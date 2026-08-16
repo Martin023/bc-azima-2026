@@ -118,6 +118,16 @@ table 52186561 "CRB Metropol API Setup"
         {
             DataClassification = ToBeClassified;
         }
+
+        // Token Caching
+        field(101; "Submission Token"; Text[1000])
+        {
+            Editable = false;
+        }
+        field(102; "Submission Token Expiry"; DateTime)
+        {
+            Editable = false;
+        }
     }
 
     keys

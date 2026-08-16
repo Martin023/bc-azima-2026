@@ -324,6 +324,17 @@ codeunit 52186561 "CRB Metropol API"
         // );
     end;
 
+    local procedure GetCachedToken(var CRBMetropolAPISetupTable: Record "CRB Metropol API Setup"): Text
+    var
+        myInt: Integer;
+    begin
+        if CurrentDateTime > CRBMetropolAPISetupTable."Submission Token Expiry" then begin
+            exit('');
+        end;
+
+        exit(CRBMetropolAPISetupTable."Submission Token");
+    end;
+
     procedure ManualSubmitDPI()
     var
         JobQueueEntry: Record "Job Queue Entry";
@@ -501,6 +512,12 @@ codeunit 52186561 "CRB Metropol API"
                 Message('CRB Metropol Login API status: %1', Format(CRBMetropolAPISetupTable.Status));
                 exit;
             end;
+
+            LoginToken := GetCachedToken(CRBMetropolAPISetupTable);
+            if LoginToken <> '' then begin
+                exit;
+            end;
+
             // 2. Prepare the headers
             Content.GetHeaders(ContentHeaders);
             if ContentHeaders.Contains('Content-Type') then ContentHeaders.Remove('Content-Type');
@@ -542,7 +559,13 @@ codeunit 52186561 "CRB Metropol API"
                     IF ShowSuccessMessage then begin
                         Message('CRB Metropol API login status : %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
                         Message('LoginToken : %1 ', LoginToken);
+                        Message('LoginTokenExpiry : %1 ', LoginTokenExpiry);
                     end;
+
+                    // Cached Submission Tokens
+                    CRBMetropolAPISetupTable."Submission Token" := LoginToken;
+                    CRBMetropolAPISetupTable."Submission Token Expiry" := LoginTokenExpiry;
+                    CRBMetropolAPISetupTable.Modify;
                 end else begin
                     // Errors - 403, 404, etc
                     CRBMetropolAPILogsTable.Init;
@@ -834,6 +857,11 @@ codeunit 52186561 "CRB Metropol API"
 
                         Message('CRB Metropol DPI Submission API Status. %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
 
+                        // Incase of 401 - Unauthorized
+                        CRBMetropolAPISetupTable."Submission Token" := '';
+                        CRBMetropolAPISetupTable."Submission Token Expiry" := 0DT;
+                        CRBMetropolAPISetupTable.Modify;
+
                     end;
                 end else begin
                     // Errors - 403, 404, etc
@@ -871,6 +899,11 @@ codeunit 52186561 "CRB Metropol API"
                     CRBMetropolAPILogsTable.Insert;
 
                     Message('CRB Metropol DPI Submission API Status. %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
+
+                    // Incase of 401 - Unauthorized
+                    CRBMetropolAPISetupTable."Submission Token" := '';
+                    CRBMetropolAPISetupTable."Submission Token Expiry" := 0DT;
+                    CRBMetropolAPISetupTable.Modify;
                 end;
             end else begin
                 CRBMetropolAPILogsTable.Init;
@@ -1222,6 +1255,11 @@ codeunit 52186561 "CRB Metropol API"
 
                         Message('CRB Metropol MICE Submission API Status. %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
 
+                        // Incase of 401 - Unauthorized
+                        CRBMetropolAPISetupTable."Submission Token" := '';
+                        CRBMetropolAPISetupTable."Submission Token Expiry" := 0DT;
+                        CRBMetropolAPISetupTable.Modify;
+
                     end;
                 end else begin
                     // Errors - 403, 404, etc
@@ -1259,6 +1297,11 @@ codeunit 52186561 "CRB Metropol API"
                     CRBMetropolAPILogsTable.Insert;
 
                     Message('CRB Metropol MICE Submission API Status. %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
+
+                    // Incase of 401 - Unauthorized
+                    CRBMetropolAPISetupTable."Submission Token" := '';
+                    CRBMetropolAPISetupTable."Submission Token Expiry" := 0DT;
+                    CRBMetropolAPISetupTable.Modify;
                 end;
             end else begin
                 CRBMetropolAPILogsTable.Init;
@@ -1588,6 +1631,11 @@ codeunit 52186561 "CRB Metropol API"
 
                         Message('CRB Metropol MICE Submission API Status. %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
 
+                        // Incase of 401 - Unauthorized
+                        CRBMetropolAPISetupTable."Submission Token" := '';
+                        CRBMetropolAPISetupTable."Submission Token Expiry" := 0DT;
+                        CRBMetropolAPISetupTable.Modify;
+
                     end;
                 end else begin
                     // Errors - 403, 404, etc
@@ -1625,6 +1673,11 @@ codeunit 52186561 "CRB Metropol API"
                     CRBMetropolAPILogsTable.Insert;
 
                     Message('CRB Metropol MICE Submission API Status. %1 - %2', Response.HttpStatusCode, Response.ReasonPhrase);
+
+                    // Incase of 401 - Unauthorized
+                    CRBMetropolAPISetupTable."Submission Token" := '';
+                    CRBMetropolAPISetupTable."Submission Token Expiry" := 0DT;
+                    CRBMetropolAPISetupTable.Modify;
                 end;
             end else begin
                 CRBMetropolAPILogsTable.Init;
