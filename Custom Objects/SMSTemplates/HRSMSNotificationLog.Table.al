@@ -80,6 +80,11 @@ table 52185921 "HR SMS Notification Log"
         {
             Caption = 'Is Resend';
         }
+        field(18; "Is CC"; Boolean)
+        {
+            Caption = 'Is CC';
+            DataClassification = CustomerContent;
+        }
     }
 
     keys

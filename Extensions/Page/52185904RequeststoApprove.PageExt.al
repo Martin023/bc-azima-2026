@@ -42,15 +42,19 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
         }
         addafter(ToApprove)
         {
-            field(MemberNo; MemberNo)
+            field(RecordIdentifier; RecordIdentifier)
             {
                 ApplicationArea = Basic;
                 Editable = false;
+                Caption = 'Record No.';
+                Visible = ShowRecordFields;
             }
-            field(MemberName; MemberName)
+            field(RecordName; RecordName)
             {
                 ApplicationArea = Basic;
                 Editable = false;
+                Caption = 'Record Name';
+                Visible = ShowRecordFields;
             }
         }
 
@@ -79,6 +83,11 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
                 HrTable: Record "HR Employees";
                 GlobalFunctions: Codeunit "Global Functions";
                 SalHeader: record "Salary Header";
+                MemberAppRec: Record "Member Application";
+                SystemEditsRec: Record "System Edits";
+                SystemEditsCodeunit: Codeunit "System Editss";
+                RecRef: RecordRef;
+                Action: Option SetFilter,PostChanges;
             begin
                 StoreReq.reset;
                 StoreReq.setrange("No.", rec."Document No.");
@@ -109,6 +118,32 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
                         SalHeader.validate(Status, SalHeader.Status::Approved);
                         SalHeader.Modify();
                         // end;
+                    end;
+                end;
+
+                // Member Application approval
+                MemberAppRec.Reset();
+                MemberAppRec.SetRange("No.", Rec."Document No.");
+                if MemberAppRec.FindFirst() then begin
+                    if MemberAppRec.Status <> MemberAppRec.Status::Approved then begin
+                        IF not ApprovalsMgmt.HasOpenApprovalEntries(MemberAppRec.RecordId) THEN BEGIN
+                            MemberAppRec.Status := MemberAppRec.Status::Approved;
+                            MemberAppRec.Validate(Status, MemberAppRec.Status::Approved);
+                            MemberAppRec.Modify();
+                        end;
+                    end;
+                end;
+
+                // System Edits approval
+                SystemEditsRec.Reset();
+                SystemEditsRec.SetRange("No.", Rec."Document No.");
+                if SystemEditsRec.FindFirst() then begin
+                    if SystemEditsRec.Status <> SystemEditsRec.Status::Approved then begin
+                        IF not ApprovalsMgmt.HasOpenApprovalEntries(SystemEditsRec.RecordId) THEN BEGIN
+                            SystemEditsRec.Status := SystemEditsRec.Status::Approved;
+                            SystemEditsRec.Validate(Status, SystemEditsRec.Status::Approved);
+                            SystemEditsRec.Modify();
+                        end;
                     end;
                 end;
 
@@ -155,15 +190,72 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
 
     var
         ApprovalCommentLine: Record "Approval Comment Line";
-        MemberNo: Code[10];
-        MemberName: Text[100];
-        loans: record loans;
+        RecordIdentifier: Code[50];
+        RecordName: Text[100];
+        ShowRecordFields: Boolean;
+        Loans: Record Loans;
+
+    trigger OnAfterGetRecord()
+    var
+        LoanRec: Record Loans;
+        MemberAppRec: Record "Member Application";
+        SystemEditsRec: Record "System Edits";
+        SystemEditsFilters: Record "System Edits Filters";
+        MemberRec: Record Members;
+        LeaveAppRec: Record "HR Leave Application";
+    begin
+        // Reset visibility and values
+        ShowRecordFields := false;
+        RecordIdentifier := '';
+        RecordName := '';
+
+        // Detect record type and populate fields accordingly
+        
+        // 1. Check if it's a Loan approval
+        if LoanRec.Get(Rec."Record ID to Approve") then begin
+            RecordIdentifier := LoanRec."Member No.";
+            RecordName := LoanRec."Member Name";
+            ShowRecordFields := true;
+        end
+        // 2. Check if it's a Member Application approval
+        else if MemberAppRec.Get(Rec."Document No.") then begin
+            RecordIdentifier := MemberAppRec."No.";
+            RecordName := MemberAppRec.Name;
+            ShowRecordFields := true;
+        end
+        // 3. Check if it's a Leave Application approval
+        else if LeaveAppRec.Get(Rec."Document No.") then begin
+            RecordIdentifier := LeaveAppRec."Applicant Staff No.";
+            RecordName := LeaveAppRec.Names;
+            ShowRecordFields := true;
+        end
+        // 4. Check if it's a System Edits approval
+        else if SystemEditsRec.Get(Rec."Document No.") then begin
+            // Only show for Members table (52185700) or Image Data table (52185702)
+            if (SystemEditsRec."Table ID" = 52185700) or (SystemEditsRec."Table ID" = 52185702) then begin
+                // Read the filter value which contains the Member No.
+                SystemEditsFilters.Reset();
+                SystemEditsFilters.SetRange("Record ID", SystemEditsRec."No.");
+                if SystemEditsFilters.FindFirst() then begin
+                    RecordIdentifier := SystemEditsFilters.Filter;
+                    
+                    // Get member name
+                    if MemberRec.Get(SystemEditsFilters.Filter) then
+                        RecordName := MemberRec.Name;
+                    
+                    ShowRecordFields := true;
+                end;
+            end;
+        end;
+    end;
 
     trigger OnOpenPage()
     BEGIN
+        // Initialize loan member data on page open if exists
         if Loans.get(rec."Record ID to Approve") then begin
-            MemberNo := Loans."Member No.";
-            MemberName := Loans."Member Name";
+            RecordIdentifier := Loans."Member No.";
+            RecordName := Loans."Member Name";
+            ShowRecordFields := true;
         end;
     END;
 

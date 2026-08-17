@@ -446,6 +446,24 @@ table 52185550 "HR Setup"
             Caption = 'CEO Goals Nos.';
             TableRelation = "No. Series".Code;
         }
+        field(39004292; "Leave Notif CC Phone 1"; Text[20])
+        {
+            Caption = 'Leave Notification CC Phone 1 (HR)';
+            DataClassification = CustomerContent;
+            ExtendedDatatype = PhoneNo;
+        }
+        field(39004293; "Leave Notif CC Phone 2"; Text[20])
+        {
+            Caption = 'Leave Notification CC Phone 2 (CEO)';
+            DataClassification = CustomerContent;
+            ExtendedDatatype = PhoneNo;
+        }
+        field(39004294; "Leave Notif CC Phone 3"; Text[20])
+        {
+            Caption = 'Leave Notification CC Phone 3';
+            DataClassification = CustomerContent;
+            ExtendedDatatype = PhoneNo;
+        }
     }
 
     keys
