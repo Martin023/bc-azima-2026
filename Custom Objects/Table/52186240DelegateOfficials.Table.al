@@ -85,13 +85,13 @@ table 52186240 "Delegate Officials"
         field(4; Position; Code[50])
         {
             Description = 'Lookup 39004358 filter type tittle';
-            TableRelation = "Salutation Tittles".Code WHERE(Type = filter(Position|"Delegate Member"));
+            TableRelation = "Salutation Tittles".Code WHERE(Type = filter(Position | "Delegate Member"));
 
             trigger OnValidate()
             var
-            Salutations: Record "Salutation Tittles";
+                Salutations: Record "Salutation Tittles";
             begin
-                
+
                 Salutations.Get(Position);
 
                 if Salutations.Type = Salutations.Type::Position then begin
@@ -143,8 +143,8 @@ table 52186240 "Delegate Officials"
         {
             trigger OnValidate()
             begin
-                if "Appointment Date" > Today then 
-                Error('Appointment date cannot be later than today');
+                if "Appointment Date" > Today then
+                    Error('Appointment date cannot be later than today');
             end;
         }
         field(23; "Expiry Date"; Date)
@@ -184,7 +184,7 @@ table 52186240 "Delegate Officials"
 
     keys
     {
-        key(Key1; "Electoral Zone", "Member Number", "Retirement Date")
+        key(Key1; "Electoral Zone", "Member Number")
         {
             Clustered = true;
         }
