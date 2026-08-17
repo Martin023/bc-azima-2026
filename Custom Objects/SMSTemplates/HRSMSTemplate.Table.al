@@ -57,6 +57,24 @@ table 52185925 "HR SMS Template"
             Caption = 'Modified Date';
             Editable = false;
         }
+        field(11; "Send to CC"; Boolean)
+        {
+            Caption = 'Send to CC';
+            DataClassification = CustomerContent;
+            InitValue = false;
+        }
+        field(12; "CC Phone Numbers"; Text[250])
+        {
+            Caption = 'CC Phone Numbers';
+            DataClassification = CustomerContent;
+            ToolTip = 'Comma-separated phone numbers for CC recipients (e.g., 0722123456,0733456789,0711222333)';
+        }
+        field(13; "CC Body"; Text[320])
+        {
+            Caption = 'CC Message Body';
+            DataClassification = CustomerContent;
+            ToolTip = 'Optional alternative message for CC recipients. Leave empty to use main body. Uses same tokens as main body.';
+        }
     }
 
     keys

@@ -255,6 +255,11 @@ Codeunit 52185466 SendSms
             'MPESA_WITHDRAWAL_REVERSAL',
             'WITHDRAWAL':
                 Priority := 205;
+            'HR_LEAVE',
+            'LEAVE-APPROVAL',
+            'LEAVE-RELIEVER',
+            'LEAVE-RECALL':
+                Priority := 215;
             'FIXED_DEPOSIT_MATURITY',
             'LOAN_DEFAULTED',
             'LOAN_GUARANTORS',

@@ -74,6 +74,13 @@ page 52185959 "HR SMS Notification Log"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
+                field("Is CC"; Rec."Is CC")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = Attention;
+                    StyleExpr = Rec."Is CC";
+                }
                 field("Parent Entry No."; Rec."Parent Entry No.")
                 {
                     ApplicationArea = Basic;
@@ -189,6 +196,53 @@ page 52185959 "HR SMS Notification Log"
                 begin
                     Rec.SetRange(Status);
                     Rec.SetRange("Parent Entry No.");
+                    Rec.SetRange("Is CC");
+                    CurrPage.Update(false);
+                end;
+            }
+            action("Show CC Only")
+            {
+                ApplicationArea = Basic;
+                Caption = 'CC Only';
+                Image = FilterLines;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Show only CC (carbon copy) sends';
+
+                trigger OnAction()
+                begin
+                    Rec.SetRange("Is CC", true);
+                    CurrPage.Update(false);
+                end;
+            }
+            action("Show Primary Only")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Primary Only';
+                Image = FilterLines;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Show only primary recipient sends (exclude CC)';
+
+                trigger OnAction()
+                begin
+                    Rec.SetRange("Is CC", false);
+                    CurrPage.Update(false);
+                end;
+            }
+            action("Show Failed CC")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Failed CC';
+                Image = ErrorLog;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Show failed CC sends for troubleshooting';
+
+                trigger OnAction()
+                begin
+                    Rec.SetRange("Is CC", true);
+                    Rec.SetFilter(Status, '%1|%2', Rec.Status::Failed, Rec.Status::"Retry Failed");
                     CurrPage.Update(false);
                 end;
             }
