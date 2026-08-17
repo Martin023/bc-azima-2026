@@ -148,6 +148,45 @@ page 52185960 "HR SMS Template Card"
                     end;
                 }
             }
+            
+            group("CC Recipients")
+            {
+                Caption = 'CC Recipients Configuration';
+                
+                field("Send to CC"; Rec."Send to CC")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Enable CC';
+                    ToolTip = 'Enable sending this SMS to additional recipients (HR, CEO, etc.)';
+                    Style = Attention;
+                    StyleExpr = Rec."Send to CC";
+                }
+                
+                field("CC Phone Numbers"; Rec."CC Phone Numbers")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'CC Phone Numbers';
+                    ToolTip = 'Comma-separated phone numbers (e.g., 0722123456,0733456789,0711222333). Invalid formats will be logged and skipped.';
+                    Enabled = Rec."Send to CC";
+                    MultiLine = true;
+                    ShowMandatory = Rec."Send to CC";
+                }
+                
+                field("CC Body"; Rec."CC Body")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'CC Message Body (Optional)';
+                    ToolTip = 'Custom message for CC recipients. Leave empty to use main body above. Uses same tokens: [EMPLOYEE_NAME], [LEAVE_TYPE], etc.';
+                    Enabled = Rec."Send to CC";
+                    MultiLine = true;
+                    
+                    trigger OnValidate()
+                    begin
+                        if (Rec."CC Body" <> '') and (StrLen(Rec."CC Body") > 160) then
+                            Message('NOTE: CC MESSAGE IS %1 CHARACTERS. MESSAGES OVER 160 WILL BE SENT AS MULTI-PART SMS.', StrLen(Rec."CC Body"));
+                    end;
+                }
+            }
         }
     }
 

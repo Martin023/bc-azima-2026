@@ -34,7 +34,7 @@ codeunit 52185460 "HR SMS Dispatcher"
             LogEntry(EventCode, RecipientRole, '', SourceDocNo, '', TokenVals, 1,
                 'NO PHONE NUMBER FOUND ON EMPLOYEE ' + RecipientEmployeeNo +
                 '. SET Cell Phone Number, Cellular Phone Number, Work Phone Number OR Home Phone Number ON THE EMPLOYEE CARD.',
-                0, false, false);
+                0, false, false, false);
             exit;
         end;
 
@@ -144,7 +144,102 @@ codeunit 52185460 "HR SMS Dispatcher"
 
         // SENDMSS DOES NOT RETURN A BOOLEAN — LOG AS SENT SINCE IT WRITES TO THE QUEUE
         LogEntry(EventCode, RecipientRole, PhoneNo, SourceDocNo, ResolvedBody,
-            TokenVals, SuccessStatus, '', ParentEntryNo, IsRetry, IsResend);
+            TokenVals, SuccessStatus, '', ParentEntryNo, IsRetry, IsResend, false);
+        
+        // PROCESS CC RECIPIENTS IF ENABLED
+        if Template."Send to CC" and (Template."CC Phone Numbers" <> '') and not IsRetry and not IsResend then
+            SendToCC(Template, SourceDocNo, TokenVals, EventCode, RecipientRole);
+    end;
+
+    local procedure SendToCC(
+        Template: Record "HR SMS Template";
+        SourceDocNo: Code[50];
+        TokenVals: Text;
+        EventCode: Code[50];
+        RecipientRole: Option
+    )
+    var
+        SmsCU: Codeunit SendSms;
+        CCPhones: List of [Text];
+        CCPhone: Text;
+        NormalizedPhone: Text[20];
+        CCBody: Text;
+    begin
+        // PARSE COMMA-SEPARATED PHONE NUMBERS
+        CCPhones := Template."CC Phone Numbers".Split(',');
+        
+        // DETERMINE CC BODY: USE CC BODY IF CONFIGURED, OTHERWISE USE MAIN BODY
+        if Template."CC Body" <> '' then
+            CCBody := ResolveTokens(Template."CC Body", EventCode, TokenVals)
+        else
+            CCBody := ResolveTokens(Template.Body, EventCode, TokenVals);
+        
+        // SEND TO EACH CC RECIPIENT
+        foreach CCPhone in CCPhones do begin
+            CCPhone := DelChr(CCPhone, '=', ' '); // TRIM SPACES
+            
+            if CCPhone <> '' then begin
+                NormalizedPhone := ValidateAndNormalizePhone(CCPhone);
+                
+                if NormalizedPhone <> '' then begin
+                    // VALID PHONE - SEND SMS
+                    SmsCU.SendSms(
+                        Template."SMS Source",
+                        NormalizedPhone,
+                        CCBody,
+                        SourceDocNo,
+                        '',
+                        false,
+                        0,
+                        false,
+                        'HR',
+                        SourceDocNo,
+                        'HR_MODULE'
+                    );
+                    
+                    // LOG AS SENT WITH CC FLAG
+                    LogEntry(EventCode, RecipientRole, NormalizedPhone, SourceDocNo, CCBody,
+                        TokenVals, 0, '', 0, false, false, true);
+                end else begin
+                    // INVALID PHONE FORMAT - LOG AS FAILED
+                    LogEntry(EventCode, RecipientRole, CCPhone, SourceDocNo, '',
+                        TokenVals, 1, 'INVALID PHONE FORMAT: ' + CCPhone, 0, false, false, true);
+                end;
+            end;
+        end;
+    end;
+
+    local procedure ValidateAndNormalizePhone(Phone: Text[20]): Text[20]
+    var
+        CleanPhone: Text[20];
+        PhoneLen: Integer;
+    begin
+        // REMOVE NON-NUMERIC CHARACTERS (EXCEPT + AT START)
+        CleanPhone := DelChr(Phone, '=', ' -()');
+        
+        // REMOVE + IF PRESENT
+        if (StrLen(CleanPhone) > 0) and (CopyStr(CleanPhone, 1, 1) = '+') then
+            CleanPhone := CopyStr(CleanPhone, 2);
+        
+        PhoneLen := StrLen(CleanPhone);
+        
+        // VALIDATE AND NORMALIZE TO 254XXXXXXXXX FORMAT
+        if PhoneLen = 12 then begin
+            // ALREADY 254XXXXXXXXX
+            if CopyStr(CleanPhone, 1, 3) = '254' then
+                exit(CleanPhone);
+        end else if PhoneLen = 10 then begin
+            // 0XXXXXXXXX -> 254XXXXXXXXX
+            if CopyStr(CleanPhone, 1, 1) = '0' then
+                exit('254' + CopyStr(CleanPhone, 2, 9));
+        end else if PhoneLen = 9 then begin
+            // XXXXXXXXX -> 254XXXXXXXXX (ASSUMING STARTS WITH 7)
+            if CopyStr(CleanPhone, 1, 1) = '7' then
+                exit('254' + CleanPhone);
+        end;
+        
+        // INVALID FORMAT
+        exit('');
     end;
 
     local procedure ResolveTokens(RawBody: Text; EventCode: Code[50]; TokenVals: Text): Text
@@ -211,7 +306,8 @@ codeunit 52185460 "HR SMS Dispatcher"
         ErrorText: Text;
         ParentEntryNo: Integer;
         IsRetry: Boolean;
-        IsResend: Boolean
+        IsResend: Boolean;
+        IsCC: Boolean
     )
     var
         Log: Record "HR SMS Notification Log";
@@ -231,6 +327,7 @@ codeunit 52185460 "HR SMS Dispatcher"
         Log."Parent Entry No." := ParentEntryNo;
         Log."Is Retry" := IsRetry;
         Log."Is Resend" := IsResend;
+        Log."Is CC" := IsCC;
         Log.Insert();
     end;
 }
