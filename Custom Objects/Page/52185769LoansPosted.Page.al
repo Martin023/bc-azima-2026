@@ -187,6 +187,7 @@ page 52185769 "Loans Posted"
                 {
                     Editable = false;
                     ApplicationArea = all;
+                    StyleExpr = 'Unfavorable';
                 }
                 // field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
                 // {
