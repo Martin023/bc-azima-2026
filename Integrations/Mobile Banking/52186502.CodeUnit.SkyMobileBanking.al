@@ -4352,6 +4352,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 if MobileLoanBuffer."Loan No." <> '' then begin
                                     MobileLoanBuffer."Loan Record Created?" := true;
                                     MobileLoanBuffer.Modify();
+                                    Commit;
                                 end;
                             end until MobileLoanBuffer.Next = 0;
                         end;
@@ -4379,6 +4380,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     MobileLoanBuffer."Needs Change" := true;
                                     MobileLoanBuffer."Needs Change Reason" := 'The loan was not found';
                                     MobileLoanBuffer.Modify();
+                                    Commit;
                                 end;
 
                                 MobileLoanBuffer."Try Posting Count" += 1;
@@ -4431,6 +4433,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MobileLoanBuffer.Posted := true;
                                             MobileLoanBuffer."Date Posted" := CurrentDateTime;
                                             MobileLoanBuffer.Modify();
+                                            Commit;
 
                                             LoanApplicant.Reset;
                                             LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
@@ -4477,6 +4480,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MobileLoanBuffer.Posted := true;
                                             MobileLoanBuffer."Date Posted" := CurrentDateTime;
                                             MobileLoanBuffer.Modify();
+                                            Commit;
 
                                             LoanApplicant.Reset;
                                             LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
@@ -4527,6 +4531,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MobileLoanBuffer."Needs Change" := true;
                                             MobileLoanBuffer."Needs Change Reason" := 'The record was not able to post';
                                             MobileLoanBuffer.Modify();
+                                            Commit;
                                         end;
                                     end;
                                 end;
@@ -4588,7 +4593,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     DepositTransBuffer.SetRange("Posted", false);
                     DepositTransBuffer.SetRange("Needs Change", false);
                     DepositTransBuffer.SetFilter("Transaction Status", '=%1|%2', DepositTransBuffer."Transaction Status"::CONFIRMED, DepositTransBuffer."Transaction Status"::REVERSE_CONFIRMED);
-                    DepositTransBuffer.SetRange("Transaction Type", DepositTransBuffer."Transaction Type"::"Mpesa Deposit");
+                    // DepositTransBuffer.SetRange("Transaction Type", DepositTransBuffer."Transaction Type"::"Mpesa Deposit");
                     DepositTransBuffer.SetFilter("Transaction Type", '%1|%2|%3|%4', DepositTransBuffer."Transaction Type"::"Mpesa Deposit", DepositTransBuffer."Transaction Type"::"Coop B2B Deposit", DepositTransBuffer."Transaction Type"::"Coop P2F Deposit", DepositTransBuffer."Transaction Type"::"Self PIN Reset");
                     DepositTransBuffer.SetCurrentKey("Try Posting Count", "Transaction Date Time");
                     DepositTransBuffer.SetAscending("Try Posting Count", true);
@@ -4624,6 +4629,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MpesaTransBuffer."Posting Time" := time;
                                 MpesaTransBuffer."Posted By" := UserID;
                                 MpesaTransBuffer.Modify();
+                                Commit;
 
                                 // SMS
                                 BeneficiarySavingsAccount.Reset;
@@ -4874,6 +4880,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MpesaTransBuffer."Posted By" := UserID;
                                             MpesaTransBuffer."Needs Change" := false;
                                             MpesaTransBuffer.Modify();
+                                            Commit;
 
                                             // SMS
                                             BeneficiarySavingsAccount.Reset;
@@ -5022,6 +5029,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 MpesaTransBuffer."Posting Time" := time;
                                                 MpesaTransBuffer."Posted By" := UserID;
                                                 MpesaTransBuffer.Modify();
+                                                Commit;
 
                                                 // SMS
                                                 BeneficiarySavingsAccount.Reset;
@@ -5190,6 +5198,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         end;
 
                                         MpesaTransBuffer.Modify();
+                                        Commit;
                                     end;
                                 end else begin
 
@@ -5672,6 +5681,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 MpesaTransBuffer."Posting Time" := time;
                                                 MpesaTransBuffer."Posted By" := UserID;
                                                 MpesaTransBuffer.Modify();
+                                                Commit;
                                             end else begin
                                                 GLEntry.Reset;
                                                 GLEntry.SetRange("Document No.", theReference);
@@ -5682,6 +5692,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     MpesaTransBuffer."Posting Time" := time;
                                                     MpesaTransBuffer."Posted By" := UserID;
                                                     MpesaTransBuffer.Modify();
+                                                    Commit;
                                                 end else begin
                                                     MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
                                                     MpesaTransBuffer."Needs Change" := true;
@@ -5769,6 +5780,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MpesaTransBuffer."Posting Time" := time;
                                 MpesaTransBuffer."Posted By" := UserID;
                                 MpesaTransBuffer.Modify();
+                                Commit;
 
                                 // SMS
                                 BeneficiaryLoan.Reset;
@@ -6006,6 +6018,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         MpesaTransBuffer."Posted By" := UserID;
                                         MpesaTransBuffer."Needs Change" := false;
                                         MpesaTransBuffer.Modify();
+                                        Commit;
 
                                         // SMS
                                         BeneficiaryLoan.Reset;
@@ -6106,6 +6119,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MpesaTransBuffer."Posting Time" := time;
                                             MpesaTransBuffer."Posted By" := UserID;
                                             MpesaTransBuffer.Modify();
+                                            Commit;
 
                                             // SMS
                                             BeneficiaryLoan.Reset;
@@ -6211,6 +6225,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MpesaTransBuffer."Needs Change" := true;
                                             MpesaTransBuffer."Needs Change Reason" := 'The record was not able to post';
                                             MpesaTransBuffer.Modify();
+                                            Commit;
                                         end;
                                     end;
                                 end;
@@ -6260,6 +6275,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     MpesaTransBuffer."Posting Time" := time;
                                     MpesaTransBuffer."Posted By" := UserID;
                                     MpesaTransBuffer.Modify();
+                                    Commit;
 
                                     // Mobile Money Reversal transaction Ref: [REFERENCE] Date: [TIMESTAMP] has been performed
 
@@ -6377,6 +6393,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         MpesaTransBuffer."Posting Time" := time;
                                         MpesaTransBuffer."Posted By" := UserID;
                                         MpesaTransBuffer.Modify();
+                                        Commit;
 
                                         // SMS
                                         BeneficiarySavingsAccount.Reset;
@@ -6580,6 +6597,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             MpesaTransBuffer."Posting Time" := time;
                                                             MpesaTransBuffer."Posted By" := UserID;
                                                             MpesaTransBuffer.Modify();
+                                                            Commit;
 
                                                             BeneficiarySavingsAccount.Reset;
                                                             BeneficiarySavingsAccount.SetRange("No.", MpesaTransBuffer."Savings Account");
@@ -6752,6 +6770,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 MpesaTransBuffer."Posting Time" := time;
                                                                 MpesaTransBuffer."Posted By" := UserID;
                                                                 MpesaTransBuffer.Modify();
+                                                                Commit;
 
                                                                 BeneficiarySavingsAccount.Reset;
                                                                 BeneficiarySavingsAccount.SetRange("No.", MpesaTransBuffer."Savings Account");
@@ -6892,6 +6911,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         MpesaTransBuffer."Posting Time" := time;
                                                         MpesaTransBuffer."Posted By" := UserID;
                                                         MpesaTransBuffer.Modify();
+                                                        Commit;
 
                                                         // theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                         // Format(MpesaTransBuffer."Transaction Type") +
@@ -6970,6 +6990,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MpesaTransBuffer."Needs Change" := true;
                                             MpesaTransBuffer."Needs Change Reason" := 'The source account was not found in Savings Accounts list';
                                             MpesaTransBuffer.Modify();
+                                            Commit;
                                         end;
                                     end;
 
@@ -7041,6 +7062,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         MpesaTransBuffer."Posting Time" := time;
                                         MpesaTransBuffer."Posted By" := UserID;
                                         MpesaTransBuffer.Modify();
+                                        Commit;
                                         // IFT SMS
                                         if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Account Transfer") OR
                                         (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer") OR
@@ -7471,6 +7493,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             MpesaTransBuffer."Posting Time" := time;
                                                             MpesaTransBuffer."Posted By" := UserID;
                                                             MpesaTransBuffer.Modify();
+                                                            Commit;
                                                         end else begin
                                                             if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
                                                                 MpesaTransBuffer.Posted := true;
@@ -7478,6 +7501,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 MpesaTransBuffer."Posting Time" := time;
                                                                 MpesaTransBuffer."Posted By" := UserID;
                                                                 MpesaTransBuffer.Modify();
+                                                                Commit;
 
                                                                 // IFT SMS
                                                                 if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Account Transfer") OR
@@ -7628,6 +7652,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     MpesaTransBuffer."Posting Time" := time;
                                                                     MpesaTransBuffer."Posted By" := UserID;
                                                                     MpesaTransBuffer.Modify();
+                                                                    Commit;
 
                                                                     // IFT SMS
                                                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Account Transfer") OR
@@ -7780,6 +7805,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     MpesaTransBuffer."Needs Change" := true;
                                                                     MpesaTransBuffer."Needs Change Reason" := 'The record was not able to post';
                                                                     MpesaTransBuffer.Modify();
+                                                                    Commit;
                                                                 end;
                                                             end;
                                                         end;
