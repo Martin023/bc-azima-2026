@@ -65,7 +65,7 @@ table 52185532 "HR Leave Application"
                     CurrentCalendar.SetRange("Current Leave Calendar", true);
                     if CurrentCalendar.FindFirst() then begin
                         if ("Start Date" < CurrentCalendar."Start Date") or ("Start Date" > CurrentCalendar."End Date") then
-                            Error('Start Date %1 is outside the current leave calendar range (%2 to %3). Please update the calendar or select a date within range.', 
+                            Error('Start Date %1 is outside the current leave calendar range (%2 to %3). Please update the calendar or select a date within range.',
                                 "Start Date", CurrentCalendar."Start Date", CurrentCalendar."End Date");
                     end;
 
@@ -217,7 +217,7 @@ table 52185532 "HR Leave Application"
                 CurrentCalendar.SetRange("Current Leave Calendar", true);
                 if CurrentCalendar.FindFirst() then begin
                     if ("End Date" < CurrentCalendar."Start Date") or ("End Date" > CurrentCalendar."End Date") then
-                        Error('End Date %1 is outside the current leave calendar range (%2 to %3). Please update the calendar or select a date within range.', 
+                        Error('End Date %1 is outside the current leave calendar range (%2 to %3). Please update the calendar or select a date within range.',
                             "End Date", CurrentCalendar."Start Date", CurrentCalendar."End Date");
                 end;
 
@@ -1177,6 +1177,7 @@ table 52185532 "HR Leave Application"
     begin
         // TOKENS: EMPLOYEE_NAME, LEAVE_TYPE, START_DATE, END_DATE, DAYS_APPROVED, RETURN_DATE, APPLICATION_CODE
         TokenVals := 'EMPLOYEE_NAME=' + Names + '||' +
+                     'RELIEVER_NAME=' + "Reliever Name" + '||' +
                      'LEAVE_TYPE=' + "Leave Type" + '||' +
                      'START_DATE=' + Format("Start Date") + '||' +
                      'END_DATE=' + Format("End Date") + '||' +

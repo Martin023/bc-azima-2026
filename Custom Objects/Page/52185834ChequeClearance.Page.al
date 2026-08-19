@@ -6,8 +6,7 @@ page 52185834 "Cheque Clearance"
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Cashier Transactions";
     SourceTableView = WHERE(Posted = CONST(true),
-                            Type = FILTER("Credit Cheque" | "Cheque Deposit"),
-                            "Cheque Status" = FILTER(Pending));
+                            Type = FILTER("Credit Cheque" | "Cheque Deposit"));
     ApplicationArea = Basic, Suite;
     usagecategory = Lists;
 

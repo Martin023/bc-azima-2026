@@ -174,7 +174,7 @@ page 52186351 "File Tracker Card"
             {
                 Editable = CurrPageEditable;
                 //Visible = TrackerTabEditable;
-                Visible = false;
+                Visible = true;
                 // field("Request Number"; Rec."Request Number")
                 // {
                 //     ApplicationArea = Basic, Suite;
