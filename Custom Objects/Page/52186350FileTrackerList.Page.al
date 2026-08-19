@@ -41,7 +41,7 @@ page 52186350 "File Tracker List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field(Status;Rec.Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
@@ -56,6 +56,12 @@ page 52186350 "File Tracker List"
                 {
                     ApplicationArea = Basic, Suite;
                     Visible = false;
+                    StyleExpr = StyleExprTxt;
+                }
+                field("File Received By"; Rec."File Received by")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Received By';
                     StyleExpr = StyleExprTxt;
                 }
                 field("Responsibility Centre"; Rec."Responsibility Centre")
@@ -115,18 +121,20 @@ page 52186350 "File Tracker List"
     // end;
     trigger OnAfterGetRecord()
     begin
-    
+
         StyleExprTxt := '';
         if FileTracker.Get(Rec."Request Number") then begin
-            if (FileTracker."File Request Date" <= CalcDate('<-2W>', Today)) 
-            then 
+            if (FileTracker."File Request Date" <= CalcDate('<-2W>', Today))
+            then
                 StyleExprTxt := 'Unfavorable'
-            else StyleExprTxt := '';
+            else
+                StyleExprTxt := '';
         end;
 
     end;
+
     var
-        StyleExprTxt : Text;
-        FileTracker : Record "File Tracker";
+        StyleExprTxt: Text;
+        FileTracker: Record "File Tracker";
 }
 
