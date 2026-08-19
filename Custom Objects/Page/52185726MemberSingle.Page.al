@@ -973,6 +973,23 @@ page 52185726 "Member Single"
                     CreateAccountsReport.RunModal();
                 end;
             }
+            action("Recover Entrance Fees")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = Accounts;
+                Promoted = true;
+                PromotedCategory = Category4;
+                Visible = Rec.Status = Rec.Status::Active;
+                trigger OnAction()
+                var
+                    CurrentMembers: Record Members;
+                begin
+                    CurrentMembers.reset;
+                    CurrentMembers.setRange("No.", Rec."No.");
+                    if CurrentMembers.findfirst() then
+                        REPORT.Run(Report::"Recover Entrance Fee Report", true, true, CurrentMembers)
+                end;
+            }
             separator(Action70)
             {
             }
