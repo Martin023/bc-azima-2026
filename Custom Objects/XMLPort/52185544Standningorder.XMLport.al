@@ -6,116 +6,113 @@ XmlPort 52185544 "standing order"
     {
         textelement(Name)
         {
-            tableelement("Standing Order Header";"Standing Order Header")
+            tableelement("Standing Order Header"; "Standing Order Header")
             {
                 AutoReplace = false;
                 AutoUpdate = true;
                 XmlName = 'No';
-                fieldelement(a;"Standing Order Header"."No.")
+                fieldelement(a; "Standing Order Header"."No.")
                 {
                     FieldValidate = No;
                 }
-                fieldelement(b;"Standing Order Header"."Application Date")
+                fieldelement(b; "Standing Order Header"."Application Date")
                 {
-                    FieldValidate=No;
+                    FieldValidate = No;
                 }
-                fieldelement(c;"Standing Order Header".Status)
+                fieldelement(c; "Standing Order Header".Status)
                 {
-                    FieldValidate=No;
+                    FieldValidate = No;
                 }
-                fieldelement(d;"Standing Order Header"."Source Account Type")
+                fieldelement(d; "Standing Order Header"."Source Account Type")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(e;"Standing Order Header"."Source Account No.")
+                fieldelement(e; "Standing Order Header"."Source Account No.")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-               
-                fieldelement(f;"Standing Order Header"."Source Account Name")
+
+                fieldelement(f; "Standing Order Header"."Source Account Name")
                 {
-                    FieldValidate=No;
+                    FieldValidate = No;
                 }
-                fieldelement(g;"Standing Order Header"."Member No.")
+                fieldelement(g; "Standing Order Header"."Member No.")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(h;"Standing Order Header".Description)
+                fieldelement(h; "Standing Order Header".Description)
                 {
-                    FieldValidate=No;
+                    FieldValidate = No;
                 }
-                fieldelement(i;"Standing Order Header".Amount)
+                fieldelement(i; "Standing Order Header".Amount)
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(j;"Standing Order Header"."Standing Order Type")
+                fieldelement(j; "Standing Order Header"."Standing Order Type")
                 {
-                    FieldValidate=No;
+                    FieldValidate = No;
                 }
-                fieldelement(k;"Standing Order Header"."Allow Partial Deduction")
+                fieldelement(k; "Standing Order Header"."Allow Partial Deduction")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(l;"Standing Order Header"."Income Type")
+                fieldelement(l; "Standing Order Header"."Income Type")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(m;"Standing Order Header"."Effective/Start Date")
+                fieldelement(m; "Standing Order Header"."Effective/Start Date")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(n;"Standing Order Header"."Frequency (Months)")
+                fieldelement(n; "Standing Order Header"."Frequency (Months)")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(o;"Standing Order Header"."Duration (Months)")
+                fieldelement(o; "Standing Order Header"."Duration (Months)")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(p;"Standing Order Header"."End Date")
+                fieldelement(p; "Standing Order Header"."End Date")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(q;"Standing Order Header"."Next Run Date")
+                fieldelement(q; "Standing Order Header"."Next Run Date")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(r;"Standing Order Header".Unrecovered)
+                fieldelement(r; "Standing Order Header".Unrecovered)
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(s;"Standing Order Header"."Transaction Type")
+                fieldelement(s; "Standing Order Header"."Transaction Type")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
                 }
-                fieldelement(t;"Standing Order Header"."Global Dimension 1 Code")
+                fieldelement(t; "Standing Order Header"."Global Dimension 1 Code")
                 {
-                    FieldValidate=No;
+                    FieldValidate = No;
 
                 }
-                fieldelement(u;"Standing Order Header"."Global Dimension 2 Code")
+                fieldelement(u; "Standing Order Header"."Global Dimension 2 Code")
                 {
-                    FieldValidate=no;
+                    FieldValidate = no;
 
                 }
-                fieldelement(v;"Standing Order Header"."Date Stopped")
+                fieldelement(v; "Standing Order Header"."Date Stopped")
                 {
-                    FieldValidate=no;
-                    MinOccurs=zero;
+                    FieldValidate = no;
+                    MinOccurs = zero;
                 }
-                fieldelement(w;"Standing Order Header"."Target Amount")
+                fieldelement(w; "Standing Order Header"."Target Amount")
                 {
-                    FieldValidate=no;
-                    MinOccurs=zero;
+                    FieldValidate = no;
+                    MinOccurs = zero;
                 }
-                
-                
-
-
-           
-                  
-
-
+                fieldelement(x; "Standing Order Header"."Employer Code")
+                {
+                    FieldValidate = no;
+                    MinOccurs = zero;
+                }
             }
         }
     }
