@@ -688,7 +688,7 @@ table 52185829 "Loan Recovery Header"
         {
             trigger OnValidate()
             begin
-                "Loan No." := '';
+                rec.validate("Amount To Use");
             end;
         }
 
@@ -853,8 +853,14 @@ table 52185829 "Loan Recovery Header"
                     end;
                 end;
 
-                if LoanGuarantors."Amount Guaranteed" <= 0 then
-                    AttachGuarantor := false;
+                if LoanGuarantors."Amount Guaranteed" <= 0 then begin
+                    if SplitEqualToGuars then begin
+                        AttachGuarantor := true;
+                    end
+                    else
+                        AttachGuarantor := false;
+                end;
+
 
                 if AttachGuarantor then begin
                     AvailableGuarantorsCount += 1;
@@ -922,8 +928,12 @@ table 52185829 "Loan Recovery Header"
                     end;
                 end;
 
-                if LoanGuarantors."Amount Guaranteed" <= 0 then
-                    AttachGuarantor := false;
+                if LoanGuarantors."Amount Guaranteed" <= 0 then begin
+                    if SplitEqualToGuars then
+                        AttachGuarantor := true
+                    else
+                        AttachGuarantor := false;
+                end;
 
                 if AttachGuarantor then begin
                     Counter += 1;

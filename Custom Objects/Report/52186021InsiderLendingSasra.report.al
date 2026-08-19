@@ -143,7 +143,7 @@ Report 52186021 "Insider Lending Report"
                                 Securities.Add(Format(LoanGuarantors."Guarantor Type"));
                         until LoanGuarantors.Next() = 0;
                     end else
-                        NewNatureOfSecurity := 'None';
+                        NewNatureOfSecurity := 'Deposits';
 
                     Security := '';
                     foreach Security in Securities do begin
@@ -265,7 +265,7 @@ Report 52186021 "Insider Lending Report"
                                 Securities.Add(Format(LoanGuarantors."Guarantor Type"));
                         until LoanGuarantors.Next() = 0;
                     end else
-                        OldNatureOfSecurity := 'None';
+                        OldNatureOfSecurity := 'Deposits';
 
                     Security := '';
                     i := 0;
