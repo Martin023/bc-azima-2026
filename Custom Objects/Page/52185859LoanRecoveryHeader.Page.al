@@ -80,21 +80,20 @@ page 52185859 "Loan Recovery Header"
             {
                 Editable = FastTabsEditable;
                 Visible = RecoveryDetailsVisible;
-                field("Equal Guarantor Disribution"; Rec."Equal Guarantor Disribution")
+                field("Loan No."; Rec."Loan No.")
                 {
+
                 }
                 field("Prorate Deposits"; Rec."Prorate Deposits")
+                {
+                }
+                field("Equal Guarantor Disribution"; Rec."Equal Guarantor Disribution")
                 {
                 }
                 // field("Recover Attached Loan"; Rec."Recover Attached Loan")
                 // {
 
                 // }
-                field("Loan No."; Rec."Loan No.")
-                {
-
-                }
-
                 field("Interest Balance"; Rec."Interest Balance")
                 {
                     Editable = false;
