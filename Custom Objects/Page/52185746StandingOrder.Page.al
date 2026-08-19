@@ -56,6 +56,11 @@ page 52185746 "Standing Order"
 
                     ApplicationArea = Basic;
                 }
+                field("Employer Code"; Rec."Employer Code")
+                {
+
+                    ApplicationArea = Basic;
+                }
                 field("ID Number"; Rec."ID Number")
                 {
 

@@ -374,6 +374,12 @@ table 52185717 "Standing Order Header"
             fieldClass = FlowField;
             CalcFormula = Lookup("Savings Accounts"."Product Type" WHERE("No." = FIELD("Source Account No.")));
         }
+        field(453; "Employer Code"; Code[100])
+        {
+            fieldClass = FlowField;
+            CalcFormula = Lookup(Members."Employer Code" WHERE("no." = FIELD("Member No.")));
+            Editable = false;
+        }
     }
 
     keys
