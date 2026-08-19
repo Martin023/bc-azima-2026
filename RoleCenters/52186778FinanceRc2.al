@@ -3221,6 +3221,7 @@ page 52186778 "Finance Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Cheque Clearance';
                             RunObject = page "Cheque Clearance";
+                            RunPageView = where("Cheque Status" = filter(Pending));
                         }
                         action("Cleared Cheques")
                         {

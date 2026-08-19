@@ -372,7 +372,7 @@ table 52187415 "Fosa Payments Header"
         //     Editable = false;
         //     FieldClass = FlowField;
         // }
-        field(88; "Payment Narration"; Text[50])
+        field(88; "Payment Narration"; Text[100])
         {
         }
         field(100; "Invoice No"; Code[20])
