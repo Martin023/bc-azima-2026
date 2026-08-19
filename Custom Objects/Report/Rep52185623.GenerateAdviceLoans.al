@@ -67,12 +67,17 @@ report 52185623 "Generate Advice Loans"
                                     end
                                     else begin
                                         CheckoffAdvice."Amount On" := Loans.Repayment;
-                                        LoanRepaySchedule.Reset();
-                                        LoanRepaySchedule.SetRange("Loan No.", Loans."Loan No.");
-                                        LoanRepaySchedule.setfilter("Repayment Date", '>=%1', Today);
-                                        // if LoanRepaySchedule.Find('-') then
-                                        LoanRepaySchedule.CalcSums("Monthly Interest");
-                                        CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + LoanRepaySchedule."Monthly Interest";
+                                        if GenerateActualBal then begin
+                                            CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
+                                        end
+                                        else begin
+                                            LoanRepaySchedule.Reset();
+                                            LoanRepaySchedule.SetRange("Loan No.", Loans."Loan No.");
+                                            LoanRepaySchedule.setfilter("Repayment Date", '>=%1', Today);
+                                            // if LoanRepaySchedule.Find('-') then
+                                            LoanRepaySchedule.CalcSums("Monthly Interest");
+                                            CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + LoanRepaySchedule."Monthly Interest";
+                                        end;
                                     end;
 
                                 end;
@@ -159,6 +164,10 @@ report 52185623 "Generate Advice Loans"
             {
                 group(GroupName)
                 {
+                    field(GenerateActualBal; GenerateActualBal)
+                    {
+                        Caption = 'General Actual Balance';
+                    }
                 }
             }
         }
@@ -182,4 +191,5 @@ report 52185623 "Generate Advice Loans"
         TotalSTO: decimal;
         iEntryNo: Integer;
         LoanRepaySchedule: record "Ideal Repayment Schedule";
+        GenerateActualBal: Boolean;
 }

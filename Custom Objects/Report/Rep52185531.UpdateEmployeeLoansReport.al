@@ -10,7 +10,7 @@ report 52185531 "Update Employee Loans Report"
     {
         dataitem(HREmployees; "HR Employees")
         {
-            RequestFilterFields = "No.","Member No.";
+            RequestFilterFields = "No.", "Member No.";
             column(MemberNo; "Member No.")
             {
             }
@@ -45,7 +45,10 @@ report 52185531 "Update Employee Loans Report"
                                 PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
                                 PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
                                 PREmployeeTransactions.Balance := Loans."Outstanding Balance" + Loans."Outstanding Interest";
-                                PREmployeeTransactions.Amount := Loans.Repayment;
+                                if loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then
+                                    PREmployeeTransactions.Amount := Loans."Loan Principle Repayment" + loans."Outstanding Interest"
+                                else
+                                    PREmployeeTransactions.Amount := Loans.Repayment;
                                 PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
                                 PREmployeeTransactions."Start Date" := Loans."Repayment Start Date";
                                 PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";

@@ -613,16 +613,16 @@ page 52185746 "Standing Order"
 
     trigger OnAfterGetCurrRecord()
     begin
-        // statusControl;
-        // SetControlAppearance;
+        statusControl;
+        SetControlAppearance;
         // if Rec.Status <> Rec.Status::Open then
         //     CurrPage.Editable := false;
     end;
 
     trigger OnOpenPage()
     begin
-        // SetControlAppearance;
-        // statusControl;
+        SetControlAppearance;
+        statusControl;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
@@ -665,7 +665,7 @@ page 52185746 "Standing Order"
     procedure statusControl()
     begin
         case Rec.Status of
-            Rec.Status::Open:
+            Rec.Status::Open, Rec.Status::Pending, Rec.Status::Approved:
                 begin
                     TransactionTypeEdit := true;
                     SourceAccountNoEtit := true;
@@ -679,19 +679,19 @@ page 52185746 "Standing Order"
                     SOLinesEdit := true;
                 end;
 
-            Rec.Status::Pending, Rec.Status::Approved, Rec.Status::Rejected, Rec.Status::Stopped:
-                begin
-                    TransactionTypeEdit := false;
-                    SourceAccountNoEtit := false;
-                    DescriptionEdit := false;
-                    AmountEdit := false;
-                    AllowPartialEdit := false;
-                    IncomeTypeEdit := false;
-                    EffectiveDateEdit := false;
-                    FrequencyEdit := false;
-                    DurationEdit := false;
-                    SOLinesEdit := false;
-                end;
+        // Rec.Status::Pending, Rec.Status::Approved, Rec.Status::Rejected, Rec.Status::Stopped:
+        //     begin
+        //         TransactionTypeEdit := false;
+        //         SourceAccountNoEtit := false;
+        //         DescriptionEdit := false;
+        //         AmountEdit := false;
+        //         AllowPartialEdit := false;
+        //         IncomeTypeEdit := false;
+        //         EffectiveDateEdit := false;
+        //         FrequencyEdit := false;
+        //         DurationEdit := false;
+        //         SOLinesEdit := false;
+        //     end;
         end;
     end;
 

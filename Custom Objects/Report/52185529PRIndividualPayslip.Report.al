@@ -607,7 +607,11 @@ Report 52185529 "PR Individual Payslip"
                     STRGRATUITY := 0;
                     RecordNo := RecordNo + 1;
                     ColumnNo := ColumnNo + 1;
-
+                    clear(Addr);
+                    clear(Trans);
+                    clear(TransAmt);
+                    clear(TransBal);
+                    clear(PayslipMessage);
 
                     //Get the staff details (header)
                     HREmployeePR.Reset;

@@ -268,83 +268,83 @@ page 52185659 "PR Salary List (ALL)"
                     end;
                 end;
             }
-            action("Update Loan Deductions")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Update Loan Deductions';
-                Image = UnlimitedCredit;
-                Promoted = true;
-                PromotedIsBig = true;
-                PromotedCategory = Process;
-                Visible = false;
+            // action("Update Loan Deductions")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Update Loan Deductions';
+            //     Image = UnlimitedCredit;
+            //     Promoted = true;
+            //     PromotedIsBig = true;
+            //     PromotedCategory = Process;
+            //     Visible = false;
 
 
-                trigger OnAction()
-                var
-                    PRTransactionCodes: Record "PR Transaction Codes";
-                    PREmployeeTransactions: Record "PR Employee Transactions";
-                    HREmployees: Record "HR Employees";
-                    ProductFactory: Record "Product Factory";
-                    Loans: Record Loans;
-                    PRTransactionCodesN: Record "PR Transaction Codes";
-                    PREmployeeTransactionsN: Record "PR Employee Transactions";
-                    PayPeriod: Record "PR Payroll Periods";
-                    dtOpenPeriod: Date;
-                    strPeriodName: Text;
-                begin
+            //     trigger OnAction()
+            //     var
+            //         PRTransactionCodes: Record "PR Transaction Codes";
+            //         PREmployeeTransactions: Record "PR Employee Transactions";
+            //         HREmployees: Record "HR Employees";
+            //         ProductFactory: Record "Product Factory";
+            //         Loans: Record Loans;
+            //         PRTransactionCodesN: Record "PR Transaction Codes";
+            //         PREmployeeTransactionsN: Record "PR Employee Transactions";
+            //         PayPeriod: Record "PR Payroll Periods";
+            //         dtOpenPeriod: Date;
+            //         strPeriodName: Text;
+            //     begin
 
-                    if not Confirm('Are you sure you want to update staff loan details?') then exit;
-                    PayPeriod.SetRange(PayPeriod.Closed, false);
-                    if PayPeriod.Find('-') then begin
-                        strPeriodName := PayPeriod."Period Name";
-                        dtOpenPeriod := PayPeriod."Date Opened";
-                    end;
-                    //if PRSalaryCard.Get('200435') then begin
-                    if PRSalaryCard.Get(Rec."No.") then begin
-                        HREmployees.Reset;
-                        HREmployees.SetRange(HREmployees.Status, HREmployees.Status::Active);
-                        if HREmployees.Find('-') then begin
-                            repeat
-                                Loans.Reset;
-                                Loans.SetRange(Loans."Member No.", HREmployees."Member No.");
-                                Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Total Balance");
-                                Loans.SetFilter(Loans."Total Balance", '>%1', 0);
-                                if Loans.Find('-') then begin
-                                    repeat
-                                        PREmployeeTransactions.Reset;
-                                        PREmployeeTransactions.SetRange("Employee Code", HREmployees."No.");
-                                        PREmployeeTransactions.SetRange("Loan Number", Loans."Loan No.");
-                                        PREmployeeTransactions.SetRange(PREmployeeTransactions."Payroll Period", dtOpenPeriod);
-                                        if PREmployeeTransactions.Find('-') then begin
-                                            repeat
-                                                Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Outstanding Bills");
-                                                if Loans."Outstanding Balance" > 0 then begin
-                                                    if PREmployeeTransactions.Variated = false then begin
-                                                        PREmployeeTransactions.Amount := Loans.Repayment;
-                                                    end;
-                                                    PREmployeeTransactions.Balance := Loans."Outstanding Balance";
-                                                    if Loans.Interest = 0 then begin
-                                                        PREmployeeTransactions."Loan Interest Rate" := 1;
-                                                    end else begin
-                                                        PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
-                                                    end;
-                                                    PREmployeeTransactions."#of Repayments" := Loans.Installments;
-                                                    PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
-                                                    PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
-                                                    PREmployeeTransactions.Modify;
-                                                end else
-                                                    PREmployeeTransactions.DeleteAll();
+            //         if not Confirm('Are you sure you want to update staff loan details?') then exit;
+            //         PayPeriod.SetRange(PayPeriod.Closed, false);
+            //         if PayPeriod.Find('-') then begin
+            //             strPeriodName := PayPeriod."Period Name";
+            //             dtOpenPeriod := PayPeriod."Date Opened";
+            //         end;
+            //         //if PRSalaryCard.Get('200435') then begin
+            //         if PRSalaryCard.Get(Rec."No.") then begin
+            //             HREmployees.Reset;
+            //             HREmployees.SetRange(HREmployees.Status, HREmployees.Status::Active);
+            //             if HREmployees.Find('-') then begin
+            //                 repeat
+            //                     Loans.Reset;
+            //                     Loans.SetRange(Loans."Member No.", HREmployees."Member No.");
+            //                     Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Total Balance");
+            //                     Loans.SetFilter(Loans."Total Balance", '>%1', 0);
+            //                     if Loans.Find('-') then begin
+            //                         repeat
+            //                             PREmployeeTransactions.Reset;
+            //                             PREmployeeTransactions.SetRange("Employee Code", HREmployees."No.");
+            //                             PREmployeeTransactions.SetRange("Loan Number", Loans."Loan No.");
+            //                             PREmployeeTransactions.SetRange(PREmployeeTransactions."Payroll Period", dtOpenPeriod);
+            //                             if PREmployeeTransactions.Find('-') then begin
+            //                                 repeat
+            //                                     Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Outstanding Bills");
+            //                                     if Loans."Outstanding Balance" > 0 then begin
+            //                                         if PREmployeeTransactions.Variated = false then begin
+            //                                             PREmployeeTransactions.Amount := Loans.Repayment;
+            //                                         end;
+            //                                         PREmployeeTransactions.Balance := Loans."Outstanding Balance";
+            //                                         if Loans.Interest = 0 then begin
+            //                                             PREmployeeTransactions."Loan Interest Rate" := 1;
+            //                                         end else begin
+            //                                             PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
+            //                                         end;
+            //                                         PREmployeeTransactions."#of Repayments" := Loans.Installments;
+            //                                         PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
+            //                                         PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
+            //                                         PREmployeeTransactions.Modify;
+            //                                     end else
+            //                                         PREmployeeTransactions.DeleteAll();
 
 
-                                            until PREmployeeTransactions.Next = 0;
-                                        end;
-                                    until Loans.Next = 0;
-                                end;
-                            until HREmployees.Next = 0;
-                        end;
-                    end;
-                end;
-            }
+            //                                 until PREmployeeTransactions.Next = 0;
+            //                             end;
+            //                         until Loans.Next = 0;
+            //                     end;
+            //                 until HREmployees.Next = 0;
+            //             end;
+            //         end;
+            //     end;
+            // }
 
             action("Update New Loan Deductions")
             {
