@@ -6505,6 +6505,7 @@ Codeunit 52186456 "Sacco Transactions"
         remainingBal: Decimal;
         SavAccII: record "Savings Accounts";
         Account: record "Savings Accounts";
+        DespositDed: Decimal;
     begin
         // Priority of Loan repayments
         //Salary loans with priority
@@ -6689,12 +6690,18 @@ Codeunit 52186456 "Sacco Transactions"
 
         //Deposit deduction
         if SalHeaD."Deposit Deduction" > 0 then begin
+            DespositDed := 0;
             if Account.get(Salaccno) then begin
                 SavAccII.reset();
                 SavAccII.setrange("Member No.", Account."Member No.");
                 SavAccII.setrange("Product Category", SavAccII."Product Category"::"BOSA Deposits");
                 SavAccII.setrange(Blocked, SavAccII.blocked::" ");
                 if SavAccII.FindFirst() then begin
+                    GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                    GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                    if GenJournalLine.findlast then begin
+                        LineNo := GenJournalLine."Line No.";
+                    end;
                     LineNo := LineNo + 10000;
                     GenJournalLine.Init;
                     GenJournalLine."Journal Template Name" := Jtemplate;
@@ -6702,15 +6709,19 @@ Codeunit 52186456 "Sacco Transactions"
                     GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                    GenJournalLine."Account No." := SalLines."Account No.";
+                    GenJournalLine."Account No." := Salaccno;
                     //GenJournalLine."External Document No.":="ID No";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Posting Date" := PDate;
                     GenJournalLine.Description := 'Deposit contribution Deduction';
                     GenJournalLine.Validate(GenJournalLine."Currency Code");
-                    GenJournalLine.Amount := SalHead."Deposit Deduction";
-                    if GenJournalLine.Amount > RunBal then
-                        GenJournalLine.Amount := RunBal;
+                    if RunBal < SalHeaD."Deposit Deduction" then
+                        DespositDed := RunBal
+                    else
+                        DespositDed := SalHeaD."Deposit Deduction";
+                    GenJournalLine.Amount := DespositDed;
+                    // if GenJournalLine.Amount > RunBal then
+                    //     GenJournalLine.Amount := RunBal;
                     GenJournalLine.Validate(GenJournalLine.Amount);
                     GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                     GenJournalLine."Bal. Account No." := '';
@@ -6737,9 +6748,7 @@ Codeunit 52186456 "Sacco Transactions"
                     GenJournalLine."Posting Date" := PDate;
                     GenJournalLine.Description := 'Deposit contribution Deduction';
                     GenJournalLine.Validate(GenJournalLine."Currency Code");
-                    GenJournalLine.Amount := (SalHead."Deposit Deduction") * -1;
-                    if Abs(GenJournalLine.Amount) > RunBal then
-                        GenJournalLine.Amount := RunBal * -1;
+                    GenJournalLine.Amount := (DespositDed * -1);
                     GenJournalLine.Validate(GenJournalLine.Amount);
                     GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                     GenJournalLine."Bal. Account No." := '';
