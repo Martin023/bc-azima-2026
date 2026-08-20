@@ -5616,70 +5616,6 @@ Codeunit 52186456 "Sacco Transactions"
                             if Account.GetAvailableBalance(Account."No.") > 0 then
                                 RunBal := RunBal + Account.GetAvailableBalance(Account."No.");
 
-                            if SalHeaD."Deposit Deduction" > 0 then begin
-                                SavAccII.reset();
-                                SavAccII.setrange("Member No.", Account."Member No.");
-                                SavAccII.setrange("Product Category", SavAccII."Product Category"::"BOSA Deposits");
-                                SavAccII.setrange(Blocked, SavAccII.blocked::" ");
-                                if SavAccII.FindFirst() then begin
-                                    LineNo := LineNo + 10000;
-                                    GenJournalLine.Init;
-                                    GenJournalLine."Journal Template Name" := Jtemplate;
-                                    GenJournalLine."Journal Batch Name" := JBatch;
-                                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
-                                    GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                    GenJournalLine."Account No." := SalLines."Account No.";
-                                    //GenJournalLine."External Document No.":="ID No";
-                                    GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := PDate;
-                                    GenJournalLine.Description := 'Deposit contribution Deduction';
-                                    GenJournalLine.Validate(GenJournalLine."Currency Code");
-                                    GenJournalLine.Amount := SalHead."Deposit Deduction";
-                                    if GenJournalLine.Amount > RunBal then
-                                        GenJournalLine.Amount := RunBal;
-                                    GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                                    GenJournalLine."Bal. Account No." := '';
-                                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
-                                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
-                                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                    if GenJournalLine.Amount <> 0 then
-                                        GenJournalLine.Insert(false);
-                                    //RunBal
-                                    RunBal := RunBal - GenJournalLine.Amount;
-
-                                    LineNo := LineNo + 10000;
-                                    GenJournalLine.Init;
-                                    GenJournalLine."Journal Template Name" := Jtemplate;
-                                    GenJournalLine."Journal Batch Name" := JBatch;
-                                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
-                                    GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                    GenJournalLine."Account No." := SavAccII."No.";
-                                    //GenJournalLine."External Document No.":="ID No";
-                                    GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := PDate;
-                                    GenJournalLine.Description := 'Deposit contribution Deduction';
-                                    GenJournalLine.Validate(GenJournalLine."Currency Code");
-                                    GenJournalLine.Amount := (SalHead."Deposit Deduction") * -1;
-                                    if Abs(GenJournalLine.Amount) > RunBal then
-                                        GenJournalLine.Amount := RunBal * -1;
-                                    GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                                    GenJournalLine."Bal. Account No." := '';
-                                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
-                                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
-                                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                    if GenJournalLine.Amount <> 0 then
-                                        GenJournalLine.Insert(false);
-                                end;
-                            end;
-
 
                             // if not SalHeaD."Donnot Recover" then
                             PostSalaryLoans(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, JBatch, RunBal, MemberNo, LineNo, Salaccno);
@@ -6567,16 +6503,11 @@ Codeunit 52186456 "Sacco Transactions"
         ProductType: Record "Product Factory";
         StandingOrdSRegister: Record "Standing Order Register";
         remainingBal: Decimal;
+        SavAccII: record "Savings Accounts";
+        Account: record "Savings Accounts";
     begin
         // Priority of Loan repayments
-        //1. BOSA loan STOs,
-        //2. Salary Loans
-        //3. SavingAccounts STOS
-
-        //BOSA loan STOs-
-        if not SalHead."Donot Recover STO" then
-            remainingBal := PostLoanSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
-
+        //Salary loans with priority
         if not SalHead."Donnot Recover" then begin
             GenJournalLine.SetRange("Journal Template Name", Jtemplate);
             GenJournalLine.SetRange("Journal Batch Name", JBatch);
@@ -6584,11 +6515,11 @@ Codeunit 52186456 "Sacco Transactions"
                 LineNo := GenJournalLine."Line No.";
             end;
 
-            RunBal -= remainingBal;
-
             Loans.Reset;
             Loans.SetRange(Loans."Member No.", MemberNo);
             Loans.SetRange(Loans."Disbursement Date", 0D, SalHeaD."Last Loan Issue Date");
+            Loans.SetCurrentKey("Recovery Priority");
+            Loans.SetAscending("Recovery Priority", true);
             Loans.SetRange("Source Unit", Loans."Source Unit"::FOSA);
             // if SalHeaD."Income Type" = SalHeaD."Income Type"::Payments THEN
             //     Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::"Board Allowance")
@@ -6750,12 +6681,84 @@ Codeunit 52186456 "Sacco Transactions"
             end;
         end;
 
+        ///loans STO
+        if not SalHead."Donot Recover STO" then
+            remainingBal := PostLoanSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
 
+        RunBal -= remainingBal;
+
+        //Deposit deduction
+        if SalHeaD."Deposit Deduction" > 0 then begin
+            if Account.get(Salaccno) then begin
+                SavAccII.reset();
+                SavAccII.setrange("Member No.", Account."Member No.");
+                SavAccII.setrange("Product Category", SavAccII."Product Category"::"BOSA Deposits");
+                SavAccII.setrange(Blocked, SavAccII.blocked::" ");
+                if SavAccII.FindFirst() then begin
+                    LineNo := LineNo + 10000;
+                    GenJournalLine.Init;
+                    GenJournalLine."Journal Template Name" := Jtemplate;
+                    GenJournalLine."Journal Batch Name" := JBatch;
+                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
+                    GenJournalLine."Line No." := LineNo;
+                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                    GenJournalLine."Account No." := SalLines."Account No.";
+                    //GenJournalLine."External Document No.":="ID No";
+                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                    GenJournalLine."Posting Date" := PDate;
+                    GenJournalLine.Description := 'Deposit contribution Deduction';
+                    GenJournalLine.Validate(GenJournalLine."Currency Code");
+                    GenJournalLine.Amount := SalHead."Deposit Deduction";
+                    if GenJournalLine.Amount > RunBal then
+                        GenJournalLine.Amount := RunBal;
+                    GenJournalLine.Validate(GenJournalLine.Amount);
+                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                    GenJournalLine."Bal. Account No." := '';
+                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                    if GenJournalLine.Amount <> 0 then
+                        GenJournalLine.Insert(false);
+                    //RunBal
+                    RunBal := RunBal - GenJournalLine.Amount;
+
+                    LineNo := LineNo + 10000;
+                    GenJournalLine.Init;
+                    GenJournalLine."Journal Template Name" := Jtemplate;
+                    GenJournalLine."Journal Batch Name" := JBatch;
+                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
+                    GenJournalLine."Line No." := LineNo;
+                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                    GenJournalLine."Account No." := SavAccII."No.";
+                    //GenJournalLine."External Document No.":="ID No";
+                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                    GenJournalLine."Posting Date" := PDate;
+                    GenJournalLine.Description := 'Deposit contribution Deduction';
+                    GenJournalLine.Validate(GenJournalLine."Currency Code");
+                    GenJournalLine.Amount := (SalHead."Deposit Deduction") * -1;
+                    if Abs(GenJournalLine.Amount) > RunBal then
+                        GenJournalLine.Amount := RunBal * -1;
+                    GenJournalLine.Validate(GenJournalLine.Amount);
+                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                    GenJournalLine."Bal. Account No." := '';
+                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                    if GenJournalLine.Amount <> 0 then
+                        GenJournalLine.Insert(false);
+                end;
+            end;
+        end;
+
+        //STO subacc deductions
         if not SalHead."Donot Recover STO" then begin
             if RunBal > 0 then
                 PostSavingSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
         end;
-
 
     end;
 

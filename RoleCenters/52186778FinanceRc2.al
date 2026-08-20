@@ -767,12 +767,7 @@ page 52186778 "Finance Role Center"
                             Caption = 'FOSA Account Activation Report';
                             RunObject = report "FOSA Account Activation";
                         }
-                        action("BOSA Account Activation Report")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'BOSA Account Activation Report';
-                            RunObject = report "BOSA Account Activation Report";
-                        }
+                       
                     }
                 }
 
@@ -5625,12 +5620,6 @@ page 52186778 "Finance Role Center"
                     //     Caption = 'Checkoff Receipt Report Report';
                     //     RunObject = report "Posted Receipt Checkoff";
                     // }
-                    action("Account Report ")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'BOSA Account Activation Report';
-                        RunObject = report "BOSA Account Activation Report";
-                    }
 
 
                     // action("Member Listing Report")

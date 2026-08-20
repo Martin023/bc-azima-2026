@@ -1024,12 +1024,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Dormant Savings Accounts';
                                 RunObject = report "Dormant Savings Accounts";
                             }
-                            action("Activate Savings Accounts")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Activate Savings Accounts';
-                                RunObject = report "Activate Savings Accounts";
-                            }
+                          
                             action("E-Mail Member Statement")
                             {
                                 ApplicationArea = "Basic, Suite";

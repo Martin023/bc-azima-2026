@@ -6170,151 +6170,155 @@ Codeunit 52185470 "Periodic Activities"
         msg: Text;
         FirstName: Text;
         PhoneNumber: Text;
+        Defaulter: record Members;
     begin
-        Loans.CalcFields("Outstanding Balance", "Outstanding Interest");
-        SavingsAccounts.Get(AccountNo);
-        MainProductFactory.Get(Loans."Loan Product Type");
-        if ProductFactory.Get(MainProductFactory."Deafulter Loan Product") then begin
+        if Defaulter.get(Loans."Member No.") then begin
+            Loans.CalcFields("Outstanding Balance", "Outstanding Interest");
+            SavingsAccounts.Get(AccountNo);
+            MainProductFactory.Get(Loans."Loan Product Type");
+            if ProductFactory.Get(MainProductFactory."Deafulter Loan Product") then begin
 
-            CreditAccountNo := ProductFactory."Account No. Prefix" + SavingsAccounts."Member No.";
-            if not CreditAcount.Get(CreditAccountNo) then begin
-                CreditAccountNo := LoanProcess.CreateLoanAccount(SavingsAccounts."Member No.", ProductFactory."Product ID");
-            end;
-
-            NewLoans.Reset;
-            NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
-            NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
-            NewLoans.SetRange(NewLoans.Posted, false);
-            if NewLoans.Find('-') then
-                NewLoans.DeleteAll;
-
-            LoanRepaymentShedule.Reset;
-            LoanRepaymentShedule.SetRange(LoanRepaymentShedule."Loan No.", Loans."Loan No.");
-            if not LoanRepaymentShedule.FindFirst then
-                LoanProcess.GenerateSchedule(Loans, true);
-
-            NewLoans.Init;
-            NewLoans."Loan No." := '';
-            NewLoans."Member No." := SavingsAccounts."Member No.";
-            if Members.Get(SavingsAccounts."Member No.") then begin
-                NewLoans."Member Name" := Members.Name;
-                NewLoans."Staff No" := Members."Payroll/Staff No.";
-                NewLoans."Employer Code" := Members."Employer Code";
-                NewLoans."Application Date" := Today;
-            end;
-            NewLoans."Loan Product Type" := ProductFactory."Product ID";
-            //NewLoans.VALIDATE(NewLoans."Loan Product Type");
-            NewLoans."Loan Product Type Name" := ProductFactory."Product Description";
-            NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
-            NewLoans.Interest := Loans.Interest;
-            NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
-            NewLoans."Interest Calculation Method" := ProductFactory."Interest Calculation Method";
-            Loans.CalcFields("Loan Span");
-            NewLoans."Loan Span" := Loans."Loan Span";
-            NewLoans.Installments := GlobalFunctions.GetRemainingInstallments(Loans, Today);
-            NewLoans."Compute Interest Due on Postin" := Loans."Compute Interest Due on Postin";
-            NewLoans."Repayment Frequency" := Loans."Repayment Frequency";
-            NewLoans."Recovery Mode" := MainProductFactory."Repay Mode";
-            NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
-            NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
-            NewLoans."Application Date" := PDate;
-            NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
-            NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
-            NewLoans.Validate(NewLoans."Approved Amount");
-            NewLoans.Status := NewLoans.Status::Approved;
-            NewLoans."Disbursement Date" := PDate;
-            NewLoans."Repayment Start Date" := PDate;
-            //Expected Completion Date
-
-            if MainProductFactory.Get(NewLoans."Loan Product Type") then begin
-                if Format(MainProductFactory."Grace Period - Principle") <> '' then begin
-                    // Apply grace period
-                    NewLoans."Repayment Start Date" := CalcDate(MainProductFactory."Grace Period - Principle", NewLoans."Disbursement Date");
-
-                    // Apply repayment start date logic based on loan application date
-                    if Date2DMY(NewLoans."Repayment Start Date", 1) <= 10 then
-                        NewLoans."Repayment Start Date" := CalcDate('CM', NewLoans."Repayment Start Date") // End of current month
-                    else
-                        NewLoans."Repayment Start Date" := CalcDate('CM+1M', NewLoans."Repayment Start Date"); // End of following month
-
-                    IntstallMentPeriodText := Format(NewLoans.Installments) + 'M';
-                    Evaluate(InstalmentPeriods, IntstallMentPeriodText);
-                    NewLoans."Expected Date of Completion" := CalcDate(InstalmentPeriods, NewLoans."Repayment Start Date");
-
-                end else begin
-                    // No grace period, apply repayment start date logic
-                    if Date2DMY(NewLoans."Disbursement Date", 1) <= 10 then
-                        NewLoans."Repayment Start Date" := CalcDate('CM', NewLoans."Disbursement Date") // End of current month
-                    else
-                        NewLoans."Repayment Start Date" := CalcDate('CM+1M', NewLoans."Disbursement Date"); // End of following month
-
-                    IntstallMentPeriodText := Format(NewLoans.Installments) + 'M';
-                    Evaluate(InstalmentPeriods, IntstallMentPeriodText);
-                    NewLoans."Expected Date of Completion" := CalcDate(InstalmentPeriods, NewLoans."Repayment Start Date");
+                CreditAccountNo := ProductFactory."Account No. Prefix" + SavingsAccounts."Member No.";
+                if not CreditAcount.Get(CreditAccountNo) then begin
+                    CreditAccountNo := LoanProcess.CreateLoanAccount(SavingsAccounts."Member No.", ProductFactory."Product ID");
                 end;
-            end;
-            // End of Expected Completion Date
-            //NewLoans.batch"Batch No.":="Batch No.";
-            NewLoans."Loan Account" := CreditAccountNo;
-            NewLoans.Repayment := ROUND(NewLoans.Repayment, 1, '>');
-            NewLoans.Advice := true;
-            NewLoans."Advice Type" := NewLoans."advice type"::"Fresh Loan";
 
-            NewLoans."Loan Recovery No." := DocNo;
-            NewLoans."Recovered Loan" := Loans."Loan No.";
-            NewLoans."Source Unit" := ProductFactory."Source Unit";
-            Newloans."Recovered Product Type" := Loans."Loan Product Type";
-            NewLoans."Recovered Product Name" := loans."Loan Product Type Name";
-            NewLoans.Insert(true);
+                NewLoans.Reset;
+                NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
+                NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
+                NewLoans.SetRange(NewLoans.Posted, false);
+                if NewLoans.Find('-') then
+                    NewLoans.DeleteAll;
 
-            NewLoans.Reset;
-            NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
-            NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
-            NewLoans.SetRange(NewLoans.Posted, false);
-            if NewLoans.Find('-') then begin
-                Dim1 := Loans."Global Dimension 1 Code";
-                Dim2 := Loans."Global Dimension 2 Code";
-                ////DEFAULTER ATTACHMENT MNO-GUARANTOR LNO-GUARANTOR
+                LoanRepaymentShedule.Reset;
+                LoanRepaymentShedule.SetRange(LoanRepaymentShedule."Loan No.", Loans."Loan No.");
+                if not LoanRepaymentShedule.FindFirst then
+                    LoanProcess.GenerateSchedule(Loans, true);
 
-                LoanNo := NewLoans."Loan No.";
-                SystemCreated := true;
-                TransAmt := NewLoans."Approved Amount";
-                Description := 'Defaulter Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
+                NewLoans.Init;
+                NewLoans."Loan No." := '';
+                NewLoans."Member No." := SavingsAccounts."Member No.";
+                if Members.Get(SavingsAccounts."Member No.") then begin
+                    NewLoans."Member Name" := Members.Name;
+                    NewLoans."Staff No" := Members."Payroll/Staff No.";
+                    NewLoans."Employer Code" := Members."Employer Code";
+                    NewLoans."Application Date" := Today;
+                end;
+                NewLoans."Loan Product Type" := ProductFactory."Product ID";
+                //NewLoans.VALIDATE(NewLoans."Loan Product Type");
+                NewLoans."Loan Product Type Name" := ProductFactory."Product Description";
+                NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
+                NewLoans.Interest := Loans.Interest;
+                NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
+                NewLoans."Interest Calculation Method" := ProductFactory."Interest Calculation Method";
+                Loans.CalcFields("Loan Span");
+                NewLoans."Loan Span" := Loans."Loan Span";
+                NewLoans.Installments := GlobalFunctions.GetRemainingInstallments(Loans, Today);
+                NewLoans."Compute Interest Due on Postin" := Loans."Compute Interest Due on Postin";
+                NewLoans."Repayment Frequency" := Loans."Repayment Frequency";
+                NewLoans."Recovery Mode" := MainProductFactory."Repay Mode";
+                NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
+                NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
+                NewLoans."Application Date" := PDate;
+                NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
+                NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
+                NewLoans.Validate(NewLoans."Approved Amount");
+                NewLoans.Status := NewLoans.Status::Approved;
+                NewLoans."Disbursement Date" := PDate;
+                NewLoans."Repayment Start Date" := PDate;
+                //Expected Completion Date
 
-                if NewLoans."Approved Amount" <> 0 then
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                           '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
+                if MainProductFactory.Get(NewLoans."Loan Product Type") then begin
+                    if Format(MainProductFactory."Grace Period - Principle") <> '' then begin
+                        // Apply grace period
+                        NewLoans."Repayment Start Date" := CalcDate(MainProductFactory."Grace Period - Principle", NewLoans."Disbursement Date");
 
-                // if LoanRecLines."Interest Amount" <> 0 then
-                // SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                //        '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+                        // Apply repayment start date logic based on loan application date
+                        if Date2DMY(NewLoans."Repayment Start Date", 1) <= 10 then
+                            NewLoans."Repayment Start Date" := CalcDate('CM', NewLoans."Repayment Start Date") // End of current month
+                        else
+                            NewLoans."Repayment Start Date" := CalcDate('CM+1M', NewLoans."Repayment Start Date"); // End of following month
 
-                NewLoans.Posted := true;
-                NewLoans.Modify;
+                        IntstallMentPeriodText := Format(NewLoans.Installments) + 'M';
+                        Evaluate(InstalmentPeriods, IntstallMentPeriodText);
+                        NewLoans."Expected Date of Completion" := CalcDate(InstalmentPeriods, NewLoans."Repayment Start Date");
 
-                //Generate Schedule
-                LoanProcess.GenerateSchedule(NewLoans, true);
+                    end else begin
+                        // No grace period, apply repayment start date logic
+                        if Date2DMY(NewLoans."Disbursement Date", 1) <= 10 then
+                            NewLoans."Repayment Start Date" := CalcDate('CM', NewLoans."Disbursement Date") // End of current month
+                        else
+                            NewLoans."Repayment Start Date" := CalcDate('CM+1M', NewLoans."Disbursement Date"); // End of following month
 
-                //Advice Loan
-                NewLoans.Validate(Repayment);
-                companyinfo.get();
-                Members.Get(NewLoans."Member No.");
+                        IntstallMentPeriodText := Format(NewLoans.Installments) + 'M';
+                        Evaluate(InstalmentPeriods, IntstallMentPeriodText);
+                        NewLoans."Expected Date of Completion" := CalcDate(InstalmentPeriods, NewLoans."Repayment Start Date");
+                    end;
+                end;
+                // End of Expected Completion Date
+                //NewLoans.batch"Batch No.":="Batch No.";
+                NewLoans."Loan Account" := CreditAccountNo;
+                NewLoans.Repayment := ROUND(NewLoans.Repayment, 1, '>');
+                NewLoans.Advice := true;
+                NewLoans."Advice Type" := NewLoans."advice type"::"Fresh Loan";
 
-                GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
-                LoanNumber := NewLoans."Loan No.";
+                NewLoans."Loan Recovery No." := DocNo;
+                NewLoans."Recovered Loan" := Loans."Loan No.";
+                NewLoans."Source Unit" := ProductFactory."Source Unit";
+                Newloans."Recovered Product Type" := Loans."Loan Product Type";
+                NewLoans."Recovered Product Name" := loans."Loan Product Type Name";
+                NewLoans.Insert(true);
 
-                // msg := 'Dear member your have been attached Loan of Kes'
-                // + Format(ROUND(NewLoans."Approved Amount", 1, '=')) + ' ' + 'for defaulted loan you guaranteed Member No.' + Loans."Member No." + '-' + Loans."Member Name" + '' +
-                // ' if in dispute call ' + companyinfo."Phone No.";
+                NewLoans.Reset;
+                NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
+                NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
+                NewLoans.SetRange(NewLoans.Posted, false);
+                if NewLoans.Find('-') then begin
+                    Dim1 := Loans."Global Dimension 1 Code";
+                    Dim2 := Loans."Global Dimension 2 Code";
+                    ////DEFAULTER ATTACHMENT MNO-GUARANTOR LNO-GUARANTOR
 
-                msg := 'Dear ' + FirstName + ', you have been attached defaulted ' + NewLoans."Loan Product Type Name" + ' KES ' + Format(Abs(TransAmt) + Abs(LoanRecLines."Interest Amount")) +
-                'for the loan guaranteed to ' + Loans."Member No." + '-' + Loans."Member Name" + '. ' + ForMoreInfo;
+                    LoanNo := NewLoans."Loan No.";
+                    SystemCreated := true;
+                    TransAmt := NewLoans."Approved Amount";
+                    Description := 'Defaulter Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
 
-                SendSMS.SendSms(Source::MBANKING, PhoneNumber, CopyStr(msg, 1, 250), Format(NewLoans."Loan No."), '', true, 0, false, 'CBS', NewLoans."Loan No.", 'CBS');
+                    if NewLoans."Approved Amount" <> 0 then
+                        SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                               '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
 
-            end;
-        end else
-            Error('Defaulter loan product does not exist');
+                    // if LoanRecLines."Interest Amount" <> 0 then
+                    // SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                    //        '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+
+                    NewLoans.Posted := true;
+                    NewLoans.Modify;
+
+                    //Generate Schedule
+                    LoanProcess.GenerateSchedule(NewLoans, true);
+
+                    //Advice Loan
+                    NewLoans.Validate(Repayment);
+                    companyinfo.get();
+                    Members.Get(NewLoans."Member No.");
+
+                    GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
+                    LoanNumber := NewLoans."Loan No.";
+
+                    // msg := 'Dear member your have been attached Loan of Kes'
+                    // + Format(ROUND(NewLoans."Approved Amount", 1, '=')) + ' ' + 'for defaulted loan you guaranteed Member No.' + Loans."Member No." + '-' + Loans."Member Name" + '' +
+                    // ' if in dispute call ' + companyinfo."Phone No.";
+
+                    msg := 'Dear ' + FirstName + ', you have been attached defaulted ' + NewLoans."Loan Product Type Name" + ' KES ' + Format(Abs(TransAmt) + Abs(LoanRecLines."Interest Amount")) +
+                    'for the loan guaranteed to ' + Loans."Member No." + '-' + Loans."Member Name" + '. for more information contact ' + format(Defaulter."Phone No.");
+
+                    SendSMS.SendSms(Source::MBANKING, PhoneNumber, CopyStr(msg, 1, 250), Format(NewLoans."Loan No."), '', true, 0, false, 'CBS', NewLoans."Loan No.", 'CBS');
+
+                end;
+            end else
+                Error('Defaulter loan product does not exist');
+        end;
+
     end;
 
 
@@ -6346,117 +6350,121 @@ Codeunit 52185470 "Periodic Activities"
 
         FirstName: Text;
         PhoneNumber: Text;
+        Defaulter: record members;
     begin
-        Loans.CalcFields("Outstanding Balance", "Outstanding Interest");
-        SavingsAccounts.Get(AccountNo);
-        MainProductFactory.Get(Loans."Loan Product Type");
-        if ProductFactory.Get(MainProductFactory."Deafulter Loan Product") then begin
+        if Defaulter.get(loans."Member No.") then begin
+            Loans.CalcFields("Outstanding Balance", "Outstanding Interest");
+            SavingsAccounts.Get(AccountNo);
+            MainProductFactory.Get(Loans."Loan Product Type");
+            if ProductFactory.Get(MainProductFactory."Deafulter Loan Product") then begin
 
-            CreditAccountNo := ProductFactory."Account No. Prefix" + SavingsAccounts."Member No.";
-            if not CreditAcount.Get(CreditAccountNo) then begin
-                CreditAccountNo := LoanProcess.CreateLoanAccount(SavingsAccounts."Member No.", ProductFactory."Product ID");
-            end;
+                CreditAccountNo := ProductFactory."Account No. Prefix" + SavingsAccounts."Member No.";
+                if not CreditAcount.Get(CreditAccountNo) then begin
+                    CreditAccountNo := LoanProcess.CreateLoanAccount(SavingsAccounts."Member No.", ProductFactory."Product ID");
+                end;
 
-            NewLoans.Reset;
-            NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
-            NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
-            NewLoans.SetRange(NewLoans.Posted, false);
-            if NewLoans.Find('-') then
-                NewLoans.DeleteAll;
+                NewLoans.Reset;
+                NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
+                NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
+                NewLoans.SetRange(NewLoans.Posted, false);
+                if NewLoans.Find('-') then
+                    NewLoans.DeleteAll;
 
-            LoanRepaymentShedule.Reset;
-            LoanRepaymentShedule.SetRange(LoanRepaymentShedule."Loan No.", Loans."Loan No.");
-            if not LoanRepaymentShedule.FindFirst then
-                LoanProcess.GenerateSchedule(Loans, true);
+                LoanRepaymentShedule.Reset;
+                LoanRepaymentShedule.SetRange(LoanRepaymentShedule."Loan No.", Loans."Loan No.");
+                if not LoanRepaymentShedule.FindFirst then
+                    LoanProcess.GenerateSchedule(Loans, true);
 
-            NewLoans.Init;
-            NewLoans."Loan No." := '';
-            NewLoans."Member No." := SavingsAccounts."Member No.";
-            if Members.Get(SavingsAccounts."Member No.") then begin
-                NewLoans."Member Name" := Members.Name;
-                NewLoans."Staff No" := Members."Payroll/Staff No.";
-                NewLoans."Employer Code" := Members."Employer Code";
-                NewLoans."Application Date" := Today;
-            end;
-            NewLoans."Loan Product Type" := ProductFactory."Product ID";
-            //NewLoans.VALIDATE(NewLoans."Loan Product Type");
-            NewLoans."Loan Product Type Name" := ProductFactory."Product Description";
-            NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
-            NewLoans.Interest := Loans.Interest;
-            NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
-            NewLoans."Interest Calculation Method" := ProductFactory."Interest Calculation Method";
-            Loans.CalcFields("Loan Span");
-            NewLoans."Loan Span" := Loans."Loan Span";
-            NewLoans.Installments := GlobalFunctions.GetRemainingInstallments(Loans, Today);
-            NewLoans."Compute Interest Due on Postin" := Loans."Compute Interest Due on Postin";
-            NewLoans."Repayment Frequency" := Loans."Repayment Frequency";
-            NewLoans."Recovery Mode" := ProductFactory."Repay Mode";
-            NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
-            NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
-            NewLoans."Application Date" := PDate;
-            NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
-            NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
-            NewLoans.Validate(NewLoans."Approved Amount");
-            NewLoans.Status := NewLoans.Status::Approved;
-            NewLoans."Disbursement Date" := PDate;
-            NewLoans."Repayment Start Date" := PDate;
-            //NewLoans.batch"Batch No.":="Batch No.";
-            NewLoans."Loan Account" := CreditAccountNo;
-            NewLoans.Repayment := ROUND(NewLoans.Repayment, 1, '>');
-            NewLoans.Advice := true;
-            NewLoans."Advice Type" := NewLoans."advice type"::"Fresh Loan";
+                NewLoans.Init;
+                NewLoans."Loan No." := '';
+                NewLoans."Member No." := SavingsAccounts."Member No.";
+                if Members.Get(SavingsAccounts."Member No.") then begin
+                    NewLoans."Member Name" := Members.Name;
+                    NewLoans."Staff No" := Members."Payroll/Staff No.";
+                    NewLoans."Employer Code" := Members."Employer Code";
+                    NewLoans."Application Date" := Today;
+                end;
+                NewLoans."Loan Product Type" := ProductFactory."Product ID";
+                //NewLoans.VALIDATE(NewLoans."Loan Product Type");
+                NewLoans."Loan Product Type Name" := ProductFactory."Product Description";
+                NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
+                NewLoans.Interest := Loans.Interest;
+                NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
+                NewLoans."Interest Calculation Method" := ProductFactory."Interest Calculation Method";
+                Loans.CalcFields("Loan Span");
+                NewLoans."Loan Span" := Loans."Loan Span";
+                NewLoans.Installments := GlobalFunctions.GetRemainingInstallments(Loans, Today);
+                NewLoans."Compute Interest Due on Postin" := Loans."Compute Interest Due on Postin";
+                NewLoans."Repayment Frequency" := Loans."Repayment Frequency";
+                NewLoans."Recovery Mode" := ProductFactory."Repay Mode";
+                NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
+                NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
+                NewLoans."Application Date" := PDate;
+                NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
+                NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
+                NewLoans.Validate(NewLoans."Approved Amount");
+                NewLoans.Status := NewLoans.Status::Approved;
+                NewLoans."Disbursement Date" := PDate;
+                NewLoans."Repayment Start Date" := PDate;
+                //NewLoans.batch"Batch No.":="Batch No.";
+                NewLoans."Loan Account" := CreditAccountNo;
+                NewLoans.Repayment := ROUND(NewLoans.Repayment, 1, '>');
+                NewLoans.Advice := true;
+                NewLoans."Advice Type" := NewLoans."advice type"::"Fresh Loan";
 
-            NewLoans."Loan Recovery No." := DocNo;
-            NewLoans."Recovered Loan" := Loans."Loan No.";
-            NewLoans."Source Unit" := ProductFactory."Source Unit";
-            NewLoans.Insert(true);
+                NewLoans."Loan Recovery No." := DocNo;
+                NewLoans."Recovered Loan" := Loans."Loan No.";
+                NewLoans."Source Unit" := ProductFactory."Source Unit";
+                NewLoans.Insert(true);
 
-            NewLoans.Reset;
-            NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
-            NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
-            NewLoans.SetRange(NewLoans.Posted, false);
-            if NewLoans.Find('-') then begin
+                NewLoans.Reset;
+                NewLoans.SetRange(NewLoans."Member No.", SavingsAccounts."Member No.");
+                NewLoans.SetRange(NewLoans."Loan Product Type", ProductFactory."Product ID");
+                NewLoans.SetRange(NewLoans.Posted, false);
+                if NewLoans.Find('-') then begin
 
-                ////DEFAULTER ATTACHMENT MNO-GUARANTOR LNO-GUARANTOR
+                    ////DEFAULTER ATTACHMENT MNO-GUARANTOR LNO-GUARANTOR
 
-                LoanNo := NewLoans."Loan No.";
-                SystemCreated := true;
-                TransAmt := NewLoans."Approved Amount";
-                Description := 'Defaulter P+I Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
+                    LoanNo := NewLoans."Loan No.";
+                    SystemCreated := true;
+                    TransAmt := NewLoans."Approved Amount";
+                    Description := 'Defaulter P+I Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
 
-                if TransAmt <> 0 then
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                           '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
+                    if TransAmt <> 0 then
+                        SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                               '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
 
-                // if LoanRecLines."Interest Amount" <> 0 then
-                //     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                //            '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+                    // if LoanRecLines."Interest Amount" <> 0 then
+                    //     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                    //            '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
 
-                NewLoans.Posted := true;
-                NewLoans.Modify;
+                    NewLoans.Posted := true;
+                    NewLoans.Modify;
 
-                //Generate Schedule
-                LoanProcess.GenerateSchedule(NewLoans, true);
+                    //Generate Schedule
+                    LoanProcess.GenerateSchedule(NewLoans, true);
 
-                //Advice Loan
-                NewLoans.Validate(Repayment);
-                companyinfo.get();
-                Members.Get(NewLoans."Member No.");
+                    //Advice Loan
+                    NewLoans.Validate(Repayment);
+                    companyinfo.get();
+                    Members.Get(NewLoans."Member No.");
 
-                GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
+                    GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
 
-                // msg := 'Dear member your have been attached Loan of Kes'
-                // + Format(ROUND(NewLoans."Approved Amount", 1, '=')) + ' ' + 'for defaulted loan you guaranteed Member No.' + Loans."Member No." + '-' + Loans."Member Name" + '' +
-                // ' if in dispute call ' + companyinfo."Phone No.";
+                    // msg := 'Dear member your have been attached Loan of Kes'
+                    // + Format(ROUND(NewLoans."Approved Amount", 1, '=')) + ' ' + 'for defaulted loan you guaranteed Member No.' + Loans."Member No." + '-' + Loans."Member Name" + '' +
+                    // ' if in dispute call ' + companyinfo."Phone No.";
 
-                msg := 'Dear ' + FirstName + ', you have been attached defaulted ' + NewLoans."Loan Product Type Name" + ' KES ' + Format(Abs(TransAmt) + Abs(LoanRecLines."Interest Amount")) +
-                'for the loan guaranteed to ' + Loans."Member No." + '-' + Loans."Member Name" + '. ' + ForMoreInfo;
+                    msg := 'Dear ' + FirstName + ', you have been attached defaulted ' + Loans."Loan Product Type Name" + ' KES ' + Format(Abs(TransAmt) + Abs(LoanRecLines."Interest Amount")) +
+                    'for the loan guaranteed to ' + Loans."Member No." + '-' + Loans."Member Name" + '. ' + 'for more information contact ' + format(Defaulter."Phone No.");
 
-                SendSMS.SendSms(Source::MBANKING, PhoneNumber, CopyStr(msg, 1, 250), Format(NewLoans."Loan No."), '', true, 0, false, 'CBS', NewLoans."Loan No.", 'CBS');
+                    SendSMS.SendSms(Source::MBANKING, PhoneNumber, CopyStr(msg, 1, 250), Format(NewLoans."Loan No."), '', true, 0, false, 'CBS', NewLoans."Loan No.", 'CBS');
 
-            end;
-        end else
-            Error('Defaulter loan product does not exist');
+                end;
+            end else
+                Error('Defaulter loan product does not exist');
+        end;
+
     end;
 
 
@@ -6623,7 +6631,7 @@ Codeunit 52185470 "Periodic Activities"
                     //  ' attached to your account KES ' + Format(ReversalLines."Interest Attached Amount" + ReversalLines."Principle Attached Amount") + ' has been reversed. ' + ForMoreInfo;
 
                     msg := 'The ' + OriginalLoan."Loan Product Type Name" + ' attached to your account ' + ReversalLines."Guarantor Member No." + '-' + FirstName + ' KES ' +
-                    Format(ReversalLines."Interest Attached Amount" + ReversalLines."Principle Attached Amount") + ' has been reversed. ' + ForMoreInfo;
+                    Format(ReversalLines."Interest Attached Amount" + ReversalLines."Principle Attached Amount") + ' has been reversed.';
 
                     SendSMS.SendSms(Source::DMU, PhoneNumber, msg, LoanRecoveryHeader."No.", GuarantorMember."No.", false, 250, false, 'CBS', '', 'CBS');
                 end;
@@ -6631,7 +6639,7 @@ Codeunit 52185470 "Periodic Activities"
         end;
 
         GlobalFunctionsCodeunit.GetMemberData(DefaulterMember."No.", FirstName, PhoneNumber);
-        msg := 'Dear ' + FirstName + ' your defaulted loan ' + LoanRecoveryHeader."Loan No." + ' has been reversed. ' + ForMoreInfo;
+        msg := 'Dear ' + FirstName + ' your defaulted loan ' + LoanRecoveryHeader."Loan No." + ' has been reversed.';
         SendSMS.SendSms(Source::DMU, PhoneNumber, msg, LoanRecoveryHeader."No.", GuarantorMember."No.", false, 250, false, 'CBS', '', 'CBS');
 
         //Mark all reappotionments as reversed
@@ -6867,7 +6875,7 @@ Codeunit 52185470 "Periodic Activities"
                         // ' has been reversed to the owner successfully';
 
                         msg := 'The ' + OriginalLoan."Loan Product Type Name" + 'attached to your account ' + ReversalLines."Guarantor Member No." + '-' + FirstName + 'KES ' +
-                        Format(ReversalLines."Attached Amount") + ' has been reversed. ' + ForMoreInfo;
+                        Format(ReversalLines."Attached Amount") + ' has been reversed.';
 
                         SendSMS.SendSms(Source::DMU, PhoneNumber, msg, LoanRecoveryHeader."No.", GuarantorMember."No.", false, 250, false, 'CBS', '', 'CBS');
                     end;
@@ -8560,7 +8568,6 @@ Codeunit 52185470 "Periodic Activities"
         CUstomCuesCU: Codeunit CustomCuesCodeunit;
         InstalmentPeriods: DateFormula;
         IntstallMentPeriodText: Text;
-        ForMoreInfo: Label 'For more info call 0709 898 000';
 
 }
 
