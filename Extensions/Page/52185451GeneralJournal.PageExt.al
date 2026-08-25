@@ -683,8 +683,8 @@ PageExtension 52185451 pageextension52185451 extends "General Journal"
                         if GenjnlLines."Loan No" <> '' then
                             if (GenjnlLines."Transaction Type" = GenjnlLines."Transaction Type"::" ") or (GenjnlLines."Transaction Type" = GenjnlLines."Transaction Type"::Armotised) then
                                 error('Please fill in the Transaction Type field');
-                        if strlen(GenjnlLines.Description) > 50 then
-                            Error('The description cannot exceed 50 characters');
+                        if strlen(GenjnlLines.Description) > 100 then
+                            Error('The description cannot exceed 100 characters');
                     until GenjnlLines.Next = 0;
                 end;
             end;
