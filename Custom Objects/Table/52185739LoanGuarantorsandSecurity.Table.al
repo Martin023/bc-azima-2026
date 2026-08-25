@@ -196,6 +196,7 @@ table 52185739 "Loan Guarantors and Security"
                                 if Members.Get(Cust."Member No.") then begin
                                     // if "Member Guaranteed" <> cust."Member No." then
                                     //     Error('Employer %1 are not allowed to guarantee.', Cust."Employer Code");
+                                    Message('The selected guarantor is a Staff member');
                                 end;
                             end;
                         end;
