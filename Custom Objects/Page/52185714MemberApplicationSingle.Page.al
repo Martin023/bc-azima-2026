@@ -1326,22 +1326,17 @@ page 52185714 "Member Application Single"
                     Promoted = true;
                     trigger OnAction()
                     var
-
+                        ApprovalsMgmt: codeunit "Approvals Mgmt.";
                     begin
                         GlobalFunctions.CommentsManagement(Rec."No.");
-
-
                         if not Rec.Created then begin
                             if not Confirm('Are you sure you want to open this record?') then exit;
-
-                            // VarVariant := Rec;
-                            // CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
-
                             if rec.Status <> rec.Status::open then begin
                                 rec.Status := rec.Status::Open;
                                 rec.Modify();
                                 //CurrPage.Update();
                                 Message('The record have been opened successfully.');
+                                ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                             end;
 
                         end else

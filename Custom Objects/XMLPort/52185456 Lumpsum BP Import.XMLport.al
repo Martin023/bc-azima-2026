@@ -40,6 +40,14 @@ XmlPort 52185556 "Lumpsum BP"
                     "Checkoff Buffer"."User Id" := UserId;
                     "Checkoff Buffer"."Upload Response" := Response;
                 end;
+
+                trigger OnBeforeInsertRecord()
+                begin
+                    if "Checkoff Buffer".Amount <= 0 then
+                        Error('Amount must be greater than zero.');
+                    "Checkoff Buffer".TestField("Employer Code");
+                    "Checkoff Buffer".TestField("Upload No.");
+                end;
             }
         }
     }
