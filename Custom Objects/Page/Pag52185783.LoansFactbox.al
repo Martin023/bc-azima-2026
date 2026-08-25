@@ -5,7 +5,7 @@ page 52185783 "Loans Factbox"
     ApplicationArea = All;
     Caption = 'Loans Factbox';
     PageType = ListPart;
-    SourceTableView = where(posted = const(true), "Total Balance" = filter(> 0));
+    SourceTableView = where(posted = const(true), "Total Balance" = filter(<> 0));
     SourceTable = Loans;
     Editable = false;
     DeleteAllowed = false;
