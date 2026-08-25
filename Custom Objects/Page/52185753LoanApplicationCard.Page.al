@@ -2899,11 +2899,36 @@ page 52185753 "Loan Application Card"
         ApplicationType: Label 'LA'; // Loan Application
         PFNumber: Text;
         loanappraisalreport: record "Loan Appraisal History";
+        FieldOutStream: OutStream;
     begin
         FileName := 'LoanAppraisalForm.pdf';
         Loans.Reset;
         Loans.SetRange("Loan No.", LoanNumber);
         if Loans.FindFirst then begin
+
+            // TempBlob.CreateOutStream(BlobOutStream);
+            // RecRef.GetTable(Loans);
+            // Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
+
+            // TempBlob.CreateInStream(BlobInStream);
+            // FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
+
+            // if FileContentsB64 <> '' then begin
+            //     LoanAppraisalReport.Reset();
+            //     LoanAppraisalReport.SetRange("Loan No", LoanNumber);
+            //     LoanAppraisalReport.DeleteAll();
+
+            //     LoanAppraisalReport.Init();
+            //     LoanAppraisalReport."Loan No" := LoanNumber;
+            //     LoanAppraisalReport.Insert();   // insert the record first, without the blob
+
+            //     TempBlob.CreateInStream(BlobInStream);   // fresh instream, since ToBase64 consumed the earlier one
+            //     LoanAppraisalReport."Appraisal form".CreateOutStream(FieldOutStream);
+            //     CopyStream(FieldOutStream, BlobInStream);
+
+            //     LoanAppraisalReport.Modify();   // persist the blob write
+            // end;
+
             // EDMS.Reset;
             // EDMS.SetRange(Key, EDMS.Key::"Appraisal File");
             // if EDMS.FindFirst then begin
@@ -2916,25 +2941,30 @@ page 52185753 "Loan Application Card"
             // end;
 
             //if (Loans.Status = Loans.Status::Open) or (Loans.Status = Loans.Status::Pending) then begin
-            TempBlob.CreateOutStream(BlobOutStream, TextEncoding::UTF8);
-            TempBlob.CreateInStream(BlobInStream);
+            // TempBlob.CreateOutStream(BlobOutStream, TextEncoding::UTF8);
+            // TempBlob.CreateInStream(BlobInStream);
 
-            RecRef.GetTable(Loans);
-            Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
+            // RecRef.GetTable(Loans);
+            // Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
 
 
-            CopyStream(BlobOutStream, BlobInStream);
-
-            TempBlob.CreateInStream(BlobInStream);
-            FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
+            // CopyStream(BlobOutStream, BlobInStream);
+            // FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
 
             // if FileContentsB64 <> '' then begin
+            //     CopyStream(BlobOutStream, BlobInStream);
+            //     //Delete Existing report
+            //     loanappraisalreport.reset();
+            //     loanappraisalreport.setrange("Loan No", LoanNumber);
+            //     if loanappraisalreport.FindFirst() then
+            //         loanappraisalreport.deleteall();
 
             //     loanappraisalreport.Init();
             //     loanappraisalreport."Loan No" := LoanNumber;
-            //     loanappraisalreport."Appraisal form".CreateOutstream(OutStream1);
-            //     CopyStream(OutStream1, InStream1);
-            //     loanappraisalreport.Modify;
+            //     loanappraisalreport."Appraisal form".CreateOutstream(BlobOutStream);
+            //     loanappraisalreport.insert();
+            // end;
+
             //     // ApplicantMember.Reset;
             //     // ApplicantMember.SetRange("No.", Rec."Member No.");
 
@@ -2972,7 +3002,7 @@ page 52185753 "Loan Application Card"
             // end
             // else
             //     Message('Appraisal form was not uploaded kindly check the file value');
-            //end;
+            // end;
         end;
     end;
 }
