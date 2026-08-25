@@ -433,6 +433,8 @@ table 52185532 "HR Leave Application"
             begin
                 HREmp.Reset;
                 if HREmp.Get(Rec."Applicant Staff No.") then begin
+                    // POPULATE EMPLOYEE NAME
+                    Rec."Employee Name" := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
 
                     HRLeaveCal.Reset;
                     HRLeaveCal.SetRange(HRLeaveCal."Current Leave Calendar", true);
@@ -1175,7 +1177,7 @@ table 52185532 "HR Leave Application"
         SMSDispatcher: Codeunit "HR SMS Dispatcher";
         TokenVals: Text;
     begin
-        // TOKENS: EMPLOYEE_NAME, LEAVE_TYPE, START_DATE, END_DATE, DAYS_APPROVED, RETURN_DATE, APPLICATION_CODE
+        // TOKENS: EMPLOYEE_NAME,RELIEVER_NAME,LEAVE_TYPE, START_DATE, END_DATE, DAYS_APPROVED, RETURN_DATE, APPLICATION_CODE
         TokenVals := 'EMPLOYEE_NAME=' + Names + '||' +
                      'RELIEVER_NAME=' + "Reliever Name" + '||' +
                      'LEAVE_TYPE=' + "Leave Type" + '||' +

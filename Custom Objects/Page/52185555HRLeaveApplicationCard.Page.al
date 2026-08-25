@@ -569,6 +569,8 @@ page 52185555 "HR Leave Application Card"
                     ToolTip = 'Reopen a rejected, cancelled, or pending leave application to allow editing and resubmission. Approved applications cannot be reopened - use Recall instead.';
 
                     trigger OnAction()
+                    var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
                         if not Confirm('Reopen this leave application? This will set the status back to New and allow editing.', false) then
                             exit;
@@ -583,6 +585,9 @@ page 52185555 "HR Leave Application Card"
 
                         Rec.Status := Rec.Status::New;
                         Rec.Modify(true);
+                        
+                        ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
+                        
                         Message('Leave application %1 has been reopened.', Rec."Application Code");
                         CurrPage.Update(false);
                     end;

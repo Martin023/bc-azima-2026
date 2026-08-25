@@ -976,10 +976,12 @@ page 52185726 "Member Single"
             action("Recover Entrance Fees")
             {
                 ApplicationArea = Basic, Suite;
+                Caption = 'Recover Entrance Fees';
                 Image = Accounts;
                 Promoted = true;
-                PromotedCategory = Category4;
-                Visible = Rec.Status = Rec.Status::Active;
+                PromotedCategory = Process;
+                // Visible = True;
+                Visible = ShowRecoverEntranceFees;
                 trigger OnAction()
                 var
                     CurrentMembers: Record Members;
@@ -2147,7 +2149,8 @@ page 52185726 "Member Single"
 
     trigger OnAfterGetRecord()
     begin
-        //*
+
+        ShowRecoverEntranceFees := Rec.Status in [Rec.Status::Active, Rec.Status::New, Rec.Status::Dormant];
         "BranchOfficial??";
         lblIDVisible := true;
         lblDOBVisible := true;
@@ -2200,6 +2203,7 @@ page 52185726 "Member Single"
     var
         GlobalFunctions: Codeunit "Global Functions";
     begin
+        ShowRecoverEntranceFees := Rec.Status in [Rec.Status::Active, Rec.Status::New, Rec.Status::Dormant];
         if (Rec.Age = 0) and (Rec."Date of Birth" <> 0D) then begin
             Rec.Age := Round(((Today - Rec."Date of Birth") / 365), 1, '<');
             Rec.Modify();
@@ -2265,6 +2269,7 @@ page 52185726 "Member Single"
     end;
 
     var
+        ShowRecoverEntranceFees: Boolean;
         ShowEDMS: Boolean;
         lblIDVisible: Boolean;
 

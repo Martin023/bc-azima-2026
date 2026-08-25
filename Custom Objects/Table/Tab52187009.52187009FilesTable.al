@@ -17,6 +17,21 @@ table 52187009 "Member Form List"
         {
             Caption = 'Member No.';
             TableRelation = Members."No.";
+
+            trigger OnValidate()
+            var
+                Member: Record Members;
+            begin
+                if Member.Get("Member No.") then
+                    "Member Name" := Member.Name
+                else
+                    "Member Name" := '';
+            end;
+        }
+        field(8; "Member Name"; Text[100])
+        {
+            Caption = 'Member Name';
+            TableRelation = Members.Name WHERE("No." = FIELD("Member No."));
         }
         field(4; "Member Form Types"; Enum "Member Form Types")
         {

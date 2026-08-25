@@ -66,12 +66,43 @@ table 52185518 "HR Employee Kin"
        
         field(15;"Identification Type"; enum "Identification Type")
         {
+            trigger OnValidate()
+            var
+                HREmployeeKinCheck: Record "HR Employee Kin";
+                MyUniqueID: Text;
+                IsUnique: Boolean;
+            begin
+                // GENERATE SYSTEM UID WHEN SELECTING SYSTEM UID TYPE
+                if "Identification Type" = "Identification Type"::"System UID" then begin
+                    // ONLY GENERATE IF ID NO/PASSPORT NO IS EMPTY (NEW RECORD OR SWITCHING TO SYSTEM UID)
+                    if "ID No/Passport No" = '' then begin
+                        IsUnique := false;
+                        repeat
+                            MyUniqueID := GenerateSystemUID(10);
+                            HREmployeeKinCheck.Reset();
+                            HREmployeeKinCheck.SetRange("ID No/Passport No", CopyStr(MyUniqueID, 1, MaxStrLen("ID No/Passport No")));
+                            if HREmployeeKinCheck.IsEmpty() then
+                                IsUnique := true;
+                        until IsUnique;
+
+                        "ID No/Passport No" := CopyStr(MyUniqueID, 1, MaxStrLen("ID No/Passport No"));
+                    end;
+                end else begin
+                    // CLEAR ID NO/PASSPORT NO WHEN SWITCHING AWAY FROM SYSTEM UID
+                    if xRec."Identification Type" = "Identification Type"::"System UID" then begin
+                        "ID No/Passport No" := '';
+                    end;
+                end;
+            end;
         }
          field(16; Identification; Code[30])
         {
             trigger OnValidate()
             begin
-                Identification := DelChr(Identification, '=', 'A|B|C|D|E|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|.|,|!|@|#|$|%|^|&|*|(|)|[|]|{|}|/|\|"|;|:|<|>|?|+|-|_');
+                // SKIP VALIDATION FOR SYSTEM UID (IT CONTAINS LETTERS AND NUMBERS)
+                if "Identification Type" <> "Identification Type"::"System UID" then begin
+                    Identification := DelChr(Identification, '=', 'A|B|C|D|E|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|.|,|!|@|#|$|%|^|&|*|(|)|[|]|{|}|/|\|"|;|:|<|>|?|+|-|_');
+                end;
             end;
         }
                   field(39003953; "Medical Insurance No."; Code[20])
@@ -102,6 +133,19 @@ table 52185518 "HR Employee Kin"
         HRCommentLine.SetRange("Table Name", HRCommentLine."Table Name"::"Employee Relative");
         HRCommentLine.SetRange("No.", "Employee Code");
         HRCommentLine.DeleteAll;
+    end;
+
+    local procedure GenerateSystemUID(Length: Integer): Text
+    var
+        AllowedChars: Text;
+        ResultUID: Text;
+        i: Integer;
+    begin
+        AllowedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        for i := 1 to Length do
+            ResultUID += CopyStr(AllowedChars, Random(StrLen(AllowedChars)), 1);
+
+        exit(ResultUID);
     end;
 }
 

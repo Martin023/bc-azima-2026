@@ -22,6 +22,7 @@ page 52185534 "HR Employee Kin SF"
                     Caption = 'Identification';
                     ApplicationArea = Basic;
                     NotBlank = True;
+                    Editable = (Rec."Identification Type" <> Rec."Identification Type"::"System UID");
                 }
 
                 field(Relationship; Rec.Relationship)

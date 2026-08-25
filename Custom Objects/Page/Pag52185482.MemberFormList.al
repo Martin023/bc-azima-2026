@@ -17,6 +17,10 @@ page 52185482 "Member Form List"
                 {
                     ToolTip = 'Specifies the value of the Member No. field.', Comment = '%';
                 }
+                field("Member Name"; Rec."Member Name")
+                {
+                    ToolTip = 'Specifies the value of the Member Name field.', Comment = '%';
+                }
                 field("Member Form Types"; Rec."Member Form Types")
                 {
                     ToolTip = 'Specifies the value of the Form Type field.', Comment = '%';

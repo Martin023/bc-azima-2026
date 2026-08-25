@@ -75,6 +75,12 @@ table 52185925 "HR SMS Template"
             DataClassification = CustomerContent;
             ToolTip = 'Optional alternative message for CC recipients. Leave empty to use main body. Uses same tokens as main body.';
         }
+        field(14; "CC Recipients JSON"; Text[2048])
+        {
+            Caption = 'CC Recipients Configuration';
+            DataClassification = CustomerContent;
+            ToolTip = 'Internal storage for CC recipient details (Employee No., Name, Phone). Managed through the CC Recipients subpage.';
+        }
     }
 
     keys
