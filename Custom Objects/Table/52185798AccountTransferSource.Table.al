@@ -154,7 +154,7 @@ table 52185798 "Account Transfer Source"
         field(5; "Source Loan No."; Code[20])
         {
             TableRelation = IF ("Source Account Type" = CONST(Credit)) Loans."Loan No." WHERE(Posted = CONST(true),
-                                                                                             "Total Loan Balance" = FILTER(> 0), "Loan Account" = field("Source Account No."));
+                                                                                             "Total Loan Balance" = FILTER(<> 0), "Loan Account" = field("Source Account No."));
 
             trigger OnValidate()
             begin

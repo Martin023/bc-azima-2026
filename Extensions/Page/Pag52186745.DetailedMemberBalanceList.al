@@ -127,8 +127,11 @@ page 52186745 "Detailed Member Balance List"
                         MemFactbox: record "Member FactBox";
                         MemberList: record Members;
                     begin
+                        // MemFactbox.reset;
+                        // MemFactbox.deleteall();
+                        //
                         MemberList.reset;
-                        if MemberList.findfirst() then begin
+                        if MemberList.findset() then begin
                             repeat
                                 if not MemFactbox.get(MemberList."No.") then begin
                                     MemFactbox.Init();

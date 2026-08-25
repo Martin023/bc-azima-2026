@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-24T13:43:30.3416734Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-08-20T11:03:10.8100059Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -32,31 +32,31 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>1.92829cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>1.97083cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.34125cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.34125cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.02375cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.36771cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.10313cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.26188cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>5.16192cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.5cm</Width>
@@ -2962,7 +2962,7 @@
             <Top>0.17639cm</Top>
             <Left>0cm</Left>
             <Height>1.8cm</Height>
-            <Width>77.5cm</Width>
+            <Width>77.50001cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2973,7 +2973,7 @@
         <Height>1.97639cm</Height>
         <Style />
       </Body>
-      <Width>77.5cm</Width>
+      <Width>77.50001cm</Width>
       <Page>
         <PageHeader>
           <Height>2.09903cm</Height>
@@ -3092,7 +3092,7 @@
           </Style>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
-        <PageWidth>78cm</PageWidth>
+        <PageWidth>79cm</PageWidth>
         <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0.5cm</RightMargin>
         <TopMargin>0cm</TopMargin>
@@ -3306,6 +3306,12 @@ End Function
         </Field>
         <Field Name="CustomerName">
           <DataField>CustomerName</DataField>
+        </Field>
+        <Field Name="TotalInterest">
+          <DataField>TotalInterest</DataField>
+        </Field>
+        <Field Name="TotalInterestFormat">
+          <DataField>TotalInterestFormat</DataField>
         </Field>
       </Fields>
       <Query>

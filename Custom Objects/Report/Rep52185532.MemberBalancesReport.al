@@ -54,6 +54,7 @@ report 52185532 "Member Balances Report"
             column(Primary_Identification; "Primary Identification") { }
             column(Date_of_Birth; "Date of Birth") { }
             Column(CustomerName; CustomerName) { }
+            column(TotalInterest; TotalInterest) { }
 
 
             trigger OnafterGetRecord()
@@ -85,7 +86,7 @@ report 52185532 "Member Balances Report"
                 SavingsAccounts.reset;
                 SavingsAccounts.setrange("Member No.", Members."No.");
                 SavingsAccounts.setfilter("Date Filter", '..%1', Enddate);
-                SavingsAccounts.SetAutoCalcFields(Balance);
+                SavingsAccounts.SetAutoCalcFields("Balance (LCY)");
                 if SavingsAccounts.Findset() then begin
                     repeat
                         Case
@@ -108,7 +109,7 @@ report 52185532 "Member Balances Report"
                 Loans.Reset();
                 loans.SetRange("Member No.", Members."No.");
                 loans.SetFilter("Date Filter", '..%1', Enddate);
-                Loans.SetAutoCalcFields("Outstanding Balance");
+                Loans.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest");
                 if Loans.Findset() then begin
                     repeat
                         case
@@ -145,6 +146,7 @@ report 52185532 "Member Balances Report"
                                 CL += Loans."Outstanding Balance";
 
                         end;
+                        TotalInterest += Loans."Outstanding Interest";
                         TotalLoans += Loans."Outstanding Balance";
                     until Loans.next() = 0;
                 end;
@@ -209,6 +211,7 @@ report 52185532 "Member Balances Report"
         Customer: record Customer;
         TotalLoans: Decimal;
         CustomerName: text[100];
+        TotalInterest: Decimal;
 
 
     trigger OnPreReport()

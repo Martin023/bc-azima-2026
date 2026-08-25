@@ -637,7 +637,7 @@ page 52185822 "Account Transfer"
                         if CreditAcc.Find('-') then begin
                             repeat
                                 CreditAcc.CalcFields("Total Balance");
-                                if CreditAcc."Total Balance" > 0 then begin
+                                if CreditAcc."Total Balance" <> 0 then begin
                                     TransSource.Init;
                                     TransSource."Entry No." := TransSource."Entry No." + 1;
                                     TransSource."No." := rec.No;

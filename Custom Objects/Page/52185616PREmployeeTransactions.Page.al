@@ -100,9 +100,9 @@ page 52185616 "PR Employee Transactions"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Frequency;Rec.Frequency)
+                field(Frequency; Rec.Frequency)
                 {
-                    
+
                 }
                 field("Reference No"; Rec."Reference No")
                 {
@@ -128,7 +128,7 @@ page 52185616 "PR Employee Transactions"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Savings Account No.";Rec."Savings Account No.")
+                field("Savings Account No."; Rec."Savings Account No.")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -170,6 +170,7 @@ page 52185616 "PR Employee Transactions"
                 {
 
                 }
+                field("Employee Code"; Rec."Employee Code") { }
                 // field("Employee Code"; Rec.PRTransactionCodes."Employee Code Filter")
                 // {
                 // }

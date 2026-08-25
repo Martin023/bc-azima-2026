@@ -41,7 +41,7 @@ Report 52185634 "Standing Order Processing"
                         StandingOrderHeader."Next Run Date" := CalcDate(StandingOrderHeader."Frequency (Months)", StandingOrderHeader."Effective/Start Date");
 
                     if StandingOrderHeader."Next Run Date" <= RunDate then begin
-                        if StandingOrderHeader."End Date" < RunDate then begin
+                        if (StandingOrderHeader."End Date" < RunDate) and (StandingOrderHeader."End Date" <> 0D) then begin
                             StandingOrderHeader.Status := StandingOrderHeader.Status::Stopped;
                             StandingOrderHeader."Stopped By" := UserId;
                             StandingOrderHeader."Date Stopped" := RunDate;
@@ -428,7 +428,7 @@ Report 52185634 "Standing Order Processing"
 
     end;
 
-    procedure UpdateStandingOrderRegister(RNo: Code[10]; RDateProcessed: Date; RDocNo: Code[10]; RNoSeries: Code[10]; RSourceAccountNo: Code[20]; RSourceAccountName: Text; RMemberNo: Code[20]; RStaffNo: Code[11]; RPartialDeduction: Boolean; RDeductionStatus: Option " ",Successfull,"Partial Deduction",Failed; RDeductionAmount: Decimal; RAmountDeducted: Decimal; RStartDate: Date; RDuration: DateFormula; RFrequency: DateFormula; REndDate: Date; Rremarks: Code[50]; Reft: Boolean; RTransferEft: Boolean; STONo: Code[20])
+    procedure UpdateStandingOrderRegister(RNo: Code[10]; RDateProcessed: Date; RDocNo: Code[20]; RNoSeries: Code[10]; RSourceAccountNo: Code[20]; RSourceAccountName: Text; RMemberNo: Code[20]; RStaffNo: Code[11]; RPartialDeduction: Boolean; RDeductionStatus: Option " ",Successfull,"Partial Deduction",Failed; RDeductionAmount: Decimal; RAmountDeducted: Decimal; RStartDate: Date; RDuration: DateFormula; RFrequency: DateFormula; REndDate: Date; Rremarks: Code[50]; Reft: Boolean; RTransferEft: Boolean; STONo: Code[20])
     var
         LineNo: Code[10];
         StandingOrdSRegister: Record "Standing Order Register";

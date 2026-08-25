@@ -38,12 +38,12 @@ XmlPort 52185555 "Loans BP"
                     FieldValidate = yes;
                     // MinOccurs = Once;
                 }
-                fieldelement(Remarks; "Checkoff Buffer".remarks)
-                {
-                    FieldValidate = yes;
-                    MinOccurs = Once;
+                // fieldelement(Remarks; "Checkoff Buffer".remarks)
+                // {
+                //     FieldValidate = yes;
+                //     MinOccurs = Once;
 
-                }
+                // }
                 trigger OnBeforeInsertRecord()
                 begin
                     if "Checkoff Buffer".Amount <= 0 then
@@ -71,7 +71,7 @@ XmlPort 52185555 "Loans BP"
         {
             area(content)
             {
-                group("No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks")
+                group("No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID")
                 {
                     field(HeaderTemplate; HeaderTemplate)
                     {
@@ -93,7 +93,7 @@ XmlPort 52185555 "Loans BP"
 
     trigger OninitXmlPort()
     begin
-        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks';
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID';
     end;
 
     trigger OnPostXmlPort()

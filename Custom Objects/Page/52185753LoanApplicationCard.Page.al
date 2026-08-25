@@ -1682,10 +1682,13 @@ page 52185753 "Loan Application Card"
                         TotalOffset := LoansTopup."Total Top Up";
                     end;
 
+                    if rec."Approved Amount" <= TotalOffset then error('Approved amount is less than the total offset amount!');
+                    if rec."Amount To Disburse" <= TotalOffset then error('Approved amount is less than the total offset amount!');
+
                     LoanApp.Reset;
                     LoanApp.SetRange("Member No.", Rec."Member No.");
                     LoanApp.SetFilter("Outstanding Balance", '>0');
-                    LoanApp.SetFilter("Loan Product Type", '<>FGL&<>BGL');
+                    LoanApp.SetFilter("Loan Product Type", '<>75');
                     LoanApp.SetFilter("Loans Category-SASRA", '%1..%2', GenSetup."Allowed Loan Categories", LoanApp."Loans Category-SASRA"::Loss);
                     if LoanApp.Find('-') then begin
                         repeat
@@ -2895,6 +2898,7 @@ page 52185753 "Loan Application Card"
         IDNumber: Text;
         ApplicationType: Label 'LA'; // Loan Application
         PFNumber: Text;
+        loanappraisalreport: record "Loan Appraisal History";
     begin
         FileName := 'LoanAppraisalForm.pdf';
         Loans.Reset;
@@ -2924,43 +2928,50 @@ page 52185753 "Loan Application Card"
             TempBlob.CreateInStream(BlobInStream);
             FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
 
-            if FileContentsB64 <> '' then begin
-                ApplicantMember.Reset;
-                ApplicantMember.SetRange("No.", Rec."Member No.");
+            // if FileContentsB64 <> '' then begin
 
-                if ApplicantMember.FindFirst then begin
-                    if ApplicantMember."Primary Identification Type" = ApplicantMember."Primary Identification Type"::"ID Number" then begin
-                        IDNumber := ApplicantMember."Primary Identification";
-                    end else
-                        if ApplicantMember."Secondary Identification Type" = ApplicantMember."Secondary Identification Type"::"ID Number" then begin
-                            IDNumber := ApplicantMember."Secondary Identification";
-                        end else begin
-                            IDNumber := ApplicantMember."Primary Identification";
-                        end;
+            //     loanappraisalreport.Init();
+            //     loanappraisalreport."Loan No" := LoanNumber;
+            //     loanappraisalreport."Appraisal form".CreateOutstream(OutStream1);
+            //     CopyStream(OutStream1, InStream1);
+            //     loanappraisalreport.Modify;
+            //     // ApplicantMember.Reset;
+            //     // ApplicantMember.SetRange("No.", Rec."Member No.");
 
-                    if ApplicantMember."Payroll/Staff No." <> '' then begin
-                        PFNumber := ApplicantMember."Payroll/Staff No.";
-                    end else begin
-                        PFNumber := IDNumber;
-                    end;
+            //     // if ApplicantMember.FindFirst then begin
+            //     //     if ApplicantMember."Primary Identification Type" = ApplicantMember."Primary Identification Type"::"ID Number" then begin
+            //     //         IDNumber := ApplicantMember."Primary Identification";
+            //     //     end else
+            //     //         if ApplicantMember."Secondary Identification Type" = ApplicantMember."Secondary Identification Type"::"ID Number" then begin
+            //     //             IDNumber := ApplicantMember."Secondary Identification";
+            //     //         end else begin
+            //     //             IDNumber := ApplicantMember."Primary Identification";
+            //     //         end;
 
-                    EDMSFunctions.EDMSLoanFileUpload(
-                      IDNumber,
-                        ApplicantMember.Name,
-                        Rec."Loan Product Type Name",
-                        PfNumber,
-                        ApplicantMember."No.",
-                        Rec."Loan No.",
-                        Rec."Loan No.",
-                        FileName,
-                        FileContentsB64,
-                        false
-                    );
-                    // Message('Appraisal form uploaded successfully to EDMS files');
-                end;
-            end
-            else
-                Message('Appraisal form was not uploaded kindly check the file value');
+            //     //     if ApplicantMember."Payroll/Staff No." <> '' then begin
+            //     //         PFNumber := ApplicantMember."Payroll/Staff No.";
+            //     //     end else begin
+            //     //         PFNumber := IDNumber;
+            //     //     end;
+
+            //     // EDMSFunctions.EDMSLoanFileUpload(
+            //     //   IDNumber,
+            //     //     ApplicantMember.Name,
+            //     //     Rec."Loan Product Type Name",
+            //     //     PfNumber,
+            //     //     ApplicantMember."No.",
+            //     //     Rec."Loan No.",
+            //     //     Rec."Loan No.",
+            //     //     FileName,
+            //     //     FileContentsB64,
+            //     //     false
+            //     // );
+            //     // Message('Appraisal form uploaded successfully to EDMS files');
+
+            //     // end;
+            // end
+            // else
+            //     Message('Appraisal form was not uploaded kindly check the file value');
             //end;
         end;
     end;
