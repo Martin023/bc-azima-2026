@@ -4149,6 +4149,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         TheLoan: Record loans;
         SearchMember: Record Members;
         SkipMobileAppCharges: Boolean;
+        NormalizedMobileNo: Text[20];
     begin
         // Database.SelectLatestVersion();
         PostingBatchSize := 25;
@@ -5190,6 +5191,19 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             DepositMember.Reset;
                                             DepositMember.SetRange("Old Member No.", MpesaTransBuffer."Savings Account");
                                             DepositMember.SetLoadFields("No.", "Primary Identification");
+                                        end;
+                                        if not DepositMember.FindFirst then begin
+                                            NormalizedMobileNo := NormalizeMobileNo(CopyStr(MpesaTransBuffer."Savings Account", 1, 30));
+                                            if NormalizedMobileNo <> '' then begin
+                                                DepositMember.Reset;
+                                                DepositMember.SetRange("Phone No.", NormalizedMobileNo);
+                                                DepositMember.SetLoadFields("No.", "Primary Identification");
+                                                if not DepositMember.FindFirst then begin
+                                                    DepositMember.Reset;
+                                                    DepositMember.SetRange("Transactional Mobile Number", '+' + NormalizedMobileNo);
+                                                    DepositMember.SetLoadFields("No.", "Primary Identification");
+                                                end;
+                                            end;
                                         end;
                                         if DepositMember.FindFirst then begin
                                             MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberFosaAcc(DepositMember);
@@ -7871,6 +7885,28 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
     //     exit('DONE');
     // end;
+
+    // Normalizes 07.../7.../+254.../254... input to the 12-digit 254XXXXXXXXX form used by Members."Phone No."
+    local procedure NormalizeMobileNo(RawInput: Text[30]): Text[20]
+    var
+        Mobile: Text[20];
+    begin
+        Mobile := CopyStr(RawInput, 1, 20);
+
+        if (StrLen(Mobile) = 13) and (CopyStr(Mobile, 1, 4) = '+254') then
+            Mobile := CopyStr(Mobile, 2, 12);
+
+        if (StrLen(Mobile) = 10) and (CopyStr(Mobile, 1, 1) = '0') then
+            Mobile := '254' + CopyStr(Mobile, 2, 9);
+
+        if (StrLen(Mobile) = 9) and (CopyStr(Mobile, 1, 1) = '7') then
+            Mobile := '254' + Mobile;
+
+        if (StrLen(Mobile) = 12) and (CopyStr(Mobile, 1, 3) = '254') then
+            exit(Mobile);
+
+        exit('');
+    end;
 
     // LOAN APPLICATIONS
     local procedure GetLoanApplicationProducts(Payload: JsonObject;
