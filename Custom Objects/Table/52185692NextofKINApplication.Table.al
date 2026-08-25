@@ -19,30 +19,36 @@ table 52185692 "Next of KIN Application"
                 MyUniqueID: Text;
                 IsUnique: Boolean;
             begin
-                if xRec."Identification Type" <> "Identification Type"::" " then begin
-                    if "Identification Type" = "Identification Type"::"System UID" then begin
-                        if "System UID" = '' then begin
+                // GENERATE SYSTEM UID WHEN SELECTING SYSTEM UID TYPE
+                if "Identification Type" = "Identification Type"::"System UID" then begin
+                    // ONLY GENERATE IF SYSTEM UID IS EMPTY (NEW RECORD OR SWITCHING TO SYSTEM UID)
+                    if "System UID" = '' then begin
+                        IsUnique := false;
+                        repeat
+                            MyUniqueID := GenerateSystemUID(10);
+                            NextOfKinAppCheck.Reset();
+                            NextOfKinAppCheck.SetRange("System UID", CopyStr(MyUniqueID, 1, MaxStrLen("System UID")));
+                            if NextOfKinAppCheck.IsEmpty() then
+                                IsUnique := true;
+                        until IsUnique;
 
-                            IsUnique := false;
-                            repeat
-                                MyUniqueID := GenerateSystemUID(10);
-                                NextOfKinAppCheck.Reset();
-                                NextOfKinAppCheck.SetRange("System UID", CopyStr(MyUniqueID, 1, MaxStrLen("System UID")));
-                                if NextOfKinAppCheck.IsEmpty() then
-                                    IsUnique := true;
-                            until IsUnique;
+                        "System UID" := CopyStr(MyUniqueID, 1, MaxStrLen("System UID"));
+                        MyUniqueID := "System UID";
+                    end else begin
+                        // USE EXISTING SYSTEM UID
+                        MyUniqueID := "System UID";
+                    end;
 
-                            "System UID" := CopyStr(MyUniqueID, 1, MaxStrLen("System UID"));
-                        end else
-                            MyUniqueID := "System UID";
-
-                        Identification := CopyStr(MyUniqueID, 1, MaxStrLen(Identification));
-                    end else
+                    // SET IDENTIFICATION TO THE SYSTEM UID
+                    Identification := CopyStr(MyUniqueID, 1, MaxStrLen(Identification));
+                end else begin
+                    // CLEAR FIELDS WHEN SWITCHING AWAY FROM SYSTEM UID
+                    if xRec."Identification Type" = "Identification Type"::"System UID" then begin
                         Identification := '';
-
-                    "Date of Birth" := 0D;
-                    Relationship := '';
-                    Age := 0;
+                        "Date of Birth" := 0D;
+                        Relationship := '';
+                        Age := 0;
+                    end;
                 end;
             end;
         }

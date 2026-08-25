@@ -12,7 +12,7 @@ Report 52185548 "Control Summary Report"
 
             column(CompanyInfo_Name; CompanyInfo.Name) { }
             column(CompanyInfo_Address; CompanyAddress) { }
-            column(CompanyInfo_Picture; CompanyInfo.Picture) { }
+            // column(CompanyInfo_Picture; CompanyInfo.Picture) { }
             column(CompanyTelephone; CompanyTelephone) { }
             column(CompanyEmail; CompanyEmail) { }
             column(PrintingDate; PrintingDate) { }
@@ -73,7 +73,7 @@ Report 52185548 "Control Summary Report"
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        CompanyInfo.CalcFields(Picture);
+        // CompanyInfo.CalcFields(Picture);
         CompanyAddress := CompanyInfo.Address + ' -Post Code: ' + CompanyInfo."Post Code" + ' -City:' + CompanyInfo.City + ' Region: ' + CompanyInfo."Country/Region Code";
         CompanyTelephone := CompanyInfo."Phone No." + ',' + CompanyInfo."Phone No. 2";
         CompanyEmail := CompanyInfo."E-Mail";

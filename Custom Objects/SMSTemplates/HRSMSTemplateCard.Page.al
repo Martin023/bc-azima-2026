@@ -63,6 +63,10 @@ page 52185960 "HR SMS Template Card"
 
                             if Rec.Body = '' then
                                 Rec.Body := GetDefaultBody(Rec."Event Code");
+                            
+                            // AUTO-POPULATE CC BODY IF EMPTY
+                            if Rec."CC Body" = '' then
+                                Rec."CC Body" := GetDefaultCCBody(Rec."Event Code");
                         end;
                         CurrPage.Variables.Page.Update(false);
                     end;
@@ -165,18 +169,18 @@ page 52185960 "HR SMS Template Card"
                 field("CC Phone Numbers"; Rec."CC Phone Numbers")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'CC Phone Numbers';
-                    ToolTip = 'Comma-separated phone numbers (e.g., 0722123456,0733456789,0711222333). Invalid formats will be logged and skipped.';
+                    Caption = 'CC Phone Numbers (Legacy - Deprecated)';
+                    ToolTip = 'DEPRECATED: Use CC Recipients list below for personalized messages with employee names. This field is only for backward compatibility.';
                     Enabled = Rec."Send to CC";
                     MultiLine = true;
-                    ShowMandatory = Rec."Send to CC";
+                    Visible = false; // HIDDEN - USE CC RECIPIENTS REPEATER INSTEAD
                 }
                 
                 field("CC Body"; Rec."CC Body")
                 {
                     ApplicationArea = Basic;
                     Caption = 'CC Message Body (Optional)';
-                    ToolTip = 'Custom message for CC recipients. Leave empty to use main body above. Uses same tokens: [EMPLOYEE_NAME], [LEAVE_TYPE], etc.';
+                    ToolTip = 'Custom message for CC recipients. Leave empty to use main body above. Use [CC_RECIPIENT_NAME] and [CC_RECIPIENT_SALUTATION] tokens for personalization.';
                     Enabled = Rec."Send to CC";
                     MultiLine = true;
                     
@@ -185,6 +189,15 @@ page 52185960 "HR SMS Template Card"
                         if (Rec."CC Body" <> '') and (StrLen(Rec."CC Body") > 160) then
                             Message('NOTE: CC MESSAGE IS %1 CHARACTERS. MESSAGES OVER 160 WILL BE SENT AS MULTI-PART SMS.', StrLen(Rec."CC Body"));
                     end;
+                }
+                
+                part(CCRecipients; "HR SMS CC Recipients")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'CC Recipients — Select from Employees/Users';
+                    Enabled = Rec."Send to CC";
+                    Visible = Rec."Send to CC";
+                    UpdatePropagation = Both;
                 }
             }
         }
@@ -216,9 +229,13 @@ page 52185960 "HR SMS Template Card"
 
                     if Rec.Body = '' then
                         Rec.Body := GetDefaultBody(Rec."Event Code");
+                    
+                    // AUTO-POPULATE CC BODY WITH DEFAULT TEMPLATE
+                    if Rec."CC Body" = '' then
+                        Rec."CC Body" := GetDefaultCCBody(Rec."Event Code");
 
                     CurrPage.Update(true);
-                    Message('TEMPLATE INITIALISED. EDIT THE BODY ABOVE AS NEEDED.');
+                    Message('TEMPLATE INITIALISED WITH DEFAULT BODY AND CC BODY. EDIT AS NEEDED.');
                 end;
             }
 
@@ -318,6 +335,23 @@ page 52185960 "HR SMS Template Card"
         if Rec."Event Code" <> '' then
             if not SystemTokensExist(Rec."Event Code") then
                 SeedSystemTokens(Rec."Event Code");
+        
+        // LOAD CC RECIPIENTS FROM JSON INTO BUFFER
+        LoadCCRecipientsFromJSON();
+    end;
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    begin
+        // SAVE CC RECIPIENTS FROM BUFFER TO JSON
+        if CloseAction in [Action::OK, Action::LookupOK] then
+            SaveCCRecipientsToJSON();
+        exit(true);
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        // UPDATE SUBPAGE WHEN RECORD CHANGES
+        LoadCCRecipientsFromJSON();
     end;
 
     local procedure SetDefaultSMSSource(EventCode: Code[50])
@@ -346,6 +380,9 @@ page 52185960 "HR SMS Template Card"
                     InsertToken(EventCode, '[DAYS_APPROVED]', 'Days Approved', 'Number of days approved', 5);
                     InsertToken(EventCode, '[RETURN_DATE]', 'Return Date', 'Date to return to work', 6);
                     InsertToken(EventCode, '[APPLICATION_CODE]', 'Application Code', 'Leave application reference', 7);
+                    InsertToken(EventCode, '[RELIEVER_NAME]', 'Reliever Name', 'Full name of the reliever', 8);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 9);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 10);
                 end;
             'LEAVE-RELIEVER':
                 begin
@@ -355,6 +392,8 @@ page 52185960 "HR SMS Template Card"
                     InsertToken(EventCode, '[START_DATE]', 'Start Date', 'Leave start date', 4);
                     InsertToken(EventCode, '[END_DATE]', 'End Date', 'Leave end date', 5);
                     InsertToken(EventCode, '[RETURN_DATE]', 'Return Date', 'Employee return date', 6);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 7);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 8);
                 end;
             'LEAVE-RECALL':
                 begin
@@ -363,6 +402,8 @@ page 52185960 "HR SMS Template Card"
                     InsertToken(EventCode, '[DAYS_RECALLED]', 'Days Recalled', 'Number of days recalled', 3);
                     InsertToken(EventCode, '[REASON]', 'Reason', 'Reason for recall', 4);
                     InsertToken(EventCode, '[LEAVE_APP_CODE]', 'Leave Application Code', 'Leave reference number', 5);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 6);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 7);
                 end;
             'APPRAISAL-SUBMITTED':
                 begin
@@ -370,6 +411,8 @@ page 52185960 "HR SMS Template Card"
                     InsertToken(EventCode, '[APPRAISAL_NO]', 'Appraisal No', 'Appraisal reference', 2);
                     InsertToken(EventCode, '[SUPERVISOR_NAME]', 'Supervisor Name', 'Supervisor name', 3);
                     InsertToken(EventCode, '[SUBMISSION_DATE]', 'Submission Date', 'Date submitted', 4);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 5);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 6);
                 end;
             'APPRAISAL-APPROVED':
                 begin
@@ -377,6 +420,8 @@ page 52185960 "HR SMS Template Card"
                     InsertToken(EventCode, '[APPRAISAL_NO]', 'Appraisal No', 'Appraisal reference', 2);
                     InsertToken(EventCode, '[SUPERVISOR_NAME]', 'Supervisor Name', 'Approving supervisor', 3);
                     InsertToken(EventCode, '[APPROVAL_DATE]', 'Approval Date', 'Date approved', 4);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 5);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 6);
                 end;
             'CEO-GOAL-ASSIGNED':
                 begin
@@ -384,12 +429,16 @@ page 52185960 "HR SMS Template Card"
                     InsertToken(EventCode, '[GOAL_NO]', 'Goal No', 'CEO goal reference', 2);
                     InsertToken(EventCode, '[OBJECTIVE]', 'Objective', 'Goal objective', 3);
                     InsertToken(EventCode, '[CEO_NAME]', 'CEO Name', 'CEO who assigned the goal', 4);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 5);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 6);
                 end;
             'HOD-GOAL-ACKNOWLEDGED':
                 begin
                     InsertToken(EventCode, '[HOD_NAME]', 'HOD Name', 'Acknowledging HOD', 1);
                     InsertToken(EventCode, '[GOAL_NO]', 'Goal No', 'CEO goal reference', 2);
                     InsertToken(EventCode, '[CEO_NAME]', 'CEO Name', 'CEO name', 3);
+                    InsertToken(EventCode, '[CC_RECIPIENT_NAME]', 'CC Recipient Name', 'Name of CC recipient (personalized per recipient)', 4);
+                    InsertToken(EventCode, '[CC_RECIPIENT_SALUTATION]', 'CC Salutation', 'Salutation for CC recipient (Dear, Mr., Ms., etc.)', 5);
                 end;
         end;
     end;
@@ -440,6 +489,52 @@ page 52185960 "HR SMS Template Card"
                 exit('Dear [CEO_NAME], [HOD_NAME] has acknowledged goal [GOAL_NO].');
         end;
         exit('Dear employee, you have a new HR notification. Please log in for details.');
+    end;
+
+    local procedure GetDefaultCCBody(EventCode: Code[50]): Text[320]
+    begin
+        // CC BODY TEMPLATES WITH PERSONALIZATION TOKENS
+        case EventCode of
+            'LEAVE-APPROVAL':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], this is to inform you that [EMPLOYEE_NAME] has been approved for [LEAVE_TYPE] leave from [START_DATE] to [END_DATE] ([DAYS_APPROVED] days). Return: [RETURN_DATE]. Reliever: [RELIEVER_NAME]. Ref: [APPLICATION_CODE]');
+            'LEAVE-RELIEVER':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], [RELIEVER_NAME] will be covering [EMPLOYEE_NAME] on [LEAVE_TYPE] leave from [START_DATE] to [END_DATE]. Return: [RETURN_DATE].');
+            'LEAVE-RECALL':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], [EMPLOYEE_NAME] has been recalled from leave. New report date: [RECALL_DATE]. Reason: [REASON]. Days reimbursed: [DAYS_RECALLED]. Ref: [LEAVE_APP_CODE]');
+            'APPRAISAL-SUBMITTED':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], [EMPLOYEE_NAME] submitted appraisal [APPRAISAL_NO] to [SUPERVISOR_NAME] on [SUBMISSION_DATE] for review.');
+            'APPRAISAL-APPROVED':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], [EMPLOYEE_NAME] appraisal [APPRAISAL_NO] was approved by [SUPERVISOR_NAME] on [APPROVAL_DATE].');
+            'CEO-GOAL-ASSIGNED':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], CEO goal [GOAL_NO] assigned to [HOD_NAME]. Objective: [OBJECTIVE]. Assigned by: [CEO_NAME].');
+            'HOD-GOAL-ACKNOWLEDGED':
+                exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], [HOD_NAME] acknowledged CEO goal [GOAL_NO].');
+        end;
+        exit('[CC_RECIPIENT_SALUTATION] [CC_RECIPIENT_NAME], you have a new HR notification. Please log in for details.');
+    end;
+
+    local procedure LoadCCRecipientsFromJSON()
+    var
+        CCBuffer: Record "HR SMS CC Recipient Buffer";
+    begin
+        // LOAD JSON INTO TEMPORARY BUFFER
+        CCBuffer.LoadFromJSON(Rec."CC Recipients JSON");
+        
+        // SEND TO SUBPAGE
+        CurrPage.CCRecipients.Page.SetAllRecords(CCBuffer);
+    end;
+
+    local procedure SaveCCRecipientsToJSON()
+    var
+        CCBuffer: Record "HR SMS CC Recipient Buffer";
+    begin
+        // GET DATA FROM SUBPAGE
+        CurrPage.CCRecipients.Page.GetAllRecords(CCBuffer);
+        
+        // SAVE TO JSON
+        Rec."CC Recipients JSON" := CCBuffer.SaveToJSON();
+        if Rec."CC Recipients JSON" <> xRec."CC Recipients JSON" then
+            Rec.Modify();
     end;
 
     var

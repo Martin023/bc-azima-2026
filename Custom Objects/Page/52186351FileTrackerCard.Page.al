@@ -51,6 +51,7 @@ page 52186351 "File Tracker Card"
                 field("Folio Number"; Rec."Folio Number")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("File Request Remarks"; Rec."File Request Remarks")
                 {
@@ -60,6 +61,8 @@ page 52186351 "File Tracker Card"
                 field(Narration; Rec.Narration)
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
+
                 }
                 field("Other  Doc  No"; Rec."Other  Doc  No")
                 {
@@ -336,6 +339,7 @@ page 52186351 "File Tracker Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = TRUE;// MVEditable;
+                    ShowMandatory = true;
                 }
                 field("Sent To"; Rec."Sent To")
                 {

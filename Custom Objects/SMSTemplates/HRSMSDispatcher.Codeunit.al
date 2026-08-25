@@ -147,8 +147,9 @@ codeunit 52185460 "HR SMS Dispatcher"
             TokenVals, SuccessStatus, '', ParentEntryNo, IsRetry, IsResend, false);
         
         // PROCESS CC RECIPIENTS IF ENABLED
-        if Template."Send to CC" and (Template."CC Phone Numbers" <> '') and not IsRetry and not IsResend then
-            SendToCC(Template, SourceDocNo, TokenVals, EventCode, RecipientRole);
+        if Template."Send to CC" and not IsRetry and not IsResend then
+            if (Template."CC Recipients JSON" <> '') or (Template."CC Phone Numbers" <> '') then
+                SendToCC(Template, SourceDocNo, TokenVals, EventCode, RecipientRole);
     end;
 
     local procedure SendToCC(
@@ -160,26 +161,133 @@ codeunit 52185460 "HR SMS Dispatcher"
     )
     var
         SmsCU: Codeunit SendSms;
+        CCRecipients: JsonArray;
+        CCRecipient: JsonToken;
+        CCObject: JsonObject;
+        CCPhones: List of [Text];
+        CCPhone: Text;
+        RecipientName: Text;
+        RecipientPhone: Text;
+        RecipientSalutation: Text;
+        NormalizedPhone: Text[20];
+        CCBody: Text;
+        ResolvedBody: Text;
+        HasJSONRecipients: Boolean;
+    begin
+        // CHECK IF JSON RECIPIENTS ARE CONFIGURED (NEW PERSONALIZED WAY)
+        HasJSONRecipients := false;
+        if Template."CC Recipients JSON" <> '' then
+            HasJSONRecipients := CCRecipients.ReadFrom(Template."CC Recipients JSON");
+        
+        // DETERMINE BASE CC BODY: USE CC BODY IF CONFIGURED, OTHERWISE USE MAIN BODY
+        if Template."CC Body" <> '' then
+            CCBody := Template."CC Body"
+        else
+            CCBody := Template.Body;
+        
+        // RESOLVE STANDARD TOKENS (EMPLOYEE_NAME, LEAVE_TYPE, etc.) ONCE
+        CCBody := ResolveTokens(CCBody, EventCode, TokenVals);
+        
+        if HasJSONRecipients then begin
+            // NEW METHOD: JSON-BASED PERSONALIZED RECIPIENTS
+            SendToCCRecipientsJSON(CCRecipients, Template, SourceDocNo, CCBody, EventCode, RecipientRole, TokenVals);
+        end else if Template."CC Phone Numbers" <> '' then begin
+            // LEGACY METHOD: COMMA-SEPARATED PHONE NUMBERS (BACKWARD COMPATIBLE)
+            SendToCCRecipientsLegacy(Template."CC Phone Numbers", Template, SourceDocNo, CCBody, EventCode, RecipientRole, TokenVals);
+        end;
+    end;
+
+    local procedure SendToCCRecipientsJSON(
+        CCRecipients: JsonArray;
+        Template: Record "HR SMS Template";
+        SourceDocNo: Code[50];
+        CCBody: Text;
+        EventCode: Code[50];
+        RecipientRole: Option;
+        TokenVals: Text
+    )
+    var
+        SmsCU: Codeunit SendSms;
+        CCRecipient: JsonToken;
+        CCObject: JsonObject;
+        RecipientName: Text;
+        RecipientPhone: Text;
+        RecipientSalutation: Text;
+        NormalizedPhone: Text[20];
+        ResolvedBody: Text;
+    begin
+        // SEND TO EACH JSON-CONFIGURED RECIPIENT WITH PERSONALIZED NAME
+        foreach CCRecipient in CCRecipients do begin
+            if CCRecipient.IsObject() then begin
+                CCObject := CCRecipient.AsObject();
+                
+                // EXTRACT RECIPIENT INFO FROM JSON
+                RecipientName := GetJSONValue(CCObject, 'Name');
+                RecipientPhone := GetJSONValue(CCObject, 'Phone');
+                RecipientSalutation := GetJSONValue(CCObject, 'Salutation');
+                
+                if (RecipientName <> '') and (RecipientPhone <> '') then begin
+                    NormalizedPhone := ValidateAndNormalizePhone(CopyStr(RecipientPhone, 1, 20));
+                    
+                    if NormalizedPhone <> '' then begin
+                        // PERSONALIZE: REPLACE [CC_RECIPIENT_NAME] AND [CC_RECIPIENT_SALUTATION]
+                        ResolvedBody := CCBody;
+                        ResolvedBody := ResolvedBody.Replace('[CC_RECIPIENT_NAME]', RecipientName);
+                        ResolvedBody := ResolvedBody.Replace('[CC_RECIPIENT_SALUTATION]', RecipientSalutation);
+                        
+                        // SEND PERSONALIZED SMS
+                        SmsCU.SendSms(
+                            Template."SMS Source",
+                            NormalizedPhone,
+                            ResolvedBody,
+                            SourceDocNo,
+                            '',
+                            false,
+                            0,
+                            false,
+                            'HR',
+                            SourceDocNo,
+                            'HR_MODULE'
+                        );
+                        
+                        // LOG WITH PERSONALIZED INFO IN MESSAGE
+                        LogEntry(EventCode, RecipientRole, NormalizedPhone, SourceDocNo, ResolvedBody,
+                            TokenVals, 0, '', 0, false, false, true);
+                    end else begin
+                        // INVALID PHONE FORMAT
+                        LogEntry(EventCode, RecipientRole, RecipientPhone, SourceDocNo, '',
+                            TokenVals, 1, 'INVALID PHONE FORMAT: ' + RecipientPhone + ' (Recipient: ' + RecipientName + ')',
+                            0, false, false, true);
+                    end;
+                end;
+            end;
+        end;
+    end;
+
+    local procedure SendToCCRecipientsLegacy(
+        CCPhoneNumbers: Text[250];
+        Template: Record "HR SMS Template";
+        SourceDocNo: Code[50];
+        CCBody: Text;
+        EventCode: Code[50];
+        RecipientRole: Option;
+        TokenVals: Text
+    )
+    var
+        SmsCU: Codeunit SendSms;
         CCPhones: List of [Text];
         CCPhone: Text;
         NormalizedPhone: Text[20];
-        CCBody: Text;
     begin
-        // PARSE COMMA-SEPARATED PHONE NUMBERS
-        CCPhones := Template."CC Phone Numbers".Split(',');
+        // LEGACY: PARSE COMMA-SEPARATED PHONE NUMBERS
+        CCPhones := CCPhoneNumbers.Split(',');
         
-        // DETERMINE CC BODY: USE CC BODY IF CONFIGURED, OTHERWISE USE MAIN BODY
-        if Template."CC Body" <> '' then
-            CCBody := ResolveTokens(Template."CC Body", EventCode, TokenVals)
-        else
-            CCBody := ResolveTokens(Template.Body, EventCode, TokenVals);
-        
-        // SEND TO EACH CC RECIPIENT
+        // SEND TO EACH CC RECIPIENT (NO PERSONALIZATION)
         foreach CCPhone in CCPhones do begin
             CCPhone := DelChr(CCPhone, '=', ' '); // TRIM SPACES
             
             if CCPhone <> '' then begin
-                NormalizedPhone := ValidateAndNormalizePhone(CCPhone);
+                NormalizedPhone := ValidateAndNormalizePhone(CopyStr(CCPhone, 1, 20));
                 
                 if NormalizedPhone <> '' then begin
                     // VALID PHONE - SEND SMS
@@ -292,6 +400,16 @@ codeunit 52185460 "HR SMS Dispatcher"
             end;
         end;
 
+        exit('');
+    end;
+
+    local procedure GetJSONValue(JSONObject: JsonObject; KeyName: Text): Text
+    var
+        JSONToken: JsonToken;
+    begin
+        if JSONObject.Get(KeyName, JSONToken) then
+            if JSONToken.IsValue() then
+                exit(JSONToken.AsValue().AsText());
         exit('');
     end;
 

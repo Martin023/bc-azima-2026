@@ -309,7 +309,8 @@ Codeunit 52185455 "Registration Process"
         Cust."Marital Status" := MemberApplication."Marital Status";
 
         //Cust."Created By" := MemberApplication."CRM Created By";
-        Cust."Created By" := MemberApplication."Created By";
+        Cust."Created By" := UserId;
+        Cust."Captured By" := MemberApplication."Created By";
         Cust."Approved By" := UserId;
 
         Cust."Branch Code" := MemberApplication."Branch Code";
