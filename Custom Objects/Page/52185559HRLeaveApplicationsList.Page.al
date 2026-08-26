@@ -86,6 +86,30 @@ page 52185559 "HR Leave Applications List1"
     {
         area(processing)
         {
+            action(CancelApprovalRequest)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Cancel Approval Re&quest';
+                Enabled = Rec.Status = Rec.Status::"Pending Approval";
+                Image = Cancel;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Cancel the approval request for this pending leave application.';
+                
+                trigger OnAction()
+                var
+                    CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                    VarVariant: Variant;
+                begin
+                    if not Confirm('Cancel the approval request for leave application %1?', false, Rec."Application Code") then
+                        exit;
+                        
+                    VarVariant := Rec;
+                    CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
+                    CurrPage.Update(false);
+                end;
+            }
             action("Update Doc No")
             {
                 ApplicationArea = Basic;

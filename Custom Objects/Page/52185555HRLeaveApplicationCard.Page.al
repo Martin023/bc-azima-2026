@@ -562,11 +562,11 @@ page 52185555 "HR Leave Application Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Re&open';
-                    Enabled = (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Cancelled) or (Rec.Status = Rec.Status::"Pending Approval");
+                    Enabled = (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Cancelled);
                     Image = ReOpen;
                     Promoted = true;
                     PromotedCategory = Category9;
-                    ToolTip = 'Reopen a rejected, cancelled, or pending leave application to allow editing and resubmission. Approved applications cannot be reopened - use Recall instead.';
+                    ToolTip = 'Reopen a rejected or cancelled leave application to allow editing and resubmission.';
 
                     trigger OnAction()
                     var
@@ -580,8 +580,8 @@ page 52185555 "HR Leave Application Card"
                         if Rec.Status = Rec.Status::Approved then
                             Error('Cannot reopen Approved leave applications. Use the Recall functionality instead to adjust approved leave.');
 
-                        if (Rec.Status <> Rec.Status::Rejected) and (Rec.Status <> Rec.Status::Cancelled) and (Rec.Status <> Rec.Status::"Pending Approval") then
-                            Error('You can only reopen Rejected, Cancelled, and Pending Approval applications .');
+                        if (Rec.Status <> Rec.Status::Rejected) and (Rec.Status <> Rec.Status::Cancelled) then
+                            Error('You can only reopen Rejected or Cancelled applications.');
 
                         Rec.Status := Rec.Status::New;
                         Rec.Modify(true);
