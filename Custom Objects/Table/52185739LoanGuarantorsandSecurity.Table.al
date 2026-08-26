@@ -41,6 +41,7 @@ table 52185739 "Loan Guarantors and Security"
                 GlobalFunctions: Codeunit "Global Functions";
                 LoanNo: Code[20];
                 FixedDeposit: Record "Fixed Deposit Contract";
+                EmployerII: record customer;
             begin
 
                 GenSetUp.Get;
@@ -193,8 +194,9 @@ table 52185739 "Loan Guarantors and Security"
                         if Employer.Get(Cust."Employer Code") then begin
                             if Employer."Internal Staff Employer" = true then begin
                                 if Members.Get(Cust."Member No.") then begin
-                                    if "Member Guaranteed" <> cust."Member No." then
-                                        Error('Employer %1 are not allowed to guarantee.', Cust."Employer Code");
+                                    // if "Member Guaranteed" <> cust."Member No." then
+                                    //     Error('Employer %1 are not allowed to guarantee.', Cust."Employer Code");
+                                    Message('The selected guarantor is a Staff member');
                                 end;
                             end;
                         end;
