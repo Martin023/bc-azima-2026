@@ -61,6 +61,9 @@ table 52185532 "HR Leave Application"
                     "Is Morning Half Day" := false;
                     "Is Afternoon Half Day" := false;
                 end else begin
+                    if "Start Date" < Today then
+                        Error('Leave start date cannot be in the past. Start Date must be today (%1) or later.', Today);
+
                     CurrentCalendar.Reset();
                     CurrentCalendar.SetRange("Current Leave Calendar", true);
                     if CurrentCalendar.FindFirst() then begin
@@ -209,6 +212,9 @@ table 52185532 "HR Leave Application"
                     "Is Afternoon Half Day" := false;
                     exit;
                 end;
+
+                if "End Date" < Today then
+                    Error('Leave end date cannot be in the past. End Date must be today (%1) or later.', Today);
 
                 if "End Date" < "Start Date" then
                     Error('End Date cannot be earlier than Start Date');

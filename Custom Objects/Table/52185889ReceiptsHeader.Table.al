@@ -7,7 +7,7 @@ table 52185889 "Receipts Header"
     {
         field(1; "No."; Code[20])
         {
-            Description = 'Stores the code of the receipt in the database';
+            Description = 'Stores the code of the receipt  in the database';
             Editable = false;
 
             trigger OnValidate()

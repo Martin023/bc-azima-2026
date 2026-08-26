@@ -8,7 +8,8 @@ report 52185557 "Recover Entrance Fee Report"
     {
         dataitem(Members; Members)
         {
-            DataItemTableView = where(status = filter(New));
+            // REMOVED the hardcoded filter here so you can run it on Active members too.
+            // Use the Request Page filters to select who you want.
             RequestFilterFields = "No.", Name, Status, "Member Class";
             column(No; "No.")
             {
@@ -70,7 +71,9 @@ report 52185557 "Recover Entrance Fee Report"
                                     RecoverFromFosa := OutstandingRegFeeBal;
                                     FundingSource := 'FOSA';
                                 END ELSE BEGIN
-                                    CurrReport.Skip; // Insufficient funds in both (respecting Min Balance)
+                                    // Log exact failure reason
+                                    ErrorLog += 'Mem ' + Members."No." + ' Skipped: Needed ' + Format(OutstandingRegFeeBal) + ', but BOSA has ' + Format(BosaAvailable) + ' & FOSA has ' + Format(FosaAvailable) + '.\';
+                                    CurrReport.Skip; 
                                 END;
 
                                 // Credit the Entrance fee Account
@@ -139,6 +142,7 @@ report 52185557 "Recover Entrance Fee Report"
                                 JournalPosting.CompletePosting(Jtemplate, JBatch);
                             END ELSE BEGIN
                                 FundingSource := 'Already Paid';
+                                ErrorLog += 'Mem ' + Members."No." + ' Skipped: Entrance fee is already fully paid.\';
                             END;
 
                             // Adam
@@ -178,23 +182,34 @@ report 52185557 "Recover Entrance Fee Report"
                             if (BosaDepBal >= MemberClass."Default BOSA Deposit") and
                                 (ShareCptBal >= MemberClass."Default Share Capital") and
                                 (FosaBal >= FosaMinBal) and (RegFeeBal >= MemberClass."Entrance Fee") then begin
-                                        Members.Status := Members.Status::Active;
-                                        Members.MODIFY();
+                                        
+                                        // Only attempt to modify if they are actually changing status
+                                        if Members.Status <> Members.Status::Active then begin
+                                            Members.Status := Members.Status::Active;
+                                            Members.MODIFY();
+                                        end;
+                                        
                                         if Members.Status = Members.Status::Active then begin
                                             SavAccount.reset;
                                             SavAccount.SetRange("Member No.", Members."No.");
                                             if SavAccount.FINDSET then begin
                                                 repeat
-                                                    SavAccount."Status" := SavAccount."Status"::Active;
-                                                    SavAccount.Modify();
+                                                    if SavAccount."Status" <> SavAccount."Status"::Active then begin
+                                                        SavAccount."Status" := SavAccount."Status"::Active;
+                                                        SavAccount.Modify();
+                                                    end;
                                                 until SavAccount.NEXT = 0;
                                             end;
                                         end;
+                            end else begin
+                                if Members.Status = Members.Status::New then
+                                    ErrorLog += 'Mem ' + Members."No." + ' Not Activated: Needs BOSA Dep ' + Format(MemberClass."Default BOSA Deposit") + ', Share Cap ' + Format(MemberClass."Default Share Capital") + ', FOSA Bal ' + Format(FosaMinBal) + '.\';
                             end;
                             MembersRecovered := MembersRecovered + Members."No." + ' (' + FundingSource + '), ';
                             // end
                         end
                         else begin
+                            ErrorLog += 'Mem ' + Members."No." + ' Skipped: Member Class not found.\';
                             CurrReport.Skip;
                         end;
                     end
@@ -231,6 +246,7 @@ report 52185557 "Recover Entrance Fee Report"
                                     RecoverFromFosa := OutstandingRejoinFeeBal;
                                     FundingSource := 'FOSA';
                                 END ELSE BEGIN
+                                    ErrorLog += 'Mem ' + Members."No." + ' (Rejoined) Skipped: Needed ' + Format(OutstandingRejoinFeeBal) + ', but BOSA has ' + Format(BosaAvailable) + ' & FOSA has ' + Format(FosaAvailable) + '.\';
                                     CurrReport.Skip;
                                 END;
 
@@ -299,6 +315,7 @@ report 52185557 "Recover Entrance Fee Report"
                                 JournalPosting.CompletePosting(Jtemplate, JBatch);
                             END ELSE BEGIN
                                 FundingSource := 'Already Paid';
+                                ErrorLog += 'Mem ' + Members."No." + ' (Rejoined) Skipped: Rejoining fee is already fully paid.\';
                             END;
 
                             // Adam
@@ -334,27 +351,39 @@ report 52185557 "Recover Entrance Fee Report"
                             if (BosaDepBal >= MemberClass."Default BOSA Deposit") and
                                 (ShareCptBal >= MemberClass."Default Share Capital") and
                                 (FosaBal >= FosaMinBal) AND (RegFeeBal >= GenSetup."Rejoining Fee") then begin
-                                        Members.Status := Members.Status::Active;
-                                        Members.MODIFY();
+                                        
+                                        // Only attempt to modify if they are actually changing status
+                                        if Members.Status <> Members.Status::Active then begin
+                                            Members.Status := Members.Status::Active;
+                                            Members.MODIFY();
+                                        end;
+                                        
                                         if Members.Status = Members.Status::Active then begin
                                             SavAccount.reset;
                                             SavAccount.SetRange("Member No.", Members."No.");
                                             if SavAccount.FINDSET then begin
                                                 repeat
-                                                    SavAccount."Status" := SavAccount."Status"::Active;
-                                                    SavAccount.Modify();
+                                                    if SavAccount."Status" <> SavAccount."Status"::Active then begin
+                                                        SavAccount."Status" := SavAccount."Status"::Active;
+                                                        SavAccount.Modify();
+                                                    end;
                                                 until SavAccount.NEXT = 0;
                                             end;
                                         end;
+                            end else begin
+                                if Members.Status = Members.Status::New then
+                                    ErrorLog += 'Mem ' + Members."No." + ' Not Activated: Needs BOSA Dep ' + Format(MemberClass."Default BOSA Deposit") + ', Share Cap ' + Format(MemberClass."Default Share Capital") + ', FOSA Bal ' + Format(FosaMinBal) + '.\';
                             end;
                             MembersRecovered := MembersRecovered + Members."No." + ' (' + FundingSource + '), ';
                             // end
                         end
                         else begin
+                            ErrorLog += 'Mem ' + Members."No." + ' Skipped: Member Class not found.\';
                             CurrReport.Skip;
                         end;
                     end
                     else begin
+                        ErrorLog += 'Mem ' + Members."No." + ' Skipped: Subflag is not First Time or Rejoined.\';
                         CurrReport.Skip;
                     end;
                 end;
@@ -386,9 +415,13 @@ report 52185557 "Recover Entrance Fee Report"
     trigger OnPostReport()
     begin
         if MembersRecovered <> '' then
-            Message('Registration Fee Recovery Report has been processed successfully for :MemNo: %1', format(MembersRecovered))
-        else
-            Message('Recovery skipped for this member. Ensure they have sufficient minimum balance in BOSA or FOSA to recover the fee.');
+            Message('Registration Fee Recovery Report has been processed successfully for :MemNo: %1', format(MembersRecovered));
+            
+        // NEW ERROR LOGGING POPUP
+        if ErrorLog <> '' then
+            Message('The following members encountered issues or were skipped:\n\n%1', ErrorLog)
+        else if MembersRecovered = '' then
+            Message('No members were processed. Please check if your filters (like Status) excluded the member you are looking for.');
     end;
 
     trigger OnPreReport()
@@ -411,6 +444,7 @@ report 52185557 "Recover Entrance Fee Report"
             Error('You are not set up as a cashier in Banking User Template : %1 ', UserId);
 
         MembersRecovered := '';
+        ErrorLog := ''; // Initialize error tracker
     end;
 
     var
@@ -450,4 +484,5 @@ report 52185557 "Recover Entrance Fee Report"
         RecoverFromBosa: Decimal;
         RecoverFromFosa: Decimal;
         FundingSource: Text[50];
+        ErrorLog: Text;
 }

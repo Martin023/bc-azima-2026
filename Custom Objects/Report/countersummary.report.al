@@ -43,10 +43,35 @@ Report 52185496 "Counter Summary Report"
                     if Number = 1 then begin
                         if not Treasury_transaction.Posted then
                             CurrReport.Skip();
+
                         if Treasury_transaction."Transaction Description" <> '' then
                             GroupDetails := Treasury_transaction."Transaction Description"
                         else
                             GroupDetails := Format(Treasury_transaction.Type);
+
+                        if Treasury_transaction.Type = Treasury_transaction.Type::"Credit Receipt" then begin
+                            HasLoan := false;
+                            HasSavings := false;
+                            
+                            CashierLines.Reset();
+                            CashierLines.SetRange("Transaction No", Treasury_transaction.No);
+                            if CashierLines.FindSet() then begin
+                                repeat
+                                    if CashierLines.Type = CashierLines.Type::Credit then
+                                        HasLoan := true
+                                    else if CashierLines.Type = CashierLines.Type::Savings then
+                                        HasSavings := true;
+                                until CashierLines.Next() = 0;
+                            end;
+
+                            if HasLoan then
+                                GroupDetails := GroupDetails + ' (Loan Repayment)'
+                            else if HasSavings then
+                                GroupDetails := GroupDetails + ' (Savings)'
+                            else
+                                GroupDetails := GroupDetails + ' (Others)';
+                        end;
+                        // -------------------------------------------------------------
 
                         TransType := Format(Treasury_transaction.Type);
                         TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
@@ -79,6 +104,7 @@ Report 52185496 "Counter Summary Report"
                         LineDebitAmt := 0;
                         LineCreditAmt := Treasury_transaction."Charge Amount";
                     end;
+                    
                     if GroupFilter <> '' then begin
                         if StrPos(UpperCase(GroupDetails), UpperCase(GroupFilter)) = 0 then
                             CurrReport.Skip();
@@ -150,6 +176,7 @@ Report 52185496 "Counter Summary Report"
 
     var
         CompanyInfo: Record "Company Information";
+        CashierLines: Record "Cashier Transaction Lines";
         CompanyAddress: Text;
         DateFilterTxt: Text;
         
@@ -170,5 +197,6 @@ Report 52185496 "Counter Summary Report"
         LineCreditAmt: Decimal;
         CashierCode: Code[50];
         GroupFilter: Text;
-        // RowNo: Integer; // numbering is now handled in RDLC
+        HasLoan: Boolean;
+        HasSavings: Boolean;
 }
