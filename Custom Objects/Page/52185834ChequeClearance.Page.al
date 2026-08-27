@@ -134,6 +134,7 @@ page 52185834 "Cheque Clearance"
                     SMSMessage: Text;
                     MobileNo: code[20];
                     SavingsACC: Record "Savings Accounts";
+                    Members: Record Members;
                 begin
                     if Confirm('Are you sure you want to process the selected transactions?', false) = true then begin
 
@@ -153,6 +154,14 @@ page 52185834 "Cheque Clearance"
 
                                 if SavingsACC.Get(Transactions."Account No") then begin
                                     MobileNo := SavingsACC."Mobile Phone No";
+                                    if MobileNo = '' then begin
+                                        if Members.Get(Transactions."Member No.") then
+                                            MobileNo := Members."Transactional Mobile Number";
+                                    end;
+                                    if MobileNo = '' then begin
+                                        if Members.Get(Transactions."Member No.") then
+                                            MobileNo := Members."Phone No.";
+                                    end;
 
                                     SMSMessage := StrSubstNo('Dear %1, your cheque no. %2 for amount KES %3 has been cleared on %4.',
                                         SavingsACC.Name, Transactions."Cheque No", Transactions.Amount, Format(Today) + ' ' + Format(Time));
@@ -169,6 +178,24 @@ page 52185834 "Cheque Clearance"
                         else
                             Error('No transactions selected for Clearance');
                         Message('Cheque Cleared Successfully!!!');
+                    end;
+                end;
+            }
+            action("Cancel Cheque Clearance")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Cancel Cheque Clearance';
+                Image = Cancel;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    SaccoT: Codeunit "Sacco Transactions";
+                begin
+                    if Confirm('Are you sure you want to cancel the clearance of the selected transactions?', false) = true then begin
+                        SaccoT.CancelCheque;
+                        Message('Cheque Clearance Cancelled Successfully!!!');
                     end;
                 end;
             }
