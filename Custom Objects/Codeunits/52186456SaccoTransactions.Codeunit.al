@@ -3745,6 +3745,108 @@ Codeunit 52186456 "Sacco Transactions"
         end;
     end;
 
+    procedure CancelCheque()
+    var
+        Transactions: Record "Cashier Transactions";
+        GenJournalLine: Record "Gen. Journal Line";
+        Text0001: label 'Ensure the Cashier Journal Template is set up in Banking User Setup';
+        Text0002: label 'Ensure the Cashier Journal Batch is set up in Banking User Setup';
+    begin
+        Temp.Get(UserId);
+        GenSetup.Get;
+
+        Jtemplate := Temp."Cashier Journal Template";
+        JBatch := Temp."Cashier Journal Batch";
+
+        if Jtemplate = '' then
+            Error(Text0001);
+
+        if JBatch = '' then
+            Error(Text0002);
+
+        Transactions.Reset;
+        Transactions.SetRange(Posted, true);
+        Transactions.SetRange(Select, true);
+        Transactions.SetRange("Cheque Status", Transactions."cheque status"::Pending);
+        if Transactions.FindSet() then begin
+            repeat
+                // SKIP if already processed (status changed during this run)
+                if Transactions."Cheque Status" <> Transactions."cheque status"::Pending then begin
+                    // Already processed or not pending, skip
+                end else begin
+                    // VALIDATE: Only cheques
+                    if not ((Transactions.Type = Transactions.Type::"Cheque Deposit") or (Transactions.Type = Transactions.Type::"Credit Cheque")) then
+                        Error('Only applicable to cheques. Transaction %1 is not a cheque.', Transactions.No);
+
+                    // DELETE OLD JOURNAL LINES
+                    GenJournalLine.Reset;
+                    GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                    GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                    GenJournalLine.DeleteAll;
+
+                    // REVERSAL ENTRY 1: DEBIT ACCOUNT (Remove money from member account)
+                    LineNo := LineNo + 10000;
+                    GenJournalLine.Init;
+                    GenJournalLine."Journal Template Name" := Jtemplate;
+                    GenJournalLine."Journal Batch Name" := JBatch;
+                    GenJournalLine."Document No." := Transactions.No;
+                    GenJournalLine."External Document No." := Transactions."Cheque No";
+                    GenJournalLine."Line No." := LineNo;
+                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                    GenJournalLine."Account No." := Transactions."Account No";
+                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                    GenJournalLine."Posting Date" := Today;
+                    GenJournalLine.Description := 'Cheque Cancellation Reversal';
+                    GenJournalLine.Validate(GenJournalLine."Currency Code");
+                    GenJournalLine.Amount := Transactions.Amount;
+                    GenJournalLine.Validate(GenJournalLine.Amount);
+                    GenJournalLine."Shortcut Dimension 1 Code" := Transactions."Global Dimension 1 Code";
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                    GenJournalLine."Shortcut Dimension 2 Code" := Transactions."Global Dimension 2 Code";
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                    if GenJournalLine.Amount <> 0 then
+                        GenJournalLine.Insert;
+
+                    // REVERSAL ENTRY 2: CREDIT BANK (Return money to bank)
+                    LineNo := LineNo + 10000;
+                    GenJournalLine.Init;
+                    GenJournalLine."Journal Template Name" := Jtemplate;
+                    GenJournalLine."Journal Batch Name" := JBatch;
+                    GenJournalLine."Document No." := Transactions.No;
+                    GenJournalLine."External Document No." := Transactions."Cheque No";
+                    GenJournalLine."Line No." := LineNo;
+                    GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
+                    GenJournalLine."Account No." := Transactions."Bank Account";
+                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                    GenJournalLine."Posting Date" := Today;
+                    GenJournalLine.Description := CopyStr(Transactions."Member No." + ' ' + Transactions."Account Name", 1, 30);
+                    GenJournalLine.Validate(GenJournalLine."Currency Code");
+                    GenJournalLine.Amount := -(Transactions.Amount);
+                    GenJournalLine.Validate(GenJournalLine.Amount);
+                    GenJournalLine."Shortcut Dimension 1 Code" := Transactions."Global Dimension 1 Code";
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                    GenJournalLine."Shortcut Dimension 2 Code" := Transactions."Global Dimension 2 Code";
+                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                    if GenJournalLine.Amount <> 0 then
+                        GenJournalLine.Insert;
+
+                    // POST JOURNAL
+                    GenJournalLine.Reset;
+                    GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                    GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                    if GenJournalLine.Find('-') then
+                        Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
+
+                    // UPDATE STATUS TO STOPPED
+                    Transactions."Cheque Status" := Transactions."cheque status"::Stopped;
+                    Transactions."Date Cleared" := Today;
+                    Transactions."Cleared By" := UserId;
+                    Transactions.Modify(false);  // Don't run triggers to avoid loop issues
+                end;
+            until Transactions.Next = 0;
+        end;
+    end;
+
 
     procedure StopBankers(CashierTrans: Record "Cashier Transactions"; JTemplate: Code[20]; JBatch: Code[20]; DBranch: Code[20]; DActivity: Code[20])
     var
