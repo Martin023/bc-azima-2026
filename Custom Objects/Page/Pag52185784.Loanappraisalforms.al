@@ -7,7 +7,7 @@ page 52185784 "Loan appraisal forms"
     PageType = List;
     SourceTable = "Loan Appraisal History";
     UsageCategory = Lists;
-    CardPageId = "Loan Appraisal Form";
+    CardPageId = "Loan Appraisal Form viewer";
 
     layout
     {

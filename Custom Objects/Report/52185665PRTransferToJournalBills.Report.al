@@ -85,120 +85,120 @@ Report 52185665 "PR Transfer To Journal Bills"
                             end
                             else
                                 if PeriodTrans."Journal Account Type" = Jac::Credit then begin
-                                    if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::None then begin
-                                        //PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::"loan Interest" 
-                                        LoanInterest := 0;
-                                        LoanPrinc := 0;
-                                        Loans.Get(PeriodTrans."Loan Number");
-                                        ProductFactory.Get(Loans."Loan Product Type");
-                                        TransCode.Get(PeriodTrans."Transaction Code");
-                                        Loans.CalcFields("Outstanding Balance", "Outstanding Bills", "Outstanding Interest");
-                                        if TransCode."Repayment Method" <> TransCode."repayment method"::Amortized then begin
+                                    // if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::None then begin
+                                    //PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::"loan Interest" 
+                                    LoanInterest := 0;
+                                    LoanPrinc := 0;
+                                    Loans.Get(PeriodTrans."Loan Number");
+                                    ProductFactory.Get(Loans."Loan Product Type");
+                                    TransCode.Get(PeriodTrans."Transaction Code");
+                                    Loans.CalcFields("Outstanding Balance", "Outstanding Bills", "Outstanding Interest");
+                                    // if TransCode."Repayment Method" <> TransCode."repayment method"::Amortized then begin
 
-                                            if AmountToCredit < Loans."Outstanding Interest" then
-                                                LoanInterest := AmountToCredit
-                                            else
-                                                LoanInterest := Loans."Outstanding Interest";
-                                            if LoanInterest < 0 then LoanInterest := 0;
-                                            SaccoTransactionType := Saccotransactiontype::"Interest Paid";
-                                            CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                        GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanInterest,
-                                        PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-
-
-                                            //Loan repayment
-                                            SaccoTransactionType := Saccotransactiontype::Repayment;
-                                            LoanPrinc := AmountToCredit - LoanInterest;
-                                            if LoanPrinc < 0 then LoanPrinc := 0;
-                                            //check if outstanding bal is less than or equal to zero
-                                            Loans.CalcFields("Outstanding Balance", "Outstanding Bills", "Outstanding Interest");
-                                            if Loans."Outstanding Balance" >= 0 then begin
-                                                if Loans."Outstanding Balance" < LoanPrinc then begin
-
-                                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                                                                               GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, Loans."Outstanding Balance",
-                                                                                               PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-                                                    LoanPrinc -= Loans."Outstanding Balance";
-                                                    AccType := AccType::Savings;
-
-
-
-                                                    CreateJnlEntry(AccType, AccNo,
-                                                                                              GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
-                                                                                              PeriodTrans."Post As", '', Saccotransactiontype::" ");
-
-                                                end
-                                                else if Loans."Outstanding Balance" >= LoanPrinc then begin
-                                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                                                                                                                            GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanPrinc,
-                                                                                                                                            PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-
-                                                end;
-                                                //
-                                            end
-                                            else begin
-                                                AccType := AccType::Savings;
-
-
-
-                                                CreateJnlEntry(AccType, AccNo,
-                                                                                          GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
-                                                                                          PeriodTrans."Post As", ' ', Saccotransactiontype::" ");
-                                            end;
-
-
-
-                                            //IF Amortized
-                                        end else begin
-                                            SaccoTransactionType := Saccotransactiontype::Repayment;
-                                            LoanPrinc := AmountToCredit;
-                                            Loans.CalcFields("Outstanding Balance", "Outstanding Bills", "Outstanding Interest");
-                                            if Loans."Outstanding Balance" >= 0 then begin
-                                                if Loans."Outstanding Balance" < LoanPrinc then begin
-
-                                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                                                                               GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, Loans."Outstanding Balance",
-                                                                                               PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-                                                    LoanPrinc -= Loans."Outstanding Balance";
-                                                    AccType := AccType::Savings;
-
-
-
-                                                    CreateJnlEntry(AccType, AccNo,
-                                                                                              GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
-                                                                                              PeriodTrans."Post As", '', Saccotransactiontype::" ");
-
-                                                end
-                                                else if Loans."Outstanding Balance" >= LoanPrinc then begin
-                                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                                                                                                                            GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanPrinc,
-                                                                                                                                            PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-
-                                                end;
-                                                //
-                                            end
-                                            else begin
-                                                AccType := AccType::Savings;
-
-
-
-                                                CreateJnlEntry(AccType, AccNo,
-                                                                                          GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
-                                                                                          PeriodTrans."Post As", ' ', SaccoTransactionType::" ");
-                                            end;
-
-                                            // CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                            // GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanPrinc,
-                                            // PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-                                        end;
-                                    end else begin
-                                        if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::"loan Interest" then
-                                            SaccoTransactionType := Saccotransactiontype::"Interest Paid";
-
+                                        if AmountToCredit < Loans."Outstanding Interest" then
+                                            LoanInterest := AmountToCredit
+                                        else
+                                            LoanInterest := Loans."Outstanding Interest";
+                                        if LoanInterest < 0 then LoanInterest := 0;
+                                        SaccoTransactionType := Saccotransactiontype::"Interest Paid";
                                         CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                        GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, AmountToCredit,
-                                        PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-                                    end;
+                                    GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanInterest,
+                                    PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+
+
+                                        //Loan repayment
+                                        SaccoTransactionType := Saccotransactiontype::Repayment;
+                                        LoanPrinc := AmountToCredit - LoanInterest;
+                                        if LoanPrinc < 0 then LoanPrinc := 0;
+                                        //check if outstanding bal is less than or equal to zero
+                                        Loans.CalcFields("Outstanding Balance", "Outstanding Bills", "Outstanding Interest");
+                                        if Loans."Outstanding Balance" >= 0 then begin
+                                            if Loans."Outstanding Balance" < LoanPrinc then begin
+
+                                                CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                                                                           GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, Loans."Outstanding Balance",
+                                                                                           PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+                                                LoanPrinc -= Loans."Outstanding Balance";
+                                                AccType := AccType::Savings;
+
+
+
+                                                CreateJnlEntry(AccType, AccNo,
+                                                                                          GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
+                                                                                          PeriodTrans."Post As", '', Saccotransactiontype::" ");
+
+                                            end
+                                            else if Loans."Outstanding Balance" >= LoanPrinc then begin
+                                                CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                                                                                                                        GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanPrinc,
+                                                                                                                                        PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+
+                                            end;
+                                            //
+                                        end
+                                        else begin
+                                            AccType := AccType::Savings;
+
+
+
+                                            CreateJnlEntry(AccType, AccNo,
+                                                                                      GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
+                                                                                      PeriodTrans."Post As", ' ', Saccotransactiontype::" ");
+                                        end;
+
+
+
+                                        //IF Amortized
+                                    // end else begin
+                                    //     SaccoTransactionType := Saccotransactiontype::Repayment;
+                                    //     LoanPrinc := AmountToCredit;
+                                    //     Loans.CalcFields("Outstanding Balance", "Outstanding Bills", "Outstanding Interest");
+                                    //     if Loans."Outstanding Balance" >= 0 then begin
+                                    //         if Loans."Outstanding Balance" < LoanPrinc then begin
+
+                                    //             CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    //                                                        GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, Loans."Outstanding Balance",
+                                    //                                                        PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+                                    //             LoanPrinc -= Loans."Outstanding Balance";
+                                    //             AccType := AccType::Savings;
+
+
+
+                                    //             CreateJnlEntry(AccType, AccNo,
+                                    //                                                       GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
+                                    //                                                       PeriodTrans."Post As", '', Saccotransactiontype::" ");
+
+                                    //         end
+                                    //         else if Loans."Outstanding Balance" >= LoanPrinc then begin
+                                    //             CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    //                                                                                                     GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanPrinc,
+                                    //                                                                                                     PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+
+                                    //         end;
+                                    //         //
+                                    //     end
+                                    //     else begin
+                                    //         AccType := AccType::Savings;
+
+
+
+                                    //         CreateJnlEntry(AccType, AccNo,
+                                    //                                                   GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + format(PeriodTrans."Loan Number") + 'OverRecovery', AmountToDebit, LoanPrinc,
+                                    //                                                   PeriodTrans."Post As", ' ', SaccoTransactionType::" ");
+                                    //     end;
+
+                                    //     // CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    //     // GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, LoanPrinc,
+                                    //     // PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+                                    // end;
+                                    // end else begin
+                                    //     if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::"loan Interest" then
+                                    //         SaccoTransactionType := Saccotransactiontype::"Interest Paid";
+
+                                    //     CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    //     GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, AmountToCredit,
+                                    //     PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+                                    // end;
 
                                 end;
 
