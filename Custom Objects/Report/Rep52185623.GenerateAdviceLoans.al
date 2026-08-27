@@ -63,28 +63,24 @@ report 52185623 "Generate Advice Loans"
                                 if CheckoffAdvice."Amount On" = 0 then begin
                                     if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
                                         CheckoffAdvice."Amount On" := Loans."Loan Principle Repayment";
-                                        CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
                                     end
                                     else begin
                                         CheckoffAdvice."Amount On" := Loans.Repayment;
-                                        if GenerateActualBal then begin
-                                            CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
-                                        end
-                                        else begin
-                                            LoanRepaySchedule.Reset();
-                                            LoanRepaySchedule.SetRange("Loan No.", Loans."Loan No.");
-                                            LoanRepaySchedule.setfilter("Repayment Date", '>=%1', Today);
-                                            // if LoanRepaySchedule.Find('-') then
-                                            LoanRepaySchedule.CalcSums("Monthly Interest");
-                                            CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + LoanRepaySchedule."Monthly Interest";
-                                        end;
                                     end;
-
                                 end;
-                                // else 
-                                // begin
-                                //      CheckoffAdvice."Amount Off":
-                                // end;
+                                if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then
+                                    CheckoffAdvice."Balance On" := Loans."Outstanding Balance"
+                                else begin
+                                    LoanRepaySchedule.Reset();
+                                    LoanRepaySchedule.SetRange("Loan No.", Loans."Loan No.");
+                                    LoanRepaySchedule.setfilter("Repayment Date", '>=%1', Today);
+                                    // if LoanRepaySchedule.Find('-') then
+                                    LoanRepaySchedule.CalcSums("Monthly Interest");
+                                    CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + LoanRepaySchedule."Monthly Interest";
+                                end;
+                                if GenerateActualBal then begin
+                                    CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
+                                end;
 
                                 if loans."Total Balance" < CheckoffAdvice."Amount On"
                                 then
