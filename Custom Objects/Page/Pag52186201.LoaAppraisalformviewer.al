@@ -24,10 +24,10 @@ page 52186585 "Loan Appraisal form viewer"
             //     Editable = False;
             //     ExtendedDatatype = URL;
             // }
-            field("Origination No."; Rec."Loan No")
+            field("Loan No"; Rec."Loan No")
             {
                 ApplicationArea = All;
-                Caption = 'Origination No.';
+                Caption = 'Loan No.';
                 Editable = False;
                 // ExtendedDatatype = URL;
             }
@@ -101,11 +101,14 @@ page 52186585 "Loan Appraisal form viewer"
         IsPDF := true;
         rec.calcfields("Appraisal form");
         if Rec."Appraisal form".HasValue then begin
-            Message('Has value');
+            //Message('Has value');
             Rec."Appraisal form".CreateInStream(InStr);
             FileData := Base64Convert.ToBase64(InStr); // proper binary → Base64
-        end else
+        end else begin
             FileData := '';
+            Message('The appraisal report was not saved.')
+        end;
+
     end;
 
 
@@ -117,11 +120,13 @@ page 52186585 "Loan Appraisal form viewer"
         IsPDF := true;
         rec.calcfields("Appraisal form");
         if Rec."Appraisal form".HasValue then begin
-            Message('Has value');
+            //Message('Has value');
             Rec."Appraisal form".CreateInStream(InStr);
             FileData := Base64Convert.ToBase64(InStr); // proper binary → Base64
-        end else
+        end else begin
             FileData := '';
+            Message('The appraisal report was not saved.')
+        end;
     end;
 
     var
