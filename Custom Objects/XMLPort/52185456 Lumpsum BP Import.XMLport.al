@@ -29,11 +29,6 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                // fieldelement(Remarks; "Checkoff Buffer"."Remarks")
-                // {
-                //     FieldValidate = yes;
-                // }
-
 
                 trigger OnAfterInitRecord()
                 begin
@@ -41,11 +36,6 @@ XmlPort 52185556 "Lumpsum BP"
                     "Checkoff Buffer"."Upload Response" := Response;
                 end;
 
-                trigger OnBeforeInsertRecord()
-                begin
-                    "Checkoff Buffer".TestField("Employer Code");
-                    "Checkoff Buffer".TestField("Upload No.");
-                end;
             }
         }
     }
