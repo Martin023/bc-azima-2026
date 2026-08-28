@@ -2387,6 +2387,23 @@ page 52185753 "Loan Application Card"
         }
     }
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    var
+        Temp: record "Banking User Template";
+        Loans: record Loans;
+    begin
+        Temp.Get(UserId);
+        Loans.Reset;
+        Loans.SetRange(Loans."Captured By", UserId);
+        Loans.SetRange(Status, Loans.Status::Open);
+        Loans.SetRange(Loans.Posted, false);
+        if Loans.findset() then begin
+            if Loans.Count >= Temp."No of Open Transactions" then begin
+                Error('There are still some pending applications that you have created. Please reuse an open document.');
+            end;
+        end;
+    end;
+
     trigger OnAfterGetCurrRecord()
     begin
         StatusControl;
