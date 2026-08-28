@@ -2,6 +2,7 @@ namespace KenpipeCBS.KenpipeCBS;
 using System.Security.User;
 using Microsoft.Foundation.NoSeries;
 using System.Utilities;
+using AZIMA.AZIMA;
 using Microsoft.Sales.Customer;
 using Microsoft.Foundation.Company;
 using System.Environment;
@@ -518,66 +519,66 @@ page 52186773 "Loans card"
     {
         area(creation)
         {
-            action("Loan Appraisal Report")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
+            // action("Loan Appraisal Report")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
 
-                trigger OnAction()
-                begin
-                    // ProdFac.Get(Rec."Loan Product Type");
-                    // Rec.TestField("Recovery Mode");
+            //     trigger OnAction()
+            //     begin
+            //         // ProdFac.Get(Rec."Loan Product Type");
+            //         // Rec.TestField("Recovery Mode");
 
 
-                    // LoanApp.Reset;
-                    // LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    // LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    // LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
-                    // if LoanApp.Find('-') then begin
-                    //     LoansTopup.Reset;
-                    //     LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                    //     LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                    //     if not LoansTopup.Find('-') then
-                    //         Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
-                    // end;
+            //         // LoanApp.Reset;
+            //         // LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+            //         // LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+            //         // LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+            //         // if LoanApp.Find('-') then begin
+            //         //     LoansTopup.Reset;
+            //         //     LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+            //         //     LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+            //         //     if not LoansTopup.Find('-') then
+            //         //         Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+            //         // end;
 
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    if LoanApp.Find('-') then begin
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
-                            if (ProdFac."Mortgage Loan" = false) then begin
-                                REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+            //         if LoanApp.Find('-') then begin
+            //             if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
+            //                 if (ProdFac."Mortgage Loan" = false) then begin
+            //                     REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
 
-                            end else
-                                if ProdFac."Mortgage Loan" = true then begin
-                                    IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
-                                    REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
+            //                 end else
+            //                     if ProdFac."Mortgage Loan" = true then begin
+            //                         IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
+            //                         REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
 
-                                end;
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
-                            REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
+            //                     end;
+            //             end;
+            //             if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
+            //                 REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
 
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
-                            REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
+            //             end;
+            //             if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
+            //                 REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
 
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
-                            REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
+            //             end;
+            //             if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
+            //                 REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
 
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
-                            REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
+            //             end;
+            //             if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
+            //                 REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
 
-                        end;
-                    end;
+            //             end;
+            //         end;
 
-                end;
-            }
+            //     end;
+            // }
             action("Generate Repayment  Schedule")
             {
                 ApplicationArea = Basic, Suite;
@@ -590,33 +591,8 @@ page 52186773 "Loans card"
                     LoanApp: Record Loans;
                     LoanProcess: Codeunit "Loans Process";
                 begin
-                    //Delete schedule
 
-
-
-                    // LoanRescheduling.Reset;
-                    // LoanRescheduling.SetRange(LoanRescheduling."Loan No.", Rec."Loan No.");
-                    // LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
-                    // if not LoanRescheduling.Find('-') then begin
-                    // LRepaymentSchedule.Reset;
-                    // LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Rec."Loan No.");
-                    // if LRepaymentSchedule.Find('-') then LRepaymentSchedule.DeleteAll;
                     LoanProcess.GenerateSchedule(Rec, True);
-                    // end;
-                    //Check if Ever Rescheduled.
-                    // LoanRescheduling.Reset;
-                    // LoanRescheduling.SetRange(LoanRescheduling."Loan No.", Rec."Loan No.");
-                    // LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
-                    // if LoanRescheduling.Find('-') then begin
-                    //     LRepaymentSchedule.Reset;
-                    //     LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", LoanRescheduling."Loan No.");
-                    //     LRepaymentSchedule.SetRange("Repayment Date", CalcDate('<CM-1M+1D>', LoanRescheduling."Rescheduling Date"), 99991230D);
-                    //     if LRepaymentSchedule.Find('-') then LRepaymentSchedule.DeleteAll;
-                    //     repeat
-                    //         LoanProcess.GenerateSchedule(Rec, True);
-                    //     // GetNewRepayment(LoanRescheduling."No.");
-                    //     until LoanRescheduling.Next = 0;
-                    // end;
 
                     Commit;
 
@@ -914,46 +890,9 @@ page 52186773 "Loans card"
             action("Download Appraisal Used")
             {
                 ApplicationArea = Basic, Suite;
-                Image = Download;
                 Promoted = true;
-
-                trigger OnAction()
-                var
-                    EDMS: Record EDMS;
-                    Name: Text;
-                    url: Text;
-                    FromFile: OutStream;
-                    TempBlob: Codeunit "Temp Blob";
-                    FileName: Text;
-                    LoanNo: Text;
-                    OutStr: OutStream;
-                    RecRef: RecordRef;
-                    AppraisalRec: Record "Loan Appraisal";
-                    PdfMimeType: Text[30];
-                    InStreamVar: InStream;
-                    ReportBlob: Codeunit "Temp Blob";
-
-                begin
-                    LoanNo := Rec."Loan No.";
-                    //##############3
-                    AppraisalRec.Get(LoanNo);
-                    AppraisalRec.SetRange("Loan No.", LoanNo);
-                    recRef.GetTable(AppraisalRec);
-                    TempBlob.CreateOutStream(OutStr);
-                    Report.SaveAs(
-                        Report::"Appraisal Loan Report",
-                        '',
-                        ReportFormat::Pdf,
-                        OutStr,
-                        recRef);
-                    FileName := LoanNo + ' Appraisal_Report_' + '.pdf';
-                    // download the report
-                    PdfMimeType := 'application/pdf';
-                    TempBlob.CreateInStream(InStreamVar);
-                    DownloadFromStream(InStreamVar, '', '', FileName, FileName);
-                    // ##############################33
-
-                end;
+                RunObject = Page "Loan Appraisal form viewer";
+                RunPageLink = "Loan No" = FIELD("Loan No.");
             }
             group("EDMS Integration")
             {

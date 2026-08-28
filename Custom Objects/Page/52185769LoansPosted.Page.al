@@ -868,46 +868,9 @@ page 52185769 "Loans Posted"
             action("Download Appraisal Used")
             {
                 ApplicationArea = Basic, Suite;
-                Image = Download;
                 Promoted = true;
-
-                trigger OnAction()
-                var
-                    EDMS: Record EDMS;
-                    Name: Text;
-                    url: Text;
-                    FromFile: OutStream;
-                    TempBlob: Codeunit "Temp Blob";
-                    FileName: Text;
-                    LoanNo: Text;
-                    OutStr: OutStream;
-                    RecRef: RecordRef;
-                    AppraisalRec: Record "Loan Appraisal";
-                    PdfMimeType: Text[30];
-                    InStreamVar: InStream;
-                    ReportBlob: Codeunit "Temp Blob";
-
-                begin
-                    LoanNo := Rec."Loan No.";
-                    //##############3
-                    AppraisalRec.Get(LoanNo);
-                    AppraisalRec.SetRange("Loan No.", LoanNo);
-                    recRef.GetTable(AppraisalRec);
-                    TempBlob.CreateOutStream(OutStr);
-                    Report.SaveAs(
-                        Report::"Appraisal Loan Report",
-                        '',
-                        ReportFormat::Pdf,
-                        OutStr,
-                        recRef);
-                    FileName := LoanNo + ' Appraisal_Report_' + '.pdf';
-                    // download the report
-                    PdfMimeType := 'application/pdf';
-                    TempBlob.CreateInStream(InStreamVar);
-                    DownloadFromStream(InStreamVar, '', '', FileName, FileName);
-                    // ##############################33
-
-                end;
+                RunObject = Page "Loan Appraisal form viewer";
+                RunPageLink = "Loan No" = FIELD("Loan No.");
             }
             group("EDMS Integration")
             {

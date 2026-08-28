@@ -355,6 +355,10 @@ page 52185753 "Loan Application Card"
                         Rec.TestField(Posted, false);
                     end;
                 }
+                field("Appraiser Recommended Amount"; Rec."Appraiser Recommended Amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Recommended Amount"; Rec."Recommended Amount")
                 {
                     ApplicationArea = Basic, Suite;
@@ -836,6 +840,7 @@ page 52185753 "Loan Application Card"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+                Visible = rec.Status = Rec.status::Open;
 
                 trigger OnAction()
                 begin
@@ -930,6 +935,17 @@ page 52185753 "Loan Application Card"
                     end;
 
                 end;
+            }
+            action("Loan Appraisal Report H")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = "Report";
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Visible = rec.Status <> Rec.status::Open;
+                RunObject = Page "Loan Appraisal form viewer";
+                RunPageLink = "Loan No" = FIELD("Loan No.");
             }
 
             action("Loan Top Ups")
@@ -2901,38 +2917,38 @@ page 52185753 "Loan Application Card"
         loanappraisalreport: record "Loan Appraisal History";
         FieldOutStream: OutStream;
     begin
-        // Loans.Reset;
-        // Loans.SetRange("Loan No.", LoanNumber);
-        // if Loans.FindFirst then begin
+        Loans.Reset;
+        Loans.SetRange("Loan No.", LoanNumber);
+        if Loans.FindFirst then begin
 
-        //     TempBlob.CreateOutStream(BlobOutStream);
-        //     RecRef.GetTable(Loans);
-        //     Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
+            TempBlob.CreateOutStream(BlobOutStream);
+            RecRef.GetTable(Loans);
+            Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
 
-        //     // delete existing
-        //     LoanAppraisalReport.reset();
-        //     LoanAppraisalReport.setrange("Loan No", LoanNumber);
-        //     LoanAppraisalReport.deleteall();
+            // delete existing
+            LoanAppraisalReport.reset();
+            LoanAppraisalReport.setrange("Loan No", LoanNumber);
+            LoanAppraisalReport.deleteall();
 
-        //     // Insert record first
-        //     LoanAppraisalReport.Init();
-        //     LoanAppraisalReport."Loan No" := LoanNumber;
-        //     LoanAppraisalReport.Insert();
+            // Insert record first
+            LoanAppraisalReport.Init();
+            LoanAppraisalReport."Loan No" := LoanNumber;
+            LoanAppraisalReport.Insert();
 
-        //     // Write into the BLOB field
-        //     LoanAppraisalReport."Appraisal form".CreateOutStream(FieldOutStream);
-        //     TempBlob.CreateInStream(BlobInStream);
-        //     CopyStream(FieldOutStream, BlobInStream);
+            // Write into the BLOB field
+            LoanAppraisalReport."Appraisal form".CreateOutStream(FieldOutStream);
+            TempBlob.CreateInStream(BlobInStream);
+            CopyStream(FieldOutStream, BlobInStream);
 
-        //     // Persist changes
-        //     LoanAppraisalReport.Modify();
+            // Persist changes
+            LoanAppraisalReport.Modify();
 
-        //     // Verify
-        //     LoanAppraisalReport."Appraisal form".CreateInStream(InStr);
-        //     FileContentsB64 := Base64Convert.ToBase64(InStr);
-        //     if FileContentsB64 <> '' then
-        //         Message('Blob contains data, length: %1', StrLen(FileContentsB64));
-        // end;
+            // Verify
+            LoanAppraisalReport."Appraisal form".CreateInStream(InStr);
+            FileContentsB64 := Base64Convert.ToBase64(InStr);
+            if FileContentsB64 <> '' then
+                Message('Appraisal report saved.');
+        end;
     end;
 }
 
