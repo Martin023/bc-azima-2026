@@ -8,7 +8,6 @@ Report 52186797 "Guarantor Notice"
     {
         dataitem("SMS Alerts Lines"; "SMS Alerts Lines")
         {
-            // RequestFilterFields = "Global Dimension 1 Code", "Code", "Electoral Zone";
             column(CompanyInformation_Picture; CompanyInformation.Picture)
             {
             }

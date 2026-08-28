@@ -758,31 +758,31 @@ page 52186732 "SMS Alerts Header Card"
 
         //Send First Notice
         IF NoticeType = NoticeType::"1st Notice" then begin
-            if AlertLoanLines."Installments FallOff" > 0 then begin
-                ReceipientsName := LoaneeFirstName;
-                if Rec."Send SMS" then begin
-                    sms := StrSubstNo(Notices.Get('LoaneeSMSFirstNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
-                                        LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
-                                        OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
+            // if AlertLoanLines."Installments FallOff" > 0 then begin
+            ReceipientsName := LoaneeFirstName;
+            if Rec."Send SMS" then begin
+                sms := StrSubstNo(Notices.Get('LoaneeSMSFirstNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
+                                    LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
+                                    OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
 
-                    Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, 'Route', Loans."Member No.",
-                                                        SMSLines."Notice Type"::SMS, DaysInArreas, Receipient::Lonee, NoticeCategory::"First Notice");
-                end;
-
-                if Rec."Create Letters" then begin
-                    Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", 'Defaulter Letter, First Notice', PhoneNumber, Email, 'Route', Loans."Member No.",
-                                                        SMSLines."Notice Type"::Letter, DaysInArreas, Receipient::Lonee, NoticeCategory::"First Notice");
-                end;
-
-                if Rec."Send Email" then begin
-                    sms := StrSubstNo(Notices.Get('LoaneeEmailFirstNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
-                                        LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
-                                        OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
-
-                    Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, 'Route', Loans."Member No.",
-                                                        SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Lonee, NoticeCategory::"First Notice");
-                end;
+                Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, 'Route', Loans."Member No.",
+                                                    SMSLines."Notice Type"::SMS, DaysInArreas, Receipient::Lonee, NoticeCategory::"First Notice");
             end;
+
+            if Rec."Create Letters" then begin
+                Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", 'Defaulter Letter, First Notice', PhoneNumber, Email, 'Route', Loans."Member No.",
+                                                    SMSLines."Notice Type"::Letter, DaysInArreas, Receipient::Lonee, NoticeCategory::"First Notice");
+            end;
+
+            if Rec."Send Email" then begin
+                sms := StrSubstNo(Notices.Get('LoaneeEmailFirstNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
+                                    LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
+                                    OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
+
+                Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, 'Route', Loans."Member No.",
+                                                    SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Lonee, NoticeCategory::"First Notice");
+            end;
+            // end;
         end;
 
 
@@ -1215,135 +1215,6 @@ page 52186732 "SMS Alerts Header Card"
         MailManagement.CheckValidEmailAddresses(EmailAddress);
     end;
 
-    local procedure GenerateLettersZip()
-    var
-        LetterCount: Integer;
-        i: Integer;
-
-        ListOfIDS: Dictionary of [Integer, Integer];
-        TempBlob: Codeunit "Temp Blob";
-        RecRef: RecordRef;
-        FileMgt: Codeunit "File Management";
-        FileName: Text;
-        FileManagement: Codeunit "File Management";
-        FileNameArchive: Text;
-        OutS: OutStream;
-        Zip: Codeunit "Data Compression";
-        InS: InStream;
-
-        FilePath: Text;
-        SMSAlertsLine: Record "SMS Alerts Lines";
-
-        FilterVariables: JsonObject;
-        ListArray: JsonArray;
-
-        LoopToken: JsonToken;
-
-        LoopJsonObject: JsonObject;
-
-        EntryNoToken: JsonToken;
-        RecepientToken: JsonToken;
-        NoticeCategoryToken: JsonToken;
-    begin
-        Zip.CreateZipArchive();
-
-        i := 0;
-        SMSAlertsLines.Reset();
-        SMSAlertsLines.SetRange("Header No", Rec."No.");
-        SMSAlertsLines.SetRange("Notice Type", SMSAlertsLines."Notice Type"::Letter);
-        if SMSAlertsLines.Find('-') then begin
-            LetterCount := SMSAlertsLines.Count;
-            repeat
-                i += 1;
-                // ListOfIDS.Add(SMSAlertsLines."Entry No");
-                Clear(FilterVariables);
-                FilterVariables.Add('Entry No', SMSAlertsLines."Entry No");
-                FilterVariables.Add('Recepient', SMSAlertsLines.Recepient);
-                FilterVariables.Add('Notice Category', SMSAlertsLines."Notice Category");
-                ListArray.Add(FilterVariables);
-            // FilterArray.Add('data',FilterVariables);
-            until SMSAlertsLines.Next() = 0;
-        end;
-
-        foreach LoopToken in ListArray do begin
-            LoopJsonObject := LoopToken.AsObject();
-
-            LoopJsonObject.SelectToken('$.Entry No', EntryNoToken);
-            LoopJsonObject.SelectToken('$.Recepient', RecepientToken);
-            LoopJsonObject.SelectToken('$.Notice Category', NoticeCategoryToken);
-
-            if NoticeCategoryToken.AsValue().AsText() = 'First Notice' then begin
-                SMSAlertsLine.Reset();
-                SMSAlertsLine.SetRange("Entry No", EntryNoToken.AsValue().AsInteger());
-                SMSAlertsLine.SetRange(Recepient, RecepientToken.AsValue().AsOption());
-                SMSAlertsLine.SetRange("Notice Category", NoticeCategoryToken.AsValue().AsOption());
-                if SMSAlertsLine.FindFirst() then begin
-
-                    TempBlob.CreateOutStream(OutS);
-                    Clear(RecRef);
-                    RecRef.GetTable(SMSAlertsLine);
-
-                    if SMSAlertsLine."Notice Category" = SMSAlertsLine."Notice Category"::"First Notice" then
-                        Report.SaveAs(Report::"First Notice", '', ReportFormat::Pdf, OutS, RecRef);
-
-                    FileName := SMSAlertsLine."Member No" + '_' + Format(SMSAlertsLine.Recepient) + '_' + Format(SMSAlertsLine."Notice Category") + '.pdf';
-
-                    TempBlob.CreateInStream(InS);
-                    Zip.AddEntry(InS, FileName);
-                end;
-            end;
-
-            if (NoticeCategoryToken.AsValue().AsText() = 'Second Notice') and (RecepientToken.AsValue().AsText() = 'Lonee') then begin
-                SMSAlertsLine.Reset();
-                SMSAlertsLine.SetRange("Entry No", EntryNoToken.AsValue().AsInteger());
-                SMSAlertsLine.SetRange(Recepient, RecepientToken.AsValue().AsOption());
-                SMSAlertsLine.SetRange("Notice Category", NoticeCategoryToken.AsValue().AsOption());
-                if SMSAlertsLine.FindFirst() then begin
-
-                    TempBlob.CreateOutStream(OutS);
-                    Clear(RecRef);
-                    RecRef.GetTable(SMSAlertsLine);
-
-                    if (SMSAlertsLine."Notice Category" = SMSAlertsLine."Notice Category"::"Second Notice") and (SMSAlertsLine.Recepient = SMSAlertsLine.Recepient::Lonee) then
-                        Report.SaveAs(Report::"Second Notice", '', ReportFormat::Pdf, OutS, RecRef);
-
-                    FileName := SMSAlertsLine."Member No" + '_' + Format(SMSAlertsLine.Recepient) + '_' + Format(SMSAlertsLine."Notice Category") + '.pdf';
-
-                    TempBlob.CreateInStream(InS);
-                    Zip.AddEntry(InS, FileName);
-                end;
-            end;
-
-            if (NoticeCategoryToken.AsValue().AsText() = 'Second Notice') and (RecepientToken.AsValue().AsText() = 'Guarantor') then begin
-                SMSAlertsLine.Reset();
-                SMSAlertsLine.SetRange("Entry No", EntryNoToken.AsValue().AsInteger());
-                SMSAlertsLine.SetRange(Recepient, RecepientToken.AsValue().AsOption());
-                SMSAlertsLine.SetRange("Notice Category", NoticeCategoryToken.AsValue().AsOption());
-                if SMSAlertsLine.FindFirst() then begin
-
-                    TempBlob.CreateOutStream(OutS);
-                    Clear(RecRef);
-                    RecRef.GetTable(SMSAlertsLine);
-
-                    if (SMSAlertsLine."Notice Category" = SMSAlertsLine."Notice Category"::"Second Notice") and (SMSAlertsLine.Recepient = SMSAlertsLine.Recepient::Guarantor) then
-                        Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, OutS, RecRef);
-
-                    FileName := SMSAlertsLine."Member No" + '_' + Format(SMSAlertsLine.Recepient) + '_' + Format(SMSAlertsLine."Notice Category") + '.pdf';
-
-                    TempBlob.CreateInStream(InS);
-                    Zip.AddEntry(InS, FileName);
-                end;
-            end;
-        end;
-
-        TempBlob.CreateOutStream(OutS);
-        Zip.SaveZipArchive(OutS);
-
-        TempBlob.CreateInStream(InS);
-        FileNameArchive := Rec."No." + ' Recovery Letters.zip';
-        DownloadFromStream(InS, '', '', '', FileNameArchive);
-    end;
-
 
     local procedure GenerateLetters()
     var
@@ -1372,6 +1243,7 @@ page 52186732 "SMS Alerts Header Card"
         //AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
         if AlertsLines.Find('-') then begin
             repeat
+                RecRef.GetTable(AlertsLines);
                 LoanNo := AlertsLines."Loan No";
                 TempBlob.CreateOutStream(OutStr);
                 Report.SaveAs(

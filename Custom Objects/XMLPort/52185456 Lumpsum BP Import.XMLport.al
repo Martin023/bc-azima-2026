@@ -43,8 +43,6 @@ XmlPort 52185556 "Lumpsum BP"
 
                 trigger OnBeforeInsertRecord()
                 begin
-                    if "Checkoff Buffer".Amount <= 0 then
-                        Error('Amount must be greater than zero.');
                     "Checkoff Buffer".TestField("Employer Code");
                     "Checkoff Buffer".TestField("Upload No.");
                 end;
@@ -105,9 +103,6 @@ XmlPort 52185556 "Lumpsum BP"
     end;
 
     var
-        // [RunOnClient]
-        // Window: dotnet Interaction;
-        MyComment: Text;
         Response: Integer;
         Error001: label 'Invalid option, please respond with 2,3 OR 4.';
         Text01: label 'Upload done successfully';
