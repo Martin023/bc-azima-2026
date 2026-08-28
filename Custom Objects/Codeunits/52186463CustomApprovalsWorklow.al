@@ -5317,7 +5317,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Loanapp.Validate(Status, Loanapp.Status::Pending);
                     Loanapp."Loan Appraised By" := UserId;
                     Loanapp."Approval Date" := Today;
-                    Loanapp."SMS Sent" := true;
                     Loanapp.modify(true);
                     Variant := Loanapp;
                     IsHandled := true;
