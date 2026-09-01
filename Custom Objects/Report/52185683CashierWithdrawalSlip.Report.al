@@ -32,14 +32,14 @@ report 52185683 "Cashier Withdrawal Slip"
             column(Co_phone; CompanyInfo."Phone No.") { }
             column(Company_Pic; CompanyInfo.Picture) { }
             column(Transactions_Transactions_Cashier; Transactions.Cashier) { }
-            
-            column(NumberText_1_; NumberText[1]) { } 
+
+            column(NumberText_1_; NumberText[1]) { }
 
             // Re-mapped Balances for perfect historical math
             column(AvailableBalance; AvailableBalanceAtStart) { }
             column(SumTransactionCharges; SumTransactionCharges) { }
-            column(NewAvailable; ActualClosingBalance) { } 
-            
+            column(NewAvailable; ActualClosingBalance) { }
+
             column(Dublicate; Transactions.Dublicate) { }
             column(CashierName; CashierName) { }
             column(MaskedAccountNo; MaskedAccountNo) { }
@@ -90,10 +90,10 @@ report 52185683 "Cashier Withdrawal Slip"
                         if SavingsLedger.FindSet() then begin
                             repeat
                                 // Match the historical excise tax applied specifically to this charge
-                                if (Abs(SavingsLedger.Amount) = Round(ActualChargeAmount * 0.20, 0.01)) or 
+                                if (Abs(SavingsLedger.Amount) = Round(ActualChargeAmount * 0.20, 0.01)) or
                                    (Abs(SavingsLedger.Amount) = Round(ActualChargeAmount * 0.15, 0.01)) then begin
                                     ExciseDutyAmount := Abs(SavingsLedger.Amount);
-                                    
+
                                     // Feed back the percentage to the RDLC for display purposes
                                     if ActualChargeAmount <> 0 then
                                         ExciseDutyPercentage := Round((ExciseDutyAmount / ActualChargeAmount) * 100, 1);
@@ -106,8 +106,12 @@ report 52185683 "Cashier Withdrawal Slip"
 
             trigger OnAfterGetRecord()
             begin
-                StaffNo := ''; ProductName := ''; CashierName := '';
-                MaskedAccountNo := ''; CashierNameOnly := ''; ProductTypeDescription := '';
+                StaffNo := '';
+                ProductName := '';
+                CashierName := '';
+                MaskedAccountNo := '';
+                CashierNameOnly := '';
+                ProductTypeDescription := '';
 
                 user.Reset();
                 user.SetRange("User Name", Transactions.Cashier);
@@ -122,7 +126,8 @@ report 52185683 "Cashier Withdrawal Slip"
                     MaskedAccountNo := CopyStr("Account No", 1, 3) +
                                       PadStr('', StrLen("Account No") - 5, '*') +
                                       CopyStr("Account No", StrLen("Account No") - 1, 2);
-                end else MaskedAccountNo := "Account No";
+                end else
+                    MaskedAccountNo := "Account No";
 
                 // 1. Calculate Exact Total Charges historically posted from immutable ledger
                 SumTransactionCharges := 0;
@@ -168,7 +173,8 @@ report 52185683 "Cashier Withdrawal Slip"
                     end;
                 end;
 
-                ReprintDate := Today; ReprintTime := Time;
+                ReprintDate := Today;
+                ReprintTime := Time;
                 NumberText[1] := ConvertAmountToWords(Amount);
             end;
 
@@ -222,8 +228,8 @@ report 52185683 "Cashier Withdrawal Slip"
         Savings: Record "Savings Accounts";
         StaffNo: Code[20];
         ProductName: Text[50];
-        AmountInWords: array[2] of Text;
-        NumberText: array[2] of Text[80];
+        AmountInWords: array[2] of Text[100];
+        NumberText: array[2] of Text[100];
         user: Record User;
         CashierName: Text;
         MaskedAccountNo: Text;
@@ -247,18 +253,42 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure InitTextVariable()
     begin
-        OnesText[1] := 'One'; OnesText[2] := 'Two'; OnesText[3] := 'Three'; OnesText[4] := 'Four'; OnesText[5] := 'Five';
-        OnesText[6] := 'Six'; OnesText[7] := 'Seven'; OnesText[8] := 'Eight'; OnesText[9] := 'Nine'; OnesText[10] := 'Ten';
-        OnesText[11] := 'Eleven'; OnesText[12] := 'Twelve'; OnesText[13] := 'Thirteen'; OnesText[14] := 'Fourteen';
-        OnesText[15] := 'Fifteen'; OnesText[16] := 'Sixteen'; OnesText[17] := 'Seventeen'; OnesText[18] := 'Eighteen';
+        OnesText[1] := 'One';
+        OnesText[2] := 'Two';
+        OnesText[3] := 'Three';
+        OnesText[4] := 'Four';
+        OnesText[5] := 'Five';
+        OnesText[6] := 'Six';
+        OnesText[7] := 'Seven';
+        OnesText[8] := 'Eight';
+        OnesText[9] := 'Nine';
+        OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven';
+        OnesText[12] := 'Twelve';
+        OnesText[13] := 'Thirteen';
+        OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen';
+        OnesText[16] := 'Sixteen';
+        OnesText[17] := 'Seventeen';
+        OnesText[18] := 'Eighteen';
         OnesText[19] := 'Nineteen';
-        TensText[1] := ''; TensText[2] := 'Twenty'; TensText[3] := 'Thirty'; TensText[4] := 'Forty'; TensText[5] := 'Fifty';
-        TensText[6] := 'Sixty'; TensText[7] := 'Seventy'; TensText[8] := 'Eighty'; TensText[9] := 'Ninety';
+        TensText[1] := '';
+        TensText[2] := 'Twenty';
+        TensText[3] := 'Thirty';
+        TensText[4] := 'Forty';
+        TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty';
+        TensText[7] := 'Seventy';
+        TensText[8] := 'Eighty';
+        TensText[9] := 'Ninety';
     end;
 
     local procedure ConvertAmountToWords(AmountToConvert: Decimal): Text
     var
-        WholeAmount: Decimal; CentsAmount: Decimal; Words: Text; CentsWords: Text;
+        WholeAmount: Decimal;
+        CentsAmount: Decimal;
+        Words: Text;
+        CentsWords: Text;
     begin
         if AmountToConvert = 0 then exit('Zero');
         WholeAmount := Round(AmountToConvert, 1, '<');
@@ -274,12 +304,19 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure ConvertNumberToText(Number: Decimal): Text
     var
-        ResultText: Text; Millions: Integer; Thousands: Integer; Hundreds: Integer; TensAndOnes: Integer;
+        ResultText: Text;
+        Millions: Integer;
+        Thousands: Integer;
+        Hundreds: Integer;
+        TensAndOnes: Integer;
     begin
         if Number = 0 then exit('');
-        Millions := Round(Number / 1000000, 1, '<'); Number := Number - (Millions * 1000000);
-        Thousands := Round(Number / 1000, 1, '<'); Number := Number - (Thousands * 1000);
-        Hundreds := Round(Number / 100, 1, '<'); TensAndOnes := Round(Number - (Hundreds * 100), 1, '<');
+        Millions := Round(Number / 1000000, 1, '<');
+        Number := Number - (Millions * 1000000);
+        Thousands := Round(Number / 1000, 1, '<');
+        Number := Number - (Thousands * 1000);
+        Hundreds := Round(Number / 100, 1, '<');
+        TensAndOnes := Round(Number - (Hundreds * 100), 1, '<');
         ResultText := '';
         if Millions > 0 then ResultText += ConvertHundreds(Millions) + ' Million ';
         if Thousands > 0 then ResultText += ConvertHundreds(Thousands) + ' Thousand ';
@@ -293,21 +330,27 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure ConvertHundreds(Number: Integer): Text
     var
-        Hundreds: Integer; TensAndOnes: Integer; ResultText: Text;
+        Hundreds: Integer;
+        TensAndOnes: Integer;
+        ResultText: Text;
     begin
-        Hundreds := Number div 100; TensAndOnes := Number mod 100;
+        Hundreds := Number div 100;
+        TensAndOnes := Number mod 100;
         if Hundreds > 0 then begin
             ResultText := OnesText[Hundreds] + ' Hundred';
             if TensAndOnes > 0 then ResultText += ' and ' + ConvertTens(TensAndOnes);
             exit(ResultText);
-        end else exit(ConvertTens(TensAndOnes));
+        end else
+            exit(ConvertTens(TensAndOnes));
     end;
 
     local procedure ConvertTens(Number: Integer): Text
     begin
         if Number = 0 then exit('');
         if Number < 20 then exit(OnesText[Number]);
-        if (Number mod 10) = 0 then exit(TensText[Number div 10])
-        else exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
+        if (Number mod 10) = 0 then
+            exit(TensText[Number div 10])
+        else
+            exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
     end;
 }
