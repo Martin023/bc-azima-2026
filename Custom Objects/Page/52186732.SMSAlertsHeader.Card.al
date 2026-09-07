@@ -263,6 +263,20 @@ page 52186732 "SMS Alerts Header Card"
                     GenerateLetters();
                 end;
             }
+            action("View Generated Letters")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'View Generated Letters';
+                Image = TestReport;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                RunObject = page "Guarantor Notice Letters List";
+                RunPageLink = "Header No" = field("No.");
+                RunPageMode = View;
+
+            }
+
             action("Skipped Loans")
             {
                 ApplicationArea = Basic, Suite;
@@ -1248,55 +1262,36 @@ page 52186732 "SMS Alerts Header Card"
         AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
         //AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
         if AlertsLines.Find('-') then begin
+            // delete existing
+            GuarantorNoticeLetters.reset();
+            GuarantorNoticeLetters.setrange("Header No", AlertsLines."Header No");
+            GuarantorNoticeLetters.deleteall();
             repeat
                 RecRef.GetTable(AlertsLines);
                 LoanNo := AlertsLines."Loan No";
                 TempBlob.CreateOutStream(OutStr);
                 TempBlob.CreateOutStream(BlobOutStream);
                 RecRef.GetTable(AlertsLines);
-                if AlertsLines.Recepient = AlertsLines.Recepient::Guarantor then
-                    Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, BlobOutStream, RecRef)
-                else
+                if AlertsLines.Recepient = AlertsLines.Recepient::Guarantor then begin//for guarnator
                     Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, BlobOutStream, RecRef);
+                    // else
+                    //     Report.SaveAs(Report::"Defaulter Notice-2", '', ReportFormat::Pdf, BlobOutStream, RecRef);
+                    // Insert record first
+                    GuarantorNoticeLetters.Init();
+                    GuarantorNoticeLetters."Loan No" := AlertsLines."Loan No";
+                    GuarantorNoticeLetters."Header No" := AlertsLines."Header No";
+                    GuarantorNoticeLetters."Recipient Member No" := AlertsLines."Member No";
+                    GuarantorNoticeLetters.Recepient := AlertsLines.Recepient;
+                    GuarantorNoticeLetters.Insert();
 
-                // delete existing
-                GuarantorNoticeLetters.reset();
-                GuarantorNoticeLetters.setrange("Header No", AlertsLines."Header No");
-                GuarantorNoticeLetters.deleteall();
+                    // Write into the BLOB field
+                    GuarantorNoticeLetters.Letter.CreateOutStream(FieldOutStream);
+                    TempBlob.CreateInStream(BlobInStream);
+                    CopyStream(FieldOutStream, BlobInStream);
 
-                // Insert record first
-                GuarantorNoticeLetters.Init();
-                GuarantorNoticeLetters."Loan No" := AlertsLines."Loan No";
-                GuarantorNoticeLetters."Header No" := AlertsLines."Header No";
-                GuarantorNoticeLetters."Recipient Member No" := AlertsLines."Member No";
-                GuarantorNoticeLetters.Recepient := AlertsLines.Recepient;
-                GuarantorNoticeLetters.Insert();
-
-                // Write into the BLOB field
-                GuarantorNoticeLetters.Letter.CreateOutStream(FieldOutStream);
-                TempBlob.CreateInStream(BlobInStream);
-                CopyStream(FieldOutStream, BlobInStream);
-
-                // Persist changes
-                GuarantorNoticeLetters.Modify();
-
-                // Verify
-                GuarantorNoticeLetters.Letter.CreateInStream(InS);
-                FileContentsB64 := Base64Convert.ToBase64(InS);
-                if FileContentsB64 <> '' then
-                    Message('Guarantor notice saved.');
-            // Report.SaveAs(
-            //     Report::"Guarantor Notice",
-            //     '',
-            //     ReportFormat::Pdf,
-            //     OutStr,
-            //     recRef);
-            // FileName := AlertsLines."Member No" + '_' + Format(AlertsLines.Recepient) + '_' + Format(AlertsLines."Notice Category") + '.pdf';
-
-            // // download the report
-            // PdfMimeType := 'application/pdf';
-            // TempBlob.CreateInStream(InStreamVar);
-            // DownloadFromStream(InStreamVar, '', '', FileName, FileName);
+                    // Persist changes
+                    GuarantorNoticeLetters.Modify();
+                end;
             until AlertsLines.Next() = 0;
         end;
     end;

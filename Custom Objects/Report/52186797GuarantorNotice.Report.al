@@ -103,7 +103,7 @@ Report 52186797 "Guarantor Notice"
                         DefaulterWkno := Defaulter."Payroll/Staff No.";
 
                         SavAcc.Reset();
-                        SavAcc.Setloadfields("Product Category", "Member No.", "Balance (LCY)");
+                        SavAcc.Setloadfields("Product Category", "Member No.", Balance);
                         SavAcc.SetRange("Member No.", Defaulter."No.");
                         SavAcc.SetAutoCalcFields(Balance);
                         if not SavAcc.IsEmpty() then

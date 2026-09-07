@@ -776,6 +776,8 @@ Codeunit 52185470 "Periodic Activities"
                                 LoansLedger.setrange("Transaction Type", LoansLedger."Transaction Type"::"Interest Due");
                                 LoansLedger.SetRange(Reversed, false);
                                 if not LoansLedger.findfirst() then begin
+                                    Dim1 := LoansRec."Global Dimension 1 Code";
+                                    Dim2 := LoansRec."Global Dimension 2 Code";
                                     LineNo := LineNo + 10000;
                                     AcctType := AcctType::Credit;
                                     AccNo := LoansInterest."Account No";
