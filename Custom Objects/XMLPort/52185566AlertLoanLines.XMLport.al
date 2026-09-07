@@ -40,9 +40,15 @@ xmlport 52185568 "Alerts Loan Lines"
             {
                 group("Header No|Loan No|Period")
                 {
-                    field(No; "Alerts Loan Lines"."Header No.")
+                    // field(No; "Alerts Loan Lines"."Header No.")
+                    // {
+                    // }
+                    field(LoansImportFormat; LoansImportFormat)
                     {
+                        ApplicationArea = All;
+                        ToolTip = 'Select the file to import.';
                     }
+
                 }
             }
         }
@@ -58,7 +64,8 @@ xmlport 52185568 "Alerts Loan Lines"
         Message('Upload of loans successful');
     end;
 
-
+    var
+        LoansImportFormat: label 'Header No|Loan No|Period';
 
 
 }

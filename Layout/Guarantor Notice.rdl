@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-17T13:47:59.8608686Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-09-07T12:13:54.0807229Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -75,30 +75,177 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>To:____________________________ Date of Notice__________________________________
+                    <Value>To:____</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!GuarantorName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>____ Date of Notice_____</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!NoticeDate.Value, "DataSet_Result")</Value>
+                    <MarkupType>HTML</MarkupType>
+                    <Style>
+                      <Format>dd/MM/yy</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>________
 
+W/No:____</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!GuarWorkNo.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>_____M/No.____</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Member_No.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>_____ </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Defaulters Name____</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DefaulterName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>_______
 
-W/No:__________M/No._________ Defaulters Name_______________________________
+Dept:___</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DefaulterEmpcode.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>________ W/No____</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DefaulterWkno.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>____
 
+Loan Type:______</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanType.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>______ Defaulted Amount Kshs.___</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Defaultedamount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <Format>#,0.00</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>_</Value>
+                    <Style>
+                      <Format>#,0.00</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>_____
 
-Dept:__________________________ W/No__________Dept __________________________
-
-
-Loan Type:____________________ Defaulted Amount Kshs.________________________
-
-
-Amount Recoverable Kshs.________ Date of Default________________________________
+Amount Recoverable Kshs.__</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!AmountRecoverable.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <Format>#,0.00</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>____ Date of Default________________________________
 
 
 Dear sir/madam,
 
 
-RE: NOTICE TO GUARANTORS:
+</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>RE: NOTICE TO GUARANTORS:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
 This notice serves to advice you that the above named member to whom you and others guaranteed a loan has now defaulted with the above shown amount, which has now to be recovered from each of you.
 Remember when you guaranteed this loan, you together with others undertook and signed the following declaration:-
 “We the undersigned hereby accept jointly and severally for the repayment of this loan in the event of borrowers default. We understand that the amount in default may be recovered by monthly payroll deduction/deposits and that we shall not be eligible for loan unless the amount in default has been cleared in full”.
 
-By virtue of this undertaking the society hereby requires you within fourteen days from the date of this notice to show cause why the sum of Kshs……………..being the defaulted loan balance cannot be recovered from you.
+By virtue of this undertaking the society hereby requires you within fourteen days from the date of this notice to show cause why the sum of Kshs …</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Defaultedamount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>…..being the defaulted loan balance cannot be recovered from you.
 
 
 If you do not respond to this notice within the said period, then the conditions herein above stated shall befall upon you immediately without any further notice.
@@ -116,7 +263,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
             </Paragraphs>
             <Top>0.37639cm</Top>
             <Left>0.02034cm</Left>
-            <Height>18.53875cm</Height>
+            <Height>17.60417cm</Height>
             <Width>19.97966cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -130,7 +277,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>19.07389cm</Height>
+        <Height>18.2716cm</Height>
         <Style />
       </Body>
       <Width>20.02034cm</Width>
@@ -643,80 +790,44 @@ End Function
         <Field Name="PrintedBy">
           <DataField>PrintedBy</DataField>
         </Field>
-        <Field Name="RecepientName">
-          <DataField>RecepientName</DataField>
+        <Field Name="GuarantorName">
+          <DataField>GuarantorName</DataField>
         </Field>
-        <Field Name="DefMemberNo">
-          <DataField>DefMemberNo</DataField>
+        <Field Name="NoticeDate">
+          <DataField>NoticeDate</DataField>
         </Field>
-        <Field Name="DefPayrollNo">
-          <DataField>DefPayrollNo</DataField>
+        <Field Name="GuarWorkNo">
+          <DataField>GuarWorkNo</DataField>
         </Field>
-        <Field Name="DefPhoneNumber">
-          <DataField>DefPhoneNumber</DataField>
+        <Field Name="Member_No">
+          <DataField>Member_No</DataField>
         </Field>
-        <Field Name="DefName">
-          <DataField>DefName</DataField>
+        <Field Name="GuarEmpcode">
+          <DataField>GuarEmpcode</DataField>
         </Field>
-        <Field Name="DefIDNo">
-          <DataField>DefIDNo</DataField>
+        <Field Name="LoanType">
+          <DataField>LoanType</DataField>
         </Field>
-        <Field Name="DefAddress">
-          <DataField>DefAddress</DataField>
+        <Field Name="DefaulterName">
+          <DataField>DefaulterName</DataField>
         </Field>
-        <Field Name="DefLoanNumber">
-          <DataField>DefLoanNumber</DataField>
+        <Field Name="DefaulterEmpcode">
+          <DataField>DefaulterEmpcode</DataField>
         </Field>
-        <Field Name="DefIssueDate">
-          <DataField>DefIssueDate</DataField>
+        <Field Name="DefaulterWkno">
+          <DataField>DefaulterWkno</DataField>
         </Field>
-        <Field Name="DefApprovedAmount">
-          <DataField>DefApprovedAmount</DataField>
+        <Field Name="Defaultedamount">
+          <DataField>Defaultedamount</DataField>
         </Field>
-        <Field Name="DefApprovedAmountFormat">
-          <DataField>DefApprovedAmountFormat</DataField>
+        <Field Name="DefaultedamountFormat">
+          <DataField>DefaultedamountFormat</DataField>
         </Field>
-        <Field Name="DefOutInt">
-          <DataField>DefOutInt</DataField>
+        <Field Name="AmountRecoverable">
+          <DataField>AmountRecoverable</DataField>
         </Field>
-        <Field Name="DefOutIntFormat">
-          <DataField>DefOutIntFormat</DataField>
-        </Field>
-        <Field Name="DefTotalBal">
-          <DataField>DefTotalBal</DataField>
-        </Field>
-        <Field Name="DefTotalBalFormat">
-          <DataField>DefTotalBalFormat</DataField>
-        </Field>
-        <Field Name="AmountInArrears">
-          <DataField>AmountInArrears</DataField>
-        </Field>
-        <Field Name="AmountInArrearsFormat">
-          <DataField>AmountInArrearsFormat</DataField>
-        </Field>
-        <Field Name="GuarMemberNo">
-          <DataField>GuarMemberNo</DataField>
-        </Field>
-        <Field Name="GuarName">
-          <DataField>GuarName</DataField>
-        </Field>
-        <Field Name="GuarAddress">
-          <DataField>GuarAddress</DataField>
-        </Field>
-        <Field Name="GuarPostCode">
-          <DataField>GuarPostCode</DataField>
-        </Field>
-        <Field Name="GuarCity">
-          <DataField>GuarCity</DataField>
-        </Field>
-        <Field Name="GuarTel">
-          <DataField>GuarTel</DataField>
-        </Field>
-        <Field Name="GuarSharesGuaranteed">
-          <DataField>GuarSharesGuaranteed</DataField>
-        </Field>
-        <Field Name="GuarSharesGuaranteedFormat">
-          <DataField>GuarSharesGuaranteedFormat</DataField>
+        <Field Name="AmountRecoverableFormat">
+          <DataField>AmountRecoverableFormat</DataField>
         </Field>
       </Fields>
       <Query>

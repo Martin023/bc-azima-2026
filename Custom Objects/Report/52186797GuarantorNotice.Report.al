@@ -39,152 +39,86 @@ Report 52186797 "Guarantor Notice"
             {
 
             }
-            column(RecepientName; RecepientName)
+            column(GuarantorName; GuarantorName)
             {
-
             }
-            column(DefMemberNo; DefMemberNo)
+            column(NoticeDate; NoticeDate)
             {
-
             }
-            column(DefPayrollNo; DefPayrollNo)
+            column(GuarWorkNo; GuarWorkNo)
             {
-
             }
-            column(DefPhoneNumber; DefPhoneNumber)
+            column(Member_No; "Member No")
             {
-
             }
-            column(DefName; DefName)
+            column(GuarEmpcode; GuarEmpcode)
             {
-
             }
-            column(DefIDNo; DefIDNo)
+            column(LoanType; LoanType)
             {
-
             }
-            column(DefAddress; DefAddress)
+            column(DefaulterName; DefaulterName)
             {
-
             }
-            column(DefLoanNumber; DefLoanNumber)
+            column(DefaulterEmpcode; DefaulterEmpcode)
             {
-
             }
-            column(DefIssueDate; DefIssueDate)
+            column(DefaulterWkno; DefaulterWkno)
             {
-
             }
-            column(DefApprovedAmount; DefApprovedAmount)
+            column(Defaultedamount; Defaultedamount)
             {
-
             }
-            column(DefOutInt; DefOutInt)
+            column(AmountRecoverable; AmountRecoverable)
             {
-
-            }
-            column(DefTotalBal; DefTotalBal)
-            {
-
-            }
-            column(AmountInArrears; AmountInArrears)
-            {
-
-            }
-            dataitem("Loan Guarantors and Security"; "Loan Guarantors and Security")
-            {
-                DataItemLink = "Loan No" = field("Loan No");
-                // DataItemTableView = where("Self Guarantee" = const(false));
-                column(GuarMemberNo; GuarMemberNo)
-                {
-
-                }
-                column(GuarName; GuarName)
-                {
-
-                }
-                column(GuarAddress; GuarAddress)
-                {
-
-                }
-                column(GuarPostCode; GuarPostCode)
-                {
-
-                }
-                column(GuarCity; GuarCity)
-                {
-
-                }
-                column(GuarTel; GuarTel)
-                {
-
-                }
-                column(GuarSharesGuaranteed; GuarSharesGuaranteed)
-                {
-
-                }
-
-
-                trigger OnAfterGetRecord()
-                begin
-                    // if "Loan Guarantors and Security"."Member No" = "SMS Alerts Lines"."Member No" then
-                    //     CurrReport.Skip();
-                    GuarMemberNo := '';
-                    GuarName := '';
-                    GuarAddress := '';
-                    GuarPostCode := '';
-                    GuarCity := '';
-                    GuarTel := '';
-                    GuarSharesGuaranteed := 0;
-
-                    GuarMemberNo := "Loan Guarantors and Security"."Member No";
-                    if GuarMembers.Get(GuarMemberNo) then begin
-                        GuarName := GuarMembers.Name;
-                        GuarAddress := GuarMembers."Current Address";
-                        if GuarAddress = '' then
-                            GuarAddress := GuarMembers."Home Address";
-                        GuarPostCode := GuarMembers."Post Code";
-                        if GuarPostCode = '' then
-                            GuarPostCode := GuarMembers."Permanent Post Code";
-                        GuarCity := GuarMembers.City;
-                        if GuarCity = '' then GuarCity := GuarMembers."Permanent City";
-                        GuarTel := GuarMembers."Phone No.";
-                        if GuarTel = '' then GuarTel := GuarMembers."Transactional Mobile Number";
-                        if GuarTel = '' then GuarTel := GuarMembers."Office Telephone No.";
-                        GuarSharesGuaranteed := "Loan Guarantors and Security"."Amount Guaranteed";
-                    end;
-                    DefLoanNumber := "SMS Alerts Lines"."Loan No";
-                    if Loans.Get(DefLoanNumber) then begin
-                        DefApprovedAmount := Loans."Approved Amount";
-                        DefIssueDate := GlobalFunctions.FormatDate(Loans."Disbursement Date");
-                    end;
-                end;
             }
             trigger OnAfterGetRecord()
             begin
-                if RecepientMembers.Get("SMS Alerts Lines"."Member No") then begin
-                    RecepientName := RecepientMembers.Name;
-                end;
+                GuarantorName := '';
+                // NoticeDate := 0D;
+                GuarWorkNo := '';
+                DefaulterName := '';
+                DefaulterEmpcode := '';
+                LoanType := '';
+                GuarEmpcode := '';
+                DefaulterWkno := '';
+                Defaultedamount := 0;
+                AmountRecoverable := 0;
 
-                if Loans.Get("SMS Alerts Lines"."Loan No") then begin
-                    Loans.CalcFields("Amount In Arreas SACCO");
-                    AmountInArrears := Loans."Amount In Arreas SACCO";
-                    RecoveryHeader.GetLoanBalances(Loans."Loan No.", DefOutInt, OutBal, DefTotalBal);
-                    if DefMember.Get(Loans."Member No.") then begin
-                        DefMemberNo := DefMember."No.";
-                        DefPayrollNo := DefMember."Payroll/Staff No.";
-                        DefPhoneNumber := DefMember."Phone No.";
-                        if DefPhoneNumber = '' then
-                            DefPhoneNumber := DefMember."Transactional Mobile Number";
-                        DefName := DefMember.Name;
-                        DefIDNo := DefMember."Primary Identification";
-                        DefAddress := DefMember."Current Address";
-                        if DefAddress = '' then
-                            DefAddress := DefMember."Home Address";
+                if SmSAlertHeader.Get("SMS Alerts Lines"."Header No") then
+                    NoticeDate := SmSAlertHeader."Posted At";
+                if GuarMember.get("Member No") then begin
+                    GuarantorName := GuarMember.Name;
+                    GuarWorkNo := GuarMember."Payroll/Staff No.";
+                    GuarEmpcode := GuarMember."Employer Code";
+                end
+                else
+                    CurrReport.Skip();
 
+                if DefaultedLoan.Get("Loan No") then begin
+                    DefaultedLoan.CalcFields("Outstanding Balance");
+                    if Defaulter.Get(DefaultedLoan."Member No.") then begin
+                        DefaulterName := Defaulter.Name;
+                        DefaulterEmpcode := Defaulter."Employer Code";
+                        DefaulterWkno := Defaulter."Payroll/Staff No.";
+
+                        SavAcc.Reset();
+                        SavAcc.Setloadfields("Product Category", "Member No.", Balance);
+                        SavAcc.SetRange("Member No.", Defaulter."No.");
+                        SavAcc.SetAutoCalcFields(Balance);
+                        if not SavAcc.IsEmpty() then
+                            AmountRecoverable := SavAcc.Balance
+                        else
+                            AmountRecoverable := 0;
                     end;
+                    Defaultedamount := DefaultedLoan."Outstanding Balance";
+                    LoanType := DefaultedLoan."Loan Product Type Name";
                 end;
+
+
             end;
+
+
         }
     }
 
@@ -224,6 +158,8 @@ Report 52186797 "Guarantor Notice"
 
     var
         //General Columns
+        CompanyInformation: Record "Company Information";
+        GlobalFunctions: Codeunit "Global Functions";
         CompanyName: Text;
         BuldingName: Text;
         CompanyAddress: Text;
@@ -232,45 +168,20 @@ Report 52186797 "Guarantor Notice"
         PrintingDate: Text;
         PrintingTime: Text;
         PrintedBy: Code[50];
-
-        //Colums Recepient Details
-        RecepientName: Text;
-
-        //Columns Defaulter Details
-        DefMemberNo: Code[50];
-        DefPayrollNo: Code[50];
-        DefPhoneNumber: Text;
-        DefName: Text;
-        DefIDNo: Code[50];
-        DefAddress: Text;
-        AmountInArrears: Decimal;
-
-        //Columns Defaulter Loan Details
-        DefLoanNumber: Text;
-        DefIssueDate: Text;
-        DefApprovedAmount: Decimal;
-        DefOutInt: Decimal;
-        DefTotalBal: Decimal;
-
-        //Columns Guarantor Details
-        GuarMemberNo: Code[50];
-        GuarName: Text;
-        GuarAddress: Text;
-        GuarPostCode: Text;
-        GuarCity: Text;
-        GuarTel: Text;
-        GuarSharesGuaranteed: Decimal;
-
-
-        //Other Variable
-        RecepientMembers: Record Members;
-        DefMember: Record Members;
-        CompanyInformation: Record "Company Information";
-        GlobalFunctions: Codeunit "Global Functions";
-        RecoveryHeader: Record "Loan Recovery Header";
-        Loans: Record Loans;
-        CreditLedgerEntry: Record "Credit Ledger Entry";
-        GuarMembers: Record Members;
-        OutBal: Decimal;
+        GuarantorName: text;
+        GuarMember: Record Members;
+        SmSAlertHeader: record "SMS Alerts Header";
+        NoticeDate: Datetime;
+        Defaulter: Record Members;
+        DefaulterName: Text[100];
+        DefaultedLoan: record Loans;
+        GuarWorkNo: Text;
+        GuarEmpcode: Code[20];
+        DefaulterEmpcode: Code[20];
+        LoanType: code[20];
+        DefaulterWkno: Code[20];
+        Defaultedamount: Decimal;
+        AmountRecoverable: Decimal;
+        SavAcc: record "Savings Accounts";
 
 }

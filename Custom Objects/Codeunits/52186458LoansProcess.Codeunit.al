@@ -6644,106 +6644,105 @@ Codeunit 52186458 "Loans Process"
             end;
         end;
         // Loans with grace period - to change from 137
-        if (Loans."Recovery Mode" <> Loans."Recovery Mode"::Dividend) then begin
-            MoratoriumLoan.Reset();
-            MoratoriumLoan.SetRange(Status, MoratoriumLoan.Status::Approved);
-            MoratoriumLoan.SetRange(MoratoriumLoan."Loan No", Loans."Loan No.");
-            if MoratoriumLoan.FindFirst() then begin
-                if (MoratoriumLoan."End Date Moratorium" <> 0D) and (MoratoriumLoan."Start Date Moratorium" <> 0D) then
-                    GraceDays := MoratoriumLoan."End Date Moratorium" - MoratoriumLoan."Start Date Moratorium";
-            end;
+        // if (Loans."Recovery Mode" <> Loans."Recovery Mode"::Dividend) then begin
+        // MoratoriumLoan.Reset();
+        // MoratoriumLoan.SetRange(Status, MoratoriumLoan.Status::Approved);
+        // MoratoriumLoan.SetRange(MoratoriumLoan."Loan No", Loans."Loan No.");
+        // if MoratoriumLoan.FindFirst() then begin
+        //     if (MoratoriumLoan."End Date Moratorium" <> 0D) and (MoratoriumLoan."Start Date Moratorium" <> 0D) then
+        //         GraceDays := MoratoriumLoan."End Date Moratorium" - MoratoriumLoan."Start Date Moratorium";
+        // end;
 
-            // if Loans."Grace Period" <> EmptyDateFormula then
-            //     GraceDays := DateFormulaetoDays(Loans."Grace Period");
+        // if Loans."Grace Period" <> EmptyDateFormula then
+        //     GraceDays := DateFormulaetoDays(Loans."Grace Period");
 
-            ActualInterestBal := Loans."Outstanding Interest";
-            ActualPrincipleBal := Loans."Outstanding Balance";
-            ActualTotalBal := ActualInterestBal + ActualPrincipleBal;
+        ActualInterestBal := Loans."Outstanding Interest";
+        ActualPrincipleBal := Loans."Outstanding Balance";
+        ActualTotalBal := ActualInterestBal + ActualPrincipleBal;
 
-            LnReshedule.Reset();
-            LnReshedule.SetRange("Loan No.", Loans."Loan No.");
-            if LnReshedule.FindFirst() then begin
-                MonthlyInterest := LnReshedule."Monthly Interest";
-                MonthlyPrinciple := LnReshedule."Principal Repayment";
-                MonthlyRepayment := MonthlyInterest + MonthlyPrinciple;
-            end;
+        LnReshedule.Reset();
+        LnReshedule.SetRange("Loan No.", Loans."Loan No.");
+        if LnReshedule.FindFirst() then begin
+            MonthlyInterest := LnReshedule."Monthly Interest";
+            MonthlyPrinciple := LnReshedule."Principal Repayment";
+            MonthlyRepayment := MonthlyInterest + MonthlyPrinciple;
+        end;
 
-            LnReshedule.Reset();
-            LnReshedule.SetRange("Loan No.", Loans."Loan No.");
-            LnReshedule.SetFilter("Repayment Date", '>=%1', AsAt);
-            if LnReshedule.Find('-') then begin
-                IdealInterestBal := Abs(LnReshedule."Monthly Interest");
-                repeat
-                    IdealPrincipleBal += Abs(LnReshedule."Principal Repayment");
-                until LnReshedule.NEXT = 0;
-            end else begin
-                if Loans."Expected Date of Completion" <> 0D then
-                    DaysAfterSchedule := AsAt - Loans."Expected Date of Completion";
-            end;
-
-            IdealTotalBal := IdealPrincipleBal;
-
-            DaysInArrears := DaysAfterSchedule;
-            InstallInArrears := round(DaysAfterSchedule / 30, 0.01, '=');
-
-            CurrMonthInt := 0;
-            CreditLedger.reset;
-            CreditLedger.setrange("Loan No", Loans."Loan No.");
-            CreditLedger.setfilter("Posting Date", '%1..%2', CalcDate('-CM', AsAt), calcdate('<CM>', AsAt));
-            CreditLedger.setrange("Transaction Type", CreditLedger."Transaction Type"::"Interest Due");
-            if CreditLedger.FindSet() then begin
-                CreditLedger.CalcSums("Amount (LCY)");
-                CurrMonthInt := CreditLedger."Amount (LCY)";
-            end;
-
-            if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
-                AmountInArrearsSASRA := ActualPrincipleBal - IdealPrincipleBal;
-                AmountInArrearsSACCO := (ActualPrincipleBal + ActualInterestBal) - (IdealPrincipleBal + CurrMonthInt);
-                if MonthlyPrinciple <> 0 then begin
-                    DaysInArrears += Round((AmountInArrearsSASRA / MonthlyPrinciple) * 30, 1, '>');
-                    InstallInArrears += Round((AmountInArrearsSASRA / MonthlyPrinciple), 0.01, '=');
-                end;
-
-                // DaysInArrears += Round((round((AmountInArrearsSASRA / MonthlyPrinciple), 1, '<')) * 30, 1, '<');
-            end else begin
-                AmountInArrearsSASRA := ActualTotalBal - (IdealTotalBal + CurrMonthInt);
-                AmountInArrearsSACCO := AmountInArrearsSASRA;
-                //if MonthlyRepayment <> 0 then
-                //DaysInArrears += Round((AmountInArrearsSASRA / MonthlyRepayment) * 30, 1, '<'); Cyprian, commented to catch the divide by zero
-                if MonthlyRepayment = 0 then MonthlyRepayment := MonthlyPrinciple;
-                if MonthlyRepayment > 0 then begin
-                    DaysInArrears += Round(((AmountInArrearsSASRA / MonthlyRepayment) * 30), 1, '>');
-                    InstallInArrears += Round((AmountInArrearsSASRA / MonthlyRepayment), 0.01, '=');
-                end;
-
-            end;
-            DaysInArrears := round(DaysInArrears, 1, '>');
-            if AmountInArrearsSACCO <= 0 then AmountInArrearsSACCO := 0;
-            if AmountInArrearsSASRA <= 0 then AmountInArrearsSASRA := 0;
-
-            if DaysInArrears <= 0 then begin
-                DaysInArrears := 0;
-            end else begin
-                // DaysInArrears -= GraceDays;
-                if DaysInArrears <= 0 then
-                    DaysInArrears := 0;
-            end;
-            if InstallInArrears <= 0 then
-                InstallInArrears := 0;
-
+        LnReshedule.Reset();
+        LnReshedule.SetRange("Loan No.", Loans."Loan No.");
+        LnReshedule.SetFilter("Repayment Date", '>=%1', AsAt);
+        if LnReshedule.Find('-') then begin
+            IdealInterestBal := Abs(LnReshedule."Monthly Interest");
+            repeat
+                IdealPrincipleBal += Abs(LnReshedule."Principal Repayment");
+            until LnReshedule.NEXT = 0;
         end else begin
-            if Loans."Disbursement Date" = 0D then Loans."Disbursement Date" := (CalcDate('-12M', AsAt));
-            if Loans."Disbursement Date" <> 0D then begin
-                if (CalcDate('12M', Loans."Disbursement Date")) < AsAt then begin
-                    AmountInArrearsSACCO := Loans."Outstanding Balance" + Loans."Outstanding Interest";
-                    AmountInArrearsSASRA := AmountInArrearsSACCO;
-                    DaysInArrears := AsAt - Loans."Disbursement Date";
-                    // One off loans not recovered in the year;
-                    InstallInArrears := 12.1;
-                end;
+            if Loans."Expected Date of Completion" <> 0D then
+                DaysAfterSchedule := AsAt - Loans."Expected Date of Completion";
+        end;
+
+        IdealTotalBal := IdealPrincipleBal;
+        DaysInArrears := DaysAfterSchedule;
+        InstallInArrears := round(DaysAfterSchedule / 30, 0.01, '=');
+
+        CurrMonthInt := 0;
+        CreditLedger.reset;
+        CreditLedger.setrange("Loan No", Loans."Loan No.");
+        CreditLedger.setfilter("Posting Date", '%1..%2', CalcDate('-CM', AsAt), calcdate('<CM>', AsAt));
+        CreditLedger.setrange("Transaction Type", CreditLedger."Transaction Type"::"Interest Due");
+        if CreditLedger.FindSet() then begin
+            CreditLedger.CalcSums("Amount (LCY)");
+            CurrMonthInt := CreditLedger."Amount (LCY)";
+        end;
+
+        if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
+            AmountInArrearsSASRA := ActualPrincipleBal - IdealPrincipleBal;
+            AmountInArrearsSACCO := (ActualPrincipleBal + ActualInterestBal) - (IdealPrincipleBal + CurrMonthInt);
+            if MonthlyPrinciple <> 0 then begin
+                DaysInArrears += Round((AmountInArrearsSASRA / MonthlyPrinciple) * 30, 1, '>');
+                InstallInArrears += Round((AmountInArrearsSASRA / MonthlyPrinciple), 0.01, '=');
+            end;
+
+            // DaysInArrears += Round((round((AmountInArrearsSASRA / MonthlyPrinciple), 1, '<')) * 30, 1, '<');
+        end else begin
+            AmountInArrearsSASRA := ActualTotalBal - (IdealTotalBal + CurrMonthInt);
+            AmountInArrearsSACCO := AmountInArrearsSASRA;
+            //if MonthlyRepayment <> 0 then
+            //DaysInArrears += Round((AmountInArrearsSASRA / MonthlyRepayment) * 30, 1, '<'); Cyprian, commented to catch the divide by zero
+            if MonthlyRepayment = 0 then MonthlyRepayment := MonthlyPrinciple;
+            if MonthlyRepayment > 0 then begin
+                DaysInArrears += Round(((AmountInArrearsSASRA / MonthlyRepayment) * 30), 1, '>');
+                InstallInArrears += Round((AmountInArrearsSASRA / MonthlyRepayment), 0.01, '=');
             end;
 
         end;
+        DaysInArrears := round(DaysInArrears, 1, '>');
+        if AmountInArrearsSACCO <= 0 then AmountInArrearsSACCO := 0;
+        if AmountInArrearsSASRA <= 0 then AmountInArrearsSASRA := 0;
+
+        if DaysInArrears <= 0 then begin
+            DaysInArrears := 0;
+        end else begin
+            // DaysInArrears -= GraceDays;
+            if DaysInArrears <= 0 then
+                DaysInArrears := 0;
+        end;
+        if InstallInArrears <= 0 then
+            InstallInArrears := 0;
+
+        // end else begin
+        //     if Loans."Disbursement Date" = 0D then Loans."Disbursement Date" := (CalcDate('-12M', AsAt));
+        //     if Loans."Disbursement Date" <> 0D then begin
+        //         if (CalcDate('12M', Loans."Disbursement Date")) < AsAt then begin
+        //             AmountInArrearsSACCO := Loans."Outstanding Balance" + Loans."Outstanding Interest";
+        //             AmountInArrearsSASRA := AmountInArrearsSACCO;
+        //             DaysInArrears := AsAt - Loans."Disbursement Date";
+        //             // One off loans not recovered in the year;
+        //             InstallInArrears := 12.1;
+        //         end;
+        //     end;
+
+        // end;
 
         if Loans."Repayment Start Date" <> 0D then
             if Loans."Repayment Start Date" > AsAt then begin
