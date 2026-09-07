@@ -1407,7 +1407,6 @@ Report 52186204 "Loan Appraisal Hybrid"
                 Loans."Loan Appraised By" := UserId;
                 if Loans.Status = Loans.Status::Open then
                     Loans.Modify;
-                CreateLoanAppraisalBackup(Loans."Loan No.");
             end;
 
         }
@@ -1422,76 +1421,15 @@ Report 52186204 "Loan Appraisal Hybrid"
         CommunicationOnline := 'E-mail: ' + Company."E-Mail" + '- Website: ' + Company."Home Page";
     end;
 
-    procedure CreateLoanAppraisalBackup(LoanNo: Code[20])
+    
     var
-        LoanRec: Record "Loan Appraisal";
-    begin
-
-
-        if LoanRec.Get(LoanNo) then begin
-            // Check if the loan is already posted
-            if Loans.Posted = true then
-                exit; // Skip deletion and insertion if loan is posted
-
-            // If not posted, delete the record
-            LoanRec.Delete();
-        end;
-
-
-        // Insert the new record
-        LoanRec.Init();
-        LoanRec."Loan No." := LoanNo;
-        LoanRec."Member No" := Loans."Member No.";
-        LoanRec."Staff No" := Loans."Staff No";
-        LoanRec."Loan Product Type" := LoansProductTyp;
-        LoanRec."Requested Amount" := Loans."Requested Amount";
-        LoanRec."Approved Amount" := Loans."Approved Amount";
-        LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        LoanRec."Member Deposits" := MemberDeposits;
-        LoanRec."Deposit Boosting" := Loans."Loans - Deposit Purchase";
-        LoanRec."Current Contribution" := NewContr;
-        LoanRec."Qualification on Deposits" := NetOnDeposits;
-        LoanRec.Installments := Loans.Installments;
-        LoanRec."Existing Loans" := TotalLoanBal;
-        LoanRec."Deposit multiplier" := Mult;
-        LoanRec."Qualification on Salary" := NetOnSalary;
-        LoanRec."Qualification on Guarantors" := SecurityTotal;
-        LoanRec."Possible Deposit Boost" := PossibleBoost;
-        LoanRec."No. of Gurantors" := CountNo;
-        LoanRec."Other Clearence" := TExternalEffects;
-        LoanRec."Other Clearence Fee" := ExternalCharges;
-        LoanRec."Other Clearence Duty" := TotalExciseDuty;
-        LoanRec."Total excise Duty" := ExerciseDuty;
-        LoanRec."Basic Income" := TBasic;
-        LoanRec.Earnings := TEarning;
-        LoanRec.Deductions := TDeductions;
-        // LoanRec."1/3 of Basic" := AthirdAmt;
-        LoanRec."Net Salary" := NetSalary;
-        LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
-        LoanRec."External Effects" := TotalExteralRec;
-        LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
-        LoanRec."Cleared Loans Installment" := TopupRepayments;
-        LoanRec."Adjusted Net" := AdjustedNet;
-        // LoanRec."New Repayment" := Loans.Repayment;
-        LoanRec."Take Home Amount" := NetTakeAwayHome;
-        LoanRec.Insert();
-    end;
-
-    var
-        DCSParameterMatrix: Record "DCS Parameter Matrix";
-
-        ParameterBold: Boolean;
-        TargeMaxLoan: Decimal;
-        TargeEmp: Record "52187008 Employer Product Attr";
         QualifyingAmount: Decimal;
         HrEmployes: Record "HR Employees";
         CompanyTelephone: Text;
         CompanyNam: Text;
         CommunicationOnline: Text;
         CompanyAddress: Text;
-        ParamContribution: Option "Formula Factor","Flat Rate",Range,Ceiling,Multiplier,Divisor,Frequency,"Sum",Difference,"Graduated Range",Exponential,Terminate,Probability,Floor;
         ParamFormula: Text;
-        SavingsAccounts: Record "Savings Accounts";
         MemberDeposits: Decimal;
         Loan: Record Loans;
         TotalLoanBal: Decimal;

@@ -3000,9 +3000,15 @@ table 52185729 Loans
             CalcFormula = Lookup("SASRA Categorization"."Amount In Arears SACCO" WHERE("Loan No." = FIELD("Loan No.")));
 
         }
-        field(168; "Repayment Bal."; Decimal)
+        field(168; "Appraiser Recommended Amount"; Decimal)
         {
             DataClassification = ToBeClassified;
+            MinValue = 0;
+            trigger OnValidate()
+            begin
+                if rec."Appraiser Recommended Amount" > rec."Recommended Amount" then
+                    Error('You cannot recommend more than the system recommended amount!');
+            end;
 
         }
         field(164; "Date of join"; Date)

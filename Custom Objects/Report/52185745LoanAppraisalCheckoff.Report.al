@@ -1134,10 +1134,6 @@ Report 52185745 "Loan Appraisal Checkoff"
                     Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
                 end;
 
-
-
-
-
                 //get remaining months to retire
                 GeneralSetUp.Get;
 
@@ -1195,6 +1191,14 @@ Report 52185745 "Loan Appraisal Checkoff"
                             Loans."Approved Amount" := Loans."Requested Amount";
                             Loans."Amount To Disburse" := Loans."Requested Amount";
                         end;
+                    end;
+                end;
+                if Loans."Appraiser Recommended Amount" > 0 then begin
+                    if Loans."Recommended Amount" > Loans."Appraiser Recommended Amount" then begin
+                        QualifyingAmount := Loans."Appraiser Recommended Amount";
+                        Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
+                        Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
+                        Loans."Recommended Amount" := "Appraiser Recommended Amount";
                     end;
                 end;
 

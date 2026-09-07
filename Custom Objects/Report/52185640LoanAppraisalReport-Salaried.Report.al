@@ -1162,8 +1162,15 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     Loans."Approved Amount" := Loans."Recommended Amount";
                     Loans."Amount To Disburse" := Loans."Recommended Amount";
                 end;
-
-
+                //Appraiser recommended amt
+                if Loans."Appraiser Recommended Amount" > 0 then begin
+                    if Loans."Recommended Amount" > Loans."Appraiser Recommended Amount" then begin
+                        QualifyingAmount := Loans."Appraiser Recommended Amount";
+                        Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
+                        Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
+                        Loans."Recommended Amount" := "Appraiser Recommended Amount";
+                    end;
+                end;
                 // Loans.Validate(Loans."Approved Amount");
                 Loans.Modify();
 
@@ -1339,8 +1346,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     SecurityRisk := true;
                     DiffSec := Loans."Approved Amount" - SecurityTotal;
                 end;
-
-                CreateLoanAppraisalBackup(Loans."Loan No.");
             end;
 
         }
@@ -1365,95 +1370,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
     labels
     {
     }
-    procedure CreateLoanAppraisalBackup(LoanNo: Code[20])
-    var
-        LoanRec: Record "Loan Appraisal";
-    begin
 
-
-        if LoanRec.Get(LoanNo) then begin
-            // Check if the loan is already posted
-            if Loans.Posted = true then
-                exit; // Skip deletion and insertion if loan is posted
-
-            // If not posted, delete the record
-            LoanRec.Delete();
-        end;
-
-        // Insert the new record
-        LoanRec.Init();
-        LoanRec."Loan No." := LoanNo;
-        LoanRec."Member No" := Loans."Member No.";
-        LoanRec."Member Name" := Loans."Member Name";
-        LoanRec."Staff No" := Loans."Staff No";
-        LoanRec."Loan Product Type" := LoansProductTyp;
-        LoanRec."Loan Product Name" := Loans."Loan Product Type Name";
-        LoanRec."Application Date" := Loans."Application Date";
-        LoanRec."Requested Amount" := Loans."Requested Amount";
-        LoanRec."Approved Amount" := Loans."Approved Amount";
-        LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        LoanRec."Months to Retire" := MonthsToRetire;
-        LoanRec."No. of Gurantors" := NofGuar;
-        LoanRec."Employer Code" := Loans."Employer Code";
-        // LoanRec."Employer Name" := EmployerName;
-        LoanRec."Existing Loans" := TotalLoanBal;
-        LoanRec.Installments := Loans.Installments;
-        LoanRec."Member Deposits" := MemberDeposits;
-        LoanRec."Share Capital" := ShareCapital;
-        // LoanRec.Dimension := Dim1;
-        //End of General
-
-        LoanRec."Deposit Boosting" := Loans."Loans - Deposit Purchase";
-        // LoanRec."Current Contribution" := NewContr;
-        LoanRec."Deposit Mult" := QualificationOnDeposits;
-        LoanRec."Processing Fee" := TotalProcessingAmt;
-        LoanRec."Dep Purchase Comm" := DepPurchaseComm;
-        LoanRec."Dep Purchase Excise" := DepPurchaseCommExc;
-        LoanRec."Share Boost" := Loans."Share Boosted Amount";
-        LoanRec."Offset Total" := OffsetTotal;
-        LoanRec."Top-up Comm" := TopUpComms;
-        LoanRec."Top-Excise" := TopUpCommExc;
-        LoanRec."Existing Loans" := TotalLoanBal;
-        LoanRec."Deposit multiplier" := Mult;
-        LoanRec."Qualification on Guarantors" := SecurityTotal;
-        LoanRec."Possible Deposit Boost" := PossibleBoost;
-        // LoanRec."No. of Gurantors" := CountNo;
-        LoanRec."Other Clearence" := TExternalEffects;
-        LoanRec."Other Clearence Fee" := ExternalCharges;
-        LoanRec."Other Clearence Duty" := TotalExciseDuty;
-        LoanRec."Total excise Duty" := ExerciseDuty;
-        //end of deductions
-
-        LoanRec."Basic Income" := TotalBasic;
-        LoanRec.Earnings := TrEarni;
-        LoanRec.Deductions := TDeductions;
-        // LoanRec."1/3 of Basic" := AthirdAmt;
-        LoanRec."1/3 Display" := AthirdDisplay;
-        LoanRec."Net Salary" := NetSalary;
-        LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
-        LoanRec."Qualification on Deposits" := qualificationOnDeposits;
-        LoanRec."Qualification on Salary" := NetOnSalary;
-        LoanRec."STO Amount" := STOAmount;
-        LoanRec."Fosa Commitments" := TotalRepay;
-        LoanRec."Fosa Minimum" := MinFosaBal;
-        LoanRec."Amount to Loan" := TotaLFosaIn;
-        LoanRec."Upfront int" := UpfrontInterest;
-        LoanRec."TopUp Excise" := TopUpCommExc;
-        //end of salar details
-
-        LoanRec."External Effects" := TotalExteralRec;
-        LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
-        // LoanRec.Interest := LInterest;
-        // LoanRec.Principle := LPrincipal;
-        // LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        // LoanRec."Cleared Loans Installment" := TopupRepayments;
-        // // LoanRec."Adjusted Net" := AdjustedNet;
-        // LoanRec."New Repayment" := Loans.Repayment;
-        LoanRec."Total Topup Deduction" := Topupdeducted;
-        LoanRec."Take Home Amount" := NetTakeHome;
-        // end of repayment
-        LoanRec.Insert();
-    end;
 
     trigger OnPostReport()
     var

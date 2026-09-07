@@ -174,7 +174,7 @@ table 52187018 "SMS Alerts Header"
         }
         field(24; "Employer Code"; Code[20])
         {
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            TableRelation = Customer WHERE("Account Type" = CONST("employer Code"));
         }
         field(25; Period; date)
         {

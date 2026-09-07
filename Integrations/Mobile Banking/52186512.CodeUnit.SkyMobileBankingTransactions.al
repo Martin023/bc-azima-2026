@@ -3051,6 +3051,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
         loansProcess: Codeunit "Loans Process";
         SASRAarr: Decimal;
         AsAtDate: Date;
+        ChargeStmtDesc: Text[100];
+        LineChargeAmt: Decimal;
     begin
         Loans.get(LoanNo);
         Members.get(Loans."Member No.");
@@ -3171,11 +3173,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                         if MobileTransLines."Recover Excise Duty" then
                             SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                    end until MobileTransLines.Next = 0;
 
-                    if TotalCharges > 0 then begin
-                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, MobileTransTypes.Description, AccType::"G/L Account", '', TotalCharges, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                    end;
+                        // Itemise the member-statement (savings) side: one line per configured charge
+                        ChargeStmtDesc := MobileTransLines.Description;
+                        if ChargeStmtDesc = '' then
+                            ChargeStmtDesc := MobileTransTypes.Description;
+                        LineChargeAmt := GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
+                        if LineChargeAmt <> 0 then
+                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                    end until MobileTransLines.Next = 0;
                 end;
             end;
         end;
@@ -3517,6 +3523,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
         LoansToBeCleared: Record "Loans Top up";
         LnTopUp: Record Loans;
+        ChargeStmtDesc: Text[100];
+        LineChargeAmt: Decimal;
     begin
         Loans.get(LoanNo);
         Members.get(Loans."Member No.");
@@ -3582,11 +3590,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                             if MobileTransLines."Recover Excise Duty" then
                                 SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                        end until MobileTransLines.Next = 0;
 
-                        if TotalCharges > 0 then begin
-                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, MobileTransTypes.Description, AccType::"G/L Account", '', TotalCharges, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                        end;
+                            // Itemise the member-statement (savings) side: one line per configured charge
+                            ChargeStmtDesc := MobileTransLines.Description;
+                            if ChargeStmtDesc = '' then
+                                ChargeStmtDesc := MobileTransTypes.Description;
+                            LineChargeAmt := GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
+                            if LineChargeAmt <> 0 then
+                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                        end until MobileTransLines.Next = 0;
                     end;
                 end;
             end;

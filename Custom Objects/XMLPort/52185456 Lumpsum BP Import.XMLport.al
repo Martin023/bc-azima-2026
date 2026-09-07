@@ -29,11 +29,6 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                // fieldelement(Remarks; "Checkoff Buffer"."Remarks")
-                // {
-                //     FieldValidate = yes;
-                // }
-
 
                 trigger OnAfterInitRecord()
                 begin
@@ -41,13 +36,6 @@ XmlPort 52185556 "Lumpsum BP"
                     "Checkoff Buffer"."Upload Response" := Response;
                 end;
 
-                trigger OnBeforeInsertRecord()
-                begin
-                    if "Checkoff Buffer".Amount <= 0 then
-                        Error('Amount must be greater than zero.');
-                    "Checkoff Buffer".TestField("Employer Code");
-                    "Checkoff Buffer".TestField("Upload No.");
-                end;
             }
         }
     }
@@ -105,9 +93,6 @@ XmlPort 52185556 "Lumpsum BP"
     end;
 
     var
-        // [RunOnClient]
-        // Window: dotnet Interaction;
-        MyComment: Text;
         Response: Integer;
         Error001: label 'Invalid option, please respond with 2,3 OR 4.';
         Text01: label 'Upload done successfully';

@@ -177,14 +177,14 @@ table 52185877 "Receipt Line"
                 RecLine: record "Receipt Line";
                 RecHeader: record "Receipts Header";
             begin
-                IF RecHeader.get(Rec.No) then begin
-                    RecLine.reset();
-                    RecLine.SetRange(No, RecHeader."No.");
-                    RecLine.SetRange("Account Type", RecLine."Account Type"::Customer);
-                    IF RecLine.findset then
-                        If RecLine.count > 1 then ERROR('You have already Selected a customer');
+                // IF RecHeader.get(Rec.No) then begin
+                //     RecLine.reset();
+                //     RecLine.SetRange(No, RecHeader."No.");
+                //     RecLine.SetRange("Account Type", RecLine."Account Type"::Customer);
+                //     IF RecLine.findset then
+                //         If RecLine.count > 1 then ERROR('You have already Selected a customer');
 
-                end;
+                // end;
             end;
         }
         field(13; "Account No."; Code[20])

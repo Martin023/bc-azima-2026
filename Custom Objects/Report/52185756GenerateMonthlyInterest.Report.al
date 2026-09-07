@@ -77,71 +77,77 @@ Report 52185756 "Generate Monthly Interest"
                                                     Members.SetFilter(Status, '<>%1', Members.Status::Deceased);
 
                                                     if Members.Find('-') then begin
+                                                        if LoansRec."Loan Rescheduled" then begin
+                                                            if LoansRec."New Interest Rate" > 0 then
+                                                                LoansRec.Interest := "New Interest Rate";
+                                                        end;
 
-                                                        if LoansRec."Interest Calculation Method" = LoansRec."Interest Calculation Method"::"Straight Line" then
-                                                            IntCharged := LoansRec."Approved Amount" * ((LoansRec.Interest) / 1200) * 1
-                                                        else
-                                                            IntCharged := LoansRec."Outstanding Balance" * ((LoansRec.Interest) / 1200) * 1;
+                                                        if LoansRec.Interest > 0 then begin
+                                                            if LoansRec."Interest Calculation Method" = LoansRec."Interest Calculation Method"::"Straight Line" then
+                                                                IntCharged := LoansRec."Approved Amount" * ((LoansRec.Interest) / 1200) * 1
+                                                            else
+                                                                IntCharged := LoansRec."Outstanding Balance" * ((LoansRec.Interest) / 1200) * 1;
 
-                                                        if IntCharged > 0 then begin
-                                                            Dim1 := LoansRec."Global Dimension 1 Code";
-                                                            Dim2 := LoansRec."Global Dimension 2 Code";
+                                                            if IntCharged > 0 then begin
+                                                                Dim1 := LoansRec."Global Dimension 1 Code";
+                                                                Dim2 := LoansRec."Global Dimension 2 Code";
 
-                                                            // if (Dim2 = '')  then begin
-                                                            //     UserSetup.Reset;
-                                                            //     UserSetup.SetRange("User ID", LoansRec."Posted By");
-                                                            //     if UserSetup.FindFirst then begin
-                                                            //         Dim1 := UserSetup."Global Dimension 1 Code";
-                                                            //         Dim2 := UserSetup."Global Dimension 2 Code";
-                                                            //     end;
-                                                            // end;
-                                                            LoansRecInterest.Reset();
-                                                            LoansRecInterest.SetRange("Loan No.", LoansRec."Loan No.");
-                                                            //LoansRecInterest.SetRange(LoansRecInterest."Interest Date", "Interest Header"."Posting Date");
-                                                            LoansRecInterest.setrange(No, "Interest Header"."No.");
+                                                                // if (Dim2 = '')  then begin
+                                                                //     UserSetup.Reset;
+                                                                //     UserSetup.SetRange("User ID", LoansRec."Posted By");
+                                                                //     if UserSetup.FindFirst then begin
+                                                                //         Dim1 := UserSetup."Global Dimension 1 Code";
+                                                                //         Dim2 := UserSetup."Global Dimension 2 Code";
+                                                                //     end;
+                                                                // end;
+                                                                LoansRecInterest.Reset();
+                                                                LoansRecInterest.SetRange("Loan No.", LoansRec."Loan No.");
+                                                                //LoansRecInterest.SetRange(LoansRecInterest."Interest Date", "Interest Header"."Posting Date");
+                                                                LoansRecInterest.setrange(No, "Interest Header"."No.");
 
-                                                            if not LoansRecInterest.Find('-') then begin
-                                                                LoansRecInterest.Init;
-                                                                LoansRecInterest.No := "Interest Header"."No.";
-                                                                LoansRecInterest."Entry No" := LoansRecInterest."Entry No" + 1;
-                                                                LoansRecInterest."Loan No." := LoansRec."Loan No.";
-                                                                LoansRecInterest."Account No" := LoansRec."Loan Account";
-                                                                LoansRecInterest."Emp code" := LoansRec."Employer Code";
-                                                                LoansRecInterest."Issued Date" := LoansRec."Disbursement Date";
-                                                                LoansRecInterest."Loan Product type" := LoansRec."Loan Product Type";
-                                                                LoansRecInterest."Interest Date" := "Interest Header"."Interest Due Date";
-                                                                LoansRecInterest."Issued Date" := LoansRec."Disbursement Date";
-                                                                LoansRecInterest.Posted := false;
-                                                                LoansRecInterest."Staff No" := LoansRec."Staff No";
-                                                                Members.CalcFields("Employer Name");
-                                                                LoansRecInterest."Employer Name" := Members."Employer Name";
-                                                                // Grace Period Interest Handling
-                                                                if Format(ProductFactory."Grace Period - Interest") <> '' then begin
-                                                                    if CalcDate(ProductFactory."Grace Period - Interest", LoansRec."Disbursement Date") <= PostingDate then
-                                                                        LoansRecInterest."Interest Bill" := IntCharged
-                                                                    else
-                                                                        LoansRecInterest."Interest Bill" := 0;
-                                                                end else begin
-                                                                    LoansRecInterest."Interest Bill" := IntCharged;
+                                                                if not LoansRecInterest.Find('-') then begin
+                                                                    LoansRecInterest.Init;
+                                                                    LoansRecInterest.No := "Interest Header"."No.";
+                                                                    LoansRecInterest."Entry No" := LoansRecInterest."Entry No" + 1;
+                                                                    LoansRecInterest."Loan No." := LoansRec."Loan No.";
+                                                                    LoansRecInterest."Account No" := LoansRec."Loan Account";
+                                                                    LoansRecInterest."Emp code" := LoansRec."Employer Code";
+                                                                    LoansRecInterest."Issued Date" := LoansRec."Disbursement Date";
+                                                                    LoansRecInterest."Loan Product type" := LoansRec."Loan Product Type";
+                                                                    LoansRecInterest."Interest Date" := "Interest Header"."Interest Due Date";
+                                                                    LoansRecInterest."Issued Date" := LoansRec."Disbursement Date";
+                                                                    LoansRecInterest.Posted := false;
+                                                                    LoansRecInterest."Staff No" := LoansRec."Staff No";
+                                                                    Members.CalcFields("Employer Name");
+                                                                    LoansRecInterest."Employer Name" := Members."Employer Name";
+                                                                    // Grace Period Interest Handling
+                                                                    if Format(ProductFactory."Grace Period - Interest") <> '' then begin
+                                                                        if CalcDate(ProductFactory."Grace Period - Interest", LoansRec."Disbursement Date") <= PostingDate then
+                                                                            LoansRecInterest."Interest Bill" := IntCharged
+                                                                        else
+                                                                            LoansRecInterest."Interest Bill" := 0;
+                                                                    end else begin
+                                                                        LoansRecInterest."Interest Bill" := IntCharged;
+                                                                    end;
+
+                                                                    LoansRecInterest."Interest Amount" := IntCharged;
+                                                                    LoansRecInterest."Interest Rate" := LoansRec.Interest;
+                                                                    LoansRecInterest."Member No" := LoansRec."Member No.";
+                                                                    LoansRecInterest."Outstanding Balance" := LoansRec."Outstanding Balance";
+                                                                    LoansRecInterest."Outstanding Interest" := LoansRec."Outstanding Interest";
+                                                                    LoansRecInterest.Status := Members.Status;
+                                                                    LoansRecInterest.Blocked := Members.Blocked;
+                                                                    LoansRecInterest."Account Type" := LoansRecInterest."account type"::Credit;
+                                                                    LoansRecInterest."Account No" := LoansRec."Loan Account";
+                                                                    LoansRecInterest."Shortcut Dimension 1 Code" := Dim1;
+                                                                    LoansRecInterest."Shortcut Dimension 2 Code" := Dim2;
+                                                                    LoansRecInterest."Monthly Repayment" := LoansRec.Repayment;
+                                                                    LoansRecInterest."Outstanding Balance" := LoansRec."Outstanding Balance";
+                                                                    LoansRecInterest."Outstanding Interest" := LoansRec."Outstanding Interest";
+
+                                                                    if LoansRecInterest."Interest Amount" > 0 then
+                                                                        LoansRecInterest.Insert;
                                                                 end;
-
-                                                                LoansRecInterest."Interest Amount" := IntCharged;
-                                                                LoansRecInterest."Interest Rate" := LoansRec.Interest;
-                                                                LoansRecInterest."Member No" := LoansRec."Member No.";
-                                                                LoansRecInterest."Outstanding Balance" := LoansRec."Outstanding Balance";
-                                                                LoansRecInterest."Outstanding Interest" := LoansRec."Outstanding Interest";
-                                                                LoansRecInterest.Status := Members.Status;
-                                                                LoansRecInterest.Blocked := Members.Blocked;
-                                                                LoansRecInterest."Account Type" := LoansRecInterest."account type"::Credit;
-                                                                LoansRecInterest."Account No" := LoansRec."Loan Account";
-                                                                LoansRecInterest."Shortcut Dimension 1 Code" := Dim1;
-                                                                LoansRecInterest."Shortcut Dimension 2 Code" := Dim2;
-                                                                LoansRecInterest."Monthly Repayment" := LoansRec.Repayment;
-                                                                LoansRecInterest."Outstanding Balance" := LoansRec."Outstanding Balance";
-                                                                LoansRecInterest."Outstanding Interest" := LoansRec."Outstanding Interest";
-
-                                                                if LoansRecInterest."Interest Amount" > 0 then
-                                                                    LoansRecInterest.Insert;
                                                             end;
                                                         end;
                                                     end;

@@ -3,6 +3,8 @@ XmlPort 52185500 "Import Telephone Nos"
 {
     Format = VariableText;
 
+    //Format => HeaderNo, MemberNo, Code, SMSMessages
+
     schema
     {
         textelement("<import_bulksms>")
@@ -31,6 +33,8 @@ XmlPort 52185500 "Import Telephone Nos"
                 }
             }
         }
+
+        //Format => HeaderNo, MemberNo, Code, SMSMessages
     }
 
     requestpage

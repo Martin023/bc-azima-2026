@@ -1,7 +1,6 @@
 table 52187099 "Loan Appraisal"
 {
     DataClassification = ToBeClassified;
-    DrillDownPageId = "Loan Appraisals";
 
     fields
     {

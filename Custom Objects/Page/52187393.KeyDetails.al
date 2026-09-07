@@ -5,7 +5,7 @@ page 52187393 "Key Details"
     PageType = List;
     SourceTable = "Office Keys List";
     UsageCategory = Lists;
-    CardPageId = "Key Creation Card";
+    // CardPageId = "Key Creation Card";
     DeleteAllowed = false;
     
     layout

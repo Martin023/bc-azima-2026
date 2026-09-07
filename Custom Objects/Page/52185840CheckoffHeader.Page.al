@@ -296,11 +296,14 @@ page 52185840 "Checkoff Header"
                 Image = ReOpen;
 
                 trigger OnAction()
+                var
+                    ApprovalsMgt: codeunit "Approvals Mgmt.";
                 begin
                     if Confirm('Are you sure you want to re-open this document?', false) = true then begin
                         Rec.TestField(Posted, false);
                         Rec.Status := Rec.Status::Open;
                         Rec.Modify;
+                        ApprovalsMgt.DeleteApprovalEntries(rec.RecordId);
                     end;
                 end;
             }
@@ -389,7 +392,7 @@ page 52185840 "Checkoff Header"
                         if rec.Posted = false then begin
                             PeriodicActy.NewPostCheckoff(Rec, true);
                             //Generate Mkey
-                            GenerateMkey();
+                            // GenerateMkey();
                         end else
                             Error(Txt0000);
                     end else

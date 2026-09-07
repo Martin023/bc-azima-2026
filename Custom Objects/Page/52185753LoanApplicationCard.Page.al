@@ -355,6 +355,10 @@ page 52185753 "Loan Application Card"
                         Rec.TestField(Posted, false);
                     end;
                 }
+                field("Appraiser Recommended Amount"; Rec."Appraiser Recommended Amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Recommended Amount"; Rec."Recommended Amount")
                 {
                     ApplicationArea = Basic, Suite;
@@ -836,6 +840,7 @@ page 52185753 "Loan Application Card"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+                Visible = rec.Status = Rec.status::Open;
 
                 trigger OnAction()
                 begin
@@ -930,6 +935,17 @@ page 52185753 "Loan Application Card"
                     end;
 
                 end;
+            }
+            action("Loan Appraisal Report H")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = "Report";
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Visible = rec.Status <> Rec.status::Open;
+                RunObject = Page "Loan Appraisal form viewer";
+                RunPageLink = "Loan No" = FIELD("Loan No.");
             }
 
             action("Loan Top Ups")
@@ -2371,6 +2387,23 @@ page 52185753 "Loan Application Card"
         }
     }
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    var
+        Temp: record "Banking User Template";
+        Loans: record Loans;
+    begin
+        Temp.Get(UserId);
+        Loans.Reset;
+        Loans.SetRange(Loans."Captured By", UserId);
+        Loans.SetRange(Status, Loans.Status::Open);
+        Loans.SetRange(Loans.Posted, false);
+        if Loans.findset() then begin
+            if Loans.Count >= Temp."No of Open Transactions" then begin
+                Error('There are still some pending applications that you have created. Please reuse an open document.');
+            end;
+        end;
+    end;
+
     trigger OnAfterGetCurrRecord()
     begin
         StatusControl;
@@ -2901,108 +2934,37 @@ page 52185753 "Loan Application Card"
         loanappraisalreport: record "Loan Appraisal History";
         FieldOutStream: OutStream;
     begin
-        FileName := 'LoanAppraisalForm.pdf';
         Loans.Reset;
         Loans.SetRange("Loan No.", LoanNumber);
         if Loans.FindFirst then begin
 
-            // TempBlob.CreateOutStream(BlobOutStream);
-            // RecRef.GetTable(Loans);
-            // Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
+            TempBlob.CreateOutStream(BlobOutStream);
+            RecRef.GetTable(Loans);
+            Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
 
-            // TempBlob.CreateInStream(BlobInStream);
-            // FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
+            // delete existing
+            LoanAppraisalReport.reset();
+            LoanAppraisalReport.setrange("Loan No", LoanNumber);
+            LoanAppraisalReport.deleteall();
 
-            // if FileContentsB64 <> '' then begin
-            //     LoanAppraisalReport.Reset();
-            //     LoanAppraisalReport.SetRange("Loan No", LoanNumber);
-            //     LoanAppraisalReport.DeleteAll();
+            // Insert record first
+            LoanAppraisalReport.Init();
+            LoanAppraisalReport."Loan No" := LoanNumber;
+            LoanAppraisalReport.Insert();
 
-            //     LoanAppraisalReport.Init();
-            //     LoanAppraisalReport."Loan No" := LoanNumber;
-            //     LoanAppraisalReport.Insert();   // insert the record first, without the blob
+            // Write into the BLOB field
+            LoanAppraisalReport."Appraisal form".CreateOutStream(FieldOutStream);
+            TempBlob.CreateInStream(BlobInStream);
+            CopyStream(FieldOutStream, BlobInStream);
 
-            //     TempBlob.CreateInStream(BlobInStream);   // fresh instream, since ToBase64 consumed the earlier one
-            //     LoanAppraisalReport."Appraisal form".CreateOutStream(FieldOutStream);
-            //     CopyStream(FieldOutStream, BlobInStream);
+            // Persist changes
+            LoanAppraisalReport.Modify();
 
-            //     LoanAppraisalReport.Modify();   // persist the blob write
-            // end;
-
-            // EDMS.Reset;
-            // EDMS.SetRange(Key, EDMS.Key::"Appraisal File");
-            // if EDMS.FindFirst then begin
-            //     url := EDMS."url path";
-            //     FilePath := url + 'appraisal' + Loans."Member No." + Loans."Loan No." + '.pdf';
-            //     if (Loans.Status = Loans.Status::Open) or (Loans.Status = Loans.Status::Pending) then begin
-            //         if Exists(FilePath) then Erase(FilePath);
-            //         REPORT.SaveAsPdf(ReportNumber, FilePath, Loans);
-            //     end;
-            // end;
-
-            //if (Loans.Status = Loans.Status::Open) or (Loans.Status = Loans.Status::Pending) then begin
-            // TempBlob.CreateOutStream(BlobOutStream, TextEncoding::UTF8);
-            // TempBlob.CreateInStream(BlobInStream);
-
-            // RecRef.GetTable(Loans);
-            // Report.SaveAs(ReportNumber, '', ReportFormat::Pdf, BlobOutStream, RecRef);
-
-
-            // CopyStream(BlobOutStream, BlobInStream);
-            // FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
-
-            // if FileContentsB64 <> '' then begin
-            //     CopyStream(BlobOutStream, BlobInStream);
-            //     //Delete Existing report
-            //     loanappraisalreport.reset();
-            //     loanappraisalreport.setrange("Loan No", LoanNumber);
-            //     if loanappraisalreport.FindFirst() then
-            //         loanappraisalreport.deleteall();
-
-            //     loanappraisalreport.Init();
-            //     loanappraisalreport."Loan No" := LoanNumber;
-            //     loanappraisalreport."Appraisal form".CreateOutstream(BlobOutStream);
-            //     loanappraisalreport.insert();
-            // end;
-
-            //     // ApplicantMember.Reset;
-            //     // ApplicantMember.SetRange("No.", Rec."Member No.");
-
-            //     // if ApplicantMember.FindFirst then begin
-            //     //     if ApplicantMember."Primary Identification Type" = ApplicantMember."Primary Identification Type"::"ID Number" then begin
-            //     //         IDNumber := ApplicantMember."Primary Identification";
-            //     //     end else
-            //     //         if ApplicantMember."Secondary Identification Type" = ApplicantMember."Secondary Identification Type"::"ID Number" then begin
-            //     //             IDNumber := ApplicantMember."Secondary Identification";
-            //     //         end else begin
-            //     //             IDNumber := ApplicantMember."Primary Identification";
-            //     //         end;
-
-            //     //     if ApplicantMember."Payroll/Staff No." <> '' then begin
-            //     //         PFNumber := ApplicantMember."Payroll/Staff No.";
-            //     //     end else begin
-            //     //         PFNumber := IDNumber;
-            //     //     end;
-
-            //     // EDMSFunctions.EDMSLoanFileUpload(
-            //     //   IDNumber,
-            //     //     ApplicantMember.Name,
-            //     //     Rec."Loan Product Type Name",
-            //     //     PfNumber,
-            //     //     ApplicantMember."No.",
-            //     //     Rec."Loan No.",
-            //     //     Rec."Loan No.",
-            //     //     FileName,
-            //     //     FileContentsB64,
-            //     //     false
-            //     // );
-            //     // Message('Appraisal form uploaded successfully to EDMS files');
-
-            //     // end;
-            // end
-            // else
-            //     Message('Appraisal form was not uploaded kindly check the file value');
-            // end;
+            // Verify
+            LoanAppraisalReport."Appraisal form".CreateInStream(InStr);
+            FileContentsB64 := Base64Convert.ToBase64(InStr);
+            if FileContentsB64 <> '' then
+                Message('Appraisal report saved.');
         end;
     end;
 }

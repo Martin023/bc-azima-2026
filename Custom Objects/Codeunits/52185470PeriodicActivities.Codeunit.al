@@ -2766,7 +2766,7 @@ Codeunit 52185470 "Periodic Activities"
                                     Loans.SetCurrentKey("Disbursement Date");
                                     Loans.SetAscending("Disbursement Date", true);
                                     loans.SetFilter("Disbursement Date", '<=%1', checkoffHeader."Loan Cutoff Date");
-                                    Loans.CalcFields("Total Loan Balance");
+                                    Loans.SetAutoCalcFields("Total Loan Balance");
                                     //loans.SetRange(pa);
                                     // Loans.SetRange(Posted, false);
                                     Loans.SetFilter("Total Loan Balance", '>0');
@@ -2815,8 +2815,16 @@ Codeunit 52185470 "Periodic Activities"
                                                     CheckoffLines.Amount := remAmt;
                                                     remAmt := 0;
                                                 end
-                                                else
+                                                else begin
                                                     remAmt -= CheckoffLines.Amount;
+                                                    if RemAmt > 0 then begin
+                                                        if Loans."Total Loan Balance" >= (remAmt + CheckoffLines.Amount) then begin
+                                                            CheckoffLines.Amount += RemAmt;
+                                                            RemAmt := 0;
+                                                        end;
+                                                    end;
+                                                end;
+
                                                 // CheckoffLines.Amount := CheckoffBuffer2.Amount + CheckoffBuffer2.Interest;
                                                 CheckoffLines."Account No." := Loans."Loan Account";
                                                 //IF CheckoffBuffer2."Account No"<>'' THEN
@@ -3258,7 +3266,7 @@ Codeunit 52185470 "Periodic Activities"
                             end;
                             DepositAccountPost := UnallocatedAccount;
                             CheckoffLines."Account No." := DepositAccountPost;
-                            TransDescriptions := CopyStr(('Err.  ATS' + CheckoffLines."Product Code" + ' ' + TransDescription), 1, 50);
+                            TransDescriptions := CopyStr(('Acc no missing to unall' + CheckoffLines."Product Code" + ' ' + TransDescription), 1, 50);
                         end;
                         AcctType := Accttype::Savings;
                         TransType := Transtype::" ";
@@ -3381,251 +3389,252 @@ Codeunit 52185470 "Periodic Activities"
                             end;
                         end;
                     end;
-                    //Bulk Postings
-                end else if CheckoffHeader."CheckOff Type" = CheckoffHeader."CheckOff Type"::Lumpsum then begin
-                    Pfact.reset;
-                    Pfact.SetRange("Product Class Type", Pfact."Product Class Type"::Loan);
-                    Pfact.SetCurrentKey("Recovery Priority");
-                    // Pfact.SetRange(status, Pfact.status::Active);
-                    if Pfact.FindSet() then begin
-                        repeat
-                            Loans.RESET;
-                            loans.setrange("Loan Product Type", Pfact."Product ID");
-                            Loans.SETCURRENTKEY(Loans."Recovery Priority");
-                            Loans.SETFILTER(Loans."Outstanding Balance", '>0');
-                            Loans.SETRANGE(Loans."Member No.", CheckoffLines."Member No.");
-                            Loans.SETRANGE(Loans."Recovery Mode", Loans."Recovery Mode"::Checkoff);
-                            IF Loans.FindSet() THEN BEGIN
-                                REPEAT
-                                    //Capitalize Interest
-                                    LoansProcess.CapitalizeDailyInterest(loans."Loan No.");
-                                    //***Repayment Methods other than Reducing Flat 
-                                    IF Loans."Interest Calculation Method" <> Loans."Interest Calculation Method"::"Reducing Flat" THEN BEGIN
-                                        IF RunBal > 0 THEN BEGIN
-                                            Loans.CALCFIELDS(Loans."Outstanding Interest", Loans."Outstanding Balance", Loans."Daily Interest");
-                                            RecoveredAmount := 0;
-                                            if BulkPosting = true then begin
-                                                RecoveredAmount := ComputeLoanJVentries(Loans."Loan No.", Jtemplate, JBatch, CheckoffHeader."Document No.", CheckoffHeader."Posting Date", TransType::Repayment);
-                                                Loans."Outstanding Balance" := Loans."Outstanding Balance" - RecoveredAmount;
-                                                Loans."Outstanding Interest" := Loans."Outstanding Interest" - ComputeLoanJVentries(Loans."Loan No.", Jtemplate, JBatch, CheckoffHeader."Document No.", CheckoffHeader."Posting Date", TransType::"interest Paid");
-                                            end;
-                                            IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN
-                                                Amortised := Loans.Repayment - ROUND(((Loans."Outstanding Balance" * (Loans.Interest) / 1200)), 0.01, '>')
-                                            ELSE
-                                                Recovery := Loans.Repayment;
-
-                                            IF (Loans."Outstanding Interest" + Loans."Daily Interest") > 0 THEN
-                                                Interest := (Loans."Outstanding Interest" + Loans."Daily Interest")
-                                            ELSE
-                                                Interest := 0;
-                                            //Interest *****************
-
-                                            AcctType := AcctType::Credit;
-                                            AccNo := Loans."Loan Account";
-                                            TransType := TransType::"Interest Paid";
-                                            BalAccType := BalAccType::"G/L Account";
-                                            BalAccNo := '';
-                                            Amt := 0;
-                                            LineNo := LineNo + 10000;
-                                            IF Interest > 0 THEN BEGIN
-                                                IF RunBal > Interest THEN BEGIN
-                                                    IF Interest > (Loans."Outstanding Interest" + Loans."Daily Interest") THEN
-                                                        Amt := ROUND((Loans."Outstanding Interest" + Loans."Daily Interest"), 0.01, '=') * -1
-                                                    ELSE
-                                                        Amt := ROUND(Interest, 0.01, '=') * -1;
-                                                END ELSE
-                                                    Amt := RunBal * -1;
-                                            END;
-                                            IF Amt <> 0 THEN
-                                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
-                                                Txt0001, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
-                                                BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                            RunBal := RunBal - ABS(Amt);
-
-                                            //Repayment**************
-                                            Amt := 0;
-                                            IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
-                                                IF Amortised > 0 THEN BEGIN
-                                                    IF RunBal > Amortised THEN BEGIN
-                                                        IF Amortised > Loans."Outstanding Balance" THEN
-                                                            Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
-                                                        ELSE
-                                                            Amt := ROUND(Amortised, 0.01, '=') * -1;
-                                                    END ELSE
-                                                        Amt := RunBal * -1;
-                                                END;
-                                            END ELSE BEGIN
-                                                IF Recovery > 0 THEN BEGIN
-                                                    IF RunBal > Recovery THEN BEGIN
-                                                        IF Recovery > Loans."Outstanding Balance" THEN
-                                                            Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
-                                                        ELSE
-                                                            Amt := ROUND(Recovery, 0.01, '=') * -1;
-                                                    END ELSE
-                                                        Amt := RunBal * -1;
-                                                END;
-
-                                            END;
-
-                                            AcctType := AcctType::Credit;
-                                            TransType := TransType::Repayment;
-                                            BalAccNo := '';
-                                            LineNo := LineNo + 10000;
-
-                                            IF Amt <> 0 THEN
-                                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
-                                                Txt0000, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
-                                               '', Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                                            RunBal := RunBal - ABS(Amt);
-                                        END;////*******************************End of other Repayment methods other than Reducing Flat
-                                    END ELSE BEGIN
-                                        IF RunBal > 0 THEN BEGIN
-                                            Loans.CALCFIELDS(Loans."Outstanding Interest", Loans."Outstanding Balance", Loans."Daily Interest");
-                                            IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" THEN
-                                                Amortised := (Loans."Approved Amount" / Loans.Installments) ////////-Loans."Outstanding Balance"*Loans.Interest/1200
-                                            ELSE
-                                                Recovery := (Loans."Approved Amount" / Loans.Installments);//Loans.Repayment;
-
-                                            IF (Loans."Outstanding Interest" + Loans."Daily Interest") > 0 THEN
-                                                Interest := (Loans.Repayment) - (Loans."Approved Amount" / Loans.Installments)
-                                            ELSE
-                                                Interest := 0;
-                                            //Loans."Outstanding Balance"*Loans.Interest/1200;
-
-                                            //Interest *****************
-
-                                            AcctType := AcctType::Credit;
-                                            AccNo := Loans."Loan Account";
-                                            TransType := TransType::"Interest Paid";
-                                            BalAccType := BalAccType::"G/L Account";
-                                            BalAccNo := '';
-                                            Amt := 0;
-                                            LineNo := LineNo + 10000;
-                                            IF Interest > 0 THEN BEGIN
-                                                IF RunBal > Interest THEN BEGIN
-                                                    IF Interest > (Loans."Outstanding Interest" + Loans."Daily Interest") THEN
-                                                        Amt := ROUND((Loans."Outstanding Interest" + Loans."Daily Interest"), 0.01, '=') * -1
-                                                    ELSE
-                                                        Amt := ROUND(Interest, 0.01, '=') * -1;
-                                                END;
-                                            END;
-                                            IF Amt <> 0 THEN
-                                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
-                                                Txt0001, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
-                                                BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                            RunBal := RunBal - ABS(Amt);
-
-                                            //Repayment**************
-                                            Amt := 0;
-                                            IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
-                                                IF Amortised > 0 THEN BEGIN
-                                                    IF RunBal > Amortised THEN BEGIN
-                                                        IF Amortised > Loans."Outstanding Balance" THEN
-                                                            Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
-                                                        ELSE
-                                                            Amt := ROUND(Amortised, 0.01, '=') * -1;
-                                                    END;
-                                                END;
-                                            END ELSE BEGIN
-                                                IF Recovery > 0 THEN BEGIN
-                                                    IF RunBal > Recovery THEN BEGIN
-                                                        IF Recovery > Loans."Outstanding Balance" THEN
-                                                            Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
-                                                        ELSE
-                                                            Amt := ROUND(Recovery, 0.01, '=') * -1;
-                                                    END;
-                                                END;
-                                            END;
-                                            AcctType := AcctType::Credit;
-                                            TransType := TransType::Repayment;
-                                            LineNo := LineNo + 10000;
-                                            BalAccNo := '';
-
-                                            IF Amt <> 0 THEN
-                                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
-                                                Txt0000, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
-                                                '', Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                                            RunBal := RunBal - ABS(Amt);
-
-                                        END;
-                                    END;
-                                UNTIL Loans.NEXT = 0;
-
-                            END;
-                        until Pfact.next = 0;
-                    end;
-                    //Savings Priority
-                    IF RunBal > 0 THEN BEGIN
-                        Pfact.reset;
-                        Pfact.SetRange("Product Class Type", Pfact."Product Class Type"::Savings);
-                        Pfact.SetCurrentKey("Recovery Priority");
-                        // Pfact.SetRange(status, Pfact.status::Active);
-                        if Pfact.FindSet() then begin
-                            repeat
-                                SavingsAccounts.RESET;
-                                SavingsAccounts.SetRange("Product Type", Pfact."Product ID");
-                                SavingsAccounts.SETRANGE(SavingsAccounts."Member No.", CheckoffLines."Member No.");
-                                SavingsAccounts.SetFilter("Product Category", '<>%1', SavingsAccounts."Product Category"::"Entrance Fee");
-                                IF SavingsAccounts.FindSet() THEN BEGIN
-                                    REPEAT
-                                        IF (SavingsAccounts."Monthly Contribution" > 0) or (Pfact."Minimum Contribution" > 0) THEN BEGIN
-
-                                            AcctType := AcctType::Savings;
-                                            TransType := TransType::" ";
-                                            LineNo := LineNo + 10000;
-                                            BalAccNo := '';
-                                            if SavingsAccounts."Monthly Contribution" < Pfact."Minimum Contribution" then
-                                                SavingsAccounts."Monthly Contribution" := Pfact."Minimum Contribution";
-                                            if SavingsAccounts."Monthly Contribution" < CUstomCuesCU.Prorata(SavingsAccounts."Member No.", '1') then
-                                                SavingsAccounts."Monthly Contribution" := CUstomCuesCU.Prorata(SavingsAccounts."Member No.", '1');
-
-                                            IF RunBal > SavingsAccounts."Monthly Contribution" THEN
-                                                Amt := SavingsAccounts."Monthly Contribution" * -1
-                                            ELSE
-                                                Amt := RunBal * -1;
-
-                                            IF Amt <> 0 THEN
-                                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
-                                                CheckoffHeader.description, Amt, SavingsAccounts."No.", CheckoffHeader."Posting Date", BalAccType,
-                                                BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                                            RunBal := RunBal - ABS(Amt);
-                                        END;
-                                    UNTIL SavingsAccounts.NEXT = 0;
-                                END;
-                            until Pfact.Next = 0;
-                        end;
-                    END;
-                    //End of Savings Priority
-                    //Excess to Unalocated
-                    IF RunBal > 0 THEN BEGIN
-                        UnallocatedAccount := '';
-                        SavingsAccounts.Reset;
-                        SavingsAccounts.SetRange(SavingsAccounts."Member No.", CheckoffLines."Member No.");
-                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."product category"::"Unallocated Fund");
-                        if SavingsAccounts.Find('-') then begin
-                            UnallocatedAccount := SavingsAccounts."No.";
-                        end else begin
-                            Pfact.reset;
-                            Pfact.SetRange("Product Category", Pfact."Product Category"::"Unallocated Fund");
-                            Pfact.SetRange(status, Pfact.status::Active);
-                            if Pfact.find('-') then begin
-                                MembersII.Get(CheckoffLines."Member No.");
-                                UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", MembersII."Global Dimension 1 Code", MembersII."No.");
-                                MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, MembersII."No.", Pfact."Product ID");
-                            end;
-                        end;
-                        AcctType := Accttype::Savings;
-                        LineNo := LineNo + 10000;
-
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
-                          Txt0003, RunBal * -1, UnallocatedAccount, CheckoffHeader."Posting Date", BalAccType,
-                          BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                        //End of excess to unalocated
-
-                    end;
                 end;
+                //Bulk Postings
+                // end else if CheckoffHeader."CheckOff Type" = CheckoffHeader."CheckOff Type"::Lumpsum then begin
+                //     Pfact.reset;
+                //     Pfact.SetRange("Product Class Type", Pfact."Product Class Type"::Loan);
+                //     Pfact.SetCurrentKey("Recovery Priority");
+                //     // Pfact.SetRange(status, Pfact.status::Active);
+                //     if Pfact.FindSet() then begin
+                //         repeat
+                //             Loans.RESET;
+                //             loans.setrange("Loan Product Type", Pfact."Product ID");
+                //             Loans.SETCURRENTKEY(Loans."Recovery Priority");
+                //             Loans.SETFILTER(Loans."Outstanding Balance", '>0');
+                //             Loans.SETRANGE(Loans."Member No.", CheckoffLines."Member No.");
+                //             Loans.SETRANGE(Loans."Recovery Mode", Loans."Recovery Mode"::Checkoff);
+                //             IF Loans.FindSet() THEN BEGIN
+                //                 REPEAT
+                //                     //Capitalize Interest
+                //                     LoansProcess.CapitalizeDailyInterest(loans."Loan No.");
+                //                     //***Repayment Methods other than Reducing Flat 
+                //                     IF Loans."Interest Calculation Method" <> Loans."Interest Calculation Method"::"Reducing Flat" THEN BEGIN
+                //                         IF RunBal > 0 THEN BEGIN
+                //                             Loans.CALCFIELDS(Loans."Outstanding Interest", Loans."Outstanding Balance", Loans."Daily Interest");
+                //                             RecoveredAmount := 0;
+                //                             if BulkPosting = true then begin
+                //                                 RecoveredAmount := ComputeLoanJVentries(Loans."Loan No.", Jtemplate, JBatch, CheckoffHeader."Document No.", CheckoffHeader."Posting Date", TransType::Repayment);
+                //                                 Loans."Outstanding Balance" := Loans."Outstanding Balance" - RecoveredAmount;
+                //                                 Loans."Outstanding Interest" := Loans."Outstanding Interest" - ComputeLoanJVentries(Loans."Loan No.", Jtemplate, JBatch, CheckoffHeader."Document No.", CheckoffHeader."Posting Date", TransType::"interest Paid");
+                //                             end;
+                //                             IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN
+                //                                 Amortised := Loans.Repayment - ROUND(((Loans."Outstanding Balance" * (Loans.Interest) / 1200)), 0.01, '>')
+                //                             ELSE
+                //                                 Recovery := Loans.Repayment;
+
+                //                             IF (Loans."Outstanding Interest" + Loans."Daily Interest") > 0 THEN
+                //                                 Interest := (Loans."Outstanding Interest" + Loans."Daily Interest")
+                //                             ELSE
+                //                                 Interest := 0;
+                //                             //Interest *****************
+
+                //                             AcctType := AcctType::Credit;
+                //                             AccNo := Loans."Loan Account";
+                //                             TransType := TransType::"Interest Paid";
+                //                             BalAccType := BalAccType::"G/L Account";
+                //                             BalAccNo := '';
+                //                             Amt := 0;
+                //                             LineNo := LineNo + 10000;
+                //                             IF Interest > 0 THEN BEGIN
+                //                                 IF RunBal > Interest THEN BEGIN
+                //                                     IF Interest > (Loans."Outstanding Interest" + Loans."Daily Interest") THEN
+                //                                         Amt := ROUND((Loans."Outstanding Interest" + Loans."Daily Interest"), 0.01, '=') * -1
+                //                                     ELSE
+                //                                         Amt := ROUND(Interest, 0.01, '=') * -1;
+                //                                 END ELSE
+                //                                     Amt := RunBal * -1;
+                //                             END;
+                //                             IF Amt <> 0 THEN
+                //                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
+                //                                 Txt0001, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
+                //                                 BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                //                             RunBal := RunBal - ABS(Amt);
+
+                //                             //Repayment**************
+                //                             Amt := 0;
+                //                             IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
+                //                                 IF Amortised > 0 THEN BEGIN
+                //                                     IF RunBal > Amortised THEN BEGIN
+                //                                         IF Amortised > Loans."Outstanding Balance" THEN
+                //                                             Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
+                //                                         ELSE
+                //                                             Amt := ROUND(Amortised, 0.01, '=') * -1;
+                //                                     END ELSE
+                //                                         Amt := RunBal * -1;
+                //                                 END;
+                //                             END ELSE BEGIN
+                //                                 IF Recovery > 0 THEN BEGIN
+                //                                     IF RunBal > Recovery THEN BEGIN
+                //                                         IF Recovery > Loans."Outstanding Balance" THEN
+                //                                             Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
+                //                                         ELSE
+                //                                             Amt := ROUND(Recovery, 0.01, '=') * -1;
+                //                                     END ELSE
+                //                                         Amt := RunBal * -1;
+                //                                 END;
+
+                //                             END;
+
+                //                             AcctType := AcctType::Credit;
+                //                             TransType := TransType::Repayment;
+                //                             BalAccNo := '';
+                //                             LineNo := LineNo + 10000;
+
+                //                             IF Amt <> 0 THEN
+                //                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
+                //                                 Txt0000, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
+                //                                '', Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //                             RunBal := RunBal - ABS(Amt);
+                //                         END;////*******************************End of other Repayment methods other than Reducing Flat
+                //                     END ELSE BEGIN
+                //                         IF RunBal > 0 THEN BEGIN
+                //                             Loans.CALCFIELDS(Loans."Outstanding Interest", Loans."Outstanding Balance", Loans."Daily Interest");
+                //                             IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" THEN
+                //                                 Amortised := (Loans."Approved Amount" / Loans.Installments) ////////-Loans."Outstanding Balance"*Loans.Interest/1200
+                //                             ELSE
+                //                                 Recovery := (Loans."Approved Amount" / Loans.Installments);//Loans.Repayment;
+
+                //                             IF (Loans."Outstanding Interest" + Loans."Daily Interest") > 0 THEN
+                //                                 Interest := (Loans.Repayment) - (Loans."Approved Amount" / Loans.Installments)
+                //                             ELSE
+                //                                 Interest := 0;
+                //                             //Loans."Outstanding Balance"*Loans.Interest/1200;
+
+                //                             //Interest *****************
+
+                //                             AcctType := AcctType::Credit;
+                //                             AccNo := Loans."Loan Account";
+                //                             TransType := TransType::"Interest Paid";
+                //                             BalAccType := BalAccType::"G/L Account";
+                //                             BalAccNo := '';
+                //                             Amt := 0;
+                //                             LineNo := LineNo + 10000;
+                //                             IF Interest > 0 THEN BEGIN
+                //                                 IF RunBal > Interest THEN BEGIN
+                //                                     IF Interest > (Loans."Outstanding Interest" + Loans."Daily Interest") THEN
+                //                                         Amt := ROUND((Loans."Outstanding Interest" + Loans."Daily Interest"), 0.01, '=') * -1
+                //                                     ELSE
+                //                                         Amt := ROUND(Interest, 0.01, '=') * -1;
+                //                                 END;
+                //                             END;
+                //                             IF Amt <> 0 THEN
+                //                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
+                //                                 Txt0001, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
+                //                                 BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                //                             RunBal := RunBal - ABS(Amt);
+
+                //                             //Repayment**************
+                //                             Amt := 0;
+                //                             IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
+                //                                 IF Amortised > 0 THEN BEGIN
+                //                                     IF RunBal > Amortised THEN BEGIN
+                //                                         IF Amortised > Loans."Outstanding Balance" THEN
+                //                                             Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
+                //                                         ELSE
+                //                                             Amt := ROUND(Amortised, 0.01, '=') * -1;
+                //                                     END;
+                //                                 END;
+                //                             END ELSE BEGIN
+                //                                 IF Recovery > 0 THEN BEGIN
+                //                                     IF RunBal > Recovery THEN BEGIN
+                //                                         IF Recovery > Loans."Outstanding Balance" THEN
+                //                                             Amt := (ROUND(Loans."Outstanding Balance", 0.01, '=') * -1)
+                //                                         ELSE
+                //                                             Amt := ROUND(Recovery, 0.01, '=') * -1;
+                //                                     END;
+                //                                 END;
+                //                             END;
+                //                             AcctType := AcctType::Credit;
+                //                             TransType := TransType::Repayment;
+                //                             LineNo := LineNo + 10000;
+                //                             BalAccNo := '';
+
+                //                             IF Amt <> 0 THEN
+                //                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
+                //                                 Txt0000, Amt, AccNo, CheckoffHeader."Posting Date", BalAccType,
+                //                                 '', Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //                             RunBal := RunBal - ABS(Amt);
+
+                //                         END;
+                //                     END;
+                //                 UNTIL Loans.NEXT = 0;
+
+                //             END;
+                //         until Pfact.next = 0;
+                //     end;
+                //     //Savings Priority
+                //     IF RunBal > 0 THEN BEGIN
+                //         Pfact.reset;
+                //         Pfact.SetRange("Product Class Type", Pfact."Product Class Type"::Savings);
+                //         Pfact.SetCurrentKey("Recovery Priority");
+                //         // Pfact.SetRange(status, Pfact.status::Active);
+                //         if Pfact.FindSet() then begin
+                //             repeat
+                //                 SavingsAccounts.RESET;
+                //                 SavingsAccounts.SetRange("Product Type", Pfact."Product ID");
+                //                 SavingsAccounts.SETRANGE(SavingsAccounts."Member No.", CheckoffLines."Member No.");
+                //                 SavingsAccounts.SetFilter("Product Category", '<>%1', SavingsAccounts."Product Category"::"Entrance Fee");
+                //                 IF SavingsAccounts.FindSet() THEN BEGIN
+                //                     REPEAT
+                //                         IF (SavingsAccounts."Monthly Contribution" > 0) or (Pfact."Minimum Contribution" > 0) THEN BEGIN
+
+                //                             AcctType := AcctType::Savings;
+                //                             TransType := TransType::" ";
+                //                             LineNo := LineNo + 10000;
+                //                             BalAccNo := '';
+                //                             if SavingsAccounts."Monthly Contribution" < Pfact."Minimum Contribution" then
+                //                                 SavingsAccounts."Monthly Contribution" := Pfact."Minimum Contribution";
+                //                             if SavingsAccounts."Monthly Contribution" < CUstomCuesCU.Prorata(SavingsAccounts."Member No.", '1') then
+                //                                 SavingsAccounts."Monthly Contribution" := CUstomCuesCU.Prorata(SavingsAccounts."Member No.", '1');
+
+                //                             IF RunBal > SavingsAccounts."Monthly Contribution" THEN
+                //                                 Amt := SavingsAccounts."Monthly Contribution" * -1
+                //                             ELSE
+                //                                 Amt := RunBal * -1;
+
+                //                             IF Amt <> 0 THEN
+                //                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
+                //                                 CheckoffHeader.description, Amt, SavingsAccounts."No.", CheckoffHeader."Posting Date", BalAccType,
+                //                                 BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //                             RunBal := RunBal - ABS(Amt);
+                //                         END;
+                //                     UNTIL SavingsAccounts.NEXT = 0;
+                //                 END;
+                //             until Pfact.Next = 0;
+                //         end;
+                //     END;
+                //     //End of Savings Priority
+                //     //Excess to Unalocated
+                //     IF RunBal > 0 THEN BEGIN
+                //         UnallocatedAccount := '';
+                //         SavingsAccounts.Reset;
+                //         SavingsAccounts.SetRange(SavingsAccounts."Member No.", CheckoffLines."Member No.");
+                //         SavingsAccounts.SetRange("Product Category", SavingsAccounts."product category"::"Unallocated Fund");
+                //         if SavingsAccounts.Find('-') then begin
+                //             UnallocatedAccount := SavingsAccounts."No.";
+                //         end else begin
+                //             Pfact.reset;
+                //             Pfact.SetRange("Product Category", Pfact."Product Category"::"Unallocated Fund");
+                //             Pfact.SetRange(status, Pfact.status::Active);
+                //             if Pfact.find('-') then begin
+                //                 MembersII.Get(CheckoffLines."Member No.");
+                //                 UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", MembersII."Global Dimension 1 Code", MembersII."No.");
+                //                 MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, MembersII."No.", Pfact."Product ID");
+                //             end;
+                //         end;
+                //         AcctType := Accttype::Savings;
+                //         LineNo := LineNo + 10000;
+
+                //         JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, CheckoffHeader."Document No.",
+                //           Txt0003, RunBal * -1, UnallocatedAccount, CheckoffHeader."Posting Date", BalAccType,
+                //           BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //         //End of excess to unalocated
+
+                //     end;
+                // end;
 
                 //Balance with Employer Code
                 //Customer Amount
