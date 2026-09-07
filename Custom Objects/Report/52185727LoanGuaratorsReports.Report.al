@@ -36,6 +36,9 @@ Report 52185727 "Loan Guarators Reports"
             column(CompPic; Company.Picture)
             {
             }
+            column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>'))
+            {
+            }
             dataitem(Loans; Loans)
             {
                 DataItemLink = "Member No." = field("Member No.");
@@ -117,7 +120,7 @@ Report 52185727 "Loan Guarators Reports"
                     column(AmontGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."Amount Guaranteed")
                     {
                     }
-                    column(StaffPayrollNo_LoanGuarantors; "Loan Guarantors and Security"."Staff/Payroll No.")
+                    column(StaffPayrollNo_LoanGuarantors; GuarantorStaffNo)
                     {
                     }
                     column(AccountNo_LoanGuarantors; "Loan Guarantors and Security"."Account No.")
@@ -165,19 +168,27 @@ Report 52185727 "Loan Guarators Reports"
                     begin
                         TotalLoan := 0;
                         MmberDeceased := false;
+
+                        GuarantorStaffNo := "Loan Guarantors and Security"."Staff/Payroll No.";
+
                         TotalLoan := "Loan Guarantors and Security"."Outstanding Balance" + Loans."Outstanding Interest";
-                        MemB.Reset();
-                        MemB.SetRange("No.", "Loan Guarantors and Security"."Member No");
-                        MemB.SetRange(Status, MemB.Status::Deceased);
-                        if MemB.FindFirst() then
-                            MmberDeceased := true
-                        else
-                            MmberDeceased := false;
+
                         if MemB.Get("Loan Guarantors and Security"."Member No") then begin
+
+                            if MemB."Payroll/Staff No." <> '' then
+                                GuarantorStaffNo := MemB."Payroll/Staff No.";
+
+                            if MemB.Status = MemB.Status::Deceased then
+                                MmberDeceased := true
+                            else
+                                MmberDeceased := false;
+
                             if Cust.get(MemB."Employer Code") then begin
                                 GurantorEmpcode := Cust."No.";
 
                             end;
+                        end else begin
+                            MmberDeceased := false;
                         end;
                         LoanGua.Reset;
                         LoanGua.SetRange("Loan No", "Loan No");
@@ -210,9 +221,7 @@ Report 52185727 "Loan Guarators Reports"
         }
     }
 
-    labels
-    {
-    }
+
 
     trigger OnPreReport()
     begin
@@ -235,4 +244,5 @@ Report 52185727 "Loan Guarators Reports"
         CommunicationOnline: Text;
         TotaAmtGUR: Decimal;
         GurantorEmpcode: Code[30];
+        GuarantorStaffNo: Code[50];
 }

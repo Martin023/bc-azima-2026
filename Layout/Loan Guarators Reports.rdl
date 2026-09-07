@@ -50,7 +50,6 @@
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
-                <!-- LOAN HEADER INFO ROW -->
                 <TablixRow>
                   <Height>0.3in</Height>
                   <TablixCells>
@@ -220,7 +219,6 @@
                     <TablixCell />
                   </TablixCells>
                 </TablixRow>
-                <!-- COLUMN HEADERS -->
                 <TablixRow>
                   <Height>0.25in</Height>
                   <TablixCells>
@@ -537,7 +535,6 @@
                     </TablixCell>
                   </TablixCells>
                 </TablixRow>
-                <!-- DETAILS ROW -->
                 <TablixRow>
                   <Height>0.2in</Height>
                   <TablixCells>
@@ -809,7 +806,6 @@
                     </TablixCell>
                   </TablixCells>
                 </TablixRow>
-                <!-- TOTALS ROW -->
                 <TablixRow>
                   <Height>0.3in</Height>
                   <TablixCells>
@@ -1070,7 +1066,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Loan Guarantor Reports</Value>
+                      <Value>Loan Guarantors Report</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -1160,7 +1156,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Printed On: " &amp; Globals!ExecutionTime</Value>
+                      <Value>="Printed On: " &amp; First(Fields!PrintDateTime.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>8pt</FontSize>
@@ -1243,6 +1239,9 @@ End Function
         </Field>
         <Field Name="CompPic">
           <DataField>CompPic</DataField>
+        </Field>
+        <Field Name="PrintDateTime">
+          <DataField>PrintDateTime</DataField>
         </Field>
         <Field Name="ReportForNavId_1102755001">
           <DataField>ReportForNavId_1102755001</DataField>

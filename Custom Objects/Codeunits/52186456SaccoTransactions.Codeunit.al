@@ -306,6 +306,10 @@ Codeunit 52186456 "Sacco Transactions"
         Text0017: label ' has gone above the replenishing levels of ';
         Text0018: label 'Transaction Aborted';
         Employer: Record Customer;
+        MemberName: Text[100];
+        AccountBalance: Decimal;
+        TokenValues: Text;
+        GlobalSMSDispatcher: Codeunit "Global SMS Dispatcher";
     begin
 
         //with CashierTrans do
@@ -1070,23 +1074,60 @@ Codeunit 52186456 "Sacco Transactions"
                             MobileNo := Memb."Phone No.";
                         end;
 
-                    if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                        msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
-                         + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
-                    else
-                        msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
-                         Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
+                    //  OLD SMS IMPLEMENTATION
+                    // if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
+                    //     msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
+                    //      + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
+                    // else
+                    //     msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
+                    //      Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
+                    //  END OLD SMS IMPLEMENTATION
+                    // GET MEMBER NAME
+                    MemberName := '';
+                    if Memb.Get(SavingsACC."Member No.") then
+                        MemberName := Memb."First Name";
+                    if MemberName = '' then
+                        MemberName := 'Member';
+
+                    // GET ACCOUNT BALANCE
+                    AccountBalance := 0;
+                    if SavingsACC.Get(CashierTrans."Account No") then begin
+                        SavingsACC.CalcFields("Balance (LCY)");
+                        AccountBalance := SavingsACC."Balance (LCY)";
+                    end;
+
+                    // BUILD TOKEN VALUES STRING FOR SMS
+                    TokenValues :=
+                        'MEMBER_NAME=' + MemberName + '||' +
+                        'MEMBER_NO=' + SavingsACC."Member No." + '||' +
+                        'AMOUNT=' + Format(CashierTrans.Amount, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                        'PRODUCT_NAME=' + SavingsACC."Product Name" + '||' +
+                        'BALANCE=' + Format(AccountBalance, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                        'ACCOUNT_NO=' + CashierTrans."Account No" + '||' +
+                        'TRANSACTION_TYPE=' + Format(CashierTrans.Type) + '||' +
+                        'REMARKS=' + CashierTrans.Remarks + '||' +
+                        'DATE=' + Format(Today, 0, '<Day,2>-<Month Text,3>-<Year4>') + '||' +
+                        'TIME=' + Format(Time, 0, '<Hours24,2>:<Minutes,2>') + '||' +
+                        'COMPANY_NAME=' + CompanyName;
+
+                    // SEND SMS BASED ON TRANSACTION TYPE
+                    case CashierTrans.Type of
+                        CashierTrans.Type::"Cash Withdrawal":
+                            GlobalSMSDispatcher.Send('CASH_WITHDRAWAL', MobileNo, TokenValues);
+
+                        CashierTrans.Type::"Cash Deposit":
+                            GlobalSMSDispatcher.Send('CASH_DEPOSIT', MobileNo, TokenValues);
+
+                        CashierTrans.Type::"Credit Receipt":
+                            GlobalSMSDispatcher.Send('CREDIT_RECEIPT', MobileNo, TokenValues);
+                    end;
                 end;
 
-                if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                    SendSMS.SendSms(Source::CASH_WITHDRAWAL_CONFIRM, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS')
-                else
-                    SendSMS.SendSms(Source::DEPOSIT_CONFIRMATION, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS');
-
-
-
-
-
+                // OLD SMS SENDING CODE
+                // if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
+                //     SendSMS.SendSms(Source::CASH_WITHDRAWAL_CONFIRM, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS')
+                // else
+                //     SendSMS.SendSms(Source::DEPOSIT_CONFIRMATION, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS');
 
                 if CashierTrans.Type = CashierTrans.Type::"Credit Receipt" then begin
                     PostCredit(CashierTrans, JTemplate, JBatch, TillNo, DBranch, DActivity);

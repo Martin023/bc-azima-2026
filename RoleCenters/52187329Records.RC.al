@@ -1269,7 +1269,18 @@ page 52187329 "Records"
                     //     }
                     // }
                 }
+                group("Guarantor Substitution")
+                {
+                    action("Guarantor Substitution Form")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Guarantor Substitution Form';
+                        RunObject = report "Guarantor Substitution Form";
+                        ToolTip = 'Generate guarantor substitution form for member loan edits';
+                        Image = Report;
+                    }
 
+                }
                 group("Member List On Edits")
                 {
                     action("Ongoing Member Edits")
