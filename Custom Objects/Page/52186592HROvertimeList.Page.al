@@ -1,6 +1,6 @@
 page 52186592 "HR Overtime List1"
 {
-    CardPageID = "HR Overtime Card";
+    // CardPageID = "HR Overtime Card";
     DeleteAllowed = false;
     ModifyAllowed = false;
     PageType = List;

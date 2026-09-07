@@ -226,27 +226,27 @@ page 52186732 "SMS Alerts Header Card"
                     end;
                 end;
             }
-            action("Batch Toggle")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = ToggleBreakpoint;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Enabled = GenerateSMSEnabled;
-                trigger OnAction()
-                var
-                    AlertLoanLines: Record "Alerts Loan Lines";
-                begin
-                    if not Confirm('Are you sure you want to run this action?') then exit;
-                    AlertLoanLines.Reset();
-                    AlertLoanLines.SetRange("Header No.", Rec."No.");
-                    if AlertLoanLines.FindFirst() then begin
-                        Report.Run(52186799, true, false, AlertLoanLines);
-                    end;
+            // action("Batch Toggle")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = ToggleBreakpoint;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     Enabled = GenerateSMSEnabled;
+            //     trigger OnAction()
+            //     var
+            //         AlertLoanLines: Record "Alerts Loan Lines";
+            //     begin
+            //         if not Confirm('Are you sure you want to run this action?') then exit;
+            //         AlertLoanLines.Reset();
+            //         AlertLoanLines.SetRange("Header No.", Rec."No.");
+            //         if AlertLoanLines.FindFirst() then begin
+            //             Report.Run(52186799, true, false, AlertLoanLines);
+            //         end;
 
-                end;
-            }
+            //     end;
+            // }
 
 
             action("Generate Letters")
@@ -1234,6 +1234,12 @@ page 52186732 "SMS Alerts Header Card"
         OutStr: OutStream;
         PdfMimeType: Text[30];
         InStreamVar: InStream;
+        BlobOutStream: OutStream;
+        FieldOutStream: OutStream;
+        BlobInStream: InStream;
+        FileContentsB64: Text;
+        Base64Convert: Codeunit "Base64 Convert";
+        GuarantorNoticeLetters: record "Guarantor Notice Letters";
     begin
         // Zip.CreateZipArchive();
         Clear(AlertsLines);
@@ -1246,18 +1252,51 @@ page 52186732 "SMS Alerts Header Card"
                 RecRef.GetTable(AlertsLines);
                 LoanNo := AlertsLines."Loan No";
                 TempBlob.CreateOutStream(OutStr);
-                Report.SaveAs(
-                    Report::"Guarantor Notice",
-                    '',
-                    ReportFormat::Pdf,
-                    OutStr,
-                    recRef);
-                FileName := AlertsLines."Member No" + '_' + Format(AlertsLines.Recepient) + '_' + Format(AlertsLines."Notice Category") + '.pdf';
+                TempBlob.CreateOutStream(BlobOutStream);
+                RecRef.GetTable(AlertsLines);
+                if AlertsLines.Recepient = AlertsLines.Recepient::Guarantor then
+                    Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, BlobOutStream, RecRef)
+                else
+                    Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, BlobOutStream, RecRef);
 
-                // download the report
-                PdfMimeType := 'application/pdf';
-                TempBlob.CreateInStream(InStreamVar);
-                DownloadFromStream(InStreamVar, '', '', FileName, FileName);
+                // delete existing
+                GuarantorNoticeLetters.reset();
+                GuarantorNoticeLetters.setrange("Header No", AlertsLines."Header No");
+                GuarantorNoticeLetters.deleteall();
+
+                // Insert record first
+                GuarantorNoticeLetters.Init();
+                GuarantorNoticeLetters."Loan No" := AlertsLines."Loan No";
+                GuarantorNoticeLetters."Header No" := AlertsLines."Header No";
+                GuarantorNoticeLetters."Recipient Member No" := AlertsLines."Member No";
+                GuarantorNoticeLetters.Recepient := AlertsLines.Recepient;
+                GuarantorNoticeLetters.Insert();
+
+                // Write into the BLOB field
+                GuarantorNoticeLetters.Letter.CreateOutStream(FieldOutStream);
+                TempBlob.CreateInStream(BlobInStream);
+                CopyStream(FieldOutStream, BlobInStream);
+
+                // Persist changes
+                GuarantorNoticeLetters.Modify();
+
+                // Verify
+                GuarantorNoticeLetters.Letter.CreateInStream(InS);
+                FileContentsB64 := Base64Convert.ToBase64(InS);
+                if FileContentsB64 <> '' then
+                    Message('Guarantor notice saved.');
+            // Report.SaveAs(
+            //     Report::"Guarantor Notice",
+            //     '',
+            //     ReportFormat::Pdf,
+            //     OutStr,
+            //     recRef);
+            // FileName := AlertsLines."Member No" + '_' + Format(AlertsLines.Recepient) + '_' + Format(AlertsLines."Notice Category") + '.pdf';
+
+            // // download the report
+            // PdfMimeType := 'application/pdf';
+            // TempBlob.CreateInStream(InStreamVar);
+            // DownloadFromStream(InStreamVar, '', '', FileName, FileName);
             until AlertsLines.Next() = 0;
         end;
     end;
