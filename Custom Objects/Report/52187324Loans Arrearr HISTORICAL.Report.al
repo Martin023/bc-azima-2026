@@ -16,6 +16,8 @@ report 52187324 "Loans Arrears HISTORICAL"
             column(ApplicationDate; "Application Date") { }
             column(LoanProductType; "Loan Product Type") { }
             column(LoanProductTypeName; "Loan Product Type Name") { }
+            column(outstandingPrinciple; "Outstanding Balance") { }
+            column(outstandingInterest; "Outstanding Interest") { }
             column(OutstandingBalance; "Total Balance") { }
             column(Repayment; "Repayment") { }
             column(Interest; "Interest") { }

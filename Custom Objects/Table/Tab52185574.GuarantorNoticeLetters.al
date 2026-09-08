@@ -36,7 +36,7 @@ table 52185574 "Guarantor Notice Letters"
     }
     keys
     {
-        key(EntryNo; EntryNo)
+        key(EntryNo; EntryNo, "Header No")
         {
             Clustered = true;
         }
