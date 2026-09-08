@@ -1267,7 +1267,13 @@ page 52186732 "SMS Alerts Header Card"
             GuarantorNoticeLetters.setrange("Header No", AlertsLines."Header No");
             GuarantorNoticeLetters.deleteall();
             repeat
-                RecRef.GetTable(AlertsLines);
+                clear(TempBlob);
+                clear(RecRef);
+                clear(BlobOutStream);
+                clear(FieldOutStream);
+                clear(BlobInStream);
+                clear(OutStr);
+                // RecRef.GetTable(AlertsLines);
                 LoanNo := AlertsLines."Loan No";
                 TempBlob.CreateOutStream(OutStr);
                 TempBlob.CreateOutStream(BlobOutStream);
@@ -1278,19 +1284,21 @@ page 52186732 "SMS Alerts Header Card"
                     //     Report.SaveAs(Report::"Defaulter Notice-2", '', ReportFormat::Pdf, BlobOutStream, RecRef);
                     // Insert record first
                     GuarantorNoticeLetters.Init();
+                    GuarantorNoticeLetters.EntryNo := AlertsLines."Entry No";
                     GuarantorNoticeLetters."Loan No" := AlertsLines."Loan No";
                     GuarantorNoticeLetters."Header No" := AlertsLines."Header No";
                     GuarantorNoticeLetters."Recipient Member No" := AlertsLines."Member No";
                     GuarantorNoticeLetters.Recepient := AlertsLines.Recepient;
-                    GuarantorNoticeLetters.Insert();
-
-                    // Write into the BLOB field
                     GuarantorNoticeLetters.Letter.CreateOutStream(FieldOutStream);
                     TempBlob.CreateInStream(BlobInStream);
                     CopyStream(FieldOutStream, BlobInStream);
+                    GuarantorNoticeLetters.Insert();
+
+                    // Write into the BLOB field
+
 
                     // Persist changes
-                    GuarantorNoticeLetters.Modify();
+                    //GuarantorNoticeLetters.Modify();
                 end;
             until AlertsLines.Next() = 0;
         end;
