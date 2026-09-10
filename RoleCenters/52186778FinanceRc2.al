@@ -767,7 +767,7 @@ page 52186778 "Finance Role Center"
                             Caption = 'FOSA Account Activation Report';
                             RunObject = report "FOSA Account Activation";
                         }
-                       
+
                     }
                 }
 
@@ -6423,12 +6423,12 @@ page 52186778 "Finance Role Center"
                             ApplicationArea = all;
                             RunObject = report "Sectoral Lending";
                         }
-                        action("Sasra Summary Ration")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Sasra Summary Ratio';
-                            RunObject = report "Sectoral Classification";
-                        }
+                        // action("Sasra Summary Ration")
+                        // {
+                        //     ApplicationArea = all;
+                        //     Caption = 'Sasra Summary Ratio';
+                        //     RunObject = report "Sectoral Classification";
+                        // }
                         action("Loans Defaulter Aging - SASRA")
                         {
                             ApplicationArea = Basic, Suite;
