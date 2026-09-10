@@ -109,16 +109,6 @@ page 52186350 "File Tracker List"
     {
     }
 
-    // trigger OnOpenPage()
-    // var
-    //     UserSetup: Record "User Setup";
-    // begin
-    //     if UserSetup.Get(UserId) then begin
-    //         UserSetup.TestField("Responsibility Centre");
-    //         Rec.SetFilter(Rec."Current Responsibility Centre", UserSetup."Responsibility Centre");
-    //     end else
-    //         Error('You must be set up in user setup');
-    // end;
     trigger OnAfterGetRecord()
     begin
 
@@ -137,4 +127,3 @@ page 52186350 "File Tracker List"
         StyleExprTxt: Text;
         FileTracker: Record "File Tracker";
 }
-

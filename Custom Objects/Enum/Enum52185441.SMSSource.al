@@ -221,4 +221,8 @@ enum 52185441 "SMS Source"
     {
         Caption = 'CHEQUE_CLEARANCE';
     }
+    value(60; BANKERS_CHEQUE_ISSUED)
+    {
+        Caption = 'BANKERS_CHEQUE_ISSUED';
+    }
 }

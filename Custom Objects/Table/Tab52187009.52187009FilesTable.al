@@ -31,7 +31,9 @@ table 52187009 "Member Form List"
         field(8; "Member Name"; Text[100])
         {
             Caption = 'Member Name';
-            TableRelation = Members.Name WHERE("No." = FIELD("Member No."));
+            FieldClass = FlowField;
+            CalcFormula = lookup(Members.Name WHERE("No." = FIELD("Member No.")));
+            Editable = false;
         }
         field(4; "Member Form Types"; Enum "Member Form Types")
         {
