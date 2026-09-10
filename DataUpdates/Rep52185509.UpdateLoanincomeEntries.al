@@ -34,6 +34,21 @@ report 52185509 "Update Loan income Entries"
                     until CreditLedger.Next() = 0;
                 end;
 
+                GlEntry1.reset();
+                GlEntry1.setfilter("Global Dimension 1 Code", '<>%1', '');
+                if GlEntry1.FindSet() then begin
+                    repeat
+                        GlEntry.Reset();
+                        GlEntry.setrange("External Document No.", GlEntry1."External Document No.");
+                        GlEntry.SetRange("Document No.", GlEntry1."Document No.");
+                        GlEntry.setrange(Amount, -(GlEntry1.Amount));
+                        if GlEntry.FindFirst() then begin
+                            GlEntry."Global Dimension 1 Code" := GlEntry1."Global Dimension 1 Code";
+                            GlEntry."Global Dimension 2 Code" := GlEntry1."Global Dimension 2 Code";
+                            GlEntry.Modify();
+                        end;
+                    until GlEntry1.Next() = 0;
+                end;
 
             end;
         }
@@ -60,4 +75,5 @@ report 52185509 "Update Loan income Entries"
     var
         GlEntry: Record "G/L Entry";
         CreditLedger: record "Credit Ledger Entry";
+        GlEntry1: record "G/L Entry";
 }

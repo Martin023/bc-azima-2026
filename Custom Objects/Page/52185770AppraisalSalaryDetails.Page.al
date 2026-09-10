@@ -124,6 +124,48 @@ page 52185770 "Appraisal Salary Details"
                 end;
 
             }
+            action("Calculate Union")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = Calculate;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+                // Visible = false;
+                trigger OnAction()
+                var
+                    ApprD: Record "Appraisal Salary Details";
+                    Net: Decimal;
+                    AppD2: record "Appraisal Salary Details";
+                begin
+                    if Rec."Loan No" <> '' then begin
+                        if LoanApps.Get(Rec."Loan No") then begin
+                            if (LoanApps."Source Unit" = LoanApps."Source Unit"::BOSA) then begin
+                                ApprD.reset();
+                                ApprD.SetRange("Loan No", Rec."Loan No");
+                                ApprD.SetRange("Client Code", rec."Client Code");
+                                ApprD.SetRange(Type, ApprD.Type::Union);
+                                if not ApprD.IsEmpty() then begin
+                                    AppD2.Reset();
+                                    AppD2.SetRange(Type, AppD2.type::Basic);
+                                    if AppD2.FindFirst() then
+                                        ApprD.Amount := round(((0.05 * AppD2.Amount) + 150), 1, '>')
+                                    else
+                                        Message('Basic pay is missing hence cannot compute Union');
+                                end
+                                else
+                                    Message('Union is not configured in app salary setup');
+                                // ApprD.CalculateNetPay();
+                            end
+                            else
+                                Error('Kindly note this only applies to BOSA loans! and current unit is %1', LoanApps."Source Unit");
+                        end;
+                        Message('Union calculation completed.');
+                    end else
+                        Message('Loan No. is required to calculate Union.');
+                end;
+            }
 
             action("Calculate NetPay")
             {

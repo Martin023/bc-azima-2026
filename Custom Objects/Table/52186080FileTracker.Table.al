@@ -275,7 +275,7 @@ table 52186080 "File Tracker"
         }
         field(45; "File Request Status"; Option)
         {
-            OptionCaption = 'Open, Requested,Issued,Received,Forwarded';
+            OptionCaption = 'Open, Requested,Issued,Received,Forwarded,CLosed';
             OptionMembers = Open,"Requested",Issued,Received,Forwarded,Closed;
         }
         field(46; "File Request Time"; Time)

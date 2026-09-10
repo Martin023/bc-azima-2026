@@ -864,29 +864,29 @@ page 52185753 "Loan Application Card"
                     LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
                     if LoanApp.Find('-') then begin
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
-                            if (ProdFac."Mortgage Loan" = false) then begin
-                                REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
-                                LoansR.reset;
-                                LoansR.SetRange("Loan No.", Rec."Loan No.");
-                                LoansR.SetRange(status, LoansR.status::Open);
-                                if LoansR.Find('-') then begin
-                                    LoansR."Loan Appraised By" := UserId;
-                                    LoansR.Modify;
-                                end;
-                                CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
-                            end else
-                                if ProdFac."Mortgage Loan" = true then begin
-                                    IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
-                                    REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
-                                    LoansR.reset;
-                                    LoansR.SetRange("Loan No.", Rec."Loan No.");
-                                    LoansR.SetRange(status, LoansR.status::Open);
-                                    if LoansR.Find('-') then begin
-                                        LoansR."Loan Appraised By" := UserId;
-                                        LoansR.Modify;
-                                    end;
-                                    CreateAppraisalBackup(LoanApp."Loan No.", 52185957);
-                                end;
+                            // if (ProdFac."Mortgage Loan" = false) then begin
+                            REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
+                            LoansR.reset;
+                            LoansR.SetRange("Loan No.", Rec."Loan No.");
+                            LoansR.SetRange(status, LoansR.status::Open);
+                            if LoansR.Find('-') then begin
+                                LoansR."Loan Appraised By" := UserId;
+                                LoansR.Modify;
+                            end;
+                            CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
+                            // end else
+                            //     if ProdFac."Mortgage Loan" = true then begin
+                            //         IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
+                            //         REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
+                            //         LoansR.reset;
+                            //         LoansR.SetRange("Loan No.", Rec."Loan No.");
+                            //         LoansR.SetRange(status, LoansR.status::Open);
+                            //         if LoansR.Find('-') then begin
+                            //             LoansR."Loan Appraised By" := UserId;
+                            //             LoansR.Modify;
+                            //         end;
+                            //         CreateAppraisalBackup(LoanApp."Loan No.", 52185957);
+                            //     end;
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
                             REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
