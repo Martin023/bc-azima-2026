@@ -5,10 +5,10 @@ PageExtension 52185797 pageextension52185797 extends "Purchase Lines"
     {
         addafter(Description)
         {
-            
+
         }
 
-        
+
 
         modify("Document Type")
         {
@@ -64,6 +64,7 @@ PageExtension 52185797 pageextension52185797 extends "Purchase Lines"
         modify("Direct Unit Cost")
         {
             ApplicationArea = Basic;
+            Caption = 'Direct Unit Cost Incl. VAT';
         }
         modify("Indirect Cost %")
         {
@@ -146,11 +147,10 @@ PageExtension 52185797 pageextension52185797 extends "Purchase Lines"
             Caption = 'Description 2';
             Visible = true;
         }
-        
-      
+
 
     }
-    
+
     actions
     {
         modify("Show Document")

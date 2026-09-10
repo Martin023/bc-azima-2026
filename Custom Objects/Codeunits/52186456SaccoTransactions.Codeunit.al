@@ -306,6 +306,13 @@ Codeunit 52186456 "Sacco Transactions"
         Text0017: label ' has gone above the replenishing levels of ';
         Text0018: label 'Transaction Aborted';
         Employer: Record Customer;
+        MemberName: Text[100];
+        AccountBalance: Decimal;
+        TokenValues: Text;
+        GlobalSMSDispatcher: Codeunit "Global SMS Dispatcher";
+        MinBalance: Decimal;
+        DepositorName: Text[100];
+        CreditedAccountName: Text[100];
     begin
 
         //with CashierTrans do
@@ -1070,47 +1077,102 @@ Codeunit 52186456 "Sacco Transactions"
                             MobileNo := Memb."Phone No.";
                         end;
 
-                    if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                        msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
-                         + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
-                    else
-                        msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
-                         Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
+                    //  OLD SMS IMPLEMENTATION
+                    // if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
+                    //     msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
+                    //      + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
+                    // else
+                    //     msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
+                    //      Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
+                    //  END OLD SMS IMPLEMENTATION
                 end;
 
-                if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                    SendSMS.SendSms(Source::CASH_WITHDRAWAL_CONFIRM, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS')
-                else
-                    SendSMS.SendSms(Source::DEPOSIT_CONFIRMATION, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS');
-
-
-
-
-
+                // OLD SMS SENDING CODE
+                // if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
+                //     SendSMS.SendSms(Source::CASH_WITHDRAWAL_CONFIRM, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS')
+                // else
+                //     SendSMS.SendSms(Source::DEPOSIT_CONFIRMATION, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS');
 
                 if CashierTrans.Type = CashierTrans.Type::"Credit Receipt" then begin
                     PostCredit(CashierTrans, JTemplate, JBatch, TillNo, DBranch, DActivity);
                 end;
 
-                //Post New
                 GenJournalLine.Reset;
                 GenJournalLine.SetRange("Journal Template Name", JTemplate);
                 GenJournalLine.SetRange("Journal Batch Name", JBatch);
                 if GenJournalLine.Find('-') then begin
                     Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
                 end;
-                //Post New
+
+                if SavingsACC.Get(CashierTrans."Account No") then begin
+                    MemberName := '';
+                    if Memb.Get(SavingsACC."Member No.") then
+                        MemberName := Memb."First Name";
+                    if MemberName = '' then
+                        MemberName := 'Member';
+
+                    DepositorName := '';
+                    if CashierTrans.Remarks = '' then
+                        DepositorName := 'You'
+                    else
+                        DepositorName := CashierTrans.Remarks;
+
+                    CreditedAccountName := '';
+                    CTransLines.Reset;
+                    CTransLines.SetRange("Transaction No", CashierTrans.No);
+                    if CTransLines.FindFirst then begin
+                        if SavingsACC.Get(CTransLines."Account No") then
+                            CreditedAccountName := SavingsACC."Product Name";
+                    end;
+                    if CreditedAccountName = '' then
+                        CreditedAccountName := SavingsACC."Product Name";
+
+                    AccountBalance := 0;
+                    MinBalance := 0;
+                    if SavingsACC.Get(CashierTrans."Account No") then begin
+                        if ProdType.Get(SavingsACC."Product Type") then
+                            MinBalance := ProdType."Minimum Balance";
+
+                        SavingsACC.CalcFields("Balance (LCY)", "Uncleared Cheques", "ATM Transactions", "Lien Placed", "Coop Transactions");
+                        AccountBalance := (SavingsACC."Balance (LCY)" + SavingsACC."Authorised Over Draft")
+                                          - (SavingsACC."Coop Transactions" + MinBalance + SavingsACC."Uncleared Cheques"
+                                             + SavingsACC."Lien Placed" + SavingsACC."ATM Transactions");
+                    end;
+
+                    TokenValues :=
+                        'MEMBER_NAME=' + MemberName + '||' +
+                        'MEMBER_NO=' + SavingsACC."Member No." + '||' +
+                        'AMOUNT=' + Format(CashierTrans.Amount, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                        'PRODUCT_NAME=' + SavingsACC."Product Name" + '||' +
+                        'BALANCE=' + Format(AccountBalance, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                        'ACCOUNT_NO=' + CashierTrans."Account No" + '||' +
+                        'TRANSACTION_TYPE=' + Format(CashierTrans.Type) + '||' +
+                        'DEPOSITOR=' + DepositorName + '||' +
+                        'CREDITED_ACCOUNT=' + CreditedAccountName + '||' +
+                        'DATE=' + Format(Today, 0, '<Day,2>-<Month Text,3>-<Year4>') + '||' +
+                        'TIME=' + Format(Time, 0, '<Hours24,2>:<Minutes,2>') + '||' +
+                        'COMPANY_NAME=' + CompanyName;
+
+                    case CashierTrans.Type of
+                        CashierTrans.Type::"Cash Withdrawal":
+                            GlobalSMSDispatcher.Send('CASH_WITHDRAWAL', MobileNo, TokenValues);
+
+                        CashierTrans.Type::"Cash Deposit":
+                            GlobalSMSDispatcher.Send('CASH_DEPOSIT', MobileNo, TokenValues);
+
+                        CashierTrans.Type::"Credit Receipt":
+                            GlobalSMSDispatcher.Send('CREDIT_RECEIPT', MobileNo, TokenValues);
+                    end;
+                end;
 
                 Post := false;
                 Post := JournlPosted.PostedSuccessfully();
-                // if Post then begin
                 Posted := true;
                 CashierTrans."Date Posted" := Today;
                 CashierTrans."Time Posted" := Time;
                 CashierTrans."Posted By" := UserId;
                 CashierTrans.Modify;
                 Commit;
-                // end;
 
                 //Advice Loan -------------Advice Savings Accounts
                 if (CashierTrans.Type <> CashierTrans.Type::"Credit Cheque") then begin
@@ -1378,7 +1440,15 @@ Codeunit 52186456 "Sacco Transactions"
         ChBank: Code[20];
         Trans: Record "Cashier Transactions";
         SavingsACC: record "Savings Accounts";
-        Employer: record "Customer";
+        Employer: record Customer;
+        MobileNo: Text[20];
+        MemberName: Text[100];
+        TokenValues: Text;
+        GlobalSMSDispatcher: Codeunit "Global SMS Dispatcher";
+        Memb: Record Members;
+        AccountBalance: Decimal;
+        MinBalance: Decimal;
+        ProdType: Record "Product Factory";
     begin
         //with CashierTrans do
         begin
@@ -1580,6 +1650,42 @@ Codeunit 52186456 "Sacco Transactions"
                 CashierTrans."Posted By" := UserId;
                 CashierTrans.Modify;
                 Commit;
+
+                if SavingsACC.Get(CashierTrans."Account No") then begin
+                    MobileNo := SavingsACC."Mobile Phone No";
+                    if MobileNo = '' then
+                        MobileNo := SavingsACC."Transactional Mobile No";
+
+                    if MobileNo <> '' then begin
+                        MemberName := '';
+                        if Memb.Get(SavingsACC."Member No.") then
+                            MemberName := Memb."First Name";
+                        if MemberName = '' then
+                            MemberName := 'Member';
+
+                        AccountBalance := 0;
+                        MinBalance := 0;
+                        if ProdType.Get(SavingsACC."Product Type") then
+                            MinBalance := ProdType."Minimum Balance";
+
+                        SavingsACC.CalcFields("Balance (LCY)", "Uncleared Cheques", "ATM Transactions", "Lien Placed", "Coop Transactions");
+                        AccountBalance := (SavingsACC."Balance (LCY)" + SavingsACC."Authorised Over Draft")
+                                          - (SavingsACC."Coop Transactions" + MinBalance + SavingsACC."Uncleared Cheques"
+                                             + SavingsACC."Lien Placed" + SavingsACC."ATM Transactions");
+
+                        TokenValues :=
+                            'MEMBER_NAME=' + MemberName + '||' +
+                            'CHEQUE_NO=' + CashierTrans."Cheque No" + '||' +
+                            'AMOUNT=' + Format(CashierTrans.Amount, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                            'PAYER=' + CashierTrans.Payer + '||' +
+                            'PRODUCT_NAME=' + SavingsACC."Product Name" + '||' +
+                            'BALANCE=' + Format(AccountBalance, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                            'DATE=' + Format(Today, 0, '<Day,2>-<Month Text,3>-<Year4>') + '||' +
+                            'TIME=' + Format(Time, 0, '<Hours24,2>:<Minutes,2>');
+
+                        GlobalSMSDispatcher.Send('CHEQUE_DEPOSIT', MobileNo, TokenValues);
+                    end;
+                end;
             end;
         end;
     end;
@@ -1831,23 +1937,21 @@ Codeunit 52186456 "Sacco Transactions"
         Text0006: label 'You cannot withdraw more than your allowed limit of %1 unless authorised.';
         Text0007: label 'You cannot withdraw more than the available balance unless authorised.';
         Text0008: label 'You cannot deposit more than your allowed limit of %1 unless authorised.';
-        Text0009: label 'You have done a transaction of KSHS. ';
-        Text0010: label ' of type ';
-        Text0011: label ' on ';
-        Text0012: label ' on your account ';
-        Text0013: label ' at ';
-        Text0014: label 'The limit for cashier ';
-        Text0015: label ' of till ';
-        Text0016: label ' has gone below the replenishing levels of ';
-        Text0017: label ' has gone above the replenishing levels of ';
         Text0018: label 'Transaction Aborted';
         BankSetup: Record "Banking User Template";
         VarVariant: Variant;
-        // CustomApprovals: Codeunit "Custom Approvals Codeunit";
         Text0019: label 'You cannot draw banker cheque more than your allowed limit of %1 unless authorised.';
         SMSChargeAmt: Decimal;
         Employer: Record "Customer";
         SavingsACC: Record "Savings Accounts";
+        MobileNo: Text[20];
+        MemberName: Text[100];
+        TokenValues: Text;
+        GlobalSMSDispatcher: Codeunit "Global SMS Dispatcher";
+        Memb: Record Members;
+        AccountBalance: Decimal;
+        MinBalance: Decimal;
+        ProdType: Record "Product Factory";
     begin
 
         // with CashierTrans do
@@ -2197,14 +2301,38 @@ Codeunit 52186456 "Sacco Transactions"
 
             if SavingsACC.Get(CashierTrans."Account No") then begin
                 MobileNo := SavingsACC."Mobile Phone No";
+                if MobileNo = '' then
+                    MobileNo := SavingsACC."Transactional Mobile No";
+
+                if MobileNo <> '' then begin
+                    MemberName := '';
+                    if Memb.Get(SavingsACC."Member No.") then
+                        MemberName := Memb."First Name";
+                    if MemberName = '' then
+                        MemberName := 'Member';
+
+                    AccountBalance := 0;
+                    MinBalance := 0;
+                    if ProdType.Get(SavingsACC."Product Type") then
+                        MinBalance := ProdType."Minimum Balance";
+
+                    SavingsACC.CalcFields("Balance (LCY)", "Uncleared Cheques", "ATM Transactions", "Lien Placed", "Coop Transactions");
+                    AccountBalance := (SavingsACC."Balance (LCY)" + SavingsACC."Authorised Over Draft")
+                                      - (SavingsACC."Coop Transactions" + MinBalance + SavingsACC."Uncleared Cheques"
+                                         + SavingsACC."Lien Placed" + SavingsACC."ATM Transactions");
+
+                    TokenValues :=
+                        'MEMBER_NAME=' + MemberName + '||' +
+                        'CHEQUE_NO=' + CashierTrans."Bankers Cheque No" + '||' +
+                        'AMOUNT=' + Format(CashierTrans.Amount, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                        'PAYEE=' + CashierTrans.Payee + '||' +
+                        'BALANCE=' + Format(AccountBalance, 0, '<Precision,2:2><Standard Format,0>') + '||' +
+                        'DATE=' + Format(Today, 0, '<Day,2>-<Month Text,3>-<Year4>') + '||' +
+                        'TIME=' + Format(Time, 0, '<Hours24,2>:<Minutes,2>');
+
+                    GlobalSMSDispatcher.Send('BANKERS_CHEQUE', MobileNo, TokenValues);
+                end;
             end;
-
-            msg := Text0009 + Format(CashierTrans.Amount) + Text0010 + Format(CashierTrans.Type) + Text0011 +
-                       Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
-
-            SendSMS.SendSms(Source::CASH_WITHDRAWAL_CONFIRM, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS');
-
-
         end;
     end;
 

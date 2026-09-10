@@ -480,6 +480,7 @@ page 52186351 "File Tracker Card"
                 trigger OnAction()
                 begin
                     Rec.TestField(status, Rec."File Request Status"::Open);
+                    Rec.TestField("File Request Remarks");
 
                     if not confirm('Are you sure you want to request file?') then exit;
                     Rec."File Request Status" := Rec."File Request Status"::Requested;

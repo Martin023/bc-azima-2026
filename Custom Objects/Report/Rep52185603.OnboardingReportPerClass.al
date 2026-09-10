@@ -4,82 +4,69 @@ report 52185603 "Onboarding Report Per Class"
     Caption = 'Member Onboarding Report Per Class';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-azima-2026/Layout/Onboarding Report Per Class.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/OnboardingReportPerClass.rdl';
+
     dataset
     {
-        dataitem(CompanyHeader; "Company Information")
-        {
-            DataItemTableView = sorting("Primary Key");
-            MaxIteration = 1;
- 
-            column(CompanyInformation_Name; Name)
-            {
-            }
-            column(CompanyInformation_Picture; Picture)
-            {
-            }
- 
-            trigger OnPreDataItem()
-            begin
-                CalcFields(Picture);  // load BLOB here, once
-            end;
-        }
         dataitem(Members; Members)
         {
-            RequestFilterFields = "No.", Status, "Member Class", "Registration Date", Age, "Branch Name", County, "Sub-County";
-            column(No; "No.")
-            {
-            }
-            column(MemberClass; "Member Class")
-            {
-            }
-            column(MemberSegment; "Member Segment")
-            {
-            }
-            column(Name; Name)
-            {
-            }
-            column(PrimaryIdentificationType; "Primary Identification Type")
-            {
-            }
-            column(PrimaryIdentification; "Primary Identification")
-            {
-            }
-            column(RegistrationDate; "Registration Date")
-            {
-            }
-            column(DateApproved; "Date Approved")
-            {
-            }
-            column(AccountType; "Account Type")
-            {
-            }
-            column(AccountProfile; "Account Profile")
-            {
-            }
-            column(AccountCategory; "Account Category")
-            {
-            }
-            column(Gender; Gender)
-            {
-            }
-            column(Status; Status)
-            {
-            }
-            column(Subflag; Subflag)
-            {
-            }
-            column(CompanyAddress; CompanyAddress)
-            {
-            }
-            column(CompanyTelephone; CompanyTelephone)
-            {
-            }
-            column(CommunicationOnline; CommunicationOnline)
-            {
-            }
+            RequestFilterFields = "Member Class", Status, Subflag;
+
+            column(CompanyInformation_Name; CompanyInformation.Name) { }
+            column(CompanyInformation_Picture; CompanyInformation.Picture) { }
+            column(CompanyAddress; CompanyAddress) { }
+            column(CompanyTelephone; CompanyTelephone) { }
+            column(CompanyEmail; CompanyEmail) { }
+            column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>')) { }
+            column(DateFilterTxt; DateFilterTxt) { }
+
+            column(MemberClass; "Member Class") { }
+            column(No; "No.") { }
+            column(Name; Name) { }
+            column(Gender; Gender) { }
+            column(PrimaryIdentification; "Primary Identification") { }
+            column(AccountType; "Account Type") { }
+            column(DateApproved; Format("Date Approved", 0, '<Day,2>/<Month,2>/<Year4>')) { }
+            column(RegistrationDate; Format("Registration Date", 0, '<Day,2>/<Month,2>/<Year4>')) { }
+            column(Status; Status) { }
+
+            column(BOSADeposit; "BOSA Deposit") { }
+            column(ShareCapital; "Share Capital") { }
+            column(EntranceFeeBal; EntranceFeeBal) { }
+
+            trigger OnPreDataItem()
+            begin
+                if (StartDate = 0D) and (EndDate <> 0D) then
+                    SetFilter("Registration Date", '..%1', EndDate)
+                else if (StartDate <> 0D) and (EndDate = 0D) then
+                    SetRange("Registration Date", StartDate, Today)
+                else if (StartDate <> 0D) and (EndDate <> 0D) then
+                    SetRange("Registration Date", StartDate, EndDate)
+                else
+                    SetFilter("Registration Date", '..%1', Today);
+
+                if BranchFilter <> '' then
+                    SetRange("Global Dimension 1 Code", BranchFilter);
+            end;
+
+            trigger OnAfterGetRecord()
+            var
+                SavAcc: Record "Savings Accounts";
+            begin
+                CalcFields("BOSA Deposit", "Share Capital");
+
+                EntranceFeeBal := 0;
+                SavAcc.Reset();
+                SavAcc.SetRange("Member No.", "No.");
+                SavAcc.SetRange("Product Category", SavAcc."Product Category"::"Entrance Fee");
+                if SavAcc.FindFirst() then begin
+                    SavAcc.CalcFields("Balance (LCY)");
+                    EntranceFeeBal := -SavAcc."Balance (LCY)";
+                end;
+            end;
         }
     }
+
     requestpage
     {
         SaveValues = true;
@@ -87,33 +74,51 @@ report 52185603 "Onboarding Report Per Class"
         {
             area(content)
             {
-                group(GroupName)
+                group(Options)
                 {
+                    Caption = 'Date & Branch Filters';
+                    field(StartDate; StartDate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Registration Start Date';
+                    }
+                    field(EndDate; EndDate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Registration End Date';
+                    }
+                    field(BranchFilter; BranchFilter)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Branch';
+                        TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+                    }
                 }
             }
         }
-        actions
-        {
-            area(processing)
-            {
-            }
-        }
     }
+
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get then begin
-            CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-            CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-            CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
-        end;
+        CompanyInformation.Get();
+        CompanyInformation.CalcFields(Picture);
+        CompanyAddress := 'P.O BOX ' + CompanyInformation."Post Code" + ', ' + CompanyInformation.City;
+        CompanyTelephone := 'TEL: ' + CompanyInformation."Phone No." + ', ' + CompanyInformation."Phone No. 2";
+        CompanyEmail := CompanyInformation."E-Mail";
+
+        if (StartDate = 0D) then StartDate := Today;
+        if (EndDate = 0D) then EndDate := Today;
+        DateFilterTxt := 'Registrations For (' + Format(StartDate, 0, '<Day,2>/<Month,2>/<Year4>') + ') To (' + Format(EndDate, 0, '<Day,2>/<Month,2>/<Year4>') + ')';
     end;
 
-
-    Var
+    var
         CompanyInformation: Record "Company Information";
-
-        EmployerName: Text;
         CompanyAddress: Text;
         CompanyTelephone: Text;
-        CommunicationOnline: Text;
+        CompanyEmail: Text;
+        StartDate: Date;
+        EndDate: Date;
+        BranchFilter: Code[20];
+        EntranceFeeBal: Decimal;
+        DateFilterTxt: Text;
 }

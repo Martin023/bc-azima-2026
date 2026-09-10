@@ -1024,7 +1024,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Dormant Savings Accounts';
                                 RunObject = report "Dormant Savings Accounts";
                             }
-                          
+
                             action("E-Mail Member Statement")
                             {
                                 ApplicationArea = "Basic, Suite";
@@ -1244,12 +1244,12 @@ page 52187058 "ICT Department"
                                 Caption = 'Batch Loan Register';
                                 RunObject = report "Batch Loan Register";
                             }
-                            action("Sectoral Classification")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Sectoral Classification';
-                                RunObject = report "Sectoral Classification";
-                            }
+                            // action("Sectoral Classification")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Sectoral Classification';
+                            //     RunObject = report "Sectoral Classification";
+                            // }
                             action("Member Guarantors Report")
                             {
                                 ApplicationArea = "Basic, Suite";
@@ -5987,6 +5987,85 @@ page 52187058 "ICT Department"
                 {
                     ApplicationArea = Basic;
                     RunObject = report "Staff Daily Transactions";
+                }
+            }
+
+            Group("SMS Configuration")
+            {
+                Caption = 'SMS Configuration & Management';
+                
+                group("SMS Templates")
+                {
+                    Caption = 'SMS Templates';
+                    
+                    action("Global SMS Templates")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Global SMS Templates';
+                        RunObject = page "Global SMS Template List";
+                        ToolTip = 'Configure SMS message templates for all modules (CBS, HR, Loans, etc.)';
+                        Image = SNInfo;
+                    }
+                }
+
+                group("SMS Tokens")
+                {
+                    Caption = 'SMS Tokens';
+                    
+                    action("Global SMS Tokens")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Global SMS Token Registry';
+                        RunObject = page "Global SMS Token List";
+                        ToolTip = 'View and manage SMS tokens (variables) used in templates';
+                        Image = VATEntries;
+                    }
+                }
+
+                group("SMS Logs & History")
+                {
+                    Caption = 'SMS Logs & Audit';
+                    
+                    action("SMS Messages Log")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Sky SMS Messages Log';
+                        RunObject = page "Sky SMS Messages";
+                        ToolTip = 'View all sent SMS messages';
+                        Image = ListPage;
+                    }
+
+                    action("Global SMS Template History")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'SMS Template Change History';
+                        RunObject = page "Global SMS Template History";
+                        ToolTip = 'View audit trail of SMS template changes';
+                        Image = History;
+                    }
+                }
+
+                group("SMS Setup & Installation")
+                {
+                    Caption = 'SMS Setup';
+                    
+                    action("View SMS Tokens Setup")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'SMS Tokens Setup';
+                        RunObject = page "Global SMS Token List";
+                        ToolTip = 'View and manage SMS tokens - use Install Default Tokens action to add system defaults';
+                        Image = SetupLines;
+                    }
+
+                    action("View SMS Templates Setup")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'SMS Templates Setup';
+                        RunObject = page "Global SMS Template List";
+                        ToolTip = 'View and manage SMS templates - use Install Default Templates action to add defaults';
+                        Image = SetupList;
+                    }
                 }
             }
         }

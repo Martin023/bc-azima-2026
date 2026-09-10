@@ -1269,7 +1269,6 @@ page 52187329 "Records"
                     //     }
                     // }
                 }
-
                 group("Member List On Edits")
                 {
                     action("Ongoing Member Edits")
@@ -1367,6 +1366,25 @@ page 52187329 "Records"
                 //         RunObject = Page "Group Mem Exit & Update List";
                 //     }
                 // }
+            }
+            group("Member Related Reports")
+            {
+                action("Guarantor Substitution Form")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Guarantor Substitution Form';
+                    RunObject = report "Guarantor Substitution Form";
+                    ToolTip = 'Generate guarantor substitution form for member loan edits';
+                    Image = Report;
+                }
+                action("Member Onboarding Report Per Class")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Member Onboarding Report Per Class';
+                    RunObject = report "Onboarding Report Per Class";
+                    ToolTip = 'Generate member onboarding report per class';
+                    Image = Report;
+                }
             }
 
             group(EmployeeSelfService)
