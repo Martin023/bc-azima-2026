@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-24T14:13:20.2973979Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-09-10T09:37:46.8227371Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -32,34 +32,37 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>4.70568cm</Width>
+                  <Width>4.73578cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.11818cm</Width>
+                  <Width>3.14828cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.00693cm</Width>
+                  <Width>2.03703cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.11818cm</Width>
+                  <Width>3.14828cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.11818cm</Width>
+                  <Width>2.5301cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.11818cm</Width>
+                  <Width>3.14828cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.11818cm</Width>
+                  <Width>3.14828cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.64193cm</Width>
+                  <Width>3.14828cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.67203cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.5301cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5301cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -173,6 +176,38 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Member Date Of Birth</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Loan Product </Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -515,6 +550,36 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="LoanProductTypeName_Loans">
+                          <rd:DefaultName>LoanProductTypeName_Loans</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!LoanProductTypeName_Loans.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="ApprovedAmount">
                           <rd:DefaultName>ApprovedAmount</rd:DefaultName>
                           <CanGrow>true</CanGrow>
@@ -641,15 +706,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox3">
-                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                        <Textbox Name="RemainingPeriod">
+                          <rd:DefaultName>RemainingPeriod</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!RemainingPeriod.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -671,16 +736,18 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox5">
-                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                        <Textbox Name="DepositBal">
+                          <rd:DefaultName>DepositBal</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
-                                  <Style />
+                                  <Value>=Fields!DepositBal.Value</Value>
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -715,6 +782,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -731,7 +799,7 @@
             <Top>0.40541cm</Top>
             <Left>0.00003cm</Left>
             <Height>1.2cm</Height>
-            <Width>29.94544cm</Width>
+            <Width>32.77649cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -742,7 +810,7 @@
         <Height>1.77271cm</Height>
         <Style />
       </Body>
-      <Width>29.94548cm</Width>
+      <Width>32.77652cm</Width>
       <Page>
         <PageHeader>
           <Height>2.95162cm</Height>
@@ -773,7 +841,7 @@
               <Top>0.29178in</Top>
               <Left>9.35881in</Left>
               <Height>0.21066in</Height>
-              <Width>2.43075in</Width>
+              <Width>3.54533in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -806,7 +874,7 @@
               </Paragraphs>
               <Top>0.03528cm</Top>
               <Height>0.6cm</Height>
-              <Width>29.94547cm</Width>
+              <Width>32.77651cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -840,7 +908,7 @@
               </Paragraphs>
               <Top>0.54391cm</Top>
               <Height>0.6cm</Height>
-              <Width>29.94547cm</Width>
+              <Width>32.77651cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -874,7 +942,7 @@
               </Paragraphs>
               <Top>1.24974cm</Top>
               <Height>0.6cm</Height>
-              <Width>29.94547cm</Width>
+              <Width>32.77651cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -917,7 +985,7 @@
               <Top>0.03529cm</Top>
               <Left>22.422cm</Left>
               <Height>0.6cm</Height>
-              <Width>7.52347cm</Width>
+              <Width>10.35451cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -967,7 +1035,7 @@
               <Top>2.02613cm</Top>
               <Left>0.00003cm</Left>
               <Height>0.6cm</Height>
-              <Width>29.94545cm</Width>
+              <Width>32.77649cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -1031,7 +1099,7 @@
           </Style>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
-        <PageWidth>31cm</PageWidth>
+        <PageWidth>34cm</PageWidth>
         <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0.5cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>

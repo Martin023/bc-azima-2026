@@ -92,8 +92,8 @@ enum 52185463 "Salary Type"
     {
         Caption = 'Voluntary Pension';
     }
-    value(22; "Reli")
+    value(22; "Union")
     {
-        Caption = 'Facillitative Allowance';
+        Caption = 'Union';
     }
 }

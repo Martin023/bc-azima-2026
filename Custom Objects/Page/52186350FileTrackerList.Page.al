@@ -2,7 +2,7 @@ page 52186350 "File Tracker List"
 {
     CardPageID = "File Tracker Card";
     DeleteAllowed = false;
-    // Editable = false;
+    Editable = false;
     PageType = List;
     InsertAllowed = true;
     SourceTable = "File Tracker";
@@ -26,7 +26,7 @@ page 52186350 "File Tracker List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field("Folio Number"; Rec."Folio Number")
+                field("File received date"; Rec."File received date")
                 {
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
@@ -85,22 +85,22 @@ page 52186350 "File Tracker List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field("Other  Doc  No"; Rec."Other  Doc  No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    StyleExpr = StyleExprTxt;
-                }
+                // field("Other  Doc  No"; Rec."Other  Doc  No")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     StyleExpr = StyleExprTxt;
+                // }
                 field("File  Forwarded"; Rec."File  Forwarded")
                 {
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field(Create; Rec.Create)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'File Created';
-                    StyleExpr = StyleExprTxt;
-                }
+                // field(Create; Rec.Create)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'File Created';
+                //     StyleExpr = StyleExprTxt;
+                // }
             }
         }
     }

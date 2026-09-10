@@ -274,6 +274,16 @@ page 52186732 "SMS Alerts Header Card"
                 RunObject = page "Guarantor Notice Letters List";
                 RunPageLink = "Header No" = field("No.");
                 RunPageMode = View;
+                // RunObject = report "Guarantor Notice";
+                // trigger OnAction()
+                // var
+                //     ReportParameters: Text;
+                //     LoanRepay: Report "Guarantor Notice";
+                // begin
+                //     ReportParameters := LoanRepay.RunRequestPage();
+                //     Message(ReportParameters);
+                // end;
+
 
             }
 
@@ -307,14 +317,14 @@ page 52186732 "SMS Alerts Header Card"
                         rec."Posted By" := UserId;
                         Rec."Posted At" := CurrentDateTime;
                         rec.Modify();
-                        if AreThereLetters() then begin
-                            if Confirm('Do you wish to generate the letters?') then begin
-                                GenerateLetters();
-                                Message('SUCCESS\1. Notifications Posted successfully\2. Letters generated successfully');
-                            end else
-                                Message('Notifications Posted successfully');
-                        end else
-                            Message('Notifications Posted successfully');
+                        // if AreThereLetters() then begin
+                        //     if Confirm('Do you wish to generate the letters?') then begin
+                        //         GenerateLetters();
+                        //         Message('SUCCESS\1. Notifications Posted successfully\2. Letters generated successfully');
+                        //     end else
+                        //         Message('Notifications Posted successfully');
+                        // end else
+                        //     Message('Notifications Posted successfully');
                     end else
                         Message('Operation aborted!');
                 end;
@@ -1243,8 +1253,8 @@ page 52186732 "SMS Alerts Header Card"
         InS: InStream;
 
         FilePath: Text;
+        AlertsLinesII: Record "SMS Alerts Lines";
         AlertsLines: Record "SMS Alerts Lines";
-        AlertsLine: Record "SMS Alerts Lines";
         OutStr: OutStream;
         PdfMimeType: Text[30];
         InStreamVar: InStream;
@@ -1254,53 +1264,62 @@ page 52186732 "SMS Alerts Header Card"
         FileContentsB64: Text;
         Base64Convert: Codeunit "Base64 Convert";
         GuarantorNoticeLetters: record "Guarantor Notice Letters";
+        ReportParameters: Text;
+        XmlDoc: XmlDocument;
+        Alerts: List of [Integer];
+        i: Integer;
+        Guars: Integer;
     begin
         // Zip.CreateZipArchive();
-        Clear(AlertsLines);
-        AlertsLines.Reset();
-        AlertsLines.SetRange("Header No", Rec."No.");
-        AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
-        //AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
-        if AlertsLines.Find('-') then begin
-            // delete existing
-            GuarantorNoticeLetters.reset();
-            GuarantorNoticeLetters.setrange("Header No", AlertsLines."Header No");
-            GuarantorNoticeLetters.deleteall();
+        clear(AlertsLinesII);
+        clear(Alerts);
+        GuarantorNoticeLetters.reset();
+        GuarantorNoticeLetters.setrange("Header No", rec."No.");
+        GuarantorNoticeLetters.deleteall();
+
+        AlertsLinesII.Reset();
+        AlertsLinesII.SetRange("Header No", Rec."No.");
+        AlertsLinesII.SetRange("Notice Type", AlertsLinesII."Notice Type"::Letter);
+        AlertsLinesII.SetRange(Recepient, AlertsLinesII.Recepient::Guarantor);
+        if AlertsLinesII.FindFirst() then
             repeat
-                clear(TempBlob);
-                clear(RecRef);
-                clear(BlobOutStream);
-                clear(FieldOutStream);
-                clear(BlobInStream);
-                clear(OutStr);
-                // RecRef.GetTable(AlertsLines);
-                LoanNo := AlertsLines."Loan No";
-                TempBlob.CreateOutStream(OutStr);
-                TempBlob.CreateOutStream(BlobOutStream);
+                Alerts.Add(AlertsLinesII."Entry No");
+            until AlertsLinesII.Next() = 0;
+
+        Guars := Alerts.Count();
+        // Message(Format(Guars));
+
+        for i := 1 to Guars do begin
+            if AlertsLines.Get(Alerts.Get(i)) then begin
+                Clear(TempBlob);
+                Clear(RecRef);
+
                 RecRef.GetTable(AlertsLines);
-                if AlertsLines.Recepient = AlertsLines.Recepient::Guarantor then begin//for guarnator
-                    Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, BlobOutStream, RecRef);
-                    // else
-                    //     Report.SaveAs(Report::"Defaulter Notice-2", '', ReportFormat::Pdf, BlobOutStream, RecRef);
-                    // Insert record first
-                    GuarantorNoticeLetters.Init();
-                    GuarantorNoticeLetters.EntryNo := AlertsLines."Entry No";
-                    GuarantorNoticeLetters."Loan No" := AlertsLines."Loan No";
-                    GuarantorNoticeLetters."Header No" := AlertsLines."Header No";
-                    GuarantorNoticeLetters."Recipient Member No" := AlertsLines."Member No";
-                    GuarantorNoticeLetters.Recepient := AlertsLines.Recepient;
-                    GuarantorNoticeLetters.Letter.CreateOutStream(FieldOutStream);
-                    TempBlob.CreateInStream(BlobInStream);
-                    CopyStream(FieldOutStream, BlobInStream);
-                    GuarantorNoticeLetters.Insert();
+                RecRef.SetRecFilter;   // scope RecRef to exactly this one record
 
-                    // Write into the BLOB field
+                TempBlob.CreateOutStream(OutS);
 
+                Report.SaveAs(
+                    Report::"Guarantor Notice",
+                    '',
+                    ReportFormat::Pdf,
+                    OutS,
+                    RecRef
+                );
 
-                    // Persist changes
-                    //GuarantorNoticeLetters.Modify();
-                end;
-            until AlertsLines.Next() = 0;
+                GuarantorNoticeLetters.Init();
+                GuarantorNoticeLetters.EntryNo := AlertsLines."Entry No";
+                GuarantorNoticeLetters."Loan No" := AlertsLines."Loan No";
+                GuarantorNoticeLetters."Header No" := AlertsLines."Header No";
+                GuarantorNoticeLetters."Recipient Member No" := AlertsLines."Member No";
+                GuarantorNoticeLetters.Recepient := AlertsLines.Recepient;
+
+                GuarantorNoticeLetters.Letter.CreateOutStream(OutS);
+                TempBlob.CreateInStream(InS);
+                CopyStream(OutS, InS);
+
+                GuarantorNoticeLetters.Insert();
+            end;
         end;
     end;
 

@@ -949,7 +949,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                                         TrEarni := TrEarni + AppraisalSal.Amount
                                     else
                                         if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
-                                        or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) or (AppraisalSal.Type = AppraisalSal.Type::"Voluntary NSSF") or (AppraisalSal.Type = AppraisalSal.Type::Loans) then
+                                        or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) or (AppraisalSal.Type = AppraisalSal.Type::"Voluntary NSSF") or (AppraisalSal.Type = AppraisalSal.Type::Loans) or (AppraisalSal.Type = AppraisalSal.Type::Union) then
                                             TDeductions := TDeductions + AppraisalSal.Amount
                                         else
                                             if (AppraisalSal.Type = AppraisalSal.Type::Pension) or (AppraisalSal.Type = AppraisalSal.Type::"Voluntary Pension") then begin
@@ -1361,7 +1361,6 @@ Report 52185745 "Loan Appraisal Checkoff"
                     DiffSec := Loans."Approved Amount" - SecurityTotal;
                 end;
 
-                CreateLoanAppraisalBackup(Loans."Loan No.");
             end;
 
         }
@@ -1386,86 +1385,6 @@ Report 52185745 "Loan Appraisal Checkoff"
     labels
     {
     }
-    procedure CreateLoanAppraisalBackup(LoanNo: Code[20])
-    var
-        LoanRec: Record "Loan Appraisal";
-    begin
-
-
-        if LoanRec.Get(LoanNo) then begin
-            // Check if the loan is already posted
-            if Loans.Posted = true then
-                exit; // Skip deletion and insertion if loan is posted
-
-            // If not posted, delete the record
-            LoanRec.Delete();
-        end;
-
-        // Insert the new record
-        LoanRec.Init();
-        LoanRec."Loan No." := LoanNo;
-        LoanRec."Member No" := Loans."Member No.";
-        LoanRec."Member Name" := Loans."Member Name";
-        LoanRec."Staff No" := Loans."Staff No";
-        LoanRec."Loan Product Type" := LoansProductTyp;
-        LoanRec."Loan Product Name" := Loans."Loan Product Type Name";
-        LoanRec."Months to Retire" := MonthsToRetire;
-        LoanRec."Member Deposits" := Loans."Member Deposits";
-        LoanRec."Share Capital" := ShareCapital;
-        LoanRec."Existing Loans" := TotalLoanBal;
-        LoanRec.Installments := Loans.Installments;
-        LoanRec."Global Dimension 1" := Loans."Global Dimension 1 Code";
-        //header end
-
-        //Deductions
-        Loanrec."General Charges" := TotalProcessingAmt;
-        Loanrec."Form Fee" := LoanFormFees;
-        Loanrec."Insurance Fee" := InsuranceFee;
-        LoanRec."Deposit Boosting" := Loans."Loans - Deposit Purchase";
-        LoanRec."Processing Fee" := TotalProcessingAmt;
-        LoanRec."Dep Purchase Comm" := DepPurchaseComm;
-        LoanRec."Dep Purchase Excise" := DepPurchaseCommExc;
-        LoanRec."Share Boost" := Loans."Share Boosted Amount";
-
-        // Refinancing
-        LoanRec."Offset Total" := OffsetTotal;
-        LoanRec."Top-up Comm" := TopUpComms;
-        LoanRec."Top-Excise" := TopUpCommExc;
-        LoanRec."One month Interest" := OneMonthInterest;
-        //Other chrges
-        LoanRec."Upfront int" := UpfrontInterest;
-        LoanRec."Total excise Duty" := TotalExciseDuty;
-
-        //SalaryDetails
-        //Checkoff
-        LoanRec."Basic Income" := TotalBasic;
-        LoanRec."House Allowance" := THouseAllow;
-        LoanRec.Earnings := TrEarni;
-        LoanRec."Gross Pay" := GrossPay;
-        LoanRec.Deductions := TDeductions;
-        LoanRec."Net Salary" := NetSalary;
-        LoanRec."2/3 of Gross" := TwoThirdGross;
-        LoanRec."Disposable Income" := DisposableInc;
-        LoanRec."Qualification on Salary" := NetOnSalary;
-        //Salary
-
-
-        //Deposit & Guar Qualification
-        Loanrec."Deposit multiplier" := DepositMult;
-        Loanrec."Qualification on Deposits" := QualificationOnDeposits;
-        loanrec."Qualification on Guarantors" := TotalGuaranteed;
-
-        //Other Details
-        LoanRec."Repayment" := Loans.Repayment;
-        Loanrec."Loan Interest Repayement" := Loans."Loan Interest Repayment";
-        LoanRec."Loan Principle Repayment" := Loans."Loan Principle Repayment";
-        LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        LoanRec."Take Home Amount" := Loans."Net Amount";
-
-        LoanRec."Deposit multiplier" := Mult;
-        // end of repayment
-        LoanRec.Insert();
-    end;
 
     trigger OnPostReport()
     var

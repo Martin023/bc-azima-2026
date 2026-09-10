@@ -137,6 +137,12 @@ page 52187312 "Credit Management Role Center"
                             RunObject = Page "CRB DPI File Submissions";
                             RunPageView = where("CRB Institution" = Const('METROPOL'));
                         }
+                        action("CRB log Buffer")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'CRB log Buffer';
+                            RunObject = Page "CRB log Buffer";
+                        }
                     }
 
                     group("Monthly CRB Listing")
@@ -155,6 +161,28 @@ page 52187312 "Credit Management Role Center"
                             Caption = 'Monthly CRB Listing (Non-Individual) - Metropol';
                             RunObject = Page "CRB Monthly NICE File Subm.";
                             RunPageView = where("CRB Institution" = Const('METROPOL'));
+                        }
+                    }
+
+                    group("CRB Monthly")
+                    {
+                        Caption = 'CRB Monthly Manual Processing';
+                        action("Process CRB Monthly")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "CRB Monthly Manual";
+                        }
+                        action("CRB Monthly List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "CRB Monthly Manual List";
+                        }
+
+                        action("CRB Monthly Errors")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Bulk Processing Errors List";
+                            RunPageView = where(Process = filter("CRB Monthly"));
                         }
                     }
                 }
@@ -2480,26 +2508,7 @@ page 52187312 "Credit Management Role Center"
                 //     ApplicationArea = Basic, Suite;
                 //     RunObject = report "CRB Monthly Report";
                 // }
-                group("CRB Monthly")
-                {
-                    action("Process CRB Monthly")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "CRB Monthly Manual";
-                    }
-                    action("CRB Monthly List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "CRB Monthly Manual List";
-                    }
 
-                    action("CRB Monthly Errors")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Bulk Processing Errors List";
-                        RunPageView = where(Process = filter("CRB Monthly"));
-                    }
-                }
                 action("CRB Attached Report")
                 {
                     ApplicationArea = Basic, Suite;
