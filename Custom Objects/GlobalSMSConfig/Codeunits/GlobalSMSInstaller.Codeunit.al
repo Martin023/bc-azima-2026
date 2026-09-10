@@ -1,6 +1,12 @@
 codeunit 52185465 "Global SMS Installer"
 {
-    // SEEDS DEFAULT TOKENS AND OPTIONALLY TEMPLATES
+    Subtype = Install;
+
+    trigger OnInstallAppPerCompany()
+    begin
+        InstallDefaultTokens();
+        InstallDefaultTemplates();
+    end;
 
     procedure InstallDefaultTokens()
     begin
@@ -22,6 +28,10 @@ codeunit 52185465 "Global SMS Installer"
         CreateToken('[TRANSACTION_NO]', 'Transaction reference number', "SMS Token Category"::"Transaction Info", 0, 'TXN-001234', true);
         CreateToken('[CHEQUE_NO]', 'Cheque number', "SMS Token Category"::"Transaction Info", 0, 'CHQ-001', true);
         CreateToken('[REFERENCE_NO]', 'Reference number', "SMS Token Category"::"Transaction Info", 0, 'REF-001234', true);
+        CreateToken('[DEPOSITOR]', 'Who deposited (You or name)', "SMS Token Category"::"Transaction Info", 0, 'John Doe', true);
+        CreateToken('[CREDITED_ACCOUNT]', 'Account credited', "SMS Token Category"::"Transaction Info", 0, 'Member Deposits', true);
+        CreateToken('[PAYEE]', 'Payee name', "SMS Token Category"::"Transaction Info", 0, 'ABC Company Ltd', true);
+        CreateToken('[PAYER]', 'Payer name', "SMS Token Category"::"Transaction Info", 0, 'XYZ Enterprises', true);
 
         // LOAN INFO TOKENS
         CreateToken('[LOAN_NO]', 'Loan account number', "SMS Token Category"::"Loan Info", 0, 'LN-001234', true);
@@ -49,11 +59,10 @@ codeunit 52185465 "Global SMS Installer"
 
     procedure InstallDefaultTemplates()
     begin
-        // CBS TEMPLATES
         CreateTemplate(
             'CASH_WITHDRAWAL',
             'Cash Withdrawal Transaction',
-            'Dear [MEMBER_NAME], You withdrew KES [AMOUNT] from [PRODUCT_NAME]. Balance: KES [BALANCE].',
+            'Dear [MEMBER_NAME], You withdrew KES [AMOUNT] from [PRODUCT_NAME] on [DATE] at [TIME].',
             "SMS Source"::CASH_WITHDRAWAL_CONFIRM,
             "SMS Module"::CBS,
             true
@@ -62,7 +71,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CASH_DEPOSIT',
             'Cash Deposit Transaction',
-            'Dear [MEMBER_NAME], KES [AMOUNT] deposited to [PRODUCT_NAME]. Balance: KES [BALANCE].',
+            'Dear [MEMBER_NAME], You deposited KES [AMOUNT] to [PRODUCT_NAME] on [DATE] at [TIME].',
             "SMS Source"::DEPOSIT_CONFIRMATION,
             "SMS Module"::CBS,
             true
@@ -71,16 +80,25 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CREDIT_RECEIPT',
             'Credit Receipt Transaction',
-            'Dear [MEMBER_NAME], Credit of KES [AMOUNT] received on [PRODUCT_NAME]. Balance: KES [BALANCE].',
+            'Dear [MEMBER_NAME], [DEPOSITOR] deposited KES [AMOUNT] to your [CREDITED_ACCOUNT] on [DATE] at [TIME].',
             "SMS Source"::DEPOSIT_CONFIRMATION,
             "SMS Module"::CBS,
             true
         );
 
         CreateTemplate(
+            'BANKERS_CHEQUE',
+            'Bankers Cheque Issuance',
+            'Dear [MEMBER_NAME], Bankers Cheque [CHEQUE_NO] of KES [AMOUNT] issued to [PAYEE] on [DATE] at [TIME].',
+            "SMS Source"::BANKERS_CHEQUE_ISSUED,
+            "SMS Module"::Teller,
+            true
+        );
+
+        CreateTemplate(
             'CHEQUE_DEPOSIT',
             'Cheque Deposit Transaction',
-            'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] deposited to [PRODUCT_NAME] (clearing in 3 days).',
+            'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] from [PAYER] deposited to [PRODUCT_NAME] on [DATE] at [TIME].',
             "SMS Source"::TELLER_CHEQUE_DEPOSIT,
             "SMS Module"::Teller,
             true
@@ -89,7 +107,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CHEQUE_CLEARED',
             'Cheque Clearance Notification',
-            'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] cleared to [PRODUCT_NAME]. Balance: KES [BALANCE].',
+            'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] cleared to [PRODUCT_NAME].',
             "SMS Source"::CHEQUE_CLEARANCE,
             "SMS Module"::Teller,
             true

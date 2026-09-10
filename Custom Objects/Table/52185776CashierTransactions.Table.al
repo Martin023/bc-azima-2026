@@ -45,7 +45,7 @@ table 52185776 "Cashier Transactions"
                         Error(Text0001);
                     Account.CalcFields(Account.Balance);
                     "Account Name" := Account.Name;
-                    Remarks := Account.Name;
+                    // Remarks := Account.Name;  // REMOVED - LET CASHIER ENTER MANUALLY TO AVOID REPETITION IN SMS
                     "Account Status" := Account.Status;
                     // Payee := Account.Name;
                     "Product Type" := Account."Product Type";

@@ -2,7 +2,7 @@ page 52186350 "File Tracker List"
 {
     CardPageID = "File Tracker Card";
     DeleteAllowed = false;
-    // Editable = false;
+
     PageType = List;
     InsertAllowed = true;
     SourceTable = "File Tracker";
@@ -58,11 +58,19 @@ page 52186350 "File Tracker List"
                     Visible = false;
                     StyleExpr = StyleExprTxt;
                 }
+                field("File Requested By"; Rec."File Requested By")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Requested By';
+                    StyleExpr = StyleExprTxt;
+                    Visible = ShowRequestedBy;
+                }
                 field("File Received By"; Rec."File Received by")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Received By';
                     StyleExpr = StyleExprTxt;
+                    Visible = ShowReceivedBy;
                 }
                 field("Responsibility Centre"; Rec."Responsibility Centre")
                 {
@@ -109,16 +117,12 @@ page 52186350 "File Tracker List"
     {
     }
 
-    // trigger OnOpenPage()
-    // var
-    //     UserSetup: Record "User Setup";
-    // begin
-    //     if UserSetup.Get(UserId) then begin
-    //         UserSetup.TestField("Responsibility Centre");
-    //         Rec.SetFilter(Rec."Current Responsibility Centre", UserSetup."Responsibility Centre");
-    //     end else
-    //         Error('You must be set up in user setup');
-    // end;
+    trigger OnOpenPage()
+    begin
+        ShowRequestedBy := Rec.GetFilter("File Request Status") = 'Requested';
+        ShowReceivedBy := Rec.GetFilter("File Request Status") = 'Received';
+    end;
+
     trigger OnAfterGetRecord()
     begin
 
@@ -136,5 +140,7 @@ page 52186350 "File Tracker List"
     var
         StyleExprTxt: Text;
         FileTracker: Record "File Tracker";
+        ShowRequestedBy: Boolean;
+        ShowReceivedBy: Boolean;
 }
 
