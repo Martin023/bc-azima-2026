@@ -2105,13 +2105,13 @@ page 52187312 "Credit Management Role Center"
                         RunObject = report "Batch Loan Register";
 
                     }
-                    action("Sectoral Classification")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sectoral Classification';
-                        RunObject = report "Sectoral Classification";
+                    // action("Sectoral Classification")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sectoral Classification';
+                    //     RunObject = report "Sectoral Classification";
 
-                    }
+                    // }
                     action("Loan Movement Summary")
                     {
                         ApplicationArea = Basic, Suite;

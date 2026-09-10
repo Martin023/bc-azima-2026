@@ -1520,7 +1520,7 @@ page 52187328 "Business Loans"
                         Caption = 'Loans Underway Report';
                         RunObject = report "Loans Underway Report";
                     }
-                                       action("Loan Approved Schedule")
+                    action("Loan Approved Schedule")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Loan Approved Schedule';
@@ -1584,7 +1584,7 @@ page 52187328 "Business Loans"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Loan Provisioning Summary';
                         // RunObject = report "Loans Provisioning Summary";
-                          RunObject = report "Risk Provisioning";
+                        RunObject = report "Risk Provisioning";
                     }
                     action("Loan Product Summaries")
                     {
@@ -1627,7 +1627,7 @@ page 52187328 "Business Loans"
                         RunObject = report "Loan Issued Summary";
 
                     }
-                    
+
                     action("Position on Borrowers in Sacco")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1712,13 +1712,13 @@ page 52187328 "Business Loans"
                         RunObject = report "Batch Loan Register";
 
                     }
-                    action("Sectoral Classification")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sectoral Classification';
-                        RunObject = report "Sectoral Classification";
+                    // action("Sectoral Classification")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sectoral Classification';
+                    //     RunObject = report "Sectoral Classification";
 
-                    }
+                    // }
                     action("Member Guarantors Report")
                     {
                         ApplicationArea = "Basic, Suite";
@@ -1841,7 +1841,7 @@ page 52187328 "Business Loans"
                         Caption = 'Sasra Staff Access Granted';
                         RunObject = report "Sasra Staff Access Granted";
                     }
-                  
+
                     action("Sasra Staff Positions")
                     {
                         ApplicationArea = Basic, Suite;

@@ -119,7 +119,7 @@ page 52185500 "Main Role Center"
                             RunObject = Page "Micro Member Application List";
                         }
                     }
-                    
+
                 }
                 group("Agents")
                 {
@@ -867,12 +867,12 @@ page 52185500 "Main Role Center"
                             Caption = 'Batch Loan Register';
                             RunObject = report "Batch Loan Register";
                         }
-                        action("Sectoral Classification")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Sectoral Classification';
-                            RunObject = report "Sectoral Classification";
-                        }
+                        // action("Sectoral Classification")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Sectoral Classification';
+                        //     RunObject = report "Sectoral Classification";
+                        // }
                         action("Member Guarantors Report")
                         {
                             ApplicationArea = "Basic, Suite";
@@ -1048,7 +1048,7 @@ page 52185500 "Main Role Center"
                             //     Caption = 'Process BDE Payments';
                             //     RunObject = report "Process BDE Payments";
                             // }
-                            
+
                         }
                     }
                     group("Defaulters Management")
@@ -4698,7 +4698,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Inventory Purchase Orders';
                             RunObject = report "Inventory Purchase Orders";
                         }
-                       
+
                         action("Inventory - Cost Variance")
                         {
                             ApplicationArea = Basic, Suite;
@@ -4876,7 +4876,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Invt. Valuation - Cost Spec.';
                             RunObject = report "Invt. Valuation - Cost Spec.";
                         }
-                       
+
                         action("Item Age Composition - Value")
                         {
                             ApplicationArea = Basic, Suite;
