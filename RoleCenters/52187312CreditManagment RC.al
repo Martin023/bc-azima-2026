@@ -241,12 +241,12 @@ page 52187312 "Credit Management Role Center"
                 {
 
                     Caption = 'Posted/Reversed Loans';
-                    action("Loan Posted List")
+                    action("Running Loan List")
                     {
+                        Caption = 'Running Loans List';
                         ApplicationArea = Basic, Suite;
-                        caption = 'Loan Posted List';
                         RunObject = page "Loan Posted List";
-                        RunPageView = where("Source Unit" = filter(<> "HR LOANS"));
+                        RunPageView = where("Total Balance" = filter(<> 0));
                     }
                     action("Cleared Loan List")
                     {
@@ -268,6 +268,13 @@ page 52187312 "Credit Management Role Center"
                         caption = 'Reversed Loan List';
                         RunObject = page "Loan Posted List";
                         RunPageView = where("Source Unit" = filter(<> "HR LOANS"), "Reversed" = filter(true));
+                    }
+                    action("Loan Posted List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'All Loans Posted List';
+                        RunObject = page "Loan Posted List";
+                        RunPageView = where("Source Unit" = filter(<> "HR LOANS"));
                     }
 
                 }
@@ -619,17 +626,17 @@ page 52187312 "Credit Management Role Center"
 
 
                 // 
-                group("Loan Categorization")
-                {
-                    caption = 'Loan Categorization';
+                // group("Loan Categorization")
+                // {
+                //     caption = 'Loan Categorization';
 
-                    action("SASRA Loan Categorization.")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SASRA Loan Categorization';
-                        RunObject = report "SASRA Loan Categorization";
-                    }
-                }
+                //     action("SASRA Loan Categorization.")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'SASRA Loan Categorization';
+                //         RunObject = report "SASRA Loan Categorization";
+                //     }
+                // }
                 group(SystemReversals)
                 {
                     Caption = 'System Reversal';
@@ -1772,13 +1779,13 @@ page 52187312 "Credit Management Role Center"
                 group("Loans Report")
                 {
                     Caption = 'Loans';
-                    action("Loans Interest Register")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted Loans Register';
-                        RunObject = report "Loan Interest  Register";
-                        Visible = false;
-                    }
+                    // action("Loans Interest Register")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Posted Loans Register';
+                    //     RunObject = report "Loan Interest  Register";
+                    //     Visible = false;
+                    // }
                     action("Loan Repayment & Total Balance")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1798,6 +1805,7 @@ page 52187312 "Credit Management Role Center"
                         RunObject = report "Loan Register";
 
                     }
+
                     action("Branch Loan Summary")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1855,12 +1863,12 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Loans Underway Report';
                         RunObject = report "Loans Underway Report";
                     }
-                    action("SASRA Loan Categorization")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SASRA Loan Categorization';
-                        RunObject = report "SASRA Loan Categorization";
-                    }
+                    // action("SASRA Loan Categorization")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'SASRA Loan Categorization';
+                    //     RunObject = report "SASRA Loan Categorization";
+                    // }
 
 
                     action("Loan Approved Schedule")
@@ -1900,20 +1908,20 @@ page 52187312 "Credit Management Role Center"
                         Visible = false;
                     }
 
-                    action("Loans Defaulter Aging - SASRA")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Defaulter Aging - SASRA';
-                        RunObject = report "Loans Defaulter Aging - SASRA";
-                    }
-                    action("Loan Provisioning Summary")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Provisioning Summary';
-                        // RunObject = report "Loans Provisioning Summary";
-                        RunObject = report "Risk Provisioning";
-                        //Visible = false;
-                    }
+                    // action("Loans Defaulter Aging - SASRA")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loans Defaulter Aging - SASRA';
+                    //     RunObject = report "Loans Defaulter Aging - SASRA";
+                    // }
+                    // action("Loan Provisioning Summary")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Risk Provisioning Summary';
+                    //     // RunObject = report "Loans Provisioning Summary";
+                    //     RunObject = report "Risk Provisioning";
+                    //     //Visible = false;
+                    // }
                     action("Loan Product Summaries")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2074,14 +2082,14 @@ page 52187312 "Credit Management Role Center"
                         Visible = false;
 
                     }
-                    action("Asset Finance Loans")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Asset Finance Loans';
-                        RunObject = report "Asset Finance Loans";
-                        Visible = false;
+                    // action("Asset Finance Loans")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Asset Finance Loans';
+                    //     RunObject = report "Asset Finance Loans";
+                    //     Visible = false;
 
-                    }
+                    // }
                     action("Summary Unallocated A/C")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2097,13 +2105,13 @@ page 52187312 "Credit Management Role Center"
                         RunObject = report "Batch Loan Register";
 
                     }
-                    action("Sectoral Classification")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sectoral Classification';
-                        RunObject = report "Sectoral Classification";
+                    // action("Sectoral Classification")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sectoral Classification';
+                    //     RunObject = report "Sectoral Classification";
 
-                    }
+                    // }
                     action("Loan Movement Summary")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2327,6 +2335,20 @@ page 52187312 "Credit Management Role Center"
                     {
                         ApplicationArea = all;
                         RunObject = report "Sectoral Lending";
+                    }
+                    action("Loan Provisioning Summary")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Risk Provisioning Summary';
+                        // RunObject = report "Loans Provisioning Summary";
+                        RunObject = report "Risk Provisioning";
+                        //Visible = false;
+                    }
+                    action("Loans Arrears HISTORICAL")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Loans Arrears HISTORICAL';
+                        RunObject = report "Loans Arrears HISTORICAL";
                     }
 
                     // action("User Groups and Permission Report")

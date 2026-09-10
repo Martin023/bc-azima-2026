@@ -16,6 +16,8 @@ report 52187324 "Loans Arrears HISTORICAL"
             column(ApplicationDate; "Application Date") { }
             column(LoanProductType; "Loan Product Type") { }
             column(LoanProductTypeName; "Loan Product Type Name") { }
+            column(outstandingPrinciple; "Outstanding Balance") { }
+            column(outstandingInterest; "Outstanding Interest") { }
             column(OutstandingBalance; "Total Balance") { }
             column(Repayment; "Repayment") { }
             column(Interest; "Interest") { }
@@ -151,7 +153,7 @@ report 52187324 "Loans Arrears HISTORICAL"
 
 
                 // Guarantor loans to always be in loss - FINANCE Kenneth.
-                if (Loans."Loan Product Type" = 'BGL') or (Loans."Loan Product Type" = 'FGL') then begin
+                if (Loans."Loan Product Type" = '075') or (Loans."Loan Product Type" = 'BGL') then begin
                     DaysInArrears := AsAt - Loans."Disbursement Date";
                     // One off loans not recovered in the year;
                     InstallInArrears := 12.1;
@@ -161,7 +163,7 @@ report 52187324 "Loans Arrears HISTORICAL"
 
 
 
-                Loans."Loans Category-SASRA" := LoanProcess.LoanCategoryStage(InstallInArrears);
+                Loans."Loans Category-SASRA" := LoanProcess.LoanCategoryStage(DaysInArrears);
                 if Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming then begin
                     // DaysInArrears := 0;
                     // AmountInArrearsSACCO := 0;

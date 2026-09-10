@@ -1152,12 +1152,12 @@ page 52186583 "Audit Role center"
                                 Caption = 'Batch Loan Register';
                                 RunObject = report "Batch Loan Register";
                             }
-                            action("Sectoral Classification")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Sectoral Classification';
-                                RunObject = report "Sectoral Classification";
-                            }
+                            // action("Sectoral Classification")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Sectoral Classification';
+                            //     RunObject = report "Sectoral Classification";
+                            // }
                             action("Member Guarantors Report")
                             {
                                 ApplicationArea = "Basic, Suite";
@@ -1333,7 +1333,7 @@ page 52186583 "Audit Role center"
                                 //     Caption = 'Process BDE Payments';
                                 //     RunObject = report "Process BDE Payments";
                                 // }
-                               
+
                             }
                         }
                         group("Defaulters Management")

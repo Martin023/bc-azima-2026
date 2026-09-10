@@ -206,7 +206,10 @@ table 52185776 "Cashier Transactions"
                             end;
                         end;
                         // end;
-
+                    end;
+                    if TransType.Type = TransType.Type::"MPESA Deposit" then begin
+                        if rec.Amount > rec."MPESA Float Balance" then
+                            Error('Transaction Denied: The float balance is insufficient!. Current balance is %1', rec."MPESA Float Balance");
                     end;
                 end;
             end;

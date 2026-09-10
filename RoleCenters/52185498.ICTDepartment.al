@@ -1024,7 +1024,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Dormant Savings Accounts';
                                 RunObject = report "Dormant Savings Accounts";
                             }
-                          
+
                             action("E-Mail Member Statement")
                             {
                                 ApplicationArea = "Basic, Suite";
@@ -1244,12 +1244,12 @@ page 52187058 "ICT Department"
                                 Caption = 'Batch Loan Register';
                                 RunObject = report "Batch Loan Register";
                             }
-                            action("Sectoral Classification")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Sectoral Classification';
-                                RunObject = report "Sectoral Classification";
-                            }
+                            // action("Sectoral Classification")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Sectoral Classification';
+                            //     RunObject = report "Sectoral Classification";
+                            // }
                             action("Member Guarantors Report")
                             {
                                 ApplicationArea = "Basic, Suite";
