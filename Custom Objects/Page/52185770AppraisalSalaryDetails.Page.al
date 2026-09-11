@@ -146,11 +146,15 @@ page 52185770 "Appraisal Salary Details"
                                 ApprD.SetRange("Loan No", Rec."Loan No");
                                 ApprD.SetRange("Client Code", rec."Client Code");
                                 ApprD.SetRange(Type, ApprD.Type::Union);
-                                if not ApprD.IsEmpty() then begin
+                                if ApprD.findfirst() then begin
                                     AppD2.Reset();
+                                    AppD2.SetRange("Loan No", Rec."Loan No");
+                                    AppD2.SetRange("Client Code", rec."Client Code");
                                     AppD2.SetRange(Type, AppD2.type::Basic);
-                                    if AppD2.FindFirst() then
-                                        ApprD.Amount := round(((0.05 * AppD2.Amount) + 150), 1, '>')
+                                    if AppD2.FindFirst() then begin
+                                        ApprD.Amount := round(((0.05 * AppD2.Amount) + 150), 1, '>');
+                                        ApprD.modify;
+                                    end
                                     else
                                         Message('Basic pay is missing hence cannot compute Union');
                                 end
