@@ -62,7 +62,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CASH_WITHDRAWAL',
             'Cash Withdrawal Transaction',
-            'Dear [MEMBER_NAME], You withdrew KES [AMOUNT] from [PRODUCT_NAME] on [DATE] at [TIME].',
+            'Dear [MEMBER_NAME], You have withdrawn KES [AMOUNT] from [PRODUCT_NAME] on [DATE] at [TIME].',
             "SMS Source"::CASH_WITHDRAWAL_CONFIRM,
             "SMS Module"::CBS,
             true
@@ -71,7 +71,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CASH_DEPOSIT',
             'Cash Deposit Transaction',
-            'Dear [MEMBER_NAME], You deposited KES [AMOUNT] to [PRODUCT_NAME] on [DATE] at [TIME].',
+            'Dear [MEMBER_NAME], You have deposited KES [AMOUNT] to [PRODUCT_NAME] on [DATE] at [TIME].',
             "SMS Source"::DEPOSIT_CONFIRMATION,
             "SMS Module"::CBS,
             true
@@ -80,7 +80,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CREDIT_RECEIPT',
             'Credit Receipt Transaction',
-            'Dear [MEMBER_NAME], [DEPOSITOR] deposited KES [AMOUNT] to your [CREDITED_ACCOUNT] on [DATE] at [TIME].',
+            'Dear [MEMBER_NAME], [DEPOSITOR] have deposited KES [AMOUNT] to your [CREDITED_ACCOUNT] on [DATE] at [TIME].',
             "SMS Source"::DEPOSIT_CONFIRMATION,
             "SMS Module"::CBS,
             true
@@ -98,7 +98,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CHEQUE_DEPOSIT',
             'Cheque Deposit Transaction',
-            'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] from [PAYER] deposited to [PRODUCT_NAME] on [DATE] at [TIME].',
+            'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] from [PAYER] have been deposited to [PRODUCT_NAME] on [DATE] at [TIME].',
             "SMS Source"::TELLER_CHEQUE_DEPOSIT,
             "SMS Module"::Teller,
             true

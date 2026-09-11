@@ -221,6 +221,7 @@ enum 52185441 "SMS Source"
     {
         Caption = 'CHEQUE_CLEARANCE';
     }
+    // 57,58, and 59 are used in HR Sms Notifications
     value(60; BANKERS_CHEQUE_ISSUED)
     {
         Caption = 'BANKERS_CHEQUE_ISSUED';

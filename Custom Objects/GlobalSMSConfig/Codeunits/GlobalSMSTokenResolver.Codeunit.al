@@ -1,6 +1,7 @@
 codeunit 52185468 "Global SMS Token Resolver"
 {
-    // TOKEN REPLACEMENT ENGINE - REPLACES [TOKENS] WITH ACTUAL VALUES
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     procedure ResolveTokens(MessageBody: Text; TokenValues: Text): Text
     var
