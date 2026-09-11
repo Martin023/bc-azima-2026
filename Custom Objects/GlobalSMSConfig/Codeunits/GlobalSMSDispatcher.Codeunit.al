@@ -1,6 +1,7 @@
 codeunit 52185464 "Global SMS Dispatcher"
 {
-    // SIMPLE API FOR SENDING SMS - THIS IS ALL DEVELOPERS NEED TO USE
+    InherentEntitlements = X;
+    InherentPermissions = X;
 
     procedure Send(EventCode: Code[50]; RecipientPhone: Text[20]; TokenValues: Text): Boolean
     var
