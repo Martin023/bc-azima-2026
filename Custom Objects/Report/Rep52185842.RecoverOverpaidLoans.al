@@ -30,7 +30,7 @@ report 52185842 "Recover Overpaid Loans"
                     repeat
                         SavAcc.reset;
                         SavAcc.SetRange("Member No.", loans."Member No.");
-                        SavAcc.SetRange("Product Type", '191');
+                        SavAcc.SetRange("Product Type", '001');
                         if SavAcc.FindFirst() then begin
                             // if AvAmt > 0 then begin
                             Loans.CalcFields("Outstanding Interest");
@@ -39,7 +39,7 @@ report 52185842 "Recover Overpaid Loans"
                                 LoansInterest."Refund Header No." := "Interest Header"."No";
                                 LoansInterest."Member No." := loans."Member No.";
                                 LoansInterest."No." += 1;
-                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::"Interest Due";
+                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::"Interest Paid";
                                 LoansInterest."Source Loan No." := Loans."Loan No.";
                                 LoansInterest."Source Account" := '';
                                 LoansInterest."Destination Account" := SavAcc."No.";
@@ -55,7 +55,7 @@ report 52185842 "Recover Overpaid Loans"
                                 LoansInterest."Refund Header No." := "Interest Header"."No";
                                 LoansInterest."Member No." := loans."Member No.";
                                 LoansInterest."No." += 1;
-                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::Loan;
+                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::Repayment;
                                 LoansInterest."Source Account" := '';
                                 LoansInterest."Destination Account" := SavAcc."No.";
                                 LoansInterest."Loan No." := '';
@@ -100,7 +100,7 @@ report 52185842 "Recover Overpaid Loans"
                     field(EmployerCode; EmployerCode)
                     {
                         Caption = 'Employer Code';
-                        tablerelation = Customer where("Account Type" = const(Employer));
+                        tablerelation = Customer where("Account Type" = const("Employer Code"));
                         ApplicationArea = Basic, Suite;
                     }
                 }

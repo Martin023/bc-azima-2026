@@ -44,10 +44,19 @@ page 52186732 "SMS Alerts Header Card"
                 {
                     ToolTip = 'Specifies the value of the Send Email field.';
                 }
-                field("Create Letters"; Rec."Create Letters")
-                {
 
+                group(CreateLetters)
+                {
+                    // ShowCaption = false;
+                    Caption = 'Letters';
+                    field("Create Letters"; Rec."Create Letters")
+                    {
+                    }
+                    field("Equal Guarantor Disribution"; Rec."Equal Guarantor Disribution")
+                    {
+                    }
                 }
+
                 field(Status; Rec.Status)
                 {
                     ToolTip = 'Specifies the value of the Status field.';
@@ -98,18 +107,19 @@ page 52186732 "SMS Alerts Header Card"
                     ToolTip = 'Specifies the value of the Posted By field.';
                     Editable = false;
                 }
-                field("Responsible Officer"; Rec."Responsible Officer")
-                {
-                    Editable = false;
-                }
-                field("Supervisor ID"; Rec."Supervisor ID")
-                {
-                    Editable = false;
-                }
-                field("Case Forwarding No"; Rec."Case Forwarding No")
-                {
 
-                }
+                // field("Responsible Officer"; Rec."Responsible Officer")
+                // {
+                //     Editable = false;
+                // }
+                // field("Supervisor ID"; Rec."Supervisor ID")
+                // {
+                //     Editable = false;
+                // }
+                // field("Case Forwarding No"; Rec."Case Forwarding No")
+                // {
+
+                // }
             }
 
             part("Alerts Loans Lines"; "Alerts Loan Lines")
@@ -987,6 +997,7 @@ page 52186732 "SMS Alerts Header Card"
                                                 SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Lonee, NoticeCategory::"CRB Notice");
             end;
         end;
+
     end;
 
 
