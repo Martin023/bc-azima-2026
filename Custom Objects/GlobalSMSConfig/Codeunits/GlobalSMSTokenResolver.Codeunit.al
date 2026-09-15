@@ -63,12 +63,13 @@ codeunit 52185468 "Global SMS Token Resolver"
         KeyValue: Text;
         EqPos: Integer;
     begin
-        // EXTRACT TOKEN NAME (REMOVE BRACKETS)
         KeyName := Token;
         KeyName := KeyName.Replace('[', '');
         KeyName := KeyName.Replace(']', '');
 
-        // PARSE TOKEN VALUES STRING (FORMAT: KEY=VALUE||KEY=VALUE||...)
+        if UpperCase(KeyName) = 'TRANSACTION_BREAKDOWN' then
+            exit(BuildTransactionBreakdown(TokenValues));
+
         if TokenValues = '' then
             exit('');
 
@@ -84,6 +85,65 @@ codeunit 52185468 "Global SMS Token Resolver"
         end;
 
         exit('');
+    end;
+
+    local procedure BuildTransactionBreakdown(TokenValues: Text): Text
+    var
+        TransactionNo: Code[20];
+        CTransLines: Record "Cashier Transaction Lines";
+        SavingsACC: Record "Savings Accounts";
+        Loans: Record Loans;
+        Breakdown: Text;
+        LineText: Text;
+        LineCount: Integer;
+        TotalLines: Integer;
+    begin
+        TransactionNo := ExtractTokenValue(TokenValues, '[TRANSACTION_NO]');
+        if TransactionNo = '' then
+            exit('');
+
+        Breakdown := '';
+        LineCount := 0;
+
+        CTransLines.Reset;
+        CTransLines.SetRange("Transaction No", TransactionNo);
+        TotalLines := CTransLines.Count;
+
+        if CTransLines.FindSet then begin
+            repeat
+                LineText := '';
+                LineCount += 1;
+
+                case CTransLines.Type of
+                    CTransLines.Type::Savings:
+                        begin
+                            if SavingsACC.Get(CTransLines."Account No") then
+                                LineText := 'KES ' + Format(CTransLines.Amount, 0, '<Precision,2:2><Standard Format,0>') +
+                                           ' to ' + SavingsACC."Product Name";
+                        end;
+
+                    CTransLines.Type::Credit:
+                        begin
+                            if Loans.Get(CTransLines."Loan No") then
+                                LineText := 'KES ' + Format(CTransLines.Amount, 0, '<Precision,2:2><Standard Format,0>') +
+                                           ' to Loan ' + CTransLines."Loan No";
+                        end;
+                end;
+
+                if LineText <> '' then begin
+                    if Breakdown <> '' then begin
+                        if LineCount = TotalLines then
+                            Breakdown += ' and '
+                        else
+                            Breakdown += ', ';
+                    end;
+                    Breakdown += LineText;
+                end;
+
+            until CTransLines.Next = 0;
+        end;
+
+        exit(Breakdown);
     end;
 
     procedure BuildTokenString(var TokenDict: Dictionary of [Text, Text]): Text

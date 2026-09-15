@@ -1147,6 +1147,7 @@ Codeunit 52186456 "Sacco Transactions"
                         'BALANCE=' + Format(AccountBalance, 0, '<Precision,2:2><Standard Format,0>') + '||' +
                         'ACCOUNT_NO=' + CashierTrans."Account No" + '||' +
                         'TRANSACTION_TYPE=' + Format(CashierTrans.Type) + '||' +
+                        'TRANSACTION_NO=' + CashierTrans.No + '||' +
                         'DEPOSITOR=' + DepositorName + '||' +
                         'CREDITED_ACCOUNT=' + CreditedAccountName + '||' +
                         'DATE=' + Format(Today, 0, '<Day,2>-<Month Text,3>-<Year4>') + '||' +

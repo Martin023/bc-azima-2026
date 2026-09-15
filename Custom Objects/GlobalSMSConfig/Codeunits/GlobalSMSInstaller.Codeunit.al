@@ -32,6 +32,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateToken('[CREDITED_ACCOUNT]', 'Account credited', "SMS Token Category"::"Transaction Info", 0, 'Member Deposits', true);
         CreateToken('[PAYEE]', 'Payee name', "SMS Token Category"::"Transaction Info", 0, 'ABC Company Ltd', true);
         CreateToken('[PAYER]', 'Payer name', "SMS Token Category"::"Transaction Info", 0, 'XYZ Enterprises', true);
+        CreateToken('[TRANSACTION_BREAKDOWN]', 'Multi-line transaction breakdown', "SMS Token Category"::"Transaction Info", 0, 'KES 1,000 to Member Deposits, KES 500 to Share Capital', true);
 
         // LOAN INFO TOKENS
         CreateToken('[LOAN_NO]', 'Loan account number', "SMS Token Category"::"Loan Info", 0, 'LN-001234', true);
@@ -80,7 +81,7 @@ codeunit 52185465 "Global SMS Installer"
         CreateTemplate(
             'CREDIT_RECEIPT',
             'Credit Receipt Transaction',
-            'Dear [MEMBER_NAME], [DEPOSITOR] have deposited KES [AMOUNT] to your [CREDITED_ACCOUNT] on [DATE] at [TIME].',
+            'Dear [MEMBER_NAME], [DEPOSITOR] have credited [TRANSACTION_BREAKDOWN] on [DATE] at [TIME].',
             "SMS Source"::DEPOSIT_CONFIRMATION,
             "SMS Module"::CBS,
             true
