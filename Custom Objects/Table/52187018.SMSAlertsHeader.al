@@ -203,6 +203,9 @@ table 52187018 "SMS Alerts Header"
         {
             Editable = false;
         }
+        field(29; "Equal Guarantor Disribution"; Boolean)
+        {
+        }
 
     }
     keys

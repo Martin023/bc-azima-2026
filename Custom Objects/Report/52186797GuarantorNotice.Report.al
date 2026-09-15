@@ -110,6 +110,22 @@ Report 52186797 "Guarantor Notice"
                             AmountRecoverable := SavAcc.Balance
                         else
                             AmountRecoverable := 0;
+
+                        //
+
+                        if AmountRecoverable > 0 then begin
+                            ExistingLoans.Reset();
+                            ExistingLoans.SetLoadFields("Member No.", "Total Balance");
+                            ExistingLoans.SetRange("Member No.", Defaulter."No.");
+                            ExistingLoans.SetLoadFields("Total Balance");
+                            if ExistingLoans.FindSet() then begin
+                                repeat
+                                    TotExistingLoan += ExistingLoans."Total Balance";
+                                until ExistingLoans.next() = 0;
+                            end;
+                        end;
+
+
                     end;
                     Defaultedamount := DefaultedLoan."Outstanding Balance";
                     LoanType := DefaultedLoan."Loan Product Type Name";
@@ -183,5 +199,7 @@ Report 52186797 "Guarantor Notice"
         Defaultedamount: Decimal;
         AmountRecoverable: Decimal;
         SavAcc: record "Savings Accounts";
+        ExistingLoans: Record Loans;
+        TotExistingLoan: Decimal;
 
 }
