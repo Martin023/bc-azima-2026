@@ -19,9 +19,9 @@ XmlPort 52185443 "FOSA PV Lines ID"
                 fieldattribute(Type; "FOSA Payment Line".Type)
                 {
                 }
-                fieldattribute(AccType; "FOSA Payment Line"."Account Type")
-                {
-                }
+                // fieldattribute(AccType; "FOSA Payment Line"."Account Type")
+                // {
+                // }
                 fieldattribute(IDNO; "FOSA Payment Line"."ID Number")
                 {
                     fieldvalidate = Yes;
@@ -54,7 +54,7 @@ XmlPort 52185443 "FOSA PV Lines ID"
         {
             area(content)
             {
-                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|ProductID|Remarks")
+                group("lineno|no|Type|IDNO|AccName|Description|BranchCode|ActivityCode|Amount")
                 {
                     field(HeaderTemplate; HeaderTemplate)
                     {
@@ -73,7 +73,7 @@ XmlPort 52185443 "FOSA PV Lines ID"
     }
     trigger OninitXmlPort()
     begin
-        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks';
+        HeaderTemplate := 'lineno|no|Type|IDNO|AccName|Description|BranchCode|ActivityCode|Amount';
     end;
 
 
