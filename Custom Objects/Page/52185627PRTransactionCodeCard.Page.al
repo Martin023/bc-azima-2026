@@ -40,7 +40,6 @@ page 52185627 "PR Transaction Code Card"
                 field("Balance Type"; Rec."Balance Type")
                 {
                     ApplicationArea = Basic, Suite;
-                    ValuesAllowed = None, Increasing, Reducing;
                 }
                 // field("Is Cash"; Rec."Is Cash")
                 // {
