@@ -1283,6 +1283,7 @@ page 52187329 "Records"
                 {
                     Visible = true;
                     Caption = 'Member Withdrawal Notice';
+
                     action("Open Withdrawal Notice")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1306,6 +1307,13 @@ page 52187329 "Records"
                         ApplicationArea = Basic, Suite;
                         caption = 'Rejected Withdrawal Notice';
                         RunObject = page "Rejected Withdrawal Notice";
+                    }
+
+                    action("Withdrawal Notice Form")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Withdrawal Notice Form';
+                        RunObject = report "Withdrawal Notice Form";
                     }
                 }
                 group("Member CLosure")
