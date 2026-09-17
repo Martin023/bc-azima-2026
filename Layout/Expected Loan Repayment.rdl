@@ -24,133 +24,6 @@
       <rd:DataSourceID>78067029-1264-4ae9-9dff-8c25bce95bd2</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="Loan_No_">
-          <DataField>Loan_No_</DataField>
-        </Field>
-        <Field Name="Member_No_">
-          <DataField>Member_No_</DataField>
-        </Field>
-        <Field Name="Member_Name">
-          <DataField>Member_Name</DataField>
-        </Field>
-        <Field Name="Loan_Account">
-          <DataField>Loan_Account</DataField>
-        </Field>
-        <Field Name="Staff_No">
-          <DataField>Staff_No</DataField>
-        </Field>
-        <Field Name="Repayment">
-          <DataField>Repayment</DataField>
-        </Field>
-        <Field Name="RepaymentFormat">
-          <DataField>RepaymentFormat</DataField>
-        </Field>
-        <Field Name="Total_Balance">
-          <DataField>Total_Balance</DataField>
-        </Field>
-        <Field Name="Total_BalanceFormat">
-          <DataField>Total_BalanceFormat</DataField>
-        </Field>
-        <Field Name="Employer_Code">
-          <DataField>Employer_Code</DataField>
-        </Field>
-        <Field Name="StartDate">
-          <DataField>StartDate</DataField>
-        </Field>
-        <Field Name="EndDate">
-          <DataField>EndDate</DataField>
-        </Field>
-        <Field Name="PriReceived">
-          <DataField>PriReceived</DataField>
-        </Field>
-        <Field Name="PriReceivedFormat">
-          <DataField>PriReceivedFormat</DataField>
-        </Field>
-        <Field Name="IntReceived">
-          <DataField>IntReceived</DataField>
-        </Field>
-        <Field Name="IntReceivedFormat">
-          <DataField>IntReceivedFormat</DataField>
-        </Field>
-        <Field Name="LoanIntOffset">
-          <DataField>LoanIntOffset</DataField>
-        </Field>
-        <Field Name="LoanIntOffsetFormat">
-          <DataField>LoanIntOffsetFormat</DataField>
-        </Field>
-        <Field Name="LoanPriOffset">
-          <DataField>LoanPriOffset</DataField>
-        </Field>
-        <Field Name="LoanPriOffsetFormat">
-          <DataField>LoanPriOffsetFormat</DataField>
-        </Field>
-        <Field Name="STOInt">
-          <DataField>STOInt</DataField>
-        </Field>
-        <Field Name="STOIntFormat">
-          <DataField>STOIntFormat</DataField>
-        </Field>
-        <Field Name="STOPri">
-          <DataField>STOPri</DataField>
-        </Field>
-        <Field Name="STOPriFormat">
-          <DataField>STOPriFormat</DataField>
-        </Field>
-        <Field Name="MobileIntRece">
-          <DataField>MobileIntRece</DataField>
-        </Field>
-        <Field Name="MobileIntReceFormat">
-          <DataField>MobileIntReceFormat</DataField>
-        </Field>
-        <Field Name="MobilePriRece">
-          <DataField>MobilePriRece</DataField>
-        </Field>
-        <Field Name="MobilePriReceFormat">
-          <DataField>MobilePriReceFormat</DataField>
-        </Field>
-        <Field Name="CashierPri">
-          <DataField>CashierPri</DataField>
-        </Field>
-        <Field Name="CashierPriFormat">
-          <DataField>CashierPriFormat</DataField>
-        </Field>
-        <Field Name="cashierInt">
-          <DataField>cashierInt</DataField>
-        </Field>
-        <Field Name="cashierIntFormat">
-          <DataField>cashierIntFormat</DataField>
-        </Field>
-        <Field Name="Variance">
-          <DataField>Variance</DataField>
-        </Field>
-        <Field Name="VarianceFormat">
-          <DataField>VarianceFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1791,12 +1664,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1834,4 +1701,131 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="Loan_No_">
+          <DataField>Loan_No_</DataField>
+        </Field>
+        <Field Name="Member_No_">
+          <DataField>Member_No_</DataField>
+        </Field>
+        <Field Name="Member_Name">
+          <DataField>Member_Name</DataField>
+        </Field>
+        <Field Name="Loan_Account">
+          <DataField>Loan_Account</DataField>
+        </Field>
+        <Field Name="Staff_No">
+          <DataField>Staff_No</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Total_Balance">
+          <DataField>Total_Balance</DataField>
+        </Field>
+        <Field Name="Total_BalanceFormat">
+          <DataField>Total_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="PriReceived">
+          <DataField>PriReceived</DataField>
+        </Field>
+        <Field Name="PriReceivedFormat">
+          <DataField>PriReceivedFormat</DataField>
+        </Field>
+        <Field Name="IntReceived">
+          <DataField>IntReceived</DataField>
+        </Field>
+        <Field Name="IntReceivedFormat">
+          <DataField>IntReceivedFormat</DataField>
+        </Field>
+        <Field Name="LoanIntOffset">
+          <DataField>LoanIntOffset</DataField>
+        </Field>
+        <Field Name="LoanIntOffsetFormat">
+          <DataField>LoanIntOffsetFormat</DataField>
+        </Field>
+        <Field Name="LoanPriOffset">
+          <DataField>LoanPriOffset</DataField>
+        </Field>
+        <Field Name="LoanPriOffsetFormat">
+          <DataField>LoanPriOffsetFormat</DataField>
+        </Field>
+        <Field Name="STOInt">
+          <DataField>STOInt</DataField>
+        </Field>
+        <Field Name="STOIntFormat">
+          <DataField>STOIntFormat</DataField>
+        </Field>
+        <Field Name="STOPri">
+          <DataField>STOPri</DataField>
+        </Field>
+        <Field Name="STOPriFormat">
+          <DataField>STOPriFormat</DataField>
+        </Field>
+        <Field Name="MobileIntRece">
+          <DataField>MobileIntRece</DataField>
+        </Field>
+        <Field Name="MobileIntReceFormat">
+          <DataField>MobileIntReceFormat</DataField>
+        </Field>
+        <Field Name="MobilePriRece">
+          <DataField>MobilePriRece</DataField>
+        </Field>
+        <Field Name="MobilePriReceFormat">
+          <DataField>MobilePriReceFormat</DataField>
+        </Field>
+        <Field Name="CashierPri">
+          <DataField>CashierPri</DataField>
+        </Field>
+        <Field Name="CashierPriFormat">
+          <DataField>CashierPriFormat</DataField>
+        </Field>
+        <Field Name="cashierInt">
+          <DataField>cashierInt</DataField>
+        </Field>
+        <Field Name="cashierIntFormat">
+          <DataField>cashierIntFormat</DataField>
+        </Field>
+        <Field Name="Variance">
+          <DataField>Variance</DataField>
+        </Field>
+        <Field Name="VarianceFormat">
+          <DataField>VarianceFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
