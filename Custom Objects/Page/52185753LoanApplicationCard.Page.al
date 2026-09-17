@@ -959,6 +959,16 @@ page 52185753 "Loan Application Card"
                 RunObject = Page "Loan Top Up";
                 RunPageLink = "Loan No." = FIELD("Loan No."),
                   "Client Code" = FIELD("Member No.");
+
+                trigger OnAction()
+                begin
+                    if (rec.Status = rec.status::Open) and not (rec.Posted) then begin
+                        if rec."Self Guarantee" then begin
+                            rec."Self Guarantee" := false;
+                            rec.modify();
+                        end;
+                    end;
+                end;
             }
             action("Other Commitments Clearance")
             {

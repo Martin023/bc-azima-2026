@@ -1183,13 +1183,13 @@ Report 52185745 "Loan Appraisal Checkoff"
                         Message('Self Guarantee Qualifying Amt %1', QualifyingAmount);
                         if Loans."Requested Amount" > QualifyingAmount then begin
                             Loans."Recommended Amount" := QualifyingAmount;
-                            Loans."Approved Amount" := QualifyingAmount;
-                            Loans."Amount To Disburse" := QualifyingAmount;
+                            Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
+                            Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
                         end
                         else begin
                             Loans."Recommended Amount" := Loans."Requested Amount";
-                            Loans."Approved Amount" := Loans."Requested Amount";
-                            Loans."Amount To Disburse" := Loans."Requested Amount";
+                            Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
+                            Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
                         end;
                     end;
                 end;

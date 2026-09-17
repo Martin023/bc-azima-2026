@@ -30,7 +30,6 @@ page 52185673 "prTransaction Code"
                 field("Balance Type"; Rec."Balance Type")
                 {
                     ApplicationArea = Basic, Suite;
-                    ValuesAllowed = None, Increasing, Reducing;
                 }
                 field("Amount Preference"; Rec."Amount Preference")
                 {

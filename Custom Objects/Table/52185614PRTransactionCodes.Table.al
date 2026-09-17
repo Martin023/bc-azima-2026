@@ -16,8 +16,8 @@ table 52185614 "PR Transaction Codes"
         }
         field(4; "Balance Type"; Option)
         {
-            Description = 'None,Increasing,Reducing';
-            OptionMembers = "None",Increasing,Reducing;
+            Description = 'Fixed Amount,Increasing,Reducing';
+            OptionMembers = "Fixed Amount",Increasing,Reducing;
         }
         field(5; "Transaction Type"; Option)
         {

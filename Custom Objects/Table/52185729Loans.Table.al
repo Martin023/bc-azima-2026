@@ -2054,12 +2054,13 @@ table 52185729 Loans
 
             trigger OnValidate()
             begin
+                LoanGuara.Reset;
+                LoanGuara.SetRange(LoanGuara."Loan No", "Loan No.");
+                if LoanGuara.Find('-') then begin
+                    LoanGuara.DeleteAll;
+                end;
+
                 if "Self Guarantee" = true then begin
-                    LoanGuara.Reset;
-                    LoanGuara.SetRange(LoanGuara."Loan No", "Loan No.");
-                    if LoanGuara.Find('-') then begin
-                        LoanGuara.DeleteAll;
-                    end;
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                     SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");

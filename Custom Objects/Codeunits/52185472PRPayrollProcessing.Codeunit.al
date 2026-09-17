@@ -1767,9 +1767,8 @@ Codeunit 52185472 "PR Payroll Processing"
                     if prTransactionCodes.Find('-') then begin
                         begin
                             case prTransactionCodes."Balance Type" of
-                                prTransactionCodes."balance type"::None:
+                                prTransactionCodes."balance type"::"Fixed Amount":
                                     begin
-
                                         curTransAmount := prEmployeeTransactions.Amount;
                                         curTransBalance := 0;
                                     end;
