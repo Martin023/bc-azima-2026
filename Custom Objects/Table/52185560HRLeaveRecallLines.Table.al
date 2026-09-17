@@ -343,7 +343,7 @@ table 52185560 "HR Leave Recall Lines"
         else
             CalenderCode := HRLeaveCal."Calendar Code";
 
-        JBatch := 'POSITIVE';
+        JBatch := 'DEFAULT';
         JTemplate := 'LEAVE';
 
         LeaveGjline.SetRange("Journal Batch Name", JBatch);
@@ -515,18 +515,14 @@ table 52185560 "HR Leave Recall Lines"
 
     local procedure TrySendRecallNotifications()
     begin
-        // WRAPPER TO PREVENT EMAIL/SMS FAILURES FROM BLOCKING RECALL POSTING
         if not TrySendRecallNotifs() then begin
-            // LOG ERROR BUT DO NOT BLOCK - NOTIFICATIONS ARE OPTIONAL
-            // Error details can be reviewed in Email/SMS Notification Log
         end;
     end;
 
     [TryFunction]
     local procedure TrySendRecallNotifs()
     begin
-        // SMS FIRST — THEY'RE WORKING, SO SEND THEM BEFORE EMAIL CAN FAIL
         SendRecallNotificationSMS();
-        SendRecallNotificationEmail();
+        // SendRecallNotificationEmail();
     end;
 }

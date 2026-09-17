@@ -64,8 +64,8 @@ page 52185595 "HR Leave Calendar Card"
             part(Control10; "HR Non Working Days & Dates")
             {
                 ApplicationArea = Basic;
-               
-               
+
+
 
 
             }
@@ -73,7 +73,7 @@ page 52185595 "HR Leave Calendar Card"
             {
                 ApplicationArea = Basic;
                 SubPageLink = Code = FIELD("Calendar Code");
-            
+
             }
         }
     }
@@ -117,7 +117,7 @@ page 52185595 "HR Leave Calendar Card"
                                 ;      // e.g 01-01-15
                                 HRCalendarList.Day := Date."Period Name";         // e.g Thursday
                                 HRCalendarList."Non Working" := fn_DetermineNonWorking(Date."Period Start");
-                                
+
                                 //Saturday - mark as non-working by default
                                 if (Date."Period Name" = TEXT0025) and not (HRCalendarList."Non Working") then begin
                                     HRCalendarList."Non Working" := true;
@@ -159,7 +159,7 @@ page 52185595 "HR Leave Calendar Card"
                     UpdateCount: Integer;
                 begin
                     Rec.TestField("Calendar Code");
-                    
+
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     if not CalendarLine.FindSet() then
@@ -183,7 +183,7 @@ page 52185595 "HR Leave Calendar Card"
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     CalendarLine.FindSet();
-                    
+
                     repeat
                         DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
                         if DayOfWeekNum = 6 then begin
@@ -217,7 +217,7 @@ page 52185595 "HR Leave Calendar Card"
                     UpdateCount: Integer;
                 begin
                     Rec.TestField("Calendar Code");
-                    
+
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     if not CalendarLine.FindSet() then
@@ -241,7 +241,7 @@ page 52185595 "HR Leave Calendar Card"
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     CalendarLine.FindSet();
-                    
+
                     repeat
                         DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
                         if DayOfWeekNum = 6 then begin
@@ -272,7 +272,7 @@ page 52185595 "HR Leave Calendar Card"
                     UpdateCount: Integer;
                 begin
                     Rec.TestField("Calendar Code");
-                    
+
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     if not CalendarLine.FindSet() then
@@ -296,7 +296,7 @@ page 52185595 "HR Leave Calendar Card"
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     CalendarLine.FindSet();
-                    
+
                     repeat
                         DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
                         if DayOfWeekNum = 7 then begin
@@ -327,7 +327,7 @@ page 52185595 "HR Leave Calendar Card"
                     UpdateCount: Integer;
                 begin
                     Rec.TestField("Calendar Code");
-                    
+
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     if not CalendarLine.FindSet() then
@@ -351,7 +351,7 @@ page 52185595 "HR Leave Calendar Card"
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     CalendarLine.FindSet();
-                    
+
                     repeat
                         DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
                         if DayOfWeekNum = 7 then begin
@@ -382,7 +382,7 @@ page 52185595 "HR Leave Calendar Card"
                     UpdateCount: Integer;
                 begin
                     Rec.TestField("Calendar Code");
-                    
+
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
                     if not CalendarLine.FindSet() then
@@ -403,15 +403,24 @@ page 52185595 "HR Leave Calendar Card"
                     if not Confirm('This will apply half-day settings to %1 working Saturdays based on this calendar policy. Continue?', false, UpdateCount) then
                         exit;
 
+                    // RE-READ CURRENT RECORD TO GET FRESH VALUE
+                    Rec.Get(Rec."Calendar Code");
+
                     CalendarLine.Reset();
                     CalendarLine.SetRange(Code, Rec."Calendar Code");
-                    CalendarLine.FindSet();
-                    
+                    CalendarLine.SetRange("Non Working", false);
+                    if not CalendarLine.FindSet(true) then begin
+                        Message('ERROR: No working days found after confirmation. Calendar may have changed.');
+                        exit;
+                    end;
+
+                    UpdateCount := 0;
                     repeat
                         DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
-                        if (DayOfWeekNum = 6) and (not CalendarLine."Non Working") then begin
+                        if DayOfWeekNum = 6 then begin // ONLY SATURDAYS
                             CalendarLine."Is Half Day" := Rec."Saturday is Half Day";
-                            CalendarLine.Modify(true); // Skip validation during bulk operation
+                            if CalendarLine.Modify(true) then
+                                UpdateCount += 1;
                         end;
                     until CalendarLine.Next() = 0;
 
@@ -419,7 +428,7 @@ page 52185595 "HR Leave Calendar Card"
                         Message('%1 working Saturdays marked as half-day.', UpdateCount)
                     else
                         Message('%1 working Saturdays marked as full-day.', UpdateCount);
-                    
+
                     CurrPage.Update(false);
                 end;
             }
