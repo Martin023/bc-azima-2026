@@ -121,6 +121,17 @@ table 52185703 "Account Signatories"
         {
         }
         field(25; Exited; Boolean) { }
+        field(26; "MFI Saving Balance"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = - sum("Savings Ledger Entry".Amount where("Member No." = field("Account No"), "Product Category" = filter("Chama Investment Account")));
+        }
+        field(27; "MFI Loan Balance"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = Sum("Credit Ledger Entry".Amount WHERE("Member No." = FIELD("Account No"), "Loan Type" = const('030')));
+
+        }
     }
 
     keys
