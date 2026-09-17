@@ -10,7 +10,6 @@ Report 52185558 "Guarantor Substitution Form"
     {
         dataitem(Loans; Loans)
         {
-            // We removed RequestFilterFields here to hide the messy default tabs
             
             column(CompanyInfo_Name; CompanyInfo.Name) { }
             column(CompanyInfo_Address; CompanyAddress) { }
@@ -29,7 +28,6 @@ Report 52185558 "Guarantor Substitution Form"
             dataitem(OutgoingGuarantor; "Loan Guarantors and Security")
             {
                 DataItemLink = "Loan No" = field("Loan No.");
-                // We removed RequestFilterFields here too
                 
                 column(OutG_No; "Member No") { }
                 column(OutG_Name; Name) { }
