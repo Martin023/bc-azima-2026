@@ -19,28 +19,28 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.01877cm</Width>
+                  <Width>1.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01877cm</Width>
+                  <Width>4.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.31877cm</Width>
+                  <Width>2.3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.31877cm</Width>
+                  <Width>2.3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.11877cm</Width>
+                  <Width>2.3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.11877cm</Width>
+                  <Width>2.0cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.11877cm</Width>
+                  <Width>1.9cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.11877cm</Width>
+                  <Width>3.0cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -631,9 +631,9 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Left>0.1875in</Left>
+            <Left>0cm</Left>
             <Height>0.60195in</Height>
-            <Width>20.15016cm</Width>
+            <Width>19.8cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -644,7 +644,7 @@
         <Height>1.778cm</Height>
         <Style />
       </Body>
-      <Width>21.44917cm</Width>
+      <Width>19.8cm</Width>
       <Page>
         <PageHeader>
           <Height>3.89819cm</Height>
@@ -656,9 +656,9 @@
               <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
               <MIMEType>image/jpeg</MIMEType>
               <Sizing>FitProportional</Sizing>
-              <Left>0.1875in</Left>
+              <Left>0cm</Left>
               <Height>1.53125in</Height>
-              <Width>2.14404in</Width>
+              <Width>5.4cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -686,10 +686,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.03125in</Top>
-              <Left>2.5in</Left>
-              <Height>0.23264in</Height>
-              <Width>5.62062in</Width>
+              <Top>0.08cm</Top>
+              <Left>5.6cm</Left>
+              <Height>0.59cm</Height>
+              <Width>14.2cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -722,10 +722,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.31945in</Top>
-              <Left>2.5in</Left>
-              <Height>0.21528in</Height>
-              <Width>5.62062in</Width>
+              <Top>0.81cm</Top>
+              <Left>5.6cm</Left>
+              <Height>0.55cm</Height>
+              <Width>14.2cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -758,10 +758,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.60416in</Top>
-              <Left>2.5in</Left>
-              <Height>0.18403in</Height>
-              <Width>5.62062in</Width>
+              <Top>1.53cm</Top>
+              <Left>5.6cm</Left>
+              <Height>0.47cm</Height>
+              <Width>14.2cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -794,10 +794,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.84375in</Top>
-              <Left>2.5in</Left>
-              <Height>0.18403in</Height>
-              <Width>5.62062in</Width>
+              <Top>2.14cm</Top>
+              <Left>5.6cm</Left>
+              <Height>0.47cm</Height>
+              <Width>14.2cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -816,7 +816,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Leave Balances  Report</Value>
+                      <Value>Leave Balances Report</Value>
                       <Style>
                         <FontFamily>Times New Roman</FontFamily>
                         <FontWeight>Bold</FontWeight>
@@ -829,10 +829,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>1.09722in</Top>
-              <Left>2.5in</Left>
-              <Height>0.25in</Height>
-              <Width>5.62062in</Width>
+              <Top>2.79cm</Top>
+              <Left>5.6cm</Left>
+              <Height>0.64cm</Height>
+              <Width>14.2cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -863,7 +863,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Date &amp; Time:</Value>
+                      <Value>Date &amp; Time: </Value>
                       <Style>
                         <FontStyle>Italic</FontStyle>
                         <FontFamily>Times New Roman</FontFamily>
@@ -888,9 +888,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.29861in</Top>
-              <Left>0.1875in</Left>
+              <Left>0cm</Left>
               <Height>0.20833in</Height>
-              <Width>7.93312in</Width>
+              <Width>19.8cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -933,9 +933,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.53472in</Top>
-              <Left>0.1875in</Left>
+              <Left>0cm</Left>
               <Height>0.1875in</Height>
-              <Width>7.93312in</Width>
+              <Width>19.8cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -954,7 +954,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Printed By:</Value>
+                      <Value>Printed By: </Value>
                       <Style>
                         <FontStyle>Italic</FontStyle>
                         <FontFamily>Times New Roman</FontFamily>
@@ -979,9 +979,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.06944in</Top>
-              <Left>0.1875in</Left>
+              <Left>0cm</Left>
               <Height>0.1875in</Height>
-              <Width>7.93312in</Width>
+              <Width>19.8cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>

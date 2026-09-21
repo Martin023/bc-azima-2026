@@ -43,6 +43,8 @@ page 52185794 "Cashier Transactions"
                     begin
                         // SavingsAccounts.
                         //CheckMemberInfomation();
+                        // var 
+                        //
                         SavingsAccounts.Reset();
                         SavingsAccounts.SetRange(SavingsAccounts."No.", Rec."Account No");
                         if SavingsAccounts.FindFirst() then begin
