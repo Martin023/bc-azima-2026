@@ -398,7 +398,8 @@ table 52185560 "HR Leave Recall Lines"
             "Posted Date" := Today;
             Modify();
 
-            TrySendRecallNotifications();
+            // TrySendRecallNotifications();
+            SendRecallNotificationSMS();
             Message('Leave recall posted successfully. %1 day(s) reimbursed to %2. Recall period: %3 to %4',
                 "Days Recalled", "Employee Name", "Recall Date", "Recall End Date");
         end else
@@ -513,16 +514,16 @@ table 52185560 "HR Leave Recall Lines"
         exit(CurrentDate);
     end;
 
-    local procedure TrySendRecallNotifications()
-    begin
-        if not TrySendRecallNotifs() then begin
-        end;
-    end;
+    // local procedure TrySendRecallNotifications()
+    // begin
+    //     if not TrySendRecallNotifs() then begin
+    //     end;
+    // end;
 
-    [TryFunction]
-    local procedure TrySendRecallNotifs()
-    begin
-        SendRecallNotificationSMS();
-        // SendRecallNotificationEmail();
-    end;
+    // [TryFunction]
+    // local procedure TrySendRecallNotifs()
+    // begin
+    //     SendRecallNotificationSMS();
+    //     // SendRecallNotificationEmail();
+    // end;
 }

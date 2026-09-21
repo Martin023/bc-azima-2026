@@ -24,6 +24,7 @@ Report 52185558 "Guarantor Substitution Form"
             column(LoaneeWNo; LoaneeWNo) { }
             column(OutstandingBal; "Outstanding Balance") { }
             column(ReportDate; Format(Today, 0, '<Day,2>/<Month,2>/<Year4>')) { }
+            column(IsClassB; IsClassB) { } // Pass the flag to the report
 
             dataitem(OutgoingGuarantor; "Loan Guarantors and Security")
             {
@@ -118,6 +119,14 @@ Report 52185558 "Guarantor Substitution Form"
                 LoaneeWNo := Loans."Staff No";
                 if LoaneeWNo = '' then 
                     LoaneeWNo := Loans."Member No.";
+                    
+                // Identify if Loanee is Class B
+                IsClassB := false;
+                if LoaneeMember.Get("Member No.") then begin
+                    // *NOTE: If your table uses a different field name for Member Class, change it here!*
+                    if LoaneeMember."Member Class" = 'CLASS B' then 
+                        IsClassB := true;
+                end;
             end;
         }
     }
@@ -142,7 +151,6 @@ Report 52185558 "Guarantor Substitution Form"
                         
                         trigger OnValidate()
                         begin
-                            // If they change the member, clear the loan and guarantor fields so they don't break the flow
                             LoanNoFilter := '';
                             OutgoingGuarantorFilter := '';
                         end;
@@ -165,10 +173,9 @@ Report 52185558 "Guarantor Substitution Form"
                             LoanRec.SetRange("Member No.", LoaneeNoFilter);
                             LoanRec.SetFilter("Outstanding Balance", '>0'); // Only show active loans
                             
-                            // Pop open the lookup page. If they pick one, save it to our variable
                             if Page.RunModal(0, LoanRec) = Action::LookupOK then begin
                                 LoanNoFilter := LoanRec."Loan No.";
-                                OutgoingGuarantorFilter := ''; // Reset guarantor just in case they changed the loan
+                                OutgoingGuarantorFilter := ''; 
                             end;
                         end;
 
@@ -204,9 +211,8 @@ Report 52185558 "Guarantor Substitution Form"
                             LoanGuaRec.Reset();
                             LoanGuaRec.SetRange("Loan No", LoanNoFilter);
                             LoanGuaRec.SetRange("Guarantor Type", LoanGuaRec."guarantor type"::Guarantor);
-                            LoanGuaRec.SetRange(Substituted, false); // Only show people who haven't already been substituted
+                            LoanGuaRec.SetRange(Substituted, false); 
                             
-                            // Pop open the lookup page. If they pick one, save it to our variable
                             if Page.RunModal(0, LoanGuaRec) = Action::LookupOK then begin
                                 OutgoingGuarantorFilter := LoanGuaRec."Member No";
                             end;
@@ -243,6 +249,7 @@ Report 52185558 "Guarantor Substitution Form"
 
     var
         CompanyInfo: Record "Company Information";
+        LoaneeMember: Record Members;
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CompanyEmail: Text;
@@ -254,8 +261,8 @@ Report 52185558 "Guarantor Substitution Form"
         MmberDeceased: Boolean;
         TotaAmtGUR: Decimal;
         PercentageGur: Decimal;
+        IsClassB: Boolean;
         
-        // Custom Request Page Variables
         LoaneeNoFilter: Code[20];
         LoanNoFilter: Code[20];
         OutgoingGuarantorFilter: Code[20];

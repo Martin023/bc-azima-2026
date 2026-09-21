@@ -103,7 +103,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>I _______________________________________________D/NO. ___________________W/NO. _________________              in Consideration of the outstanding loan balance of (Name) </Value>
+                                      <Value>I ____________________________________________D/NO. ___________________W/NO. _________________              in Consideration of the outstanding loan balance of (Name) </Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
                                         <FontSize>11pt</FontSize>
@@ -424,11 +424,7 @@
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>The guarantors form must be signed by the new guarantor and witnessed by
-             the withdrawing member and the loanee.
-
-             1) One copy to be retained by the member who is withdrawing the guarantee.
-             2) The second copy to be retained by the Society.</Value>
+                                      <Value>="The guarantors form must be signed by the new guarantor and witnessed by the withdrawing member and the loanee." &amp; vbCrLf &amp; vbCrLf &amp; "1) One copy to be retained by the member who is withdrawing the guarantee." &amp; vbCrLf &amp; "2) The second copy to be retained by the Society." &amp; IIf(Fields!IsClassB.Value, vbCrLf &amp; "3) The loanee MUST attach an ID copy for the new guarantor.", "")</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
                                         <FontSize>11pt</FontSize>
@@ -1800,6 +1796,9 @@ End Function
         </Field>
         <Field Name="ReportDate">
           <DataField>ReportDate</DataField>
+        </Field>
+        <Field Name="IsClassB">
+          <DataField>IsClassB</DataField>
         </Field>
         <Field Name="OutG_No">
           <DataField>OutG_No</DataField>
