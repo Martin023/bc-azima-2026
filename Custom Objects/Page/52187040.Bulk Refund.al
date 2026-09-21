@@ -345,7 +345,7 @@ page 52187040 "Bulk Refunds Card"
                     INHeader: Record "Refund,Account Transfer Header";
                 begin
                     Rec.TestField(Status, Rec.Status::Open);
-                    rec.TestField(Description);
+                    // rec.TestField(Description);
                     INHeader.Reset();
                     INHeader.SetRange("No", Rec."No");
                     if INHeader.FindFirst() then begin

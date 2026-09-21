@@ -53,16 +53,8 @@ page 52185864 "Signatories List"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Designation';
                 }
-                field(TotalBalances; TotalBalances)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Total Loan Balance';
-                }
-                field(TotalSavings;TotalSavings)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Total Loan Balance';
-                }
+                field("MFI Saving Balance"; Rec."MFI Saving Balance") { }
+                field("MFI Loan Balance"; Rec."MFI Loan Balance") { }
             }
         }
         area(factboxes)
@@ -81,7 +73,7 @@ page 52185864 "Signatories List"
                 SubPageLink = "Member No." = field("Member No.");
                 Visible = not HideAccount;
             }
-            
+
 
         }
     }
@@ -92,7 +84,7 @@ page 52185864 "Signatories List"
     var
         TotalBalances: Decimal;
         TotalSavings: Decimal;
-        
+
         GlobalFunctions: Codeunit "Global Functions";
         HideAccount: Boolean;
 
@@ -140,8 +132,8 @@ page 52185864 "Signatories List"
         SavingsAccounts: Record "Savings Accounts";
     begin
         SavingsAccounts.Reset();
-        SavingsAccounts.SetRange("Product Category",SavingsAccounts."Product Category"::"Business Deposits");
-        SavingsAccounts.SetRange("Member No.",Rec."Member No.");
+        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"Business Deposits");
+        SavingsAccounts.SetRange("Member No.", Rec."Member No.");
         if SavingsAccounts.FindFirst() then begin
             TotalSavings := SavingsAccounts.GetAvailableBalance(SavingsAccounts."No.");
         end;

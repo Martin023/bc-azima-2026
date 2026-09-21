@@ -45,10 +45,17 @@ report 52185531 "Update Employee Loans Report"
                                 PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
                                 PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
                                 PREmployeeTransactions.Balance := Loans."Outstanding Balance" + Loans."Outstanding Interest";
-                                if loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then
-                                    PREmployeeTransactions.Amount := Loans."Loan Principle Repayment" + loans."Outstanding Interest"
-                                else
+                                if loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
+                                    PREmployeeTransactions.Amount := Loans."Loan Principle Repayment";
+                                    if Loans."Variated Amount" > 0 then
+                                        PREmployeeTransactions.Amount := Loans."Variated Amount" + +loans."Outstanding Interest";
+                                end
+                                else begin
                                     PREmployeeTransactions.Amount := Loans.Repayment;
+                                    if Loans."Variated Amount" > 0 then
+                                        PREmployeeTransactions.Amount := Loans."Variated Amount"
+                                end;
+
                                 PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
                                 PREmployeeTransactions."Start Date" := Loans."Repayment Start Date";
                                 PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";

@@ -39,12 +39,12 @@ report 52185842 "Recover Overpaid Loans"
                                 LoansInterest."Refund Header No." := "Interest Header"."No";
                                 LoansInterest."Member No." := loans."Member No.";
                                 LoansInterest."No." += 1;
-                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::"Interest Paid";
+                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::"Interest Due";
                                 LoansInterest."Source Loan No." := Loans."Loan No.";
                                 LoansInterest."Source Account" := '';
                                 LoansInterest."Destination Account" := SavAcc."No.";
                                 LoansInterest."Loan No." := '';
-                                LoansInterest."Destination Description" := "Interest Header".Description;
+                                LoansInterest."Destination Description" := '';
                                 LoansInterest.Amount := -(Loans."Outstanding Interest");
                                 if LoansInterest.Amount > 0 then
                                     LoansInterest.Insert(true);
@@ -55,7 +55,7 @@ report 52185842 "Recover Overpaid Loans"
                                 LoansInterest."Refund Header No." := "Interest Header"."No";
                                 LoansInterest."Member No." := loans."Member No.";
                                 LoansInterest."No." += 1;
-                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::Repayment;
+                                LoansInterest."Source Loan Transaction." := LoansInterest."Source Loan Transaction."::Loan;
                                 LoansInterest."Source Account" := '';
                                 LoansInterest."Destination Account" := SavAcc."No.";
                                 LoansInterest."Loan No." := '';
@@ -63,7 +63,7 @@ report 52185842 "Recover Overpaid Loans"
                                 LoansInterest.Amount := -(Loans."Outstanding Balance");
                                 LoansInterest."Destination Account" := SavAcc."No.";
                                 LoansInterest."Loan No." := '';
-                                LoansInterest."Destination Description" := "Interest Header".Description;
+                                LoansInterest."Destination Description" := '';
                                 if LoansInterest.Amount > 0 then
                                     LoansInterest.Insert(true);
 
