@@ -541,12 +541,12 @@ page 52186778 "Finance Role Center"
                         Caption = 'Member Single';
                         RunObject = Page "Member Single List";
                     }
-                    action("Member Detailed List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Detailed Balances';
-                        RunObject = Page "Detailed Member Balance List";
-                    }
+                    // action("Member Detailed List")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Member Detailed Balances';
+                    //     RunObject = Page "Detailed Member Balance List";
+                    // }
 
                     action("Savings Account Register")
                     {
@@ -2818,12 +2818,12 @@ page 52186778 "Finance Role Center"
                         Caption = 'Member List';
                         RunObject = page "Member List";
                     }
-                    action("Member Detailed Bal. List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Detailed Balances';
-                        RunObject = Page "Detailed Member Balance List";
-                    }
+                    // action("Member Detailed Bal. List")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Member Detailed Balances';
+                    //     RunObject = Page "Detailed Member Balance List";
+                    // }
                     action(BankAccounts)
                     {
                         ApplicationArea = Basic, Suite;
