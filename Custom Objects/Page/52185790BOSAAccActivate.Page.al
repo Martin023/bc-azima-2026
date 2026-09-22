@@ -577,7 +577,8 @@ page 52186088 "BOSA Account Activation"
                     // if SavAcc."Product Category" = SavAcc."Product Category"::"BOSA Deposits" then begin
                     //charge ODS not BOSA Acc.
                     FosaAcc.Reset();
-                    FosaAcc.SetRange("Product Type", '191');
+                    FosaAcc.setrange("Loan Disbursement Account", true);
+                    // FosaAcc.SetRange("Product Type", '191');
                     FosaAcc.SetRange("Member No.", SavAcc."Member No.");
                     if FosaAcc.FindFirst() then begin
                         SavBal := FosaAcc.GetAvailableBalance(FosaAcc."No.");
@@ -648,7 +649,7 @@ page 52186088 "BOSA Account Activation"
                         JournalPosting.CompletePosting(Jtemplate, JBatch);
                     end
                     else
-                        Error('Member does not have an Ordinary Account to charge');
+                        Error('Member does not have an default Account to charge');
                 end
                 // else
                 //     Error('This Account cannoit be activated by this process')
