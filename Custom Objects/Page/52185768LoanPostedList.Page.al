@@ -54,6 +54,11 @@ page 52185768 "Loan Posted List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
+                field("Employer Name"; Rec."Employer Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                    StyleExpr = StyleExprTxt;
+                }
                 // field("Loan Account"; Rec."Loan Account")
                 // {
                 //     ApplicationArea = Basic, Suite;

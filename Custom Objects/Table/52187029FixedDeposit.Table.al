@@ -569,6 +569,10 @@ table 52187029 "Fixed Deposit Contract"
         Jtemplate: Code[20];
         JBatch: Code[20];
         GenJournalLine: record "Gen. Journal Line";
+        msg: text;
+        Memb: Record Members;
+        SendSMS: codeunit SendSms;
+        SMSSource: Enum "SMS Source";
     begin
         savingsLedger.Reset();
         savingsLedger.SetRange("Fixed Deposit Contract", FDContract."No.");
@@ -660,10 +664,31 @@ table 52187029 "Fixed Deposit Contract"
                 Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
             end;
             // Rec.Balance := Rec."Fixed Deposit Amount";
-            Rec."Fixed Deposit Status" := Rec."Fixed Deposit Status"::Active;
+            FDContract."Fixed Deposit Status" := FDContract."Fixed Deposit Status"::Active;
             // Rec."Application Date" := today;
-            Rec.Modify();
+            FDContract.Modify();
             Message('Funds Transfered Successfully!');
+
+            //Send SMS
+            //sendSMS
+            msg := 'Dear member, you have transferred KES.' + Format(FDContract."Fixed Deposit Amount") + ' to your fixed deposit account on ' + format(Today) + ' ' + format(Time);
+
+            if rec."Transactional Mobile No" = '' then begin
+                Memb.reset;
+                Memb.setrange("No.", FDContract."Member No.");
+                if Memb.FindFirst() then begin
+
+                    if Memb."Transactional Mobile Number" <> '' then
+                        SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, Memb."Transactional Mobile Number", msg, Format(FDContract."No."), '', true, 0, false, 'CBS', FDContract."No.", 'CBS')
+                    else
+                        SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, Memb."Phone No.", msg, Format(FDContract."No."), '', true, 0, false, 'CBS', FDContract."No.", 'CBS')
+
+                end;
+            end
+            else begin
+
+                SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, FDContract."Transactional Mobile No", msg, Format(FDContract."No."), '', true, 0, false, 'CBS', FDContract."No.", 'CBS');
+            end;
 
         end;
     end;
