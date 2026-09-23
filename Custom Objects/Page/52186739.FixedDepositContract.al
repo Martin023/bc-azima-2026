@@ -288,6 +288,11 @@ page 52186739 "Fixed Deposit Contract"
                         Dim1: Code[20];
                         Dim2: Code[20];
                         GlEntry: Record "G/L Entry";
+                        msg: Text;
+                        FDAccount: record "Fixed Deposit Contract";
+                        Memb: record Members;
+                        SendSms: codeunit SendSMS;
+
                     begin
 
                         if Rec."Fixed Deposit Status" = Rec."Fixed Deposit Status"::Closed then
@@ -423,6 +428,27 @@ page 52186739 "Fixed Deposit Contract"
                                 rec."Fixed Deposit Status" := rec."Fixed Deposit Status"::Terminated;
                                 Rec.Modify();
                                 Message('Terminated Successfully!');
+
+                                //sendSMS
+                                msg := 'Dear member, your fixed deposit of KES.' + Format(rec."Fixed Deposit Amount") + ' has been terminated and the amount transferred to your savings account on '
+                                        + Format(Today) + ' at ' + Format(Time);
+
+                                if rec."Transactional Mobile No" = '' then begin
+                                    Memb.reset;
+                                    Memb.setrange("No.", rec."Member No.");
+                                    if Memb.FindFirst() then begin
+
+                                        if Memb."Transactional Mobile Number" <> '' then
+                                            SendSMS.SendSms(Source::FIXED_DEPOSIT_MATURITY, Memb."Transactional Mobile Number", msg, Format(FDAccount."No."), '', true, 0, false, 'CBS', FDAccount."No.", 'CBS')
+                                        else
+                                            SendSMS.SendSms(Source::FIXED_DEPOSIT_MATURITY, Memb."Phone No.", msg, Format(FDAccount."No."), '', true, 0, false, 'CBS', FDAccount."No.", 'CBS')
+
+                                    end;
+                                end
+                                else begin
+
+                                    SendSMS.SendSms(Source::FIXED_DEPOSIT_MATURITY, FDAccount."Transactional Mobile No", msg, Format(FDAccount."No."), '', true, 0, false, 'CBS', FDAccount."No.", 'CBS');
+                                end;
                             end else
                                 Error('This is a matured contract. Proceed to process, Maturity date is %1. ', Rec."FD Maturity Date");
                             // end;

@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-24T11:57:33.8961266Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-09-23T13:41:49.0530469Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -32,16 +32,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.09144cm</Width>
+                  <Width>2.07815cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>8.96519cm</Width>
+                  <Width>6.47023cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.17624cm</Width>
+                  <Width>2.83609cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.56769cm</Width>
+                  <Width>4.51233cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.90378cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -91,6 +94,38 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Name</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>ID No.</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -243,6 +278,36 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Primary_Identification">
+                          <rd:DefaultName>Primary_Identification</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Primary_Identification.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="DOB">
                           <rd:DefaultName>DOB</rd:DefaultName>
                           <CanGrow>true</CanGrow>
@@ -311,6 +376,7 @@
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -494,6 +560,9 @@ End Function
         </Field>
         <Field Name="PayrollStaffNo">
           <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="Primary_Identification">
+          <DataField>Primary_Identification</DataField>
         </Field>
         <Field Name="DOB">
           <DataField>DOB</DataField>
