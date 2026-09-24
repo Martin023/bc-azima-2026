@@ -3244,7 +3244,7 @@ table 52185729 Loans
         {
             Editable = false;
             FIeldClass = flowfield;
-            CalcFormula = lookup(Customer.Name where("No." = field("Staff No")));
+            CalcFormula = lookup(Customer.Name where("No." = field("Employer Code")));
         }
 
     }

@@ -172,7 +172,7 @@ table 52187416 "FOSA Payment Line"
             ELSE
             IF ("Account Type" = CONST("IC Partner")) "IC Partner"
             ELSE
-            IF ("Account Type" = CONST(Savings)) "Savings Accounts" where("Product Category" = const("FOSA Account"))
+            IF ("Account Type" = CONST(Savings)) "Savings Accounts"
             ELSE
             IF ("Account Type" = CONST(Credit)) "Credit Accounts";
 
