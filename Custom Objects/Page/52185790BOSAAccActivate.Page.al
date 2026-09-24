@@ -574,96 +574,97 @@ page 52186088 "BOSA Account Activation"
                 TransactionCharges.TestField("G/L Account");
                 if SavAcc.get(Rec."Account No") then begin
                     SavAcc.TestField(Status, SavAcc.Status::Dormant);
-                    if SavAcc."Product Category" = SavAcc."Product Category"::"BOSA Deposits" then begin
-                        //charge ODS not BOSA Acc.
-                        FosaAcc.Reset();
-                        FosaAcc.SetRange("Product Type", '191');
-                        FosaAcc.SetRange("Member No.", SavAcc."Member No.");
-                        if FosaAcc.FindFirst() then begin
-                            SavBal := FosaAcc.GetAvailableBalance(FosaAcc."No.");
+                    // if SavAcc."Product Category" = SavAcc."Product Category"::"BOSA Deposits" then begin
+                    //charge ODS not BOSA Acc.
+                    FosaAcc.Reset();
+                    FosaAcc.setrange("Loan Disbursement Account", true);
+                    // FosaAcc.SetRange("Product Type", '191');
+                    FosaAcc.SetRange("Member No.", SavAcc."Member No.");
+                    if FosaAcc.FindFirst() then begin
+                        SavBal := FosaAcc.GetAvailableBalance(FosaAcc."No.");
 
-                            if TransactionCharges."Recover Excise Duty" then
-                                Excise := TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)" * 0.01;
-                            if SavBal >= (TransactionCharges."Charge Amount" + Excise) then begin
-                                PDate := Today;
-                                DocNo := rec.No;
-                                DActivity2 := rec."Global Dimension 1 Code";
-                                DBranch2 := rec."Global Dimension 2 Code";
+                        if TransactionCharges."Recover Excise Duty" then
+                            Excise := TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)" * 0.01;
+                        if SavBal >= (TransactionCharges."Charge Amount" + Excise) then begin
+                            PDate := Today;
+                            DocNo := rec.No;
+                            DActivity2 := rec."Global Dimension 1 Code";
+                            DBranch2 := rec."Global Dimension 2 Code";
+                            LineNo := LineNo + 10000;
+                            AccType := Acctype::"G/L Account";
+                            AccNo := TransactionCharges."G/L Account";
+                            TransType := Transtype::" ";
+                            BalAccType := Balacctype::"G/L Account";
+                            BalAccNo := '';
+                            Amt := TransactionCharges."Charge Amount";
+                            Amt := Amt * -1;
+                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+                          BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                            LineNo := LineNo + 10000;
+                            AccType := Acctype::Savings;
+                            AccNo := FosaAcc."No.";
+                            TransType := Transtype::" ";
+                            BalAccType := Balacctype::"G/L Account";
+                            BalAccNo := '';
+                            Amt := TransactionCharges."Charge Amount";
+
+                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+                          BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                            if TransactionCharges."Recover Excise Duty" = true then begin
+                                GenSetup.TestField("Excise Duty G/L");
+                                GenSetup.TestField("Excise Duty (%)");
                                 LineNo := LineNo + 10000;
                                 AccType := Acctype::"G/L Account";
-                                AccNo := TransactionCharges."G/L Account";
+                                Amt := TransactionCharges."Charge Amount";
+                                AccNo := GenSetup."Excise Duty G/L";
                                 TransType := Transtype::" ";
                                 BalAccType := Balacctype::"G/L Account";
                                 BalAccNo := '';
-                                Amt := TransactionCharges."Charge Amount";
-                                Amt := Amt * -1;
-                                JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
-                              BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+                                JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 90), Amt * -1, AccNo, PDate, BalAccType,
+                                BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                                 LineNo := LineNo + 10000;
+                                GenSetup.TestField("Excise Duty G/L");
+                                GenSetup.TestField("Excise Duty (%)");
+                                Amt := TransactionCharges."Charge Amount";
                                 AccType := Acctype::Savings;
                                 AccNo := FosaAcc."No.";
                                 TransType := Transtype::" ";
-                                BalAccType := Balacctype::"G/L Account";
+                                BalAccType := Balacctype::Savings;
                                 BalAccNo := '';
-                                Amt := TransactionCharges."Charge Amount";
+                                Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+                                JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 90), Amt, AccNo, PDate, BalAccType,
+                                BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                                JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
-                              BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                if TransactionCharges."Recover Excise Duty" = true then begin
-                                    GenSetup.TestField("Excise Duty G/L");
-                                    GenSetup.TestField("Excise Duty (%)");
-                                    LineNo := LineNo + 10000;
-                                    AccType := Acctype::"G/L Account";
-                                    Amt := TransactionCharges."Charge Amount";
-                                    AccNo := GenSetup."Excise Duty G/L";
-                                    TransType := Transtype::" ";
-                                    BalAccType := Balacctype::"G/L Account";
-                                    BalAccNo := '';
-                                    Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
-                                    JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 90), Amt * -1, AccNo, PDate, BalAccType,
-                                    BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                    LineNo := LineNo + 10000;
-                                    GenSetup.TestField("Excise Duty G/L");
-                                    GenSetup.TestField("Excise Duty (%)");
-                                    Amt := TransactionCharges."Charge Amount";
-                                    AccType := Acctype::Savings;
-                                    AccNo := FosaAcc."No.";
-                                    TransType := Transtype::" ";
-                                    BalAccType := Balacctype::Savings;
-                                    BalAccNo := '';
-                                    Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
-                                    JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 90), Amt, AccNo, PDate, BalAccType,
-                                    BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                end;
-                                SavAcc.Status := SavAcc.Status::Active;
-                                SavAcc."Status Change Reason" := 'Activation';
-                                SavAcc.Modify;
-                            end
-                            else
-                                Error('Account balance is below required amount %1', TransactionCharges."Charge Amount");
-                            JournalPosting.CompletePosting(Jtemplate, JBatch);
+                            end;
+                            SavAcc.Status := SavAcc.Status::Active;
+                            SavAcc."Status Change Reason" := 'Activation';
+                            SavAcc.Modify;
                         end
                         else
-                            Error('Member does not have an Ordinary Account to charge');
+                            Error('Account balance is below required amount %1', TransactionCharges."Charge Amount");
+                        JournalPosting.CompletePosting(Jtemplate, JBatch);
                     end
                     else
-                        Error('This Account cannoit be activated by this process')
-                    // if SavAcc.Blocked <> SavAcc.Blocked::" " then begin
-                    //     SavAcc.Blocked := SavAcc.Blocked::" ";
+                        Error('Member does not have an default Account to charge');
+                end
+                // else
+                //     Error('This Account cannoit be activated by this process')
+                // if SavAcc.Blocked <> SavAcc.Blocked::" " then begin
+                //     SavAcc.Blocked := SavAcc.Blocked::" ";
 
-                    // end;
-                end else
-                    Error('There is no enough balance to charge activation fee.');
-
-            end;
+                // end;
+            end else
+                Error('There is no enough balance to charge activation fee.');
 
         end;
 
     end;
+
+    // end;
     //block account if
 
 

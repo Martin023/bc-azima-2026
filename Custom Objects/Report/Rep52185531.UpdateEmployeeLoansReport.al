@@ -46,9 +46,9 @@ report 52185531 "Update Employee Loans Report"
                                 PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
                                 PREmployeeTransactions.Balance := Loans."Outstanding Balance" + Loans."Outstanding Interest";
                                 if loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
-                                    PREmployeeTransactions.Amount := Loans."Loan Principle Repayment";
+                                    PREmployeeTransactions.Amount := Loans."Loan Principle Repayment" + loans."Outstanding Interest";
                                     if Loans."Variated Amount" > 0 then
-                                        PREmployeeTransactions.Amount := Loans."Variated Amount" + +loans."Outstanding Interest";
+                                        PREmployeeTransactions.Amount := Loans."Variated Amount" + loans."Outstanding Interest";
                                 end
                                 else begin
                                     PREmployeeTransactions.Amount := Loans.Repayment;

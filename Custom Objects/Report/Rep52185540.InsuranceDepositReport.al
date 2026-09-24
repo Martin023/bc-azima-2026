@@ -23,6 +23,7 @@ report 52185540 "Insurance Deposit Report"
             column(PayrollStaffNo; "Payroll/Staff No.")
             {
             }
+            column(Primary_Identification; "Primary Identification") { }
             column(DOB; "Date of Birth") { }
             column(Sno; Sno) { }
             column(DepositsCont; DepositsCont) { }

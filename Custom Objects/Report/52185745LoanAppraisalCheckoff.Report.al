@@ -1188,8 +1188,8 @@ Report 52185745 "Loan Appraisal Checkoff"
                         end
                         else begin
                             Loans."Recommended Amount" := Loans."Requested Amount";
-                            Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
-                            Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
+                            Loans."Approved Amount" := ROUND(Loans."Requested Amount", 100, '<');
+                            Loans."Amount To Disburse" := ROUND(Loans."Requested Amount", 100, '<');
                         end;
                     end;
                 end;

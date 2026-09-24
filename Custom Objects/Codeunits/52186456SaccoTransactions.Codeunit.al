@@ -10371,7 +10371,7 @@ Codeunit 52186456 "Sacco Transactions"
         InterestBuffer: Record "Interest Buffer";
         FosaAcc: Record "Savings Accounts";
         Text0001: label 'Your Fixed deposit of ';
-        Text0002: label ' has matured and amount transfered to your savings account on';
+        Text0002: label ' has matured, amount and interest transfered to your savings account on ';
         GlobalFunctions: Codeunit "Global Functions";
         DocumentNo: Code[20];
         Wtax: Decimal;
@@ -10609,7 +10609,7 @@ Codeunit 52186456 "Sacco Transactions"
                                             Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
                                         end;
                                         //Post New
-                                        msg := Text0001 + Format(FDAccount."Fixed Deposit Amount") + Text0002
+                                        msg := Text0001 + Format(FDAccount."Fixed Deposit Amount") + Text0002 + ' '
                                         + Format(Today) + ' ' + Format(Time);
 
                                         if FDAccount."Transactional Mobile No" = '' then begin

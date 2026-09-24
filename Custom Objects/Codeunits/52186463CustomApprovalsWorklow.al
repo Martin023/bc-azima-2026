@@ -5349,7 +5349,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 begin
                     recref.settable(FDContract);
                     FDContract.Validate(Status, FDContract.Status::Pending);
-                    FDContract."Fixed Deposit Status" := FDContract."Fixed Deposit Status"::Active;
+                    // FDContract."Fixed Deposit Status" := FDContract."Fixed Deposit Status"::Active;
                     FDContract.modify(true);
                     Variant := FDContract;
                     IsHandled := true;
