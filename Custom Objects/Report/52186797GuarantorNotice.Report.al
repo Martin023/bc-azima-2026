@@ -113,24 +113,22 @@ Report 52186797 "Guarantor Notice"
                             SavAcc.SetRange("Product Category", SavAcc."Product Category"::"BOSA Deposits");
                             SavAcc.SetRange("Member No.", Defaulter."No.");
                             SavAcc.SetAutoCalcFields(Balance);
-                            if not SavAcc.IsEmpty() then
+                            if SavAcc.FindFirst() then
                                 DepositBal := SavAcc.Balance
                             else
-                                DepositBal := 0;
+                                DepositBal := 0;                            //
 
-                            //
-
-                            if AmountRecoverable > 0 then begin
-                                ExistingLoans.Reset();
-                                ExistingLoans.SetLoadFields("Member No.", "Total Balance");
-                                ExistingLoans.SetRange("Member No.", Defaulter."No.");
-                                ExistingLoans.SetLoadFields("Total Balance");
-                                if ExistingLoans.FindSet() then begin
-                                    repeat
-                                        TotExistingLoan += ExistingLoans."Total Balance";
-                                    until ExistingLoans.next() = 0;
-                                end;
+                            // if AmountRecoverable > 0 then begin
+                            ExistingLoans.Reset();
+                            ExistingLoans.SetLoadFields("Member No.", "Total Balance");
+                            ExistingLoans.SetRange("Member No.", Defaulter."No.");
+                            ExistingLoans.SetAutoCalcFields("Total Balance");
+                            if ExistingLoans.FindSet() then begin
+                                repeat
+                                    TotExistingLoan += ExistingLoans."Total Balance";
+                                until ExistingLoans.next() = 0;
                             end;
+
                             if TotExistingLoan > 0 then
                                 AmountRecoverable := round(((DefaultedLoan."Total Balance" / TotExistingLoan) * DepositBal), 1, '<')
                             Else
@@ -139,13 +137,14 @@ Report 52186797 "Guarantor Notice"
                             if SmSAlertHeader."Equal Guarantor Disribution" then begin
                                 LoanGuar.Reset();
                                 LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
+                                LoanGuar.SetRange("Self Guarantee", false);
                                 LoanGuar.SetRange(Substituted, false);
                                 if LoanGuar.FindSet() then
                                     NoOfGuars := LoanGuar.Count()
                                 else
                                     NoOfGuars := 0;
                                 if NoOfGuars > 0 then
-                                    AmtToGuarantor := Round((Defaultedamount / NoOfGuars), 1, '>')
+                                    AmtToGuarantor := Round(((Defaultedamount - AmountRecoverable) / NoOfGuars), 1, '>')
                                 else
                                     AmtToGuarantor := 0;
                             end
