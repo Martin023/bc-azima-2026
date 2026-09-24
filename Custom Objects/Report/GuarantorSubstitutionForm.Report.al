@@ -120,13 +120,8 @@ Report 52185558 "Guarantor Substitution Form"
                 if LoaneeWNo = '' then 
                     LoaneeWNo := Loans."Member No.";
                     
-                // Identify if Loanee is Class B
-                IsClassB := false;
-                if LoaneeMember.Get("Member No.") then begin
-                    // *NOTE: If your table uses a different field name for Member Class, change it here!*
-                    if LoaneeMember."Member Class" = 'CLASS B' then 
-                        IsClassB := true;
-                end;
+                // USE USER'S SELECTION FROM REQUEST PAGE
+                IsClassB := RequireIDCopy;
             end;
         }
     }
@@ -150,10 +145,28 @@ Report 52185558 "Guarantor Substitution Form"
                         ToolTip = 'Select the member whose loan requires a guarantor substitution.';
                         
                         trigger OnValidate()
+                        var
+                            MemberRec: Record Members;
                         begin
                             LoanNoFilter := '';
                             OutgoingGuarantorFilter := '';
+                            
+                            MemberClassDisplay := '';
+                            if LoaneeNoFilter <> '' then begin
+                                if MemberRec.Get(LoaneeNoFilter) then
+                                    MemberClassDisplay := Format(MemberRec."Member Class");
+                            end;
                         end;
+                    }
+                    
+                    field(MemberClassDisplay; MemberClassDisplay)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Member Class';
+                        Editable = false;
+                        ToolTip = 'The class of the selected member. Use this to decide if ID copy attachment is required.';
+                        Style = Strong;
+                        StyleExpr = true;
                     }
                     
                     field(LoanNoFilter; LoanNoFilter)
@@ -232,6 +245,13 @@ Report 52185558 "Guarantor Substitution Form"
                             end;
                         end;
                     }
+                    
+                    field(RequireIDCopy; RequireIDCopy)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Require ID Copy Attachment';
+                        ToolTip = 'Check this to add a note requiring the loanee to attach an ID copy for the new guarantor.';
+                    }
                 }
             }
         }
@@ -266,4 +286,6 @@ Report 52185558 "Guarantor Substitution Form"
         LoaneeNoFilter: Code[20];
         LoanNoFilter: Code[20];
         OutgoingGuarantorFilter: Code[20];
+        RequireIDCopy: Boolean;
+        MemberClassDisplay: Text[50];
 }

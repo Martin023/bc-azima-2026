@@ -40,6 +40,8 @@ page 52185794 "Cashier Transactions"
 
 
                     trigger OnValidate()
+                    var
+                        GlobalFunctions: Codeunit "Global Functions";
                     begin
                         // SavingsAccounts.
                         //CheckMemberInfomation();
@@ -55,7 +57,7 @@ page 52185794 "Cashier Transactions"
                                         Message(LoaneeInfomationBase.Info);
                                 until LoaneeInfomationBase.Next = 0;
                             end;
-
+                            GlobalFunctions.FlagAccounts(SavingsAccounts."Member No.");
                         end;
 
                     end;
