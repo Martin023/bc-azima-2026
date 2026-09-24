@@ -2378,6 +2378,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         Loans."Global Dimension 2 Code" := Format(ProductFactory."Source Unit");
         Loans.Source := Loans.Source::BANKING;
         Loans."Recovery Mode" := ProductFactory."Repay Mode";
+        Loans."Recovery Priority" := ProductFactory."Recovery Priority";
 
         if (Installments > ProductFactory."Ordinary Default Intallments") or (Installments <= 0) then begin
             Installments := ProductFactory."Ordinary Default Intallments";
@@ -2905,6 +2906,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         Loans."Global Dimension 2 Code" := Format(ProductFactory."Source Unit");
         Loans.Source := Loans.Source::BANKING;
         Loans."Recovery Mode" := ProductFactory."Repay Mode";
+        Loans."Recovery Priority" := ProductFactory."Recovery Priority";
         Loans.Installments := ProductFactory."Ordinary Default Intallments";
         Loans."Repayment Frequency" := ProductFactory."Repayment Frequency";
         Loans."Source Aplication" := Loans."Source Aplication"::"Mbanking - APP";//dafault to app for reporting
