@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-09-24T16:52:20.0712373Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-09-28T14:13:53.2255200Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -212,7 +212,18 @@ Amount Recoverable Kshs.__</Value>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>____ Date of Default________________________________
+                    <Value>____ Date of Default_______</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DefaultedDate.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <Format>dd/MM/yy</Format>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>______
 
 
 Dear sir/madam,
@@ -834,6 +845,9 @@ End Function
         </Field>
         <Field Name="AmtToGuarantorFormat">
           <DataField>AmtToGuarantorFormat</DataField>
+        </Field>
+        <Field Name="DefaultedDate">
+          <DataField>DefaultedDate</DataField>
         </Field>
       </Fields>
       <Query>

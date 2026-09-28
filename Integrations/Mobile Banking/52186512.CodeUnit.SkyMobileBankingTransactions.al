@@ -3055,14 +3055,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
         AsAtDate: Date;
         ChargeStmtDesc: Text[100];
         LineChargeAmt: Decimal;
-        TotalVendorCharges: Decimal;
     begin
         Loans.get(LoanNo);
         Members.get(Loans."Member No.");
         ProductFactory.get(Loans."Loan Product Type");
         FosaAcc := GetMemberFosaAcc(Members);
         LineNo := 0;
-        TotalVendorCharges := 0;
 
         DocNo := CopyStr(SessionID, 1, 19);
         // DocNo := Loans."Loan No.";
@@ -3184,11 +3182,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             ChargeStmtDesc := MobileTransTypes.Description;
                         LineChargeAmt := GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                         if LineChargeAmt <> 0 then
-                            if MobileTransLines."Account Type" = MobileTransLines."Account Type"::Vendor then begin
-                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Credit, Loans."Loan Account", ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, Loans."Loan No.", TransType::Loan, Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                                TotalVendorCharges += LineChargeAmt;
-                            end else
-                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
                     end until MobileTransLines.Next = 0;
                 end;
             end;
@@ -3474,11 +3468,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
         end;
 
         if SaccoTrans.PostJournal(Template, Batch) then begin
-            if TotalVendorCharges > 0 then begin
-                Loans."Approved Amount" += TotalVendorCharges;
-                Loans."Loan Principle Repayment" := Loans."Approved Amount";
-                Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
-            end;
             Loans.Posted := true;
             Loans.Modify;
             exit(true);
@@ -3488,11 +3477,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
             GLEntry.SetRange("Document No.", DocNo);
             GLEntry.SetLoadFields("Entry No.");
             if GLEntry.FindFirst then begin
-                if TotalVendorCharges > 0 then begin
-                    Loans."Approved Amount" += TotalVendorCharges;
-                    Loans."Loan Principle Repayment" := Loans."Approved Amount";
-                    Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
-                end;
                 Loans.Posted := true;
                 Loans.Modify;
                 exit(true);
@@ -3543,14 +3527,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
         LnTopUp: Record Loans;
         ChargeStmtDesc: Text[100];
         LineChargeAmt: Decimal;
-        TotalVendorCharges: Decimal;
     begin
         Loans.get(LoanNo);
         Members.get(Loans."Member No.");
         ProductFactory.get(Loans."Loan Product Type");
         FosaAcc := GetMemberFosaAcc(Members);
         LineNo := 0;
-        TotalVendorCharges := 0;
 
         DocNo := LoanNo;
         // DocNo := Loans."Loan No.";
@@ -3603,7 +3585,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
                     if MobileTransLines.FindSet then begin
                         TotalCharges := 0;
-                        TotalVendorCharges := 0;
                         repeat begin
                             // LineNo += 1000;
 
@@ -3618,11 +3599,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                 ChargeStmtDesc := MobileTransTypes.Description;
                             LineChargeAmt := GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                             if LineChargeAmt <> 0 then
-                                if MobileTransLines."Account Type" = MobileTransLines."Account Type"::Vendor then begin
-                                    SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Credit, Loans."Loan Account", ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, Loans."Loan No.", TransType::Loan, Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                                    TotalVendorCharges += LineChargeAmt;
-                                end else
-                                    SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, ChargeStmtDesc, AccType::"G/L Account", '', LineChargeAmt, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
                         end until MobileTransLines.Next = 0;
                     end;
                 end;
@@ -3631,11 +3608,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
             if SaccoTrans.PostJournal(Template, Batch) then begin
                 // Refresh: PostLoanNormal already modified this record.
                 Loans.Get(LoanNo);
-                if TotalVendorCharges > 0 then begin
-                    Loans."Approved Amount" += TotalVendorCharges;
-                    Loans."Loan Principle Repayment" := Loans."Approved Amount";
-                    Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
-                end;
                 Loans.Posted := true;
                 Loans.Modify;
                 exit(true);
@@ -3645,11 +3617,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 GLEntry.SetLoadFields("Entry No.");
                 if GLEntry.FindFirst then begin
                     Loans.Get(LoanNo);
-                    if TotalVendorCharges > 0 then begin
-                        Loans."Approved Amount" += TotalVendorCharges;
-                        Loans."Loan Principle Repayment" := Loans."Approved Amount";
-                        Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
-                    end;
                     Loans.Posted := true;
                     Loans.Modify;
                     exit(true);

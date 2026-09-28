@@ -2591,6 +2591,31 @@ Codeunit 52185506 "Global Functions"
         end;
 
     end;
+
+    procedure CheckStaffAccount(No: Code[50]): Boolean
+    var
+        Loans: Record Loans;
+        Members: Record Members;
+        Accounts: Record "Savings Accounts";
+        UserSetUp: Record "User Setup";
+    begin
+        // UserSetUp.Reset();
+        // UserSetUp.SetRange("User ID", UserID);
+        // UserSetup.SetFilter("Member No.", '<>%1', '');
+        // UserSetUp.SetRange("Member No.", No);
+        // if UserSetUp.isempty() then CheckPermissionsToViewStaffAcc(UserId);
+    end;
+
+    //Check Permissions
+    procedure CheckPermissionsToViewStaffAcc(WinUserID: Code[20]): Boolean
+    var
+        StatusChange: record "Status Change Permissions.";
+    begin
+        // StatusChange.Reset();
+        // StatusChange.SetRange("User ID", WinUserID);
+        // StatusChange.SetRange("View Staff Acc", true);
+        // if StatusChange.IsEmpty then Error('You do not have rights to view other staff accounts in status change kindly contact ICT!');
+    end;
 }
 
 

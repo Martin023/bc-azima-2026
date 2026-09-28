@@ -4431,10 +4431,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     pfac.Get(MobileLoanBuffer."Loan Product Type");
                                     if not pfac."Allow Topup" then begin
                                         if SkyMbankingTrans.PostLoan(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
-                                            Loan.Get(MobileLoanBuffer."Loan No.");
                                             MobileLoanBuffer.Posted := true;
                                             MobileLoanBuffer."Date Posted" := CurrentDateTime;
-                                            MobileLoanBuffer."Approved Amount" := Loan."Approved Amount";
                                             MobileLoanBuffer.Modify();
                                             Commit;
 
@@ -4449,7 +4447,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 theSMS := 'Dear ' + LoanApplicant."First Name" + ', Your ' +
                                                 Loan."Loan Product Type Name" +
                                                 ' has been disbursed, principal of Kshs ' +
-                                                Format(Loan."Approved Amount", 0, '<Precision,2:2><Standard Format,0>') +
+                                                Format(MobileLoanBuffer.Amount, 0, '<Precision,2:2><Standard Format,0>') +
                                                 ' and interest of Kshs ' +
                                                 Format(DisbursementInterestAmt, 0, '<Precision,2:2><Standard Format,0>') +
                                                 '. You can now withdraw from your account. Thank you';
@@ -4480,10 +4478,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     end else begin
                                         // FOSA M-Loan
                                         if SkyMbankingTrans.PostLoan2(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
-                                            Loan.Get(MobileLoanBuffer."Loan No.");
                                             MobileLoanBuffer.Posted := true;
                                             MobileLoanBuffer."Date Posted" := CurrentDateTime;
-                                            MobileLoanBuffer."Approved Amount" := Loan."Approved Amount";
                                             MobileLoanBuffer.Modify();
                                             Commit;
 
@@ -4508,7 +4504,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 theSMS := 'Dear ' + LoanApplicant."First Name" + ', Your ' +
                                                 Loan."Loan Product Type Name" +
                                                 ' has been disbursed, principal of Kshs ' +
-                                                Format(Loan."Approved Amount", 0, '<Precision,2:2><Standard Format,0>') +
+                                                Format(MobileLoanBuffer."Approved Amount", 0, '<Precision,2:2><Standard Format,0>') +
                                                 // Format(NetDisbursedAmount, 0, '<Precision,2:2><Standard Format,0>') +
                                                 ' and interest of Kshs ' +
                                                 Format(DisbursementInterestAmt, 0, '<Precision,2:2><Standard Format,0>') +

@@ -75,6 +75,9 @@ Report 52186797 "Guarantor Notice"
             column(AmtToGuarantor; AmtToGuarantor)
             {
             }
+            column(DefaultedDate; DefaultedDate)
+            {
+            }
             trigger OnAfterGetRecord()
             begin
                 GuarantorName := '';
@@ -99,9 +102,13 @@ Report 52186797 "Guarantor Notice"
                         CurrReport.Skip();
 
                     if DefaultedLoan.Get("SMS Alerts Lines"."Loan No") then begin
-                        DefaultedLoan.CalcFields("Outstanding Balance", "Total Balance");
-                        Defaultedamount := DefaultedLoan."Outstanding Balance";
+                        DefaultedLoan.CalcFields("Outstanding Balance", "Total Balance", "Installments In Arrears");
+                        Defaultedamount := DefaultedLoan."Total Balance" + threemonthsint(DefaultedLoan);
                         LoanType := DefaultedLoan."Loan Product Type Name";
+                        if DefaultedLoan."Installments In Arrears" > 0 then
+                            DefaultedDate := CalcDate('<-' + Format(DefaultedLoan."Installments In Arrears") + 'M>', Today)
+                        else
+                            DefaultedDate := Today;
 
                         if Defaulter.Get(DefaultedLoan."Member No.") then begin
                             DefaulterName := Defaulter.Name;
@@ -237,5 +244,12 @@ Report 52186797 "Guarantor Notice"
         AmtToGuarantor: Decimal;
         LoanGuar: record "Loan Guarantors and Security";
         NoOfGuars: Integer;
+        DefaultedDate: Date;
+
+    procedure threemonthsint(LoanII: record Loans): Decimal
+    begin
+        LoanII.CalcFields("Outstanding Balance");
+        exit(round((LoanII."Outstanding Balance" * ((LoanII.Interest / 12) * 0.01)) * 3, 1, '>'));
+    end;
 
 }

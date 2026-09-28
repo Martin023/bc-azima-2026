@@ -22,6 +22,7 @@ page 52186182 "General Setup"
                 field("Max. Member Age"; rec."Max. Member Age")
                 {
                     ApplicationArea = Basic;
+                    caption = 'Retirement Age - CLASS A';
                 }
                 field("EFT Dest Acc Length"; rec."EFT Dest Acc Length")
                 {
@@ -30,6 +31,7 @@ page 52186182 "General Setup"
                 field("Max. Member Age - Disabled"; rec."Max. Member Age - Disabled")
                 {
                     ApplicationArea = Basic;
+                    caption = 'Retirement Age - CLASS B';
                 }
                 field("Max. Age Non-Common Bond"; rec."Max. Age Non-Common Bond")
                 {
