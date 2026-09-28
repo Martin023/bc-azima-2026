@@ -100,7 +100,7 @@ Report 52186797 "Guarantor Notice"
 
                     if DefaultedLoan.Get("SMS Alerts Lines"."Loan No") then begin
                         DefaultedLoan.CalcFields("Outstanding Balance", "Total Balance");
-                        Defaultedamount := DefaultedLoan."Outstanding Balance";
+                        Defaultedamount := DefaultedLoan."Total Balance" + threemonthsint(DefaultedLoan);
                         LoanType := DefaultedLoan."Loan Product Type Name";
 
                         if Defaulter.Get(DefaultedLoan."Member No.") then begin
@@ -237,5 +237,11 @@ Report 52186797 "Guarantor Notice"
         AmtToGuarantor: Decimal;
         LoanGuar: record "Loan Guarantors and Security";
         NoOfGuars: Integer;
+
+    procedure threemonthsint(LoanII: record Loans): Decimal
+    begin
+        LoanII.CalcFields("Outstanding Balance");
+        exit(round((LoanII."Outstanding Balance" * ((LoanII.Interest / 12) * 0.01)) * 3, 1, '>'));
+    end;
 
 }

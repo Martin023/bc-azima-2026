@@ -2243,6 +2243,9 @@ page 52185726 "Member Single"
         end;
 
         HideAccount := GlobalFunctions.HideAccount(Rec."No.");
+        if GlobalFunctions.CheckStaffAccount(Rec."No.") then begin
+            GlobalFunctions.CheckPermissionsToViewStaffAcc(UserId);
+        end;
     end;
 
     procedure CheckMemberInfomation()

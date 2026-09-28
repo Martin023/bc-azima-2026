@@ -101,10 +101,7 @@ page 52186264 "Status Change Permssion."
                 {
                     ApplicationArea = Basic;
                 }
-                field("View Data Sheet"; Rec."View Data Sheet")
-                {
-                    ApplicationArea = Basic;
-                }
+
                 field("Upload Old Loans"; Rec."Upload Old Loans")
                 {
                     ApplicationArea = Basic;
@@ -196,6 +193,10 @@ page 52186264 "Status Change Permssion."
                 }
                 field("Recover Share & Entrance Fee"; Rec."Recover Share & Entrance Fee")
                 {
+                }
+                field("View Staff Acc"; Rec."View Staff Acc")
+                {
+                    ApplicationArea = Basic;
                 }
             }
         }
