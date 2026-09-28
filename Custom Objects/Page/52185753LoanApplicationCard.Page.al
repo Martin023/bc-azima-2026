@@ -970,6 +970,19 @@ page 52185753 "Loan Application Card"
                     end;
                 end;
             }
+
+            action("Blocked Loan Products")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Blocked Loan Products';
+                Image = CheckList;
+                Promoted = true;
+                PromotedCategory = Category4;
+                ToolTip = 'View or manage the mobile loan products this member is blocked from applying for.';
+
+                RunObject = Page "Mobile Loan Restrictions";
+                RunPageLink = "Member No." = FIELD("Member No.");
+            }
             action("Other Commitments Clearance")
             {
                 ApplicationArea = Basic, Suite;

@@ -78,7 +78,7 @@ table 52185687 "Status Change Permissions."
         field(17; "Edit Bank Card"; Boolean)
         {
         }
-        field(18; "View Data Sheet"; Boolean)
+        field(18; "View Staff Acc"; Boolean)
         {
         }
         field(19; "Full Name"; Text[30])

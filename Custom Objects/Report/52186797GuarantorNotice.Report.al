@@ -72,6 +72,12 @@ Report 52186797 "Guarantor Notice"
             column(AmountRecoverable; AmountRecoverable)
             {
             }
+            column(AmtToGuarantor; AmtToGuarantor)
+            {
+            }
+            column(DefaultedDate; DefaultedDate)
+            {
+            }
             trigger OnAfterGetRecord()
             begin
                 GuarantorName := '';
@@ -85,52 +91,85 @@ Report 52186797 "Guarantor Notice"
                 Defaultedamount := 0;
                 AmountRecoverable := 0;
 
-                if SmSAlertHeader.Get("SMS Alerts Lines"."Header No") then
+                if SmSAlertHeader.Get("SMS Alerts Lines"."Header No") then begin
                     NoticeDate := SmSAlertHeader."Posted At";
-                if GuarMember.get("Member No") then begin
-                    GuarantorName := GuarMember.Name;
-                    GuarWorkNo := GuarMember."Payroll/Staff No.";
-                    GuarEmpcode := GuarMember."Employer Code";
-                end
-                else
-                    CurrReport.Skip();
+                    if GuarMember.get("Member No") then begin
+                        GuarantorName := GuarMember.Name;
+                        GuarWorkNo := GuarMember."Payroll/Staff No.";
+                        GuarEmpcode := GuarMember."Employer Code";
+                    end
+                    else
+                        CurrReport.Skip();
 
-                if DefaultedLoan.Get("Loan No") then begin
-                    DefaultedLoan.CalcFields("Outstanding Balance");
-                    if Defaulter.Get(DefaultedLoan."Member No.") then begin
-                        DefaulterName := Defaulter.Name;
-                        DefaulterEmpcode := Defaulter."Employer Code";
-                        DefaulterWkno := Defaulter."Payroll/Staff No.";
-
-                        SavAcc.Reset();
-                        SavAcc.Setloadfields("Product Category", "Member No.", Balance);
-                        SavAcc.SetRange("Member No.", Defaulter."No.");
-                        SavAcc.SetAutoCalcFields(Balance);
-                        if not SavAcc.IsEmpty() then
-                            AmountRecoverable := SavAcc.Balance
+                    if DefaultedLoan.Get("SMS Alerts Lines"."Loan No") then begin
+                        DefaultedLoan.CalcFields("Outstanding Balance", "Total Balance", "Installments In Arrears");
+                        Defaultedamount := DefaultedLoan."Total Balance" + threemonthsint(DefaultedLoan);
+                        LoanType := DefaultedLoan."Loan Product Type Name";
+                        if DefaultedLoan."Installments In Arrears" > 0 then
+                            DefaultedDate := CalcDate('<-' + Format(DefaultedLoan."Installments In Arrears") + 'M>', Today)
                         else
-                            AmountRecoverable := 0;
+                            DefaultedDate := Today;
 
-                        //
+                        if Defaulter.Get(DefaultedLoan."Member No.") then begin
+                            DefaulterName := Defaulter.Name;
+                            DefaulterEmpcode := Defaulter."Employer Code";
+                            DefaulterWkno := Defaulter."Payroll/Staff No.";
 
-                        if AmountRecoverable > 0 then begin
+                            SavAcc.Reset();
+                            SavAcc.Setloadfields("Product Category", "Member No.", Balance);
+                            SavAcc.SetRange("Product Category", SavAcc."Product Category"::"BOSA Deposits");
+                            SavAcc.SetRange("Member No.", Defaulter."No.");
+                            SavAcc.SetAutoCalcFields(Balance);
+                            if SavAcc.FindFirst() then
+                                DepositBal := SavAcc.Balance
+                            else
+                                DepositBal := 0;                            //
+
+                            // if AmountRecoverable > 0 then begin
                             ExistingLoans.Reset();
                             ExistingLoans.SetLoadFields("Member No.", "Total Balance");
                             ExistingLoans.SetRange("Member No.", Defaulter."No.");
-                            ExistingLoans.SetLoadFields("Total Balance");
+                            ExistingLoans.SetAutoCalcFields("Total Balance");
                             if ExistingLoans.FindSet() then begin
                                 repeat
                                     TotExistingLoan += ExistingLoans."Total Balance";
                                 until ExistingLoans.next() = 0;
                             end;
+
+                            if TotExistingLoan > 0 then
+                                AmountRecoverable := round(((DefaultedLoan."Total Balance" / TotExistingLoan) * DepositBal), 1, '<')
+                            Else
+                                AmountRecoverable := DepositBal;
+
+                            if SmSAlertHeader."Equal Guarantor Disribution" then begin
+                                LoanGuar.Reset();
+                                LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
+                                LoanGuar.SetRange("Self Guarantee", false);
+                                LoanGuar.SetRange(Substituted, false);
+                                if LoanGuar.FindSet() then
+                                    NoOfGuars := LoanGuar.Count()
+                                else
+                                    NoOfGuars := 0;
+                                if NoOfGuars > 0 then
+                                    AmtToGuarantor := Round(((Defaultedamount - AmountRecoverable) / NoOfGuars), 1, '>')
+                                else
+                                    AmtToGuarantor := 0;
+                            end
+                            else begin
+                                LoanGuar.Reset();
+                                LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
+                                LoanGuar.SetRange(Substituted, false);
+                                LoanGuar.SetRange("Member No", "SMS Alerts Lines"."Member No");
+                                if LoanGuar.FindFirst() then
+                                    AmtToGuarantor := LoanGuar."Amount Guaranteed";
+                            end;
+
                         end;
 
-
                     end;
-                    Defaultedamount := DefaultedLoan."Outstanding Balance";
-                    LoanType := DefaultedLoan."Loan Product Type Name";
-                end;
-
+                end
+                else
+                    CurrReport.Skip();
 
             end;
 
@@ -201,5 +240,16 @@ Report 52186797 "Guarantor Notice"
         SavAcc: record "Savings Accounts";
         ExistingLoans: Record Loans;
         TotExistingLoan: Decimal;
+        DepositBal: Decimal;
+        AmtToGuarantor: Decimal;
+        LoanGuar: record "Loan Guarantors and Security";
+        NoOfGuars: Integer;
+        DefaultedDate: Date;
+
+    procedure threemonthsint(LoanII: record Loans): Decimal
+    begin
+        LoanII.CalcFields("Outstanding Balance");
+        exit(round((LoanII."Outstanding Balance" * ((LoanII.Interest / 12) * 0.01)) * 3, 1, '>'));
+    end;
 
 }

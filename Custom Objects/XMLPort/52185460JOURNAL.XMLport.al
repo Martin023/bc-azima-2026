@@ -61,7 +61,7 @@ XmlPort 52185460 JOURNAL
                 {
                     FieldValidate = No;
                 }
-                 fieldelement(n; "Gen. Journal Line"."Fixed Deposit Contract")
+                fieldelement(n; "Gen. Journal Line"."Fixed Deposit Contract")
                 {
                     FieldValidate = No;
                 }
@@ -72,17 +72,41 @@ XmlPort 52185460 JOURNAL
                 fieldelement(p; "Gen. Journal Line"."Bal. Account Type")
                 {
                     FieldValidate = No;
-                }  
+                }
             }
-            
+
         }
     }
+    requestpage
+    {
+        SaveValues = true;
+
+        layout
+        {
+            area(content)
+            {
+                group("Excel Layout")
+                {
+                    field(ExcelLayout; ExcelLayout)
+                    {
+                    }
+                }
+            }
+        }
+    }
+    trigger OninitXmlPort()
+    begin
+        ExcelLayout := 'TemplateName|BatchName|PpostingDate|DocumentNo|AccountType|AccountNo|Amount|Description|Lineno|BranchCode|ActivityCode|LoanNo|TransactionType|FixedDepositNo|BalAccNo|BalAccType';
+    end;
+
     trigger OnPostXmlPort()
     var
         myInt: Integer;
     begin
         Message('Upload completed successfully');
     end;
-    
-    
+
+
+    var
+        ExcelLayout: Text;
 }
