@@ -139,6 +139,25 @@ page 52185822 "Account Transfer"
             group(Posting)
             {
                 Caption = 'Posting';
+                action("Print Transfer")
+                {
+                    Caption = 'Print Transfer';
+                    Image = Print;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    PromotedIsBig = true;
+                    ApplicationArea = Basic, Suite;
+
+                    trigger OnAction()
+                    var
+                        TransferRec: Record "Account Transfer Header";
+                    begin
+                        TransferRec.Reset();
+                        TransferRec.SetRange(No, Rec.No);
+                        if TransferRec.FindFirst() then
+                            Report.Run(Report::"Account Transfer", true, false, TransferRec);
+                    end;
+                }
                 action(Post)
                 {
                     Caption = 'Post';
@@ -940,9 +959,7 @@ page 52185822 "Account Transfer"
                     end;
                     Message('SMS Notifications Sent Successfully');
                 end;
-            }
-
-
+            }        
         }
     }
 
