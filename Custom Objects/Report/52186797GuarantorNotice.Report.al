@@ -106,7 +106,7 @@ Report 52186797 "Guarantor Notice"
                         Defaultedamount := DefaultedLoan."Total Balance" + threemonthsint(DefaultedLoan);
                         LoanType := DefaultedLoan."Loan Product Type Name";
                         if DefaultedLoan."Installments In Arrears" > 0 then
-                            DefaultedDate := CalcDate('<-' + Format(DefaultedLoan."Installments In Arrears") + 'M>', Today)
+                            DefaultedDate := CalcDate('<-' + Format(round(DefaultedLoan."Installments In Arrears"), 1, '<') + 'M>', Today)
                         else
                             DefaultedDate := Today;
 
