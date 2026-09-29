@@ -24,6 +24,9 @@ Report 52185571 "Account Transfer"
             column(PrintedBy; PrintedBy) { }
             column(DateFilterTxt; DateFilterTxt) { }
             column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>')) { }
+            
+            // Moved Created By to the header level
+            column(HeaderCreatedBy; TransferHeader."Created By") { }
 
             dataitem(TransLines; Integer)
             {
@@ -31,7 +34,6 @@ Report 52185571 "Account Transfer"
 
                 column(GroupDetails; GroupDetails) { }
                 column(TransType; TransType) { }
-                column(UserName; TransferHeader."Created By") { }
                 column(TrxDate; TrxDate) { }
                 column(TrxTime; TrxTime) { }
                 column(Amount; LineAmount) { }
@@ -45,7 +47,6 @@ Report 52185571 "Account Transfer"
                         if TransferHeader."Total Debits" = 0 then
                             CurrReport.Skip();
 
-                        // Group Details logic combining Header Remarks and Source Name
                         GroupDetails := Format(TransferHeader."Transfer Type") + ' Transfer Out';
                         TransferSource.Reset();
                         TransferSource.SetRange("No.", TransferHeader.No);
@@ -68,7 +69,6 @@ Report 52185571 "Account Transfer"
                         if TransferHeader."Total Credits" = 0 then
                             CurrReport.Skip();
 
-                        // Group Details logic combining Header Remarks and Destination Name
                         GroupDetails := Format(TransferHeader."Transfer Type") + ' Transfer In';
                         TransferDest.Reset();
                         TransferDest.SetRange("No.", TransferHeader.No);
@@ -87,7 +87,6 @@ Report 52185571 "Account Transfer"
                         LineCreditAmt := TransferHeader."Total Credits";
                     end;
                     
-                    // Allow the user to filter via request page input
                     if GroupFilter <> '' then begin
                         if StrPos(UpperCase(GroupDetails), UpperCase(GroupFilter)) = 0 then
                             CurrReport.Skip();
@@ -97,7 +96,6 @@ Report 52185571 "Account Transfer"
 
             trigger OnAfterGetRecord()
             begin
-                // Update flowfields so they can be read by TransLines DataItem
                 TransferHeader.CalcFields("Total Debits", "Total Credits");
             end;
 

@@ -124,7 +124,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>User Name</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -339,7 +339,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>="Grouped By:   Details: " &amp; Fields!GroupDetails.Value &amp; "          " &amp; Fields!UserName.Value</Value>
+                                  <Value>="Details: " &amp; Fields!GroupDetails.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -429,14 +429,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="UserName">
+                        <Textbox Name="EmptyUser">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!UserName.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1047,6 +1047,50 @@
                     </TablixCell>
                   </TablixCells>
                 </TablixRow>
+                <TablixRow>
+                  <Height>0.5in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SignatureBox">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Customer / Authorized Signature: __________________________________________</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>10pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>20pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>8</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
@@ -1071,7 +1115,6 @@
                   <Group Name="Group1">
                     <GroupExpressions>
                       <GroupExpression>=Fields!GroupDetails.Value</GroupExpression>
-                      <GroupExpression>=Fields!UserName.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <TablixMembers>
@@ -1089,17 +1132,20 @@
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
                 </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0in</Top>
             <Left>0in</Left>
-            <Height>1.38in</Height>
+            <Height>1.88in</Height>
             <Width>7.5in</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>1.5in</Height>
+        <Height>2.0in</Height>
         <Style />
       </Body>
       <Width>7.5in</Width>
@@ -1271,6 +1317,28 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
+                      <Value>Created By : </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=First(Fields!HeaderCreatedBy.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
                       <Value>Printed By : </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
@@ -1307,9 +1375,9 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0in</Top>
-              <Left>5in</Left>
-              <Height>0.8in</Height>
-              <Width>2.5in</Width>
+              <Left>4.7in</Left>
+              <Height>1.0in</Height>
+              <Width>2.8in</Width>
               <ZIndex>3</ZIndex>
               <Style />
             </Textbox>
@@ -1332,7 +1400,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Counter Summary For " &amp; First(Fields!DateFilterTxt.Value, "DataSet_Result")</Value>
+                      <Value>="Account Transfer Summary For " &amp; First(Fields!DateFilterTxt.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -1416,14 +1484,14 @@ End Function
         <Field Name="PrintDateTime">
           <DataField>PrintDateTime</DataField>
         </Field>
+        <Field Name="HeaderCreatedBy">
+          <DataField>HeaderCreatedBy</DataField>
+        </Field>
         <Field Name="GroupDetails">
           <DataField>GroupDetails</DataField>
         </Field>
         <Field Name="TransType">
           <DataField>TransType</DataField>
-        </Field>
-        <Field Name="UserName">
-          <DataField>UserName</DataField>
         </Field>
         <Field Name="TrxDate">
           <DataField>TrxDate</DataField>
