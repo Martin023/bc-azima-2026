@@ -24,9 +24,8 @@ Report 52185571 "Account Transfer"
             column(PrintedBy; PrintedBy) { }
             column(DateFilterTxt; DateFilterTxt) { }
             column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>')) { }
-            
-            // Moved Created By to the header level
             column(HeaderCreatedBy; TransferHeader."Created By") { }
+            column(ReportTitle; ReportTitleTxt) { }
 
             dataitem(TransLines; Integer)
             {
@@ -47,14 +46,33 @@ Report 52185571 "Account Transfer"
                         if TransferHeader."Total Debits" = 0 then
                             CurrReport.Skip();
 
-                        GroupDetails := Format(TransferHeader."Transfer Type") + ' Transfer Out';
                         TransferSource.Reset();
                         TransferSource.SetRange("No.", TransferHeader.No);
-                        if TransferSource.FindFirst() then
-                            GroupDetails := GroupDetails + ' (From: ' + TransferSource."Source Account Name" + ')';
+                        TransferSource.SetFilter("Source Amount", '>0'); // Ignore 0.00 lines
+                        
+                        if TransferSource.FindSet() then begin
+                            if TransferSource.Count = 1 then begin
+                                // SINGLE SOURCE ACCOUNT
+                                GroupDetails := 'ACCOUNT TRANSFER FROM - ' + TransferSource."Source Account No." + ': ' + TransferSource."Product Name" + 
+                                                ' - ' + Format(TransferHeader."Transfer Type") + ' Transfer Out (From: ' + TransferSource."Source Account Name" + ')';
+                            end else begin
+                                // MULTIPLE SOURCE ACCOUNTS
+                                AccountList := '';
+                                repeat
+                                    if AccountList = '' then
+                                        AccountList := TransferSource."Source Account No."
+                                    else
+                                        AccountList += ', ' + TransferSource."Source Account No.";
+                                until TransferSource.Next() = 0;
 
-                        if TransferHeader.Remarks <> '' then
-                            GroupDetails := TransferHeader.Remarks + ' - ' + GroupDetails;
+                                // Reset back to first to grab the primary name
+                                TransferSource.FindFirst();
+                                GroupDetails := 'ACCOUNT TRANSFER FROM - Multiple Accounts (' + AccountList + ') - ' + 
+                                                Format(TransferHeader."Transfer Type") + ' Transfer Out (From: ' + TransferSource."Source Account Name" + '...)';
+                            end;
+                        end else begin
+                            GroupDetails := 'ACCOUNT TRANSFER FROM - ' + Format(TransferHeader."Transfer Type") + ' Transfer Out';
+                        end;
 
                         TransType := 'Transfer Out';
                         TrxDate := Format(TransferHeader."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
@@ -69,14 +87,33 @@ Report 52185571 "Account Transfer"
                         if TransferHeader."Total Credits" = 0 then
                             CurrReport.Skip();
 
-                        GroupDetails := Format(TransferHeader."Transfer Type") + ' Transfer In';
                         TransferDest.Reset();
                         TransferDest.SetRange("No.", TransferHeader.No);
-                        if TransferDest.FindFirst() then
-                            GroupDetails := GroupDetails + ' (To: ' + TransferDest."Destination Account Name" + ')';
+                        TransferDest.SetFilter("Destination Amount", '>0'); // Ignore 0.00 lines
+                        
+                        if TransferDest.FindSet() then begin
+                            if TransferDest.Count = 1 then begin
+                                // SINGLE DESTINATION ACCOUNT
+                                GroupDetails := 'ACCOUNT TRANSFER TO - ' + TransferDest."Destination Account No." + ': ' + TransferDest."Product Name" + 
+                                                ' - ' + Format(TransferHeader."Transfer Type") + ' Transfer In (To: ' + TransferDest."Destination Account Name" + ')';
+                            end else begin
+                                // MULTIPLE DESTINATION ACCOUNTS
+                                AccountList := '';
+                                repeat
+                                    if AccountList = '' then
+                                        AccountList := TransferDest."Destination Account No."
+                                    else
+                                        AccountList += ', ' + TransferDest."Destination Account No.";
+                                until TransferDest.Next() = 0;
 
-                        if TransferHeader.Remarks <> '' then
-                            GroupDetails := TransferHeader.Remarks + ' - ' + GroupDetails;
+                                // Reset back to first to grab the primary name
+                                TransferDest.FindFirst();
+                                GroupDetails := 'ACCOUNT TRANSFER TO - Multiple Accounts (' + AccountList + ') - ' + 
+                                                Format(TransferHeader."Transfer Type") + ' Transfer In (To: ' + TransferDest."Destination Account Name" + '...)';
+                            end;
+                        end else begin
+                            GroupDetails := 'ACCOUNT TRANSFER TO - ' + Format(TransferHeader."Transfer Type") + ' Transfer In';
+                        end;
 
                         TransType := 'Transfer In';
                         TrxDate := Format(TransferHeader."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
@@ -97,6 +134,9 @@ Report 52185571 "Account Transfer"
             trigger OnAfterGetRecord()
             begin
                 TransferHeader.CalcFields("Total Debits", "Total Credits");
+                
+                // Formulate the dynamic title
+                ReportTitleTxt := 'Account Transfer Summary For ' + TransferHeader.No + ' on ' + Format(TransferHeader."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
             end;
 
             trigger OnPreDataItem()
@@ -172,6 +212,7 @@ Report 52185571 "Account Transfer"
         PrintingDate: Text;
         PrintingTime: Text;
         PrintedBy: Text;
+        ReportTitleTxt: Text;
 
         GroupDetails: Text;
         TransType: Text;
@@ -182,4 +223,5 @@ Report 52185571 "Account Transfer"
         LineCreditAmt: Decimal;
         UserCode: Code[50];
         GroupFilter: Text;
+        AccountList: Text;
 }
