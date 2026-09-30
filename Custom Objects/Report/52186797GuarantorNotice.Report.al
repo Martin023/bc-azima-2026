@@ -90,6 +90,8 @@ Report 52186797 "Guarantor Notice"
                 DefaulterWkno := '';
                 Defaultedamount := 0;
                 AmountRecoverable := 0;
+                TotalAmtToGuarantors := 0;
+                TotalGuaranteedAmt := 0;
 
                 if SmSAlertHeader.Get("SMS Alerts Lines"."Header No") then begin
                     NoticeDate := SmSAlertHeader."Posted At";
@@ -130,6 +132,7 @@ Report 52186797 "Guarantor Notice"
                             ExistingLoans.SetLoadFields("Member No.", "Total Balance");
                             ExistingLoans.SetRange("Member No.", Defaulter."No.");
                             ExistingLoans.SetAutoCalcFields("Total Balance");
+                            ExistingLoans.setfilter("Total Balance", '>0');
                             if ExistingLoans.FindSet() then begin
                                 repeat
                                     TotExistingLoan += ExistingLoans."Total Balance";
@@ -141,29 +144,32 @@ Report 52186797 "Guarantor Notice"
                             Else
                                 AmountRecoverable := DepositBal;
 
-                            if SmSAlertHeader."Equal Guarantor Disribution" then begin
-                                LoanGuar.Reset();
-                                LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
-                                LoanGuar.SetRange("Self Guarantee", false);
-                                LoanGuar.SetRange(Substituted, false);
-                                if LoanGuar.FindSet() then
-                                    NoOfGuars := LoanGuar.Count()
-                                else
-                                    NoOfGuars := 0;
-                                if NoOfGuars > 0 then
-                                    AmtToGuarantor := Round(((Defaultedamount - AmountRecoverable) / NoOfGuars), 1, '>')
-                                else
-                                    AmtToGuarantor := 0;
+                            LoanGuar.Reset();
+                            LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
+                            LoanGuar.SetRange("Self Guarantee", false);
+                            LoanGuar.SetRange(Substituted, false);
+                            if LoanGuar.FindSet() then begin
+                                LoanGuar.CalcSums("Amount Guaranteed");
+                                NoOfGuars := LoanGuar.Count();
+                                TotalGuaranteedAmt := LoanGuar."Amount Guaranteed";
                             end
-                            else begin
-                                LoanGuar.Reset();
-                                LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
-                                LoanGuar.SetRange(Substituted, false);
-                                LoanGuar.SetRange("Member No", "SMS Alerts Lines"."Member No");
-                                if LoanGuar.FindFirst() then
-                                    AmtToGuarantor := LoanGuar."Amount Guaranteed";
-                            end;
+                            else
+                                NoOfGuars := 0;
 
+                            TotalAmtToGuarantors := Defaultedamount - AmountRecoverable;
+
+                            if NoOfGuars > 0 then begin
+                                if SmSAlertHeader."Equal Guarantor Disribution" then begin
+                                    AmtToGuarantor := Round((TotalAmtToGuarantors / NoOfGuars), 1, '>')
+                                end
+                                else begin
+                                    //Specicified Guarantor
+                                    if LoanGuar."Amount Guaranteed" > 0 then begin
+                                        AmtToGuarantor := Round(((LoanGuar."Amount Guaranteed" / TotalGuaranteedAmt) * TotalAmtToGuarantors), 1, '>')
+                                    end else
+                                        AmtToGuarantor := 0;
+                                end;
+                            end;
                         end;
 
                     end;
@@ -245,6 +251,8 @@ Report 52186797 "Guarantor Notice"
         LoanGuar: record "Loan Guarantors and Security";
         NoOfGuars: Integer;
         DefaultedDate: Date;
+        TotalAmtToGuarantors: Decimal;
+        TotalGuaranteedAmt: Decimal;
 
     procedure threemonthsint(LoanII: record Loans): Decimal
     begin
