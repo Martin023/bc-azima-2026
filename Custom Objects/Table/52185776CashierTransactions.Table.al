@@ -194,17 +194,26 @@ table 52185776 "Cashier Transactions"
                         //     end;
                         // end
                         // else begin
+                        // BUserSetup.Get(Cashier);
+                        // BankAccount.Get(BUserSetup."Default  Bank");
+                        // if bankAccount.FindFirst() then begin
+                        //     BankAccount.CalcFields("Balance (LCY)");
+                        //     if BankAccount."Balance (LCY)" <= BankAccount."Replenishment Balance" then begin
+                        //         Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
+                        //     end;
+                        //     if BankAccount."Balance (LCY)" < rec.Amount then begin
+                        //         Error('Transaction Denied: Insufficient funds in till. Current balance is %1', BankAccount."Balance (LCY)");
+                        //     end;
+                        // end;
                         BUserSetup.Get(Cashier);
                         BankAccount.Get(BUserSetup."Default  Bank");
-                        if bankAccount.FindFirst() then begin
-                            BankAccount.CalcFields("Balance (LCY)");
-                            if BankAccount."Balance (LCY)" <= BankAccount."Replenishment Balance" then begin
-                                Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
-                            end;
-                            if BankAccount."Balance (LCY)" < rec.Amount then begin
-                                Error('Transaction Denied: Insufficient funds in till. Current balance is %1', BankAccount."Balance (LCY)");
-                            end;
-                        end;
+
+                        BankAccount.CalcFields("Balance (LCY)");
+
+                        if BankAccount."Balance (LCY)" <= BankAccount."Replenishment Balance" then
+                        Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
+                        if BankAccount."Balance (LCY)" < Rec.Amount then
+                        Error('Transaction Denied: Insufficient funds in till. Current balance is %1', BankAccount."Balance (LCY)");
                         // end;
                     end;
                     if TransType.Type = TransType.Type::"MPESA Deposit" then begin

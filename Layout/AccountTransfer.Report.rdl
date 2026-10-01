@@ -339,7 +339,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>="Details: " &amp; Fields!GroupDetails.Value</Value>
+                                  <Value>=Fields!GroupDetails.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -930,7 +930,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Amount.Value)</Value>
+                                  <Value>=Sum(Fields!DebitAmt.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1059,10 +1059,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Customer / Authorized Signature: __________________________________________</Value>
+                                  <Value>Authorized Signature: __________________________________________</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
-                                    <FontSize>10pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1145,7 +1144,7 @@
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>2.0in</Height>
+        <Height>2in</Height>
         <Style />
       </Body>
       <Width>7.5in</Width>
@@ -1376,7 +1375,7 @@
               </Paragraphs>
               <Top>0in</Top>
               <Left>4.7in</Left>
-              <Height>1.0in</Height>
+              <Height>1in</Height>
               <Width>2.8in</Width>
               <ZIndex>3</ZIndex>
               <Style />
@@ -1400,7 +1399,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>="Account Transfer Summary For " &amp; First(Fields!DateFilterTxt.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!ReportTitle.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -1486,6 +1485,9 @@ End Function
         </Field>
         <Field Name="HeaderCreatedBy">
           <DataField>HeaderCreatedBy</DataField>
+        </Field>
+        <Field Name="ReportTitle">
+          <DataField>ReportTitle</DataField>
         </Field>
         <Field Name="GroupDetails">
           <DataField>GroupDetails</DataField>

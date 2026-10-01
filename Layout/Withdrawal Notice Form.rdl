@@ -368,19 +368,19 @@ APPROVED BY ANY OFFICIAL: ......................................................
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Deposits: -...................................................................................................................................................................
-Outstanding Normal / Jijenge / Jipange Loan: -.............................................................................................................
-Interest on Normal / Jijenge / Jipange Loan: -...............................................................................................................
-Short Term Loans (SL &amp; EL): -........................................................................................................................................
-Masomo Loan + interest: .............................................................................................................................................
-Defaulters loan + Interest: -.........................................................................................................................................
-Pineapple Loan + interest: -.........................................................................................................................................
-Super loan + interest: -.................................................................................................................................................
-Salary Advance / Okoa Mwezi / Azima+ Interest: -........................................................................................................
-Share Capital: -............................................................................................................................................................
-Withdrawal Charges: -..................................................................................................................................................
-Instant refund charges (10% of gross deposit): .............................................................................................................
-Amount to be refunded: -............................................................................................................................................</Value>
+                                  <Value>="Deposits: " &amp; Format(Fields!TotalDeposits.Value, "N2") &amp; vbCrLf &amp;
+"Outstanding Normal / Jijenge / Jipange Loan: " &amp; Format(Fields!NormJijJipPrin.Value, "N2") &amp; vbCrLf &amp;
+"Interest on Normal / Jijenge / Jipange Loan: " &amp; Format(Fields!NormJijJipInt.Value, "N2") &amp; vbCrLf &amp;
+"Short Term Loans (SL &amp; EL): " &amp; Format(Fields!ShortTermPrinInt.Value, "N2") &amp; vbCrLf &amp;
+"Masomo Loan + interest: " &amp; Format(Fields!MasomoPrinInt.Value, "N2") &amp; vbCrLf &amp;
+"Defaulters loan + Interest: " &amp; Format(Fields!DefaulterPrinInt.Value, "N2") &amp; vbCrLf &amp;
+"Pineapple Loan + interest: " &amp; Format(Fields!PineapplePrinInt.Value, "N2") &amp; vbCrLf &amp;
+"Super loan + interest: " &amp; Format(Fields!SuperPrinInt.Value, "N2") &amp; vbCrLf &amp;
+"Salary Advance / Okoa Mwezi / Azima+ Interest: " &amp; Format(Fields!SalAdvOkoaPrinInt.Value, "N2") &amp; vbCrLf &amp;
+"Share Capital: " &amp; Format(Fields!ShareCapital.Value, "N2") &amp; vbCrLf &amp;
+"Withdrawal Charges: " &amp; Format(Fields!WithdrawalCharges.Value, "N2") &amp; vbCrLf &amp;
+"Instant refund charges (10% of gross deposit): " &amp; Format(Fields!InstantRefundCharge.Value, "N2") &amp; vbCrLf &amp;
+"Amount to be refunded: " &amp; Format(Fields!AmountToBeRefunded.Value, "N2")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -849,6 +849,84 @@ End Function
         </Field>
         <Field Name="MemDept">
           <DataField>MemDept</DataField>
+        </Field>
+        <Field Name="TotalDeposits">
+          <DataField>TotalDeposits</DataField>
+        </Field>
+        <Field Name="TotalDepositsFormat">
+          <DataField>TotalDepositsFormat</DataField>
+        </Field>
+        <Field Name="ShareCapital">
+          <DataField>ShareCapital</DataField>
+        </Field>
+        <Field Name="ShareCapitalFormat">
+          <DataField>ShareCapitalFormat</DataField>
+        </Field>
+        <Field Name="NormJijJipPrin">
+          <DataField>NormJijJipPrin</DataField>
+        </Field>
+        <Field Name="NormJijJipPrinFormat">
+          <DataField>NormJijJipPrinFormat</DataField>
+        </Field>
+        <Field Name="NormJijJipInt">
+          <DataField>NormJijJipInt</DataField>
+        </Field>
+        <Field Name="NormJijJipIntFormat">
+          <DataField>NormJijJipIntFormat</DataField>
+        </Field>
+        <Field Name="ShortTermPrinInt">
+          <DataField>ShortTermPrinInt</DataField>
+        </Field>
+        <Field Name="ShortTermPrinIntFormat">
+          <DataField>ShortTermPrinIntFormat</DataField>
+        </Field>
+        <Field Name="MasomoPrinInt">
+          <DataField>MasomoPrinInt</DataField>
+        </Field>
+        <Field Name="MasomoPrinIntFormat">
+          <DataField>MasomoPrinIntFormat</DataField>
+        </Field>
+        <Field Name="DefaulterPrinInt">
+          <DataField>DefaulterPrinInt</DataField>
+        </Field>
+        <Field Name="DefaulterPrinIntFormat">
+          <DataField>DefaulterPrinIntFormat</DataField>
+        </Field>
+        <Field Name="PineapplePrinInt">
+          <DataField>PineapplePrinInt</DataField>
+        </Field>
+        <Field Name="PineapplePrinIntFormat">
+          <DataField>PineapplePrinIntFormat</DataField>
+        </Field>
+        <Field Name="SuperPrinInt">
+          <DataField>SuperPrinInt</DataField>
+        </Field>
+        <Field Name="SuperPrinIntFormat">
+          <DataField>SuperPrinIntFormat</DataField>
+        </Field>
+        <Field Name="SalAdvOkoaPrinInt">
+          <DataField>SalAdvOkoaPrinInt</DataField>
+        </Field>
+        <Field Name="SalAdvOkoaPrinIntFormat">
+          <DataField>SalAdvOkoaPrinIntFormat</DataField>
+        </Field>
+        <Field Name="WithdrawalCharges">
+          <DataField>WithdrawalCharges</DataField>
+        </Field>
+        <Field Name="WithdrawalChargesFormat">
+          <DataField>WithdrawalChargesFormat</DataField>
+        </Field>
+        <Field Name="InstantRefundCharge">
+          <DataField>InstantRefundCharge</DataField>
+        </Field>
+        <Field Name="InstantRefundChargeFormat">
+          <DataField>InstantRefundChargeFormat</DataField>
+        </Field>
+        <Field Name="AmountToBeRefunded">
+          <DataField>AmountToBeRefunded</DataField>
+        </Field>
+        <Field Name="AmountToBeRefundedFormat">
+          <DataField>AmountToBeRefundedFormat</DataField>
         </Field>
       </Fields>
       <Query>
