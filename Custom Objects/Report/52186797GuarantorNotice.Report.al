@@ -92,6 +92,8 @@ Report 52186797 "Guarantor Notice"
                 AmountRecoverable := 0;
                 TotalAmtToGuarantors := 0;
                 TotalGuaranteedAmt := 0;
+                AmtToGuarantor := 0;
+                PledgedAmt := 0;
 
                 if SmSAlertHeader.Get("SMS Alerts Lines"."Header No") then begin
                     NoticeDate := SmSAlertHeader."Posted At";
@@ -156,6 +158,7 @@ Report 52186797 "Guarantor Notice"
                             else
                                 NoOfGuars := 0;
 
+
                             TotalAmtToGuarantors := Defaultedamount - AmountRecoverable;
 
                             if NoOfGuars > 0 then begin
@@ -163,9 +166,17 @@ Report 52186797 "Guarantor Notice"
                                     AmtToGuarantor := Round((TotalAmtToGuarantors / NoOfGuars), 1, '>')
                                 end
                                 else begin
+                                    LoanGuar.Reset();
+                                    LoanGuar.SetRange("Loan No", DefaultedLoan."Loan No.");
+                                    LoanGuar.SetRange("Self Guarantee", false);
+                                    LoanGuar.SetRange(Substituted, false);
+                                    LoanGuar.SetRange("Member No", "Member No");
+                                    if LoanGuar.findfirst() then begin
+                                        PledgedAmt := LoanGuar."Amount Guaranteed";
+                                    end;
                                     //Specicified Guarantor
-                                    if LoanGuar."Amount Guaranteed" > 0 then begin
-                                        AmtToGuarantor := Round(((LoanGuar."Amount Guaranteed" / TotalGuaranteedAmt) * TotalAmtToGuarantors), 1, '>')
+                                    if PledgedAmt > 0 then begin
+                                        AmtToGuarantor := Round(((PledgedAmt / TotalGuaranteedAmt) * TotalAmtToGuarantors), 1, '>')
                                     end else
                                         AmtToGuarantor := 0;
                                 end;
@@ -253,6 +264,7 @@ Report 52186797 "Guarantor Notice"
         DefaultedDate: Date;
         TotalAmtToGuarantors: Decimal;
         TotalGuaranteedAmt: Decimal;
+        PledgedAmt: Decimal;
 
     procedure threemonthsint(LoanII: record Loans): Decimal
     begin
