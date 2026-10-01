@@ -537,8 +537,12 @@ page 52185555 "HR Leave Application Card"
                         Rec.TestField("Leave Type");
 
                         VarVariant := Rec;
-                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin
                             CustomApprovals.OnSendDocForApproval(VarVariant);
+                            
+                            // Send SMS notification to CEO about leave approval request
+                            SendCEOApprovalNotification();
+                        end;
                     end;
                 }
                 action(CancelApprovalRequest)
@@ -1172,5 +1176,79 @@ page 52185555 "HR Leave Application Card"
             MKS := False;
         end;
     end;
-}
 
+    local procedure SendCEOApprovalNotification()
+    var
+        HRCEOSetup: Record "HR CEO Setup";
+        HREmployee: Record "HR Employees";
+        UserSetup: Record "User Setup";
+        GlobalSMSDispatcher: Codeunit "Global SMS Dispatcher";
+        LeaveType: Record "HR Leave Types";
+        TokenValues: Text;
+        CEOEmployeeNo: Code[20];
+        CEOUserID: Code[50];
+        CEOPhone: Text[20];
+        ApplicantUserID: Code[50];
+        ApproverUserID: Code[50];
+        ApplicantName: Text[200];
+        LeaveTypeDesc: Text[100];
+    begin
+        // Get CEO details from HR CEO Setup
+        if not HRCEOSetup.Get('CEO') then
+            exit; // No CEO configured
+        
+        CEOEmployeeNo := HRCEOSetup."CEO Employee No.";
+        CEOUserID := HRCEOSetup."CEO User ID";
+        
+        if (CEOEmployeeNo = '') or (CEOUserID = '') then
+            exit; // CEO not properly configured
+        
+        // Get applicant's user ID
+        if not HREmployee.Get(Rec."Applicant Staff No.") then
+            exit;
+        
+        ApplicantUserID := HREmployee."User ID";
+        if ApplicantUserID = '' then
+            exit; // Applicant has no user ID
+        
+        // Check if applicant's approver is the CEO
+        if not UserSetup.Get(ApplicantUserID) then
+            exit;
+        
+        ApproverUserID := UserSetup."Approver ID";
+        
+        // Only send SMS if the CEO is the approver for this employee (HODs only)
+        if ApproverUserID <> CEOUserID then
+            exit; // CEO is not the approver for this leave application
+        
+        // Get CEO phone number
+        if not HREmployee.Get(CEOEmployeeNo) then
+            exit;
+        
+        CEOPhone := HREmployee."Cell Phone Number";
+        if CEOPhone = '' then
+            exit; // CEO has no phone number
+        
+        // Get applicant name
+        if HREmployee.Get(Rec."Applicant Staff No.") then
+            ApplicantName := HREmployee."Full Name"
+        else
+            ApplicantName := Rec."Applicant Staff No.";
+        
+        // Get leave type description
+        if LeaveType.Get(Rec."Leave Type") then
+            LeaveTypeDesc := LeaveType.Description
+        else
+            LeaveTypeDesc := Rec."Leave Type";
+        
+        TokenValues := 'EMPLOYEE_NAME=' + ApplicantName + '||' +
+                      'LEAVE_TYPE=' + LeaveTypeDesc + '||' +
+                      'START_DATE=' + Format(Rec."Start Date") + '||' +
+                      'END_DATE=' + Format(Rec."End Date") + '||' +
+                      'DAYS_APPLIED=' + Format(Rec."Days Applied") + '||' +
+                      'APPLICATION_CODE=' + Rec."Application Code";
+        
+        // Send SMS to CEO using Global SMS Dispatcher
+        GlobalSMSDispatcher.Send('LEAVE-APPROVAL-REQUEST', CEOPhone, TokenValues);
+    end;
+}

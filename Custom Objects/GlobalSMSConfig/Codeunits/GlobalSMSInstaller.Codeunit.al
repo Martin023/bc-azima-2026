@@ -46,8 +46,10 @@ codeunit 52185465 "Global SMS Installer"
         CreateToken('[EMPLOYEE_NAME]', 'Employee name', "SMS Token Category"::"HR Info", 0, 'Jane Doe', true);
         CreateToken('[LEAVE_TYPE]', 'Leave type', "SMS Token Category"::"HR Info", 0, 'Annual Leave', true);
         CreateToken('[LEAVE_DAYS]', 'Number of leave days', "SMS Token Category"::"HR Info", 1, '10', true);
+        CreateToken('[DAYS_APPLIED]', 'Number of days applied for leave', "SMS Token Category"::"HR Info", 1, '10', true);
         CreateToken('[START_DATE]', 'Leave start date', "SMS Token Category"::"HR Info", 2, '01-Feb-2026', true);
         CreateToken('[END_DATE]', 'Leave end date', "SMS Token Category"::"HR Info", 2, '10-Feb-2026', true);
+        CreateToken('[APPLICATION_CODE]', 'Leave application reference number', "SMS Token Category"::"HR Info", 0, 'LA-001234', true);
 
         // SYSTEM INFO TOKENS
         CreateToken('[DATE]', 'Current date', "SMS Token Category"::"System Info", 2, '23-Jan-2026', true);
@@ -111,6 +113,15 @@ codeunit 52185465 "Global SMS Installer"
             'Dear [MEMBER_NAME], Cheque [CHEQUE_NO] of KES [AMOUNT] cleared to [PRODUCT_NAME].',
             "SMS Source"::CHEQUE_CLEARANCE,
             "SMS Module"::Teller,
+            true
+        );
+
+        CreateTemplate(
+            'LEAVE-APPROVAL-REQUEST',
+            'Leave Approval Request - CEO Notification',
+            'Leave approval request from [EMPLOYEE_NAME] for [DAYS_APPLIED] days of [LEAVE_TYPE] from [START_DATE] to [END_DATE]. Ref: [APPLICATION_CODE]',
+            "SMS Source"::HR_LEAVE,
+            "SMS Module"::HR,
             true
         );
 
