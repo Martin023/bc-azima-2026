@@ -106,11 +106,11 @@ Report 52186797 "Guarantor Notice"
                         CurrReport.Skip();
 
                     if DefaultedLoan.Get("SMS Alerts Lines"."Loan No") then begin
-                        DefaultedLoan.CalcFields("Outstanding Balance", "Total Balance", "Installments In Arrears");
+                        DefaultedLoan.CalcFields("Outstanding Balance", "Total Balance", "Days In Arrears");
                         Defaultedamount := DefaultedLoan."Total Balance" + threemonthsint(DefaultedLoan);
                         LoanType := DefaultedLoan."Loan Product Type Name";
-                        if DefaultedLoan."Installments In Arrears" > 0 then
-                            DefaultedDate := CalcDate('<-' + Format(round(DefaultedLoan."Installments In Arrears", 1, '<')) + 'M>', Today)
+                        if DefaultedLoan."Days In Arrears" > 0 then
+                            DefaultedDate := CalcDate('<-' + Format(round(DefaultedLoan."Days In Arrears", 1, '<')) + 'D>', Today)
                         else
                             DefaultedDate := Today;
 
@@ -135,6 +135,7 @@ Report 52186797 "Guarantor Notice"
                             ExistingLoans.SetRange("Member No.", Defaulter."No.");
                             ExistingLoans.SetAutoCalcFields("Total Balance");
                             ExistingLoans.setfilter("Total Balance", '>0');
+                            ExistingLoans.SetRange("Mobile Loan", false);
                             if ExistingLoans.FindSet() then begin
                                 repeat
                                     TotExistingLoan += ExistingLoans."Total Balance";
