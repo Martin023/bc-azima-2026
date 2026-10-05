@@ -622,61 +622,6 @@ page 52186773 "Loans card"
                         REPORT.Run(Report::"Ideal Repayment Schedule", true, true, LoanApp);
                 end;
             }
-            // action("Update Actual Schedule")
-            // {
-            //     ApplicationArea = all;
-            //     Image = UpdateUnitCost;
-            //     Promoted = true;
-            //     PromotedCategory = Report;
-            //     PromotedIsBig = true;
-            //     trigger OnAction()
-            //     var
-            //         ActualSchedule: Codeunit ActualLoanSchedule;
-            //     begin
-            //         ActualSchedule.GenerateLoanSchedule(Rec);
-            //         Message('Actual Schedule updated successfully');
-            //         // LoanApp.Reset;
-            //         // LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-            //         // if LoanApp.Find('-') then
-            //         //     REPORT.Run(Report::"Actual Loan Schedule", true, true, LoanApp);
-            //     end;
-            // }
-            // action("View Actual Schedule")
-            // {
-            //     ApplicationArea = all;
-            //     Image = ViewPage;
-            //     Promoted = true;
-            //     PromotedCategory = Report;
-            //     PromotedIsBig = true;
-            //     trigger OnAction()
-            //     var
-            //         ActualSchedule: Codeunit ActualLoanSchedule;
-            //     begin
-            //         LoanApp.Reset;
-            //         LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-            //         if LoanApp.Find('-') then
-            //             REPORT.Run(Report::"Actual Loan Schedule", true, true, LoanApp);
-            //     end;
-            // }
-            // action("Capitalize Interest")
-            // {
-            //     ApplicationArea = all;
-            //     Image = SuggestFinancialCharge;
-            //     Promoted = true;
-            //     PromotedCategory = Report;
-            //     PromotedIsBig = true;
-            //     trigger OnAction()
-            //     var
-            //         myInt: Integer;
-            //         LoansProcessing: Codeunit "Loans Process";
-            //     begin
-            //         if not Confirm('Are you sure you want to capitalize this interest?') then exit;
-            //         LoansProcessing.PostCapitalizedInterestDMU(Rec."Loan No.", Rec."Loan No.");
-            //         message('Entries Capitalized Succesfully.');
-
-            //     end;
-            // }
-
             action(UpdateRepayMode)
             {
                 ApplicationArea = Basic, Suite;
@@ -732,33 +677,6 @@ page 52186773 "Loans card"
                 RunPageMode = view;
             }
 
-            // action("Loan [File]")
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Image = Document;
-            //     Promoted = true;
-            //     PromotedCategory = New;
-
-            //     trigger OnAction()
-            //     var
-            //         DMS: Record EDMS;
-            //     begin
-            //         DMS.Reset;
-            //         DMS.SetRange(DMS.Key, DMS.Key::"Loan File");
-            //         if DMS.Find('-') then begin
-            //             HyperLink(DMS."url path" + Rec."Loan No.");
-            //         end;
-            //     end;
-            // }
-            // action("Prorata")
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Image = PaymentForecast;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     RunObject = Page "Member Prorata";
-            //     RunPageLink = "Loan No" = FIELD("Loan No.");
-            // }
             action(Approvals)
             {
                 ApplicationArea = Basic, Suite;
@@ -766,14 +684,27 @@ page 52186773 "Loans card"
                 Image = Approvals;
                 Promoted = true;
                 PromotedCategory = Category4;
+                trigger OnAction()
+                var
+                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                begin
+                    ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
+                end;
+            }
+            action(ReopenLoan)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Reopen Loan.';
+                Image = Approvals;
+                Promoted = true;
+                PromotedCategory = Category4;
 
                 trigger OnAction()
                 var
-                    //ApprovalEntries: Page "Approval Entries";
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
-
-                    ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
+                    if rec.Posted then Error('Cannot reopen a posted loan. Please contact the system administrator for assistance.');
+                    ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                 end;
             }
             action(Comments)

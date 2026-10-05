@@ -214,6 +214,20 @@ page 52187058 "ICT Department"
             Group("Audit Process")
             {
                 Caption = 'Audit Process';
+
+                action("Account Activation Details")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Account Activation Details Report';
+                    RunObject = report "Account Activation Details";
+                }
+                action("Account Flags Details")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Member/Account Flags List';
+                    RunObject = page "Comments List";
+                    Runpageview = where(Types = const("Member Flagging"));
+                }
                 action(ChangeLogSetup)
                 {
                     ApplicationArea = Basic, Suite;
@@ -279,6 +293,7 @@ page 52187058 "ICT Department"
                 }
 
             }
+
             Group("Database Management")
             {
                 action(DatabaseLocks)
@@ -5993,11 +6008,11 @@ page 52187058 "ICT Department"
             Group("SMS Configuration")
             {
                 Caption = 'SMS Configuration & Management';
-                
+
                 group("SMS Templates")
                 {
                     Caption = 'SMS Templates';
-                    
+
                     action("Global SMS Templates")
                     {
                         ApplicationArea = Basic, Suite;
@@ -6011,7 +6026,7 @@ page 52187058 "ICT Department"
                 group("SMS Tokens")
                 {
                     Caption = 'SMS Tokens';
-                    
+
                     action("Global SMS Tokens")
                     {
                         ApplicationArea = Basic, Suite;
@@ -6025,7 +6040,7 @@ page 52187058 "ICT Department"
                 group("SMS Logs & History")
                 {
                     Caption = 'SMS Logs & Audit';
-                    
+
                     action("SMS Messages Log")
                     {
                         ApplicationArea = Basic, Suite;
@@ -6048,7 +6063,7 @@ page 52187058 "ICT Department"
                 group("SMS Setup & Installation")
                 {
                     Caption = 'SMS Setup';
-                    
+
                     action("View SMS Tokens Setup")
                     {
                         ApplicationArea = Basic, Suite;
