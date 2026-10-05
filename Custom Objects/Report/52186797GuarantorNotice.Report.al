@@ -161,7 +161,7 @@ Report 52186797 "Guarantor Notice"
 
 
                             TotalAmtToGuarantors := Defaultedamount - AmountRecoverable;
-
+                            Defaultedamount := TotalAmtToGuarantors;
                             if NoOfGuars > 0 then begin
                                 if SmSAlertHeader."Equal Guarantor Disribution" then begin
                                     AmtToGuarantor := Round((TotalAmtToGuarantors / NoOfGuars), 1, '>')

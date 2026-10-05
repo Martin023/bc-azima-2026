@@ -473,6 +473,11 @@ table 52185688 "Credit Nos. Series"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+        field(159; "Global Bulk SMS Nos"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
         field(151; "M-Smart Documents Nos."; Code[20])
         {
             DataClassification = ToBeClassified;

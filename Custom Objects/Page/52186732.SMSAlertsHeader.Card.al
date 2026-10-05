@@ -473,15 +473,18 @@ page 52186732 "SMS Alerts Header Card"
 
                     trigger OnAction()
                     var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        if Confirm('Are you sure you want to open this document?') then begin
+                        Rec.TestField(Posted, false);
+                        if not Confirm('Are you sure you want to reopen this document?') then exit;
 
+                        Rec.Status := Rec.Status::Open;
 
-                            VarVariant := Rec;
-                            CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
-                            Message('Record opened successfully');
-                        end else
-                            Message('Operation aborted!');
+                        if ApprovalsMgmt.HasApprovalEntries(Rec.RecordId) then
+                            ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
+
+                        Rec.Modify();
+                        Message('The document has been opened successfully.');
                     end;
                 }
                 action(Reject)

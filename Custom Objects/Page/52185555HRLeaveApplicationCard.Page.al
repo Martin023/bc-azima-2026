@@ -1248,7 +1248,7 @@ page 52185555 "HR Leave Application Card"
                       'DAYS_APPLIED=' + Format(Rec."Days Applied") + '||' +
                       'APPLICATION_CODE=' + Rec."Application Code";
         
-        // Send SMS to CEO using Global SMS Dispatcher
-        GlobalSMSDispatcher.Send('LEAVE-APPROVAL-REQUEST', CEOPhone, TokenValues);
+        if GlobalSMSDispatcher.IsConfigured('LEAVE-APPROVAL-REQUEST') then
+            GlobalSMSDispatcher.Send('LEAVE-APPROVAL-REQUEST', CEOPhone, TokenValues);
     end;
 }
