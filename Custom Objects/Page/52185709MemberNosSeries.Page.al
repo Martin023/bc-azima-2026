@@ -52,6 +52,10 @@ page 52185709 "Member Nos. Series"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Global Bulk SMS Nos"; Rec."Global Bulk SMS Nos")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Sales Route No."; Rec."Sales Route No.")
                 {
                     ApplicationArea = Basic, Suite;

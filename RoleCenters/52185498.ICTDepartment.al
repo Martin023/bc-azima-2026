@@ -6066,6 +6066,15 @@ page 52187058 "ICT Department"
                         ToolTip = 'View and manage SMS templates - use Install Default Templates action to add defaults';
                         Image = SetupList;
                     }
+
+                    action("Global Bulk SMS")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Global Bulk SMS Campaigns';
+                        RunObject = page "Global Bulk SMS List";
+                        ToolTip = 'Create and manage bulk SMS campaigns with dynamic filtering and custom tokens';
+                        Image = SendMail;
+                    }
                 }
             }
         }

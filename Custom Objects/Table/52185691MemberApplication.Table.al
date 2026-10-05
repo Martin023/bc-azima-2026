@@ -1301,8 +1301,8 @@ table 52185691 "Member Application"
         }
         field(4023; "Group Type"; Option)
         {
-            OptionCaption = ' ,Corporate,Company,Welfare';
-            OptionMembers = " ",Corporate,Company,Welfare;
+            OptionCaption = ' ,Corporate,Company,Welfare,Joint';
+            OptionMembers = " ",Corporate,Company,Welfare,Joint;
         }
     }
 

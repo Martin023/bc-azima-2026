@@ -721,6 +721,30 @@ page 52187329 "Records"
                         RunObject = page "Commission Setup";
                     }
                 }
+
+                group("Bulk SMS")
+                {
+                    Caption = 'Bulk SMS';
+
+                    action("Old Bulk SMS List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Bulk SMS List';
+                        RunObject = page "Bulk SMS Header List";
+                        ToolTip = 'View legacy bulk SMS campaigns';
+                        Image = List;
+                    }
+
+                    action("Global Bulk SMS Campaigns")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Global Bulk SMS Campaigns';
+                        RunObject = page "Global Bulk SMS List";
+                        ToolTip = 'Create and manage bulk SMS campaigns with dynamic filtering and custom tokens';
+                        Image = SendMail;
+                    }
+                }
+
                 // }
 
             }
@@ -2138,12 +2162,12 @@ page 52187329 "Records"
                 Caption = 'Members Portal';
                 RunObject = codeunit "Members Portal Link";
             }
-            action("Bulk SMS")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Bulk SMS List';
-                RunObject = page "Bulk SMS Header List";
-            }
+            // action("Bulk SMS")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Bulk SMS List';
+            //     RunObject = page "Bulk SMS Header List";
+            // }
             action("Customer Management Portal")
             {
                 ApplicationArea = Basic, Suite;
