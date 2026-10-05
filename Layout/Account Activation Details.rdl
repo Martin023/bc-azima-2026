@@ -24,73 +24,6 @@
       <rd:DataSourceID>20cb1eec-a5bc-4593-a339-b806bc3027fe</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="Entry_No_">
-          <DataField>Entry_No_</DataField>
-        </Field>
-        <Field Name="Date_and_Time">
-          <DataField>Date_and_Time</DataField>
-        </Field>
-        <Field Name="User_ID">
-          <DataField>User_ID</DataField>
-        </Field>
-        <Field Name="Table_No_">
-          <DataField>Table_No_</DataField>
-        </Field>
-        <Field Name="Table_Caption">
-          <DataField>Table_Caption</DataField>
-        </Field>
-        <Field Name="Field_No_">
-          <DataField>Field_No_</DataField>
-        </Field>
-        <Field Name="Field_Caption">
-          <DataField>Field_Caption</DataField>
-        </Field>
-        <Field Name="Type_of_Change">
-          <DataField>Type_of_Change</DataField>
-        </Field>
-        <Field Name="Old_Value">
-          <DataField>Old_Value</DataField>
-        </Field>
-        <Field Name="New_Value">
-          <DataField>New_Value</DataField>
-        </Field>
-        <Field Name="Primary_Key">
-          <DataField>Primary_Key</DataField>
-        </Field>
-        <Field Name="Primary_Key_Field_1_Caption">
-          <DataField>Primary_Key_Field_1_Caption</DataField>
-        </Field>
-        <Field Name="Primary_Key_Field_1_Value">
-          <DataField>Primary_Key_Field_1_Value</DataField>
-        </Field>
-        <Field Name="Primary_Key_Field_1_No_">
-          <DataField>Primary_Key_Field_1_No_</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -790,12 +723,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -833,4 +760,71 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="Entry_No_">
+          <DataField>Entry_No_</DataField>
+        </Field>
+        <Field Name="Date_and_Time">
+          <DataField>Date_and_Time</DataField>
+        </Field>
+        <Field Name="User_ID">
+          <DataField>User_ID</DataField>
+        </Field>
+        <Field Name="Table_No_">
+          <DataField>Table_No_</DataField>
+        </Field>
+        <Field Name="Table_Caption">
+          <DataField>Table_Caption</DataField>
+        </Field>
+        <Field Name="Field_No_">
+          <DataField>Field_No_</DataField>
+        </Field>
+        <Field Name="Field_Caption">
+          <DataField>Field_Caption</DataField>
+        </Field>
+        <Field Name="Type_of_Change">
+          <DataField>Type_of_Change</DataField>
+        </Field>
+        <Field Name="Old_Value">
+          <DataField>Old_Value</DataField>
+        </Field>
+        <Field Name="New_Value">
+          <DataField>New_Value</DataField>
+        </Field>
+        <Field Name="Primary_Key">
+          <DataField>Primary_Key</DataField>
+        </Field>
+        <Field Name="Primary_Key_Field_1_Caption">
+          <DataField>Primary_Key_Field_1_Caption</DataField>
+        </Field>
+        <Field Name="Primary_Key_Field_1_Value">
+          <DataField>Primary_Key_Field_1_Value</DataField>
+        </Field>
+        <Field Name="Primary_Key_Field_1_No_">
+          <DataField>Primary_Key_Field_1_No_</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
