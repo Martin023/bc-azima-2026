@@ -82,6 +82,8 @@ table 52185729 Loans
                 "Loan Group" := ProdFac."Loan Group";
 
                 if "Loan Group" = "Loan Group"::"Group Loan" then begin
+                    if rec."Group Account No." = '' then
+                        Error('Kindly select a group account number for the member before proceeding with the loan application!');
                     InsertLoanGuarantorsForBusinessLoans();
                     rec."Share Boosted Amount" := 0;
                 end;
@@ -3956,7 +3958,25 @@ table 52185729 Loans
 
     end;
 
-
-
+    procedure CheckForTopupChanges()
+    var
+        Topup: record "Loans Top up";
+        LoansII: record Loans;
+    begin
+        Topup.reset();
+        Topup.setrange("Loan No.", Rec."Loan No.");
+        Topup.setrange("Client Code", rec."Member No.");
+        if Topup.findset() then begin
+            repeat
+                if LoansII.get(Topup."Loan No.") then begin
+                    LoansII.calcfields("Outstanding Balance","Outstanding Interest");
+                    if LoansII."Outstanding Balance" < Topup."Principle Top Up" then
+                        Error('The top up amount %1 is greater than the outstanding balance %2 for loan number %3', Topup."Principle Top Up", LoansII."Outstanding Balance", Topup."Loan No.");
+                    if LoansII."Outstanding Interest" < Topup."Interest Top Up" then
+                        Error('The top up amount %1 is greater than the outstanding Interest %2 for loan number %3', Topup."Principle Top Up", LoansII."Outstanding Interest", Topup."Loan No.");
+                end;
+            until Topup.next = 0;
+        end;
+    end;
 }
 
