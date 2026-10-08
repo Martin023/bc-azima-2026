@@ -105,358 +105,358 @@ codeunit 52185457 "Membership Closure Mgmt"
 
     begin
 
-        with MembershipClosure do begin
+        // with MembershipClosure do begin
 
-            TestField(Posted, false);
-            //if not Confirm('Kindly Ensure you have updated this closure before proceeding. Are you sure you wish to continue?', false) then Error('Kindly ensure you have updated the record before proceeding');
+        MembershipClosure.TestField(Posted, false);
+        //if not Confirm('Kindly Ensure you have updated this closure before proceeding. Are you sure you wish to continue?', false) then Error('Kindly ensure you have updated the record before proceeding');
 
-            Loans.Reset;
-            Loans.SetRange(Loans."Member No.", MembershipClosure."Member No.");
-            Loans.SetFilter("Total Loan Balance", '>0');
-            Loans.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest");
-            if Loans.Find('-') then begin
-                repeat
-                    LoansProcess.CapitalizeDailyInterest(Loans."Loan No.");
-                until Loans.Next() = 0;
-            end;
+        Loans.Reset;
+        Loans.SetRange(Loans."Member No.", MembershipClosure."Member No.");
+        Loans.SetFilter("Total Loan Balance", '>0');
+        Loans.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest");
+        if Loans.Find('-') then begin
+            repeat
+                LoansProcess.CapitalizeDailyInterest(Loans."Loan No.");
+            until Loans.Next() = 0;
+        end;
 
-            if MembershipClosure."Closure Type" in [MembershipClosure."Closure Type"::"Withdrawal - 1st Partial",
-            MembershipClosure."Closure Type"::"Withdrawal - 2nd Partial"] then begin
-                PostPartialWithdrawals(MembershipClosure);
+        if MembershipClosure."Closure Type" in [MembershipClosure."Closure Type"::"Withdrawal - 1st Partial",
+        MembershipClosure."Closure Type"::"Withdrawal - 2nd Partial"] then begin
+            PostPartialWithdrawals(MembershipClosure);
+        end else begin
+
+            SavingsLedgerEntry.Reset;
+            SavingsLedgerEntry.SetRange(Reversed, False);
+            SavingsLedgerEntry.SetRange("Document No.", MembershipClosure."No.");
+            if SavingsLedgerEntry.FindFirst() then begin
+                MembershipClosure.Posted := true;
+                MembershipClosure.Modify;
+                Message(TrasPosted);
+                exit;
             end else begin
 
-                SavingsLedgerEntry.Reset;
-                SavingsLedgerEntry.SetRange(Reversed, False);
-                SavingsLedgerEntry.SetRange("Document No.", MembershipClosure."No.");
-                if SavingsLedgerEntry.FindFirst() then begin
-                    MembershipClosure.Posted := true;
-                    MembershipClosure.Modify;
-                    Message(TrasPosted);
-                    exit;
-                end else begin
+                MembershipClosure.TestField("Closing Date");
+                MembershipClosure.TestField(Posted, false);
 
-                    MembershipClosure.TestField("Closing Date");
-                    MembershipClosure.TestField(Posted, false);
+                BankingUserTemplate.Get(UserId);
+                BankingUserTemplate.TestField("Transfer Journal Template");
+                BankingUserTemplate.TestField("Transfer Journal Batch");
 
-                    BankingUserTemplate.Get(UserId);
-                    BankingUserTemplate.TestField("Transfer Journal Template");
-                    BankingUserTemplate.TestField("Transfer Journal Batch");
+                Jtemplate := BankingUserTemplate."Transfer Journal Template";
+                JBatch := BankingUserTemplate."Transfer Journal Batch";
 
-                    Jtemplate := BankingUserTemplate."Transfer Journal Template";
-                    JBatch := BankingUserTemplate."Transfer Journal Batch";
+                GeneralSetUp.Get();
+                GeneralSetUp.TestField("Withdrawal Fee Account");
 
-                    GeneralSetUp.Get();
-                    GeneralSetUp.TestField("Withdrawal Fee Account");
-
-                    if UserSetup.Get(UserId) then begin
-                        Dim1 := UserSetup."Global Dimension 1 Code";
-                        Dim2 := UserSetup."Global Dimension 2 Code";
-                    end;
-
-                    JnlPost.ClearJournalLines(Jtemplate, JBatch, true);
-
-                    if MembershipClosure."Deposit Refundable" <= 0 then
-                        Error(ErrTxt0001);
-
-                    ClosureAccountsII.Reset;
-                    ClosureAccountsII.SetRange(ClosureAccountsII."No.", MembershipClosure."No.");
-                    ClosureAccountsII.SetRange(ClosureAccountsII.Close, true);
-                    if ClosureAccountsII.Find('-') then begin
-                        repeat
-                            ClosureAccountsII.Validate("Account No.");
-                        until ClosureAccountsII.Next = 0;
-                    end;
-
-                    Members.Get(MembershipClosure."Member No.");
-
-                    JnlPost.ClearJournalLines(Jtemplate, JBatch, true);
-                    //Close Accounts
-                    ClosureAccounts.Reset;
-                    ClosureAccounts.SetRange(ClosureAccounts."No.", MembershipClosure."No.");
-                    ClosureAccounts.SetRange(ClosureAccounts.Close, true);
-                    if ClosureAccounts.Findset() then begin
-                        repeat
-                            if ProdutFactory.Get(ClosureAccounts."Product Type") then begin
-                                LineNo := LineNo + 10000;
-                                AcctType := AcctType::Savings;
-                                TransType := TransType::" ";
-                                Amt := ClosureAccounts.Balance;
-                                BalAccNo := '';
-                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                                Txt0004 + ' ' + Format(MembershipClosure."Member No."), Amt, ClosureAccounts."Account No.", "Closing Date", BalAccType,
-                                BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                                TotalSaving := TotalSaving + Amt;
-
-                                if SavingsAccounts.Get(ClosureAccounts."Account No.") then begin
-                                    SavingsAccounts.Status := SavingsAccounts.Status::Closed;
-                                    SavingsAccounts.Modify;
-                                end;
-                            end;
-                        until ClosureAccounts.Next = 0;
-                    end;
+                if UserSetup.Get(UserId) then begin
+                    Dim1 := UserSetup."Global Dimension 1 Code";
+                    Dim2 := UserSetup."Global Dimension 2 Code";
                 end;
 
-                if TotalSaving > 0 then begin
+                JnlPost.ClearJournalLines(Jtemplate, JBatch, true);
 
-                    SavingsAccounts.Reset;
-                    SavingsAccounts.SetRange(SavingsAccounts."Loan Disbursement Account", true);
-                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-                    if SavingsAccounts.FindFirst then begin
+                if MembershipClosure."Deposit Refundable" <= 0 then
+                    Error(ErrTxt0001);
 
-                        LineNo := LineNo + 10000;
-                        Amt := TotalSaving;
-                        AcctType := AcctType::Savings;
-                        TransType := TransType::" ";
-                        BalAccNo := '';
-                        RunBal := TotalSaving;
+                ClosureAccountsII.Reset;
+                ClosureAccountsII.SetRange(ClosureAccountsII."No.", MembershipClosure."No.");
+                ClosureAccountsII.SetRange(ClosureAccountsII.Close, true);
+                if ClosureAccountsII.Find('-') then begin
+                    repeat
+                        ClosureAccountsII.Validate("Account No.");
+                    until ClosureAccountsII.Next = 0;
+                end;
 
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                        CopyStr((('Member Closure ' + Remarks) + ClosureAccounts."No."), 1, 50), -(Amt), SavingsAccounts."No.", "Closing Date", BalAccType,
-                        BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                Members.Get(MembershipClosure."Member No.");
 
-                        //Withdrawal Fee
-                        // Early Withdrawal Fee
+                JnlPost.ClearJournalLines(Jtemplate, JBatch, true);
+                //Close Accounts
+                ClosureAccounts.Reset;
+                ClosureAccounts.SetRange(ClosureAccounts."No.", MembershipClosure."No.");
+                ClosureAccounts.SetRange(ClosureAccounts.Close, true);
+                if ClosureAccounts.Findset() then begin
+                    repeat
+                        if ProdutFactory.Get(ClosureAccounts."Product Type") then begin
+                            LineNo := LineNo + 10000;
+                            AcctType := AcctType::Savings;
+                            TransType := TransType::" ";
+                            Amt := ClosureAccounts.Balance;
+                            BalAccNo := '';
+                            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                            Txt0004 + ' ' + Format(MembershipClosure."Member No."), Amt, ClosureAccounts."Account No.", MembershipClosure."Closing Date", BalAccType,
+                            BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                            TotalSaving := TotalSaving + Amt;
 
-                        if MembershipClosure."Early Withdrawal" then
-                            if GeneralSetUp."Early Withdrawal Fee" <> '' then begin
-                                Amt := 0;
-                                TransactionTypes.Reset();
-                                TransactionTypes.setrange(Code, GeneralSetUp."Early Withdrawal Fee");
-                                if TransactionTypes.FindFirst() then begin
-                                    TransactionCharges.Reset();
-                                    TransactionCharges.SetRange("Transaction Type", TransactionTypes.code);
-                                    if TransactionCharges.findfirst() then begin
+                            if SavingsAccounts.Get(ClosureAccounts."Account No.") then begin
+                                SavingsAccounts.Status := SavingsAccounts.Status::Closed;
+                                SavingsAccounts.Modify;
+                            end;
+                        end;
+                    until ClosureAccounts.Next = 0;
+                end;
+            end;
+
+            if TotalSaving > 0 then begin
+
+                SavingsAccounts.Reset;
+                SavingsAccounts.SetRange(SavingsAccounts."Loan Disbursement Account", true);
+                SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
+                if SavingsAccounts.FindFirst then begin
+
+                    LineNo := LineNo + 10000;
+                    Amt := TotalSaving;
+                    AcctType := AcctType::Savings;
+                    TransType := TransType::" ";
+                    BalAccNo := '';
+                    RunBal := TotalSaving;
+
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                    CopyStr((('Member Closure ' + MembershipClosure.Remarks) + ClosureAccounts."No."), 1, 50), -(Amt), SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                    BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                    //Withdrawal Fee
+                    // Early Withdrawal Fee
+
+                    if MembershipClosure."Early Withdrawal" then
+                        if GeneralSetUp."Early Withdrawal Fee" <> '' then begin
+                            Amt := 0;
+                            TransactionTypes.Reset();
+                            TransactionTypes.setrange(Code, GeneralSetUp."Early Withdrawal Fee");
+                            if TransactionTypes.FindFirst() then begin
+                                TransactionCharges.Reset();
+                                TransactionCharges.SetRange("Transaction Type", TransactionTypes.code);
+                                if TransactionCharges.findfirst() then begin
+                                    LineNo := LineNo + 10000;
+                                    AcctType := AcctType::"G/L Account";
+                                    TransType := TransType::" ";
+                                    BalAccNo := TransactionCharges."G/L Account";
+
+                                    if TransactionCharges."Percentage of Amount" <> 0 then
+                                        Amt := (MembershipClosure."Member Savings" - (MembershipClosure."Total Loan" + MembershipClosure."Total Interest" + MembershipClosure."TSC Clearance")) * TransactionCharges."Percentage of Amount" * 0.01
+                                    else
+                                        if TransactionCharges."Charge Amount" <> 0 then
+                                            Amt := TransactionCharges."Charge Amount";
+
+                                    if Amt > RunBal then
+                                        Amt := RunBal;
+
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
+                                    Txt0009 + ' ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                                    BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                    RunBal -= Amt;
+
+                                    if TransactionCharges."Recover Excise Duty" then begin
+                                        GeneralSetUp.TestField(GeneralSetUp."Excise Duty (%)");
+                                        GeneralSetUp.TestField(GeneralSetUp."Excise Duty G/L");
                                         LineNo := LineNo + 10000;
                                         AcctType := AcctType::"G/L Account";
                                         TransType := TransType::" ";
-                                        BalAccNo := TransactionCharges."G/L Account";
+                                        BalAccNo := GeneralSetUp."Excise Duty G/L";
 
-                                        if TransactionCharges."Percentage of Amount" <> 0 then
-                                            Amt := (MembershipClosure."Member Savings" - (MembershipClosure."Total Loan" + MembershipClosure."Total Interest" + MembershipClosure."TSC Clearance")) * TransactionCharges."Percentage of Amount" * 0.01
-                                        else
-                                            if TransactionCharges."Charge Amount" <> 0 then
-                                                Amt := TransactionCharges."Charge Amount";
-
-                                        if Amt > RunBal then
-                                            Amt := RunBal;
+                                        WithdrawalExciseDuty := Amt * GeneralSetUp."Excise Duty (%)" * 0.01;
+                                        if WithdrawalExciseDuty > RunBal then
+                                            WithdrawalExciseDuty := RunBal;
 
                                         JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                                        Txt0009 + ' ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                                        Txt0009 + ' Excise Duty ' + Format(MembershipClosure."Member No."), WithdrawalExciseDuty, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
                                         BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                                        RunBal -= Amt;
 
-                                        if TransactionCharges."Recover Excise Duty" then begin
-                                            GeneralSetUp.TestField(GeneralSetUp."Excise Duty (%)");
-                                            GeneralSetUp.TestField(GeneralSetUp."Excise Duty G/L");
-                                            LineNo := LineNo + 10000;
-                                            AcctType := AcctType::"G/L Account";
-                                            TransType := TransType::" ";
-                                            BalAccNo := GeneralSetUp."Excise Duty G/L";
-
-                                            WithdrawalExciseDuty := Amt * GeneralSetUp."Excise Duty (%)" * 0.01;
-                                            if WithdrawalExciseDuty > RunBal then
-                                                WithdrawalExciseDuty := RunBal;
-
-                                            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                                            Txt0009 + ' Excise Duty ' + Format(MembershipClosure."Member No."), WithdrawalExciseDuty, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
-                                            BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                            RunBal -= WithdrawalExciseDuty;
-                                        end;
+                                        RunBal -= WithdrawalExciseDuty;
                                     end;
-                                    //GeneralSetUp.TestField(GeneralSetUp."Withdrawal Fee Account");
                                 end;
-
+                                //GeneralSetUp.TestField(GeneralSetUp."Withdrawal Fee Account");
                             end;
-                    end;
-                    // SMS Charges
-                    Amt := 0;
-                    TransactionTypes.Reset();
-                    TransactionTypes.setrange(Code, MembershipClosure."SMS Charge");
-                    if TransactionTypes.FindFirst() then begin
-                        TransactionCharges.Reset();
-                        TransactionCharges.SetRange("Transaction Type", TransactionTypes.code);
-                        if TransactionCharges.findfirst() then begin
+
+                        end;
+                end;
+                // SMS Charges
+                Amt := 0;
+                TransactionTypes.Reset();
+                TransactionTypes.setrange(Code, MembershipClosure."SMS Charge");
+                if TransactionTypes.FindFirst() then begin
+                    TransactionCharges.Reset();
+                    TransactionCharges.SetRange("Transaction Type", TransactionTypes.code);
+                    if TransactionCharges.findfirst() then begin
+                        LineNo := LineNo + 10000;
+                        AcctType := AcctType::"G/L Account";
+                        TransType := TransType::" ";
+                        BalAccNo := TransactionCharges."G/L Account";
+
+                        if TransactionCharges."Percentage of Amount" <> 0 then
+                            Amt := (MembershipClosure."Member Savings" - (MembershipClosure."Total Loan" + MembershipClosure."Total Interest" + MembershipClosure."TSC Clearance")) * TransactionCharges."Percentage of Amount" * 0.01
+                        else
+                            if TransactionCharges."Charge Amount" <> 0 then
+                                Amt := TransactionCharges."Charge Amount";
+
+                        if Amt > RunBal then
+                            Amt := RunBal;
+
+                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
+                        Txt0009 + ' ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                        BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                        RunBal -= Amt;
+
+                        if TransactionCharges."Recover Excise Duty" then begin
+                            GeneralSetUp.TestField(GeneralSetUp."Excise Duty (%)");
+                            GeneralSetUp.TestField(GeneralSetUp."Excise Duty G/L");
                             LineNo := LineNo + 10000;
                             AcctType := AcctType::"G/L Account";
                             TransType := TransType::" ";
-                            BalAccNo := TransactionCharges."G/L Account";
+                            BalAccNo := GeneralSetUp."Excise Duty G/L";
 
-                            if TransactionCharges."Percentage of Amount" <> 0 then
-                                Amt := (MembershipClosure."Member Savings" - (MembershipClosure."Total Loan" + MembershipClosure."Total Interest" + MembershipClosure."TSC Clearance")) * TransactionCharges."Percentage of Amount" * 0.01
-                            else
-                                if TransactionCharges."Charge Amount" <> 0 then
-                                    Amt := TransactionCharges."Charge Amount";
-
-                            if Amt > RunBal then
-                                Amt := RunBal;
+                            WithdrawalExciseDuty := Amt * GeneralSetUp."Excise Duty (%)" * 0.01;
+                            if WithdrawalExciseDuty > RunBal then
+                                WithdrawalExciseDuty := RunBal;
 
                             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                            Txt0009 + ' ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                            Txt0009 + ' Excise Duty ' + Format(MembershipClosure."Member No."), WithdrawalExciseDuty, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
                             BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                            RunBal -= Amt;
 
-                            if TransactionCharges."Recover Excise Duty" then begin
-                                GeneralSetUp.TestField(GeneralSetUp."Excise Duty (%)");
-                                GeneralSetUp.TestField(GeneralSetUp."Excise Duty G/L");
-                                LineNo := LineNo + 10000;
-                                AcctType := AcctType::"G/L Account";
-                                TransType := TransType::" ";
-                                BalAccNo := GeneralSetUp."Excise Duty G/L";
-
-                                WithdrawalExciseDuty := Amt * GeneralSetUp."Excise Duty (%)" * 0.01;
-                                if WithdrawalExciseDuty > RunBal then
-                                    WithdrawalExciseDuty := RunBal;
-
-                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                                Txt0009 + ' Excise Duty ' + Format(MembershipClosure."Member No."), WithdrawalExciseDuty, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
-                                BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                RunBal -= WithdrawalExciseDuty;
-                            end;
+                            RunBal -= WithdrawalExciseDuty;
                         end;
-                        //GeneralSetUp.TestField(GeneralSetUp."Withdrawal Fee Account");
                     end;
+                    //GeneralSetUp.TestField(GeneralSetUp."Withdrawal Fee Account");
+                end;
 
-                    if MembershipClosure."TSC Clearance" > 0 then begin
-                        LineNo := LineNo + 10000;
-                        AcctType := AcctType::Customer;
-                        TransType := TransType::" ";
-                        BalAccNo := '';
+                if MembershipClosure."TSC Clearance" > 0 then begin
+                    LineNo := LineNo + 10000;
+                    AcctType := AcctType::Customer;
+                    TransType := TransType::" ";
+                    BalAccNo := '';
 
-                        if MembershipClosure."TSC Clearance" > RunBal then
-                            MembershipClosure."TSC Clearance" := RunBal;
+                    if MembershipClosure."TSC Clearance" > RunBal then
+                        MembershipClosure."TSC Clearance" := RunBal;
 
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
-                        Txt00011 + ' ' + Format(MembershipClosure."Member No."), -MembershipClosure."TSC Clearance", MembershipClosure."TSC Clearance Account", MembershipClosure."Closing Date", BalAccType,
-                        BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                    Txt00011 + ' ' + Format(MembershipClosure."Member No."), -MembershipClosure."TSC Clearance", MembershipClosure."TSC Clearance Account", MembershipClosure."Closing Date", BalAccType,
+                    BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                        LineNo := LineNo + 10000;
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                        Txt00011 + ' ' + Format(MembershipClosure."Member No."), MembershipClosure."TSC Clearance", SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
-                        BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                    LineNo := LineNo + 10000;
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
+                    Txt00011 + ' ' + Format(MembershipClosure."Member No."), MembershipClosure."TSC Clearance", SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                    BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                        RunBal -= MembershipClosure."TSC Clearance";
-                    end;
+                    RunBal -= MembershipClosure."TSC Clearance";
+                end;
 
-                    // LoansProcess.CapitalizeDailyInterest();();
+                // LoansProcess.CapitalizeDailyInterest();();
 
-                    Loans.Reset;
-                    Loans.SetRange(Loans."Member No.", MembershipClosure."Member No.");
-                    Loans.SetFilter("Total Loan Balance", '>0');
-                    Loans.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest");
-                    if Loans.Find('-') then begin
-                        repeat
-                            if Loans."Outstanding Interest" > 0 then begin
+                Loans.Reset;
+                Loans.SetRange(Loans."Member No.", MembershipClosure."Member No.");
+                Loans.SetFilter("Total Loan Balance", '>0');
+                Loans.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest");
+                if Loans.Find('-') then begin
+                    repeat
+                        if Loans."Outstanding Interest" > 0 then begin
 
-                                Interest := Loans."Outstanding Interest";
+                            Interest := Loans."Outstanding Interest";
 
-                                if Interest > RunBal then
-                                    Interest := RunBal;
+                            if Interest > RunBal then
+                                Interest := RunBal;
 
-                                if (Interest > 0) then begin
+                            if (Interest > 0) then begin
 
-                                    //Interest Recovery
-                                    LineNo := LineNo + 10000;
-                                    AcctType := AcctType::Credit;
-                                    TransType := TransType::"Interest Paid";
-                                    BalAccNo := '';
-                                    Amt := Interest;
-
-                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
-                                    'Closure Interest Recovery  ' + Format(MembershipClosure."Member No."), -Amt, Loans."Loan Account", MembershipClosure."Closing Date", BalAccType,
-                                    BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                    LineNo := LineNo + 10000;
-                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                                    'Closure Interest Recovery ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
-                                    BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType::" ", '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                                    RunBal -= Amt;
-
-                                end;
-                            end;
-
-
-                            if Loans."Outstanding Balance" > 0 then
-                                LRepayment := Loans."Outstanding Balance"
-                            else
-                                LRepayment := 0;
-
-                            if (LRepayment > 0) then begin
-
+                                //Interest Recovery
                                 LineNo := LineNo + 10000;
                                 AcctType := AcctType::Credit;
-                                TransType := TransType::Repayment;
+                                TransType := TransType::"Interest Paid";
                                 BalAccNo := '';
-                                if LRepayment > RunBal then
-                                    LRepayment := RunBal;
-                                Amt := LRepayment;
+                                Amt := Interest;
 
                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
-                                'Closure Principal Recovery' + ' ' + Format(MembershipClosure."Member No."), -Amt, Loans."Loan Account", MembershipClosure."Closing Date", BalAccType,
+                                'Closure Interest Recovery  ' + Format(MembershipClosure."Member No."), -Amt, Loans."Loan Account", MembershipClosure."Closing Date", BalAccType,
                                 BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                                 LineNo := LineNo + 10000;
                                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                                'Closure Principal Recovery ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                                'Closure Interest Recovery ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
                                 BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType::" ", '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                                 RunBal -= Amt;
+
                             end;
-                        until Loans.Next = 0;
-                    end;
+                        end;
 
-                end else
-                    Error(ErrSavAcc);
 
-                //Post New
-                JournalPosting.CompletePosting(Jtemplate, JBatch);
-                //Post New
-                // SavingsAccounts.Reset();
-                // SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
-                // SavingsAccounts.SetFilter(SavingsAccounts."Product Category", '%1|%2|%3',
-                // SavingsAccounts."Product Category"::"BOSA Deposits", SavingsAccounts."Product Category"::Risk, SavingsAccounts."Product Category"::"Benevolent (BBF)");
-                // if SavingsAccounts.Find('-') then begin
-                //     repeat
-                //         LoansProcess.AdviceShares(SavingsAccounts, 0, MembershipClosure."No.");
-                //     until SavingsAccounts.Next() = 0;
-                // end;
+                        if Loans."Outstanding Balance" > 0 then
+                            LRepayment := Loans."Outstanding Balance"
+                        else
+                            LRepayment := 0;
 
-                SavingsAccounts.Reset;
-                SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
-                SavingsAccounts.setfilter(SavingsAccounts."Product Category", '<>%1&<>%2', SavingsAccounts."Product Category"::"Share Capital", SavingsAccounts."Product Category"::"FOSA Account");
-                if SavingsAccounts.Find('-') then begin
-                    repeat
-                        //if SavingsAccounts."Product Category" <>  and  then begin
-                        //if SavingsAccounts."Loan Disbursement Account" = false then begin
-                        SavingsAccounts.Status := SavingsAccounts.Status::Closed;
-                        SavingsAccounts.Blocked := SavingsAccounts.Blocked::All;
-                        SavingsAccounts.Modify;
-                    //end;
-                    //end;
-                    until SavingsAccounts.Next = 0;
+                        if (LRepayment > 0) then begin
+
+                            LineNo := LineNo + 10000;
+                            AcctType := AcctType::Credit;
+                            TransType := TransType::Repayment;
+                            BalAccNo := '';
+                            if LRepayment > RunBal then
+                                LRepayment := RunBal;
+                            Amt := LRepayment;
+
+                            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                            'Closure Principal Recovery' + ' ' + Format(MembershipClosure."Member No."), -Amt, Loans."Loan Account", MembershipClosure."Closing Date", BalAccType,
+                            BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                            LineNo := LineNo + 10000;
+                            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
+                            'Closure Principal Recovery ' + Format(MembershipClosure."Member No."), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                            BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType::" ", '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                            RunBal -= Amt;
+                        end;
+                    until Loans.Next = 0;
                 end;
-                //--------
-                if Members.Get(MembershipClosure."Member No.") then begin
 
-                    // if Members.Subflag = Members.Subflag::"Pending Withdrawal" then begin
-                    //     Members.Blocked := Members.Blocked::All;
-                    // end;
-                    MembershipClosure.Posted := true;
-                    MembershipClosure."Date Posted" := Today;
-                    MembershipClosure."Posted By" := UserId;
+            end else
+                Error(ErrSavAcc);
 
-                    msg := 'Dear ' + Members.Name + ', Your membership withdrawal has been processed successfully!';
-                    SendSMS.SendSms(Source::WITHDRAWAL, Members."Phone No.", msg, MembershipClosure."No.", Members."No.", true, 0, false, 'CBS', Members."No.", 'CBS');
-                    Members.Subflag := Members.Subflag::Withdrawal;
-                    Members.Status := Members.Status::Withdrawn;
-                    Members.Blocked := Members.Blocked::All;
-                    Members.Modify;
-                end;
-                MembershipClosure.Modify;
+            //Post New
+            JournalPosting.CompletePosting(Jtemplate, JBatch);
+            //Post New
+            // SavingsAccounts.Reset();
+            // SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
+            // SavingsAccounts.SetFilter(SavingsAccounts."Product Category", '%1|%2|%3',
+            // SavingsAccounts."Product Category"::"BOSA Deposits", SavingsAccounts."Product Category"::Risk, SavingsAccounts."Product Category"::"Benevolent (BBF)");
+            // if SavingsAccounts.Find('-') then begin
+            //     repeat
+            //         LoansProcess.AdviceShares(SavingsAccounts, 0, MembershipClosure."No.");
+            //     until SavingsAccounts.Next() = 0;
+            // end;
+
+            SavingsAccounts.Reset;
+            SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
+            SavingsAccounts.setfilter(SavingsAccounts."Product Category", '<>%1&<>%2', SavingsAccounts."Product Category"::"Share Capital", SavingsAccounts."Product Category"::"FOSA Account");
+            if SavingsAccounts.Find('-') then begin
+                repeat
+                    //if SavingsAccounts."Product Category" <>  and  then begin
+                    //if SavingsAccounts."Loan Disbursement Account" = false then begin
+                    SavingsAccounts.Status := SavingsAccounts.Status::Closed;
+                    SavingsAccounts.Blocked := SavingsAccounts.Blocked::All;
+                    SavingsAccounts.Modify;
+                //end;
+                //end;
+                until SavingsAccounts.Next = 0;
             end;
+            //--------
+            if Members.Get(MembershipClosure."Member No.") then begin
+
+                // if Members.Subflag = Members.Subflag::"Pending Withdrawal" then begin
+                //     Members.Blocked := Members.Blocked::All;
+                // end;
+                MembershipClosure.Posted := true;
+                MembershipClosure."Date Posted" := Today;
+                MembershipClosure."Posted By" := UserId;
+
+                msg := 'Dear ' + Members.Name + ', Your membership withdrawal has been processed successfully!';
+                SendSMS.SendSms(Source::WITHDRAWAL, Members."Phone No.", msg, MembershipClosure."No.", Members."No.", true, 0, false, 'CBS', Members."No.", 'CBS');
+                Members.Subflag := Members.Subflag::Withdrawal;
+                Members.Status := Members.Status::Withdrawn;
+                Members.Blocked := Members.Blocked::All;
+                Members.Modify;
+            end;
+            MembershipClosure.Modify;
         end;
+        // end;
 
         MembershipClosure.MarkNoticeAsFinalized();
 
@@ -575,299 +575,299 @@ codeunit 52185457 "Membership Closure Mgmt"
         TotalLiabilities: Decimal;
         BOSAAccNo: Code[50];
     begin
-        with MembershipClosure do begin
+        // with MembershipClosure do begin
 
-            MembershipClosure.TestField(Posted, false);
+        MembershipClosure.TestField(Posted, false);
 
-            TestField("Closing Date");
-            if Status <> Status::Approved then
-                Error(ErrTxt0002);
+        MembershipClosure.TestField("Closing Date");
+        if MembershipClosure.Status <> MembershipClosure.Status::Approved then
+            Error(ErrTxt0002);
 
-            SavingsLedgerEntry.Reset;
-            SavingsLedgerEntry.SetRange("Document No.", "No.");
-            SavingsLedgerEntry.SetRange("Posting Date", "Closing Date");
-            if SavingsLedgerEntry.Find('-') then begin
-                MembershipClosure.Posted := true;
-                MembershipClosure.Modify;
-                exit;
-            end;
+        SavingsLedgerEntry.Reset;
+        SavingsLedgerEntry.SetRange("Document No.", MembershipClosure."No.");
+        SavingsLedgerEntry.SetRange("Posting Date", MembershipClosure."Closing Date");
+        if SavingsLedgerEntry.Find('-') then begin
+            MembershipClosure.Posted := true;
+            MembershipClosure.Modify;
+            exit;
+        end;
 
-            BankingUserTemplate.Get(UserId);
-            BankingUserTemplate.TestField("Transfer Journal Template");
-            BankingUserTemplate.TestField("Transfer Journal Batch");
+        BankingUserTemplate.Get(UserId);
+        BankingUserTemplate.TestField("Transfer Journal Template");
+        BankingUserTemplate.TestField("Transfer Journal Batch");
 
-            Jtemplate := BankingUserTemplate."Transfer Journal Template";
-            JBatch := BankingUserTemplate."Transfer Journal Batch";
+        Jtemplate := BankingUserTemplate."Transfer Journal Template";
+        JBatch := BankingUserTemplate."Transfer Journal Batch";
 
-            GeneralSetUp.Get();
-            GeneralSetUp.TestField("Partial Account Fee");
+        GeneralSetUp.Get();
+        GeneralSetUp.TestField("Partial Account Fee");
 
-            if UserSetup.Get(UserId) then begin
-                Dim1 := UserSetup."Global Dimension 1 Code";
-                Dim2 := UserSetup."Global Dimension 2 Code";
-            end;
+        if UserSetup.Get(UserId) then begin
+            Dim1 := UserSetup."Global Dimension 1 Code";
+            Dim2 := UserSetup."Global Dimension 2 Code";
+        end;
 
-            JnlPost.ClearJournalLines(Jtemplate, JBatch, true);
+        JnlPost.ClearJournalLines(Jtemplate, JBatch, true);
 
-            if MembershipClosure."Partial Deposit Refundable" <= 0 then
-                Error(ErrTxt0001);
+        if MembershipClosure."Partial Deposit Refundable" <= 0 then
+            Error(ErrTxt0001);
 
-            ClosureAccountsII.Reset;
-            ClosureAccountsII.SetRange(ClosureAccountsII."No.", "No.");
-            ClosureAccountsII.SetRange(ClosureAccountsII.Close, true);
-            if ClosureAccountsII.Find('-') then begin
-                repeat
-                    ClosureAccountsII.Validate("Account No.");
-                until ClosureAccountsII.Next = 0;
-            end;
+        ClosureAccountsII.Reset;
+        ClosureAccountsII.SetRange(ClosureAccountsII."No.", MembershipClosure."No.");
+        ClosureAccountsII.SetRange(ClosureAccountsII.Close, true);
+        if ClosureAccountsII.Find('-') then begin
+            repeat
+                ClosureAccountsII.Validate("Account No.");
+            until ClosureAccountsII.Next = 0;
+        end;
 
-            Members.Get("Member No.");
-            TotalSaving := 0;
-            TotalDepoCap := 0;
-            ClosureAccounts.Reset;
-            ClosureAccounts.SetRange(ClosureAccounts."No.", "No.");
-            ClosureAccounts.SetRange(ClosureAccounts.Close, true);
-            if ClosureAccounts.FindSet() then begin
-                repeat
-                    if ProductFactory.Get(ClosureAccounts."Product Type") then begin
-                        if ProductFactory."Product Category" <> ProductFactory."Product Category"::"BOSA Deposits" then begin
-                            LineNo := LineNo + 10000;
-                            AcctType := AcctType::Savings;
-                            TransType := TransType::" ";
-                            Amt := ClosureAccounts.Balance;
-                            //* MembershipClosure."% of Refunds" * 0.01;
-                            BalAccNo := '';
-                            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                            CopyStr(('Partial Withdrawal - ' + Remarks), 1, 50), Amt, ClosureAccounts."Account No.", "Closing Date", BalAccType,
-                            BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                            // end;
-                            TotalDepoCap := TotalDepoCap + Amt;
-                        end;
+        Members.Get(MembershipClosure."Member No.");
+        TotalSaving := 0;
+        TotalDepoCap := 0;
+        ClosureAccounts.Reset;
+        ClosureAccounts.SetRange(ClosureAccounts."No.", MembershipClosure."No.");
+        ClosureAccounts.SetRange(ClosureAccounts.Close, true);
+        if ClosureAccounts.FindSet() then begin
+            repeat
+                if ProductFactory.Get(ClosureAccounts."Product Type") then begin
+                    if ProductFactory."Product Category" <> ProductFactory."Product Category"::"BOSA Deposits" then begin
+                        LineNo := LineNo + 10000;
+                        AcctType := AcctType::Savings;
+                        TransType := TransType::" ";
+                        Amt := ClosureAccounts.Balance;
+                        //* MembershipClosure."% of Refunds" * 0.01;
+                        BalAccNo := '';
+                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                        CopyStr(('Partial Withdrawal - ' + MembershipClosure.Remarks), 1, 50), Amt, ClosureAccounts."Account No.", MembershipClosure."Closing Date", BalAccType,
+                        BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                        // end;
+                        TotalDepoCap := TotalDepoCap + Amt;
                     end;
-                until ClosureAccounts.Next = 0;
-            end;
+                end;
+            until ClosureAccounts.Next = 0;
+        end;
+        SavingsAccounts.Reset;
+        SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
+        SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+        if SavingsAccounts.Find('-') then begin
+            LineNo := LineNo + 10000;
+            AcctType := AcctType::Savings;
+            TransType := TransType::" ";
+            Amt := -TotalDepoCap;
+            //* MembershipClosure."% of Refunds" * 0.01;
+            BalAccNo := '';
+            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+            CopyStr(('Partial Withdrawal dep cap - ' + MembershipClosure.Remarks), 1, 50), Amt, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+            BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+            // end;
+        end
+        else begin
+            AccNo := RegistrProcess.CreateSavingsAccountNo('1', '201', Members."No.");
+            LineNo := LineNo + 10000;
+            AcctType := AcctType::Savings;
+            TransType := TransType::" ";
+            Amt := -TotalDepoCap;
+            //* MembershipClosure."% of Refunds" * 0.01;
+            BalAccNo := '';
+            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+            CopyStr(('Partial Withdrawal - ' + MembershipClosure.Remarks), 1, 50), Amt, AccNo, MembershipClosure."Closing Date", BalAccType,
+            BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+        end;
+
+        SavingsAccounts.Reset;
+        SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
+        SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+        if SavingsAccounts.Find('-') then begin
+            SavingsAccounts.CalcFields("Balance (LCY)");
+            TotalSaving := SavingsAccounts."Balance (LCY)";
+            BOSAAccNo := SavingsAccounts."No.";
+        end
+        else
+            TotalSaving := 0;
+
+        TotalLiabilities := 0;
+
+        if TotalSaving > 0 then begin
+
             SavingsAccounts.Reset;
-            SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-            SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+            SavingsAccounts.SetRange(SavingsAccounts."Loan Disbursement Account", true);
+            SavingsAccounts.SetRange(SavingsAccounts."Member No.", MembershipClosure."Member No.");
+            SavingsAccounts.SetRange("Product Type", '191');
             if SavingsAccounts.Find('-') then begin
+
+                //ClosureFee := GetTransactionCharge(GeneralSetUp."Partial Account Fee", "Member Savings");
+                WithdrawalExciseDuty := ClosureFee * GeneralSetUp."Excise Duty (%)" * 0.01;
+                // debit bosa account
                 LineNo := LineNo + 10000;
                 AcctType := AcctType::Savings;
                 TransType := TransType::" ";
-                Amt := -TotalDepoCap;
-                //* MembershipClosure."% of Refunds" * 0.01;
                 BalAccNo := '';
-                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                CopyStr(('Partial Withdrawal dep cap - ' + Remarks), 1, 50), Amt, SavingsAccounts."No.", "Closing Date", BalAccType,
-                BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                // end;
-            end
-            else begin
-                AccNo := RegistrProcess.CreateSavingsAccountNo('1', '201', Members."No.");
+                //Amt := MembershipClosure."Total Loan" + MembershipClosure."Total Interest" + MembershipClosure."TSC Clearance" + MembershipClosure."Partial Deposit Refundable" + ClosureFee + WithdrawalExciseDuty;
+
+                Amt := MembershipClosure."TSC Clearance" + MembershipClosure."Partial Deposit Refundable" + ClosureFee + WithdrawalExciseDuty;
+                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+               CopyStr((('Partial Withdrawal debit from Bosa Acc- ' + MembershipClosure.Remarks) + ClosureAccounts."No."), 1, 50), (Amt), BOSAAccNo, MembershipClosure."Closing Date", BalAccType,
+               BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+
+                //Credit Fosa acc
                 LineNo := LineNo + 10000;
+                Amt := (MembershipClosure."TSC Clearance" + MembershipClosure."Partial Deposit Refundable" + ClosureFee + WithdrawalExciseDuty);
                 AcctType := AcctType::Savings;
                 TransType := TransType::" ";
-                Amt := -TotalDepoCap;
-                //* MembershipClosure."% of Refunds" * 0.01;
                 BalAccNo := '';
-                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                CopyStr(('Partial Withdrawal - ' + Remarks), 1, 50), Amt, AccNo, "Closing Date", BalAccType,
+                FosaAccount := SavingsAccounts."No.";
+                RunBal := TotalSaving;
+
+                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                CopyStr((('Partial Withdrawal Gross to Fosa Acc- ' + MembershipClosure.Remarks) + ClosureAccounts."No."), 1, 50), -(Amt), SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
                 BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-            end;
 
-            SavingsAccounts.Reset;
-            SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-            SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-            if SavingsAccounts.Find('-') then begin
-                SavingsAccounts.CalcFields("Balance (LCY)");
-                TotalSaving := SavingsAccounts."Balance (LCY)";
-                BOSAAccNo := SavingsAccounts."No.";
-            end
-            else
-                TotalSaving := 0;
+                //ClosureFee := GetTransactionCharge(GeneralSetUp."Partial Account Fee", "Member Savings");
+                TotalLiabilities := TotalLiabilities + ClosureFee;
 
-            TotalLiabilities := 0;
+                //Withdrawal Fee
+                if ClosureFee > 0 then begin
 
-            if TotalSaving > 0 then begin
+                    LineNo := LineNo + 10000;
+                    AcctType := AcctType::Savings;
+                    TransType := TransType::" ";
+                    GeneralSetUp.TestField(GeneralSetUp."Withdrawal Fee Account");
+                    BalAccNo := GeneralSetUp."Withdrawal Fee Account";
 
-                SavingsAccounts.Reset;
-                SavingsAccounts.SetRange(SavingsAccounts."Loan Disbursement Account", true);
-                SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-                SavingsAccounts.SetRange("Product Type", '191');
-                if SavingsAccounts.Find('-') then begin
+                    if ClosureFee > RunBal then
+                        ClosureFee := RunBal;
 
-                    //ClosureFee := GetTransactionCharge(GeneralSetUp."Partial Account Fee", "Member Savings");
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                    'Partial ' + Txt0009 + ClosureAccounts."No.", ClosureFee, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                    BalAccNo, SavingsAccounts."Member No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                    TotalDebits += ClosureFee;
+                    RunBal -= ClosureFee;
+
+                    LineNo := LineNo + 10000;
+                    AcctType := AcctType::Savings;
+                    TransType := TransType::" ";
+                    GeneralSetUp.TestField(GeneralSetUp."Excise Duty (%)");
+                    GeneralSetUp.TestField(GeneralSetUp."Excise Duty G/L");
+                    BalAccNo := GeneralSetUp."Excise Duty G/L";
                     WithdrawalExciseDuty := ClosureFee * GeneralSetUp."Excise Duty (%)" * 0.01;
-                    // debit bosa account
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                    'Partial ' + Txt0009 + ' Excise Duty ' + Format(MembershipClosure."Member No."), WithdrawalExciseDuty, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                    BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                    TotalDebits += Abs(WithdrawalExciseDuty);
+                    RunBal -= WithdrawalExciseDuty;
+
+                    TotalLiabilities := TotalLiabilities + WithdrawalExciseDuty;
+
+                end;
+
+                if MembershipClosure."TSC Clearance" > 0 then begin
                     LineNo := LineNo + 10000;
-                    AcctType := AcctType::Savings;
+                    AcctType := AcctType::Customer;
                     TransType := TransType::" ";
                     BalAccNo := '';
-                    //Amt := MembershipClosure."Total Loan" + MembershipClosure."Total Interest" + MembershipClosure."TSC Clearance" + MembershipClosure."Partial Deposit Refundable" + ClosureFee + WithdrawalExciseDuty;
 
-                    Amt := MembershipClosure."TSC Clearance" + MembershipClosure."Partial Deposit Refundable" + ClosureFee + WithdrawalExciseDuty;
-                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                   CopyStr((('Partial Withdrawal debit from Bosa Acc- ' + Remarks) + ClosureAccounts."No."), 1, 50), (Amt), BOSAAccNo, "Closing Date", BalAccType,
-                   BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                    if MembershipClosure."TSC Clearance" > RunBal then
+                        MembershipClosure."TSC Clearance" := RunBal;
 
-
-                    //Credit Fosa acc
-                    LineNo := LineNo + 10000;
-                    Amt := (MembershipClosure."TSC Clearance" + MembershipClosure."Partial Deposit Refundable" + ClosureFee + WithdrawalExciseDuty);
-                    AcctType := AcctType::Savings;
-                    TransType := TransType::" ";
-                    BalAccNo := '';
-                    FosaAccount := SavingsAccounts."No.";
-                    RunBal := TotalSaving;
-
-                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                    CopyStr((('Partial Withdrawal Gross to Fosa Acc- ' + Remarks) + ClosureAccounts."No."), 1, 50), -(Amt), SavingsAccounts."No.", "Closing Date", BalAccType,
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
+                    Txt00011 + ' ' + Format(MembershipClosure."Member No."), -MembershipClosure."TSC Clearance", MembershipClosure."TSC Clearance Account", MembershipClosure."Closing Date", BalAccType,
                     BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                    //ClosureFee := GetTransactionCharge(GeneralSetUp."Partial Account Fee", "Member Savings");
-                    TotalLiabilities := TotalLiabilities + ClosureFee;
+                    LineNo := LineNo + 10000;
+                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
+                    Txt00011 + ' ' + Format(MembershipClosure."Member No."), MembershipClosure."TSC Clearance", SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
+                    BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                    //Withdrawal Fee
-                    if ClosureFee > 0 then begin
+                    RunBal -= MembershipClosure."TSC Clearance";
 
-                        LineNo := LineNo + 10000;
-                        AcctType := AcctType::Savings;
-                        TransType := TransType::" ";
-                        GeneralSetUp.TestField(GeneralSetUp."Withdrawal Fee Account");
-                        BalAccNo := GeneralSetUp."Withdrawal Fee Account";
+                    TotalLiabilities := TotalLiabilities + MembershipClosure."TSC Clearance";
+                end;
 
-                        if ClosureFee > RunBal then
-                            ClosureFee := RunBal;
+                // Exclude loans
 
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                        'Partial ' + Txt0009 + ClosureAccounts."No.", ClosureFee, SavingsAccounts."No.", "Closing Date", BalAccType,
-                        BalAccNo, SavingsAccounts."Member No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                        TotalDebits += ClosureFee;
-                        RunBal -= ClosureFee;
+                // Loans.Reset;
+                // Loans.SetRange(Loans."Member No.", "Member No.");
+                // Loans.SetFilter("Total Loan Balance", '>%1', 0);
+                // Loans.SetAutoCalcFields("Outstanding Interest", "Outstanding Balance");
+                // if Loans.Find('-') then begin
+                //     repeat
+                //         Loans.CalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest");
+                //         Amt := 0;
+                //         Interest := 0;
+                //         if Loans."Outstanding Interest" > 0 then begin
+                //             Interest := Loans."Outstanding Interest";
+                //             LineNo := LineNo + 10000;
+                //             AcctType := AcctType::Credit;
+                //             TransType := TransType::"Interest Paid";
+                //             if Interest > RunBal then
+                //                 Interest := RunBal;
+                //             Amt := Interest;
+                //             BalAccNo := '';
+                //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
+                //             CopyStr((('Partial Withrawal Interest- ' + Remarks) + ClosureAccounts."No."), 1, 50), Amt * -1, Loans."Loan Account", "Closing Date", BalAccType,
+                //             BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                        LineNo := LineNo + 10000;
-                        AcctType := AcctType::Savings;
-                        TransType := TransType::" ";
-                        GeneralSetUp.TestField(GeneralSetUp."Excise Duty (%)");
-                        GeneralSetUp.TestField(GeneralSetUp."Excise Duty G/L");
-                        BalAccNo := GeneralSetUp."Excise Duty G/L";
-                        WithdrawalExciseDuty := ClosureFee * GeneralSetUp."Excise Duty (%)" * 0.01;
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
-                        'Partial ' + Txt0009 + ' Excise Duty ' + Format(MembershipClosure."Member No."), WithdrawalExciseDuty, SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
-                        BalAccNo, Members."No.", Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //             LineNo := LineNo + 10000;
+                //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, "No.",
+                //             CopyStr((('Partial Withrawal Interest- ' + Remarks) + ClosureAccounts."No."), 1, 50), Amt, SavingsAccounts."No.", "Closing Date", BalAccType,
+                //             BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                        TotalDebits += Abs(WithdrawalExciseDuty);
-                        RunBal -= WithdrawalExciseDuty;
+                //             RunBal -= Amt;
+                //             TotalLiabilities := TotalLiabilities + Amt;
+                //         end;
 
-                        TotalLiabilities := TotalLiabilities + WithdrawalExciseDuty;
+                //         if (Loans."Outstanding Balance" > 0) and (RunBal > 0) then begin
+                //             LineNo := LineNo + 10000;
+                //             AcctType := AcctType::Credit;
+                //             TransType := TransType::Repayment;
+                //             BalAccNo := '';
+                //             Amt := Loans."Outstanding Balance";
+                //             if Amt > RunBal then
+                //                 Amt := RunBal;
 
-                    end;
+                //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
+                //             CopyStr((('Partial Withrawal Principal- ' + Remarks) + ClosureAccounts."No."), 1, 50), -Amt, Loans."Loan Account", "Closing Date", BalAccType,
+                //             BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                    if MembershipClosure."TSC Clearance" > 0 then begin
-                        LineNo := LineNo + 10000;
-                        AcctType := AcctType::Customer;
-                        TransType := TransType::" ";
-                        BalAccNo := '';
+                //             LineNo := LineNo + 10000;
+                //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, "No.",
+                //             CopyStr((('Partial Withrawal Principal- ' + Remarks) + ClosureAccounts."No."), 1, 50), Amt, SavingsAccounts."No.", "Closing Date", BalAccType,
+                //             BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
-                        if MembershipClosure."TSC Clearance" > RunBal then
-                            MembershipClosure."TSC Clearance" := RunBal;
+                //             RunBal -= Amt;
 
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, MembershipClosure."No.",
-                        Txt00011 + ' ' + Format(MembershipClosure."Member No."), -MembershipClosure."TSC Clearance", MembershipClosure."TSC Clearance Account", MembershipClosure."Closing Date", BalAccType,
-                        BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //             TotalLiabilities := TotalLiabilities + Amt;
 
-                        LineNo := LineNo + 10000;
-                        JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, MembershipClosure."No.",
-                        Txt00011 + ' ' + Format(MembershipClosure."Member No."), MembershipClosure."TSC Clearance", SavingsAccounts."No.", MembershipClosure."Closing Date", BalAccType,
-                        BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //         end;
+                //     until Loans.Next = 0;
+                // end;
 
-                        RunBal -= MembershipClosure."TSC Clearance";
+            end else
+                Error(ErrSavAcc);
+        end
+        else
+            Error('Member deposits are less than 0');
+        //Post New
+        JournalPosting.CompletePosting(Jtemplate, JBatch);
+        //--------
+        Members.Status := Members.Status::Active;
+        Members.Blocked := Members.Blocked::" ";
+        Members.Subflag := Members.Subflag::"Partial withdrawn";
+        Members.Modify();
 
-                        TotalLiabilities := TotalLiabilities + MembershipClosure."TSC Clearance";
-                    end;
+        MembershipClosure.Posted := true;
+        MembershipClosure."Posted By" := UserId;
+        MembershipClosure."Date Posted" := Today;
+        MembershipClosure.Modify;
 
-                    // Exclude loans
+        SendSMS.SendSms(Source::WITHDRAWAL, SavingsAccounts."Phone No.", Text0005, Format(SavingsAccounts."No."), '', true, 0, false, 'CBS', SavingsAccounts."No.", 'CBS');
+        MembershipClosure.MarkNoticeAsFinalized();
+        Message('Partial Closure posted successfully.!');
 
-                    // Loans.Reset;
-                    // Loans.SetRange(Loans."Member No.", "Member No.");
-                    // Loans.SetFilter("Total Loan Balance", '>%1', 0);
-                    // Loans.SetAutoCalcFields("Outstanding Interest", "Outstanding Balance");
-                    // if Loans.Find('-') then begin
-                    //     repeat
-                    //         Loans.CalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest");
-                    //         Amt := 0;
-                    //         Interest := 0;
-                    //         if Loans."Outstanding Interest" > 0 then begin
-                    //             Interest := Loans."Outstanding Interest";
-                    //             LineNo := LineNo + 10000;
-                    //             AcctType := AcctType::Credit;
-                    //             TransType := TransType::"Interest Paid";
-                    //             if Interest > RunBal then
-                    //                 Interest := RunBal;
-                    //             Amt := Interest;
-                    //             BalAccNo := '';
-                    //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                    //             CopyStr((('Partial Withrawal Interest- ' + Remarks) + ClosureAccounts."No."), 1, 50), Amt * -1, Loans."Loan Account", "Closing Date", BalAccType,
-                    //             BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                    //             LineNo := LineNo + 10000;
-                    //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, "No.",
-                    //             CopyStr((('Partial Withrawal Interest- ' + Remarks) + ClosureAccounts."No."), 1, 50), Amt, SavingsAccounts."No.", "Closing Date", BalAccType,
-                    //             BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                    //             RunBal -= Amt;
-                    //             TotalLiabilities := TotalLiabilities + Amt;
-                    //         end;
-
-                    //         if (Loans."Outstanding Balance" > 0) and (RunBal > 0) then begin
-                    //             LineNo := LineNo + 10000;
-                    //             AcctType := AcctType::Credit;
-                    //             TransType := TransType::Repayment;
-                    //             BalAccNo := '';
-                    //             Amt := Loans."Outstanding Balance";
-                    //             if Amt > RunBal then
-                    //                 Amt := RunBal;
-
-                    //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType, "No.",
-                    //             CopyStr((('Partial Withrawal Principal- ' + Remarks) + ClosureAccounts."No."), 1, 50), -Amt, Loans."Loan Account", "Closing Date", BalAccType,
-                    //             BalAccNo, Loans."Loan No.", Dim1, Dim2, TransType, Loans."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                    //             LineNo := LineNo + 10000;
-                    //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AcctType::Savings, "No.",
-                    //             CopyStr((('Partial Withrawal Principal- ' + Remarks) + ClosureAccounts."No."), 1, 50), Amt, SavingsAccounts."No.", "Closing Date", BalAccType,
-                    //             BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-                    //             RunBal -= Amt;
-
-                    //             TotalLiabilities := TotalLiabilities + Amt;
-
-                    //         end;
-                    //     until Loans.Next = 0;
-                    // end;
-
-                end else
-                    Error(ErrSavAcc);
-            end
-            else
-                Error('Member deposits are less than 0');
-            //Post New
-            JournalPosting.CompletePosting(Jtemplate, JBatch);
-            //--------
-            Members.Status := Members.Status::Active;
-            Members.Blocked := Members.Blocked::" ";
-            Members.Subflag := Members.Subflag::"Partial withdrawn";
-            Members.Modify();
-
-            Posted := true;
-            "Posted By" := UserId;
-            "Date Posted" := Today;
-            Modify;
-
-            SendSMS.SendSms(Source::WITHDRAWAL, SavingsAccounts."Phone No.", Text0005, Format(SavingsAccounts."No."), '', true, 0, false, 'CBS', SavingsAccounts."No.", 'CBS');
-            MembershipClosure.MarkNoticeAsFinalized();
-            Message('Partial Closure posted successfully.!');
-
-        end;
     end;
+    // end;
 
     local procedure CommentedWithDrawalFuneralCode()
     var

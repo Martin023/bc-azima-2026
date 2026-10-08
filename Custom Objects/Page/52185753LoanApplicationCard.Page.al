@@ -2145,7 +2145,7 @@ page 52185753 "Loan Application Card"
                     Rec.TestField(Posted, false);
                     Rec.TestField(Status, Rec.Status::Approved);
                     if Confirm('Do You want to post this loan of Member No' + '...' + Rec."Member No." + '...' + 'Loan No' + '...' + Rec."Loan No.") then begin
-
+                        rec.CheckForTopupChanges();
                         Posting.PostLoanNormal(Rec."Loan No.");
                         Rec."disbursement time" := Time;
                         Rec."Disbursement Date" := Today;

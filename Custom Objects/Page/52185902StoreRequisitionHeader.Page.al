@@ -682,27 +682,27 @@ page 52185902 "Store Requisition Header"
         TrackingSpecification: Record "Tracking Specification";
         ReservEntry: Record "Reservation Entry";
     begin
-        with TrackingSpecification do begin
-            SetCurrentKey("Source ID", "Source Type", "Source Subtype", "Source Batch Name",
-              "Source Prod. Order Line", "Source Ref. No.");
-            SetRange("Source Type", DATABASE::"Store Requistion Lines");
-            SetRange("Source Subtype", 0);
-            SetRange("Source ID", PurchLine."Requistion No");
-            SetRange("Source Batch Name", '');
-            SetRange("Source Prod. Order Line", 0);
-            SetRange("Source Ref. No.", PurchLine."Line No.");
-        end;
-        with ReservEntry do begin
-            SetCurrentKey(
-              "Source ID", "Source Ref. No.", "Source Type", "Source Subtype",
-              "Source Batch Name", "Source Prod. Order Line");
-            SetRange("Source ID", PurchLine."Requistion No");
-            SetRange("Source Ref. No.", PurchLine."Line No.");
-            SetRange("Source Type", DATABASE::"Store Requistion Lines");
-            SetRange("Source Subtype", 0);
-            SetRange("Source Batch Name", '');
-            SetRange("Source Prod. Order Line", 0);
-        end;
+        // with TrackingSpecification do begin
+        TrackingSpecification.SetCurrentKey("Source ID", "Source Type", "Source Subtype", "Source Batch Name",
+          "Source Prod. Order Line", "Source Ref. No.");
+        TrackingSpecification.SetRange("Source Type", DATABASE::"Store Requistion Lines");
+        TrackingSpecification.SetRange("Source Subtype", 0);
+        TrackingSpecification.SetRange("Source ID", PurchLine."Requistion No");
+        TrackingSpecification.SetRange("Source Batch Name", '');
+        TrackingSpecification.SetRange("Source Prod. Order Line", 0);
+        TrackingSpecification.SetRange("Source Ref. No.", PurchLine."Line No.");
+        // end;
+        // with ReservEntry do begin
+        ReservEntry.SetCurrentKey(
+          "Source ID", "Source Ref. No.", "Source Type", "Source Subtype",
+          "Source Batch Name", "Source Prod. Order Line");
+        ReservEntry.SetRange("Source ID", PurchLine."Requistion No");
+        ReservEntry.SetRange("Source Ref. No.", PurchLine."Line No.");
+        ReservEntry.SetRange("Source Type", DATABASE::"Store Requistion Lines");
+        ReservEntry.SetRange("Source Subtype", 0);
+        ReservEntry.SetRange("Source Batch Name", '');
+        ReservEntry.SetRange("Source Prod. Order Line", 0);
+        // end;
 
         case FunctionType of
             FunctionType::CheckTrackingExists:

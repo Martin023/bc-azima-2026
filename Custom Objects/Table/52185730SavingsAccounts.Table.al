@@ -1335,12 +1335,12 @@ table 52185730 "Savings Accounts"
     // [Scope('OnPrem')]
     procedure CheckBlockedCustOnJnls(Cust2: Record "Savings Accounts"; DocType: Enum "Gen. Journal Document Type"; Transaction: Boolean)
     begin
-        with Cust2 do begin
-            if (Blocked = Blocked::All) or
-               ((Blocked = Blocked::Debit) and (DocType in [DocType::Invoice, DocType::" "]))
-            then
-                CustBlockedErrorMessage(Cust2, Transaction)
-        end;
+        // with Cust2 do begin
+        if (Cust2.Blocked = Cust2.Blocked::All) or
+           ((Cust2.Blocked = Cust2.Blocked::Debit) and (DocType in [DocType::Invoice, DocType::" "]))
+        then
+            CustBlockedErrorMessage(Cust2, Transaction)
+        // end;
     end;
 
     // [Scope('OnPrem')]

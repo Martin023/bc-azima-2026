@@ -7,8 +7,9 @@ page 52185768 "Loan Posted List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Loans;
-    SourceTableView =
-    WHERE(Posted = CONST(true));
+    SourceTableView = SORTING("Disbursement Date")
+                  ORDER(descending)
+                  WHERE(Posted = CONST(true));
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;
 
