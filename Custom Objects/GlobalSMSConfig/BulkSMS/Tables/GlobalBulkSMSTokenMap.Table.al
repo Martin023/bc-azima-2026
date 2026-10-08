@@ -255,7 +255,9 @@ table 52185985 "Global Bulk SMS Token Map"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
 
         CheckDuplicateToken();
@@ -265,7 +267,9 @@ table 52185985 "Global Bulk SMS Token Map"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
     end;
 

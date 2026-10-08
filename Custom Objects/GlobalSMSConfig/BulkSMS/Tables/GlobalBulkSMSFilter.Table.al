@@ -212,7 +212,9 @@ table 52185647 "Global Bulk SMS Filter"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
     end;
 
@@ -220,7 +222,9 @@ table 52185647 "Global Bulk SMS Filter"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
     end;
 

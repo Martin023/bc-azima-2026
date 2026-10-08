@@ -144,6 +144,8 @@ table 52185984 "Global Bulk SMS Line"
         TokenEngine: Codeunit "Global Token Engine";
         ResolvedMessage: Text;
         TokenValues: Text;
+        ErrorOccurred: Boolean;
+        ErrorText: Text;
     begin
         if not Header.Get("Campaign No.") then
             Error('Campaign %1 does not exist.', "Campaign No.");
@@ -156,12 +158,29 @@ table 52185984 "Global Bulk SMS Line"
 
         // Resolve tokens and populate personalized message
         if "Personalized Message" = '' then begin
-            ResolvedMessage := TokenEngine.ResolveAllTokens(Header."Message Template", "Member No.", "Campaign No.");
-            "Personalized Message" := CopyStr(ResolvedMessage, 1, MaxStrLen("Personalized Message"));
+            if Header."Message Template" <> '' then begin
+                // Resolve tokens - if it fails, store error in Token Values
+                ErrorOccurred := false;
+                Clear(ResolvedMessage);
+                Clear(TokenValues);
+                
+                ErrorText := '';
+                if not ErrorOccurred then begin
+                    ResolvedMessage := TokenEngine.ResolveAllTokens(Header."Message Template", "Member No.", "Campaign No.");
+                    TokenValues := TokenEngine.BuildTokenValuesString("Member No.", "Campaign No.");
+                end;
 
-            // Build token values for debugging/reference
-            TokenValues := TokenEngine.BuildTokenValuesString("Member No.", "Campaign No.");
-            "Token Values" := CopyStr(TokenValues, 1, MaxStrLen("Token Values"));
+                if ResolvedMessage <> '' then begin
+                    "Personalized Message" := CopyStr(ResolvedMessage, 1, MaxStrLen("Personalized Message"));
+                    "Token Values" := CopyStr(TokenValues, 1, MaxStrLen("Token Values"));
+                end else begin
+                    // Fallback: use template as-is
+                    "Personalized Message" := Header."Message Template";
+                    "Token Values" := '';
+                end;
+            end else begin
+                "Personalized Message" := Header."Message Template";
+            end;
         end;
 
         Status := Status::Pending;
