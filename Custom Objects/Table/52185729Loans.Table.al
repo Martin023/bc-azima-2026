@@ -3968,12 +3968,12 @@ table 52185729 Loans
         Topup.setrange("Client Code", rec."Member No.");
         if Topup.findset() then begin
             repeat
-                if LoansII.get(Topup."Loan No.") then begin
-                    LoansII.calcfields("Outstanding Balance","Outstanding Interest");
+                if LoansII.get(Topup."Loan Top Up") then begin
+                    LoansII.calcfields("Outstanding Balance", "Outstanding Interest");
                     if LoansII."Outstanding Balance" < Topup."Principle Top Up" then
-                        Error('The top up amount %1 is greater than the outstanding balance %2 for loan number %3', Topup."Principle Top Up", LoansII."Outstanding Balance", Topup."Loan No.");
+                        Error('The top up amount %1 is greater than the outstanding balance %2 for loan number %3', Topup."Principle Top Up", LoansII."Outstanding Balance", LoansII."Loan No.");
                     if LoansII."Outstanding Interest" < Topup."Interest Top Up" then
-                        Error('The top up amount %1 is greater than the outstanding Interest %2 for loan number %3', Topup."Principle Top Up", LoansII."Outstanding Interest", Topup."Loan No.");
+                        Error('The top up amount %1 is greater than the outstanding Interest %2 for loan number %3', Topup."Principle Top Up", LoansII."Outstanding Interest", LoansII."Loan No.");
                 end;
             until Topup.next = 0;
         end;
