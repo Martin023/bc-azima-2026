@@ -257,7 +257,9 @@ table 52185982 "Global Bulk SMS Header"
 
     procedure CheckEditAllowed()
     begin
-        TestField(Status, Status::Draft);
+        if Status in [Status::Sending, Status::Completed] then
+            Error('Cannot edit campaign with status %1. Please create a new campaign.', Status);
+        // Allows editing when: Draft, Generating (for recovery), Ready, Cancelled
     end;
 
     procedure SetStatusGenerating()
@@ -304,8 +306,8 @@ table 52185982 "Global Bulk SMS Header"
 
     procedure ResetToDraft()
     begin
-        if not (Status in [Status::Ready, Status::Cancelled]) then
-            Error('Can only reset Ready or Cancelled campaigns to Draft.');
+        if not (Status in [Status::Ready, Status::Cancelled, Status::Generating]) then
+            Error('Can only reset Ready, Cancelled, or Generating campaigns to Draft.');
 
         Status := Status::Draft;
         "Generated DateTime" := 0DT;

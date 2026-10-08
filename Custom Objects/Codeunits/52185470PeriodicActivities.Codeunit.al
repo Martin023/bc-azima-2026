@@ -692,7 +692,7 @@ Codeunit 52185470 "Periodic Activities"
                     SavAcc.setrange("No.", FPVLines."Account No.");
                     if SavAcc.findfirst then begin
                         if Members.get(SavAcc."Member No.") then begin
-                            Msg := 'Dear ' + Members."First Name" + ', ' + FPVHeader."Payment Narration" + ' allowance of KES' + format(FPVLines.Amount) + ' has been credited to your account. Access your account via *' + theUSSD + '# .Thank you for banking with us.';
+                            Msg := 'Dear ' + Members."First Name" + ', ' + FPVHeader."Payment Narration" + ' allowance of KES' + format(FPVLines."Net Amount") + ' has been credited to your account. Access your account via *' + theUSSD + '# .Thank you for banking with us.';
                             SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Members."Phone No.", msg, Format(Members."No."), '', true, 0, false, 'CBS', Members."No.", 'CBS');
                         end;
                     end;

@@ -91,6 +91,12 @@ page 52187312 "Credit Management Role Center"
                             caption = 'Rejected Withdrawal Notice';
                             RunObject = page "Rejected Withdrawal Notice";
                         }
+                        action("Withdrawal Notice Form")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Withdrawal Notice Form';
+                            RunObject = report "Withdrawal Notice Form";
+                        }
                     }
                     group("Member CLosure")
                     {
