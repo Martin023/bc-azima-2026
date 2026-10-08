@@ -166,9 +166,20 @@ page 52185463 "Global Bulk SMS Card"
                     var
                         FilterEngine: Codeunit "Global Filter Engine";
                         RecipientCount: Integer;
+                        SelectorPage: Page "Global SMS Recipient Selector";
+                        UseSelector: Boolean;
                     begin
                         Rec.TestField("Campaign Name");
                         Rec.TestField("Message Template");
+
+                        // Option to use enhanced selector (can be removed if not needed)
+                        UseSelector := Confirm('Do you want to preview recipients before generating?', true);
+
+                        if UseSelector then begin
+                            SelectorPage.SetCampaign(Rec."Campaign No.");
+                            if SelectorPage.RunModal() <> Action::OK then
+                                exit;
+                        end;
 
                         RecipientCount := FilterEngine.GenerateRecipients(Rec."Campaign No.");
 
@@ -192,6 +203,32 @@ page 52185463 "Global Bulk SMS Card"
                     begin
                         MatchCount := FilterEngine.TestFilters(Rec."Campaign No.");
                         Message('%1 member(s) match the configured filters.', MatchCount);
+                    end;
+                }
+                action(ResetStatus)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Reset to Draft';
+                    Image = ResetStatus;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    Enabled = CanResetToDraft;
+                    ToolTip = 'Reset campaign status back to Draft to make changes or recover from stuck status';
+
+                    trigger OnAction()
+                    begin
+                        if Rec.Status = Rec.Status::Generating then begin
+                            if not Confirm('Reset campaign from Generating to Draft? This is an emergency recovery action.', false) then
+                                exit;
+                        end else begin
+                            if not Confirm('Reset campaign status to Draft? This will allow you to make changes.', true) then
+                                exit;
+                        end;
+
+                        Rec.ResetToDraft();
+                        CurrPage.Update(false);
+                        Message('Campaign status reset to Draft.');
                     end;
                 }
                 action(PreviewMessages)
@@ -308,19 +345,6 @@ page 52185463 "Global Bulk SMS Card"
                     begin
                         FilterEngine.ClearLines(Rec."Campaign No.");
                         CurrPage.Update(false);
-                    end;
-                }
-                action(ResetToDraft)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Reset to Draft';
-                    Image = ResetStatus;
-
-                    trigger OnAction()
-                    begin
-                        Rec.ResetToDraft();
-                        CurrPage.Update(false);
-                        Message('Campaign reset to Draft status.');
                     end;
                 }
                 action(CopyCampaignAction)
@@ -537,10 +561,14 @@ page 52185463 "Global Bulk SMS Card"
     local procedure UpdatePageControls()
     begin
         CanGenerateRecipients := Rec.Status in [Rec.Status::Draft, Rec.Status::Ready];
+        CanResetToDraft := (Rec.Status = Rec.Status::Generating) or 
+                           (Rec.Status = Rec.Status::Ready) or 
+                           (Rec.Status = Rec.Status::Cancelled);
     end;
 
     var
         StatusStyle: Text;
         TestMember: Record Members;
         CanGenerateRecipients: Boolean;
+        CanResetToDraft: Boolean;
 }

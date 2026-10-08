@@ -28,6 +28,8 @@ table 52185984 "Global Bulk SMS Line"
             trigger OnValidate()
             var
                 Member: Record Members;
+                FilterEngine: Codeunit "Global Filter Engine";
+                PhoneNumber: Text[20];
             begin
                 if "Member No." = '' then
                     Error('Member No. cannot be blank.');
@@ -41,7 +43,11 @@ table 52185984 "Global Bulk SMS Line"
                 "Member Name" := Member.Name;
 
                 if "Phone No." = '' then begin
-                    "Phone No." := Member."Phone No.";
+                    PhoneNumber := FilterEngine.GetMemberPhoneNumber(Member);
+                    if PhoneNumber = '' then
+                        Error('Member %1 has no valid phone number.', "Member No.");
+
+                    "Phone No." := CopyStr(PhoneNumber, 1, MaxStrLen("Phone No."));
                     ValidatePhoneNumber();
                 end;
             end;
@@ -135,6 +141,11 @@ table 52185984 "Global Bulk SMS Line"
     trigger OnInsert()
     var
         Header: Record "Global Bulk SMS Header";
+        TokenEngine: Codeunit "Global Token Engine";
+        ResolvedMessage: Text;
+        TokenValues: Text;
+        ErrorOccurred: Boolean;
+        ErrorText: Text;
     begin
         if not Header.Get("Campaign No.") then
             Error('Campaign %1 does not exist.', "Campaign No.");
@@ -145,8 +156,32 @@ table 52185984 "Global Bulk SMS Line"
         TestField("Member No.");
         TestField("Phone No.");
 
-        if "Personalized Message" = '' then
-            "Personalized Message" := Header."Message Template";
+        // Resolve tokens and populate personalized message
+        if "Personalized Message" = '' then begin
+            if Header."Message Template" <> '' then begin
+                // Resolve tokens - if it fails, store error in Token Values
+                ErrorOccurred := false;
+                Clear(ResolvedMessage);
+                Clear(TokenValues);
+                
+                ErrorText := '';
+                if not ErrorOccurred then begin
+                    ResolvedMessage := TokenEngine.ResolveAllTokens(Header."Message Template", "Member No.", "Campaign No.");
+                    TokenValues := TokenEngine.BuildTokenValuesString("Member No.", "Campaign No.");
+                end;
+
+                if ResolvedMessage <> '' then begin
+                    "Personalized Message" := CopyStr(ResolvedMessage, 1, MaxStrLen("Personalized Message"));
+                    "Token Values" := CopyStr(TokenValues, 1, MaxStrLen("Token Values"));
+                end else begin
+                    // Fallback: use template as-is
+                    "Personalized Message" := Header."Message Template";
+                    "Token Values" := '';
+                end;
+            end else begin
+                "Personalized Message" := Header."Message Template";
+            end;
+        end;
 
         Status := Status::Pending;
         "Retry Count" := 0;

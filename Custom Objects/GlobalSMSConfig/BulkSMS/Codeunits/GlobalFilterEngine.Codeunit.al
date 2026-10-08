@@ -22,22 +22,29 @@ codeunit 52185975 "Global Filter Engine"
                 Error('');
 
         Header.SetStatusGenerating();
+        Commit();
 
+        // Delete existing lines
+        ExistingLine.SetRange("Campaign No.", CampaignNo);
         ExistingLine.DeleteAll(true);
         Commit();
 
+        // Get matching members
         MemberList := GetDistinctMembers(CampaignNo);
 
         if MemberList.Count() = 0 then begin
+            Header.Get(CampaignNo);
             Header.ResetToDraft();
             Error('No members match the configured filters.');
         end;
 
+        // Create recipient lines
         ProcessedCount := CreateLinesFromMembers(CampaignNo, MemberList);
 
         if ProcessedCount = 0 then begin
+            Header.Get(CampaignNo);
             Header.ResetToDraft();
-            Error('Failed to create any recipient lines. Check member phone numbers.');
+            Error('No recipients created. Check that members have valid phone numbers and match your filters.');
         end;
 
         UpdateFilterSummary(CampaignNo);
@@ -47,6 +54,8 @@ codeunit 52185975 "Global Filter Engine"
 
         exit(ProcessedCount);
     end;
+
+
 
     local procedure GetDistinctMembers(CampaignNo: Code[20]): List of [Code[20]]
     var
@@ -96,11 +105,28 @@ codeunit 52185975 "Global Filter Engine"
 
         if Member.FindSet() then
             repeat
-                if Member."Phone No." <> '' then
+                if GetMemberPhoneNumber(Member) <> '' then
                     MemberList.Add(Member."No.");
             until Member.Next() = 0;
 
         exit(MemberList);
+    end;
+
+    procedure GetMemberPhoneNumber(Member: Record Members): Text[20]
+    begin
+        // Priority 1: Transactional Mobile Number (most common, used for mobile banking)
+        if Member."Transactional Mobile Number" <> '' then
+            exit(Member."Transactional Mobile Number");
+
+        // Priority 2: Phone No.
+        if Member."Phone No." <> '' then
+            exit(Member."Phone No.");
+
+        // Priority 3: Office Telephone
+        if Member."Office Telephone No." <> '' then
+            exit(Member."Office Telephone No.");
+
+        exit('');
     end;
 
     local procedure GetMembersFromMemberFilter(FilterRec: Record "Global Bulk SMS Filter"): List of [Code[20]]
@@ -138,7 +164,7 @@ codeunit 52185975 "Global Filter Engine"
             repeat
                 RecRef.SetTable(Member);
                 if Member.Status <> Member.Status::Deceased then
-                    if Member."Phone No." <> '' then
+                    if GetMemberPhoneNumber(Member) <> '' then
                         MemberList.Add(Member."No.");
             until RecRef.Next() = 0;
 
@@ -238,6 +264,7 @@ codeunit 52185975 "Global Filter Engine"
         NewLine: Record "Global Bulk SMS Line";
         MemberNo: Code[20];
         ProcessedCount: Integer;
+        PhoneNumber: Text[20];
         i: Integer;
     begin
         ProcessedCount := 0;
@@ -248,7 +275,8 @@ codeunit 52185975 "Global Filter Engine"
             if not Member.Get(MemberNo) then
                 continue;
 
-            if Member."Phone No." = '' then
+            PhoneNumber := GetMemberPhoneNumber(Member);
+            if PhoneNumber = '' then
                 continue;
 
             if Member.Status = Member.Status::Deceased then
@@ -367,6 +395,12 @@ codeunit 52185975 "Global Filter Engine"
             until FilterRec.Next() = 0;
 
         exit(Summary);
+    end;
+
+    procedure GetDistinctMembersForPreview(CampaignNo: Code[20]): List of [Code[20]]
+    begin
+        // Reuse existing logic for preview
+        exit(GetDistinctMembers(CampaignNo));
     end;
 
     procedure ValidateFilterConfiguration(CampaignNo: Code[20]): Text

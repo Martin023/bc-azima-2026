@@ -60,12 +60,14 @@ table 52185985 "Global Bulk SMS Token Map"
         {
             Caption = 'Source Type';
             DataClassification = CustomerContent;
-            OptionMembers = "Member Field","Savings Field","Loan Field",Calculated,FlowField;
-            OptionCaption = 'Member Field,Savings Field,Loan Field,Calculated,FlowField';
+            OptionMembers = " ","Member Field","Savings Field","Loan Field",Calculated,FlowField;
+            OptionCaption = ' ,Member Field,Savings Field,Loan Field,Calculated,FlowField';
 
             trigger OnValidate()
             begin
                 case "Source Type" of
+                    "Source Type"::" ":
+                        "Source Table ID" := 0;
                     "Source Type"::"Member Field":
                         "Source Table ID" := Database::Members;
                     "Source Type"::"Savings Field":
@@ -243,21 +245,19 @@ table 52185985 "Global Bulk SMS Token Map"
 
         Header.CheckEditAllowed();
 
-        TestField("Token Code");
-        TestField("Token Description");
-        TestField("Source Table ID");
-
-        if "Source Type" <> "Source Type"::Calculated then
-            TestField("Source Field Name");
-
-        CheckDuplicateToken();
+        // Don't validate on insert - allow incomplete records to be saved as draft
+        // Validation will happen when Test Token or Preview Messages is clicked
+        if "Token Code" <> '' then
+            CheckDuplicateToken();
     end;
 
     trigger OnModify()
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
 
         CheckDuplicateToken();
@@ -267,7 +267,9 @@ table 52185985 "Global Bulk SMS Token Map"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
     end;
 
