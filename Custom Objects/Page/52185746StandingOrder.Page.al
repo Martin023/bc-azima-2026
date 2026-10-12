@@ -364,6 +364,11 @@ page 52185746 "Standing Order"
                                         begin
                                             StandingOrderLines.TestField(StandingOrderLines."Loan No.");
                                         end;
+                                    StandingOrderLines."Destination Account Type"::Savings:
+                                        begin
+                                            if StandingOrderLines."Loan No." <> '' then
+                                                error('Loan No. should be empty for Savings Account Type');
+                                        end;
 
                                 end;
                             until StandingOrderLines.Next = 0;
@@ -660,6 +665,7 @@ page 52185746 "Standing Order"
         OpenApprovalEntriesExist: Boolean;
         AmountError: Label 'Allocated amount and amount are not the same.';
         PendingStO: record "Standing Order Header";
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 
     //[Scope('OnPrem')]
     procedure statusControl()

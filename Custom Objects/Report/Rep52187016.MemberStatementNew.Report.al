@@ -665,11 +665,12 @@ Report 52187016 "Member and loan Statement"
 
                 SavAccII.reset;
                 SavAccII.setrange("Member No.", Members."No.");
-                SavAccII.SetRange("Product Type", '191');
+                SavAccII.SetRange("Loan Disbursement Account", true);
+                // SavAccII.SetRange("Product Type", '191');
                 if SavAccII.FindFirst() then begin
                     AcctBal := SavAccII.GetAvailableBalance(SavAccII."No.");
                     if StatementCharge then begin
-                        PostStmtCharges(StatementTypeII, AcctBal, Members, SavAccII."No.",NumberOfPages);
+                        PostStmtCharges(StatementTypeII, AcctBal, Members, SavAccII."No.", NumberOfPages);
                     end;
                 end;
             end;
@@ -850,13 +851,13 @@ Report 52187016 "Member and loan Statement"
         StatementCharge: Boolean;
         StatementTypeII: Option Uncertified,Certified;
         SavAccII: record "Savings Accounts";
-        NumberOfPages : Integer;
-        ExciseDuty : Decimal;
-        SaccoCharge : Decimal;
+        NumberOfPages: Integer;
+        ExciseDuty: Decimal;
+        SaccoCharge: Decimal;
 
 
     // Post Statement Charges
-    procedure PostStmtCharges(StatementType: Option Uncertified,Certified; AvailableBal: Decimal; Member: record Members; AccNo: Code[20];NumberOfPages: Integer)
+    procedure PostStmtCharges(StatementType: Option Uncertified,Certified; AvailableBal: Decimal; Member: record Members; AccNo: Code[20]; NumberOfPages: Integer)
     begin
         //Charges
         GenSetup.Get();
@@ -905,8 +906,8 @@ Report 52187016 "Member and loan Statement"
                     end;
 
                     if NumberOfPages > 0 then
-                    ChargeAmount := (ChargeAmount * NumberOfPages);                   
-                    
+                        ChargeAmount := (ChargeAmount * NumberOfPages);
+
                     LineN += 1;
                     GenJLine.Init;
                     GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
@@ -925,7 +926,7 @@ Report 52187016 "Member and loan Statement"
                     GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", Member."Global Dimension 2 Code");
                     if GenJLine.Amount <> 0 then
                         GenJLine.Insert;
-                    
+
                     LineN += 1;
                     GenJLine.Init;
                     GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
@@ -945,36 +946,36 @@ Report 52187016 "Member and loan Statement"
                     if GenJLine.Amount <> 0 then
                         GenJLine.Insert;
 
-                    TCharges+=ChargeAmount;
+                    TCharges += ChargeAmount;
 
                     if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty") and
                         (TransactionCharges."Recover Excise Duty" = true) then begin
                         //Excise
                         LineN += 1;
-                            GenJLine.Init;
-                            GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
-                            GenJLine."Journal Batch Name" := Temp."Cashier Journal Batch";
-                            GenJLine."Line No." := LineN;
-                            GenJLine."Posting Date" := Today;
-                            GenJLine."Document No." := CopyStr(('S-FEE_' + Member."No."), 1, 20);
-                            GenJLine."External Document No." := Member."No.";
-                            GenJLine."Account Type" := GenJLine."account type"::Savings;
-                            GenJLine.Validate(GenJLine."Account No.", AccNo);
-                            GenJLine.Description := TransactionCharges.Description + ' Excise Duty';
-                            GenJLine.Validate(GenJLine.Amount, (TCharges * GenSetup."Excise Duty (%)") * 0.01);
-                            GenJLine."Bal. Account Type" := GenJLine."bal. account type"::"G/L Account";
-                            GenJLine.Validate(GenJLine."Bal. Account No.", GenSetup."Excise Duty G/L");
-                            GenJLine.Validate(GenJLine."Shortcut Dimension 1 Code", SavingsAccounts."Global Dimension 1 Code");
-                            GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", SavingsAccounts."Global Dimension 2 Code");
-                            if GenJLine.Amount <> 0 then
-                                GenJLine.Insert;
+                        GenJLine.Init;
+                        GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
+                        GenJLine."Journal Batch Name" := Temp."Cashier Journal Batch";
+                        GenJLine."Line No." := LineN;
+                        GenJLine."Posting Date" := Today;
+                        GenJLine."Document No." := CopyStr(('S-FEE_' + Member."No."), 1, 20);
+                        GenJLine."External Document No." := Member."No.";
+                        GenJLine."Account Type" := GenJLine."account type"::Savings;
+                        GenJLine.Validate(GenJLine."Account No.", AccNo);
+                        GenJLine.Description := TransactionCharges.Description + ' Excise Duty';
+                        GenJLine.Validate(GenJLine.Amount, (TCharges * GenSetup."Excise Duty (%)") * 0.01);
+                        GenJLine."Bal. Account Type" := GenJLine."bal. account type"::"G/L Account";
+                        GenJLine.Validate(GenJLine."Bal. Account No.", GenSetup."Excise Duty G/L");
+                        GenJLine.Validate(GenJLine."Shortcut Dimension 1 Code", SavingsAccounts."Global Dimension 1 Code");
+                        GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", SavingsAccounts."Global Dimension 2 Code");
+                        if GenJLine.Amount <> 0 then
+                            GenJLine.Insert;
                     end;
-                    
+
                 until TransactionCharges.Next = 0;
             end;
 
             if AvailableBal >= TCharges then begin
-                
+
                 GenJLine.Reset;
                 GenJLine.SetRange(GenJLine."Journal Template Name", Temp."Cashier Journal Template");
                 GenJLine.SetRange(GenJLine."Journal Batch Name", Temp."Cashier Journal Batch");

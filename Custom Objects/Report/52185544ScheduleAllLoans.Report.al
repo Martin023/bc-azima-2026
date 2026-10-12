@@ -85,13 +85,21 @@ Report 52185544 "Schedule All Loans"
                         end;
                         Loans.Repayment := Round(((Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment")), 1, '>');
                         //Loans."Repayment Start Date" := "Disbursement Date" + 45;
-                        loans."Repayment Start Date" := CalcDate('1M', loans."Disbursement Date");
-                        if Loans.installments > 1 then
-                            Loans."Expected Date of Completion" := CalcDate(FORMAT(loans.Installments) + 'M', loans."Repayment Start Date");
+                        // loans."Repayment Start Date" := CalcDate('1M', loans."Disbursement Date");
+                        // if Loans.installments > 1 then
+                        //     Loans."Expected Date of Completion" := CalcDate(FORMAT(loans.Installments) + 'M', loans."Repayment Start Date");
                         Loans.Modify();
                     end;
                 end;
-
+                if UpdateLoanRepayStart then begin
+                    if format(GracePeriod) = '' then error('Kindly input grace period for loan repayment start date');
+                    loans."Repayment Start Date" := CalcDate(GracePeriod, loans."Disbursement Date");
+                    if Loans.installments > 1 then
+                        Loans."Expected Date of Completion" := CalcDate(FORMAT(loans.Installments) + 'M', loans."Repayment Start Date")
+                    else
+                        Loans."Expected Date of Completion" := loans."Repayment Start Date";
+                    Loans.Modify();
+                end;
             end;
 
             trigger OnPreDataItem()
@@ -130,6 +138,16 @@ Report 52185544 "Schedule All Loans"
                     Caption = 'Update Loan Repayment';
                     ApplicationArea = All;
                 }
+                field(UpdateLoanRepayStart; UpdateLoanRepayStart)
+                {
+                    Caption = 'Update Loan Repayment Start Date';
+                    ApplicationArea = All;
+                }
+                field(GracePeriod; GracePeriod)
+                {
+                    Caption = 'Update Loan Repayment Start Date';
+                    ApplicationArea = All;
+                }
             }
         }
 
@@ -159,4 +177,7 @@ Report 52185544 "Schedule All Loans"
         diaProgress: Dialog;
         intProgress: Integer;
         UpdateLoanRepayment: Boolean;
+        UpdateLoanRepayStart: Boolean;
+        GracePeriod: Dateformula;
+
 }
