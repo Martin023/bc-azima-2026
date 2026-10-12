@@ -683,7 +683,7 @@ page 52186773 "Loans card"
                 Caption = 'Approvals';
                 Image = Approvals;
                 Promoted = true;
-                PromotedCategory = Category4;
+                PromotedCategory = Category9;
                 trigger OnAction()
                 var
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
@@ -697,13 +697,15 @@ page 52186773 "Loans card"
                 Caption = 'Reopen Loan.';
                 Image = Approvals;
                 Promoted = true;
-                PromotedCategory = Category4;
+                PromotedCategory = Category9;
 
                 trigger OnAction()
                 var
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
                     if rec.Posted then Error('Cannot reopen a posted loan. Please contact the system administrator for assistance.');
+                    rec.Status := rec.Status::Open;
+                    rec.Modify;
                     ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                 end;
             }

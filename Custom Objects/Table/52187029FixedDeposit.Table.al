@@ -573,6 +573,7 @@ table 52187029 "Fixed Deposit Contract"
         Memb: Record Members;
         SendSMS: codeunit SendSms;
         SMSSource: Enum "SMS Source";
+        FDCont: record "Fixed Deposit Contract";
     begin
         savingsLedger.Reset();
         savingsLedger.SetRange("Fixed Deposit Contract", FDContract."No.");
@@ -663,25 +664,26 @@ table 52187029 "Fixed Deposit Contract"
             if GenJournalLine.Find('-') then begin
                 Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
             end;
-            // Rec.Balance := Rec."Fixed Deposit Amount";
-            FDContract."Fixed Deposit Status" := FDContract."Fixed Deposit Status"::Active;
-            // Rec."Application Date" := today;
-            FDContract.Modify();
+
+            if FDCont.get(FDContract."No.") then begin
+                FDCont."Fixed Deposit Status" := FDCont."Fixed Deposit Status"::Active;
+                FDCont.Modify();
+            end;
             Message('Funds Transfered Successfully!');
 
             //Send SMS
             //sendSMS
-            msg := 'Dear member, you have transferred KES.' + Format(FDContract."Fixed Deposit Amount") + ' to your fixed deposit account on ' + format(Today) + ' ' + format(Time);
+            msg := 'Dear member, you have transferred KES.' + Format(FDCont."Fixed Deposit Amount") + ' to your fixed deposit account on ' + format(Today) + ' ' + format(Time);
 
-            if rec."Transactional Mobile No" = '' then begin
+            if FDCont."Transactional Mobile No" = '' then begin
                 Memb.reset;
                 Memb.setrange("No.", FDContract."Member No.");
                 if Memb.FindFirst() then begin
 
                     if Memb."Transactional Mobile Number" <> '' then
-                        SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, Memb."Transactional Mobile Number", msg, Format(FDContract."No."), '', true, 0, false, 'CBS', FDContract."No.", 'CBS')
+                        SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, Memb."Transactional Mobile Number", msg, Format(FDCont."No."), '', true, 0, false, 'CBS', FDCont."No.", 'CBS')
                     else
-                        SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, Memb."Phone No.", msg, Format(FDContract."No."), '', true, 0, false, 'CBS', FDContract."No.", 'CBS')
+                        SendSMS.SendSms(SMSSource::FIXED_DEPOSIT_MATURITY, Memb."Phone No.", msg, Format(FDCont."No."), '', true, 0, false, 'CBS', FDCont."No.", 'CBS')
 
                 end;
             end
