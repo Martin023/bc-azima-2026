@@ -2798,7 +2798,60 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         exit(Response);
     end;
 
-    local procedure CheckLoanLimit(Payload: JsonObject; APIRequestID: JsonToken): Text
+    local procedure CheckMemberHasSalary(SearchMember: Record Members): Boolean
+    var
+        SalaryLines: Record "Salary Lines";
+        FosaAcc: Code[20];
+        SalAvg: Decimal;
+        Incomsal: Enum "Salary Income Types";
+    begin
+        SalaryLines.Reset();
+        SalaryLines.SetRange("Member No.", SearchMember."No.");
+        SalaryLines.SetRange(Posted, true);
+        SalaryLines.SetRange(Reversed, false);
+        SalaryLines.SetRange("Income Type", SalaryLines."Income Type"::Salary);
+        SalaryLines.SetFilter(Amount, '>0');
+        if not SalaryLines.IsEmpty() then
+            exit(true);
+
+        FosaAcc := CopyStr(SkyMbankingTrans.GetMemberFosaAcc(SearchMember), 1, 20);
+        if FosaAcc <> '' then begin
+            SalaryLines.Reset();
+            SalaryLines.SetRange("Account No.", FosaAcc);
+            SalaryLines.SetRange(Posted, true);
+            SalaryLines.SetRange(Reversed, false);
+            SalaryLines.SetRange("Income Type", SalaryLines."Income Type"::Salary);
+            SalaryLines.SetFilter(Amount, '>0');
+            if not SalaryLines.IsEmpty() then
+                exit(true);
+
+            SalAvg := GlobalFunctions.GetAzimaSMSLoanSalaryAverage(FosaAcc, Incomsal::Salary);
+            if SalAvg > 0 then
+                exit(true);
+        end;
+
+        exit(false);
+    end;
+
+    local procedure CheckMemberHasDeposits(MemberNo: Code[50]): Boolean
+    var
+        SavingsAccounts: Record "Savings Accounts";
+        TotalDeposits: Decimal;
+    begin
+        TotalDeposits := 0;
+        SavingsAccounts.Reset();
+        SavingsAccounts.SetRange("Member No.", MemberNo);
+        SavingsAccounts.SetFilter("Product Category", '%1|%2', SavingsAccounts."Product Category"::"BOSA Deposits", SavingsAccounts."Product Category"::"Business Deposits");
+        SavingsAccounts.SetAutoCalcFields(Balance);
+        if SavingsAccounts.FindSet() then
+            repeat
+                TotalDeposits += SavingsAccounts.Balance;
+            until SavingsAccounts.Next() = 0;
+
+        exit(TotalDeposits > 0);
+    end;
+
+    procedure CheckLoanLimit(Payload: JsonObject; APIRequestID: JsonToken): Text
     var
         originator_id: JsonToken;
         identifier_type: JsonToken;
@@ -2822,6 +2875,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Response: Text;
         EligibilityFailReason: Text;
         TotalCharges: Decimal;
+        // allow contractors to apply azima sms loan 
+        AllowContractors: Record "Employer Loan Eligibility";
+        IsEmployerSupported: Boolean;
+        ContractorHasSalary: Boolean;
+        ContractorHasDeposits: Boolean;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
@@ -2848,21 +2906,81 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             MobileLoanProduct.SetRange("Product ID", loan_type_id.AsValue.AsText);
 
             MobileLoanProduct.SetLoadFields(
-                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount", "Allow Topup"
+                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount", "Allow Topup",
+                "Use Contribution Qualification", "Use Salary Average", "Allow Salaried"
             );
 
             if MobileLoanProduct.FindFirst then begin
-                // MemberClass product filter
-                ProductSupportedClasses.Reset();
-                ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
-                ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
-                if ProductSupportedClasses.IsEmpty() then begin
-                    ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
-                    ResponseObject.Add('response_payload', Datum);
-                    AddDateTimeToResponse(ResponseObject);
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
+                AllowContractors.Reset();
+                AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+                AllowContractors.SetRange("Product ID", MobileLoanProduct."Product ID");
+                IsEmployerSupported := AllowContractors.FindFirst();
+
+                if not IsEmployerSupported then begin
+                    AllowContractors.Reset();
+                    AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+                    if AllowContractors.FindFirst() then
+                        IsEmployerSupported := true;
+                end;
+
+                if IsEmployerSupported then begin
+                    ContractorHasSalary := CheckMemberHasSalary(SearchMember);
+                    ContractorHasDeposits := CheckMemberHasDeposits(SearchMember."No.");
+
+                    if MobileLoanProduct."Allow Salaried" then begin
+                        if not ContractorHasDeposits then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You do not have deposits to qualify for this loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                        if not ContractorHasSalary then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You have deposits only without salary. Please apply for Azima Biashara loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                    end else begin
+                        if not ContractorHasDeposits then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You do not have deposits to qualify for this loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                        if ContractorHasSalary then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You have salary and deposits. Please apply for Azima SMS loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                    end;
+                end else begin
+                    ProductSupportedClasses.Reset();
+                    ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
+
+                    if ProductSupportedClasses.IsEmpty() then begin
+                        ResponseObject.Add('request_status', 'ERROR');
+                        Datum.Add(
+                            'error_message',
+                            StrSubstNo(
+                                'This loan product is not available to %1 members.',
+                                SearchMember."Member Class"
+                            )
+                        );
+                        ResponseObject.Add('response_payload', Datum);
+                        AddDateTimeToResponse(ResponseObject);
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
                 end;
 
                 // MblLoanRestriction member filter
@@ -2975,6 +3093,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         BlockedEmployers: Record "Blocked Employers";
         MobileLoanPurpose: Text;
         theSMS: Text;
+        AllowContractors: Record "Employer Loan Eligibility";
+        ProductSupportedClasses: Record "Product Supported Classes";
+        IsEmployerSupported: Boolean;
+        ContractorHasSalary: Boolean;
+        ContractorHasDeposits: Boolean;
 
         ResponseObject: JsonObject;
         MemberDetails: JsonObject;
@@ -3041,33 +3164,105 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             MobileLoanProduct.SetRange("Mobile Loan", true);
 
             MobileLoanProduct.SetLoadFields(
-                "Product ID", "Mobile Max. Loan Amount", "Minimum Loan Amount",
-                "Allow Topup"
+                "Product ID", "Product Description", "Mobile Max. Loan Amount", "Minimum Loan Amount",
+                "Allow Topup", "Allow Salaried"
             );
-            OutstandingBalance := 0;
-            if MobileLoanProduct."Allow Topup" then begin
-                OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
-                    SearchMember."No.",
-                    MobileLoanProduct."Product ID");
 
-                if OutstandingBalance > 0 then begin
-                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
-                    OutstandingBalance += TotalCharges;
-                    MobileLoanProduct."Minimum Loan Amount" := OutstandingBalance;
-                    if amount.AsValue.AsDecimal < OutstandingBalance then begin
+            if MobileLoanProduct.FindFirst then begin
+                AllowContractors.Reset();
+                AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+                AllowContractors.SetRange("Product ID", MobileLoanProduct."Product ID");
+                IsEmployerSupported := AllowContractors.FindFirst();
+
+                if not IsEmployerSupported then begin
+                    AllowContractors.Reset();
+                    AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+                    if AllowContractors.FindFirst() then
+                        IsEmployerSupported := true;
+                end;
+
+                if IsEmployerSupported then begin
+                    ContractorHasSalary := CheckMemberHasSalary(SearchMember);
+                    ContractorHasDeposits := CheckMemberHasDeposits(SearchMember."No.");
+
+                    if MobileLoanProduct."Allow Salaried" then begin
+                        if not ContractorHasDeposits then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You do not have deposits to qualify for this loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                        if not ContractorHasSalary then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You have deposits only without salary. Please apply for Azima Biashara loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                    end else begin
+                        if not ContractorHasDeposits then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You do not have deposits to qualify for this loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                        if ContractorHasSalary then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'You have salary and deposits. Please apply for Azima SMS loan.');
+                            ResponseObject.Add('response_payload', Datum);
+                            AddDateTimeToResponse(ResponseObject);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                    end;
+                end else begin
+                    ProductSupportedClasses.Reset();
+                    ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
+
+                    if ProductSupportedClasses.IsEmpty() then begin
                         ResponseObject.Add('request_status', 'ERROR');
-                        Datum.Add('error_message', 'Loan amount must be above the minimum amount of KES ' + Format(OutstandingBalance));
+                        Datum.Add(
+                            'error_message',
+                            StrSubstNo(
+                                'This loan product is not available to %1 members.',
+                                SearchMember."Member Class"
+                            )
+                        );
                         ResponseObject.Add('response_payload', Datum);
-
                         AddDateTimeToResponse(ResponseObject);
-
                         ResponseObject.WriteTo(Response);
                         exit(Response);
                     end;
                 end;
-            end;
 
-            if MobileLoanProduct.FindFirst then begin
+                OutstandingBalance := 0;
+                if MobileLoanProduct."Allow Topup" then begin
+                    OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                        SearchMember."No.",
+                        MobileLoanProduct."Product ID");
+
+                    if OutstandingBalance > 0 then begin
+                        TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
+                        OutstandingBalance += TotalCharges;
+                        MobileLoanProduct."Minimum Loan Amount" := OutstandingBalance;
+                        if amount.AsValue.AsDecimal < OutstandingBalance then begin
+                            ResponseObject.Add('request_status', 'ERROR');
+                            Datum.Add('error_message', 'Loan amount must be above the minimum amount of KES ' + Format(OutstandingBalance));
+                            ResponseObject.Add('response_payload', Datum);
+
+                            AddDateTimeToResponse(ResponseObject);
+
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
+                    end;
+                end;
                 MblLoanRestriction.Reset();
                 MblLoanRestriction.SetRange("Member No.", SearchMember."No.");
                 MblLoanRestriction.SetRange("Product ID", MobileLoanProduct."Product ID");
