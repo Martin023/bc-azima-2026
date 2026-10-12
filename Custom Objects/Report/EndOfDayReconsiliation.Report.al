@@ -9,7 +9,8 @@ Report 52185446 "End of Day Reconciliation"
         dataitem(TreasuryTrans; "Treasury Cashier Transactions")
         {
             DataItemTableView = sorting(No) where("Transaction Type" = const("End of Day Return to Treasury"));
-            RequestFilterFields = No, "From Account", "Date Posted";
+            RequestFilterFields = "From Account", "Date Posted";
+            //RequestFilterFields = No, "From Account", "Date Posted";
 
             column(CompanyInfo_Name; CompanyInformation.Name) { }
             column(CompanyInformation_Picture; CompanyInformation.Picture) { }

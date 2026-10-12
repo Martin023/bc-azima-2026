@@ -26,7 +26,7 @@ report 52185562 "Withdrawal Notice Form"
             column(MemMobile; "Phone No.") { }
             column(MemDept; "Employer Name") { }
 
-            // --- NEW CALCULATED COLUMNS ---
+            // Calculated Columns
             column(TotalDeposits; TotalDeposits) { }
             column(ShareCapital; ShareCapital) { }
             column(NormJijJipPrin; NormJijJipPrin) { }
@@ -54,6 +54,8 @@ report 52185562 "Withdrawal Notice Form"
                 SavAcc: Record "Savings Accounts";
                 LoanRec: Record Loans;
                 TotalLoanLiabilities: Decimal;
+                BaseCharge: Decimal;
+                RemainingDeposit: Decimal;
             begin
                 // 1. Initialize Variables
                 TotalDeposits := 0; ShareCapital := 0;
@@ -61,7 +63,9 @@ report 52185562 "Withdrawal Notice Form"
                 ShortTermPrinInt := 0; MasomoPrinInt := 0;
                 DefaulterPrinInt := 0; PineapplePrinInt := 0;
                 SuperPrinInt := 0; SalAdvOkoaPrinInt := 0;
-                WithdrawalCharges := 1000; // Hardcoded or fetch from General Setup if available
+                WithdrawalCharges := 0;
+                InstantRefundCharge := 0;
+                AmountToBeRefunded := 0;
 
                 // 2. Fetch Deposits & Share Capital
                 SavAcc.Reset();
@@ -76,10 +80,16 @@ report 52185562 "Withdrawal Notice Form"
                     until SavAcc.Next() = 0;
                 end;
 
-                // 3. Calculate 10% Instant Refund Charge (Penalty)
-                InstantRefundCharge := TotalDeposits * 0.10;
+                // 3. Calculate Tiered Withdrawal Charges
+                if TotalDeposits < 25000 then begin
+                    BaseCharge := TotalDeposits * 0.10;
+                    WithdrawalCharges := BaseCharge + (BaseCharge * 0.20); // Base + 20% Excise Duty
+                end else begin
+                    WithdrawalCharges := 3000; // Flat 2500 + 500 Excise Duty
+                end;
 
                 // 4. Fetch Outstanding Loans & Interest
+                TotalLoanLiabilities := 0;
                 LoanRec.Reset();
                 LoanRec.SetRange("Member No.", "No.");
                 LoanRec.SetFilter("Outstanding Balance", '>0');
@@ -87,14 +97,13 @@ report 52185562 "Withdrawal Notice Form"
                     repeat
                         LoanRec.CalcFields("Outstanding Balance", "Outstanding Interest");
                         
-                        // Map loans according to product IDs
                         case LoanRec."Loan Product Type" of
                             '066', '065', '068', '016': // Normal, Normal B, Jijenge, Jipange
                                 begin
                                     NormJijJipPrin += LoanRec."Outstanding Balance";
                                     NormJijJipInt += LoanRec."Outstanding Interest";
                                 end;
-                            '062': // Emergency / Short Term
+                            '062': // Emergency Loan Only (Short Term)
                                 ShortTermPrinInt += (LoanRec."Outstanding Balance" + LoanRec."Outstanding Interest");
                             '069': // Masomo
                                 MasomoPrinInt += (LoanRec."Outstanding Balance" + LoanRec."Outstanding Interest");
@@ -110,21 +119,27 @@ report 52185562 "Withdrawal Notice Form"
                     until LoanRec.Next() = 0;
                 end;
 
-                // 5. Calculate Final Refund
                 TotalLoanLiabilities := NormJijJipPrin + NormJijJipInt + ShortTermPrinInt + MasomoPrinInt + 
                                         DefaulterPrinInt + PineapplePrinInt + SuperPrinInt + SalAdvOkoaPrinInt;
+
+                // 5. Calculate Instant Refund Charge (10% of Remaining Deposits)
+                RemainingDeposit := TotalDeposits - TotalLoanLiabilities - WithdrawalCharges;
+                if RemainingDeposit > 0 then
+                    InstantRefundCharge := RemainingDeposit * 0.10
+                else
+                    InstantRefundCharge := 0; // Safeguard if member owes more than they have
+                
+                // 6. Calculate Final Refund
+                AmountToBeRefunded := RemainingDeposit - InstantRefundCharge;
+                if AmountToBeRefunded < 0 then
+                    AmountToBeRefunded := 0; // Prevent negative refund output
                 
                 // =========================================================================
                 // COMMENT ON SHARE CAPITAL:
-                // According to standard SACCO Society Regulatory Authority (SASRA) by-laws, 
-                // Share Capital is strictly non-refundable and cannot be directly offset 
-                // against loan liabilities. It can only be transferred or sold to another 
-                // member. Therefore, Share Capital is EXCLUDED from the refund calculation below. 
-                // If Azima SACCO rules dictate otherwise (i.e. to add it to the refund amount), 
-                // simply append '+ ShareCapital' to this calculation.
+                // According to standard SASRA by-laws, Share Capital is strictly 
+                // non-refundable and cannot be directly offset against loan liabilities. 
+                // It is EXCLUDED from the refund calculation above. 
                 // =========================================================================
-                
-                AmountToBeRefunded := TotalDeposits - TotalLoanLiabilities - WithdrawalCharges - InstantRefundCharge;
             end;
         }
     }
@@ -218,7 +233,6 @@ report 52185562 "Withdrawal Notice Form"
         ReqWNo: Code[50];
         ReqDept: Text[100];
         
-        // Calculation Variables
         TotalDeposits: Decimal;
         ShareCapital: Decimal;
         NormJijJipPrin: Decimal;

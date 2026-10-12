@@ -100,14 +100,14 @@ page 52185439 "Mobile Loan Eligibility"
                     ToolTip = 'Maximum loan amount the member qualifies for';
                 }
 
-                field(EligibilityMessage; EligibilityFailReason)
+                field(EligibilityReason; EligibilityFailReason)
                 {
-                    Caption = 'Details';
+                    Caption = 'Reason';
                     Editable = false;
                     ApplicationArea = All;
                     MultiLine = true;
-                    ToolTip = 'Detailed information about eligibility status';
-                    Visible = EligibilityFailReason <> '';
+                    StyleExpr = EligibilityStatusStyle;
+                    ToolTip = 'Shows why the member is eligible or not eligible for this loan product';
                 }
             }
         }
@@ -124,6 +124,8 @@ page 52185439 "Mobile Loan Eligibility"
                 ApplicationArea = All;
                 ToolTip = 'Calculate loan eligibility for the selected product';
                 Enabled = LoanTypeCode <> '';
+                Promoted = true;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 begin
@@ -137,6 +139,8 @@ page 52185439 "Mobile Loan Eligibility"
                 Image = Refresh;
                 ApplicationArea = All;
                 ToolTip = 'Clear and reset the form';
+                Promoted = true;
+                PromotedOnly = true;
 
                 trigger OnAction()
                 begin
@@ -144,7 +148,6 @@ page 52185439 "Mobile Loan Eligibility"
                 end;
             }
         }
-
     }
 
     trigger OnOpenPage()
@@ -153,7 +156,7 @@ page 52185439 "Mobile Loan Eligibility"
     end;
 
     var
-        SkyMbankingTrans: Codeunit "Sky M-Banking Transactions";
+        SkyMobileBanking: Codeunit "Sky Mobile Banking Integration";
         LoanTypeCode: Code[20];
         LoanProductName: Text[100];
         MemberNo: Code[20];
@@ -167,16 +170,19 @@ page 52185439 "Mobile Loan Eligibility"
         MemberNotSetErr: Label 'Member number has not been set. Please close and reopen from the member card.';
         EligibleLbl: Label 'ELIGIBLE';
         NotEligibleLbl: Label 'NOT ELIGIBLE';
-        CalculatingMsg: Label 'Calculating eligibility...';
 
     local procedure CalculateEligibility()
     var
-        ProductFactory: Record "Product Factory";
-        Member: Record Members;
-        ProductSupportedClasses: Record "Product Supported Classes";
-        MblLoanRestriction: Record "Mobile Loan Restrictions";
-        BlockedEmployers: Record "Blocked Employers";
-        MblLoanException: Record "Mobile Loan Exceptions";
+        ResponseText: Text;
+        ResponseJson: JsonObject;
+        PayloadToken: JsonToken;
+        PayloadObj: JsonObject;
+        StatusToken: JsonToken;
+        FieldToken: JsonToken;
+        RequestStatus: Text;
+        RequestPayload: JsonObject;
+        RequestIdValue: JsonValue;
+        RequestIdToken: JsonToken;
     begin
         if MemberNo = '' then
             Error(MemberNotSetErr);
@@ -186,45 +192,59 @@ page 52185439 "Mobile Loan Eligibility"
 
         ClearResults();
         ShowResults := false;
-
         EligibilityFailReason := '';
+        GetProductDescription();
 
-        if ProductFactory.Get(LoanTypeCode) and Member.Get(MemberNo) then begin
-            ProductSupportedClasses.Reset();
-            ProductSupportedClasses.SetRange("Product ID", ProductFactory."Product ID");
-            ProductSupportedClasses.SetRange("Class Category", Member."Member Class");
-            if ProductSupportedClasses.IsEmpty() then
-                EligibilityFailReason := StrSubstNo('This loan product is not available to %1 members.', Member."Member Class");
+        RequestPayload.Add('originator_id', Format(CreateGuid()));
+        RequestPayload.Add('identifier_type', 'CUSTOMER_NO');
+        RequestPayload.Add('identifier', MemberNo);
+        RequestPayload.Add('loan_type_id', LoanTypeCode);
 
-            if EligibilityFailReason = '' then begin
-                MblLoanRestriction.Reset();
-                MblLoanRestriction.SetRange("Member No.", MemberNo);
-                MblLoanRestriction.SetRange("Product ID", ProductFactory."Product ID");
-                MblLoanRestriction.SetRange(Status, MblLoanRestriction.Status::Active);
-                if not MblLoanRestriction.IsEmpty() then
-                    EligibilityFailReason := 'You are currently blocked from applying for this loan product. Please contact the SACCO for assistance.';
-            end;
+        RequestIdValue.SetValue(Format(CreateGuid()));
+        RequestIdToken := RequestIdValue.AsToken();
 
-            if EligibilityFailReason = '' then begin
-                BlockedEmployers.Reset();
-                BlockedEmployers.SetRange("Product ID", ProductFactory."Product ID");
-                BlockedEmployers.SetRange("Employer Code", Member."Employer Code");
-                if not BlockedEmployers.IsEmpty() then begin
-                    MblLoanException.Reset();
-                    MblLoanException.SetRange("Member No.", MemberNo);
-                    MblLoanException.SetRange("Product ID", ProductFactory."Product ID");
-                    MblLoanException.SetRange(Status, MblLoanException.Status::Active);
-                    if MblLoanException.IsEmpty() then
-                        EligibilityFailReason := 'This loan product is not available to members of your employer.';
+        ResponseText := SkyMobileBanking.CheckLoanLimit(RequestPayload, RequestIdToken);
+
+        if ResponseJson.ReadFrom(ResponseText) then begin
+            if ResponseJson.Get('request_status', StatusToken) then
+                RequestStatus := StatusToken.AsValue().AsText();
+
+            if ResponseJson.Get('response_payload', PayloadToken) and PayloadToken.IsObject() then begin
+                PayloadObj := PayloadToken.AsObject();
+
+                if RequestStatus = 'SUCCESS' then begin
+                    if PayloadObj.Get('eligible_amount', FieldToken) then
+                        QualifiedAmount := FieldToken.AsValue().AsDecimal();
+
+                    if (LoanProductName = '') and PayloadObj.Get('loan_name', FieldToken) then
+                        LoanProductName := CopyStr(FieldToken.AsValue().AsText(), 1, MaxStrLen(LoanProductName));
+
+                    if QualifiedAmount > 0 then begin
+                        if PayloadObj.Get('message', FieldToken) and (FieldToken.AsValue().AsText() <> '') then
+                            EligibilityFailReason := FieldToken.AsValue().AsText()
+                        else if PayloadObj.Get('eligibility_fail_reason', FieldToken) and (FieldToken.AsValue().AsText() <> '') then
+                            EligibilityFailReason := FieldToken.AsValue().AsText()
+                        else
+                            EligibilityFailReason := 'Member qualifies for the selected loan product';
+                    end else begin
+                        if PayloadObj.Get('eligibility_fail_reason', FieldToken) and (FieldToken.AsValue().AsText() <> '') then
+                            EligibilityFailReason := FieldToken.AsValue().AsText()
+                        else if PayloadObj.Get('error_message', FieldToken) and (FieldToken.AsValue().AsText() <> '') then
+                            EligibilityFailReason := FieldToken.AsValue().AsText()
+                        else
+                            EligibilityFailReason := 'Member does not qualify for the selected loan product';
+                    end;
+                end else begin
+                    QualifiedAmount := 0;
+                    if PayloadObj.Get('error_message', FieldToken) then
+                        EligibilityFailReason := FieldToken.AsValue().AsText()
+                    else
+                        EligibilityFailReason := 'An error occurred while evaluating eligibility.';
                 end;
             end;
-        end;
-
-        if EligibilityFailReason = '' then begin
-            if ProductFactory."Allow Topup" then
-                QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount2(MemberNo, LoanTypeCode, 0, EligibilityFailReason)
-            else
-                QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount(MemberNo, LoanTypeCode, 0, EligibilityFailReason);
+        end else begin
+            QualifiedAmount := 0;
+            EligibilityFailReason := 'Failed to process mobile loan eligibility request.';
         end;
 
         UpdateEligibilityStatus();
@@ -238,14 +258,10 @@ page 52185439 "Mobile Loan Eligibility"
             EligibilityStatus := EligibleLbl;
             EligibilityStatusStyle := 'Favorable';
             QualifiedAmountStyle := 'Favorable';
-            if EligibilityFailReason = '' then
-                EligibilityFailReason := 'Member qualifies for the selected loan product';
         end else begin
             EligibilityStatus := NotEligibleLbl;
             EligibilityStatusStyle := 'Unfavorable';
             QualifiedAmountStyle := 'Unfavorable';
-            if EligibilityFailReason = '' then
-                EligibilityFailReason := 'Member does not qualify for the selected loan product';
         end;
     end;
 
@@ -303,4 +319,3 @@ page 52185439 "Mobile Loan Eligibility"
         MemberNo := SavingsAccountMember;
     end;
 }
-

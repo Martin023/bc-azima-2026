@@ -1728,6 +1728,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             end;
                         end;
 
+                        if (QualifiedAmount <= ProdFac."Minimum Loan Amount") and (ProdFac."Minimum Loan Amount" > 0) then begin
+                            EligibilityFailReason := StrSubstNo(
+                                'You are not eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                                Format(Round(QualifiedAmount, 1)),
+                                Format(ProdFac."Minimum Loan Amount")
+                            );
+                            QualifiedAmount := 0;
+                        end;
+
                         exit(QualifiedAmount);
                     end;
 
@@ -1804,7 +1813,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         amtQualified := ProdFac."Maximum Loan Amount";
 
 
-                    EligibilityFailReason := '';
+                    if (amtQualified <= ProdFac."Minimum Loan Amount") and (ProdFac."Minimum Loan Amount" > 0) then begin
+                        EligibilityFailReason := StrSubstNo(
+                            'You are not eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                            Format(Round(amtQualified, 1)),
+                            Format(ProdFac."Minimum Loan Amount")
+                        );
+                        amtQualified := 0;
+                    end else
+                        EligibilityFailReason := '';
                     QualifiedAmount := amtQualified;
                     EXIT(QualifiedAmount);
                 end;
@@ -1854,7 +1871,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 exit(QualifiedAmount);
             end;
 
-            EligibilityFailReason := '';
+            if (amtQualified <= ProdFac."Minimum Loan Amount") and (ProdFac."Minimum Loan Amount" > 0) then begin
+                EligibilityFailReason := StrSubstNo(
+                    'You are not eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                    Format(Round(amtQualified, 1)),
+                    Format(ProdFac."Minimum Loan Amount")
+                );
+                amtQualified := 0;
+            end else
+                EligibilityFailReason := '';
         END;
         exit(amtQualified);
         Message('Qualified Amount: %1', Format(amtQualified));
@@ -2110,6 +2135,13 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     if QualifiedAmount <= 0 then begin
                         EligibilityFailReason := 'You do not have sufficient dividends to qualify for this loan';
                         QualifiedAmount := 0;
+                    end else if (QualifiedAmount <= ProdFac."Minimum Loan Amount") and (ProdFac."Minimum Loan Amount" > 0) then begin
+                        EligibilityFailReason := StrSubstNo(
+                            'You are not eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                            Format(Round(QualifiedAmount, 1)),
+                            Format(ProdFac."Minimum Loan Amount")
+                        );
+                        QualifiedAmount := 0;
                     end;
                     exit(QualifiedAmount);
                 end;
@@ -2145,8 +2177,17 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             exit(QualifiedAmount);
                         end;
 
-                        Message('DEBUG: Final QualifiedAmount (deposit-based) = %1', QualifiedAmount - ExistingFOSAMLoanAmount);
-                        exit(QualifiedAmount - ExistingFOSAMLoanAmount);
+                        QualifiedAmount := QualifiedAmount - ExistingFOSAMLoanAmount;
+                        if (QualifiedAmount <= ProdFac."Minimum Loan Amount") and (ProdFac."Minimum Loan Amount" > 0) then begin
+                            EligibilityFailReason := StrSubstNo(
+                                'You are not eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                                Format(Round(QualifiedAmount, 1)),
+                                Format(ProdFac."Minimum Loan Amount")
+                            );
+                            exit(0);
+                        end;
+                        Message('DEBUG: Final QualifiedAmount (deposit-based) = %1', QualifiedAmount);
+                        exit(QualifiedAmount);
                     end;
                     /*
                     this loan qualifies off the average net salary only
@@ -2224,6 +2265,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     end;
 
                     // QualifiedAmount -= ExistingFOSAMLoanAmount;
+                    if (QualifiedAmount <= ProdFac."Minimum Loan Amount") and (ProdFac."Minimum Loan Amount" > 0) then begin
+                        EligibilityFailReason := StrSubstNo(
+                            'You are not eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                            Format(Round(QualifiedAmount, 1)),
+                            Format(ProdFac."Minimum Loan Amount")
+                        );
+                        QualifiedAmount := 0;
+                        EXIT(QualifiedAmount);
+                    end;
                     Message('DEBUG: Final QualifiedAmount (salary-based) = %1', QualifiedAmount);
                     EXIT(QualifiedAmount);
                 end;

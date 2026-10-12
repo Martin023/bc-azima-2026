@@ -1,26 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <am:AuthoringMetadata>
-    <am:CreatedBy>
-      <am:Name>PBIRB</am:Name>
-      <am:Version>15.7.1813.16</am:Version>
-    </am:CreatedBy>
-    <am:UpdatedBy>
-      <am:Name>PBIRB</am:Name>
-      <am:Version>15.7.1813.16</am:Version>
-    </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-09-28T14:13:53.2255200Z</am:LastModifiedTimestamp>
-  </am:AuthoringMetadata>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
-      <rd:SecurityType>None</rd:SecurityType>
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString />
       </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>2aac1994-87eb-4712-87e2-884872fff718</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -68,7 +55,6 @@
             </Style>
           </Line>
           <Textbox Name="Textbox1">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -119,16 +105,15 @@ W/No:____</Value>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>_____ </Value>
+                    <Value>_____ Dept:___</Value>
                     <Style />
                   </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>=Fields!GuarEmpcode.Value</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>_____</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -272,6 +257,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                 <Style />
               </Paragraph>
             </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.37639cm</Top>
             <Left>0.02034cm</Left>
             <Height>17.60417cm</Height>
@@ -313,7 +299,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Image>
             <Textbox Name="BuldingName">
-              <rd:DefaultName>BuldingName</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -329,6 +314,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>BuldingName</rd:DefaultName>
               <Top>0.635cm</Top>
               <Left>5.28237cm</Left>
               <Height>0.6cm</Height>
@@ -345,7 +331,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="CompanyName">
-              <rd:DefaultName>CompanyName</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -362,7 +347,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>0cm</Top>
+              <rd:DefaultName>CompanyName</rd:DefaultName>
               <Left>5.28237cm</Left>
               <Height>0.6cm</Height>
               <Width>8.13563cm</Width>
@@ -378,7 +363,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="CompanyAddress">
-              <rd:DefaultName>CompanyAddress</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -394,6 +378,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>CompanyAddress</rd:DefaultName>
               <Top>1.27027cm</Top>
               <Left>5.28237cm</Left>
               <Height>0.6cm</Height>
@@ -410,7 +395,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="CompanyTelephone">
-              <rd:DefaultName>CompanyTelephone</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -432,6 +416,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>CompanyTelephone</rd:DefaultName>
               <Top>1.90555cm</Top>
               <Left>6.79459cm</Left>
               <Height>0.6cm</Height>
@@ -448,7 +433,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="CompanyEmail">
-              <rd:DefaultName>CompanyEmail</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -470,6 +454,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>CompanyEmail</rd:DefaultName>
               <Top>2.52943cm</Top>
               <Left>6.79459cm</Left>
               <Height>0.6cm</Height>
@@ -486,7 +471,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="CompanyTelephone2">
-              <rd:DefaultName>CompanyTelephone</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -502,6 +486,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>CompanyTelephone</rd:DefaultName>
               <Top>1.90555cm</Top>
               <Left>5.28237cm</Left>
               <Height>0.6cm</Height>
@@ -518,7 +503,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="CompanyTelephone3">
-              <rd:DefaultName>CompanyTelephone</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -534,6 +518,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>CompanyTelephone</rd:DefaultName>
               <Top>2.52943cm</Top>
               <Left>5.28237cm</Left>
               <Height>0.6cm</Height>
@@ -550,7 +535,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="PrintingDate">
-              <rd:DefaultName>PrintingDate</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -574,7 +558,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0cm</Top>
+              <rd:DefaultName>PrintingDate</rd:DefaultName>
               <Left>14.04008cm</Left>
               <Height>0.6cm</Height>
               <Width>5.98026cm</Width>
@@ -590,7 +574,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="PrintingTime">
-              <rd:DefaultName>PrintingTime</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -614,6 +597,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>PrintingTime</rd:DefaultName>
               <Top>0.63528cm</Top>
               <Left>14.04008cm</Left>
               <Height>0.6cm</Height>
@@ -630,7 +614,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
               </Style>
             </Textbox>
             <Textbox Name="PrintedBy">
-              <rd:DefaultName>PrintedBy</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -654,6 +637,7 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>PrintedBy</rd:DefaultName>
               <Top>1.27028cm</Top>
               <Left>14.04008cm</Left>
               <Height>0.6cm</Height>
@@ -682,7 +666,6 @@ NB: This notice must be served to the guarantor immediately after establishing t
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="PageNumber">
-              <rd:DefaultName>PageNumber</rd:DefaultName>
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -702,8 +685,8 @@ NB: This notice must be served to the guarantor immediately after establishing t
                   </Style>
                 </Paragraph>
               </Paragraphs>
+              <rd:DefaultName>PageNumber</rd:DefaultName>
               <Top>0.57354cm</Top>
-              <Left>0cm</Left>
               <Height>0.02646cm</Height>
               <Width>20cm</Width>
               <Style>
@@ -771,6 +754,8 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>

@@ -1,240 +1,155 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 52185727 "Loan Guarators Reports"
+report 52185727 "Loan Guarators Reports"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Loan Guarators Reports.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan Guarantors Report';
+
     dataset
     {
         dataitem("Credit Accounts"; "Credit Accounts")
         {
             RequestFilterFields = "No.", "Member No.";
-            column(ReportForNavId_1102755000; 1102755000)
-            {
-            }
-            column(No_Members; "Credit Accounts"."No.")
-            {
-            }
-            column(Name_SACCOAccount; "Credit Accounts".Name)
-            {
-            }
-            column(MemberNo_SACCOAccount; "Credit Accounts"."Member No.")
-            {
-            }
-            column(CompName; CompanyNam)
-            {
 
-            }
-            column(CommunicationOnline; CommunicationOnline)
-            {
+            column(CompName; CompanyNam) { }
+            column(CommunicationOnline; CommunicationOnline) { }
+            column(CompAddress; CompanyAddress) { }
+            column(CompPic; Company.Picture) { }
+            column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>')) { }
 
-            }
-            column(CompAddress; CompanyAddress)
-            {
-            }
-            column(CompPic; Company.Picture)
-            {
-            }
-            column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>'))
-            {
-            }
+            // Member Header Details (Fetched from Members record below)
+            column(No_Members; "Member No.") { }
+            column(Name_Members; MemberName) { }
+            column(PayrollStaffNo_Members; MemberStaffNo) { }
+            column(EmployerCode_Members; MemberEmpCode) { }
+            column(EmployerName_Members; MemberEmpName) { }
+
             dataitem(Loans; Loans)
             {
                 DataItemLink = "Member No." = field("Member No.");
-                column(ReportForNavId_1102755001; 1102755001)
-                {
-                }
-                column(LoanNo_Loans; Loans."Loan No.")
-                {
-                }
-                column(Loan_Product_Type; "Loan Product Type")
-                {
+                
+                column(LoanNo_Loans; "Loan No.") { }
+                column(LoanProductType_Loans; "Loan Product Type") { }
+                column(LoanProductTypeNam; "Loan Product Type Name") { }
+                column(Staff_No; "Staff No") { }
+                column(OutStanding_Interest; "Outstanding Interest") { }
 
-                }
-                column(Loan_Product_Type_Name; "Loan Product Type Name")
-                {
-
-                }
-                column(ApplicationDate_Loans; Loans."Application Date")
-                {
-                }
-                column(LoanProductType_Loans; Loans."Loan Product Type")
-                {
-                }
-                column(RequestedAmount_Loans; Loans."Requested Amount")
-                {
-                }
-                column(LoanProductTypeNam; Loans."Loan Product Type Name")
-                {
-                }
-                column(ApprovedAmount_Loans; Loans."Approved Amount")
-                {
-                }
-                column(OutStanding_Interest; Loans."Outstanding Interest")
-                {
-                }
-                column(Loan_Account; "Loan Account")
-                {
-
-                }
-                column(Staff_No; "Staff No")
-                {
-
-                }
                 dataitem("Loan Guarantors and Security"; "Loan Guarantors and Security")
                 {
                     DataItemLink = "Loan No" = field("Loan No.");
                     DataItemTableView = where("Outstanding Balance" = filter(> 0), Substituted = const(false));
 
-                    column(ReportForNavId_1102755002; 1102755002)
-                    {
-                    }
-                    column(MemberNo_LoanGuarantors; "Loan Guarantors and Security"."Member No")
-                    {
-                    }
-                    column(Name_LoanGuarantors; "Loan Guarantors and Security".Name)
-                    {
-                    }
-                    column(LoanBalance_LoanGuarantors; "Loan Guarantors and Security"."Loan Balance")
-                    {
-                    }
-                    column(Shares_LoanGuarantors; "Loan Guarantors and Security"."Deposits/Shares")
-                    {
-                    }
-                    column(NoOfLoansGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."No Of Loans Guaranteed")
-                    {
-                    }
-                    column(Substituted_LoanGuarantors; "Loan Guarantors and Security".Substituted)
-                    {
-                    }
-                    column(Date_LoanGuarantors; "Loan Guarantors and Security".Date)
-                    {
-                    }
-                    column(SharesRecovery_LoanGuarantors; "Loan Guarantors and Security"."Shares Recovery")
-                    {
-                    }
-                    column(NewUpload_LoanGuarantors; "Loan Guarantors and Security"."New Upload")
-                    {
-                    }
-                    column(AmontGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."Amount Guaranteed")
-                    {
-                    }
-                    column(StaffPayrollNo_LoanGuarantors; GuarantorStaffNo)
-                    {
-                    }
-                    column(AccountNo_LoanGuarantors; "Loan Guarantors and Security"."Account No.")
-                    {
-                    }
-                    column(SelfGuarantee_LoanGuarantors; "Loan Guarantors and Security"."Self Guarantee")
-                    {
-                    }
-                    column(IDNo_LoanGuarantors; "Loan Guarantors and Security"."ID No.")
-                    {
-                    }
-                    column(OutstandingBalance_LoanGuarantors; "Loan Guarantors and Security"."Outstanding Balance")
-                    {
-                    }
-                    column(MemberGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."Member Guaranteed")
-                    {
-                    }
-                    column(TLoan; TotalLoan)
-                    {
-                    }
-                    column(MmberDeceased; MmberDeceased)
-                    {
-
-
-                    }
-                    column(GurantorEmpcode; GurantorEmpcode)
-                    {
-
-                    }
-                    column(PercentageGur; PercentageGur)
-                    {
-
-                    }
-                    column(Proportion_Guaranteed; "Amount Guaranteed")
-                    {
-
-                    }
+                    column(MemberNo_LoanGuarantors; "Member No") { }
+                    column(Name_LoanGuarantors; Name) { }
+                    column(AmontGuaranteed_LoanGuarantors; "Amount Guaranteed") { }
+                    column(StaffPayrollNo_LoanGuarantors; GuarantorStaffNo) { }
+                    column(Substituted_LoanGuarantors; Substituted) { }
+                    column(OutstandingBalance_LoanGuarantors; "Outstanding Balance") { }
+                    column(TLoan; TotalLoan) { }
+                    column(MmberDeceased; MmberDeceased) { }
+                    column(PercentageGur; PercentageGur) { }
 
                     trigger OnAfterGetRecord()
                     var
                         MemB: Record Members;
-                        Cust: Record Customer;
-                        LoanGua: Record "Loan Guarantors and Security";
-                        CountNo: Integer;
                     begin
                         TotalLoan := 0;
                         MmberDeceased := false;
+                        GuarantorStaffNo := '';
+                        PercentageGur := 0;
 
-                        GuarantorStaffNo := "Loan Guarantors and Security"."Staff/Payroll No.";
+                        GuarantorStaffNo := "Staff/Payroll No.";
+                        TotalLoan := "Outstanding Balance" + Loans."Outstanding Interest";
 
-                        TotalLoan := "Loan Guarantors and Security"."Outstanding Balance" + Loans."Outstanding Interest";
-
-                        if MemB.Get("Loan Guarantors and Security"."Member No") then begin
-
+                        if MemB.Get("Member No") then begin
                             if MemB."Payroll/Staff No." <> '' then
                                 GuarantorStaffNo := MemB."Payroll/Staff No.";
 
                             if MemB.Status = MemB.Status::Deceased then
-                                MmberDeceased := true
-                            else
-                                MmberDeceased := false;
-
-                            if Cust.get(MemB."Employer Code") then begin
-                                GurantorEmpcode := Cust."No.";
-
-                            end;
-                        end else begin
-                            MmberDeceased := false;
+                                MmberDeceased := true;
                         end;
-                        LoanGua.Reset;
-                        LoanGua.SetRange("Loan No", "Loan No");
-                        LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
-                        if LoanGua.Find('-') then begin
-                            CountNo := LoanGua.Count;
-                            LoanGua.CalcSums("Amount Guaranteed");
-                            TotaAmtGUR := LoanGua."Amount Guaranteed";
-                        end;
+
                         if TotaAmtGUR <> 0 then begin
-                            PercentageGur := Round(((("Loan Guarantors and Security"."Amount Guaranteed" / TotaAmtGUR) * 100)), 0.01, '=');
+                            PercentageGur := Round((("Amount Guaranteed" / TotaAmtGUR) * 100), 0.01, '=');
                         end;
-
                     end;
-                }
-            }
-        }
+                } // End of Guarantors DataItem
+
+                trigger OnAfterGetRecord()
+                var
+                    LoanGua: Record "Loan Guarantors and Security";
+                begin
+                    // Fix 1: Calculate flowfields
+                    CalcFields("Outstanding Balance", "Outstanding Interest");
+
+                    // Fix 2: Pre-calculate the total guaranteed amount once per loan
+                    TotaAmtGUR := 0;
+                    LoanGua.Reset();
+                    LoanGua.SetRange("Loan No", "Loan No.");
+                    LoanGua.SetRange("Guarantor Type", LoanGua."Guarantor Type"::Guarantor);
+                    if LoanGua.FindSet() then begin
+                        LoanGua.CalcSums("Amount Guaranteed");
+                        TotaAmtGUR := LoanGua."Amount Guaranteed";
+                    end;
+                end;
+            } // End of Loans DataItem
+
+            trigger OnPreDataItem()
+            begin
+                Clear(ProcessedMembers);
+            end;
+
+            trigger OnAfterGetRecord()
+            var
+                Mem: Record Members;
+            begin
+                // Fix Duplication: If this Member No. was already processed via another account, skip it!
+                if ProcessedMembers.Contains("Member No.") then
+                    CurrReport.Skip();
+                
+                ProcessedMembers.Add("Member No.");
+
+                // Fetch Member details manually to display in the RDLC header
+                if Mem.Get("Member No.") then begin
+                    MemberName := Mem.Name;
+                    MemberStaffNo := Mem."Payroll/Staff No.";
+                    MemberEmpCode := Mem."Employer Code";
+                    Mem.CalcFields("Employer Name");
+                    MemberEmpName := Mem."Employer Name";
+                end else begin
+                    MemberName := Name; 
+                    MemberStaffNo := '';
+                    MemberEmpCode := '';
+                    MemberEmpName := '';
+                end;
+            end;
+        } // End of Credit Accounts DataItem
     }
 
     requestpage
     {
         SaveValues = true;
-
-        layout
-        {
-        }
-
-        actions
-        {
-        }
+        layout { }
+        actions { }
     }
-
-
 
     trigger OnPreReport()
     begin
-        Company.GET();
-        Company.CALCFIELDS(Company.Picture);
+        Company.Get();
+        Company.CalcFields(Picture);
         CompanyNam := Company.Name;
         CompanyAddress := Company.Address + ' -Post Code: ' + Company."Post Code" + ' -City:' + Company.City + ' Region: ' + Company."Country/Region Code";
         CompanyTelephone := 'Tel: ' + Company."Phone No." + ' -Office Tel: ' + Company."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + Company."E-Mail" + '- Website: ' + Company."Home Page";
+        CommunicationOnline := 'E-mail: ' + Company."E-Mail" + ' - Website: ' + Company."Home Page";
     end;
 
     var
         Company: Record "Company Information";
+        ProcessedMembers: List of [Code[50]];
+        MemberName: Text;
+        MemberStaffNo: Code[50];
+        MemberEmpCode: Code[50];
+        MemberEmpName: Text;
         TotalLoan: Decimal;
         PercentageGur: Decimal;
         CompanyNam: Text;
@@ -243,6 +158,5 @@ Report 52185727 "Loan Guarators Reports"
         MmberDeceased: Boolean;
         CommunicationOnline: Text;
         TotaAmtGUR: Decimal;
-        GurantorEmpcode: Code[30];
         GuarantorStaffNo: Code[50];
 }

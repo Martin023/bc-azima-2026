@@ -63,6 +63,8 @@ page 52186618 "Guarantor Notice Letters List"
                     if not Rec.Letter.HasValue then
                         Error('No letter document found for Member %1, Loan %2.', Rec."Recipient Member No", Rec."Loan No");
 
+                    Rec.CalcFields(Letter);  // Must load Blob data first!
+
                     FileName := Rec."Recipient Member No" + '-' + Rec."Loan No" + '.pdf';
 
                     Rec.Letter.CreateInStream(InStr);
@@ -105,6 +107,8 @@ page 52186618 "Guarantor Notice Letters List"
 
                     repeat
                         if SelectedRec.Letter.HasValue then begin
+                            SelectedRec.CalcFields(Letter);  // Must load Blob data first!
+                            
                             FileName := SelectedRec."Recipient Member No" + '-' + SelectedRec."Loan No" + '.pdf';
                             
                             // Copy Blob to TempBlob first
@@ -163,18 +167,20 @@ page 52186618 "Guarantor Notice Letters List"
                     FileNameArchive: Text;
                     RecordCount: Integer;
                 begin
-                    GuarantorRec.Reset();
+                    GuarantorRec.CopyFilters(Rec);  // Copy current page filters!
 
                     if not GuarantorRec.FindSet() then
                         Error('No records found to download.');
 
-                    if not Confirm('This will download all %1 records. Continue?', false, GuarantorRec.Count()) then
+                    if not Confirm('This will download all %1 filtered records. Continue?', false, GuarantorRec.Count()) then
                         exit;
 
                     Zip.CreateZipArchive();
 
                     repeat
                         if GuarantorRec.Letter.HasValue then begin
+                            GuarantorRec.CalcFields(Letter);  // Must load Blob data first!
+                            
                             FileName := GuarantorRec."Recipient Member No" + '-' + GuarantorRec."Loan No" + '.pdf';
                             
                             // Copy Blob to TempBlob first

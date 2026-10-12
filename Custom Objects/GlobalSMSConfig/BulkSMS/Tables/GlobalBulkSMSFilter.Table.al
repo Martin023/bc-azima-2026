@@ -23,12 +23,14 @@ table 52185647 "Global Bulk SMS Filter"
         {
             Caption = 'Filter Source';
             DataClassification = CustomerContent;
-            OptionMembers = Member,"Savings Account",Loan;
-            OptionCaption = 'Member,Savings Account,Loan';
+            OptionMembers = " ",Member,"Savings Account",Loan;
+            OptionCaption = ' ,Member,Savings Account,Loan';
 
             trigger OnValidate()
             begin
                 case "Filter Source" of
+                    "Filter Source"::" ":
+                        "Source Table ID" := 0;
                     "Filter Source"::Member:
                         "Source Table ID" := Database::Members;
                     "Filter Source"::"Savings Account":
@@ -201,10 +203,8 @@ table 52185647 "Global Bulk SMS Filter"
 
         Header.CheckEditAllowed();
 
-        TestField("Source Table ID");
-        TestField("Field Name");
-        TestField("Filter Value 1");
-
+        // Don't validate on insert - allow incomplete records to be saved as draft
+        // Validation will happen when Generate Recipients is clicked
         UpdateDescription();
     end;
 
@@ -212,7 +212,9 @@ table 52185647 "Global Bulk SMS Filter"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
     end;
 
@@ -220,7 +222,9 @@ table 52185647 "Global Bulk SMS Filter"
     var
         Header: Record "Global Bulk SMS Header";
     begin
-        if Header.Get("Campaign No.") then
+        Header.Reset();
+        Header.SetRange("Campaign No.", "Campaign No.");
+        if Header.FindFirst() then
             Header.CheckEditAllowed();
     end;
 

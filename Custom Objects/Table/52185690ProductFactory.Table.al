@@ -1122,6 +1122,11 @@ table 52185690 "Product Factory"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(10053; "Allow Salaried"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            caption = 'Allow Salaried';
+        }
     }
 
     keys

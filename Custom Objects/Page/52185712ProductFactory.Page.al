@@ -978,6 +978,11 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                // used by contractors to determine if they are eligible for a loan
+                field("Allow Salaried"; Rec."Allow Salaried")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Allow Topup"; Rec."Allow Topup")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1237,6 +1242,17 @@ page 52185712 "Product Factory"
                     PromotedOnly = true;
 
                     RunObject = Page "Blocked Employers List";
+                    RunPageLink = "Product ID" = field("Product ID");
+                }
+                action("Employer Loan Eligibility")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Employer Loan Eligibility';
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+
+                    RunObject = Page "Employer Loan Eligibility";
                     RunPageLink = "Product ID" = field("Product ID");
                 }
                 action("Monthly Contribution Changes")

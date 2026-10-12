@@ -379,7 +379,7 @@ APPROVED BY ANY OFFICIAL: ......................................................
 "Salary Advance / Okoa Mwezi / Azima+ Interest: " &amp; Format(Fields!SalAdvOkoaPrinInt.Value, "N2") &amp; vbCrLf &amp;
 "Share Capital: " &amp; Format(Fields!ShareCapital.Value, "N2") &amp; vbCrLf &amp;
 "Withdrawal Charges: " &amp; Format(Fields!WithdrawalCharges.Value, "N2") &amp; vbCrLf &amp;
-"Instant refund charges (10% of gross deposit): " &amp; Format(Fields!InstantRefundCharge.Value, "N2") &amp; vbCrLf &amp;
+"Instant refund charges (10% of remaining deposit): " &amp; Format(Fields!InstantRefundCharge.Value, "N2") &amp; vbCrLf &amp;
 "Amount to be refunded: " &amp; Format(Fields!AmountToBeRefunded.Value, "N2")</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>

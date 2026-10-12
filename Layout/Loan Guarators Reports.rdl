@@ -19,16 +19,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.0in</Width>
+                  <Width>0.9in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.0in</Width>
+                  <Width>2.2in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.8in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2in</Width>
+                  <Width>1.1in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.7in</Width>
@@ -55,7 +55,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox27">
+                        <Textbox Name="LabelLoanNo">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -80,7 +80,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="LoanNo_Loans1">
+                        <Textbox Name="LoanNo_Loans">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -105,7 +105,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox29">
+                        <Textbox Name="LabelProduct">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -162,7 +162,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox5">
+                        <Textbox Name="LabelStaff">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -224,7 +224,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox312">
+                        <Textbox Name="HeaderGuarantorNo">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -253,7 +253,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox318">
+                        <Textbox Name="HeaderGuarantorName">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -282,7 +282,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="HeaderStaff">
+                        <Textbox Name="HeaderStaff2">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -311,7 +311,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox314">
+                        <Textbox Name="HeaderAmtCommitted">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -343,7 +343,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox315">
+                        <Textbox Name="HeaderReplaced">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -375,7 +375,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox316">
+                        <Textbox Name="HeaderOutstBalance">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -407,7 +407,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox15">
+                        <Textbox Name="HeaderOutstInterest">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -439,7 +439,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox22">
+                        <Textbox Name="HeaderTotalLoan">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -471,7 +471,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox32">
+                        <Textbox Name="HeaderDeceased">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -503,7 +503,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox10">
+                        <Textbox Name="HeaderPercentGuar">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -811,7 +811,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox23">
+                        <Textbox Name="LabelTotals">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -846,7 +846,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="AmontGuaranteed_LoanGuarantors2">
+                        <Textbox Name="AmontGuaranteed_Sum">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -882,7 +882,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="b1">
+                        <Textbox Name="BlankCell">
                           <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
@@ -999,7 +999,7 @@
               <Height>1.0in</Height>
               <Width>1.2in</Width>
             </Image>
-            <Textbox Name="Textbox2">
+            <Textbox Name="CompNameBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
@@ -1020,7 +1020,7 @@
               <Height>0.25in</Height>
               <Width>4.0in</Width>
             </Textbox>
-            <Textbox Name="Textbox3">
+            <Textbox Name="CompAddressBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
@@ -1040,7 +1040,7 @@
               <Height>0.25in</Height>
               <Width>4.0in</Width>
             </Textbox>
-            <Textbox Name="Textbox16">
+            <Textbox Name="CommOnlineBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
@@ -1082,16 +1082,16 @@
               </Paragraphs>
               <Top>0.0in</Top>
               <Left>7.0in</Left>
-              <Height>0.3in</Height>
+              <Height>0.25in</Height>
               <Width>4.0in</Width>
             </Textbox>
-            <Textbox Name="MemberHeaderDetails">
+            <Textbox Name="MemberInfoBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!MemberNo_SACCOAccount.Value, "DataSet_Result") &amp; " - " &amp; First(Fields!Name_SACCOAccount.Value, "DataSet_Result")</Value>
+                      <Value>="Member: " &amp; First(Fields!No_Members.Value, "DataSet_Result") &amp; " - " &amp; First(Fields!Name_Members.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>10pt</FontSize>
@@ -1104,13 +1104,61 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.3in</Top>
-              <Left>6.0in</Left>
-              <Height>0.25in</Height>
-              <Width>5.0in</Width>
+              <Top>0.30in</Top>
+              <Left>5.0in</Left>
+              <Height>0.2in</Height>
+              <Width>6.0in</Width>
+            </Textbox>
+            <Textbox Name="WorkInfoBox">
+              <CanGrow>true</CanGrow>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Work/Staff No: " &amp; First(Fields!PayrollStaffNo_Members.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.50in</Top>
+              <Left>5.0in</Left>
+              <Height>0.2in</Height>
+              <Width>6.0in</Width>
+            </Textbox>
+            <Textbox Name="EmployerInfoBox">
+              <CanGrow>true</CanGrow>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Employer: " &amp; First(Fields!EmployerCode_Members.Value, "DataSet_Result") &amp; " - " &amp; First(Fields!EmployerName_Members.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.70in</Top>
+              <Left>5.0in</Left>
+              <Height>0.2in</Height>
+              <Width>6.0in</Width>
             </Textbox>
             <Line Name="HeaderLine">
-              <Top>1.1in</Top>
+              <Top>1.05in</Top>
               <Left>0.0in</Left>
               <Height>0in</Height>
               <Width>11.0in</Width>
@@ -1127,7 +1175,7 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox4">
+            <Textbox Name="PageNumberBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
@@ -1150,7 +1198,7 @@
               <Height>0.25in</Height>
               <Width>2.5in</Width>
             </Textbox>
-            <Textbox Name="Textbox6">
+            <Textbox Name="PrintDateBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
@@ -1173,7 +1221,7 @@
               <Height>0.25in</Height>
               <Width>3.0in</Width>
             </Textbox>
-            <Textbox Name="Textbox7">
+            <Textbox Name="PrintByBox">
               <CanGrow>true</CanGrow>
               <Paragraphs>
                 <Paragraph>
@@ -1216,18 +1264,6 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="ReportForNavId_1102755000">
-          <DataField>ReportForNavId_1102755000</DataField>
-        </Field>
-        <Field Name="No_Members">
-          <DataField>No_Members</DataField>
-        </Field>
-        <Field Name="Name_SACCOAccount">
-          <DataField>Name_SACCOAccount</DataField>
-        </Field>
-        <Field Name="MemberNo_SACCOAccount">
-          <DataField>MemberNo_SACCOAccount</DataField>
-        </Field>
         <Field Name="CompName">
           <DataField>CompName</DataField>
         </Field>
@@ -1243,38 +1279,32 @@ End Function
         <Field Name="PrintDateTime">
           <DataField>PrintDateTime</DataField>
         </Field>
-        <Field Name="ReportForNavId_1102755001">
-          <DataField>ReportForNavId_1102755001</DataField>
+        <Field Name="No_Members">
+          <DataField>No_Members</DataField>
+        </Field>
+        <Field Name="Name_Members">
+          <DataField>Name_Members</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo_Members">
+          <DataField>PayrollStaffNo_Members</DataField>
+        </Field>
+        <Field Name="EmployerCode_Members">
+          <DataField>EmployerCode_Members</DataField>
+        </Field>
+        <Field Name="EmployerName_Members">
+          <DataField>EmployerName_Members</DataField>
         </Field>
         <Field Name="LoanNo_Loans">
           <DataField>LoanNo_Loans</DataField>
         </Field>
-        <Field Name="Loan_Product_Type">
-          <DataField>Loan_Product_Type</DataField>
-        </Field>
-        <Field Name="Loan_Product_Type_Name">
-          <DataField>Loan_Product_Type_Name</DataField>
-        </Field>
-        <Field Name="ApplicationDate_Loans">
-          <DataField>ApplicationDate_Loans</DataField>
-        </Field>
         <Field Name="LoanProductType_Loans">
           <DataField>LoanProductType_Loans</DataField>
-        </Field>
-        <Field Name="RequestedAmount_Loans">
-          <DataField>RequestedAmount_Loans</DataField>
-        </Field>
-        <Field Name="RequestedAmount_LoansFormat">
-          <DataField>RequestedAmount_LoansFormat</DataField>
         </Field>
         <Field Name="LoanProductTypeNam">
           <DataField>LoanProductTypeNam</DataField>
         </Field>
-        <Field Name="ApprovedAmount_Loans">
-          <DataField>ApprovedAmount_Loans</DataField>
-        </Field>
-        <Field Name="ApprovedAmount_LoansFormat">
-          <DataField>ApprovedAmount_LoansFormat</DataField>
+        <Field Name="Staff_No">
+          <DataField>Staff_No</DataField>
         </Field>
         <Field Name="OutStanding_Interest">
           <DataField>OutStanding_Interest</DataField>
@@ -1282,47 +1312,11 @@ End Function
         <Field Name="OutStanding_InterestFormat">
           <DataField>OutStanding_InterestFormat</DataField>
         </Field>
-        <Field Name="Loan_Account">
-          <DataField>Loan_Account</DataField>
-        </Field>
-        <Field Name="Staff_No">
-          <DataField>Staff_No</DataField>
-        </Field>
-        <Field Name="ReportForNavId_1102755002">
-          <DataField>ReportForNavId_1102755002</DataField>
-        </Field>
         <Field Name="MemberNo_LoanGuarantors">
           <DataField>MemberNo_LoanGuarantors</DataField>
         </Field>
         <Field Name="Name_LoanGuarantors">
           <DataField>Name_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="LoanBalance_LoanGuarantors">
-          <DataField>LoanBalance_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="LoanBalance_LoanGuarantorsFormat">
-          <DataField>LoanBalance_LoanGuarantorsFormat</DataField>
-        </Field>
-        <Field Name="Shares_LoanGuarantors">
-          <DataField>Shares_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="Shares_LoanGuarantorsFormat">
-          <DataField>Shares_LoanGuarantorsFormat</DataField>
-        </Field>
-        <Field Name="NoOfLoansGuaranteed_LoanGuarantors">
-          <DataField>NoOfLoansGuaranteed_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="Substituted_LoanGuarantors">
-          <DataField>Substituted_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="Date_LoanGuarantors">
-          <DataField>Date_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="SharesRecovery_LoanGuarantors">
-          <DataField>SharesRecovery_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="NewUpload_LoanGuarantors">
-          <DataField>NewUpload_LoanGuarantors</DataField>
         </Field>
         <Field Name="AmontGuaranteed_LoanGuarantors">
           <DataField>AmontGuaranteed_LoanGuarantors</DataField>
@@ -1333,23 +1327,14 @@ End Function
         <Field Name="StaffPayrollNo_LoanGuarantors">
           <DataField>StaffPayrollNo_LoanGuarantors</DataField>
         </Field>
-        <Field Name="AccountNo_LoanGuarantors">
-          <DataField>AccountNo_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="SelfGuarantee_LoanGuarantors">
-          <DataField>SelfGuarantee_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="IDNo_LoanGuarantors">
-          <DataField>IDNo_LoanGuarantors</DataField>
+        <Field Name="Substituted_LoanGuarantors">
+          <DataField>Substituted_LoanGuarantors</DataField>
         </Field>
         <Field Name="OutstandingBalance_LoanGuarantors">
           <DataField>OutstandingBalance_LoanGuarantors</DataField>
         </Field>
         <Field Name="OutstandingBalance_LoanGuarantorsFormat">
           <DataField>OutstandingBalance_LoanGuarantorsFormat</DataField>
-        </Field>
-        <Field Name="MemberGuaranteed_LoanGuarantors">
-          <DataField>MemberGuaranteed_LoanGuarantors</DataField>
         </Field>
         <Field Name="TLoan">
           <DataField>TLoan</DataField>
@@ -1360,20 +1345,11 @@ End Function
         <Field Name="MmberDeceased">
           <DataField>MmberDeceased</DataField>
         </Field>
-        <Field Name="GurantorEmpcode">
-          <DataField>GurantorEmpcode</DataField>
-        </Field>
         <Field Name="PercentageGur">
           <DataField>PercentageGur</DataField>
         </Field>
         <Field Name="PercentageGurFormat">
           <DataField>PercentageGurFormat</DataField>
-        </Field>
-        <Field Name="Proportion_Guaranteed">
-          <DataField>Proportion_Guaranteed</DataField>
-        </Field>
-        <Field Name="Proportion_GuaranteedFormat">
-          <DataField>Proportion_GuaranteedFormat</DataField>
         </Field>
       </Fields>
       <Query>
