@@ -2631,6 +2631,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         EligibleClass: JsonArray;
         OutstandingBalance: Decimal;
         PreviousMinimum: Decimal;
+        
+        AllowContractors: Record "Employer Loan Eligibility";
+        IsEmployerSupported: Boolean;
+        ContractorHasSalary: Boolean;
+        IsProductEligible: Boolean;
+        
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
@@ -2642,7 +2648,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             ''
         );
 
-        SearchMember.SetLoadFields("Member Class");
         IF SearchMember.FindFirst() then begin
             MobileLoanProducts.Reset;
             MobileLoanProducts.SetRange("Product Class Type", MobileLoanProducts."Product Class Type"::Loan);
@@ -2651,20 +2656,20 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             MobileLoanProducts.SetLoadFields(
                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount",
-               "Ordinary Default Intallments", "Allow Topup"
-           );
+               "Ordinary Default Intallments", "Allow Topup", "Allow Salaried"
+            );
+
+            AllowContractors.Reset();
+            AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+            IsEmployerSupported := (SearchMember."Employer Code" <> '') and AllowContractors.FindFirst();
 
             if SearchMember."Employer Code" = 'RETIREE' then begin
                 // Pension only
                 MobileLoanProducts.Setfilter("Salary Income Types", '%1|%2', MobileLoanProducts."Salary Income Types"::Pension, MobileLoanProducts."Salary Income Types"::Dividend);
-            end else begin
+            end else if not IsEmployerSupported then begin
                 // Salaried
                 MobileLoanProducts.Setfilter("Salary Income Types", '%1|%2', MobileLoanProducts."Salary Income Types"::Salary, MobileLoanProducts."Salary Income Types"::Dividend);
             end;
-
-            MobileLoanProducts.SetLoadFields(
-                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount"
-            );
 
             IF MobileLoanProducts.FindSet then begin
                 repeat begin
@@ -2684,10 +2689,37 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         until ProductSupportedClasses.Next() = 0;
                     end;
 
-                    ProductSupportedClasses.Reset(); // filter products by member class
-                    ProductSupportedClasses.SetRange("Product ID", MobileLoanProducts."Product ID");
-                    ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
-                    if not ProductSupportedClasses.IsEmpty() then begin
+                    AllowContractors.Reset();
+                    AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+                    AllowContractors.SetRange("Product ID", MobileLoanProducts."Product ID");
+                    IsEmployerSupported := AllowContractors.FindFirst();
+
+                    if not IsEmployerSupported then begin
+                        AllowContractors.Reset();
+                        AllowContractors.SetRange("Employer Code", SearchMember."Employer Code");
+                        if AllowContractors.FindFirst() then
+                            IsEmployerSupported := true;
+                    end;
+
+                    IsProductEligible := false;
+                    if IsEmployerSupported then begin
+                        ContractorHasSalary := CheckMemberHasSalary(SearchMember);
+                        if MobileLoanProducts."Allow Salaried" then begin
+                            if ContractorHasSalary then
+                                IsProductEligible := true;
+                        end else begin
+                            if not ContractorHasSalary then
+                                IsProductEligible := true;
+                        end;
+                    end else begin
+                        ProductSupportedClasses.Reset(); // filter products by member class
+                        ProductSupportedClasses.SetRange("Product ID", MobileLoanProducts."Product ID");
+                        ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
+                        if not ProductSupportedClasses.IsEmpty() then
+                            IsProductEligible := true;
+                    end;
+
+                    if IsProductEligible then begin
                         Datum.Add('loan_type_id', MobileLoanProducts."Product ID");
                         Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                         Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
