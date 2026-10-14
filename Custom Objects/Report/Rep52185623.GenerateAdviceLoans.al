@@ -20,7 +20,7 @@ report 52185623 "Generate Advice Loans"
             dataitem(Loans; Loans)
             {
                 DataItemTableView = where(Posted = const(true));
-                RequestFilterFields = "Loan Product Type", "Disbursement Date", "Member No.", "Employer Code";
+                RequestFilterFields = "Loan Product Type", "Recovered Product Type", "Disbursement Date", "Member No.", "Employer Code";
                 trigger OnpreDataItem()
                 begin
                     if CheckoffAdviceHeader."Employer Code" <> '' then
@@ -78,6 +78,8 @@ report 52185623 "Generate Advice Loans"
                                     LoanRepaySchedule.CalcSums("Monthly Interest");
                                     CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + LoanRepaySchedule."Monthly Interest";
                                 end;
+                                if loans."Total Balance" < CheckoffAdvice."Balance On" then
+                                    CheckoffAdvice."Balance On" := loans."Total Balance";
                                 if GenerateActualBal then begin
                                     CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
                                 end;
