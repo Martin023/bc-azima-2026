@@ -68,7 +68,7 @@ table 52187260 "Mobile Loan Restrictions"
         {
             Caption = 'Status';
             OptionMembers = Active,Inactive;
-            OptionCaption = 'Active,Inactive';
+            OptionCaption = 'Block,Unblock';
             InitValue = Inactive;
         }
         field(9; "Created By"; Code[50])
