@@ -84,9 +84,13 @@ report 52185623 "Generate Advice Loans"
                                     CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
                                 end;
 
-                                if loans."Total Balance" < CheckoffAdvice."Amount On"
-                                then
+                                if Loans."Total Balance" = 0 then begin
                                     CheckoffAdvice."Amount On" := Loans."Total Balance";
+                                end;
+
+                                // if loans."Total Balance" < CheckoffAdvice."Amount On"
+                                // then
+                                //     CheckoffAdvice."Amount On" := Loans."Total Balance";
 
                                 CheckoffAdvice."Loan Principle Repayment" := Loans."Loan Principle Repayment";
                                 CheckoffAdvice."Loan Interest Repayment" := Loans."Loan Interest Repayment";
