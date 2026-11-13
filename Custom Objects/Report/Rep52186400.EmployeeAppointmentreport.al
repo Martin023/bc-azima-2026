@@ -1,6 +1,6 @@
 
 
-report 52186400 "EmployeeAppointment report"
+report 86400 "EmployeeAppointment report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Appointment Report.rdl';

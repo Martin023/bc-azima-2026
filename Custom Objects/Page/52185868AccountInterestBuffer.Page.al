@@ -1,4 +1,4 @@
-page 52185868 "Account Interest Buffer"
+page 85868 "Account Interest Buffer"
 {
     DeleteAllowed = false;
     Editable = false;

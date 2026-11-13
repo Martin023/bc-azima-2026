@@ -1,4 +1,4 @@
-table 52187389 "Tenant Escalation Buffer"
+table 87389 "Tenant Escalation Buffer"
 {
     Caption = 'Tenant Escalation Buffer';
     DataClassification = ToBeClassified;

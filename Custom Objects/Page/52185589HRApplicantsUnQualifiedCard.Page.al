@@ -1,4 +1,4 @@
-page 52185589 "HR Applicants UnQualified Card"
+page 85589 "HR Applicants UnQualified Card"
 {
     PageType = Card;
     SourceTable = "HR Job Applications";

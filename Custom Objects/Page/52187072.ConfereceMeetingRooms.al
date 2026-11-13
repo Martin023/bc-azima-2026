@@ -1,4 +1,4 @@
-page 52187072 "MNS Conf & Meetings Appl List"
+page 87072 "MNS Conf & Meetings Appl List"
 {
     ApplicationArea = All;
     Caption = 'MNS Conf & Meeting Rooms Appl List';

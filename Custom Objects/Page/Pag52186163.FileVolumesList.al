@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186163 "File Volumes List"
+page 86163 "File Volumes List"
 {
     ApplicationArea = All;
     Caption = 'File Volumes List';

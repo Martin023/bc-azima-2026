@@ -1,4 +1,4 @@
-page 52186113 "Renewed Contracts list"
+page 86113 "Renewed Contracts list"
 {
     Caption = 'Renewed Contracts list';
     CardPageID = "Renewed Contracts Card";

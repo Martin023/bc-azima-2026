@@ -1,4 +1,4 @@
-enumextension 52185462 "HR SMS Source Ext" extends "SMS Source"
+enumextension 85462 "HR SMS Source Ext" extends "SMS Source"
 {
     // HR-FACING SMS SOURCES
     value(57; HR_LEAVE)

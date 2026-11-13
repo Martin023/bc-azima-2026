@@ -1,4 +1,4 @@
-table 52185584 "HR Training Bonding Conditions"
+table 85584 "HR Training Bonding Conditions"
 {
 
     fields

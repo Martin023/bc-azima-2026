@@ -1,4 +1,4 @@
-table 52186519 "Sky Loan Guarantor Requests"
+table 86519 "Sky Loan Guarantor Requests"
 {
     Caption = 'Sky Loan Guarantor Requests';
     DataClassification = ToBeClassified;

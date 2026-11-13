@@ -1,4 +1,4 @@
-page 52186288 "Approved ATM Linking Card"
+page 86288 "Approved ATM Linking Card"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

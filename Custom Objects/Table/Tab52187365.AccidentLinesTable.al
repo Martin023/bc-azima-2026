@@ -1,4 +1,4 @@
-table 52187365 "Accident Lines Table"
+table 87365 "Accident Lines Table"
 {
     Caption = 'Accident Lines Table';
     DataClassification = ToBeClassified;

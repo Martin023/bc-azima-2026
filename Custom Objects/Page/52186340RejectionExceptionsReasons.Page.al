@@ -1,4 +1,4 @@
-page 52186340 "Exceptions/ Rejection Reason"
+page 86340 "Exceptions/ Rejection Reason"
 {
     PageType = List;
     SourceTable = "Exceptions/ Rejection Reason";

@@ -1,4 +1,4 @@
-page 52186198 "Lease-Active"
+page 86198 "Lease-Active"
 {
     Editable = true;
     PageType = Card;

@@ -1,4 +1,4 @@
-report 52187404 "Rescheduled Loans report"
+report 87404 "Rescheduled Loans report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

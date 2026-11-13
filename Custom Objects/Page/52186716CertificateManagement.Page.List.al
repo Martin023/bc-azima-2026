@@ -1,4 +1,4 @@
-page 52186716 "Certificate Management" 
+page 86716 "Certificate Management" 
 {
     SourceTable = "Certificate Management";
     PageType = List;

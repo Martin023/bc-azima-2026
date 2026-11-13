@@ -1,4 +1,4 @@
-table 52186237 "Portal Endpoints"
+table 86237 "Portal Endpoints"
 {
 
     fields

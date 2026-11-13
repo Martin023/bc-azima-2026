@@ -1,4 +1,4 @@
-page 52185820 "Over Draft Authorisation"
+page 85820 "Over Draft Authorisation"
 {
     DeleteAllowed = false;
     PageType = Card;

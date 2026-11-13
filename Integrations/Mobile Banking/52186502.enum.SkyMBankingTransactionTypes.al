@@ -1,4 +1,4 @@
-enum 52186502 "Sky M-Banking Trans Types"
+enum 86502 "Sky M-Banking Trans Types"
 {
     Extensible = true;
 

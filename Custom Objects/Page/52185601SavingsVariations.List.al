@@ -1,4 +1,4 @@
-page 52185601 "Savings Variations List"
+page 85601 "Savings Variations List"
 {
     CardPageId = "Savings Variations";
     ApplicationArea = All;

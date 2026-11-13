@@ -4,7 +4,7 @@ using System.Automation;
 using MNS.MNS;
 using Microsoft.EServices.EDocument;
 
-page 52186483 "HR Collateral Register"
+page 86483 "HR Collateral Register"
 {
     DeleteAllowed = false;
     PageType = Card;

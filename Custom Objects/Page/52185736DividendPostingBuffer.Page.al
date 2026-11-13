@@ -1,4 +1,4 @@
-page 52185736 "Dividend Posting Buffer"
+page 85736 "Dividend Posting Buffer"
 {
     DeleteAllowed = false;
     Editable = false;

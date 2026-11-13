@@ -1,4 +1,4 @@
-report 52187397 "FA reg addition audit trail"
+report 87397 "FA reg addition audit trail"
 {
     ApplicationArea = All;
     Caption = 'Fixed Asset Register addition audit trail';

@@ -1,4 +1,4 @@
-table 52185612 "HR Interns Requisition"
+table 85612 "HR Interns Requisition"
 {
     // DrillDownPageID = "HR Intern Requisition List";
     // LookupPageID = "HR Intern Requisition List";

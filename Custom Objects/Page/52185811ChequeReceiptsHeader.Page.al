@@ -1,4 +1,4 @@
-page 52185811 "Cheque Receipts Header"
+page 85811 "Cheque Receipts Header"
 {
     PageType = Card;
     SourceTable = "Cheque Receipts";

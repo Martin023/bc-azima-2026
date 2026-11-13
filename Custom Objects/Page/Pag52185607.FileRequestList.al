@@ -1,7 +1,7 @@
 namespace MNSProjectMwanga.MNSProjectMwanga;
 using System.Security.User;
 
-page 52185607 "File Request List"
+page 85607 "File Request List"
 {
     ApplicationArea = All;
     Caption = 'File Request List';

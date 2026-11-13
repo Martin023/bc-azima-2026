@@ -1,4 +1,4 @@
-enum 52186506 "ATM Service Prov. Resp. Codes"
+enum 86506 "ATM Service Prov. Resp. Codes"
 {
     value(200; "Success"){}
     value(201; "Accepted for reversal"){}

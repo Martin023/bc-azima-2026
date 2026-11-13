@@ -1,4 +1,4 @@
-table 52185540 "HR Leave Family Employees"
+table 85540 "HR Leave Family Employees"
 {
     // DrillDownPageID = "HR Service Management List";
     // LookupPageID = "HR Service Management List";

@@ -1,4 +1,4 @@
-page 52185701 "Virtual Registration Fact Box"
+page 85701 "Virtual Registration Fact Box"
 {
     DeleteAllowed = false;
     Editable = false;

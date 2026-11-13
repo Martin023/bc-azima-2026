@@ -1,4 +1,4 @@
-codeunit 52185427 "NCBA Integration"
+codeunit 85427 "NCBA Integration"
 {
     procedure GetPensionProcessAmount(pensionNo: Text; pensionAmount: Decimal; referenceNo: Text): Text
     var

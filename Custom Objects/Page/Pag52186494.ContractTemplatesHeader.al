@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186494 "Contract Templates Header"
+page 86494 "Contract Templates Header"
 {
     Caption = 'Contract Templates';
     PageType = Card;

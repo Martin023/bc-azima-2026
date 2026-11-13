@@ -1,4 +1,4 @@
-page 52186750 "Dispatch ATM Header"
+page 86750 "Dispatch ATM Header"
 {
     DeleteAllowed = false;
     Editable = true;

@@ -1,4 +1,4 @@
-Report 52186789 "FOSA Account Change Logs"
+Report 86789 "FOSA Account Change Logs"
 {
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
@@ -90,7 +90,7 @@ Report 52186789 "FOSA Account Change Logs"
             trigger OnPreDataItem()
             begin
                 // "Change Log Entry".reset;
-                "Change Log Entry".SetRange("Table No.", 52185730);
+                "Change Log Entry".SetRange("Table No.", 85730);
                 if AccountNo <> '' then begin
                     "Change Log Entry".SetFilter("Primary Key Field 1 Value", '%1', AccountNo);
                 end;

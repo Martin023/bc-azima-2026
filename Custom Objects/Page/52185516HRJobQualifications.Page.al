@@ -1,4 +1,4 @@
-page 52185516 "HR Job Qualifications"
+page 85516 "HR Job Qualifications"
 {
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Qualifications';

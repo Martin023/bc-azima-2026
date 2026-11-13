@@ -1,4 +1,4 @@
-table 52185778 "Treasury Cashier Transactions"
+table 85778 "Treasury Cashier Transactions"
 {
     DrillDownPageID = "Treasury Cashier List";
     LookupPageID = "Treasury Cashier List";

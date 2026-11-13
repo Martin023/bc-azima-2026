@@ -1,4 +1,4 @@
-page 52185932 "Imprest Surrender List"
+page 85932 "Imprest Surrender List"
 {
     CardPageID = "Imprest Surrender";
     DeleteAllowed = false;
@@ -311,7 +311,7 @@ page 52185932 "Imprest Surrender List"
 
                     PaymentLine.Reset;
                     PaymentLine.SetRange(PaymentLine.No, Rec."Imprest Issue Doc. No");
-                    PAGE.RunModal(52186173, PaymentLine);
+                    PAGE.RunModal(86173, PaymentLine);
                 end;
             }
             group("Request Approval")

@@ -1,4 +1,4 @@
-page 52185621 "prEmployee Posting Group"
+page 85621 "prEmployee Posting Group"
 {
     PageType = List;
     SourceTable = "prEmployee Posting Group";

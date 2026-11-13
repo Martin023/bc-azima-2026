@@ -1,4 +1,4 @@
-table 52186104 "Agent Applications"
+table 86104 "Agent Applications"
 {
     DrillDownPageId = "Approved Agents List";
     LookupPageId = "Approved Agents List";

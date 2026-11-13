@@ -1,4 +1,4 @@
-page 52185840 "Checkoff Header"
+page 85840 "Checkoff Header"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -204,7 +204,7 @@ page 52185840 "Checkoff Header"
                             Xmlport.Run(xmlport::"Loans BP", true, true) else
                             if (Rec."CheckOff Type" = Rec."CheckOff Type"::"Short term Loans") or (Rec."CheckOff Type" = Rec."CheckOff Type"::"Long term Loans") then
                                 Xmlport.Run(xmlport::"Lumpsum BP", true, true) else
-                                Xmlport.Run(52185499, true, true)
+                                Xmlport.Run(85499, true, true)
 
                 end;
 

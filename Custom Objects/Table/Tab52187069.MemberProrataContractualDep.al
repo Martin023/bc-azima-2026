@@ -1,4 +1,4 @@
-table 52187069 "Member Prorata_Contractual Dep"
+table 87069 "Member Prorata_Contractual Dep"
 {
     Caption = 'Member Prorata_Contractual Dep';
     DataClassification = ToBeClassified;

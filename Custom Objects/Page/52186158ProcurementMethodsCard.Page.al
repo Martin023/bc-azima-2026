@@ -1,4 +1,4 @@
-page 52186158 "Procurement Methods Card"
+page 86158 "Procurement Methods Card"
 {
     PageType = Card;
     SourceTable = "Procurement Methods";

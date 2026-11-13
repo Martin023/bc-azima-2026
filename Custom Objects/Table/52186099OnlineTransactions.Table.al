@@ -1,4 +1,4 @@
-table 52186099 "Online Transactions"
+table 86099 "Online Transactions"
 {
     DrillDownPageID = "Internet Banking Transactions";
     LookupPageId = "Internet Banking Transactions";

@@ -1,4 +1,4 @@
-table 52186095 "Product Checklist"
+table 86095 "Product Checklist"
 {
 
     fields

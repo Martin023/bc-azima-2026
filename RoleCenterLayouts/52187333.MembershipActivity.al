@@ -1,4 +1,4 @@
-page 52187333 "Membership Activity cue"
+page 87333 "Membership Activity cue"
 {
 
     PageType = CardPart;

@@ -1,4 +1,4 @@
-table 52186271 "BBF/Nominee Register"
+table 86271 "BBF/Nominee Register"
 {
     Caption = 'BBF/Nominee Register';
     DataClassification = ToBeClassified;

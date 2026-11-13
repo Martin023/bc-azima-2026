@@ -1,4 +1,4 @@
-page 52186290 "Interest Buffer"
+page 86290 "Interest Buffer"
 {
     DeleteAllowed = false;
     Editable = false;

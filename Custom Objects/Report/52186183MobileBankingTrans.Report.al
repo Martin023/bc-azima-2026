@@ -1,4 +1,4 @@
-report 52186183 "Mobile Banking Report"
+report 86183 "Mobile Banking Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/ Mobile Banking Report.rdl';

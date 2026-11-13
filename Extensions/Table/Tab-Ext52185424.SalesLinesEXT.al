@@ -3,7 +3,7 @@ namespace MNS.MNS;
 using Microsoft.Sales.Document;
 using Microsoft.Inventory.Item;
 
-tableextension 52185424 "Sales Lines EXT" extends "Sales Line"
+tableextension 85424 "Sales Lines EXT" extends "Sales Line"
 {
     fields
     {

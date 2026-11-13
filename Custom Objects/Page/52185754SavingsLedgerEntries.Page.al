@@ -1,4 +1,4 @@
-page 52185754 "Savings Ledger Entries"
+page 85754 "Savings Ledger Entries"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

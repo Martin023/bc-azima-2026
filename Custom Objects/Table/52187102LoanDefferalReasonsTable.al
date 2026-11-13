@@ -1,4 +1,4 @@
-table 52187103 "Loan Defferals"
+table 87103 "Loan Defferals"
 {
     DataClassification = ToBeClassified;
 

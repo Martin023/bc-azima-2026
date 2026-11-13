@@ -100,7 +100,7 @@ using Microsoft.Service.Document;
 using Microsoft.Foundation.UOM;
 using System.Visualization;
 
-page 52186778 "Finance Role Center"
+page 86778 "Finance Role Center"
 {
     Caption = 'Accountant', Comment = 'Use same translation as ''Profile Description'' (if applicable)';
     PageType = RoleCenter;

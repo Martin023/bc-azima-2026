@@ -1,4 +1,4 @@
-page 52185715 "Member Application Group List"
+page 85715 "Member Application Group List"
 {
     CardPageID = "Member Application Group";
     DeleteAllowed = false;

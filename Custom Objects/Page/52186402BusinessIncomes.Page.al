@@ -1,4 +1,4 @@
-page 52186402 "Business Incomes"
+page 86402 "Business Incomes"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

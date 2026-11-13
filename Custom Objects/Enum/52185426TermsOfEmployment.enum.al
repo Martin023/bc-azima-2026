@@ -1,4 +1,4 @@
-enum 52185426 "Terms Of Employment"
+enum 85426 "Terms Of Employment"
 {
     value(0; " ") { }
     value(1; "Permanent and Pensionable") { }

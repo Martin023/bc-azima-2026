@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186499 "Contract Template Lines"
+page 86499 "Contract Template Lines"
 {
     Caption = 'Contract Template Lines';
     PageType = ListPart;

@@ -1,4 +1,4 @@
-page 52187045 "Business Types"
+page 87045 "Business Types"
 {
     Editable = true;
     PageType = List;

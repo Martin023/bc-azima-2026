@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-enum 52185463 "Salary Type"
+enum 85463 "Salary Type"
 {
     Extensible = true;
 

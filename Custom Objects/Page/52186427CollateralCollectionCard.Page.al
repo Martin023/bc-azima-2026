@@ -1,4 +1,4 @@
-page 52186427 "Collateral Collection Card"
+page 86427 "Collateral Collection Card"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -224,7 +224,7 @@ page 52186427 "Collateral Collection Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52185843), "No." = field("No.");//52186080
+                SubPageLink = "Table ID" = Const(85843), "No." = field("No.");//52186080
             }
             systempart(Control1900383207; Links)
             {

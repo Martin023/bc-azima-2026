@@ -1,4 +1,4 @@
-table 52185521 "HR Employee Exit Interviews"
+table 85521 "HR Employee Exit Interviews"
 {
     DrillDownPageId = "HR Exit Interview list1";
     LookupPageId = "HR Exit Interview list1";

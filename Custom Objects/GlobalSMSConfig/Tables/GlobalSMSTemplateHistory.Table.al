@@ -1,4 +1,4 @@
-table 52185955 "Global SMS Template History"
+table 85955 "Global SMS Template History"
 {
     Caption = 'Global SMS Template History';
     DataClassification = CustomerContent;

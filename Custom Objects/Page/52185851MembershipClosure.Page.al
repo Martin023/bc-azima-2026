@@ -1,4 +1,4 @@
-page 52185851 "Membership Closure"
+page 85851 "Membership Closure"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -864,7 +864,7 @@ page 52185851 "Membership Closure"
                     begin
                         if Members.Get(Rec."Member No.") then begin
                             Cust.SetRange("No.", Members."Employer Code");
-                            Page.Run(52186649, Cust);
+                            Page.Run(86649, Cust);
                         end;
                     end;
                 }

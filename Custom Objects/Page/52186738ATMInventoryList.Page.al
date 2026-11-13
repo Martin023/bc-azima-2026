@@ -1,4 +1,4 @@
-page 52186738 "Atm Inventory List"
+page 86738 "Atm Inventory List"
 {
     Editable = true;
     PageType = List;

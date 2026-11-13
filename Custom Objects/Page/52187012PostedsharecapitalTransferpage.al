@@ -1,4 +1,4 @@
-page 52187012 "Posted Shares Transfer List"
+page 87012 "Posted Shares Transfer List"
 {
     PageType = List;
     ApplicationArea = All;

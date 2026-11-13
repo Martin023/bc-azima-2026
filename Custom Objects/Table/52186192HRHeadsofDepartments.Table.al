@@ -1,4 +1,4 @@
-table 52186192 "HR Heads of Departments"
+table 86192 "HR Heads of Departments"
 {
 
     fields

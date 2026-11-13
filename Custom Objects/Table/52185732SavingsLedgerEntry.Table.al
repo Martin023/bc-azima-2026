@@ -1,4 +1,4 @@
-table 52185732 "Savings Ledger Entry"
+table 85732 "Savings Ledger Entry"
 {
     Caption = 'Savings Ledger Entry';
     DrillDownPageID = "Savings Ledger Entries";

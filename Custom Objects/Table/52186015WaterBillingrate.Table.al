@@ -1,4 +1,4 @@
-table 52186015 "Water Billing rate"
+table 86015 "Water Billing rate"
 {
     DrillDownPageID = "Water Billing rates";
     LookupPageID = "Water Billing rates";

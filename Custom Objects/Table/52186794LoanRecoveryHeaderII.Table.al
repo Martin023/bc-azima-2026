@@ -1,4 +1,4 @@
-table 52186794 "Loan Recovery Header II"
+table 86794 "Loan Recovery Header II"
 {
     DrillDownPageID = "Posted Loan Recovery Header II";
     LookupPageID = "Posted Loan Recovery Header II";

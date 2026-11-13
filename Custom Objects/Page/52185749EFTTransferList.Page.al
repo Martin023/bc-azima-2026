@@ -1,4 +1,4 @@
-page 52185749 "RTGS Transfer List"
+page 85749 "RTGS Transfer List"
 {
     CardPageID = "RTGS Transfer Header";
     DeleteAllowed = false;

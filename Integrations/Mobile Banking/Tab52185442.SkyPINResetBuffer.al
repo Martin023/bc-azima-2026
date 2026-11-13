@@ -1,4 +1,4 @@
-table 52185442 "Sky PIN Reset Buffer"
+table 85442 "Sky PIN Reset Buffer"
 {
     Caption = 'Sky PIN Reset Buffer';
     DataClassification = ToBeClassified;

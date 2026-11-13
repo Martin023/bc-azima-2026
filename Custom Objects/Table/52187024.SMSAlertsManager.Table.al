@@ -1,4 +1,4 @@
-table 52187024 "SMS Alerts Manager"
+table 87024 "SMS Alerts Manager"
 {
     Caption = 'SMS Alerts Manager';
     DataClassification = ToBeClassified;

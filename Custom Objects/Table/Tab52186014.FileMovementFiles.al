@@ -1,4 +1,4 @@
-table 52186014 "Files Table"
+table 86014 "Files Table"
 {
     Caption = 'File Movement Files';
     DataClassification = ToBeClassified;

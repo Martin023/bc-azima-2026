@@ -1,4 +1,4 @@
-page 52186390 "Deleage AGM Update Header"
+page 86390 "Deleage AGM Update Header"
 {
     DeleteAllowed = false;
     PageType = Card;

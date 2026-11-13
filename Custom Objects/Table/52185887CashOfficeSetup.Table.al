@@ -1,4 +1,4 @@
-table 52185887 "Cash Office Setup"
+table 85887 "Cash Office Setup"
 {
 
     fields

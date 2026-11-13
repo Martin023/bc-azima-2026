@@ -1,4 +1,4 @@
-page 52185606 "HR OSMeasure Line"
+page 85606 "HR OSMeasure Line"
 {
     PageType = ListPart;
     SourceTable = "HR OSMeasure Line";

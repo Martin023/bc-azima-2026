@@ -6,7 +6,7 @@ using Microsoft.FixedAssets.Ledger;
 using Microsoft.FixedAssets.Setup;
 using Microsoft.Foundation.Company;
 
-report 52186072 "Right To Use Assets"
+report 86072 "Right To Use Assets"
 {
     ApplicationArea = All;
     Caption = 'Right To Use Assets';

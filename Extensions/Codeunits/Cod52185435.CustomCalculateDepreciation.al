@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.FixedAssets.Depreciation;
 
-codeunit 52185435 "Custom Calculate Depreciation"
+codeunit 85435 "Custom Calculate Depreciation"
 {
 
     trigger OnRun()

@@ -1,4 +1,4 @@
-table 52186048 "ISO-Defined Data Elements"
+table 86048 "ISO-Defined Data Elements"
 {
 
     fields

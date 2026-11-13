@@ -1,4 +1,4 @@
-table 52185905 "Responsibility CenterBR"
+table 85905 "Responsibility CenterBR"
 {
     Caption = 'Responsibility Center BR';
     DrillDownPageID = "Responsibility Center ListBR";

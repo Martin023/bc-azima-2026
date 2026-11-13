@@ -1,4 +1,4 @@
-table 52185844 "ATM Linking  Statistics"
+table 85844 "ATM Linking  Statistics"
 {
     DrillDownPageID = "ATM Linking Statistics";
     LookupPageID = "ATM Linking Statistics";

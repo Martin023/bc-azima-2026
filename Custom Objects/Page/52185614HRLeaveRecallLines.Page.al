@@ -1,4 +1,4 @@
-page 52185614 "HR Leave Recall Lines"
+page 85614 "HR Leave Recall Lines"
 {
     PageType = ListPart;
     SourceTable = "HR Leave Recall Lines";

@@ -1,4 +1,4 @@
-table 52187002 "Certificate Management"
+table 87002 "Certificate Management"
 {
     fields
     {

@@ -1,4 +1,4 @@
-table 52185815 "Collective Asset Insurance"
+table 85815 "Collective Asset Insurance"
 {
     Caption = 'Collective Asset Insurance';
     DataClassification = ToBeClassified;

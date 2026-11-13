@@ -1,4 +1,4 @@
-page 52187383 "Closed Vehicle Req - Card"
+page 87383 "Closed Vehicle Req - Card"
 {
     ApplicationArea = All;
     Caption = 'Closed Vehicle Req - Card';

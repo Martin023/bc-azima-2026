@@ -1,4 +1,4 @@
-table 52186006 "Property Charges"
+table 86006 "Property Charges"
 {
     // DrillDownPageID = "Property Charges";
     // LookupPageID = "Property Charges";

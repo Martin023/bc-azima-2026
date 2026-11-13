@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Codeunit 52185445 "HR Leave Jnl Management"
+Codeunit 85445 "HR Leave Jnl Management"
 {
     Permissions = TableData "Insurance Journal Template" = imd,
                   TableData "Insurance Journal Batch" = imd;
@@ -156,7 +156,7 @@ Codeunit 52185445 "HR Leave Jnl Management"
         InsuranceJnlBatch.FilterGroup(2);
         InsuranceJnlBatch.SetRange("Journal Template Name", InsuranceJnlBatch."Journal Template Name");
         InsuranceJnlBatch.FilterGroup(0);
-        if Page.RunModal(52185554, InsuranceJnlBatch) = Action::LookupOK then begin
+        if Page.RunModal(85554, InsuranceJnlBatch) = Action::LookupOK then begin
             CurrentJnlBatchName := InsuranceJnlBatch.Name;
             SetName(CurrentJnlBatchName, InsuranceJnlLine);
         end;

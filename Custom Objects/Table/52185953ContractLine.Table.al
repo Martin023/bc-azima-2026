@@ -1,4 +1,4 @@
-table 52185953 "Contract Line"
+table 85953 "Contract Line"
 {
 
     fields

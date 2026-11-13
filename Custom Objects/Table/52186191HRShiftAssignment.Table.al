@@ -1,4 +1,4 @@
-table 52186191 "HR Shift Assignment"
+table 86191 "HR Shift Assignment"
 {
     // DrillDownPageID = "HR Shift Assignment List";
     // LookupPageID = "HR Shift Assignment List";

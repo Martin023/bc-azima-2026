@@ -1,4 +1,4 @@
-page 52185627 "PR Transaction Code Card"
+page 85627 "PR Transaction Code Card"
 {
     PageType = Card;
     SourceTable = "PR Transaction Codes";

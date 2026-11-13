@@ -1,4 +1,4 @@
-table 52186217 "HR Approvals Set Up"
+table 86217 "HR Approvals Set Up"
 {
     DrillDownPageID = "FD Interest Calculation";
     LookupPageID = "FD Interest Calculation";

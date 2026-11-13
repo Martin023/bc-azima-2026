@@ -1,4 +1,4 @@
-table 52186509 "Sky Channels Loan Applications"
+table 86509 "Sky Channels Loan Applications"
 {
     Caption = 'Sky Channels Loan Applications';
     DataClassification = ToBeClassified;
@@ -736,7 +736,7 @@ table 52186509 "Sky Channels Loan Applications"
                 // Blob
                 TempBlob.CreateOutStream(OutStr);
                 Clear(TheLoanApplicationDocuments.Document);
-                StoreRecRef.Open(52186564);
+                StoreRecRef.Open(86564);
                 StoreImageRef := StoreRecRef.Field(TheLoanApplicationDocuments.FieldNo(Document));
                 RecRef.GetTable(LoanApp);
                 Report.SaveAs(Report::"Loan Application Report", ReportParameters, ReportFormat::Pdf, OutStr, RecRef);

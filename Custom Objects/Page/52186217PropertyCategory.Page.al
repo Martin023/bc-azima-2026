@@ -1,4 +1,4 @@
-page 52186217 "Property Category"
+page 86217 "Property Category"
 {
     PageType = List;
     SourceTable = "Property Category";

@@ -1,4 +1,4 @@
-table 52186000 "BOSA Account Activation"
+table 86000 "BOSA Account Activation"
 {
     DrillDownPageId = "BOSA Account Activation List";
     LookupPageId = "BOSA Account Activation List";

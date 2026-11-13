@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186605 "Member Withdrawal Notices ALL"
+page 86605 "Member Withdrawal Notices ALL"
 {
     ApplicationArea = All;
     Caption = 'Member Withdrawal Notices ALL';

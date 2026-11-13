@@ -1,4 +1,4 @@
-table 52186032 "Leases Billed New"
+table 86032 "Leases Billed New"
 {
     // DrillDownPageID = "Lease-Billed";
     // LookupPageID = "Lease-Billed";

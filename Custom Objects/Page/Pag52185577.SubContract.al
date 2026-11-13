@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52185577 "Sub Contract"
+page 85577 "Sub Contract"
 {
     ApplicationArea = All;
     Caption = 'Sub Contract';

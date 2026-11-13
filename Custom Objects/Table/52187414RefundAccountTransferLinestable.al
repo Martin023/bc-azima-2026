@@ -1,4 +1,4 @@
-table 52187414 "Refund,Account Transfer lines"
+table 87414 "Refund,Account Transfer lines"
 {
     Caption = 'Refund And Account Transfer';
     DrillDownPageID = "Refund,Account Transfer Lines";

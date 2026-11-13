@@ -1,4 +1,4 @@
-table 52186241 "Meeting Types"
+table 86241 "Meeting Types"
 {
 
     fields

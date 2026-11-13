@@ -1,4 +1,4 @@
-page 52186382 "File Mvt Remarks Card"
+page 86382 "File Mvt Remarks Card"
 {
     PageType = Card;
     Caption = 'File Movement Card';

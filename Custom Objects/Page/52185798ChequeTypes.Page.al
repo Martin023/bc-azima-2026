@@ -1,4 +1,4 @@
-page 52185798 "Cheque Types"
+page 85798 "Cheque Types"
 {
     PageType = List;
     SourceTable = "Cheque Types";

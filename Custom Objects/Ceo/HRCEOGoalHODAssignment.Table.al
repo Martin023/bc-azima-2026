@@ -1,4 +1,4 @@
-table 52185755 "HR CEO Goal HOD Assignment"
+table 85755 "HR CEO Goal HOD Assignment"
 {
     Caption = 'HR CEO Goal HOD Assignment';
     DataClassification = CustomerContent;

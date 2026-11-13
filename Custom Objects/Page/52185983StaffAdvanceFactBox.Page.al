@@ -1,4 +1,4 @@
-page 52185983 "Staff Advance FactBox"
+page 85983 "Staff Advance FactBox"
 {
     PageType = CardPart;
     SourceTable = "Staff Advance Lines";

@@ -1,4 +1,4 @@
-page 52185919 "Released Store Requisitions Li"
+page 85919 "Released Store Requisitions Li"
 {
     Caption = 'Released Store Requisitions';
     CardPageID = "Store Requisition Header";

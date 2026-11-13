@@ -1,4 +1,4 @@
-table 52186227 "Complain and Remarks"
+table 86227 "Complain and Remarks"
 {
     LookupPageID = "Complains and Remarks Page";
 

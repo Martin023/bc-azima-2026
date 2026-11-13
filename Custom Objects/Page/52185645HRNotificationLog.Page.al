@@ -1,4 +1,4 @@
-page 52185645 "HR Notification Log"
+page 85645 "HR Notification Log"
 {
     PageType = List;
     ApplicationArea = All;

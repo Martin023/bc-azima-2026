@@ -1,4 +1,4 @@
-page 52187317 "Member Card Edits"
+page 87317 "Member Card Edits"
 {
     PageType = Card;
     ApplicationArea = All;
@@ -1343,7 +1343,7 @@ page 52187317 "Member Card Edits"
                 var
                 begin
                     if SystemEdits.Get(Rec."No.") then
-                        Page.Run(52187081, SystemEdits);
+                        Page.Run(87081, SystemEdits);
                 end;
             }
 
@@ -1359,7 +1359,7 @@ page 52187317 "Member Card Edits"
                 begin
 
                     if SystemEdits.Get(Rec."No.") then
-                        Page.Run(52187317, SystemEdits);
+                        Page.Run(87317, SystemEdits);
                 end;
 
             }
@@ -1412,7 +1412,7 @@ page 52187317 "Member Card Edits"
                     if SystemEdits.Status <> SystemEdits.Status::Approved then error('The status has to be approved');
                     if SystemEdits.Posted then Error('This record has already been posted');
 
-                    if SystemEdits."Table ID" = 52185700 then
+                    if SystemEdits."Table ID" = 85700 then
                         SystemEditsCard.SMSMemberOnChange(SystemEdits);
 
                     Message(SystemEditsCodeunit.SetFilterFields(SystemEdits."Table ID", SystemEdits."No.", Action::PostChanges, RecRef, RecRef));
@@ -1698,7 +1698,7 @@ page 52187317 "Member Card Edits"
         SystemFilterFields.SetRange("Record ID", RecordID);
         if SystemFilterFields.Find('-') then begin
             repeat
-                FieldRef := SystemEditsCodeunit.AssignFieldRefValue(52185700, '', SystemFilterFields."Field ID");
+                FieldRef := SystemEditsCodeunit.AssignFieldRefValue(85700, '', SystemFilterFields."Field ID");
                 if SystemFilterFields."Generally Edited" then
                     ConfigValidateMgt.EvaluateTextToFieldRef(SystemFilterFields."New Value", FieldRef, false)
                 else

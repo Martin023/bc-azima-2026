@@ -1,4 +1,4 @@
-table 52185886 "Imprest Surrender Details"
+table 85886 "Imprest Surrender Details"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186076 "Damages List"
+page 86076 "Damages List"
 {
     Caption = 'Contingent Liabilities List';
     PageType = List;

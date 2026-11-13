@@ -1,4 +1,4 @@
-codeunit 52186504 "EDMS Integration"
+codeunit 86504 "EDMS Integration"
 {
     procedure ArchiveMemberFiles(MemberApplicationNumber: Text) Response: Text
     var

@@ -1,4 +1,4 @@
-table 52186145 "HR Appraisal Journal Line"
+table 86145 "HR Appraisal Journal Line"
 {
 
     fields

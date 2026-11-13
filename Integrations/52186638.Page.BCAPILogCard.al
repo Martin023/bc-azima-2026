@@ -1,4 +1,4 @@
-page 52186638 "BC API Log Card"
+page 86638 "BC API Log Card"
 {
     ApplicationArea = All;
     Caption = 'BC API Log';

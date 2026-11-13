@@ -1,4 +1,4 @@
-page 52185617 "prSalary Arrears"
+page 85617 "prSalary Arrears"
 {
     PageType = Card;
     SourceTable = "prSalary Arrears";

@@ -1,4 +1,4 @@
-table 52185736 "Loan Disbursement Header"
+table 85736 "Loan Disbursement Header"
 {
     DrillDownPageID = "Loan Disbursement List";
     LookupPageID = "Loan Disbursement List";

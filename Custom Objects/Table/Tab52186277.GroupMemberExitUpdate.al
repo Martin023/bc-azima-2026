@@ -1,4 +1,4 @@
-table 52186277 "Group Member Exit & Update"
+table 86277 "Group Member Exit & Update"
 {
     Caption = '"Group Member Exit & Update"';
     DataClassification = ToBeClassified;

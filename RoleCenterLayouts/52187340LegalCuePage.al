@@ -1,4 +1,4 @@
-page 52187340 "Legal Cue Page"
+page 87340 "Legal Cue Page"
 {
     Caption = 'Legal Activities';
     PageType = CardPart;

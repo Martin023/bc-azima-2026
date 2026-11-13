@@ -1,4 +1,4 @@
-page 52185920 "Imprest Surrender"
+page 85920 "Imprest Surrender"
 {
     Caption = 'Imprest Surrender';
     DeleteAllowed = false;

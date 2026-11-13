@@ -1,4 +1,4 @@
-page 52186022 "SMS Template Token Usage SF"
+page 86022 "SMS Template Token Usage SF"
 {
     PageType = ListPart;
     ApplicationArea = All;

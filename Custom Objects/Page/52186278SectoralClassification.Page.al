@@ -1,4 +1,4 @@
-page 52186278 "Sectoral Classification"
+page 86278 "Sectoral Classification"
 {
     DataCaptionFields = "Sector Description";
     PageType = List;

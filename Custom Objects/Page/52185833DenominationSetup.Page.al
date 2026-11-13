@@ -1,4 +1,4 @@
-page 52185833 "Denomination Setup"
+page 85833 "Denomination Setup"
 {
     PageType = List;
     SourceTable = Denominations;

@@ -1,7 +1,7 @@
 namespace AZIMA.AZIMA;
 using Microsoft.Foundation.Company;
 
-report 52185425 "Sales Routes Plan Report"
+report 85425 "Sales Routes Plan Report"
 {
     ApplicationArea = All;
     Caption = 'Sales Routes Plan Report';

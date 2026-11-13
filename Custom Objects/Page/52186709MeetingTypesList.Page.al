@@ -1,4 +1,4 @@
-page 52186709 "Meeting Types List"
+page 86709 "Meeting Types List"
 {
     CardPageID = "Meeting Type Card";
     DeleteAllowed = false;

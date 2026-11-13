@@ -1,4 +1,4 @@
-table 52185661 "prNet Pay"
+table 85661 "prNet Pay"
 {
 
     fields

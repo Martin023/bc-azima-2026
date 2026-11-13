@@ -1,4 +1,4 @@
-page 52185774 "Loan Product Appraisal"
+page 85774 "Loan Product Appraisal"
 {
     PageType = List;
     SourceTable = "Loan Product Parameters";

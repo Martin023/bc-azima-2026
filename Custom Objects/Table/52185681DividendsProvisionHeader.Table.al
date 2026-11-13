@@ -1,4 +1,4 @@
-table 52185681 "Dividends Provision Header"
+table 85681 "Dividends Provision Header"
 {
     DrillDownPageID = "Dividends Provision List";
     LookupPageID = "Dividends Provision List";

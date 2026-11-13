@@ -1,4 +1,4 @@
-page 52185769 "Loans Posted"
+page 85769 "Loans Posted"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

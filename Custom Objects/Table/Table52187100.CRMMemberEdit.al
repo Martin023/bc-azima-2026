@@ -1,4 +1,4 @@
-table 52187100 "CRM Member Edit"
+table 87100 "CRM Member Edit"
 {
     DataClassification = ToBeClassified;
     DrillDownPageId = "Open CRM Member Edits";

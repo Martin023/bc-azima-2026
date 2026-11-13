@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 using Microsoft.Bank.Check;
 
-report 52186095 "Loan Offer Letter Buss Loans"
+report 86095 "Loan Offer Letter Buss Loans"
 {
     ApplicationArea = All;
     Caption = 'Loan Offer Letter Buss Loans';

@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-xmlport 52185577 "Import Saving Monthly Interest"
+xmlport 85577 "Import Saving Monthly Interest"
 {
     Caption = 'Import Saving Monthly Interest';
     Format = VariableText;

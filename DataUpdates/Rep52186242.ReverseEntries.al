@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Finance.GeneralLedger.Journal;
 
-report 52186242 ReverseEntries
+report 86242 ReverseEntries
 {
     ApplicationArea = All;
     Caption = 'Reverse CAS Entries';

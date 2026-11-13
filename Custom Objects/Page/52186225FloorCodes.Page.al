@@ -1,4 +1,4 @@
-page 52186225 "Floor Codes"
+page 86225 "Floor Codes"
 {
     CardPageID = "Floor Description Card";
     Editable = false;

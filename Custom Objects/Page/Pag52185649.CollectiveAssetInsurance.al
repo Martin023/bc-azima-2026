@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52185649 "Collective Asset Insurance"
+page 85649 "Collective Asset Insurance"
 {
     Caption = 'Collective Asset Insurance';
     PageType = ListPart;

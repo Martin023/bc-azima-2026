@@ -1,4 +1,4 @@
-page 52187397 "Closed Vehicle Movements"
+page 87397 "Closed Vehicle Movements"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Request Card';

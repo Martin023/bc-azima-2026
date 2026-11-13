@@ -1,4 +1,4 @@
-page 52186476 "General SMS Header Card"
+page 86476 "General SMS Header Card"
 {
     ApplicationArea = All;
     Caption = 'General SMS Header Card';

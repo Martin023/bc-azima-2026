@@ -1,4 +1,4 @@
-report 52187332 "Instruction Template - Surety"
+report 87332 "Instruction Template - Surety"
 {
     ApplicationArea = All;
     Caption = 'Instruction Template - Surety CEO';

@@ -1,4 +1,4 @@
-page 52186765 "Bulk SMS Header"
+page 86765 "Bulk SMS Header"
 {
     SourceTable = "Bulk SMS Header";
     PromotedActionCategories = 'New,Process,Reports,Approvals,Defaulter Notification';

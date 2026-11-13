@@ -1,4 +1,4 @@
-page 52186683 "Non Member Mortgage List"
+page 86683 "Non Member Mortgage List"
 {
     CardPageID = "Mortgage Card";
     DelayedInsert = false;

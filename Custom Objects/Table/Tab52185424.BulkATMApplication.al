@@ -1,4 +1,4 @@
-table 52185424 "Bulk ATM Application"
+table 85424 "Bulk ATM Application"
 {
     Caption = 'Bulk ATM Application';
     DrillDownPageId = "Bulk Atm List";

@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186575 "Perfection In Progress list"
+page 86575 "Perfection In Progress list"
 {
     ApplicationArea = All;
     Caption = 'Perfection In Progress list';

@@ -1,4 +1,4 @@
-table 52186086 "User Stations"
+table 86086 "User Stations"
 {
 
     fields

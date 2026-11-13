@@ -1,4 +1,4 @@
-page 52185728 "Member Group"
+page 85728 "Member Group"
 {
     DeleteAllowed = false;
     Editable = false;
@@ -286,12 +286,12 @@ page 52185728 "Member Group"
                                 if Confirm('Would you wish to have a look at the existing one(s)') then begin
                                     if PresentEdits = 1 then begin
                                         if SystemEdits.Get(EditsHelper."Edits Header No.") then
-                                            Page.Run(52187317, SystemEdits);
+                                            Page.Run(87317, SystemEdits);
                                     end else begin
                                         EditsHelper.Reset();
                                         EditsHelper.SetRange("Record No.", Rec."No.");
                                         if EditsHelper.Find('-') then
-                                            Page.Run(52187316, EditsHelper);
+                                            Page.Run(87316, EditsHelper);
                                     end;
                                 end;
                             end;
@@ -324,7 +324,7 @@ page 52185728 "Member Group"
                             PresentEdits := EditsHelper.Count;
 
                             if PresentEdits > 0 then begin
-                                Page.Run(52187316, EditsHelper);
+                                Page.Run(87316, EditsHelper);
                             end;
                         end;
                         if PresentEdits = 0 then begin
@@ -453,9 +453,9 @@ page 52185728 "Member Group"
     procedure CreateNewEdit()
     begin
         SystemEdits.Init();
-        SystemEdits."Table ID" := 52185700;
+        SystemEdits."Table ID" := 85700;
         if SystemEdits.Insert(true) then begin
-            RecRef.Open(52185700);
+            RecRef.Open(85700);
             SystemEditsFilters.Init();
             SystemEditsFilters."Record ID" := SystemEdits."No.";
             SystemEditsFilters."Field ID" := 1;
@@ -472,9 +472,9 @@ page 52185728 "Member Group"
             Rec."Marked For Edits" := true;
             Rec.Modify();
 
-            SystemEditsCodeunit.SetFilterFields(52185700, SystemEdits."No.", Action::SetFilter, RecRef, RecRef);
+            SystemEditsCodeunit.SetFilterFields(85700, SystemEdits."No.", Action::SetFilter, RecRef, RecRef);
 
-            Page.Run(52187317, SystemEdits);
+            Page.Run(87317, SystemEdits);
         end;
     end;
 

@@ -1,4 +1,4 @@
-page 52185976 "Global SMS Template List"
+page 85976 "Global SMS Template List"
 {
     PageType = List;
     ApplicationArea = All;

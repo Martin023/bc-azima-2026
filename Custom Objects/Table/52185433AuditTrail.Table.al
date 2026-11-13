@@ -1,4 +1,4 @@
-table 52185433 "Audit Trail"
+table 85433 "Audit Trail"
 {
 
     fields

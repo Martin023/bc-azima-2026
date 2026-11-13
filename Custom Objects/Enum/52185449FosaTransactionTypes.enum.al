@@ -1,4 +1,4 @@
-enum 52185449 "Fosa Transaction Types"
+enum 85449 "Fosa Transaction Types"
 {
     Value(0; "Cash Deposit") { }
     Value(1; "Cash Withdrawal") { }

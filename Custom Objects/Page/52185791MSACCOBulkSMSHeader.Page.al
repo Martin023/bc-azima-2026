@@ -1,4 +1,4 @@
-page 52185791 "Bulk SMS Header List"
+page 85791 "Bulk SMS Header List"
 {
     CardPageID = "Bulk SMS Header";
     Editable = false;

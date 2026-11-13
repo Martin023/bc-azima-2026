@@ -1,4 +1,4 @@
-page 52187338 "Appealed Lines"
+page 87338 "Appealed Lines"
 {
     ApplicationArea = All;
     Caption = 'Appealed Lines';

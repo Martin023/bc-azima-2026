@@ -1,4 +1,4 @@
-table 52185686 EDMS
+table 85686 EDMS
 {
 
     fields

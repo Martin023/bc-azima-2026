@@ -1,4 +1,4 @@
-enum 52185466 "Sky Survey Triggers"
+enum 85466 "Sky Survey Triggers"
 {
     value(0; LOAN_DISBURSEMENT)
     {

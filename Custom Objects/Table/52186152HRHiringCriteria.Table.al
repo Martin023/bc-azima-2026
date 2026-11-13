@@ -1,4 +1,4 @@
-table 52186152 "HR Hiring Criteria"
+table 86152 "HR Hiring Criteria"
 {
 
     fields

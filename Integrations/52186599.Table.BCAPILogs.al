@@ -1,4 +1,4 @@
-table 52186599 "BC API Logs"
+table 86599 "BC API Logs"
 {
     DataClassification = SystemMetadata;
 

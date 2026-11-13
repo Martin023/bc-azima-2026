@@ -1,4 +1,4 @@
-page 52186882 "Account Activation"
+page 86882 "Account Activation"
 {
     DeleteAllowed = false;
     PageType = Card;

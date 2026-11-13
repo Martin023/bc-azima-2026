@@ -1,4 +1,4 @@
-page 52185716 "Member Application Group"
+page 85716 "Member Application Group"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -461,7 +461,7 @@ page 52185716 "Member Application Group"
 
                         ApprovalCommentLine: Record "Approval Comment Line";
                     begin
-                        ApprovalCommentLine.SetRange("Table ID", 52185690);
+                        ApprovalCommentLine.SetRange("Table ID", 85690);
                         ApprovalCommentLine.SetRange("Record ID to Approve", Rec.RecordId);
                         PAGE.Run(PAGE::"Approval Comments", ApprovalCommentLine);
                     end;

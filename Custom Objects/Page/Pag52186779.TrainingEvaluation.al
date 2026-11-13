@@ -1,4 +1,4 @@
-page 52186779 "Training Evaluation"
+page 86779 "Training Evaluation"
 {
     CardPageId= "HR Training Feedback";
     ApplicationArea = All;

@@ -1,4 +1,4 @@
-page 52186385 "File MVT Remarks"
+page 86385 "File MVT Remarks"
 {
     CardPageID = "File Mvt Remarks Card";
     PageType = List;

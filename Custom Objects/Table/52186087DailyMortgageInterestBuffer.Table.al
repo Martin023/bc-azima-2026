@@ -1,4 +1,4 @@
-table 52186087 "Daily Mortgage Interest Buffer"
+table 86087 "Daily Mortgage Interest Buffer"
 {
 
     fields

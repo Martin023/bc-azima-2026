@@ -1,4 +1,4 @@
-table 52185982 "Global Bulk SMS Header"
+table 85982 "Global Bulk SMS Header"
 {
     Caption = 'Global Bulk SMS Header';
     DataClassification = CustomerContent;

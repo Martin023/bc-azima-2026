@@ -1,4 +1,4 @@
-table 52185476 "Sky USSD Auth"
+table 85476 "Sky USSD Auth"
 {
 
     fields

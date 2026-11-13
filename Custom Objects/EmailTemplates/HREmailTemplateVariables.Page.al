@@ -1,4 +1,4 @@
-page 52185937 "HR Email Template Variables"
+page 85937 "HR Email Template Variables"
 {
     Caption = 'Available Tokens';
     PageType = ListPart;

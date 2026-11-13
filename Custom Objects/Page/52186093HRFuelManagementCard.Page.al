@@ -1,4 +1,4 @@
-page 52186093 "HR Fuel Management Card"
+page 86093 "HR Fuel Management Card"
 {
     SourceTable = "HR Fuel Management Header";
     PageType = Card;

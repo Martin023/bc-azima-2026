@@ -1,4 +1,4 @@
-table 52187360 "Nominee Lines Table"
+table 87360 "Nominee Lines Table"
 {
     Caption = 'Nominee Lines Table';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52185522 "HR Employee SIC Numbers"
+table 85522 "HR Employee SIC Numbers"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52185998 "Destination Code List"
+page 85998 "Destination Code List"
 {
     CardPageID = "Destination Code Card";
     InsertAllowed = false;

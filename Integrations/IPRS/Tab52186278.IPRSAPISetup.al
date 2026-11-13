@@ -1,4 +1,4 @@
-table 52186278 "IPRS API Setup"
+table 86278 "IPRS API Setup"
 {
     Caption = 'IPRS API Setup';
     DataClassification = ToBeClassified;

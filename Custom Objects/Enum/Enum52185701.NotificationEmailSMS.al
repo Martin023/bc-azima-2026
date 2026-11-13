@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-enum 52185701 NotificationEmailSMS
+enum 85701 NotificationEmailSMS
 {
     Extensible = true;
     

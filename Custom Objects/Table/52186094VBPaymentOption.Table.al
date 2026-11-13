@@ -1,4 +1,4 @@
-table 52186094 "VB Payment Option"
+table 86094 "VB Payment Option"
 {
 
     fields

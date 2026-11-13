@@ -1,4 +1,4 @@
-report 52187403 "Total Liabilities report"
+report 87403 "Total Liabilities report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

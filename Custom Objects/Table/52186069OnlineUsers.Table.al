@@ -1,4 +1,4 @@
-table 52186069 "Online Users"
+table 86069 "Online Users"
 {
     DrillDownPageId = "Online Users";
     LookupPageId = "Online Users";

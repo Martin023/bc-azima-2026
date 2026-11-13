@@ -1,4 +1,4 @@
-table 52186058 "Delegates Meeting Minutes"
+table 86058 "Delegates Meeting Minutes"
 {
 
     fields

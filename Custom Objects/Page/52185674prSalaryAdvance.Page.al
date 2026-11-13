@@ -1,4 +1,4 @@
-page 52185674 "prSalary Advance"
+page 85674 "prSalary Advance"
 {
     PageType = Card;
     SourceTable = "prSalary Advance";

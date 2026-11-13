@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52186900 "Stock Keeping Lines"
+page 86900 "Stock Keeping Lines"
 {
     ApplicationArea = All;
     Caption = 'Stock Keeping Lines';

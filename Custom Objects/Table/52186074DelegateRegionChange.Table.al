@@ -1,4 +1,4 @@
-table 52186074 "Delegate Region Change"
+table 86074 "Delegate Region Change"
 {
     DataCaptionFields = "Code", "Delegate Region Description", "Electoral Zone";
     DrillDownPageID = "Delegate Group Change Lists";

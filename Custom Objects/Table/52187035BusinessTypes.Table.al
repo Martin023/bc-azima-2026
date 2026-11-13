@@ -1,4 +1,4 @@
-table 52187035 "Business Types"
+table 87035 "Business Types"
 {
     LookupPageId = "Business Types";
     DataClassification = ToBeClassified;

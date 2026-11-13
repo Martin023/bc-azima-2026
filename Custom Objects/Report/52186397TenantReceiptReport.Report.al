@@ -1,4 +1,4 @@
-Report 52186397 "Tenant Receipt"
+Report 86397 "Tenant Receipt"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Tenant Receipt.rdl';

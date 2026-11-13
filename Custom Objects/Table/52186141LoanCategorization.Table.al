@@ -1,4 +1,4 @@
-table 52186141 "Loan Categorization"
+table 86141 "Loan Categorization"
 {
     LookupPageId = "Loan Categorization";
     DrillDownPageId = "Loan Categorization";

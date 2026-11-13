@@ -1,4 +1,4 @@
-page 52186495 "HR Disciplinary Cases SF"
+page 86495 "HR Disciplinary Cases SF"
 {
     PageType = ListPart;
     SourceTable = "HR Disciplinary Cases NCA";

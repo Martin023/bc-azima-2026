@@ -1,4 +1,4 @@
-page 52186701 "Approved Electoral List"
+page 86701 "Approved Electoral List"
 {
     CardPageID = "Electoral Zones Card";
     DeleteAllowed = false;

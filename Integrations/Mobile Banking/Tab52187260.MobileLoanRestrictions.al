@@ -1,4 +1,4 @@
-table 52187260 "Mobile Loan Restrictions"
+table 87260 "Mobile Loan Restrictions"
 {
     Caption = 'Mobile Loan Restrictions';
     DataClassification = ToBeClassified;

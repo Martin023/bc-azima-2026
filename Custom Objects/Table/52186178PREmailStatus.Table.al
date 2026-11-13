@@ -1,4 +1,4 @@
-table 52186178 "PR Email Status"
+table 86178 "PR Email Status"
 {
 
     fields

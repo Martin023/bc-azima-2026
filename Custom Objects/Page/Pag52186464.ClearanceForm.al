@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using System.Security.User;
 
-page 52186464 "Clearance Form List"
+page 86464 "Clearance Form List"
 {
     CardPageId="Clearance Form";
     Caption = 'Clearance Form';

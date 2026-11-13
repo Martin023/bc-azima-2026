@@ -1,4 +1,4 @@
-table 52185828 "Guarantors Substitution"
+table 85828 "Guarantors Substitution"
 {
     DrillDownPageID = "Guarantor Subsitution List";
     LookupPageID = "Guarantor Subsitution List";

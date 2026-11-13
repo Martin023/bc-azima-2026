@@ -1,4 +1,4 @@
-table 52185567 "Trigger Survey Setup"
+table 85567 "Trigger Survey Setup"
 {
     Caption = 'Trigger Survey Setup';
     DataClassification = ToBeClassified;

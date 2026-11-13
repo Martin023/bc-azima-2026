@@ -1,4 +1,4 @@
-enum 52185469 "SMS Module"
+enum 85469 "SMS Module"
 {
     Extensible = true;
 

@@ -1,4 +1,4 @@
-page 52185855 "Guarantor Substitution"
+page 85855 "Guarantor Substitution"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -541,7 +541,7 @@ page 52185855 "Guarantor Substitution"
                     Promoted = true;
                     PromotedCategory = Category4;
                     Image = Comment;
-                    RunObject = page 52187231;
+                    RunObject = page 87231;
                     RunPageLink = "Loan No." = field("Loan No.");
                 }
                 action(Approvals)

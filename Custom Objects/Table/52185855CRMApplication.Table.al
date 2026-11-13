@@ -1,4 +1,4 @@
-table 52185855 "CRM Application"
+table 85855 "CRM Application"
 {
     DrillDownPageID = "CRM Application List";
     LookupPageID = "CRM Application List";

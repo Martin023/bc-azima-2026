@@ -1,4 +1,4 @@
-table 52185583 "HR Training App Lines"
+table 85583 "HR Training App Lines"
 {
     // DrillDownPageID = "HR Training Application Lines";
     // LookupPageID = "HR Training Application Lines";

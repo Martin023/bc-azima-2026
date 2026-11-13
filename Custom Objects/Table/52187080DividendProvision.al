@@ -1,4 +1,4 @@
-table 52187080 "Dividend Provision"
+table 87080 "Dividend Provision"
 {
     LookupPageID = "Dividend Provision";
 

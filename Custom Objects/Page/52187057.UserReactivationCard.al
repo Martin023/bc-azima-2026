@@ -1,4 +1,4 @@
-page 52187057 "User Reactivation Card"
+page 87057 "User Reactivation Card"
 {
     DeleteAllowed = false;
     ApplicationArea = All;

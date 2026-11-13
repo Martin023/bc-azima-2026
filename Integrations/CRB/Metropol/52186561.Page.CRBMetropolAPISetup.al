@@ -1,4 +1,4 @@
-page 52186561 "CRB Metropol API Setup"
+page 86561 "CRB Metropol API Setup"
 {
     PageType = List;
     ApplicationArea = Advanced;

@@ -1,4 +1,4 @@
-page 52186370 "Mortage Doc Release Card"
+page 86370 "Mortage Doc Release Card"
 {
     DeleteAllowed = false;
     PageType = Card;

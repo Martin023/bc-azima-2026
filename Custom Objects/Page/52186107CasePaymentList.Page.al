@@ -1,4 +1,4 @@
-page 52186107 "Case Payment List"
+page 86107 "Case Payment List"
 {
     CardPageID = "Case Payment Header";
     Editable = false;

@@ -1,4 +1,4 @@
-table 52186160 "HR Shortlisting Panel"
+table 86160 "HR Shortlisting Panel"
 {
 
     fields

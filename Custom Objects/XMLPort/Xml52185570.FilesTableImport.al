@@ -1,5 +1,5 @@
 
-xmlport 52185570 FilesTableImport
+xmlport 85570 FilesTableImport
 {
     Format = VariableText;
     Caption = 'FilesTableImport';

@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186089 "Archived Files"
+report 86089 "Archived Files"
 {
     ApplicationArea = All;
     Caption = 'Archived Files';

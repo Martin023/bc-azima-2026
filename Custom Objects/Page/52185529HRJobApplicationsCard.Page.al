@@ -1,4 +1,4 @@
-page 52185529 "HR Job Applications Card"
+page 85529 "HR Job Applications Card"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Functions,Other Details,Job Details,,,Approvals';

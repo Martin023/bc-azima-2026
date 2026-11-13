@@ -1,4 +1,4 @@
-codeunit 52187101 "Sky Send Email"
+codeunit 87101 "Sky Send Email"
 {
     procedure QueueOutgoingEmail(
         ReceiverEmailAddress: Text;

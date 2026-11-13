@@ -1,4 +1,4 @@
-page 52185427 "Loan Reappotionment List"
+page 85427 "Loan Reappotionment List"
 {
     CardPageID = "Loan Recovery Header";
     DeleteAllowed = false;

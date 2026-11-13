@@ -1,4 +1,4 @@
-page 52185476 "Sms Messages Archive"
+page 85476 "Sms Messages Archive"
 {
     Editable = false;
     PageType = List;

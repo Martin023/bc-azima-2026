@@ -1,4 +1,4 @@
-page 52186171 "Update Agent Applications"
+page 86171 "Update Agent Applications"
 {
     PageType = Card;
     SourceTable = "Update Agent Application";

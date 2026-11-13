@@ -1,4 +1,4 @@
-page 52185824 "Account Transfer Destination"
+page 85824 "Account Transfer Destination"
 {
     PageType = ListPart;
     SourceTable = "Account Transfer Destination";

@@ -1,4 +1,4 @@
-table 52185795 "Over Draft Authorisation"
+table 85795 "Over Draft Authorisation"
 {
     DrillDownPageID = "Over Draft Authorisation List";
     LookupPageID = "Over Draft Authorisation List";

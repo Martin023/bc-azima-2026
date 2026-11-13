@@ -1,4 +1,4 @@
-page 52185637 prSalaryArrears
+page 85637 prSalaryArrears
 {
     Editable = false;
     PageType = ListPart;

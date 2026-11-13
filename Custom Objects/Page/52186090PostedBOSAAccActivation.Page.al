@@ -1,4 +1,4 @@
-page 52186090 "Posted BOSA Account Activation"
+page 86090 "Posted BOSA Account Activation"
 {
     Caption = 'Posted BOSA Account Activation List';
     CardPageID = "BOSA Account Activation";

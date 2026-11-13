@@ -1,4 +1,4 @@
-page 52185693 "Agent Application Card"
+page 85693 "Agent Application Card"
 {
     PageType = Card;
     //Permissions = TableData TableData39006049 = rimd;

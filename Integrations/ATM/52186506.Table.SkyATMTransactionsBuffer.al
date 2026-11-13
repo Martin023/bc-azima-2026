@@ -1,4 +1,4 @@
-table 52186506 "Sky ATM Transactions Buffer"
+table 86506 "Sky ATM Transactions Buffer"
 {
     DataClassification = AccountData;
     LookupPageId = "Sky ATM Transactions Buffer";

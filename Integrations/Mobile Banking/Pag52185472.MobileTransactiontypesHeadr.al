@@ -1,4 +1,4 @@
-page 52185472 "Mobile Transaction types List"
+page 85472 "Mobile Transaction types List"
 {
     ApplicationArea = All;
     Caption = 'Mobile Transaction types List';

@@ -1,4 +1,4 @@
-table 52185568 "HR Disciplinary Cases"
+table 85568 "HR Disciplinary Cases"
 {
 
     fields

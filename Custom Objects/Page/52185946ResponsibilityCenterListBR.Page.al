@@ -1,4 +1,4 @@
-page 52185946 "Responsibility Center ListBR"
+page 85946 "Responsibility Center ListBR"
 {
     Caption = 'Responsibility Center List';
     CardPageID = "Responsibility Center CardBR";

@@ -1,4 +1,4 @@
-page 52185592 "HR Setup"
+page 85592 "HR Setup"
 {
     DeleteAllowed = false;
     InsertAllowed = true;

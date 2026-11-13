@@ -1,4 +1,4 @@
-table 52187026 "ATM Inventory"
+table 87026 "ATM Inventory"
 {
     Caption = 'ATM Inventory';
     DataClassification = ToBeClassified;

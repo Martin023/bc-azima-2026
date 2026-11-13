@@ -1,4 +1,4 @@
-page 52185659 "PR Salary List (ALL)"
+page 85659 "PR Salary List (ALL)"
 {
     CardPageID = "PR Header Salary Card - ALL";
     DeleteAllowed = false;

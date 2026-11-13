@@ -1,4 +1,4 @@
-page 52186648 "Mobile Banking App List"
+page 86648 "Mobile Banking App List"
 {
     Caption = 'Mobile Banking Application List';
     CardPageID = "Mobile Banking Card";

@@ -1,4 +1,4 @@
-page 52185996 "Posted Bank & Cash Transfer"
+page 85996 "Posted Bank & Cash Transfer"
 {
     DeleteAllowed = false;
     Editable = false;

@@ -1,4 +1,4 @@
-table 52186791 "DMU SMS Templates"
+table 86791 "DMU SMS Templates"
 {
     LookupPageId = "SMS Templates";
     DrillDownPageId = "SMS Templates";

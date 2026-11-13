@@ -1,4 +1,4 @@
-page 52185984 "Staff Advance Surrender FactBo"
+page 85984 "Staff Advance Surrender FactBo"
 {
     PageType = CardPart;
     SourceTable = "Staff Advanc Surrender Details";

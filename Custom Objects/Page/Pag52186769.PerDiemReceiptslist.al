@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-page 52186769 "Per-Diem Receipts list"
+page 86769 "Per-Diem Receipts list"
 {
     ApplicationArea = All;
     Caption = 'Per-Diem/Claims Payments list';

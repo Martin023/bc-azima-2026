@@ -1,4 +1,4 @@
-page 52186126 "Store Requisition List"
+page 86126 "Store Requisition List"
 {
     // CardPageID = "Store Requisition Header";
     Editable = false;
@@ -171,7 +171,7 @@ page 52186126 "Store Requisition List"
                     begin
                         Rec.Reset;
                         Rec.SetFilter("No.", Rec."No.");
-                        REPORT.Run(52185785, true, true, Rec);
+                        REPORT.Run(85785, true, true, Rec);
                         Rec.Reset;
                     end;
                 }

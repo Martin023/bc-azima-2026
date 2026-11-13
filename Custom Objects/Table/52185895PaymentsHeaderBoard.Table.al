@@ -1,4 +1,4 @@
-table 52185895 "Payments Header Board"
+table 85895 "Payments Header Board"
 {
     DrillDownPageId = "Payment Voucher Board List";
     fields

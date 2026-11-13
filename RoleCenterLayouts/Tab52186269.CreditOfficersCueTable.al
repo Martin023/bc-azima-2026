@@ -1,4 +1,4 @@
-table 52186269 "Credit Officers Cue Table"
+table 86269 "Credit Officers Cue Table"
 {
     Caption = 'Credit Officers Cue Table';
     DataClassification = ToBeClassified;

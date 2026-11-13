@@ -1,6 +1,6 @@
 namespace Microsoft.Bank.Ledger;
 using Microsoft.Sales.Receivables;
-codeunit 52185425 "Customer Running balalnce"
+codeunit 85425 "Customer Running balalnce"
 {
     SingleInstance = true;
 

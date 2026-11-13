@@ -1,4 +1,4 @@
-page 52186665 "Pending Member Application V"
+page 86665 "Pending Member Application V"
 {
     CardPageID = "Member Application Single";
     DeleteAllowed = false;

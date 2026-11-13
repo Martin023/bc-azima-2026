@@ -1,4 +1,4 @@
-page 52186279 "ATM Linking Statistics"
+page 86279 "ATM Linking Statistics"
 {
     DeleteAllowed = false;
     Editable = false;

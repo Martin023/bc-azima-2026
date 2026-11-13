@@ -1,4 +1,4 @@
-page 52186127 "Loanee Information Base"
+page 86127 "Loanee Information Base"
 {
     DeleteAllowed = false;
     PageType = List;

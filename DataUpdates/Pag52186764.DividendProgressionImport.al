@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-page 52186764 "Dividend Progression Import"
+page 86764 "Dividend Progression Import"
 {
     ApplicationArea = All;
     Caption = 'Dividend Progression Import';

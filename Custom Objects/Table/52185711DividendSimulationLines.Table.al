@@ -1,4 +1,4 @@
-table 52185711 "Dividend Simulation Lines"
+table 85711 "Dividend Simulation Lines"
 {
 
     fields

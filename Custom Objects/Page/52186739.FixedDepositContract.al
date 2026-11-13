@@ -1,4 +1,4 @@
-page 52186739 "Fixed Deposit Contract"
+page 86739 "Fixed Deposit Contract"
 {
     Caption = 'Fixed/Call Deposit Card';
     Editable = true;

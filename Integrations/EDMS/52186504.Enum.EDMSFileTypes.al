@@ -1,4 +1,4 @@
-enum 52186504 "EDMS File Types"
+enum 86504 "EDMS File Types"
 {
     Extensible = true;
 

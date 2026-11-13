@@ -1,4 +1,4 @@
-page 52186057 "Vote Transfer List."
+page 86057 "Vote Transfer List."
 {
     CardPageID = "Vote Transfer";
     DeleteAllowed = false;

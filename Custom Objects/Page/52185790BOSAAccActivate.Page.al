@@ -1,4 +1,4 @@
-page 52186088 "BOSA Account Activation"
+page 86088 "BOSA Account Activation"
 {
     DeleteAllowed = false;
     PageType = Card;

@@ -1,4 +1,4 @@
-page 52186044 "Closed RFQ Header"
+page 86044 "Closed RFQ Header"
 {
     PageType = Document;
     SourceTable = "Purchase Quote Header";

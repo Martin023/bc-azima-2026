@@ -1,4 +1,4 @@
-page 52185852 "Account Closure Line"
+page 85852 "Account Closure Line"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

@@ -1,4 +1,4 @@
-table 52186155 "HR Dept. Responsibilities"
+table 86155 "HR Dept. Responsibilities"
 {
 
     fields

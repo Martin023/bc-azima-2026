@@ -1,4 +1,4 @@
-report 52187381 "Tenant Aging Report"
+report 87381 "Tenant Aging Report"
 {
     Caption = 'Tenant Aging Report';
     RDLCLayout = './bc-azima-2026/Layout/Tenant Aging.rdl';

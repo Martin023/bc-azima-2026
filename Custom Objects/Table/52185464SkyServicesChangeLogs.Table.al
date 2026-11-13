@@ -1,4 +1,4 @@
-table 52185464 "Sky Services Change Logs"
+table 85464 "Sky Services Change Logs"
 {
 
     fields

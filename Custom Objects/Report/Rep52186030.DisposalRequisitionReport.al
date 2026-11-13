@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186030 "Disposal Requisition Report"
+report 86030 "Disposal Requisition Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Disposal Requisition Report.rdl';

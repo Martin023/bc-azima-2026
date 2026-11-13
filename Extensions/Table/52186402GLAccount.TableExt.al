@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-TableExtension 52186402 "G/L Account Ext" extends "G/L Account"
+TableExtension 86402 "G/L Account Ext" extends "G/L Account"
 {
 
     fields
@@ -201,7 +201,7 @@ TableExtension 52186402 "G/L Account Ext" extends "G/L Account"
     // Prevents creation of new g/ls by non finance members
     procedure FnRestrictAccess()
     var
-        StatusPermission: Record 52185687;
+        StatusPermission: Record 85687;
         ErrorOnRestrictViewTxt: label 'You do not have permissions to EDIT this Page. This is restricted to only FINANCE and IT Department only. Contact IT department for further details';
     begin
         StatusPermission.Reset;

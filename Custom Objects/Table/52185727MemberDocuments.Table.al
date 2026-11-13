@@ -1,4 +1,4 @@
-table 52185727 "Member Documents"
+table 85727 "Member Documents"
 {
 
     fields

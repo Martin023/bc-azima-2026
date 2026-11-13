@@ -1,4 +1,4 @@
-table 52186169 "HR Car Loan Setup"
+table 86169 "HR Car Loan Setup"
 {
 
     fields

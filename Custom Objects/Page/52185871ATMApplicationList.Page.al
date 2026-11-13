@@ -1,4 +1,4 @@
-page 52185871 "ATM Application List"
+page 85871 "ATM Application List"
 {
     CardPageID = "ATM Application Card";
     Editable = false;

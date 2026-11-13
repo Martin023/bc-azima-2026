@@ -1,4 +1,4 @@
-table 52185488 "Sky Search Options"
+table 85488 "Sky Search Options"
 {
 
     fields

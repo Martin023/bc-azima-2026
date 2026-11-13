@@ -1,6 +1,6 @@
 namespace mns.mns;
 
-page 52186508 "Vendor Categories List"
+page 86508 "Vendor Categories List"
 {
     
     Caption = 'Vendor Categories List';

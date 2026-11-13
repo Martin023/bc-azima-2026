@@ -1,4 +1,4 @@
-table 52185840 "Securities Register"
+table 85840 "Securities Register"
 
 {
     // LookupPageId = "Collateral Register - List";

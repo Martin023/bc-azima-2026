@@ -1,4 +1,4 @@
-table 52186133 "M-SACCO SMS MessagesBackup"
+table 86133 "M-SACCO SMS MessagesBackup"
 {
 
     fields

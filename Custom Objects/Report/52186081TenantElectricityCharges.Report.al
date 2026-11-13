@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 52186081 "Tenants Electricity Charges"
+Report 86081 "Tenants Electricity Charges"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Tenants Electricity Charges.rdl';

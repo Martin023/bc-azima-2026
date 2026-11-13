@@ -1,4 +1,4 @@
-page 52186097 "FA WIP Suggest Lines List"
+page 86097 "FA WIP Suggest Lines List"
 {
     SourceTable = "FA WIP Suggest Lines";
     ApplicationArea = Basic, Suite;

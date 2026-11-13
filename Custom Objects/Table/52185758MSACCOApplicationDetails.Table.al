@@ -1,4 +1,4 @@
-table 52185758 "M-SACCO Application Details"
+table 85758 "M-SACCO Application Details"
 {
 
     fields

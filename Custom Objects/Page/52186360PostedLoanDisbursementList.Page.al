@@ -1,4 +1,4 @@
-page 52186360 "Posted Loan Disbursement List"
+page 86360 "Posted Loan Disbursement List"
 {
     CardPageID = "Loan Disbursement Header";
     Editable = false;

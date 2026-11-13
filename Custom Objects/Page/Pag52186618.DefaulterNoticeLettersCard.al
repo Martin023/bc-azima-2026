@@ -1,7 +1,7 @@
 namespace AZIMA.AZIMA;
 using System.Text;
 
-page 52186590 "Defaulter Notice Letters Card"
+page 86590 "Defaulter Notice Letters Card"
 {
     ApplicationArea = All;
     Caption = 'Defaulter Notice Letters Card';

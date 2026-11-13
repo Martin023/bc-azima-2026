@@ -1,4 +1,4 @@
-page 52186684 "Rejected Cashier Transactions"
+page 86684 "Rejected Cashier Transactions"
 {
     CardPageID = "Cashier Transactions";
     Editable = false;

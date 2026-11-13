@@ -1,4 +1,4 @@
-table 52187161 "M-Banking Whitelist App"
+table 87161 "M-Banking Whitelist App"
 {
     Caption = 'M-Banking Whitelist Applications';
     DataClassification = ToBeClassified;

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Environment;
 using Microsoft.Foundation.Company;
 
-report 52185454 "Account Activation Details"
+report 85454 "Account Activation Details"
 {
     Caption = 'Account Activation Details';
     DefaultLayout = RDLC;
@@ -97,7 +97,7 @@ report 52185454 "Account Activation Details"
             trigger OnPreDataItem()
             begin
                 // "Change Log Entry".reset;
-                "Change Log Entry".SetRange("Table No.", 52185730);
+                "Change Log Entry".SetRange("Table No.", 85730);
                 "Change Log Entry".SetRange("Field No.", 40);
                 if AccountNo <> '' then begin
                     "Change Log Entry".SetFilter("Primary Key Field 1 Value", '%1', AccountNo);

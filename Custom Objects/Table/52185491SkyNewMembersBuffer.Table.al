@@ -1,4 +1,4 @@
-table 52185491 "Sky New Members Buffer"
+table 85491 "Sky New Members Buffer"
 {
 
     fields

@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186127 "Amounts Received - Deposit A/c"
+report 86127 "Amounts Received - Deposit A/c"
 {
     ApplicationArea = All;
     Caption = 'Amounts Received - Deposit A/c';

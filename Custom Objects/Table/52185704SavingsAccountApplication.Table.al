@@ -1,4 +1,4 @@
-table 52185704 "Savings Account Application"
+table 85704 "Savings Account Application"
 {
     DrillDownPageId = "Savings Account Application";
     LookupPageId = "Savings Account Application";

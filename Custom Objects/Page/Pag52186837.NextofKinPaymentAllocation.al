@@ -1,4 +1,4 @@
-page 52186837 "NextofKin Payment Allocation"
+page 86837 "NextofKin Payment Allocation"
 {
     ApplicationArea = All;
     Caption = 'NextofKin Payment Allocation';

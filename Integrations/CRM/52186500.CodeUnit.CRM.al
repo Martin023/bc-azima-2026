@@ -1,4 +1,4 @@
-codeunit 52186500 "CRM Integration"
+codeunit 86500 "CRM Integration"
 {
     procedure HandleRequest(Request: Text): Text
     var

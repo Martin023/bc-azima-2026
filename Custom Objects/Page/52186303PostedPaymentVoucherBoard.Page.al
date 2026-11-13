@@ -1,4 +1,4 @@
-page 52186303 "Posted Payment Voucher Board"
+page 86303 "Posted Payment Voucher Board"
 {
     DeleteAllowed = false;
     Editable = false;

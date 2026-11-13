@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186153 "Ind Member Lifetime Value Rep"
+report 86153 "Ind Member Lifetime Value Rep"
 {
     ApplicationArea = All;
     Caption = 'Ind. Member Lifetime Value Rep';

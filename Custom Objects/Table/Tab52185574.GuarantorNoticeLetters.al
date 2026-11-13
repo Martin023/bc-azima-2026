@@ -1,4 +1,4 @@
-table 52185574 "Guarantor Notice Letters"
+table 85574 "Guarantor Notice Letters"
 {
     Caption = 'Guarantor Notice Letters';
     DataClassification = ToBeClassified;

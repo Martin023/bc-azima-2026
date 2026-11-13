@@ -1,4 +1,4 @@
-page 52187294 "Approved Loans List_BL"
+page 87294 "Approved Loans List_BL"
 {
     Caption = 'Approved Loans(Business Loans)';
     CardPageID = "Loan Application Card";

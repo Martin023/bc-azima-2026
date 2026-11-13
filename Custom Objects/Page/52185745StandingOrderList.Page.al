@@ -1,4 +1,4 @@
-page 52185745 "Standing Order List"
+page 85745 "Standing Order List"
 {
     CardPageID = "Standing Order";
     DeleteAllowed = false;

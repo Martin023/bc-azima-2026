@@ -1,4 +1,4 @@
-page 52185477 "Internet Banking Transactions"
+page 85477 "Internet Banking Transactions"
 {
     DelayedInsert = false;
     DeleteAllowed = false;

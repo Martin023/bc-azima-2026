@@ -1,4 +1,4 @@
-page 52186826 "Investment Receipt"
+page 86826 "Investment Receipt"
 {
     DeleteAllowed = false;
     PageType = Document;

@@ -1,4 +1,4 @@
-table 52187153 "Loan FallOff"
+table 87153 "Loan FallOff"
 {
     DataClassification = ToBeClassified;
 

@@ -1,4 +1,4 @@
-table 52185740 Collateral
+table 85740 Collateral
 {
 
     fields

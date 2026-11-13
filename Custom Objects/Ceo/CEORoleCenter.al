@@ -1,4 +1,4 @@
-page 52185743 "CEO Role Center"
+page 85743 "CEO Role Center"
 {
     Caption = 'CEO Role Center';
     PageType = RoleCenter;
@@ -250,21 +250,21 @@ page 52185743 "CEO Role Center"
                 {
                     ApplicationArea = All;
                     Caption = 'Human Resources';
-                    RunObject = Page 52187320;
+                    RunObject = Page 87320;
                     Image = Employee;
                 }
                 action("Banking Management RC")
                 {
                     ApplicationArea = All;
                     Caption = 'Banking Management';
-                    RunObject = Page 52187301;
+                    RunObject = Page 87301;
                     Image = Bank;
                 }
                 action("Finance RC")
                 {
                     ApplicationArea = All;
                     Caption = 'Finance Department';
-                    RunObject = Page 52186778;
+                    RunObject = Page 86778;
                     Image = CashReceiptJournal;
                 }
                 // action("Audit RC")
@@ -278,28 +278,28 @@ page 52185743 "CEO Role Center"
                 {
                     ApplicationArea = All;
                     Caption = 'Loan Management';
-                    RunObject = Page 52185502;
+                    RunObject = Page 85502;
                     Image = JobLedger;
                 }
                 action("ICT RC")
                 {
                     ApplicationArea = All;
                     Caption = 'ICT Department';
-                    RunObject = Page 52185498;
+                    RunObject = Page 85498;
                     Image = Setup;
                 }
                 action("Procurement RC")
                 {
                     ApplicationArea = All;
                     Caption = 'Procurement';
-                    RunObject = Page 52187326;
+                    RunObject = Page 87326;
                     Image = Purchasing;
                 }
                 action("Business Loans RC")
                 {
                     ApplicationArea = All;
                     Caption = 'Loans';
-                    RunObject = Page 52187328;
+                    RunObject = Page 87328;
                     Image = Agreement;
                 }
             }

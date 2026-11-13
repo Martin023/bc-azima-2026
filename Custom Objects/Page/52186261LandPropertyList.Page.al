@@ -1,4 +1,4 @@
-page 52186261 "Land Property List"
+page 86261 "Land Property List"
 {
     CardPageID = "Land Property Details";
     Editable = false;

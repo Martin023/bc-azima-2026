@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186157 "Finance Share Certificate"
+report 86157 "Finance Share Certificate"
 {
     ApplicationArea = All;
     Caption = 'Finance Share Certificate';

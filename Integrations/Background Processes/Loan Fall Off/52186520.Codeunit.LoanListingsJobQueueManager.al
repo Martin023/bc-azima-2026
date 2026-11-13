@@ -1,4 +1,4 @@
-codeunit 52186520 "Loan FallOff Job Queue Manager"
+codeunit 86520 "Loan FallOff Job Queue Manager"
 {
     TableNo = Loans;
     trigger OnRun()
@@ -134,7 +134,7 @@ codeunit 52186520 "Loan FallOff Job Queue Manager"
         FallOffFilter: Page "Fall Off Filter";
 }
 
-codeunit 52186521 "Loan FallOff Job"
+codeunit 86521 "Loan FallOff Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()
@@ -186,7 +186,7 @@ codeunit 52186521 "Loan FallOff Job"
     end;
 }
 
-page 52187023 "Fall Off Filter"
+page 87023 "Fall Off Filter"
 {
     PageType = StandardDialog;
     Caption = 'Deposit Listing - Enter Date Range';

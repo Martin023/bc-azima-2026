@@ -1,4 +1,4 @@
-Report 52186833 "Waived Tenants"
+Report 86833 "Waived Tenants"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Waived Tenants.rdl';

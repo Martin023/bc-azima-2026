@@ -1,4 +1,4 @@
-table 52186562 "CRB Log Buffer"
+table 86562 "CRB Log Buffer"
 {
     Caption = 'CRB Log Buffer';
     DataClassification = ToBeClassified;

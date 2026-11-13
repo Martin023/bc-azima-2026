@@ -1,4 +1,4 @@
-page 52185712 "Product Factory"
+page 85712 "Product Factory"
 {
     DeleteAllowed = false;
     PageType = Card;

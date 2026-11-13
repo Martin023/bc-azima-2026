@@ -1,4 +1,4 @@
-table 52186571 "CRB Monthly NICE File Subm."
+table 86571 "CRB Monthly NICE File Subm."
 {
     Caption = 'CRB Monthly Non-Individual Consumer and Account file Submissions';
     DataClassification = ToBeClassified;

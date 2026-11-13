@@ -1,4 +1,4 @@
-table 52185925 "HR SMS Template"
+table 85925 "HR SMS Template"
 {
     Caption = 'HR SMS Template';
     DataClassification = CustomerContent;

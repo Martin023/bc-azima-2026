@@ -1,4 +1,4 @@
-table 52185783 "Salary Header"
+table 85783 "Salary Header"
 {
     DrillDownPageID = "Salary Lists";
     LookupPageID = "Salary Lists";

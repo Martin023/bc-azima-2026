@@ -1,4 +1,4 @@
-page 52185883 "End Year Interest List"
+page 85883 "End Year Interest List"
 {
     CardPageID = "End Year Interest Header";
     DeleteAllowed = false;

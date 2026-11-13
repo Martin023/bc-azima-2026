@@ -1,4 +1,4 @@
-codeunit 52186511 "CRB TransUnion CreditScore API"
+codeunit 86511 "CRB TransUnion CreditScore API"
 {
     procedure GetServerInfo(ShowSuccessMessage: Boolean)
     var

@@ -1,4 +1,4 @@
-table 52187021 "Loan Recovery Lines"
+table 87021 "Loan Recovery Lines"
 {
     Caption = 'Loan Recovery Lines';
     DataClassification = ToBeClassified;

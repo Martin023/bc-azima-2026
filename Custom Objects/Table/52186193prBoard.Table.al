@@ -1,4 +1,4 @@
-table 52186193 prBoard
+table 86193 prBoard
 {
 
     fields

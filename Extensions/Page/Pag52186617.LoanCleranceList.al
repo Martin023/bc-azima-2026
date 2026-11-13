@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186617 "Loan Clearance List"
+page 86617 "Loan Clearance List"
 {
     ApplicationArea = All;
     Caption = 'Loan Clerance List';

@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186203 MemberNoticeRemainingDYS
+report 86203 MemberNoticeRemainingDYS
 {
     ApplicationArea = All;
     Caption = 'Member Withdrawal Notice Remaining DYS';

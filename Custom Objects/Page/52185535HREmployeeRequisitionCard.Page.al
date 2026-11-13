@@ -1,4 +1,4 @@
-page 52185535 "HR Employee Requisition Card"
+page 85535 "HR Employee Requisition Card"
 {
     // DeleteAllowed = false;
     InsertAllowed = true;

@@ -1,4 +1,4 @@
-page 52186444 "DCS Vendor Card"
+page 86444 "DCS Vendor Card"
 {
     PageType = List;
     SourceTable = Vendor;

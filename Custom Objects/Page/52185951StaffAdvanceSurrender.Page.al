@@ -1,4 +1,4 @@
-page 52185951 "Staff Advance Surrender"
+page 85951 "Staff Advance Surrender"
 {
     Caption = 'Staff Advance Liquidation';
     PageType = Document;

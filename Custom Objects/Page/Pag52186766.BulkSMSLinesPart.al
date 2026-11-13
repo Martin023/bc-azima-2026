@@ -1,4 +1,4 @@
-page 52186766 "Bulk SMS Lines Part"
+page 86766 "Bulk SMS Lines Part"
 {
     PageType = ListPart;
     SourceTable = "Bulk SMS Lines";

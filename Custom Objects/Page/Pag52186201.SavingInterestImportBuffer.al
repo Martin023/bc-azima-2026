@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-page 52186201 "Saving Interest Import Buffer"
+page 86201 "Saving Interest Import Buffer"
 {
     ApplicationArea = All;
     Caption = 'Saving Interest Import Buffer';

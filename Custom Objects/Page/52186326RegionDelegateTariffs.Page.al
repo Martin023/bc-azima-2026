@@ -1,4 +1,4 @@
-page 52186326 "Region Delegate Tariffs"
+page 86326 "Region Delegate Tariffs"
 {
     //DeleteAllowed = false;
     PageType = List;

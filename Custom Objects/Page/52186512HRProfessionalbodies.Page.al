@@ -1,4 +1,4 @@
-page 52186512 "HR Professional bodies"
+page 86512 "HR Professional bodies"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Professional Body';

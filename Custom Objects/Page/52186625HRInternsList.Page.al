@@ -1,4 +1,4 @@
-page 52186625 "HR Interns List"
+page 86625 "HR Interns List"
 {
     CardPageID = "HR Interns Card";
     DeleteAllowed = false;

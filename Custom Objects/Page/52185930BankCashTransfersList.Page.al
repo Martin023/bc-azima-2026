@@ -1,4 +1,4 @@
-page 52185930 "Bank & Cash Transfers List"
+page 85930 "Bank & Cash Transfers List"
 {
     CardPageID = "Bank & Cash Transfer Request";
     Editable = false;

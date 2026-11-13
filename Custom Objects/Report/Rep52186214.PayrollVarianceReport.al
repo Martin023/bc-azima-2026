@@ -2,7 +2,7 @@ namespace KenpipeBC.KenpipeBC;
 using System.Environment;
 using Microsoft.Foundation.Company;
 
-report 52186214 "Payroll Variance Report"
+report 86214 "Payroll Variance Report"
 {
     ApplicationArea = All;
     Caption = 'Payroll Variance Report';

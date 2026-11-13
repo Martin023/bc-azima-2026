@@ -1,4 +1,4 @@
-table 52185621 "prStatutory Exemptions"
+table 85621 "prStatutory Exemptions"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52187355 "Perfected Securities List"
+page 87355 "Perfected Securities List"
 {
     ApplicationArea = All;
     Caption = 'Perfected Securities List';

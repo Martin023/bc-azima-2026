@@ -1,4 +1,4 @@
-table 52186196 "Board members"
+table 86196 "Board members"
 {
 
     fields

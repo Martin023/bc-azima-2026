@@ -1,4 +1,4 @@
-page 52185594 "HR Lookup Values Card"
+page 85594 "HR Lookup Values Card"
 {
     PageType = Card;
     SourceTable = "HR Lookup Values";

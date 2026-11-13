@@ -1,4 +1,4 @@
-page 52186698 "Cancelled Payments list"
+page 86698 "Cancelled Payments list"
 {
     CardPageID = "Payment Header";
     PageType = List;

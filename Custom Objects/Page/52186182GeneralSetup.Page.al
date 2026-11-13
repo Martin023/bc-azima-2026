@@ -1,4 +1,4 @@
-page 52186182 "General Setup"
+page 86182 "General Setup"
 {
     PageType = Card;
     SourceTable = "General Set-Up";

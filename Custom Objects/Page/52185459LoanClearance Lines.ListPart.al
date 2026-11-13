@@ -1,4 +1,4 @@
-page 52185459 "Loan Clearance Lines"
+page 85459 "Loan Clearance Lines"
 {
     PageType = ListPart;
     SourceTable = "Loan Clearance Lines";

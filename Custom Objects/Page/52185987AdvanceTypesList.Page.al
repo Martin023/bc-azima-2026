@@ -1,4 +1,4 @@
-page 52185987 "Advance Types List"
+page 85987 "Advance Types List"
 {
     PageType = List;
     SourceTable = "Receipts and Payment Types";

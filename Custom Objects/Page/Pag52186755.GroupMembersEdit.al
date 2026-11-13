@@ -1,6 +1,6 @@
 namespace KenpipeBC.KenpipeBC;
 
-page 52186755 "Group Members Edit"
+page 86755 "Group Members Edit"
 {
     Caption = 'Group Members Edit';
     PageType = ListPart;

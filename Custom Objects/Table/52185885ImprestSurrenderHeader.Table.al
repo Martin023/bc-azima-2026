@@ -1,4 +1,4 @@
-table 52185885 "Imprest Surrender Header"
+table 85885 "Imprest Surrender Header"
 {
     DrillDownPageID = "Imprest Surrender List";
     LookupPageID = "Imprest Surrender List";

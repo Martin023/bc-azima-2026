@@ -1,4 +1,4 @@
-report 52186018 "Generate Bulk Refunds"
+report 86018 "Generate Bulk Refunds"
 {
     Caption = 'Generate Bulk Refunds';
     ProcessingOnly = true;

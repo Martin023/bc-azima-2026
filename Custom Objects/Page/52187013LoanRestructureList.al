@@ -1,4 +1,4 @@
-page 52187013 "Loan Restructure List"
+page 87013 "Loan Restructure List"
 {
     PageType = List;
     ApplicationArea = All;

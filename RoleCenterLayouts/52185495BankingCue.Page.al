@@ -1,4 +1,4 @@
-page 52185495 "Banking Activities"
+page 85495 "Banking Activities"
 {
     PageType = CardPart;
     SourceTable = "Banking Cue";

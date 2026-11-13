@@ -1,4 +1,4 @@
-table 52185618 "prBank Transfer Figures"
+table 85618 "prBank Transfer Figures"
 {
 
     fields

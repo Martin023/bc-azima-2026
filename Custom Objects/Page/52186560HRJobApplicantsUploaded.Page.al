@@ -1,4 +1,4 @@
-page 52186560 "HR Job Applicants Uploaded1"
+page 86560 "HR Job Applicants Uploaded1"
 {
     DeleteAllowed = false;
     Description = 'HR Job Applicants Qualified Card';

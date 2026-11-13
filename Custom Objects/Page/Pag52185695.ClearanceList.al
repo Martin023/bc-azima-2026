@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52185695 "Clearance List"
+page 85695 "Clearance List"
 {
     ApplicationArea = All;
     Caption = 'Clearance List';

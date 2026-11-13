@@ -1,4 +1,4 @@
-table 52186406 "Stock Keeping Lines"
+table 86406 "Stock Keeping Lines"
 {
     Caption = 'Stock Keeping Lines';
     DataClassification = ToBeClassified;

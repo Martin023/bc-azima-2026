@@ -1,4 +1,4 @@
-page 52186284 "Family Member App."
+page 86284 "Family Member App."
 {
     PageType = ListPart;
     SourceTable = "Next of KIN Application";

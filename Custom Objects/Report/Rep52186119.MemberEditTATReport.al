@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186119 "Member Edit TAT Report"
+report 86119 "Member Edit TAT Report"
 {
     Caption = 'Member Edit TAT Report';
     RDLCLayout = './bc-azima-2026/Layout/Member Edit TAT Report.rdl';

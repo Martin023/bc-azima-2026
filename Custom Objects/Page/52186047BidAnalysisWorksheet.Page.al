@@ -1,4 +1,4 @@
-page 52186047 "Bid Analysis Worksheet"
+page 86047 "Bid Analysis Worksheet"
 {
     DeleteAllowed = false;
     PageType = Worksheet;

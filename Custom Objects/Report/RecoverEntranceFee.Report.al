@@ -1,4 +1,4 @@
-report 52185557 "Recover Entrance Fee Report"
+report 85557 "Recover Entrance Fee Report"
 {
     ApplicationArea = All;
     Caption = 'Recover Entrance Fee Report';

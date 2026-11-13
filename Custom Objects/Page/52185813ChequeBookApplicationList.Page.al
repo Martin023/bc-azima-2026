@@ -1,4 +1,4 @@
-page 52185813 "Cheque Book Application List"
+page 85813 "Cheque Book Application List"
 {
     CardPageID = "Cheque Application";
     DeleteAllowed = false;
@@ -89,7 +89,7 @@ page 52185813 "Cheque Book Application List"
                     ChqAppl.Reset;
                     ChqAppl.SetRange(ChqAppl."Application Exported", false);
                     ChqAppl.SetRange(Select, true);
-                    XMLPORT.Run(52185623, true, false, ChqAppl);
+                    XMLPORT.Run(85623, true, false, ChqAppl);
 
                 end;
             }

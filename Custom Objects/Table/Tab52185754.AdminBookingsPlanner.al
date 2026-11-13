@@ -1,4 +1,4 @@
-table 52185754 "Admin Bookings Planner"
+table 85754 "Admin Bookings Planner"
 {
     Caption = 'Admin Bookings Planner';
     DataClassification = ToBeClassified;

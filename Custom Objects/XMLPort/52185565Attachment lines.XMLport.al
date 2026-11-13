@@ -1,4 +1,4 @@
-xmlport 52185565 "Attachement Header"
+xmlport 85565 "Attachement Header"
 {
     Caption = 'DMUAttachment';
     Format = VariableText;

@@ -1,4 +1,4 @@
-table 52186051 "ATM Log Entries"
+table 86051 "ATM Log Entries"
 {
 
     fields

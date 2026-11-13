@@ -1,4 +1,4 @@
-table 52185674 "prSalary Advance"
+table 85674 "prSalary Advance"
 {
     DataCaptionFields = "Requisition No.", "Employee Names";
 

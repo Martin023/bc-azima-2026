@@ -1,4 +1,4 @@
-page 52186486 "HR Training ApplicationList"
+page 86486 "HR Training ApplicationList"
 {
     CardPageID = "HR Training Application Header";
     DeleteAllowed = false;

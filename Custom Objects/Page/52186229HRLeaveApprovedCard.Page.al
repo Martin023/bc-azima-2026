@@ -1,4 +1,4 @@
-page 52186229 "HR Leave Approved Card"
+page 86229 "HR Leave Approved Card"
 {
     DeleteAllowed = false;
     Editable = false;

@@ -1,4 +1,4 @@
-page 52186502 "Sky M-Banking Trans. Buffer"
+page 86502 "Sky M-Banking Trans. Buffer"
 {
     ApplicationArea = basic, suite;
     Caption = 'Sky Mobile Banking Transactions List';

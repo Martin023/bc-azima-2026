@@ -1,4 +1,4 @@
-table 52185571 "HR Transport Requisition Head"
+table 85571 "HR Transport Requisition Head"
 {
     // DrillDownPageID = "HR Transport Requisition List";
     // LookupPageID = "HR Transport Requisition List";

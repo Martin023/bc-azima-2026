@@ -1,4 +1,4 @@
-page 52186487 "HR Training Needs List"
+page 86487 "HR Training Needs List"
 {
     CardPageID = "HR Training Needs Card";
     DeleteAllowed = false;

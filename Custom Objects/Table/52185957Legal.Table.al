@@ -1,4 +1,4 @@
-table 52185957 Legal
+table 85957 Legal
 {
     DrillDownPageID = "Legal List";
     LookupPageID = "Legal List";

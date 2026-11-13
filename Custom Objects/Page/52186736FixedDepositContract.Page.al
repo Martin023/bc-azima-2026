@@ -1,4 +1,4 @@
-page 52186736 "Fixed Deposit Contract List"
+page 86736 "Fixed Deposit Contract List"
 {
     Caption = 'Fixed/Call Deposit Contract';
     CardPageID = "Fixed Deposit Contract";

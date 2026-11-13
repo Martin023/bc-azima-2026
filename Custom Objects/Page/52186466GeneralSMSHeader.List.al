@@ -1,4 +1,4 @@
-page 52186466 "General SMS Header List"
+page 86466 "General SMS Header List"
 {
     ApplicationArea = All;
     Caption = 'General SMS Header List';

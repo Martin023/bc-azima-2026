@@ -1,4 +1,4 @@
-table 52185908 "Staff Allowance Grades"
+table 85908 "Staff Allowance Grades"
 {
 
     fields

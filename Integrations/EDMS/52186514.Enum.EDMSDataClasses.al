@@ -1,4 +1,4 @@
-enum 52186514 "EDMS Data Classes"
+enum 86514 "EDMS Data Classes"
 {
     Extensible = true;
 

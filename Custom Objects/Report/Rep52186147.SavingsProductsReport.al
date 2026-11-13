@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186147 "Savings Products Report"
+report 86147 "Savings Products Report"
 {
     ApplicationArea = All;
     Caption = 'Savings Products Report';

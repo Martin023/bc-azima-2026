@@ -1,4 +1,4 @@
-table 52186245 "Batch Lines Table"
+table 86245 "Batch Lines Table"
 {
     Caption = 'Batch Lines Table';
     DataClassification = ToBeClassified;

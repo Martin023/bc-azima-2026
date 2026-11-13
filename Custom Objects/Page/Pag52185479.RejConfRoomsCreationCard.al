@@ -1,4 +1,4 @@
-page 52185479 "Rej. Conf Rooms Creation Card"
+page 85479 "Rej. Conf Rooms Creation Card"
 {
     Caption = 'Rej. Conf Rooms Creation Card';
     PageType = Card;

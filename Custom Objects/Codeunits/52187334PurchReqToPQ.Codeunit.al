@@ -1,4 +1,4 @@
-codeunit 52187334 "Purchase Req To Quote"
+codeunit 87334 "Purchase Req To Quote"
 {
     TableNo = "Purchase Header";
 

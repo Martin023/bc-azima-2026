@@ -1,4 +1,4 @@
-page 52185805 "Treasury Cashier List"
+page 85805 "Treasury Cashier List"
 {
     CardPageID = "Treasury Cashier Transactions";
     Editable = false;

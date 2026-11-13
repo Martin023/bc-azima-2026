@@ -1,4 +1,4 @@
-page 52186016 "Imprest FactBox"
+page 86016 "Imprest FactBox"
 {
     PageType = CardPart;
     SourceTable = "Imprest Lines";

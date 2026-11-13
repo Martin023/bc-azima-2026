@@ -1,4 +1,4 @@
-page 52185857 "Loan Guarantors substition Ln"
+page 85857 "Loan Guarantors substition Ln"
 {
     Caption = 'Loan Guarantor Substitution Lines';
     PageType = ListPart;

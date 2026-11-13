@@ -1,4 +1,4 @@
-page 52186295 "Salutation Tittles"
+page 86295 "Salutation Tittles"
 {
     PageType = List;
     SourceTable = "Salutation Tittles";

@@ -1,4 +1,4 @@
-page 52185556 "HR Leave Jnl. Template List"
+page 85556 "HR Leave Jnl. Template List"
 {
     Caption = 'Leave Jnl. Template List';
     Editable = true;

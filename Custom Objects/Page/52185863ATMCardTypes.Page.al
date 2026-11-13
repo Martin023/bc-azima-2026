@@ -1,4 +1,4 @@
-page 52185863 "ATM Card Types"
+page 85863 "ATM Card Types"
 {
     DeleteAllowed = false;
     PageType = List;

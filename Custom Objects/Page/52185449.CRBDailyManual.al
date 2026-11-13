@@ -1,4 +1,4 @@
-page 52185449 "CRB Daily Manual"
+page 85449 "CRB Daily Manual"
 {
     Caption = 'CRB Daily Manual';
     SourceTable = "CRB Daily Manual";

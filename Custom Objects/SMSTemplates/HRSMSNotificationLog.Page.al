@@ -1,4 +1,4 @@
-page 52185959 "HR SMS Notification Log"
+page 85959 "HR SMS Notification Log"
 {
     Caption = 'SMS Notification Log';
     PageType = List;

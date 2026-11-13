@@ -1,4 +1,4 @@
-enum 52186507 "ATM Transaction Types"
+enum 86507 "ATM Transaction Types"
 {
     value(0; " ") {
         Caption = 'Other ATM Transaction';
@@ -28,7 +28,7 @@ enum 52186507 "ATM Transaction Types"
     value(11; "VISA Purchase") {}
 }
 
-enum 52186508 "Saccolink Transaction Types"
+enum 86508 "Saccolink Transaction Types"
 {
     value(0001; "M-PESA B2C"){}
     value(0004; "KPLC postpaid"){} //

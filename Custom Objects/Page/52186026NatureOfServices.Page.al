@@ -1,4 +1,4 @@
-page 52186026 "Nature Of Services"
+page 86026 "Nature Of Services"
 {
     PageType = List;
     SourceTable = "Nature Of Sevices";

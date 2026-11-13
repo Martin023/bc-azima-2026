@@ -1,4 +1,4 @@
-table 52185587 "HR Medical Schemes"
+table 85587 "HR Medical Schemes"
 {
     // DrillDownPageID = "HR Medical Schemes List";
     // LookupPageID = "HR Medical Schemes List";

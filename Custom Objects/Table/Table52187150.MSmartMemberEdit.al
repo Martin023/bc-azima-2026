@@ -1,4 +1,4 @@
-table 52187150 "M-Smart Member Edit"
+table 87150 "M-Smart Member Edit"
 {
     Caption = 'M-Smart Member Edit';
     DataClassification = ToBeClassified;

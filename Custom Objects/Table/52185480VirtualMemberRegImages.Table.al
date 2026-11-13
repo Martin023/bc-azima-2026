@@ -1,4 +1,4 @@
-table 52185480 "Virtual Member Reg Images"
+table 85480 "Virtual Member Reg Images"
 {
 
     fields

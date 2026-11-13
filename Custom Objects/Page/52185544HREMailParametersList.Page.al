@@ -1,4 +1,4 @@
-page 52185544 "HR E-Mail Parameters List"
+page 85544 "HR E-Mail Parameters List"
 {
     CardPageID = "HR E-Mail Parameters Card";
     PageType = List;

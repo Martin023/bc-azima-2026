@@ -1,4 +1,4 @@
-table 52185800 "Tiered Charges Header"
+table 85800 "Tiered Charges Header"
 {
     DrillDownPageID = "Tiered Charges List";
     LookupPageID = "Tiered Charges List";

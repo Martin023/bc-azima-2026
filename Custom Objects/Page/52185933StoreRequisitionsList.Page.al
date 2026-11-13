@@ -1,4 +1,4 @@
-page 52185933 "Store Requisitions List"
+page 85933 "Store Requisitions List"
 {
      CardPageID = "Store Requisition Header";
     DeleteAllowed = false;

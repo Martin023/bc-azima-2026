@@ -1,4 +1,4 @@
-table 52185793 "Bankers Cheque Application"
+table 85793 "Bankers Cheque Application"
 {
     DrillDownPageID = "Bankers Application List";
     LookupPageID = "Bankers Application List";

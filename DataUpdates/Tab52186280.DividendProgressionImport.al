@@ -1,4 +1,4 @@
-table 52186280 "Dividend Progression Import"
+table 86280 "Dividend Progression Import"
 {
     Caption = 'Dividend Progression Import';
     DataClassification = ToBeClassified;

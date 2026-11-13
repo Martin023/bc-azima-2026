@@ -1,4 +1,4 @@
-table 52186071 "Exceptions/ Rejection Reason"
+table 86071 "Exceptions/ Rejection Reason"
 {
     DrillDownPageId = "Exceptions/ Rejection Reason";
     LookupPageId = "Exceptions/ Rejection Reason";

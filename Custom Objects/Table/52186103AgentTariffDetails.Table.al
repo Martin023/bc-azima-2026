@@ -1,4 +1,4 @@
-table 52186103 "Agent Tariff Details"
+table 86103 "Agent Tariff Details"
 {
 
     fields

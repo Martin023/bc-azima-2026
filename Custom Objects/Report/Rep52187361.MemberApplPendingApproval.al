@@ -1,4 +1,4 @@
-report 52187361 "Member Appl. Pending Approval"
+report 87361 "Member Appl. Pending Approval"
 {
     ApplicationArea = All;
     Caption = 'Member Appl. Pending Approval';
@@ -83,7 +83,7 @@ report 52187361 "Member Appl. Pending Approval"
             begin
                 ApprovalEntry.RESET;
                 //ApprovalEntry.SetRange();
-                ApprovalEntry.SetRange("Table ID", 52185691);
+                ApprovalEntry.SetRange("Table ID", 85691);
                 ApprovalEntry.SetRange("Document No.", MemberApplication."No.");
                 ApprovalEntry.SetRange("Status", MemberApplication.Status);
                 if ApprovalEntry.FINDSET then begin

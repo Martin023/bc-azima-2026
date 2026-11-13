@@ -1,4 +1,4 @@
-report 52187385 "Share Capital Register"
+report 87385 "Share Capital Register"
 {
     ApplicationArea = All;
     Caption = 'Share Capital Register';

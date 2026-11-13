@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-enum 52185423 "Customer Types"
+enum 85423 "Customer Types"
 {
     Extensible = true;
 

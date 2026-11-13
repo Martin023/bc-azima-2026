@@ -1,4 +1,4 @@
-page 52185890 "PR Employee Allowances Card"
+page 85890 "PR Employee Allowances Card"
 {
     PageType = Card;
     SourceTable = "PR Employee Allowances";

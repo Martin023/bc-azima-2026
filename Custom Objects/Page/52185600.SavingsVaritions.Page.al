@@ -1,4 +1,4 @@
-page 52185600 "Savings Variations"
+page 85600 "Savings Variations"
 {
     ApplicationArea = All;
     Caption = 'Savings Variations';

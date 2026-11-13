@@ -1,4 +1,4 @@
-page 52186455 "VB Loan List"
+page 86455 "VB Loan List"
 {
     CardPageID = "VB Loan Card";
     PageType = List;

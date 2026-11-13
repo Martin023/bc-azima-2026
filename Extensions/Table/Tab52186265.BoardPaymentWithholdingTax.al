@@ -1,4 +1,4 @@
-table 52186265 "Deleg. Payment Withholding Tax"
+table 86265 "Deleg. Payment Withholding Tax"
 {
     Caption = 'Board Payment Withholding Tax';
     DataClassification = ToBeClassified;

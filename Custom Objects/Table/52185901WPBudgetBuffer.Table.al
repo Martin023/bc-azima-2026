@@ -1,4 +1,4 @@
-table 52185901 "W/P Budget Buffer"
+table 85901 "W/P Budget Buffer"
 {
 
     fields

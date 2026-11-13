@@ -2,7 +2,7 @@ namespace MNSProjectMwanga.MNSProjectMwanga;
 
 using Microsoft.Projects.TimeSheet;
 
-page 52186589 "User Time Register"
+page 86589 "User Time Register"
 {
     ApplicationArea = All;
     Caption = 'User Time Register';

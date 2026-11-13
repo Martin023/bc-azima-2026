@@ -1,4 +1,4 @@
-codeunit 52187325 "Bulk Processing"
+codeunit 87325 "Bulk Processing"
 {
 
     procedure LoanListingProcessing(Loans: Record Loans; BatchNo: Code[100]; AsAt: date)

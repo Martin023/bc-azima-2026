@@ -1,4 +1,4 @@
-table 52187042 "Investment Interest Lines"
+table 87042 "Investment Interest Lines"
 {
 
 

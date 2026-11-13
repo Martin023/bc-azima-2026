@@ -1,4 +1,4 @@
-page 52185836 "Posted EFT Transfer List"
+page 85836 "Posted EFT Transfer List"
 {
     CardPageID = "RTGS Transfer Header";
     DeleteAllowed = false;

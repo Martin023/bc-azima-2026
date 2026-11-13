@@ -1,4 +1,4 @@
-report 52187331 "Surety Instruction Template LO"
+report 87331 "Surety Instruction Template LO"
 {
     ApplicationArea = All;
     Caption = 'Surety Instruction Template Legal Officer';

@@ -2,7 +2,7 @@ namespace Mwanga.Mwanga;
 using Microsoft.Foundation.Company;
 using Microsoft.Sales.Customer;
 
-report 52186194 "Triggered Checkoff Advice"
+report 86194 "Triggered Checkoff Advice"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Triggered Checkoff Advice.rdl';

@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52186152 "Disposal Requisition List"
+page 86152 "Disposal Requisition List"
 {
     CardPageId="Disposal Requisition";
     ApplicationArea = All;

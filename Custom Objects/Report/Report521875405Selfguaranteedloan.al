@@ -1,4 +1,4 @@
-report 52187405 "Self Guaranteed Loans Report"
+report 87405 "Self Guaranteed Loans Report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

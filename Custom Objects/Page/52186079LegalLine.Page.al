@@ -1,4 +1,4 @@
-page 52186079 "Legal Line"
+page 86079 "Legal Line"
 {
     PageType = ListPart;
     SourceTable = "Legal Line";

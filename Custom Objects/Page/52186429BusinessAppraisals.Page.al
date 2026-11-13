@@ -1,4 +1,4 @@
-page 52186429 "Business Appraisals"
+page 86429 "Business Appraisals"
 {
     PageType = List;
     SourceTable = "Business Loan Appraisal";

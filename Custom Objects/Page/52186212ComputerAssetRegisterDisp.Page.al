@@ -1,4 +1,4 @@
-page 52186212 "Computer Asset Register (Disp)"
+page 86212 "Computer Asset Register (Disp)"
 {
     CardPageID = "Computer Asset Register";
     DeleteAllowed = false;

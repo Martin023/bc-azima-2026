@@ -1,4 +1,4 @@
-table 52185963 "Case Cost List"
+table 85963 "Case Cost List"
 {
     DrillDownPageID = "Case Cost List";
     LookupPageID = "Case Cost List";

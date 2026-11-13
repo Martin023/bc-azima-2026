@@ -1,4 +1,4 @@
-page 52186362 "Agent Tariff Card"
+page 86362 "Agent Tariff Card"
 {
     PageType = Card;
     SourceTable = "Agent Tarriff Header";

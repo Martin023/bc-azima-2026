@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186199 "Loan Monthly Receipt Report"
+report 86199 "Loan Monthly Receipt Report"
 {
     ApplicationArea = All;
     Caption = 'Loan Monthly Receipt Report';

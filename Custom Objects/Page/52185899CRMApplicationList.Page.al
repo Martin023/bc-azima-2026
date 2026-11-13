@@ -1,4 +1,4 @@
-page 52185899 "CRM Application List"
+page 85899 "CRM Application List"
 {
     CardPageID = "CRM Application Card";
     DeleteAllowed = true;

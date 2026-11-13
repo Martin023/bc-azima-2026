@@ -1,4 +1,4 @@
-page 52185537 "Misc. Article Information List"
+page 85537 "Misc. Article Information List"
 {
     Caption = 'Misc. Article Information';
     PageType = ListPart;

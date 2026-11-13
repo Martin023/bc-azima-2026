@@ -1,4 +1,4 @@
-enum 52185435 "Accounts Category"
+enum 85435 "Accounts Category"
 {
     Value(0; "FOSA Account") { }
     Value(1; "BOSA Account") { }

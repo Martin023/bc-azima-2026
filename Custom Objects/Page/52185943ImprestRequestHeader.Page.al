@@ -1,4 +1,4 @@
-page 52185943 "Imprest Request Header"
+page 85943 "Imprest Request Header"
 {
     Caption = 'Imprest Application';
     DeleteAllowed = false;
@@ -588,7 +588,7 @@ page 52185943 "Imprest Request Header"
                     Promoted = true;
                     PromotedCategory = Category4;
                     RunObject = Page "Approval Comments";
-                    RunPageLink = "Table ID" = CONST(52185909),
+                    RunPageLink = "Table ID" = CONST(85909),
                                   "Document No." = FIELD("No.");
                     Visible = OpenApprovalEntriesExistForCurrUser;
                 }

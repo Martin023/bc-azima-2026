@@ -2,7 +2,7 @@ namespace AZIMA.AZIMA;
 using Microsoft.Foundation.Company;
 using Microsoft.Sales.Customer;
 
-report 52185513 "Loan Apprisal Report-Group"
+report 85513 "Loan Apprisal Report-Group"
 {
     ApplicationArea = All;
     Caption = 'Loan Apprisal Report-Group';

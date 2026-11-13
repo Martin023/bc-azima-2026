@@ -1,4 +1,4 @@
-page 52186840 "Business Group Closure Line"
+page 86840 "Business Group Closure Line"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

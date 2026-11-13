@@ -1,4 +1,4 @@
-page 52186321 "Delegate Meeting Card"
+page 86321 "Delegate Meeting Card"
 {
     DeleteAllowed = false;
     PageType = Card;

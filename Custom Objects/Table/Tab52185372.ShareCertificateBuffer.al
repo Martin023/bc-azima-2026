@@ -1,4 +1,4 @@
-table 52187369 "Share Certificate Buffer"
+table 87369 "Share Certificate Buffer"
 {
     Caption = 'Share Certificate Buffer';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52185920 "Central Payment"
+table 85920 "Central Payment"
 {
     Caption = 'Central Payment';
 

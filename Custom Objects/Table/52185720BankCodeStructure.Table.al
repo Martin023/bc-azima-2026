@@ -1,4 +1,4 @@
-table 52185720 "Bank Code Structure"
+table 85720 "Bank Code Structure"
 {
     DrillDownPageID = "Bank Code Structure";
     LookupPageID = "Bank Code Structure";

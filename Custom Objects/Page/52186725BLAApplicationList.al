@@ -1,4 +1,4 @@
-page 52186725 "BLA Application List"
+page 86725 "BLA Application List"
 {
     CardPageID = "B/S Loan Acc. Application Card";
     DeleteAllowed = false;

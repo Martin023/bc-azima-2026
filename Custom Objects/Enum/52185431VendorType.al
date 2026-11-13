@@ -1,4 +1,4 @@
-enum 52185445 "Vendor Type"
+enum 85445 "Vendor Type"
 {
     value(1; " ") { }
     value(2; "Implementing Partner") { }

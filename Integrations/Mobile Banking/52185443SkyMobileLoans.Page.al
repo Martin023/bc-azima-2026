@@ -1,4 +1,4 @@
-page 52185443 "Sky Mobile Loans"
+page 85443 "Sky Mobile Loans"
 {
     DeleteAllowed = false;
     Editable = false;

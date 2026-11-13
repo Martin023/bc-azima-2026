@@ -1,4 +1,4 @@
-page 52185796 "Transaction Charges"
+page 85796 "Transaction Charges"
 {
     ModifyAllowed = true;
     PageType = ListPart;

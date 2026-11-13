@@ -1,4 +1,4 @@
-table 52187013 "B/S Loan Account Application"
+table 87013 "B/S Loan Account Application"
 {
     fields
     {

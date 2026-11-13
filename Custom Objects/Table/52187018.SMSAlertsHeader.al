@@ -1,4 +1,4 @@
-table 52187018 "SMS Alerts Header"
+table 87018 "SMS Alerts Header"
 {
     Caption = 'SMS Alerts Header';
     DataClassification = ToBeClassified;

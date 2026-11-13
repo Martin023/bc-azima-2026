@@ -1,4 +1,4 @@
-report 52187002 "Society Vehicle Movement"
+report 87002 "Society Vehicle Movement"
 {
     ApplicationArea = All;
     Caption = 'Society Vehicle Movement';

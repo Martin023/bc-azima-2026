@@ -1,4 +1,4 @@
-table 52185799 "Account Transfer Destination"
+table 85799 "Account Transfer Destination"
 {
 
     fields

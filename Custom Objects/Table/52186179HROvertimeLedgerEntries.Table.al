@@ -1,4 +1,4 @@
-table 52186179 "HR Overtime Ledger Entries"
+table 86179 "HR Overtime Ledger Entries"
 {
     Caption = 'Leave Ledger Entry';
     // DrillDownPageID = "HR Leave Ledger Entries";

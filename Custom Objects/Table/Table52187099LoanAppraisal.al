@@ -1,4 +1,4 @@
-table 52187099 "Loan Appraisal"
+table 87099 "Loan Appraisal"
 {
     DataClassification = ToBeClassified;
 

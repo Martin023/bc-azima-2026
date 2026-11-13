@@ -1,4 +1,4 @@
-table 52186004 "General Setup"
+table 86004 "General Setup"
 {
     DrillDownPageID = "General Setup";
     LookupPageID = "General Setup";

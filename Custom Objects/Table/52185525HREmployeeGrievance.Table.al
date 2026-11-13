@@ -1,4 +1,4 @@
-table 52185525 "HR Employee Grievance"
+table 85525 "HR Employee Grievance"
 {
     // DrillDownPageID = "HR Employee Grievance List";
     // LookupPageID = "HR Employee Grievance List";

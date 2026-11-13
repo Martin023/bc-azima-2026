@@ -1,4 +1,4 @@
-table 52186139 "Account Trans Summary"
+table 86139 "Account Trans Summary"
 {
 
     fields

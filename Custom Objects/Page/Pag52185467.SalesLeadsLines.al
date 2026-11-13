@@ -1,6 +1,6 @@
 namespace AzimaBC.AzimaBC;
 
-page 52185467 "Sales Leads Lines"
+page 85467 "Sales Leads Lines"
 {
     ApplicationArea = All;
     Caption = 'Sales Leads Lines';

@@ -1,4 +1,4 @@
-page 52186138 "Global Bulk SMS Token Part"
+page 86138 "Global Bulk SMS Token Part"
 {
     PageType = ListPart;
     SourceTable = "Global Bulk SMS Token Map";

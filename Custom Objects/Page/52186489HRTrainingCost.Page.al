@@ -1,4 +1,4 @@
-page 52186489 "HR Training Cost"
+page 86489 "HR Training Cost"
 {
     Caption='Costs';
     PageType = List;

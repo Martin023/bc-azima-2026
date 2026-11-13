@@ -1,4 +1,4 @@
-page 52186197 "Lease Charge Review View"
+page 86197 "Lease Charge Review View"
 {
     DeleteAllowed = false;
     Editable = false;

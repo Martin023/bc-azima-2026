@@ -1,4 +1,4 @@
-page 52186565 "HR Company Activities Card"
+page 86565 "HR Company Activities Card"
 {
     // DeleteAllowed = true;
     // InsertAllowed = true;

@@ -1,4 +1,4 @@
-table 52185897 "HR Email Template"
+table 85897 "HR Email Template"
 {
     Caption = 'HR Email Template';
     DataClassification = CustomerContent;

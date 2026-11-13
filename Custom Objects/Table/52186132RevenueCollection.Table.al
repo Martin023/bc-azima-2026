@@ -1,4 +1,4 @@
-table 52186132 "Revenue Collection"
+table 86132 "Revenue Collection"
 {
 
     Caption = 'Revenue Collection';

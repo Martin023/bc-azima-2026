@@ -1,7 +1,7 @@
 namespace mns.mns;
 using Microsoft.Foundation.Company;
 
-report 52186165 "Loan Variance Report"
+report 86165 "Loan Variance Report"
 {
     ApplicationArea = All;
     Caption = 'Loan Variance Report';

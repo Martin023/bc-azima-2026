@@ -1,4 +1,4 @@
-page 52187054 "Dispatch ATM Lists"
+page 87054 "Dispatch ATM Lists"
 {
     CardPageID = "Dispatch ATM Header";
     DeleteAllowed = TRUE;

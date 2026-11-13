@@ -1,4 +1,4 @@
-table 52187062 "Conf & Meeting Rooms List"
+table 87062 "Conf & Meeting Rooms List"
 {
     Caption = 'Conf & Meeting Rooms List';
     DataClassification = ToBeClassified;

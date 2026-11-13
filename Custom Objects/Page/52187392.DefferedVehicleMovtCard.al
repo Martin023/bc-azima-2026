@@ -1,4 +1,4 @@
-page 52187391 "Deffered Vehicle Movt - Card"
+page 87391 "Deffered Vehicle Movt - Card"
 {
     ApplicationArea = All;
     Caption = 'Deffered Vehicle Movt - Card';

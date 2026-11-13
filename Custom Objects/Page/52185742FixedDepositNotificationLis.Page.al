@@ -1,4 +1,4 @@
-page 52185742 "Fixed Deposit Notification Lis"
+page 85742 "Fixed Deposit Notification Lis"
 {
     PageType = List;
     SourceTable = "Fixed Deposit Notification Lis";

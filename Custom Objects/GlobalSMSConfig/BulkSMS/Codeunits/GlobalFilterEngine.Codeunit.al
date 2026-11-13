@@ -1,4 +1,4 @@
-codeunit 52185975 "Global Filter Engine"
+codeunit 85975 "Global Filter Engine"
 {
     procedure GenerateRecipients(CampaignNo: Code[20]): Integer
     var

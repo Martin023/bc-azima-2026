@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185774 "KYC Report"
+report 85774 "KYC Report"
 {
     ApplicationArea = All;
     Caption = 'KYC Report';

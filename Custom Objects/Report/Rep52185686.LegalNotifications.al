@@ -1,4 +1,4 @@
-report 52185686 "Legal Notifications"
+report 85686 "Legal Notifications"
 {
     ApplicationArea = All;
     Caption = 'Legal Notifications';

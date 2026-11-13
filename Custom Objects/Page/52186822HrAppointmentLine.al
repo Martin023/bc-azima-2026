@@ -1,4 +1,4 @@
-page 52186825 "HR Employee Appointment"
+page 86825 "HR Employee Appointment"
 {
     //Caption = 'Employee Qualification Lines';
     PageType = List;

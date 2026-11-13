@@ -1,4 +1,4 @@
-report 52187422 "Disposed Fixed Assets"
+report 87422 "Disposed Fixed Assets"
 {
     ApplicationArea = All;
     Caption = 'Disposed Fixed Asssets';

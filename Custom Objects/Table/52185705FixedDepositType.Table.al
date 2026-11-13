@@ -1,4 +1,4 @@
-table 52185705 "Fixed Deposit Type"
+table 85705 "Fixed Deposit Type"
 {
     LookupPageID = "Fixed Deposit Type";
 

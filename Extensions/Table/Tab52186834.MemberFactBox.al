@@ -1,4 +1,4 @@
-table 52186834 "Member FactBox"
+table 86834 "Member FactBox"
 {
     Caption = 'Member FactBox';
     DataClassification = CustomerContent;

@@ -1,4 +1,4 @@
-table 52186172 "HR File Movement Tracker"
+table 86172 "HR File Movement Tracker"
 {
     DrillDownPageID = "Fixed Deposit Type";
     LookupPageID = "Fixed Deposit Type";

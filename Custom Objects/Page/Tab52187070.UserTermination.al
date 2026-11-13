@@ -1,4 +1,4 @@
-table 52187071 "User Termination"
+table 87071 "User Termination"
 {
     Caption = 'User Termination';
     DataClassification = ToBeClassified;

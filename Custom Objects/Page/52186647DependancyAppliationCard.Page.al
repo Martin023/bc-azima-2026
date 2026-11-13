@@ -1,4 +1,4 @@
-page 52186647 "Dependancies Applications Card"
+page 86647 "Dependancies Applications Card"
 {
     DeleteAllowed = false;
     PageType = Card;

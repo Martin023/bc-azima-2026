@@ -1,4 +1,4 @@
-page 52186493 "HR Training Bonding Cond. List"
+page 86493 "HR Training Bonding Cond. List"
 {
     Caption = 'HR Training Bonding Conditions List';
     PageType = List;

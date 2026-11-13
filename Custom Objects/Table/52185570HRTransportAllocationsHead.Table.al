@@ -1,4 +1,4 @@
-table 52185570 "HR Transport Allocations Head"
+table 85570 "HR Transport Allocations Head"
 {
     //LookupPageID = "HR Transport Allocation";
 

@@ -1,4 +1,4 @@
-page 52185744 "Savings Account Card"
+page 85744 "Savings Account Card"
 {
     Caption = 'Savings Account Card';
 

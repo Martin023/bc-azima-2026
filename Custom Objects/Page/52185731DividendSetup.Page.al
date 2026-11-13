@@ -1,4 +1,4 @@
-page 52185731 "Dividend Setup"
+page 85731 "Dividend Setup"
 {
     PageType = Card;
     SourceTable = "Dividend SetUp";

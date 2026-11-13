@@ -1,4 +1,4 @@
-table 52185942 Contracts
+table 85942 Contracts
 {
     // DrillDownPageId = "Contract List";
     // LookupPageId = "Contract List";

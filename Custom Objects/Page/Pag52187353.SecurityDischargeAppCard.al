@@ -1,4 +1,4 @@
-page 52187353 "Security Discharge App Card"
+page 87353 "Security Discharge App Card"
 {
     ApplicationArea = All;
     Caption = 'Security Discharge App Card';

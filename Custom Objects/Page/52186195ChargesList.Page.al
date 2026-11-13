@@ -1,4 +1,4 @@
-page 52186195 "Charges List"
+page 86195 "Charges List"
 {
     CardPageID = "Charges Card";
     Editable = false;

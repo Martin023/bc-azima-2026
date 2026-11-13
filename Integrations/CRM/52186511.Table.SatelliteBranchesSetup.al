@@ -1,4 +1,4 @@
-table 52186511 "Satellite Branches Setup"
+table 86511 "Satellite Branches Setup"
 {
     Caption = 'Satellite Branches Setup';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-enum 52185429 "Account Creation Method"
+enum 85429 "Account Creation Method"
 {
     value(0; "Use Product Factory") { }
     value(1; "Use Branch Code") { }

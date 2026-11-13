@@ -1,4 +1,4 @@
-page 52186196 "Lease Line"
+page 86196 "Lease Line"
 {
     Editable = true;
     PageType = ListPart;

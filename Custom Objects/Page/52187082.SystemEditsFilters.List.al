@@ -1,4 +1,4 @@
-page 52187082 "System Edits Filters"
+page 87082 "System Edits Filters"
 {
     ApplicationArea = All;
     Caption = 'System Edits Fields';

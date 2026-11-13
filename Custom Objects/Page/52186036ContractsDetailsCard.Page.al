@@ -1,4 +1,4 @@
-page 52186036 "Contracts Details Card"
+page 86036 "Contracts Details Card"
 {
     Caption = 'Contract';
     DeleteAllowed = false;
@@ -416,7 +416,7 @@ page 52186036 "Contracts Details Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(52185942), "No." = field("Contract No");
+                SubPageLink = "Table ID" = const(85942), "No." = field("Contract No");
             }
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
             {

@@ -1,4 +1,4 @@
-page 52186433 "BBF Requisation Lines"
+page 86433 "BBF Requisation Lines"
 {
     DeleteAllowed = true;
     Editable = false;

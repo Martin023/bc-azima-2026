@@ -1,4 +1,4 @@
-page 52186031 "Contract Cycle"
+page 86031 "Contract Cycle"
 {
     PageType = List;
     SourceTable = "Contract Cycle";

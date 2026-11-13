@@ -1,4 +1,4 @@
-table 52185768 "M-SACCO Change PIN No"
+table 85768 "M-SACCO Change PIN No"
 {
     DrillDownPageID = "Sky Mbanking Changes List";
     LookupPageID = "Sky Mbanking Changes List";

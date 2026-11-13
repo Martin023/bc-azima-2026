@@ -1,4 +1,4 @@
-page 52185470 "Sky Business Accounts"
+page 85470 "Sky Business Accounts"
 {
     DeleteAllowed = false;
     Editable = false;

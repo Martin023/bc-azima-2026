@@ -1,4 +1,4 @@
-table 52185560 "HR Leave Recall Lines"
+table 85560 "HR Leave Recall Lines"
 {
     Caption = 'HR Leave Recall Lines';
     DataClassification = CustomerContent;

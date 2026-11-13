@@ -1,4 +1,4 @@
-page 52186835 "Risk Claim Notice"
+page 86835 "Risk Claim Notice"
 {
     Caption = 'Deceased Member Notice';
     DeleteAllowed = false;

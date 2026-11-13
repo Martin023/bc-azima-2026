@@ -1,4 +1,4 @@
-table 52185596 "HR Appraissal Appeal"
+table 85596 "HR Appraissal Appeal"
 {
 
     fields

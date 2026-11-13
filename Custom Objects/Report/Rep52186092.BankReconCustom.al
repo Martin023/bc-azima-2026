@@ -11,7 +11,7 @@ using Microsoft.Purchases.Payables;
 using Microsoft.Sales.Receivables;
 using System.Utilities;
 
-report 52186092 "Bank Recon Custom"
+report 86092 "Bank Recon Custom"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/BankAccReconTest.rdl';

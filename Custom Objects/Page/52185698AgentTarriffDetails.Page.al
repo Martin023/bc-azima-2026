@@ -1,4 +1,4 @@
-page 52185698 "Agent Tarriff Details"
+page 85698 "Agent Tarriff Details"
 {
     PageType = List;
     SourceTable = "Agent Tariff Details";

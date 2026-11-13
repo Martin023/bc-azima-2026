@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186069 "Unallocated Amounts Report"
+report 86069 "Unallocated Amounts Report"
 {
     ApplicationArea = All;
     Caption = 'Unallocated Amounts Report';

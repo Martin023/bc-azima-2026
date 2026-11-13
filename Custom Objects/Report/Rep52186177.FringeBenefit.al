@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186177 "Fringe Benefit"
+report 86177 "Fringe Benefit"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Fringe Benefit Report.rdl';

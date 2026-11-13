@@ -1,4 +1,4 @@
-page 52186576 "HR Disciplinary Case Card N"
+page 86576 "HR Disciplinary Case Card N"
 {
     Caption = 'Open Disciplinary Cases';
     DeleteAllowed = false;

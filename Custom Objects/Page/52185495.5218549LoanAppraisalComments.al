@@ -1,4 +1,4 @@
-page 52187231 "52187231Loan Appr. Comments"
+page 87231 "52187231Loan Appr. Comments"
 {
     ApplicationArea = All;
     Caption = 'Appraisal Comments';

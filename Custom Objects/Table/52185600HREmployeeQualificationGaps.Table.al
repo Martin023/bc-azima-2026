@@ -1,4 +1,4 @@
-table 52185600 "HR Employee Qualification Gaps"
+table 85600 "HR Employee Qualification Gaps"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52185698 "Financial Appraisal setup"
+table 85698 "Financial Appraisal setup"
 {
 
     fields

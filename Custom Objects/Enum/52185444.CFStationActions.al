@@ -1,4 +1,4 @@
-enum 52185444 "CF Station Actions"
+enum 85444 "CF Station Actions"
 {
     Extensible = true;
     

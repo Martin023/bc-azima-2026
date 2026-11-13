@@ -1,4 +1,4 @@
-page 52186304 "Bank Transfer Modes"
+page 86304 "Bank Transfer Modes"
 {
     PageType = List;
     SourceTable = "Bank Transfer Modes";

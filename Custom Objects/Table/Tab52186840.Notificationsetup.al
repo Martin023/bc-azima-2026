@@ -1,4 +1,4 @@
-table 52186840 "Notification EmSms setup"
+table 86840 "Notification EmSms setup"
 {
     Caption = 'Notification setup';
     DataClassification = ToBeClassified;

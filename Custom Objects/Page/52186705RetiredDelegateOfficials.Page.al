@@ -1,4 +1,4 @@
-page 52186705 "Retired Delegate Officials"
+page 86705 "Retired Delegate Officials"
 {
     CardPageID = "Delegate Officials Card";
     DeleteAllowed = false;

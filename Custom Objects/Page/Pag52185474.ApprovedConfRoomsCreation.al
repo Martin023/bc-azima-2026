@@ -1,4 +1,4 @@
-page 52185474 "Approved Conf Rooms - Creation"
+page 85474 "Approved Conf Rooms - Creation"
 {
     ApplicationArea = All;
     Caption = 'Approved Conf Rooms - Creation';

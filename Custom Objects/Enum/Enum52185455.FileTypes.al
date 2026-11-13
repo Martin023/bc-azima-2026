@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-enum 52185455 "File Types"
+enum 85455 "File Types"
 {
     Extensible = true;
     value(0; "")

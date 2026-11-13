@@ -1,4 +1,4 @@
-report 52187364 "Members Missing Photos"
+report 87364 "Members Missing Photos"
 {
     ApplicationArea = All;
     Caption = 'Member Missing Photos';

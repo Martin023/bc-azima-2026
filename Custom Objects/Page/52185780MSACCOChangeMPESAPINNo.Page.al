@@ -1,4 +1,4 @@
-page 52185780 "MBanking Change MPESA PIN No"
+page 85780 "MBanking Change MPESA PIN No"
 {
     DeleteAllowed = false;
     PageType = Card;

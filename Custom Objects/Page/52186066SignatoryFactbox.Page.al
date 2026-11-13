@@ -1,4 +1,4 @@
-page 52186066 "Signatory Factbox"
+page 86066 "Signatory Factbox"
 {
     PageType = List;
     SourceTable = "Account Signatories";

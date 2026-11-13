@@ -1,4 +1,4 @@
-table 52186162 "HR Disciplinary Cases NCA"
+table 86162 "HR Disciplinary Cases NCA"
 {
      DrillDownPageID = "HR Disciplinary Cases List N1";
      LookupPageID = "HR Disciplinary Cases List N1";

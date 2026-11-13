@@ -1,4 +1,4 @@
-table 52185565 "HR OSSafety Rules"
+table 85565 "HR OSSafety Rules"
 {
 
     fields

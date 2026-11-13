@@ -1,4 +1,4 @@
-table 52185671 "PR Employee Allowances"
+table 85671 "PR Employee Allowances"
 {
 
     fields

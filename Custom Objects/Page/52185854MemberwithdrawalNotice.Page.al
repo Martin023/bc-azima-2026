@@ -1,4 +1,4 @@
-page 52185854 "Member withdrawal Notice"
+page 85854 "Member withdrawal Notice"
 {
     PageType = Card;
     SourceTable = "Member withdrawal Notice";

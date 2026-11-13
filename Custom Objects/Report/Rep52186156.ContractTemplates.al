@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-report 52186156 "Contract Templates"
+report 86156 "Contract Templates"
 {
     ApplicationArea = All;
     Caption = 'Contract Templates';

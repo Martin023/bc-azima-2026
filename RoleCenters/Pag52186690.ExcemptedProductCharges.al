@@ -1,6 +1,6 @@
 namespace MNSProjectMwanga.MNSProjectMwanga;
 
-page 52186690 "Excempted Product Charges"
+page 86690 "Excempted Product Charges"
 {
     ApplicationArea = All;
     Caption = 'Excempted Product Charges';

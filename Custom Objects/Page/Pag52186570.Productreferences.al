@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186570 "Product & references"
+page 86570 "Product & references"
 {
     ApplicationArea = All;
     Caption = 'Product & references';

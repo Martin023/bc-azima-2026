@@ -1,4 +1,4 @@
-page 52185847 "Checkoff Advice Header List"
+page 85847 "Checkoff Advice Header List"
 {
     Caption = 'Checkoff Advise List';
     CardPageID = "Checkoff Advice Header";

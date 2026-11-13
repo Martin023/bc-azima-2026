@@ -1,4 +1,4 @@
-table 52185734 "Loan Product Charges"
+table 85734 "Loan Product Charges"
 {
     DrillDownPageId = "Loan Product Charges";
 

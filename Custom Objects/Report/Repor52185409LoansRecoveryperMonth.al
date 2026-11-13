@@ -1,4 +1,4 @@
-Report 52187409 "Loans Recovery Per Month"
+Report 87409 "Loans Recovery Per Month"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Loans Recovery Per Month.rdl';

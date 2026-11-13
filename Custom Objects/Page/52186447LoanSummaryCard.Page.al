@@ -1,4 +1,4 @@
-page 52186447 "Loan Summary Card"
+page 86447 "Loan Summary Card"
 {
     PageType = Card;
     SourceTable = "DCS Loan Summary";

@@ -1,4 +1,4 @@
-page 52186017 "HR Disc Withdrawal list"
+page 86017 "HR Disc Withdrawal list"
 {
     CardPageID = "HR Disc Wthdrawal Card";
     PageType = List;

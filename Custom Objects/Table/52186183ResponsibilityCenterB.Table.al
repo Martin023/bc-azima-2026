@@ -1,4 +1,4 @@
-table 52186183 "Responsibility Center B"
+table 86183 "Responsibility Center B"
 {
 
     fields

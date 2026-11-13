@@ -1,4 +1,4 @@
-table 52187221 "Legal Upcoming Matters"
+table 87221 "Legal Upcoming Matters"
 {
     Caption = 'Legal Upcoming Matters';
     DataClassification = ToBeClassified;

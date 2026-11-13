@@ -1,4 +1,4 @@
-page 52185822 "Account Transfer"
+page 85822 "Account Transfer"
 {
     //DeleteAllowed = false;
     PageType = Card;

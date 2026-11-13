@@ -1,4 +1,4 @@
-table 52185441 "Loan Appraisal Comments"
+table 85441 "Loan Appraisal Comments"
 {
     Caption = 'Loan Appraisal Comments';
     fields

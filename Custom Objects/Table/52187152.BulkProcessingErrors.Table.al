@@ -1,4 +1,4 @@
-table 52187152 "Bulk Processing Errors"
+table 87152 "Bulk Processing Errors"
 {
     Caption = 'Bulk Processing Errors';
     DataClassification = ToBeClassified;

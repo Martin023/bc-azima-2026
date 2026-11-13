@@ -1,4 +1,4 @@
-page 52186503 "Sky M-Banking Trans. Buf. Card"
+page 86503 "Sky M-Banking Trans. Buf. Card"
 {
     ApplicationArea = All;
     Caption = 'Sky M-Banking Transactions Buffer Card';

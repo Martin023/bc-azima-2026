@@ -1,4 +1,4 @@
-table 52185512 "HR Job Applications"
+table 85512 "HR Job Applications"
 {
     Caption = 'HR Job Applications';
     DrillDownPageID = "HR Job Applications List";

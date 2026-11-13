@@ -1,4 +1,4 @@
-page 52185595 "HR Leave Calendar Card"
+page 85595 "HR Leave Calendar Card"
 {
     InsertAllowed = true;
     ModifyAllowed = true;

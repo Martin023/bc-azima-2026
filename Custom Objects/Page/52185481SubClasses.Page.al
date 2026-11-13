@@ -1,4 +1,4 @@
-page 52185481 "Sub Classes"
+page 85481 "Sub Classes"
 {
     PageType = List;
     SourceTable = "Sub Classes";

@@ -1,4 +1,4 @@
-table 52187064 "Witheld Tax Obligations On PV"
+table 87064 "Witheld Tax Obligations On PV"
 {
     Caption = 'Witheld Tax Obligations On PV';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-page 52185723 "Segment/County/Dividend/Signat"
+page 85723 "Segment/County/Dividend/Signat"
 {
     PageType = List;
     SourceTable = "Segment/County/Dividend/Signat";

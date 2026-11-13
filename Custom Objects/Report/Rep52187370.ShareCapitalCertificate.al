@@ -1,4 +1,4 @@
-report 52187370 "Share Capital Certificate"
+report 87370 "Share Capital Certificate"
 {
     ApplicationArea = All;
     Caption = 'Share Capital Certificate';

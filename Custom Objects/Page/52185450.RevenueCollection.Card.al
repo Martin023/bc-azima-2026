@@ -1,7 +1,7 @@
 namespace Mwanga.Mwanga;
 using System.Automation;
 
-page 52185450 "Revenue Collection Card"
+page 85450 "Revenue Collection Card"
 {
     ApplicationArea = All;
     Caption = 'Revenue Collection Card';

@@ -1,4 +1,4 @@
-page 52187407 "Dividend Provision"
+page 87407 "Dividend Provision"
 {
     DeleteAllowed = false;
     Editable = false;

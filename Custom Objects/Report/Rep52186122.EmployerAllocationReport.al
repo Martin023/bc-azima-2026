@@ -3,7 +3,7 @@ namespace MNS.MNS;
 using Microsoft.Sales.Customer;
 using Microsoft.Foundation.Company;
 
-report 52186122 "Employer Allocation Report"
+report 86122 "Employer Allocation Report"
 {
     ApplicationArea = All;
     Caption = 'Employer Allocation Report';

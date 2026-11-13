@@ -1,4 +1,4 @@
-page 52185935 "InterBank Transfers List"
+page 85935 "InterBank Transfers List"
 {
     CardPageID = "Bank & Cash Transfer Request";
     DeleteAllowed = false;

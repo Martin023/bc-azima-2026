@@ -1,4 +1,4 @@
-table 52186274 "Excel Data"
+table 86274 "Excel Data"
 {
     DataClassification = ToBeClassified;
 

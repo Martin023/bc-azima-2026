@@ -1,4 +1,4 @@
-page 52185528 "HR Job Applications List"
+page 85528 "HR Job Applications List"
 {
     CardPageID = "HR Job Applications Card";
     Editable = false;

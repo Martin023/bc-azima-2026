@@ -1,4 +1,4 @@
-page 52185960 "HR SMS Template Card"
+page 85960 "HR SMS Template Card"
 {
     Caption = 'HR SMS Template';
     PageType = Card;

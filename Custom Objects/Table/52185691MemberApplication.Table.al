@@ -1,4 +1,4 @@
-table 52185691 "Member Application"
+table 85691 "Member Application"
 
 {
     DrillDownPageId = "Open Member Application List";

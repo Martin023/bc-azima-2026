@@ -1,4 +1,4 @@
-table 52187070 "User Creation Requests"
+table 87070 "User Creation Requests"
 {
     Caption = 'User Creation Requests';
     DataClassification = ToBeClassified;

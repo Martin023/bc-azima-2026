@@ -1,4 +1,4 @@
-page 52185900 "CRM Application Card"
+page 85900 "CRM Application Card"
 {
     DeleteAllowed = true;
     Editable = true;

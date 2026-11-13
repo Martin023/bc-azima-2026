@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Bank.Check;
 
-report 52185460 "Inter Bank Cheque"
+report 85460 "Inter Bank Cheque"
 {
     ApplicationArea = All;
     Caption = 'Inter Bank Cheque';

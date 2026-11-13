@@ -1,4 +1,4 @@
-page 52185700 "Virtual Registrations Card"
+page 85700 "Virtual Registrations Card"
 {
     DeleteAllowed = false;
     Editable = false;

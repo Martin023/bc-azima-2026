@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52185578 "Insurance Claims - List"
+page 85578 "Insurance Claims - List"
 {
     ApplicationArea = All;
     Caption = 'Fixed Asset Insurance Claims - List';

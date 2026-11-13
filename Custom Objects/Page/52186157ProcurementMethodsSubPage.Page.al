@@ -1,4 +1,4 @@
-page 52186157 "Procurement Methods Sub Page"
+page 86157 "Procurement Methods Sub Page"
 {
     PageType = ListPart;
     SourceTable = "Procurement Method Stages";

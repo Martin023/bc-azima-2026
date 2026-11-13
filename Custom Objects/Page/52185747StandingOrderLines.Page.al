@@ -1,4 +1,4 @@
-page 52185747 "Standing Order Lines"
+page 85747 "Standing Order Lines"
 {
     PageType = ListPart;
     SourceTable = "Standing Order Lines";

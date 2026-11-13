@@ -1,4 +1,4 @@
-table 52185536 "HR Leave Register"
+table 85536 "HR Leave Register"
 {
     Caption = 'Leave Register';
 

@@ -1,4 +1,4 @@
-page 52185520 "HR Professional Bodies List"
+page 85520 "HR Professional Bodies List"
 {
     CardPageID = "HR Professional bodies";
     PageType = List;

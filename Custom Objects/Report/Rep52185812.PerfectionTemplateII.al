@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185812 "Perfection Template II"
+report 85812 "Perfection Template II"
 {
     ApplicationArea = All;
     Caption = 'Perfection Template II';

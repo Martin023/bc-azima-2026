@@ -1,4 +1,4 @@
-page 52185734 "Dividend Instructions - Member"
+page 85734 "Dividend Instructions - Member"
 {
     PageType = List;
     SourceTable = "Dividend Instructions - Member";

@@ -1,4 +1,4 @@
-Report 52186078 "Recovery Fresh Loans Summary"
+Report 86078 "Recovery Fresh Loans Summary"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Recovery Fresh Loans Summary.rdl';

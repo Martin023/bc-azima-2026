@@ -1,4 +1,4 @@
-page 52185785 "Change MPESA PIN List"
+page 85785 "Change MPESA PIN List"
 {
     CardPageID = "MBanking Change MPESA PIN No";
     PageType = List;

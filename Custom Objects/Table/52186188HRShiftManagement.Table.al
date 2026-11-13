@@ -1,4 +1,4 @@
-table 52186188 "HR Shift Management"
+table 86188 "HR Shift Management"
 {
     // DrillDownPageID = "HR Shift Management List";
     // LookupPageID = "HR Shift Management List";

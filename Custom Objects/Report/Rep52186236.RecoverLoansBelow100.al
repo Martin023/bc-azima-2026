@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Sales.Customer;
 
-report 52186236 "Recover Loans Below 100"
+report 86236 "Recover Loans Below 100"
 {
     ApplicationArea = All;
     Caption = 'Recover Loans Below Amount';

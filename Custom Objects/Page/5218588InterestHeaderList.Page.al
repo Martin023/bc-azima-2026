@@ -1,4 +1,4 @@
-page 52185880 "Interest Header List"
+page 85880 "Interest Header List"
 {
     CardPageID = "Interest Header Card";
     DeleteAllowed = false;

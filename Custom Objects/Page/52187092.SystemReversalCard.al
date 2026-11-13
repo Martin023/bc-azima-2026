@@ -1,4 +1,4 @@
-page 52187092 "System Reversal Card"
+page 87092 "System Reversal Card"
 {
     ApplicationArea = All;
     PromotedActionCategories = 'Home,Process,Reports,History,Approval request';

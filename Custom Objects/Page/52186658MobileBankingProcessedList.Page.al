@@ -1,4 +1,4 @@
-page 52186658 "Mobile Banking Procssed List"
+page 86658 "Mobile Banking Procssed List"
 {
     CardPageID = "Mobile Banking Card";
     DeleteAllowed = false;

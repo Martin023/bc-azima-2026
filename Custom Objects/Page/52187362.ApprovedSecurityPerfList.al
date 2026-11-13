@@ -1,4 +1,4 @@
-page 52187362 "Approved Security Perf. List"
+page 87362 "Approved Security Perf. List"
 {
     ApplicationArea = All;
     Caption = 'Approved Security Perf. List';

@@ -1,4 +1,4 @@
-table 52185750 "Related Product"
+table 85750 "Related Product"
 {
 
     fields

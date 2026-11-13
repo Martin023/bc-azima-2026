@@ -1,4 +1,4 @@
-page 52185895 "My CEO Goal Assignments"
+page 85895 "My CEO Goal Assignments"
 {
     Caption = 'My CEO Goal Assignments';
     PageType = List;

@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-enum 52185464 "Member Form Types"
+enum 85464 "Member Form Types"
 {
     Extensible = true;
     

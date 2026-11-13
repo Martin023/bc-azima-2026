@@ -1,4 +1,4 @@
-table 52185707 "Fixed Deposit Notification Lis"
+table 85707 "Fixed Deposit Notification Lis"
 {
 
     fields

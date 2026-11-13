@@ -1,4 +1,4 @@
-query 52186503 "CRM Members Marketing API"
+query 86503 "CRM Members Marketing API"
 {
     APIGroup = 'crm';
     APIPublisher = 'sky';

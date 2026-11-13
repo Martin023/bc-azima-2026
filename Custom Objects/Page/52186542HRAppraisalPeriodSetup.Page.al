@@ -1,4 +1,4 @@
-page 52186542 "HR Appraisal Period Setup"
+page 86542 "HR Appraisal Period Setup"
 {
     PageType = List;
     SourceTable = "HR Appraisal Period";

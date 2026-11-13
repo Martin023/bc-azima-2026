@@ -1,4 +1,4 @@
-page 52185812 "Cheque Receipt Lines"
+page 85812 "Cheque Receipt Lines"
 {
     PageType = ListPart;
     SourceTable = "Cheque Issue Lines";

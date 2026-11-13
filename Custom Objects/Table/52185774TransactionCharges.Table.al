@@ -1,4 +1,4 @@
-table 52185774 "Transaction Charges"
+table 85774 "Transaction Charges"
 {
     LookupPageID = "Transaction Charges";
 

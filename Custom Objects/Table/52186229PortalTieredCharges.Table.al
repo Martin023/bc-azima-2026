@@ -1,4 +1,4 @@
-table 52186229 "Portal Tiered Charges"
+table 86229 "Portal Tiered Charges"
 {
     DrillDownPageID = "Tiered Charges Lines";
     LookupPageID = "Tiered Charges Lines";

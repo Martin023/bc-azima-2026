@@ -1,4 +1,4 @@
-page 52186072 "Contract Milestone Entrie List"
+page 86072 "Contract Milestone Entrie List"
 {
     PageType = List;
     SourceTable = Contracts;

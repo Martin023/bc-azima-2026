@@ -1,4 +1,4 @@
-page 52185778 "Dividends Provision List"
+page 85778 "Dividends Provision List"
 {
     CardPageID = "Dividends Provision";
     // DeleteAllowed = false;

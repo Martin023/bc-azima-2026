@@ -1,4 +1,4 @@
-page 52185706 "Tariff Codes"
+page 85706 "Tariff Codes"
 {
     PageType = List;
     SourceTable = "Tariff Codes";

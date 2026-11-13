@@ -1,4 +1,4 @@
-table 52185551 "HR Leave Calendar"
+table 85551 "HR Leave Calendar"
 {
 
     fields

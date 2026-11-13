@@ -1,4 +1,4 @@
-page 52187381 "Rejected Conf & Meeting - List"
+page 87381 "Rejected Conf & Meeting - List"
 {
     ApplicationArea = All;
     Caption = 'Declined Conf & Meeting - List';

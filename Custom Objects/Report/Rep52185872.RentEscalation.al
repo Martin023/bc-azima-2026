@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-report 52185872 "Rent Escalation"
+report 85872 "Rent Escalation"
 {
     ApplicationArea = All;
     Caption = 'Rent Escalation';

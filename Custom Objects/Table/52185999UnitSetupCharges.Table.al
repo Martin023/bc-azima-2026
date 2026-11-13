@@ -1,4 +1,4 @@
-table 52185999 "Unit Setup Charges"
+table 85999 "Unit Setup Charges"
 {
 
     fields

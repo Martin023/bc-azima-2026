@@ -1,6 +1,6 @@
 namespace BCAZIMA.BCAZIMA;
 
-page 52185435 "Bulk Atm List"
+page 85435 "Bulk Atm List"
 {
     ApplicationArea = All;
     //CardPageId = "Bulk ATM Card";

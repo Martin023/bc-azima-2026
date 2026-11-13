@@ -1,4 +1,4 @@
-page 52185423 "Loan Closure Line"
+page 85423 "Loan Closure Line"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

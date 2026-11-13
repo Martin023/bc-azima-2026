@@ -1,7 +1,7 @@
 namespace MNSProjectMwanga.MNSProjectMwanga;
 using Microsoft.Foundation.Attachment;
 
-page 52185609 "File Request Card"
+page 85609 "File Request Card"
 {
     Caption = 'File Request Card';
     PageType = Card;
@@ -209,7 +209,7 @@ page 52185609 "File Request Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52185814), "No." = field("Request Number");
+                SubPageLink = "Table ID" = Const(85814), "No." = field("Request Number");
             }
             systempart(Control1900383207; Links)
             {

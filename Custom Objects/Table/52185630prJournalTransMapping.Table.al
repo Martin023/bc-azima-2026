@@ -1,4 +1,4 @@
-table 52185630 "prJournal Trans Mapping"
+table 85630 "prJournal Trans Mapping"
 {
 
     fields

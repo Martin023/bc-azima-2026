@@ -1,4 +1,4 @@
-page 52185835 "Investment Card"
+page 85835 "Investment Card"
 {
     DeleteAllowed = true;
     PageType = Card;

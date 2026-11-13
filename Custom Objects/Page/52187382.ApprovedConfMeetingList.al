@@ -1,4 +1,4 @@
-page 52187382 "Approved Conf & Meeting - List"
+page 87382 "Approved Conf & Meeting - List"
 {
     ApplicationArea = All;
     Caption = 'Approved Conf & Meeting - List';

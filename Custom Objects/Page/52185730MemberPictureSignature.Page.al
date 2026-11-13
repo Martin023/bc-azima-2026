@@ -1,4 +1,4 @@
-page 52185730 "Member Picture & Signature"
+page 85730 "Member Picture & Signature"
 {
     DeleteAllowed = false;
     Editable = false;

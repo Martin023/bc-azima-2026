@@ -1,4 +1,4 @@
-page 52185632 "prPayroll Type"
+page 85632 "prPayroll Type"
 {
     PageType = List;
     SourceTable = "prPayroll Type";

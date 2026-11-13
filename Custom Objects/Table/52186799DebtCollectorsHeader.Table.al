@@ -1,4 +1,4 @@
-table 52186799 "Debt Collectors Header"
+table 86799 "Debt Collectors Header"
 {
     Caption = 'Loan Reversal Lines';
     DataClassification = ToBeClassified;

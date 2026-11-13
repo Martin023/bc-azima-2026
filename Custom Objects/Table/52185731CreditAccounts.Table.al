@@ -1,4 +1,4 @@
-table 52185731 "Credit Accounts"
+table 85731 "Credit Accounts"
 {
     Caption = 'Credit Account';
     DataCaptionFields = "No.", Name;

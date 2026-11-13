@@ -1,4 +1,4 @@
-page 52186259 "Tenant List-Water Billing"
+page 86259 "Tenant List-Water Billing"
 {
     CardPageID = "Customer Card-Tenant Billing";
     Editable = true;

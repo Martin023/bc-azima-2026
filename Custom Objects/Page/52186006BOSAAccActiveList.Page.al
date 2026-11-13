@@ -1,4 +1,4 @@
-page 52186006 "BOSA Account Activation List"
+page 86006 "BOSA Account Activation List"
 {
     CardPageID = "BOSA Account Activation";
     DeleteAllowed = false;

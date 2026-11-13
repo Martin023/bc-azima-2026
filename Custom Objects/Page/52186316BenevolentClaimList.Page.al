@@ -1,4 +1,4 @@
-page 52186316 "Benevolent Claim List"
+page 86316 "Benevolent Claim List"
 {
     CardPageID = "Benevolent Claim Header";
     Editable = false;

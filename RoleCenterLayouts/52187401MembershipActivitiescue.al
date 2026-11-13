@@ -1,4 +1,4 @@
-table 52187401 "Membership Activities Cue"
+table 87401 "Membership Activities Cue"
 {
     Caption = 'Membership Activities Cue';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52186173 "HR Loan Repayment Schedule"
+table 86173 "HR Loan Repayment Schedule"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52185986 "Imprest Types List"
+page 85986 "Imprest Types List"
 {
     Caption = 'Imprest Types';
     PageType = List;

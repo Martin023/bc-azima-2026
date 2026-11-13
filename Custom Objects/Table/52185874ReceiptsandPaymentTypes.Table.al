@@ -1,4 +1,4 @@
-table 52185874 "Receipts and Payment Types"
+table 85874 "Receipts and Payment Types"
 {
     DrillDownPageID = "Receipt and Payment Types List";
     LookupPageID = "Receipt and Payment Types List";

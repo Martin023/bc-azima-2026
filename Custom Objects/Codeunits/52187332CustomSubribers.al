@@ -1,4 +1,4 @@
-codeunit 52187332 MySubscribers
+codeunit 87332 MySubscribers
 {
     EventSubscriberInstance = StaticAutomatic;
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"System Editss", 'OnBeforeSystemEditsPosting', '', true, true)]
@@ -13,7 +13,7 @@ codeunit 52187332 MySubscribers
         HrEmployees: record "HR Employees";
         EmployeeTransfer: record "Employee Transfer";
     begin
-        if TableID = 52185650 then begin
+        if TableID = 85650 then begin
             If HrEmployees.get(FilterValue) then begin
                 IF HrEmployees."Global Dimension 2 Code" <> Format(NewFieldRef) then begin
                     EmployeeTransfer.init;

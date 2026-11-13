@@ -1,4 +1,4 @@
-page 52185904 "Internal Requisitions"
+page 85904 "Internal Requisitions"
 {
     Caption = 'Purchase Requisitions';
     DeleteAllowed = false;

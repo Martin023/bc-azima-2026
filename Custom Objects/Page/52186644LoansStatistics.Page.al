@@ -1,4 +1,4 @@
-page 52186644 "Loans Statistics"
+page 86644 "Loans Statistics"
 {
     DeleteAllowed = false;
     Editable = false;

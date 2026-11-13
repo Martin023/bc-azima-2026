@@ -1,4 +1,4 @@
-page 52185968 "Asset Transfer List Effected"
+page 85968 "Asset Transfer List Effected"
 {
     CardPageID = "Asset Transfer";
     Editable = false;

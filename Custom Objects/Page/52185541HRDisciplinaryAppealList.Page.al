@@ -1,4 +1,4 @@
-page 52185541 "HR Disciplinary Appeal List"
+page 85541 "HR Disciplinary Appeal List"
 {
     CardPageID = "HR Disciplinary Appeal Card";
     PageType = List;

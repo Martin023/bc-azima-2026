@@ -1,4 +1,4 @@
-page 52185831 "Tiered Charges List"
+page 85831 "Tiered Charges List"
 {
     CardPageID = "Tiered Charges Header";
     Editable = false;

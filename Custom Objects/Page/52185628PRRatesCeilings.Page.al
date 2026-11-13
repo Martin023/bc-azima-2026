@@ -1,4 +1,4 @@
-page 52185628 "PR Rates & Ceilings"
+page 85628 "PR Rates & Ceilings"
 {
     PageType = Card;
     SourceTable = "PR Vital Setup Info";

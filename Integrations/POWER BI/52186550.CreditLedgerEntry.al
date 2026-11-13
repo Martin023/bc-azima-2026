@@ -1,4 +1,4 @@
-page 52186550 "Credit Ledger Entry"
+page 86550 "Credit Ledger Entry"
 {
     APIGroup = 'powerBI';
     APIPublisher = 'sky';

@@ -1,4 +1,4 @@
-table 52186171 "HR Movement Tracker"
+table 86171 "HR Movement Tracker"
 {
     DrillDownPageID = "Dividend Setup";
     LookupPageID = "Dividend Setup";

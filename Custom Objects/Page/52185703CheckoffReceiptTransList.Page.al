@@ -1,4 +1,4 @@
-page 52185703 "Checkoff Receipt Trans List"
+page 85703 "Checkoff Receipt Trans List"
 {
     CardPageID = "Checkoff Receipt Transactions";
     Editable = false;

@@ -1,4 +1,4 @@
-page 52185941 "Budgetary Control Setup"
+page 85941 "Budgetary Control Setup"
 {
     PageType = Card;
     SourceTable = "Budgetary Control Setup";

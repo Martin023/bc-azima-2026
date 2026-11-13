@@ -1,4 +1,4 @@
-table 52185689 "General Set-Up"
+table 85689 "General Set-Up"
 {
     DrillDownPageId = "General Setup";
 

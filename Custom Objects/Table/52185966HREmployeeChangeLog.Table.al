@@ -1,4 +1,4 @@
-table 52185966 "HR Employee Change Log"
+table 85966 "HR Employee Change Log"
 {
 
     fields

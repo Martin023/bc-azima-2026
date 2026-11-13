@@ -1,4 +1,4 @@
-page 52186833 "Employee Groups"
+page 86833 "Employee Groups"
 {
     ApplicationArea = All;
     InsertAllowed=true;

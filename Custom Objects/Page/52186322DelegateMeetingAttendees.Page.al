@@ -1,4 +1,4 @@
-page 52186322 "Delegate Meeting Attendees"
+page 86322 "Delegate Meeting Attendees"
 {
     PageType = ListPart;
     SourceTable = "Delegates Meeting Attendees";

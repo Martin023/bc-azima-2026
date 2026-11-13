@@ -1,4 +1,4 @@
-table 52185504 "HR Appraisal Discussion Log"
+table 85504 "HR Appraisal Discussion Log"
 {
     Caption = 'HR Appraisal Discussion Log';
     DataClassification = CustomerContent;

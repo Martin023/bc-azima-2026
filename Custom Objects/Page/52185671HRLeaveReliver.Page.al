@@ -1,4 +1,4 @@
-page 52185671 "HR Leave Reliver"
+page 85671 "HR Leave Reliver"
 {
     PageType = List;
     SourceTable = "HR Leave Reliver";

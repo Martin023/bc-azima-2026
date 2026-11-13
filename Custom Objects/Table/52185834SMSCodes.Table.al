@@ -1,4 +1,4 @@
-table 52185834 "SMS Codes"
+table 85834 "SMS Codes"
 {
     Caption = 'Dynamic Request Page Field';
     LookupPageID = "Dynamic Request Page Fields";

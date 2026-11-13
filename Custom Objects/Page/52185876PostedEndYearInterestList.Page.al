@@ -1,4 +1,4 @@
-page 52185876 "Posted End Year Interest List"
+page 85876 "Posted End Year Interest List"
 {
     CardPageID = "Posted End Year Interest";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-report 52186212 "Generate Bulk SMS Lines"
+report 86212 "Generate Bulk SMS Lines"
 {
     ApplicationArea = All;
     Caption = 'Generate Bulk SMS Lines';

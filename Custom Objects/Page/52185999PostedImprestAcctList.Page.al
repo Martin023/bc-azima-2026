@@ -1,4 +1,4 @@
-page 52185999 "Posted Imprest Acct. List"
+page 85999 "Posted Imprest Acct. List"
 {
     //CardPageID = "Imprest Surrender";
     DeleteAllowed = false;

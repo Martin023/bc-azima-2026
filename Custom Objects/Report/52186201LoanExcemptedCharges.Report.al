@@ -1,4 +1,4 @@
-report 52186201 "Loan Excempted Charges"
+report 86201 "Loan Excempted Charges"
 {
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan Excempted Charges';

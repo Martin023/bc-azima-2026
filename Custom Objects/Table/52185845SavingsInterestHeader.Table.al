@@ -1,4 +1,4 @@
-table 52185845 "Savings Interest Header"
+table 85845 "Savings Interest Header"
 {
     DrillDownPageID = "Account Interest List";
     LookupPageID = "Account Interest List";

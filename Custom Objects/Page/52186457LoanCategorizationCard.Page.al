@@ -1,4 +1,4 @@
-page 52186457 "Loan Categorization"
+page 86457 "Loan Categorization"
 {
     PageType = Card;
     SourceTable = "Loan Categorization";

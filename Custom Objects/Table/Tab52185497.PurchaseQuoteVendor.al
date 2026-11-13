@@ -1,4 +1,4 @@
-table 52185497 "Purchase Quote Vendor"
+table 85497 "Purchase Quote Vendor"
 {
     Caption = 'Purchase Quote Vendor';
     DataClassification = CustomerContent;

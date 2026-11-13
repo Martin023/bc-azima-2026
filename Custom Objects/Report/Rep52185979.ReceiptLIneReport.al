@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52185979 "ReceiptLIne Report"
+report 85979 "ReceiptLIne Report"
 {
     Caption = 'ReceiptLIne Report';
     DefaultLayout = RDLC;

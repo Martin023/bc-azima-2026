@@ -1,4 +1,4 @@
-page 52185737 "Savings Account Application"
+page 85737 "Savings Account Application"
 {
     CardPageID = "Savings Acc. Application Card";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-page 52186547 "CRB Monthly NICE File Sub Card"
+page 86547 "CRB Monthly NICE File Sub Card"
 {
     ApplicationArea = All;
     Caption = 'CRB Monthly NICE File Sub Card';

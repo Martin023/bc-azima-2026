@@ -1,4 +1,4 @@
-page 52186117 "Approved Contract Details Card"
+page 86117 "Approved Contract Details Card"
 {
     Editable = false;
     PageType = Document;

@@ -1,4 +1,4 @@
-page 52186850 "Insurance Claim Notice"
+page 86850 "Insurance Claim Notice"
 {
     DeleteAllowed = false;
     InsertAllowed = true;
@@ -528,7 +528,7 @@ page 52186850 "Insurance Claim Notice"
                     Promoted = true;
                     PromotedCategory = New;
                     RunObject = Page "Approval Comments";
-                    RunPageLink = "Table ID" = CONST(52185888),
+                    RunPageLink = "Table ID" = CONST(85888),
                     "Document No." = FIELD("No. Series");
                     Visible = OpenApprovalEntriesExistForCurrUser;
                 }

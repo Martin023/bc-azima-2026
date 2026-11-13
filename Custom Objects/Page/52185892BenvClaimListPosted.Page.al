@@ -1,4 +1,4 @@
-page 52185892 "Benv.Claim List-Posted"
+page 85892 "Benv.Claim List-Posted"
 {
     CardPageID = "Benv.Claim Header-Posted";
     Editable = false;

@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52185424 "Deleg. Payment Withholding Tax"
+page 85424 "Deleg. Payment Withholding Tax"
 {
     ApplicationArea = All;
     Caption = 'Delegate Payment Withholding Tax';

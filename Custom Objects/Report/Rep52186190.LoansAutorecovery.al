@@ -1,6 +1,6 @@
 namespace MNSProjectMwanga.MNSProjectMwanga;
 
-report 52186190 "Loans Autorecovery"
+report 86190 "Loans Autorecovery"
 {
     ApplicationArea = All;
     Caption = 'Loans Autorecovery';

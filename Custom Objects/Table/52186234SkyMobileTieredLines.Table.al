@@ -1,4 +1,4 @@
-table 52186234 "Sky Mobile Tiered Lines"
+table 86234 "Sky Mobile Tiered Lines"
 {
     DrillDownPageID = "Tiered Charges Lines";
     LookupPageID = "Tiered Charges Lines";

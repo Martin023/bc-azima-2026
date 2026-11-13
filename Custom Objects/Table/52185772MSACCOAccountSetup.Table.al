@@ -1,4 +1,4 @@
-table 52185772 "M-SACCO Account Setup"
+table 85772 "M-SACCO Account Setup"
 {
 
     fields

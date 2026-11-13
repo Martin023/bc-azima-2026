@@ -1,4 +1,4 @@
-table 52185622 "prUnused Relief"
+table 85622 "prUnused Relief"
 {
     fields
     {

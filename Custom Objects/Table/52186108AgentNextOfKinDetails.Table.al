@@ -1,4 +1,4 @@
-table 52186108 "Agent Next Of Kin Details"
+table 86108 "Agent Next Of Kin Details"
 {
 
     fields

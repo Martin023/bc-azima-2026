@@ -1,4 +1,4 @@
-table 52185779 Coinage
+table 85779 Coinage
 {
     DrillDownPageID = Coinage;
     LookupPageID = Coinage;

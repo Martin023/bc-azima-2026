@@ -1,4 +1,4 @@
-page 52186049 "Bid Analysis SubForm"
+page 86049 "Bid Analysis SubForm"
 {
     PageType = ListPart;
     SourceTable = "Bid Analysis";

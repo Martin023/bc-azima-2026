@@ -1,4 +1,4 @@
-page 52185853 "Open withdrawal Notice"
+page 85853 "Open withdrawal Notice"
 {
     CardPageID = "Member withdrawal Notice";
     Editable = false;

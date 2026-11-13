@@ -1,4 +1,4 @@
-page 52187416 "Dailly Interest Buffer"
+page 87416 "Dailly Interest Buffer"
 {
     ApplicationArea = All;
     Caption = 'Dailly Interest Buffer';

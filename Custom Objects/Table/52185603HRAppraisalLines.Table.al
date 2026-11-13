@@ -1,4 +1,4 @@
-table 52185603 "HR Appraisal Lines"
+table 85603 "HR Appraisal Lines"
 {
     //               HRAppraisalGoalSettingH.GET("Appraisal No");
     //                 "Employee No":=HRAppraisalGoalSettingH."Employee No";

@@ -1,4 +1,4 @@
-page 52185922 "Bank Pay In Slip List"
+page 85922 "Bank Pay In Slip List"
 {
     DeleteAllowed = false;
     Editable = false;

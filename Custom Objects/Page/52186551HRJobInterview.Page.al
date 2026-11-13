@@ -1,4 +1,4 @@
-page 52186551 "HR Job Interview"
+page 86551 "HR Job Interview"
 {
     PageType = List;
     SourceTable = "HR Job Interview";

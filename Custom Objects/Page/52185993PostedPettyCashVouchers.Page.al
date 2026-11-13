@@ -1,4 +1,4 @@
-page 52185993 "Posted Petty Cash Vouchers"
+page 85993 "Posted Petty Cash Vouchers"
 {
     CardPageID = "Posted Cash Payment Header";
     DeleteAllowed = false;

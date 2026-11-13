@@ -1,4 +1,4 @@
-table 52186203 "PR Board NPAY & PAYE"
+table 86203 "PR Board NPAY & PAYE"
 {
 
     fields

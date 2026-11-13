@@ -1,4 +1,4 @@
-page 52185867 "Account  Interest Header"
+page 85867 "Account  Interest Header"
 {
     DeleteAllowed = true;
     Editable = true;

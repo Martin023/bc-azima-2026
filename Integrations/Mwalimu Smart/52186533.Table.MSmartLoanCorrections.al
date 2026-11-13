@@ -1,4 +1,4 @@
-table 52186533 "M-Smart Loan Corrections"
+table 86533 "M-Smart Loan Corrections"
 {
     DataClassification = ToBeClassified;
     DrillDownPageID = "M-Smart Loan Corrections";

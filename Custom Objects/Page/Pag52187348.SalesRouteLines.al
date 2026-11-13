@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52187348 "Sales Route Lines"
+page 87348 "Sales Route Lines"
 {
     ApplicationArea = All;
     Caption = 'Sales Route Lines';

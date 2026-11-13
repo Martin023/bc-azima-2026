@@ -1,4 +1,4 @@
-report 52187319 "Lease Contract Report"
+report 87319 "Lease Contract Report"
 {
     ApplicationArea = All;
     Caption = 'Lease Contract Report';

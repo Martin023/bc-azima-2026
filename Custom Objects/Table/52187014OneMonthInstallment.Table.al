@@ -1,4 +1,4 @@
-table 52187014 "One Month Installment"
+table 87014 "One Month Installment"
 {
     LookupPageId = "One Month Installments";
     DrillDownPageId = "One Month Installments";

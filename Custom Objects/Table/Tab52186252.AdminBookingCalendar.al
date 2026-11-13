@@ -1,4 +1,4 @@
-table 52186252 "Admin Booking Calendar"
+table 86252 "Admin Booking Calendar"
 {
     Caption = 'Admin Booking Calendar';
     DataClassification = ToBeClassified;

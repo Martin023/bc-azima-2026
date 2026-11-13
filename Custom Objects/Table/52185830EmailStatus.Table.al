@@ -1,4 +1,4 @@
-table 52185830 "Email Status"
+table 85830 "Email Status"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186024 "Contract Lines"
+page 86024 "Contract Lines"
 {
     PageType = ListPart;
     SourceTable = "Contract Line";

@@ -1,4 +1,4 @@
-table 52185451 "Perfection File Action"
+table 85451 "Perfection File Action"
 {
     Caption = 'Perfection File Action';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-page 52186336 "Delegate Retire Memberss"
+page 86336 "Delegate Retire Memberss"
 {
     PageType = ListPart;
     SourceTable = "Delegate Members Retirementss";

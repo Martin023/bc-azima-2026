@@ -1,4 +1,4 @@
-page 52186289 "Cheque Return Codes"
+page 86289 "Cheque Return Codes"
 {
     PageType = List;
     SourceTable = "Cheque Return Codes";

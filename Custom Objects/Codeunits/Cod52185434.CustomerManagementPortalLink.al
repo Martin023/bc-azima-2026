@@ -1,7 +1,7 @@
 namespace kenpipe.kenpipe;
 using Microsoft.Foundation.Company;
 
-codeunit 52185434 "Customer Management Portal Url"
+codeunit 85434 "Customer Management Portal Url"
 {
     trigger OnRun()
     begin

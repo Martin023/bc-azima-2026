@@ -1,4 +1,4 @@
-table 52185649 "prEmployee Trans IMP BAL"
+table 85649 "prEmployee Trans IMP BAL"
 {
 
     fields

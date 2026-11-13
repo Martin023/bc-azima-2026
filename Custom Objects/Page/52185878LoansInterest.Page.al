@@ -1,4 +1,4 @@
-page 52185878 "Loans Interest"
+page 85878 "Loans Interest"
 {
     DeleteAllowed = false;
     Editable = false;

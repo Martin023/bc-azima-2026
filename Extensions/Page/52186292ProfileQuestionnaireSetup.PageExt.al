@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52186292 pageextension52186292 extends "Profile Questionnaire Setup" 
+PageExtension 86292 pageextension52186292 extends "Profile Questionnaire Setup" 
 {
 
     //Unsupported feature: Property Modification (PageType) on ""Profile Questionnaire Setup"(Page 5110)".

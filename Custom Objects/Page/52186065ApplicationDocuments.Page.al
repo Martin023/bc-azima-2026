@@ -1,4 +1,4 @@
-page 52186065 "Application Documents"
+page 86065 "Application Documents"
 {
     LinksAllowed = false;
     PageType = List;

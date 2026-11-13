@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-report 52185479 "Next of kin Allocation Report"
+report 85479 "Next of kin Allocation Report"
 {
     ApplicationArea = All;
     Caption = 'Next of kin Allocation Report';

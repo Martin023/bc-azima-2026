@@ -1,4 +1,4 @@
-table 52185786 "Cheque Issue Lines"
+table 85786 "Cheque Issue Lines"
 {
 
     fields

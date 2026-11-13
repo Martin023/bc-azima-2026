@@ -1,4 +1,4 @@
-page 52187066 "Motor Vehicle Card"
+page 87066 "Motor Vehicle Card"
 {
     ApplicationArea = All;
     Caption = 'SACCO Vehicle Card';

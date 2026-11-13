@@ -1,4 +1,4 @@
-report 52187360 "Member's Statement"
+report 87360 "Member's Statement"
 {
     Caption = 'Member''s Statement';
     UsageCategory = ReportsAndAnalysis;

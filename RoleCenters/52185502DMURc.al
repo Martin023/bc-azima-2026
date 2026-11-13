@@ -1,4 +1,4 @@
-page 52185502 "Debt Management Unit"
+page 85502 "Debt Management Unit"
 {
     ApplicationArea = All;
     Caption = 'DMU Role Center';

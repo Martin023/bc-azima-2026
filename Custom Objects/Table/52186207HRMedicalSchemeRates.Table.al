@@ -1,4 +1,4 @@
-table 52186207 "HR Medical Scheme Rates"
+table 86207 "HR Medical Scheme Rates"
 {
 
     fields

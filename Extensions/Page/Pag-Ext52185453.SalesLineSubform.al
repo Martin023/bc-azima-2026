@@ -3,7 +3,7 @@ namespace ALProject.ALProject;
 using Microsoft.Sales.History;
 using Microsoft.Sales.Document;
 
-pageextension 52185453 SalesLineSubform extends "Sales Invoice Subform"
+pageextension 85453 SalesLineSubform extends "Sales Invoice Subform"
 {
     layout
     {

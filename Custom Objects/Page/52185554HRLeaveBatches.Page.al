@@ -1,4 +1,4 @@
-page 52185554 "HR Leave Batches"
+page 85554 "HR Leave Batches"
 {
     PageType = List;
     SourceTable = "HR Leave Journal Batch";

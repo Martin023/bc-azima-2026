@@ -1,4 +1,4 @@
-table 52185670 "Leave Allowances"
+table 85670 "Leave Allowances"
 {
 
     fields

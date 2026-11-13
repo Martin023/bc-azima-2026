@@ -1,4 +1,4 @@
-page 52186130 "SinkFund Receipt Header"
+page 86130 "SinkFund Receipt Header"
 {
     DeleteAllowed = false;
     PageType = Card;

@@ -1,4 +1,4 @@
-table 52185458 "Coop ATM  Setup"
+table 85458 "Coop ATM  Setup"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52186039 "Permission Requisition"
+table 86039 "Permission Requisition"
 {
 
     DrillDownPageID = "Permission Requisition List";

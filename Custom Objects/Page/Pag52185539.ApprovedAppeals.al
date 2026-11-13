@@ -1,4 +1,4 @@
-page 52185539 "Approved Appeals"
+page 85539 "Approved Appeals"
 {
     ApplicationArea = All;
     Caption = 'Approved Appeals';

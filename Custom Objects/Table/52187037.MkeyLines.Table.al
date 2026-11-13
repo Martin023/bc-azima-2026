@@ -1,4 +1,4 @@
-table 52187037 "MKey Lines"
+table 87037 "MKey Lines"
 {
     DataClassification = ToBeClassified;
 

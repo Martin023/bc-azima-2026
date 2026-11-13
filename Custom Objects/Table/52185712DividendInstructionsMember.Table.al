@@ -1,4 +1,4 @@
-table 52185712 "Dividend Instructions - Member"
+table 85712 "Dividend Instructions - Member"
 {
 
     fields

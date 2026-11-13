@@ -1,4 +1,4 @@
-page 52186720 "Member Prorata"
+page 86720 "Member Prorata"
 {
     ApplicationArea = All;
     Caption = 'Member Prorata';

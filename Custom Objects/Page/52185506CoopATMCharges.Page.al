@@ -1,4 +1,4 @@
-page 52185506 "ATM Transaction Types Card"
+page 85506 "ATM Transaction Types Card"
 {
     Caption = 'ATM Transaction Types Card';
     PageType = Card;

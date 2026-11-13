@@ -1,4 +1,4 @@
-table 52185933 "Order/Req Buffer"
+table 85933 "Order/Req Buffer"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52186100 "DCS CRB Data"
+table 86100 "DCS CRB Data"
 {
 
     fields

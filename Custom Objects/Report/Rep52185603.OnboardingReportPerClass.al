@@ -1,4 +1,4 @@
-report 52185603 "Onboarding Report Per Class"
+report 85603 "Onboarding Report Per Class"
 {
     ApplicationArea = All;
     Caption = 'Member Onboarding Report Per Class';

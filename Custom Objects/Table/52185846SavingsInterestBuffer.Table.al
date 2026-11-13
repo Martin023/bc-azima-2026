@@ -1,4 +1,4 @@
-table 52185846 "Savings Interest Buffer"
+table 85846 "Savings Interest Buffer"
 {
     DrillDownPageID = "Account Interest Buffer";
     LookupPageID = "Account Interest Buffer";

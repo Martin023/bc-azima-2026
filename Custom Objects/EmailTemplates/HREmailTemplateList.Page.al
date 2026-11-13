@@ -1,4 +1,4 @@
-page 52185936 "HR Email Template List"
+page 85936 "HR Email Template List"
 {
     Caption = 'HR Email Templates';
     PageType = List;

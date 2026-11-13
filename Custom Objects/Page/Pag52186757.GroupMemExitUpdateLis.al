@@ -1,6 +1,6 @@
 namespace KenpipeBC.KenpipeBC;
 
-page 52186757 "Group Mem Exit & Update List"
+page 86757 "Group Mem Exit & Update List"
 {
     ApplicationArea = All;
     Caption = 'Group Mem Exit & Update Lis';

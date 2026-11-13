@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.Bank.Deposit;
 
-pageextension 52185464 "Bank Deposit List" extends "Bank Deposit List"
+pageextension 85464 "Bank Deposit List" extends "Bank Deposit List"
 {
     //Editable = true;
     //cardpageid = "Bank Deposit";

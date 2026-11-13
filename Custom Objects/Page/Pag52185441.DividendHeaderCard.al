@@ -1,7 +1,7 @@
 namespace Azima.Azima;
 using System.Automation;
 
-page 52185441 "Dividend Header Card"
+page 85441 "Dividend Header Card"
 {
     Caption = 'Dividend Header Card';
     PageType = Card;

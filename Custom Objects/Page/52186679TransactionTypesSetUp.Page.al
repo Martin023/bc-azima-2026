@@ -1,4 +1,4 @@
-page 52186679 "Transaction Types SetUp"
+page 86679 "Transaction Types SetUp"
 {
     PageType = List;
     SourceTable = "Transaction Types";

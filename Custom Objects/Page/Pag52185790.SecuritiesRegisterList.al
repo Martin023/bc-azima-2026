@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52185790 "Securities Register - List"
+page 85790 "Securities Register - List"
 {
     ApplicationArea = All;
     Caption = 'Securities Register - List';

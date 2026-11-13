@@ -1,4 +1,4 @@
-table 52185781 "Banking No Setup"
+table 85781 "Banking No Setup"
 {
     DrillDownPageId = "Banking No Setup";
 

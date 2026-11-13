@@ -1,4 +1,4 @@
-table 52186003 Floor
+table 86003 Floor
 {
     LookupPageID = Floor;
 

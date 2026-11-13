@@ -1,4 +1,4 @@
-page 52187352 "Discharged Securities List"
+page 87352 "Discharged Securities List"
 {
     ApplicationArea = All;
     Caption = 'Discharged Securities List';

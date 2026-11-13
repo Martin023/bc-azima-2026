@@ -1,4 +1,4 @@
-table 52185672 "HR Leave Planner Drill"
+table 85672 "HR Leave Planner Drill"
 {
     DrillDownPageID = "HR Leave Planner Lines Drill";
     LookupPageID = "HR Leave Planner Lines Drill";

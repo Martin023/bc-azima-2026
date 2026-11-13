@@ -1,4 +1,4 @@
-page 52185655 "My Individual Appraisals List"
+page 85655 "My Individual Appraisals List"
 {
     Caption = 'My Individual Appraisals';
     PageType = List;

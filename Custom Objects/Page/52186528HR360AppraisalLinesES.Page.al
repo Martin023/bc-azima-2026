@@ -1,4 +1,4 @@
-page 52186528 "HR 360 Appraisal Lines - ES"
+page 86528 "HR 360 Appraisal Lines - ES"
 {
     Caption = 'HR Appraisal Lines - Employee Subordinates';
     PageType = ListPart;

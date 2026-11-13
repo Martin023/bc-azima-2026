@@ -1,4 +1,4 @@
-enum 52185438 "Transaction Types"
+enum 85438 "Transaction Types"
 {
     Value(0; " ") { }
     Value(1; Loan) { Caption = 'Principal'; }

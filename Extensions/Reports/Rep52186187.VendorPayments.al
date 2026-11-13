@@ -4,7 +4,7 @@ using Microsoft.Purchases.Vendor;
 using Microsoft.Purchases.Payables;
 using Microsoft.Foundation.Company;
 
-report 52186187 "Vendor Payments"
+report 86187 "Vendor Payments"
 {
     ApplicationArea = All;
     Caption = 'Vendor Payments';

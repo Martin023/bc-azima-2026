@@ -1,4 +1,4 @@
-page 52185486 "Mortgage Requisition List"
+page 85486 "Mortgage Requisition List"
 {
     CardPageID = "Mortgage Card";
     DelayedInsert = false;

@@ -1,4 +1,4 @@
-page 52186010 "Posted Staff Advance Account"
+page 86010 "Posted Staff Advance Account"
 {
     Caption = 'Work Advance Retirement';
     DeleteAllowed = false;

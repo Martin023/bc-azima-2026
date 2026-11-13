@@ -1,4 +1,4 @@
-page 52186415 "Loan Securites Card"
+page 86415 "Loan Securites Card"
 {
     DeleteAllowed = false;
     PageType = Card;

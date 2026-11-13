@@ -1,4 +1,4 @@
-page 52185825 "Account Transfer List"
+page 85825 "Account Transfer List"
 {
     CardPageID = "Account Transfer";
     DeleteAllowed = false;

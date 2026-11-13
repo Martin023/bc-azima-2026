@@ -1,4 +1,4 @@
-table 52185725 "Product Documents"
+table 85725 "Product Documents"
 {
     DrillDownPageID = "Product Document";
     LookupPageID = "Product Document";

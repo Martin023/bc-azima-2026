@@ -1,4 +1,4 @@
-page 52185971 "Payment Line FactBox"
+page 85971 "Payment Line FactBox"
 {
     PageType = CardPart;
     SourceTable = "Payment Line";

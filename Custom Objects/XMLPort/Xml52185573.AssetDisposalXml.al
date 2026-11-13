@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.FixedAssets.FixedAsset;
 
-xmlport 52185573 "Asset Disposal Xml "
+xmlport 85573 "Asset Disposal Xml "
 {
     Caption = 'Asset Disposal Xml ';
     schema

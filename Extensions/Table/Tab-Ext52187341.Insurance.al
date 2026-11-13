@@ -1,4 +1,4 @@
-tableextension 52187341 Insurance extends Insurance
+tableextension 87341 Insurance extends Insurance
 {
     fields
     {

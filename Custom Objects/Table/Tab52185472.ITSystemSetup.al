@@ -1,4 +1,4 @@
-table 52185472 "IT System Setup"
+table 85472 "IT System Setup"
 {
     Caption = 'IT System Setup';
     DataClassification = ToBeClassified;

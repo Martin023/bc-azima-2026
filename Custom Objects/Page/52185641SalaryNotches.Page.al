@@ -1,4 +1,4 @@
-page 52185641 "Salary Notches"
+page 85641 "Salary Notches"
 {
     PageType = List;
     SourceTable = "Salary Notch";

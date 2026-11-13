@@ -1,4 +1,4 @@
-page 52185794 "Cashier Transactions"
+page 85794 "Cashier Transactions"
 {
     DeleteAllowed = true;
     PageType = Card;

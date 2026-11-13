@@ -1,4 +1,4 @@
-table 52186167 "HR Batches"
+table 86167 "HR Batches"
 {
     DrillDownPageID = "Case Payment Header";
     LookupPageID = "Case Payment Header";

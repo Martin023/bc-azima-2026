@@ -14,7 +14,7 @@ using Microsoft.HumanResources.Payables;
 using Microsoft.Inventory.Ledger;
 using System.Security.User;
 
-page 52187300 "Custom GL Register"
+page 87300 "Custom GL Register"
 {
     AdditionalSearchTerms = 'general ledger registers';
     ApplicationArea = Basic, Suite;

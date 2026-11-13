@@ -1,4 +1,4 @@
-page 52187318 "SMS Templates"
+page 87318 "SMS Templates"
 {
     
     PageType = List;

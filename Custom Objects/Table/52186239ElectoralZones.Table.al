@@ -1,4 +1,4 @@
-table 52186239 "Electoral Zones"
+table 86239 "Electoral Zones"
 {
     DataCaptionFields = "Code", "Electoral Zone Name";
     DrillDownPageID = "Approved Electoral List";

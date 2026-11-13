@@ -1,4 +1,4 @@
-table 52186096 "Loan Mandatory Requirements"
+table 86096 "Loan Mandatory Requirements"
 {
 
     fields

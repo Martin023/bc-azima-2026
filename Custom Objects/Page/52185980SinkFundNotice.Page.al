@@ -1,4 +1,4 @@
-page 52185980 "SinkFund Notice"
+page 85980 "SinkFund Notice"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -430,7 +430,7 @@ page 52185980 "SinkFund Notice"
                     Promoted = true;
                     PromotedCategory = New;
                     RunObject = Page "Approval Comments";
-                    RunPageLink = "Table ID" = CONST(52185888),
+                    RunPageLink = "Table ID" = CONST(85888),
                     "Document No." = FIELD("No. Series");
                     Visible = OpenApprovalEntriesExistForCurrUser;
                 }

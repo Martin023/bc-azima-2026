@@ -1,4 +1,4 @@
-page 52187100 "Staff Welfare "
+page 87100 "Staff Welfare "
 {
     ApplicationArea = All;
     Caption = 'Staff Welfare ';
@@ -69,7 +69,7 @@ page 52187100 "Staff Welfare "
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(52187100),
+                SubPageLink = "Table ID" = const(87100),
                 "No." = field(No);
 
             }

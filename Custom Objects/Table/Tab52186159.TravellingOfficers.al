@@ -1,4 +1,4 @@
-table 52186170 "Travelling Officers"
+table 86170 "Travelling Officers"
 {
     Caption = 'Travelling Officers';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52187031 "Digital Signature"
+table 87031 "Digital Signature"
 {
     DataClassification = ToBeClassified;
 

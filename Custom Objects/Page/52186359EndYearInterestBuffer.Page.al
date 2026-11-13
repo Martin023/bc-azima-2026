@@ -1,4 +1,4 @@
-page 52185885 "End Year Interest Buffer"
+page 85885 "End Year Interest Buffer"
 {
     DeleteAllowed = false;
     Editable = false;

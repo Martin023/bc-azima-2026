@@ -1,4 +1,4 @@
-table 52186300 "Banking Cue"
+table 86300 "Banking Cue"
 {
 
     fields

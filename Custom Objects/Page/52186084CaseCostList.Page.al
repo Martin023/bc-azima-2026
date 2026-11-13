@@ -1,4 +1,4 @@
-page 52186084 "Case Cost List"
+page 86084 "Case Cost List"
 {
     Caption = 'Case Cost List';
     PageType = List;

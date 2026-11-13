@@ -1,4 +1,4 @@
-page 52185442 "Product Supported Classes List"
+page 85442 "Product Supported Classes List"
 {
     PageType = List;
     SourceTable = "Product Supported Classes";

@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using System.Visualization;
 
-page 52186687 "Credit Officers Cue Page"
+page 86687 "Credit Officers Cue Page"
 {
     Caption = 'Credit Officers Cue Page';
     PageType = CardPart;

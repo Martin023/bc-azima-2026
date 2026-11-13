@@ -1,4 +1,4 @@
-table 52187006 "Treasury Cheque Application"
+table 87006 "Treasury Cheque Application"
 {
 
     fields

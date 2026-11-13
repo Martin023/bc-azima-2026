@@ -1,4 +1,4 @@
-table 52186106 "Agent Tarriff Header"
+table 86106 "Agent Tarriff Header"
 {
 
     fields

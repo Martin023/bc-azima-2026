@@ -1,4 +1,4 @@
-table 52186119 "Loan Product Charge Appl."
+table 86119 "Loan Product Charge Appl."
 {
 
     fields

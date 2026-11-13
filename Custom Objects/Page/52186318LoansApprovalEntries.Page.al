@@ -1,4 +1,4 @@
-page 52186318 "Loans Approval Entries"
+page 86318 "Loans Approval Entries"
 {
     DeleteAllowed = false;
     Editable = false;

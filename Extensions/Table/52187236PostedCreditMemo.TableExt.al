@@ -1,4 +1,4 @@
-TableExtension 52187236 tableextension52187236 extends "Sales Cr.Memo Header"
+TableExtension 87236 tableextension52187236 extends "Sales Cr.Memo Header"
 {
     fields
     {

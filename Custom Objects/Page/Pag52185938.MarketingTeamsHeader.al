@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52185938 "Marketing Teams Header"
+page 85938 "Marketing Teams Header"
 {
     ApplicationArea = All;
     Caption = 'Sales Team List';

@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186392 " Loan Monthly Receipt "
+report 86392 " Loan Monthly Receipt "
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Loan Monthly Receipt Per Category.rdl';

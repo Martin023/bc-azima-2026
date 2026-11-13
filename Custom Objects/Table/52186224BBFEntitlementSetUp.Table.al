@@ -1,4 +1,4 @@
-table 52186224 "BBF Entitlement SetUp"
+table 86224 "BBF Entitlement SetUp"
 {
 
     fields

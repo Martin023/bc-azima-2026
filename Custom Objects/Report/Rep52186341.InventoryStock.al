@@ -1,4 +1,4 @@
-report 52186341 InventoryStock
+report 86341 InventoryStock
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Inventory Stock.rdl';

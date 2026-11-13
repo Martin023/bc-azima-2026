@@ -1,4 +1,4 @@
-table 52185432 "ATM Nos"
+table 85432 "ATM Nos"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186510 "CRM Originations Setup"
+page 86510 "CRM Originations Setup"
 {
     ApplicationArea = All;
     Caption = 'CRM Originations Setup';

@@ -1,4 +1,4 @@
-page 52187073 "Motor Vehicle Fueling List"
+page 87073 "Motor Vehicle Fueling List"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Fueling List';

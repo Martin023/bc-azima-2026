@@ -12,7 +12,7 @@ using Microsoft.Purchases.Vendor;
 using Microsoft.Purchases.Document;
 using Microsoft.Finance.Dimension;
 
-page 52186394 "Apply Vendor Entries - New"
+page 86394 "Apply Vendor Entries - New"
 
 {
     Caption = 'Apply Vendor Entries';

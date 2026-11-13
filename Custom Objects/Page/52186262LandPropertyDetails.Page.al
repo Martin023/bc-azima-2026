@@ -1,4 +1,4 @@
-page 52186262 "Land Property Details"
+page 86262 "Land Property Details"
 {
     PageType = Card;
     SourceTable = "Property Details";

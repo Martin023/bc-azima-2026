@@ -1,4 +1,4 @@
-table 52185502 "Sky Insurance"
+table 85502 "Sky Insurance"
 {
     DrillDownPageId = "Insurance List";
     LookupPageId = "Insurance List";

@@ -1,4 +1,4 @@
-table 52185578 "Portfolio Manager"
+table 85578 "Portfolio Manager"
 {
     Caption = 'Portfolio Manager';
     DataClassification = ToBeClassified;

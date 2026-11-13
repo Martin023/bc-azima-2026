@@ -1,4 +1,4 @@
-table 52186044 "Asset Register Setup"
+table 86044 "Asset Register Setup"
 {
     DrillDownPageID = "Asset Register Setup";
     LookupPageID = "Asset Register Setup";

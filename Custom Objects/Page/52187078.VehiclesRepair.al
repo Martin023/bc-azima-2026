@@ -1,4 +1,4 @@
-page 52187078 "Vehicles Repair"
+page 87078 "Vehicles Repair"
 {
     ApplicationArea = All;
     Caption = 'Vehicles Repair';

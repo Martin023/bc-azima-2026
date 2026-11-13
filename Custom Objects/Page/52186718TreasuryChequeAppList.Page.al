@@ -1,4 +1,4 @@
-page 52186718 "Treasury Application List"
+page 86718 "Treasury Application List"
 {
     CardPageID = "Treasury Cheque Application";
     Editable = false;

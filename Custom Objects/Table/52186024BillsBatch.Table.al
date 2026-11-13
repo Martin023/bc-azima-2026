@@ -1,4 +1,4 @@
-table 52186024 "Bills Batch"
+table 86024 "Bills Batch"
 {
     // DrillDownPageID = "Bills List";
     // LookupPageID = "Bills List";

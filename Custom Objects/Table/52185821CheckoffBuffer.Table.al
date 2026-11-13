@@ -1,4 +1,4 @@
-table 52185821 "Checkoff Buffer"
+table 85821 "Checkoff Buffer"
 {
 
     fields

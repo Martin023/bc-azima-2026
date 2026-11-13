@@ -1,4 +1,4 @@
-table 52185700 Members
+table 85700 Members
 {
     DrillDownPageID = "Member List";
     LookupPageID = "Member List";

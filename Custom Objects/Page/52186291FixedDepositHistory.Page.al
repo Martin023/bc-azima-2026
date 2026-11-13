@@ -1,4 +1,4 @@
-page 52186291 "Fixed Deposit History"
+page 86291 "Fixed Deposit History"
 {
     Editable = false;
     PageType = List;

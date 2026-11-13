@@ -1,4 +1,4 @@
-page 52185873 "Approved ATM Application List"
+page 85873 "Approved ATM Application List"
 {
     CardPageID = "Approved ATM Application Card";
     DeleteAllowed = false;

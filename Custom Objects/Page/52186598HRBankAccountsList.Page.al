@@ -1,4 +1,4 @@
-page 52186598 "HR Bank Accounts List"
+page 86598 "HR Bank Accounts List"
 {
     PageType = List;
     SourceTable = "HR Employee Bank Accounts";

@@ -1,4 +1,4 @@
-table 52185438 "Security Valuers"
+table 85438 "Security Valuers"
 {
     Caption = 'Security Valuers';
     DataClassification = ToBeClassified;

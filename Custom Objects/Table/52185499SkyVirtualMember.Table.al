@@ -1,4 +1,4 @@
-table 52185499 "Sky Virtual Member"
+table 85499 "Sky Virtual Member"
 {
     DrillDownPageId = "Created Sky Virtual Member";
     LookupPageId = "Created Sky Virtual Member";

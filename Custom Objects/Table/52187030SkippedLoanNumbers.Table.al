@@ -1,4 +1,4 @@
-table 52187030 "Skipped Loans"
+table 87030 "Skipped Loans"
 {
     DataClassification = ToBeClassified;
 

@@ -1,4 +1,4 @@
-table 52185440 "Digit Custodian Setup"
+table 85440 "Digit Custodian Setup"
 {
     DataClassification = ToBeClassified;
     DrillDownPageId = "Digit Custodian Setup";

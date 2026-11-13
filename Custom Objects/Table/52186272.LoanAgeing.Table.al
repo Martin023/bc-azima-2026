@@ -1,4 +1,4 @@
-table 52186272 "Loan Ageing Table"
+table 86272 "Loan Ageing Table"
 {
     Caption = 'Loan Ageing Table';
     DataClassification = ToBeClassified;

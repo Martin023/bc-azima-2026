@@ -1,4 +1,4 @@
-table 52187348 "Appeal Lines Table"
+table 87348 "Appeal Lines Table"
 {
     Caption = 'Appeal Lines Table';
     DataClassification = ToBeClassified;

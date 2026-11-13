@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using System.Utilities;
 
-page 52186482 "Admin Booking Calendar Card"
+page 86482 "Admin Booking Calendar Card"
 {
     Caption = 'Admin Booking Calendar Card';
     PageType = Card;

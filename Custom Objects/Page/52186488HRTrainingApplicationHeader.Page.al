@@ -1,4 +1,4 @@
-page 52186488 "HR Training Application Header"
+page 86488 "HR Training Application Header"
 {
     DeleteAllowed = false;
     PageType = Card;

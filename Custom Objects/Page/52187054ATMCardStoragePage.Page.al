@@ -1,4 +1,4 @@
-page 52186771 "Atm Card"
+page 86771 "Atm Card"
 {
     Editable = false;
     PageType = List;

@@ -1,4 +1,4 @@
-table 52185987 "Employer Loan Eligibility"
+table 85987 "Employer Loan Eligibility"
 {
     Caption = 'Employer Loan Eligibility';
     DataClassification = ToBeClassified;

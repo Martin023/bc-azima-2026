@@ -1,4 +1,4 @@
-page 52185635 "Pension Contribution Details"
+page 85635 "Pension Contribution Details"
 {
     PageType = List;
     SourceTable = "prPension Details";

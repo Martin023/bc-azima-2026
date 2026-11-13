@@ -1,4 +1,4 @@
-table 52186059 "Region Delegates Tariff"
+table 86059 "Region Delegates Tariff"
 {
     DrillDownPageID = "Region Delegate Tariffs";
     LookupPageID = "Region Delegate Tariffs";

@@ -1,4 +1,4 @@
-page 52185586 "HR Shortlisting Card"
+page 85586 "HR Shortlisting Card"
 {
     DeleteAllowed = false;
     //InsertAllowed = false;

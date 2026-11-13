@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186143 "Member Share By Category"
+report 86143 "Member Share By Category"
 {
     ApplicationArea = All;
     Caption = 'Member Share By Category';

@@ -1,4 +1,4 @@
-report 52186075 "Transfered Fixed Assets"
+report 86075 "Transfered Fixed Assets"
 {
     ApplicationArea = All;
     Caption = 'Transfered Fixed Assets';

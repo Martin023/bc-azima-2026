@@ -1,4 +1,4 @@
-table 52186249 "Clearance Lines"
+table 86249 "Clearance Lines"
 {
     Caption = 'Clearance Lines';
     DataClassification = ToBeClassified;

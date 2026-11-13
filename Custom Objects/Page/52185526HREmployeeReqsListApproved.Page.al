@@ -1,4 +1,4 @@
-page 52185526 "HR Employee ReqsListApproved1"
+page 85526 "HR Employee ReqsListApproved1"
 {
     CardPageID = "HR Employee Requisition Card";
     DelayedInsert = false;

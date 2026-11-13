@@ -1,4 +1,4 @@
-page 52187345 "Rejected Vehicles"
+page 87345 "Rejected Vehicles"
 {
     ApplicationArea = All;
     Caption = 'Rejected Vehicles';

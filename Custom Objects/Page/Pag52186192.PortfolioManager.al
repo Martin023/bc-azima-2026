@@ -1,6 +1,6 @@
 namespace AzimaBC.AzimaBC;
 
-page 52186192 "Portfolio Manager List"
+page 86192 "Portfolio Manager List"
 {
     ApplicationArea = All;
     Caption = 'Portfolio Manager List';

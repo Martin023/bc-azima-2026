@@ -1,4 +1,4 @@
-report 52187380 "Promise To Pay Report"
+report 87380 "Promise To Pay Report"
 {
     ApplicationArea = All;
     Caption = 'Finance Member Listing';

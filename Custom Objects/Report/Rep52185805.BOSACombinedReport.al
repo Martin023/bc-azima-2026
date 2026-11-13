@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185805 "BOSA Combined Report"
+report 85805 "BOSA Combined Report"
 {
     ApplicationArea = All;
     Caption = 'BOSA Combined Report';

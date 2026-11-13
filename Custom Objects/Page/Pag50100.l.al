@@ -1,4 +1,4 @@
-page 52186480 "Unposted Loans Statistics"
+page 86480 "Unposted Loans Statistics"
 {
     DeleteAllowed = false;
     Editable = false;

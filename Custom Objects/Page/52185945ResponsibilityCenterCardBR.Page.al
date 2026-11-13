@@ -1,4 +1,4 @@
-page 52185945 "Responsibility Center CardBR"
+page 85945 "Responsibility Center CardBR"
 {
     Caption = 'Responsibility Center Card';
     PageType = Card;

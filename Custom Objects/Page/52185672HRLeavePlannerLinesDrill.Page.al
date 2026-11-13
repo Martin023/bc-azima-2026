@@ -1,4 +1,4 @@
-page 52185672 "HR Leave Planner Lines Drill"
+page 85672 "HR Leave Planner Lines Drill"
 {
     PageType = List;
     SourceTable = "HR Leave Planner Drill";

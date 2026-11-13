@@ -1,4 +1,4 @@
-page 52186267 "Permission Requisition Card"
+page 86267 "Permission Requisition Card"
 {
     DeleteAllowed = false;
     PageType = Card;

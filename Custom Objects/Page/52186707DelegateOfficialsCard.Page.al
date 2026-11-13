@@ -1,4 +1,4 @@
-page 52186707 "Delegate Officials Card"
+page 86707 "Delegate Officials Card"
 {
     DeleteAllowed = false;
     InsertAllowed = true;

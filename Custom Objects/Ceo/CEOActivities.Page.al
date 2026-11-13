@@ -1,4 +1,4 @@
-page 52185657 "CEO Activities"
+page 85657 "CEO Activities"
 {
     PageType = CardPart;
     SourceTable = "CEO Cue";

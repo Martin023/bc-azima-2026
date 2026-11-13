@@ -1,4 +1,4 @@
-page 52185750 "RTGS Transfer Header"
+page 85750 "RTGS Transfer Header"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -214,7 +214,7 @@ page 52185750 "RTGS Transfer Header"
                         RTGSDetails.Reset;
                         RTGSDetails.SetRange(RTGSDetails."Document No.", Rec."No.");
                         if RTGSDetails.Find('-') then
-                            XMLPORT.Run(52185620, true, false, RTGSDetails);
+                            XMLPORT.Run(85620, true, false, RTGSDetails);
 
                         Message(SuccessfulGeneration);
                     end;

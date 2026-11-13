@@ -1,4 +1,4 @@
-enum 52185430 "Sub Module"
+enum 85430 "Sub Module"
 {
     value(0; "Members Applications") { }
     value(1; "Members Edits(BC)") { }

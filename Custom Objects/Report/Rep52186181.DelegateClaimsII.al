@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186181 "Delegate Claims II"
+report 86181 "Delegate Claims II"
 {
     ApplicationArea = All;
     Caption = 'Dalegate Claims II';

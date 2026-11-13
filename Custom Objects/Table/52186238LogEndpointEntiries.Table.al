@@ -1,4 +1,4 @@
-table 52186238 "Log Endpoint  Entiries"
+table 86238 "Log Endpoint  Entiries"
 {
     DrillDownPageID = "Log Entries Endpoints";
     LookupPageID = "Log Entries Endpoints";

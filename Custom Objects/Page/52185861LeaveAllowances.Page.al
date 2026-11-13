@@ -1,4 +1,4 @@
-page 52185861 "Leave Allowances"
+page 85861 "Leave Allowances"
 {
     PageType = List;
     SourceTable = "Leave Allowances";

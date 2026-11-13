@@ -1,4 +1,4 @@
-page 52186506 "EDMS Files List"
+page 86506 "EDMS Files List"
 {
     ApplicationArea = All;
     Caption = 'EDMS Files List';

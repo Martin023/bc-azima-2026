@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185451 pageextension52185451 extends "General Journal"
+PageExtension 85451 pageextension52185451 extends "General Journal"
 {
     Caption = 'General Journal';
 
@@ -902,14 +902,14 @@ PageExtension 52185451 pageextension52185451 extends "General Journal"
 
     var
         Gnjline: Record "Gen. Journal Line";
-        Account: Record 52185730;
+        Account: Record 85730;
         GenJournalBatch: Record "Gen. Journal Batch";
         NotJournalUserErr: label 'User %1 is not attached to this batch, and hence can not modify the batch';
         approvalsMgmt: Codeunit "Approvals Mgmt.";
         Text002: label 'Standard General Journal %1 has been successfully created.';
         GenJnlBatch: Record "Gen. Journal Batch";
-        CreditAccounts: Record 52185731;
-        Loans: Record 52185729;
+        CreditAccounts: Record 85731;
+        Loans: Record 85729;
         UserSetup: Record "User Setup";
         AccTypeNotSupportedErr: label 'You cannot specify a deferral code for this type of account.';
 

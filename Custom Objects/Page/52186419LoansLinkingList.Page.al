@@ -1,4 +1,4 @@
-page 52186419 "Loans Linking List"
+page 86419 "Loans Linking List"
 {
     CardPageID = "Loan Linking";
     Editable = false;

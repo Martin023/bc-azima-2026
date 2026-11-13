@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186604 "Loans Guaranteed List"
+page 86604 "Loans Guaranteed List"
 {
     Caption = 'Loans Guaranteed List';
     PageType = List;

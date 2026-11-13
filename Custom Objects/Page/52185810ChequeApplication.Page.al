@@ -1,4 +1,4 @@
-page 52185810 "Cheque Application"
+page 85810 "Cheque Application"
 {
     DeleteAllowed = false;
     PageType = Card;

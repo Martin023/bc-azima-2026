@@ -1,4 +1,4 @@
-page 52186008 "Posted Staff Advance"
+page 86008 "Posted Staff Advance"
 {
     Caption = 'Work Advance Request';
     DeleteAllowed = false;

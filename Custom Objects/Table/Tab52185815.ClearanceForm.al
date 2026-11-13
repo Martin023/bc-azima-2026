@@ -1,4 +1,4 @@
-table 52187032 "Clearance Form"// 52185815
+table 87032 "Clearance Form"// 52185815
 {
     Caption = 'Clearance Form';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52186831 "Overtime Need Request Lines"
+table 86831 "Overtime Need Request Lines"
 {
     Caption = 'Overtime Need Request Lines';
     DataClassification = ToBeClassified;

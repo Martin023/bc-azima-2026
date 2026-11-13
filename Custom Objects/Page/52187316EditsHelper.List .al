@@ -1,4 +1,4 @@
-page 52187316 "Edits Helper"
+page 87316 "Edits Helper"
 {
     Editable = false;
     PageType = List;
@@ -47,7 +47,7 @@ page 52187316 "Edits Helper"
                 var
                 begin
                     if SystemEdits.Get(Rec."Edits Header No.") then
-                        Page.Run(52187081, SystemEdits);
+                        Page.Run(87081, SystemEdits);
                 end;
             }
 
@@ -62,7 +62,7 @@ page 52187316 "Edits Helper"
                 var
                 begin
                     if SystemEdits.Get(Rec."Edits Header No.") then
-                        Page.Run(52187317, SystemEdits);
+                        Page.Run(87317, SystemEdits);
                 end;
 
             }

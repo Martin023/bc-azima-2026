@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
+PageExtension 85904 pageextension52185904 extends "Requests to Approve"
 {
 
     layout
@@ -232,7 +232,7 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
         // 4. Check if it's a System Edits approval
         else if SystemEditsRec.Get(Rec."Document No.") then begin
             // Only show for Members table (52185700) or Image Data table (52185702)
-            if (SystemEditsRec."Table ID" = 52185700) or (SystemEditsRec."Table ID" = 52185702) then begin
+            if (SystemEditsRec."Table ID" = 85700) or (SystemEditsRec."Table ID" = 85702) then begin
                 // Read the filter value which contains the Member No.
                 SystemEditsFilters.Reset();
                 SystemEditsFilters.SetRange("Record ID", SystemEditsRec."No.");

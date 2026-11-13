@@ -1,4 +1,4 @@
-page 52185431 "Mbanking Registered Members"
+page 85431 "Mbanking Registered Members"
 {
     CardPageID = "Savings Account Card";
     DeleteAllowed = false;

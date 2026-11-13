@@ -1,4 +1,4 @@
-page 52186632 "prBoard Employees Card"
+page 86632 "prBoard Employees Card"
 {
     PageType = Card;
     SourceTable = "Board members";

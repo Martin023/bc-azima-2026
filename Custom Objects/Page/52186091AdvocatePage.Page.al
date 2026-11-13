@@ -1,4 +1,4 @@
-page 52186091 "Advocate Page"
+page 86091 "Advocate Page"
 {
     Caption = 'Advocate Page';
     Editable = true;

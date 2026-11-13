@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186229 "Update Guaranteed Amount"
+report 86229 "Update Guaranteed Amount"
 {
     ApplicationArea = All;
     Caption = 'Update Guaranteed Amount';

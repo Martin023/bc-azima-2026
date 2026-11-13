@@ -1,4 +1,4 @@
-page 52186106 "Appealed Legal List"
+page 86106 "Appealed Legal List"
 {
     CardPageID = "Appealed Legal Card";
     PageType = List;

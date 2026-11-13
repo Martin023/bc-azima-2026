@@ -1,4 +1,4 @@
-page 52185509 "HR Job Occupants"
+page 85509 "HR Job Occupants"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

@@ -1,4 +1,4 @@
-page 52186245 "Common Area Charges"
+page 86245 "Common Area Charges"
 {
     PageType = List;
     // SourceTable = "Common Area Charges";

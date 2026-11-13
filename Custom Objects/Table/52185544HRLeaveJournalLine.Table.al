@@ -1,4 +1,4 @@
-table 52185544 "HR Leave Journal Line"
+table 85544 "HR Leave Journal Line"
 {
 
     fields

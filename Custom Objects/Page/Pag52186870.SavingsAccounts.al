@@ -1,5 +1,5 @@
 
-page 52186870 "Savings Accounts"
+page 86870 "Savings Accounts"
 {
     ApplicationArea = All;
     Caption = 'Savings Account Register';

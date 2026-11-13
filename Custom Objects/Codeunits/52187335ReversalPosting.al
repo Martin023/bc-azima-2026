@@ -1,4 +1,4 @@
-codeunit 52187335 "Reversal Posting"
+codeunit 87335 "Reversal Posting"
 {
     SingleInstance = true;
     EventSubscriberInstance = StaticAutomatic;

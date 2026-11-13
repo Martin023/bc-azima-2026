@@ -1,4 +1,4 @@
-page 52186884 "Hr Establishment List"
+page 86884 "Hr Establishment List"
 {
     ApplicationArea = All;
     Caption = 'Hr Establishment List';

@@ -1,4 +1,4 @@
-table 52186001 "Contract Files"
+table 86001 "Contract Files"
 {
     DataClassification = ToBeClassified;
 

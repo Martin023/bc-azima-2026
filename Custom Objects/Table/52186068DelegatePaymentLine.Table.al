@@ -1,4 +1,4 @@
-table 52186068 "Delegate Payment Line"
+table 86068 "Delegate Payment Line"
 {
     DrillDownPageId = "Delegates Payment Line List";
     LookupPageId = "Delegates Payment Line List";

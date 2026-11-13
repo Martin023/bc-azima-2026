@@ -1,4 +1,4 @@
-page 52186682 "Portal Tiered Charges"
+page 86682 "Portal Tiered Charges"
 {
     PageType = ListPart;
     SourceTable = "Portal Tiered Charges";

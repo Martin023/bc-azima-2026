@@ -1,4 +1,4 @@
-page 52185748 "Standing Order Register List"
+page 85748 "Standing Order Register List"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

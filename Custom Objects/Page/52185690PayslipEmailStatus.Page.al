@@ -1,4 +1,4 @@
-page 52185690 "Payslip Email Status"
+page 85690 "Payslip Email Status"
 {
     PageType = List;
     SourceTable = "PR Email Status";

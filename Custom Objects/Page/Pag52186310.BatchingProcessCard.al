@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using System.Security.User;
 using System.Automation;
 
-page 52186310 "Batching Process Card"
+page 86310 "Batching Process Card"
 {
     Caption = 'Batching Process Card';
     PageType = Card;

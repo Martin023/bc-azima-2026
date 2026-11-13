@@ -1,4 +1,4 @@
-page 52186448 "DCS Account Trans Summ List"
+page 86448 "DCS Account Trans Summ List"
 {
     PageType = List;
     SourceTable = "Salary Lines";

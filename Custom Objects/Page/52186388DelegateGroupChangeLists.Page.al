@@ -1,4 +1,4 @@
-page 52186388 "Delegate Group Change Lists"
+page 86388 "Delegate Group Change Lists"
 {
     CardPageID = "Delegate Region Change  Cards";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-page 52186731 "SMS Alert Header List"
+page 86731 "SMS Alert Header List"
 {
     ApplicationArea = All;
     Caption = 'SMS Alert Header List';

@@ -5,7 +5,7 @@ using System.Environment;
 using System.Reflection;
 using System.Security.AccessControl;
 
-table 52187076 "System Edits Fields"
+table 87076 "System Edits Fields"
 {
     ReplicateData = false;
     LookupPageId = "System Edits Fields";

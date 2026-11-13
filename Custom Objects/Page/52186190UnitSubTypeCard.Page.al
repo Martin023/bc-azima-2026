@@ -1,4 +1,4 @@
-page 52186190 "Unit Sub Type Card"
+page 86190 "Unit Sub Type Card"
 {
     PageType = Card;
     SourceTable = "Unit Sub Type";

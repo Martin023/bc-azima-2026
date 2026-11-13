@@ -1,4 +1,4 @@
-page 52186272 "Staff Allowance Setup"
+page 86272 "Staff Allowance Setup"
 {
     PageType = List;
     Permissions = TableData "Staff Allowance Setup" = rimd;

@@ -1,4 +1,4 @@
-table 52185726 "Application Documents"
+table 85726 "Application Documents"
 {
     LookupPageID = "Application Documents";
 

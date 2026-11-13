@@ -1,4 +1,4 @@
-page 52186215 "HR Employee List - (FixedTc)"
+page 86215 "HR Employee List - (FixedTc)"
 {
     CardPageID = "HR Employee Card";
     DeleteAllowed = false;

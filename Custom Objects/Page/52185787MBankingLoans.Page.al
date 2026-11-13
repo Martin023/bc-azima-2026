@@ -1,4 +1,4 @@
-page 52185787 "MBanking Loans"
+page 85787 "MBanking Loans"
 {
     DeleteAllowed = false;
     ModifyAllowed = false;

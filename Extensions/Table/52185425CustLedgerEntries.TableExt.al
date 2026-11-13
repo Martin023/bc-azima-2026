@@ -1,4 +1,4 @@
-TableExtension 52185425 tableextension52185425 extends "Cust. Ledger Entry"
+TableExtension 85425 tableextension52185425 extends "Cust. Ledger Entry"
 {
     fields
     {

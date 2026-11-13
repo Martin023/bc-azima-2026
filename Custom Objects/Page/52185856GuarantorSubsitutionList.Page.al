@@ -1,4 +1,4 @@
-page 52185856 "Guarantor Subsitution List"
+page 85856 "Guarantor Subsitution List"
 {
     CardPageID = "Guarantor Substitution";
     Editable = false;

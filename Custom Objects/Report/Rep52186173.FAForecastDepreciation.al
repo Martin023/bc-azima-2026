@@ -4,7 +4,7 @@ using Microsoft.FixedAssets.Ledger;
 using Microsoft.FixedAssets.Depreciation;
 using Microsoft.Foundation.Company;
 
-report 52186173 "FA Forecast Depreciation"
+report 86173 "FA Forecast Depreciation"
 {
     ApplicationArea = All;
     Caption = 'FA Forecast Depreciation';

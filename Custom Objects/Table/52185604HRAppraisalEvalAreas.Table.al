@@ -1,4 +1,4 @@
-table 52185604 "HR Appraisal Eval Areas"
+table 85604 "HR Appraisal Eval Areas"
 {
 
     fields

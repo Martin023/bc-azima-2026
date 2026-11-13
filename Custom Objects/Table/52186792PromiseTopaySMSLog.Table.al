@@ -1,4 +1,4 @@
-table 52186793 "PromiseTopay SMS Log"
+table 86793 "PromiseTopay SMS Log"
 {
 
     fields

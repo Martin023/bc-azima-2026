@@ -1,4 +1,4 @@
-page 52185954 "Claim Types"
+page 85954 "Claim Types"
 {
     PageType = Card;
     SourceTable = "Receipts and Payment Types";

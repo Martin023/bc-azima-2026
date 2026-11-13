@@ -6,7 +6,7 @@ using Microsoft.FixedAssets.Ledger;
 using Microsoft.Foundation.Company;
 using Microsoft.FixedAssets.Depreciation;
 
-report 52185951 "Assets Marked For Disposal"
+report 85951 "Assets Marked For Disposal"
 {
     ApplicationArea = All;
     Caption = 'Assets Marked For Disposal';

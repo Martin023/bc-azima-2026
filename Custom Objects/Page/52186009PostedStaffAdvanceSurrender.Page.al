@@ -1,4 +1,4 @@
-page 52186009 "Posted Staff Advance Surrender"
+page 86009 "Posted Staff Advance Surrender"
 {
     Caption = 'Work Advance Retire List';
     CardPageID = "Posted Staff Advance Account";

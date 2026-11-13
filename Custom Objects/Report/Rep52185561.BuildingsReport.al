@@ -1,4 +1,4 @@
-report 52185561 "Buildings Report"
+report 85561 "Buildings Report"
 {
     ApplicationArea = All;
     Caption = 'Buildings Report';

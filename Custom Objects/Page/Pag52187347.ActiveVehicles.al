@@ -1,4 +1,4 @@
-page 52187347 "Active Vehicles"
+page 87347 "Active Vehicles"
 {
     ApplicationArea = All;
     Caption = 'Active Vehicles';

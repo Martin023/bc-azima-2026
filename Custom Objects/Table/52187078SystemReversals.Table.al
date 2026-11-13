@@ -1,4 +1,4 @@
-table 52187078 "System Reversal"
+table 87078 "System Reversal"
 {
     ReplicateData = false;
     LookupPageId = "System Reversal List";

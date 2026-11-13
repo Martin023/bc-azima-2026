@@ -1,4 +1,4 @@
-table 52187366 "Vehicle Servicing Table"
+table 87366 "Vehicle Servicing Table"
 {
     Caption = 'Vehicle Servicing Table';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52185717 "Standing Order Header"
+table 85717 "Standing Order Header"
 {
     DrillDownPageID = "Standing Order List";
     LookupPageID = "Standing Order List";

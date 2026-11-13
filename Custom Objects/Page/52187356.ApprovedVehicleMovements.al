@@ -1,4 +1,4 @@
-page 52187356 "Approved Vehicle Movt Card"
+page 87356 "Approved Vehicle Movt Card"
 {
     ApplicationArea = All;
     Caption = 'Approved Vehicle Mov';

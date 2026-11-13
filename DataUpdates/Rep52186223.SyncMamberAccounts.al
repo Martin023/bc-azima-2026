@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186223 "Sync Member & Accounts"
+report 86223 "Sync Member & Accounts"
 {
     ApplicationArea = All;
     Caption = 'Sync Member & Accounts';

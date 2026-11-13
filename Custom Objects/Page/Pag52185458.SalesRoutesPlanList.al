@@ -1,6 +1,6 @@
 namespace AzimaBC.AzimaBC;
 
-page 52185458 "Sales Routes Plan List"
+page 85458 "Sales Routes Plan List"
 {
     ApplicationArea = All;
     Caption = 'Sales Routes Plan List';

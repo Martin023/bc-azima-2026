@@ -1,4 +1,4 @@
-table 52187044 "ATM Card Storage"
+table 87044 "ATM Card Storage"
 {
     Caption = 'ATM Card Storage';
     DataClassification = ToBeClassified;

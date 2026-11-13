@@ -1,4 +1,4 @@
-table 52185579 "CEO Cue"
+table 85579 "CEO Cue"
 {
     DataClassification = CustomerContent;
 

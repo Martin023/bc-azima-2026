@@ -1,4 +1,4 @@
-table 52185863 "Social Listening Sites App."
+table 85863 "Social Listening Sites App."
 {
     DrillDownPageID = "Social Listening Sites App.";
     LookupPageID = "Social Listening Sites App.";

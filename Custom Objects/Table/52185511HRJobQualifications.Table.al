@@ -1,4 +1,4 @@
-table 52185511 "HR Job Qualifications"
+table 85511 "HR Job Qualifications"
 {
     Caption = 'HR Qualifications';
     DataCaptionFields = "Code", Description;

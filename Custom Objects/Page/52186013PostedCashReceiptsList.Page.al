@@ -1,4 +1,4 @@
-page 52186013 "Posted Cash Receipts List"
+page 86013 "Posted Cash Receipts List"
 {
     CardPageID = "Posted Cash Receipt Header";
     DeleteAllowed = false;

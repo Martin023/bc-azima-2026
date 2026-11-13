@@ -1,4 +1,4 @@
-page 52185995 "Posted Bank & Cash Transfers"
+page 85995 "Posted Bank & Cash Transfers"
 {
     CardPageID = "Posted Bank & Cash Transfer";
     DeleteAllowed = false;

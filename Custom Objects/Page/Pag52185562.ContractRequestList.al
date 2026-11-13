@@ -1,4 +1,4 @@
-page 52185562 "Contract Request List"
+page 85562 "Contract Request List"
 {
     ApplicationArea = All;
     Caption = 'Contract Request List';

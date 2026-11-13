@@ -1,4 +1,4 @@
-page 52185804 "Treasury Cashier Transactions"
+page 85804 "Treasury Cashier Transactions"
 {
     DeleteAllowed = false;
     SourceTable = "Treasury Cashier Transactions";

@@ -2,7 +2,7 @@ namespace MNSProjectMwanga.MNSProjectMwanga;
 
 using System.Utilities;
 
-tableextension 52186835 "Error Messages TableEXT" extends 700
+tableextension 86835 "Error Messages TableEXT" extends 700
 {
     fields
     {

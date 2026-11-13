@@ -1,4 +1,4 @@
-page 52185573 "HR Applicant Referees"
+page 85573 "HR Applicant Referees"
 {
     PageType = List;
     SourceTable = "HR Applicant Referees";

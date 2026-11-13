@@ -1,4 +1,4 @@
-page 52185433 "Sky Mbanking Changes Card"
+page 85433 "Sky Mbanking Changes Card"
 {
     DeleteAllowed = false;
     PageType = Card;

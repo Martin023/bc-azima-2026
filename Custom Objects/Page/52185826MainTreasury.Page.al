@@ -1,4 +1,4 @@
-page 52185826 "Main Treasury"
+page 85826 "Main Treasury"
 {
     PageType = Card;
     SourceTable = "Main Treasury Account";

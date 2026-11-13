@@ -1,4 +1,4 @@
-page 52185494 "Funds Management Activity"
+page 85494 "Funds Management Activity"
 {
     Caption = 'Activities';
     PageType = CardPart;

@@ -1,4 +1,4 @@
-page 52187036 "Refund $ Account Trans List"
+page 87036 "Refund $ Account Trans List"
 {
     CardPageID = "Bulk Refunds Card";
     DeleteAllowed = false;

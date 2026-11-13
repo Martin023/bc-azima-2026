@@ -1,4 +1,4 @@
-page 52185588 "HR Perspective Setup Card"
+page 85588 "HR Perspective Setup Card"
 {
     PageType = Card;
     SourceTable = "HR Perspectives Setup";

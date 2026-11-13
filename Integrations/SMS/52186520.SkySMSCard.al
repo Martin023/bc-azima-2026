@@ -1,4 +1,4 @@
-page 52186520 "Sky SMS Card"
+page 86520 "Sky SMS Card"
 {
     ApplicationArea = All;
     Caption = 'Sky SMS Card';

@@ -1,4 +1,4 @@
-table 52186124 "Payment Methods Application"
+table 86124 "Payment Methods Application"
 {
 
     fields

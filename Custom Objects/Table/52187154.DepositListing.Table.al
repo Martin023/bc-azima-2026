@@ -1,4 +1,4 @@
-table 52187154 "Deposit Listing"
+table 87154 "Deposit Listing"
 {
     Caption = 'Deposit Listing';
     DataClassification = ToBeClassified;

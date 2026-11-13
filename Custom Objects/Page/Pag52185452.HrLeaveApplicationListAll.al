@@ -1,7 +1,7 @@
 namespace mns.mns;
 using System.Automation;
 
-page 52185452 "Hr Leave Application List All"
+page 85452 "Hr Leave Application List All"
 
 {
     CardPageID = "HR Leave Application Card";

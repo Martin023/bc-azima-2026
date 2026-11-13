@@ -1,4 +1,4 @@
-page 52186485 "HR Training Needs Card"
+page 86485 "HR Training Needs Card"
 {
     DeleteAllowed = false;
     PageType = Card;

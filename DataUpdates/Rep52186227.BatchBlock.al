@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186227 "Batch Block"
+report 86227 "Batch Block"
 {
     ApplicationArea = All;
     Caption = 'Batch Block Accounts';

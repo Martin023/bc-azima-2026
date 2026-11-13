@@ -1,4 +1,4 @@
-page 52186280 "Money Market Subform"
+page 86280 "Money Market Subform"
 {
     AutoSplitKey = true;
     PageType = ListPart;

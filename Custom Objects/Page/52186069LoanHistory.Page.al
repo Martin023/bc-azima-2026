@@ -1,4 +1,4 @@
-page 52186069 "Loan History"
+page 86069 "Loan History"
 {
     Editable = false;
     PageType = List;

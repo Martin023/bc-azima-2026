@@ -1,4 +1,4 @@
-page 52185917 "Bank & Cash Transfer Request"
+page 85917 "Bank & Cash Transfer Request"
 {
     DeleteAllowed = false;
     PageType = Card;

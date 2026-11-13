@@ -1,4 +1,4 @@
-page 52185652 "Mobile Loan Exceptions"
+page 85652 "Mobile Loan Exceptions"
 {
     Caption = 'Mobile Loan Exceptions';
     PageType = List;

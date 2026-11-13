@@ -1,4 +1,4 @@
-enum 52185439 "Account Category"
+enum 85439 "Account Category"
 {
     Value(0; " ") {}
     Value(1; Member) {}

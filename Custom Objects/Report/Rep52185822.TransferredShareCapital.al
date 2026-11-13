@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185822 "Transferred Share Capital Cert"
+report 85822 "Transferred Share Capital Cert"
 
 {
     ApplicationArea = All;

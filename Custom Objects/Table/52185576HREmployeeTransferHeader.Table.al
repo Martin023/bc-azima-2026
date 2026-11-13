@@ -1,4 +1,4 @@
-table 52185576 "HR Employee Transfer Header"
+table 85576 "HR Employee Transfer Header"
 {
 
     fields

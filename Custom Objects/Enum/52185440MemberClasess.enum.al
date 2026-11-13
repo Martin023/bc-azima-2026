@@ -1,4 +1,4 @@
-enum 52185440 "Member Classes"
+enum 85440 "Member Classes"
 {
     Value(0; " ") { }
     Value(1; A) { }

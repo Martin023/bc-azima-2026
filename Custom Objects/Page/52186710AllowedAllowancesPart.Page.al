@@ -1,4 +1,4 @@
-page 52186710 "Allowed Allowances Part"
+page 86710 "Allowed Allowances Part"
 {
     PageType = ListPart;
     SourceTable = "Allowed Allowances";

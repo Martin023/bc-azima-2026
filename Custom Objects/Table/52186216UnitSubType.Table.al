@@ -1,4 +1,4 @@
-table 52186216 "Unit Sub Type"
+table 86216 "Unit Sub Type"
 {
 
     fields

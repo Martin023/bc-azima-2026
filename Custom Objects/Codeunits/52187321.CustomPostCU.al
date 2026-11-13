@@ -1,4 +1,4 @@
-codeunit 52187321 CustomPostCU
+codeunit 87321 CustomPostCU
 {
     [EventSubscriber(ObjectType::Codeunit, codeunit::"Gen. Jnl.-Post Line", 'OnMoveGenJournalLine', '', false, false)]
     local procedure OnMoveGenJournalLines(var GenJournalLine: Record "Gen. Journal Line"; ToRecordID: RecordId)

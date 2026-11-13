@@ -1,4 +1,4 @@
-page 52186132 "Sinkfund Receipts List"
+page 86132 "Sinkfund Receipts List"
 {
     CardPageID = "SinkFund Receipt Header";
     Editable = false;

@@ -1,4 +1,4 @@
-page 52186102 "Verdict List"
+page 86102 "Verdict List"
 {
     //CardPageID = "Verdict Card";
     PageType = ListPart;

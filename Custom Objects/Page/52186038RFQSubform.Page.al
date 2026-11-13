@@ -1,4 +1,4 @@
-page 52186038 "RFQ Subform"
+page 86038 "RFQ Subform"
 {
     DeleteAllowed = true;
     PageType = ListPart;

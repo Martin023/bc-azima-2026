@@ -1,4 +1,4 @@
-table 52185832 "SMS Series"
+table 85832 "SMS Series"
 {
     DrillDownPageID = "SMS Series";
     LookupPageID = "SMS Series";

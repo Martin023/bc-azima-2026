@@ -1,4 +1,4 @@
-page 52186333 "System Edits Reasons"
+page 86333 "System Edits Reasons"
 {
     PageType = List;
     SourceTable = "System Edit Reasons";

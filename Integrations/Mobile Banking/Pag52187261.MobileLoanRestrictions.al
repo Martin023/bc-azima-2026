@@ -1,4 +1,4 @@
-page 52187261 "Mobile Loan Restrictions"
+page 87261 "Mobile Loan Restrictions"
 {
     Caption = 'Mobile Loan Restrictions';
     PageType = List;

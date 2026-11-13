@@ -1,4 +1,4 @@
-page 52187052 "Nominee Legal List"
+page 87052 "Nominee Legal List"
 {
     ApplicationArea = All;
     Caption = 'Nominee Legal List';

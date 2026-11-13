@@ -1,4 +1,4 @@
-page 52185760 "Loan Disbursement Header"
+page 85760 "Loan Disbursement Header"
 {
     DeleteAllowed = false;
     PageType = Card;

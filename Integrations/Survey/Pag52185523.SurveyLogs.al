@@ -1,4 +1,4 @@
-page 52185523 "Survey Logs"
+page 85523 "Survey Logs"
 {
     ApplicationArea = All;
     Caption = 'Survey Logs';

@@ -1,4 +1,4 @@
-page 52186025 "Contract Stage Activities"
+page 86025 "Contract Stage Activities"
 {
     PageType = List;
     SourceTable = "Contract Stage Activities";

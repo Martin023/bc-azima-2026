@@ -1,4 +1,4 @@
-table 52185636 "PR Vital Setup Info"
+table 85636 "PR Vital Setup Info"
 {
 
     fields

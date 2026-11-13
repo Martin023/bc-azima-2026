@@ -1,4 +1,4 @@
-page 52185839 "Checkoff Advice"
+page 85839 "Checkoff Advice"
 {
     Caption = 'Checkoff Advice Logs.';
     PageType = List;

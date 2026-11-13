@@ -1,4 +1,4 @@
-page 52187056 "User Reactivation List"
+page 87056 "User Reactivation List"
 {
     CardPageID = "User Reactivation Card";
     ApplicationArea = All;

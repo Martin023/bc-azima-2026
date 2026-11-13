@@ -1,4 +1,4 @@
-page 52185669 "prNHIF SetUp"
+page 85669 "prNHIF SetUp"
 {
     DeleteAllowed = false;
     PageType = List;

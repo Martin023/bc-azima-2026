@@ -1,4 +1,4 @@
-page 52185953 "Staff Advance Surrender List"
+page 85953 "Staff Advance Surrender List"
 {
     Caption = 'Staff Imprest Liquidation List';
     CardPageID = "Staff Advance Surrender";

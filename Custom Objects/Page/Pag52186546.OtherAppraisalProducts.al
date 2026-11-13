@@ -1,6 +1,6 @@
 namespace MNSProject.MNSProject;
 
-page 52186546 "Other Appraisal Products"
+page 86546 "Other Appraisal Products"
 {
     ApplicationArea = All;
     Caption = 'Other Appraisal Products';

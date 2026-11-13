@@ -1,4 +1,4 @@
-table 52185692 "Next of KIN Application"
+table 85692 "Next of KIN Application"
 {
     LookupPageID = "Next of KIN Application";
 

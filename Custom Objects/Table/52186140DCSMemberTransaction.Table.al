@@ -1,4 +1,4 @@
-table 52186140 "DCS Member Transaction"
+table 86140 "DCS Member Transaction"
 {
 
     fields

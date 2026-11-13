@@ -1,4 +1,4 @@
-page 52185975 "Posted Loan Recovery Header"
+page 85975 "Posted Loan Recovery Header"
 {
     CardPageID = "Loan Recovery Header";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-table 52185753 "Dependancies Applications"
+table 85753 "Dependancies Applications"
 {
     LookupPageID = "Dependancies Applications List";
     DrillDownPageId = "Dependancies Applications List";

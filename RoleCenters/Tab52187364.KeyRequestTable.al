@@ -1,4 +1,4 @@
-table 52187364 "Key Request Table"
+table 87364 "Key Request Table"
 {
     Caption = 'Key Request Table';
     DataClassification = ToBeClassified;

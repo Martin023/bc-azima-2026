@@ -1,4 +1,4 @@
-table 52187157 "Member Listing"
+table 87157 "Member Listing"
 {
     DataClassification = ToBeClassified;
     Caption = 'Membr Listing';

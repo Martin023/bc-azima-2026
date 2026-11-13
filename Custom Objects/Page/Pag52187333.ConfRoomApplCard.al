@@ -1,4 +1,4 @@
-page 52187324 "Conf Room Appl Card"
+page 87324 "Conf Room Appl Card"
 {
     ApplicationArea = All;
     Caption = 'Conf Room Appl Card';

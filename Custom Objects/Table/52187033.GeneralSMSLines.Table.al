@@ -1,4 +1,4 @@
-table 52187033 "General SMS Lines"
+table 87033 "General SMS Lines"
 {
     Caption = 'General SMS Lines';
     DataClassification = ToBeClassified;

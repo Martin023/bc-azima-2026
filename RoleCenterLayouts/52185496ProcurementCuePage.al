@@ -1,4 +1,4 @@
-page 52185496 "Procurement Cue Page"
+page 85496 "Procurement Cue Page"
 {
     Caption = 'Procurement Cue Page';
     PageType = CardPart;

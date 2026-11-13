@@ -1,4 +1,4 @@
-report 52186037 "Member Receipt Report"
+report 86037 "Member Receipt Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Member Receipt Report.rdl';

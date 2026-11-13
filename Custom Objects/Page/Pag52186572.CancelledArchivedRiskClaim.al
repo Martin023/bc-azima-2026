@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186572 "Cancelled/Archived Risk Claim"
+page 86572 "Cancelled/Archived Risk Claim"
 {
 
     CardPageID = "Risk Claim Notice";

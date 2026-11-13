@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 using System.Security.User;
 
-report 52186185 "Partial Closure Slip"
+report 86185 "Partial Closure Slip"
 {
     Caption = 'Partial Closure Slip';
 
@@ -447,15 +447,15 @@ report 52186185 "Partial Closure Slip"
         TotalCaptionLbl: label 'Total';
         TotalCaption_Control1102760055Lbl: label 'Total';
         UBF_Refund_CaptionLbl: label 'UBF Refund ';
-        AccountClosure: Record 52185825;
+        AccountClosure: Record 85825;
         Product: Code[20];
         Amount: Decimal;
-        MemberwithdrawalNotice: Record 52185826;
-        TransactionTypes: Record 52185773;
-        TransactionCharges: Record 52185774;
+        MemberwithdrawalNotice: Record 85826;
+        TransactionTypes: Record 85773;
+        TransactionCharges: Record 85774;
         TCharges: Decimal;
         ChargeAmount: Decimal;
-        TariffDetails: Record 52185777;
+        TariffDetails: Record 85777;
         Refund: Decimal;
         Members: Record "Members";
         EmployerName: Text;

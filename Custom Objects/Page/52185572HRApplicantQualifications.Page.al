@@ -1,4 +1,4 @@
-page 52185572 "HR Applicant Qualifications"
+page 85572 "HR Applicant Qualifications"
 {
     Caption = 'Applicant Qualifications';
     PageType = List;

@@ -1,4 +1,4 @@
-table 52187028 "Alerts Loan Lines"
+table 87028 "Alerts Loan Lines"
 {
     Caption = 'Alerts Loan Lines';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-report 52185555 "Terminated Leases"
+report 85555 "Terminated Leases"
 {
     ApplicationArea = All;
     Caption = 'Terminated Leases';

@@ -1,4 +1,4 @@
-table 52185613 "PR Payroll Periods"
+table 85613 "PR Payroll Periods"
 {
     LookupPageID = "PR Payroll Periods";
 

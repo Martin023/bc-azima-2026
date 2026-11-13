@@ -1,4 +1,4 @@
-tableextension 52186258 vendoraccount extends "vendor bank account"
+tableextension 86258 vendoraccount extends "vendor bank account"
 {
     fields
     {

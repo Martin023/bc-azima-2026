@@ -1,4 +1,4 @@
-page 52185631 "HR Employee Card"
+page 85631 "HR Employee Card"
 {
     DeleteAllowed = false;
     PageType = Card;

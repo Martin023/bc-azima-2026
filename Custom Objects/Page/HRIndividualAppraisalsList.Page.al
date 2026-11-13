@@ -1,4 +1,4 @@
-page 52186156 "HR Individual Appraisals List"
+page 86156 "HR Individual Appraisals List"
 {
     Caption = 'Individual Appraisals - All';
     PageType = List;

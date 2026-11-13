@@ -1,4 +1,4 @@
-report 52186044 HrNextofKin
+report 86044 HrNextofKin
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/HR Next Of Kin Report.rdl';

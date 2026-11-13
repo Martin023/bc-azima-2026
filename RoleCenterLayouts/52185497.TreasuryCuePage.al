@@ -1,4 +1,4 @@
-page 52185497 "Treasury Cue Page"
+page 85497 "Treasury Cue Page"
 {
     Caption = 'Activities';
     PageType = CardPart;

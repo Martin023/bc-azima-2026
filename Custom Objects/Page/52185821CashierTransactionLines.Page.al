@@ -1,4 +1,4 @@
-page 52185821 "Cashier Transaction Lines"
+page 85821 "Cashier Transaction Lines"
 {
     PageType = List;
     SourceTable = "Cashier Transaction Lines";

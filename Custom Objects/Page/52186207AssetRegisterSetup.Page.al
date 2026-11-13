@@ -1,4 +1,4 @@
-page 52186207 "Asset Register Setup"
+page 86207 "Asset Register Setup"
 {
     PageType = List;
     SourceTable = "Asset Register Setup";

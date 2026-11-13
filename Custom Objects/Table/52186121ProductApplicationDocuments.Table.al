@@ -1,4 +1,4 @@
-table 52186121 "Product Application Documents"
+table 86121 "Product Application Documents"
 {
 
     fields

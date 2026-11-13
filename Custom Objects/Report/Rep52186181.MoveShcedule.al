@@ -4,7 +4,7 @@ using Microsoft.FixedAssets.Depreciation;
 using Microsoft.FixedAssets.Ledger;
 using Microsoft.FixedAssets.FixedAsset;
 
-report 52186182 MoveShcedule
+report 86182 MoveShcedule
 {
     ApplicationArea = All;
     Caption = 'MoveShcedule';

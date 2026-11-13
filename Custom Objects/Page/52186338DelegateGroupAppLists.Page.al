@@ -1,4 +1,4 @@
-page 52186338 "Delegate Group App Lists"
+page 86338 "Delegate Group App Lists"
 {
     CardPageID = "Delegate Region App Cards";
     DeleteAllowed = false;

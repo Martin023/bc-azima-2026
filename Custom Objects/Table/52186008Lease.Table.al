@@ -1,4 +1,4 @@
-table 52186008 Lease
+table 86008 Lease
 {
     LookupPageID = "Lease-List";
 

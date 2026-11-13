@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 52185726 "Resignation Slip"
+Report 85726 "Resignation Slip"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Closure Slip.rdl';
@@ -444,15 +444,15 @@ Report 52185726 "Resignation Slip"
         TotalCaptionLbl: label 'Total';
         TotalCaption_Control1102760055Lbl: label 'Total';
         UBF_Refund_CaptionLbl: label 'UBF Refund ';
-        AccountClosure: Record 52185825;
+        AccountClosure: Record 85825;
         Product: Code[20];
         Amount: Decimal;
-        MemberwithdrawalNotice: Record 52185826;
-        TransactionTypes: Record 52185773;
-        TransactionCharges: Record 52185774;
+        MemberwithdrawalNotice: Record 85826;
+        TransactionTypes: Record 85773;
+        TransactionCharges: Record 85774;
         TCharges: Decimal;
         ChargeAmount: Decimal;
-        TariffDetails: Record 52185777;
+        TariffDetails: Record 85777;
         Refund: Decimal;
         Members: Record "Members";
         EmployerName: Text;

@@ -1,4 +1,4 @@
-page 52186293 "Delegate Group List"
+page 86293 "Delegate Group List"
 {
     CardPageID = "Delegate Groups Card";
     DeleteAllowed = false;

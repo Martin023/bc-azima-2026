@@ -3,7 +3,7 @@ using System.Email;
 using System.Security.User;
 using Microsoft.Sales.Customer;
 
-report 52186174 "Lease Job"
+report 86174 "Lease Job"
 {
     ApplicationArea = All;
     Caption = 'Lease Job';

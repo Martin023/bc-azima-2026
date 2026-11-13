@@ -1,4 +1,4 @@
-table 52186061 "System Edit Reasons"
+table 86061 "System Edit Reasons"
 {
 
     DrillDownPageId = "System Edits Reasons";

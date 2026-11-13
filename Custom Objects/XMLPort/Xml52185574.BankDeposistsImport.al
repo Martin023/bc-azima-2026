@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.Finance.GeneralLedger.Journal;
 
-xmlport 52185574 "Bank Deposits Import"
+xmlport 85574 "Bank Deposits Import"
 {
     Caption = 'Bank Deposits Import';
     Format = VariableText;

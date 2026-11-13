@@ -1,4 +1,4 @@
-page 52185765 "Other Commitments Clearance"
+page 85765 "Other Commitments Clearance"
 {
     PageType = List;
     SourceTable = "Other Commitements Clearance";

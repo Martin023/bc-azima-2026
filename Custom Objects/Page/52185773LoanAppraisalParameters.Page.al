@@ -1,4 +1,4 @@
-page 52185773 "Loan Appraisal Parameters"
+page 85773 "Loan Appraisal Parameters"
 {
     PageType = List;
     SourceTable = "Loan Application Credit Score";

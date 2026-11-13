@@ -1,4 +1,4 @@
-table 52187416 "FOSA Payment Line"
+table 87416 "FOSA Payment Line"
 {
     DrillDownPageID = "FOSA Payment Lines";
     LookupPageID = "FOSA Payment Lines";

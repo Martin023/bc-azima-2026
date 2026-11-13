@@ -5,7 +5,7 @@ using Microsoft.Foundation.Period;
 using Microsoft.FixedAssets.Depreciation;
 using Microsoft.FixedAssets.Posting;
 
-codeunit 52185436 "Custom Calc. Normal Deprec."
+codeunit 85436 "Custom Calc. Normal Deprec."
 {
     Permissions = TableData "FA Ledger Entry" = r,
                   TableData "FA Posting Type Setup" = r;

@@ -1,4 +1,4 @@
-page 52185591 "HR E-Mail Parameters Card"
+page 85591 "HR E-Mail Parameters Card"
 {
     PageType = Card;
     SourceTable = "HR E-Mail Parameters";

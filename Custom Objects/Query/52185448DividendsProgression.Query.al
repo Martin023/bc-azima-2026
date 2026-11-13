@@ -1,4 +1,4 @@
-Query 52185448 "Dividends Progression"
+Query 85448 "Dividends Progression"
 {
 
     elements

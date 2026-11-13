@@ -1,4 +1,4 @@
-page 52186574 "M-Smart Document"
+page 86574 "M-Smart Document"
 {
     ApplicationArea = All;
     Caption = 'M-Smart Document';

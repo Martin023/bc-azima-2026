@@ -1,4 +1,4 @@
-page 52186048 "Bid Analysis"
+page 86048 "Bid Analysis"
 {
     PageType = Document;
     SourceTable = "Purchase Quote Header";

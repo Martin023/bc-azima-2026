@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Finance.GeneralLedger.Journal;
 
-report 52186208 ClearLoanBalless100
+report 86208 ClearLoanBalless100
 {
     ApplicationArea = All;
     Caption = 'Clear Loan Bal With less 100';

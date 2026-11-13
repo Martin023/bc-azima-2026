@@ -1,4 +1,4 @@
-page 52185490 "Insurance Actioned List"
+page 85490 "Insurance Actioned List"
 {
     CardPageID = "Sky Insurance Card";
     DelayedInsert = false;

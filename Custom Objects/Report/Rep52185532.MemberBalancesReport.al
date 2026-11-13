@@ -1,7 +1,7 @@
 namespace AZIMA.AZIMA;
 using Microsoft.Sales.Customer;
 
-report 52185532 "Member Balances Report"
+report 85532 "Member Balances Report"
 {
     ApplicationArea = All;
     Caption = 'Member Balances Report';

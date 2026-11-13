@@ -1,4 +1,4 @@
-enum 52185427 "Recruited By"
+enum 85427 "Recruited By"
 {
     value(0; "None") {} 
     value(1; Staff) {} 

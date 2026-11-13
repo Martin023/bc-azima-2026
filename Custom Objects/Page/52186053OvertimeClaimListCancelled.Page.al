@@ -1,4 +1,4 @@
-page 52186053 "Overtime Claim List-Cancelled"
+page 86053 "Overtime Claim List-Cancelled"
 {
     CardPageID = "Overtime Claim Header";
     Editable = false;

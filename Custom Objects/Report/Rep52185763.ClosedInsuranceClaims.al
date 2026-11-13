@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185763 "Closed Insurance Claims"
+report 85763 "Closed Insurance Claims"
 {
     ApplicationArea = All;
     Caption = 'Closed Insurance Claims';

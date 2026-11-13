@@ -1,4 +1,4 @@
-table 52186504 "EDMS API Setup"
+table 86504 "EDMS API Setup"
 {
     DataClassification = SystemMetadata;
 

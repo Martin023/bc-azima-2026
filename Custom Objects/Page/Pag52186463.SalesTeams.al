@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52186490 "Sales Teams"
+page 86490 "Sales Teams"
 {
     ApplicationArea = All;
     Caption = 'Sales Card';

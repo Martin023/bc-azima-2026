@@ -1,4 +1,4 @@
-page 52185691 "ATM Charge List"
+page 85691 "ATM Charge List"
 {
     ApplicationArea = All;
     Caption = 'ATM Transaction Types.';

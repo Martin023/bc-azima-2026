@@ -1,4 +1,4 @@
-page 52186216 "Unit Rental Charges"
+page 86216 "Unit Rental Charges"
 {
     PageType = List;
     SourceTable = "Unit Setup Charges";

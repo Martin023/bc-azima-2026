@@ -1,4 +1,4 @@
-table 52185581 "HR Training Needs"
+table 85581 "HR Training Needs"
 {
     DataCaptionFields = "Code", Description;
     DrillDownPageID = "HR Training Needs List";

@@ -1,10 +1,10 @@
 
-page 52186110 "Defined SLA List"
+page 86110 "Defined SLA List"
 {
     ApplicationArea = All;
     Caption = 'Defined SLA List';
     PageType = List;
-    SourceTable = 52186018;
+    SourceTable = 86018;
     UsageCategory = Administration;
     CardPageId = "Defined SLA Card";
 

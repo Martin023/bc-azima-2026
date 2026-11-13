@@ -1,4 +1,4 @@
-page 52186641 "Member Statistics"
+page 86641 "Member Statistics"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

@@ -1,4 +1,4 @@
-page 52185681 "SMS Account Subscription"
+page 85681 "SMS Account Subscription"
 {
     PageType = Card;
     SourceTable = "SMS Account Subscription";

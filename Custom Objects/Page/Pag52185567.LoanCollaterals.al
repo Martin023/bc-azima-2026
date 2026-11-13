@@ -1,4 +1,4 @@
-page 52185567 "Loan Collaterals"
+page 85567 "Loan Collaterals"
 {
 
     PageType = ListPart;

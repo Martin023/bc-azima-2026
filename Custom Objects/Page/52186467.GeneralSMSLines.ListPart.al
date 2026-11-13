@@ -1,4 +1,4 @@
-page 52186467 "General SMS Lines"
+page 86467 "General SMS Lines"
 {
     ApplicationArea = All;
     Caption = 'Genral SMS Lines';

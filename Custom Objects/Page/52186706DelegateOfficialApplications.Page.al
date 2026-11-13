@@ -1,4 +1,4 @@
-page 52186706 "Delegate Official Applications"
+page 86706 "Delegate Official Applications"
 {
     CardPageID = "Delegate Officials Card";
     DeleteAllowed = false;

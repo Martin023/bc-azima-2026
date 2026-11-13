@@ -1,5 +1,5 @@
 
-page 52187374 "Member Card Printing Log"
+page 87374 "Member Card Printing Log"
 {
     PageType = List;
     SourceTable = "Member Card Printing Log";

@@ -1,4 +1,4 @@
-page 52185817 "Bankers Application List"
+page 85817 "Bankers Application List"
 {
     CardPageID = "Bankers Cheque Application";
     Editable = false;

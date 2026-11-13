@@ -1,4 +1,4 @@
-table 52185715 "RTGS Transfer Header"
+table 85715 "RTGS Transfer Header"
 {
     LookupPageID = "RTGS Transfer List";
     DrillDownPageId = "RTGS Transfer List";

@@ -1,4 +1,4 @@
-page 52186260 "Customer Card-Tenant Billing"
+page 86260 "Customer Card-Tenant Billing"
 {
     Caption = 'Customer Card';
     PageType = Card;

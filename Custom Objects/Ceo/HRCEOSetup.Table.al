@@ -1,4 +1,4 @@
-table 52185812 "HR CEO Setup"
+table 85812 "HR CEO Setup"
 {
     Caption = 'HR CEO Setup';
     DataClassification = CustomerContent;

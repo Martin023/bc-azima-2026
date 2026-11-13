@@ -1,4 +1,4 @@
-table 52185770 "M-SACCO Transactions"
+table 85770 "M-SACCO Transactions"
 {
 
     fields

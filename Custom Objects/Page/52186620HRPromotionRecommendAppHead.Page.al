@@ -1,4 +1,4 @@
-page 52186620 "HR Promotion Recommend AppHead"
+page 86620 "HR Promotion Recommend AppHead"
 {
     DeleteAllowed = false;
     Editable = false;

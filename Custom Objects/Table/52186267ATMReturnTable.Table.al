@@ -1,4 +1,4 @@
-table 52186267 "ATM Return Table"
+table 86267 "ATM Return Table"
 {
     DrillDownPageID = "ATM Returned List";
     LookupPageID = "ATM Returned List";

@@ -1,4 +1,4 @@
-page 52186737 "ATM Inventory Card"
+page 86737 "ATM Inventory Card"
 {
     Caption = 'ATM Inventory Card';
     // Editable = true;

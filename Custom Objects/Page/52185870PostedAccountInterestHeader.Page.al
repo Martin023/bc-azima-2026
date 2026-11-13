@@ -1,4 +1,4 @@
-page 52185870 "Posted Account Interest Header"
+page 85870 "Posted Account Interest Header"
 {
     DeleteAllowed = false;
     Editable = false;

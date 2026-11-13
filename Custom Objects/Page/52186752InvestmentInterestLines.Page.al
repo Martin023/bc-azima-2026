@@ -1,4 +1,4 @@
-page 52186752 "Investment Interest Lines"
+page 86752 "Investment Interest Lines"
 {
     DeleteAllowed = false;
     Editable = false;

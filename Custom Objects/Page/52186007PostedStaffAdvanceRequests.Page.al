@@ -1,4 +1,4 @@
-page 52186007 "Posted Staff Advance Requests"
+page 86007 "Posted Staff Advance Requests"
 {
     Caption = 'Posted Staff Imprest Requests';
     CardPageID = "Posted Staff Advance";

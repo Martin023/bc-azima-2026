@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186296 "File Volumes Card"
+page 86296 "File Volumes Card"
 {
     Caption = 'File Volumes Card';
     PageType = Card;

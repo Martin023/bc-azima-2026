@@ -1,4 +1,4 @@
-page 52186383 "User Station Card"
+page 86383 "User Station Card"
 {
     PageType = Card;
     SourceTable = "User Stations";

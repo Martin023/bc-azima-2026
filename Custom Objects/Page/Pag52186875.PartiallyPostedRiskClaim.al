@@ -1,4 +1,4 @@
-page 52186875 "Partially Posted Risk Claim"
+page 86875 "Partially Posted Risk Claim"
 {
     Caption = 'Partially Posted Risk Claim';
     DeleteAllowed = false;

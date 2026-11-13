@@ -1,4 +1,4 @@
-page 52187364 "Key Request List"
+page 87364 "Key Request List"
 {
     ApplicationArea = All;
     Caption = 'Key Request List';

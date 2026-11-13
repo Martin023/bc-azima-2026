@@ -1,4 +1,4 @@
-table 52185744 "Appraisal Salary Details"
+table 85744 "Appraisal Salary Details"
 {
     DrillDownPageID = "Appraisal Salary Details";
     LookupPageID = "Appraisal Salary Details";

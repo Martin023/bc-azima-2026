@@ -9,7 +9,7 @@ using Microsoft.FixedAssets.Ledger;
 using Microsoft.FixedAssets.Depreciation;
 using Microsoft.FixedAssets.Setup;
 
-report 52185964 "Fixed Asset Register"
+report 85964 "Fixed Asset Register"
 {
     ApplicationArea = All;
     Caption = 'Fixed Asset Register';

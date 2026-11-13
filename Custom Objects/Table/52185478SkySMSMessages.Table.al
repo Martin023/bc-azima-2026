@@ -1,4 +1,4 @@
-table 52185478 "Sky SMS Messages"
+table 85478 "Sky SMS Messages"
 {
 
     fields

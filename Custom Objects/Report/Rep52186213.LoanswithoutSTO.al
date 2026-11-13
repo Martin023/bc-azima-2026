@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186213 "Loans without STO"
+report 86213 "Loans without STO"
 {
     ApplicationArea = All;
     Caption = 'Loans without STO';

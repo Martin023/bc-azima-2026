@@ -1,4 +1,4 @@
-table 52185763 "M-SACCO Virtual Registrations"
+table 85763 "M-SACCO Virtual Registrations"
 {
 
     fields

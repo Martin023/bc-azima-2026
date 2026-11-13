@@ -1,4 +1,4 @@
-page 52186577 "HR Disciplinary Cases List N1"
+page 86577 "HR Disciplinary Cases List N1"
 {
     Caption = 'Employee Disciplinary Cases ';
     CardPageID = "HR Disciplinary Case Card N";

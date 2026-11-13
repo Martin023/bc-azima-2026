@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186298 "Batching Process List"
+page 86298 "Batching Process List"
 {
     ApplicationArea = All;
     Caption = 'Batching Process List';

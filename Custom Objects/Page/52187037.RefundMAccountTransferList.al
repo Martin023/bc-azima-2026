@@ -1,4 +1,4 @@
-page 52187037 "Bulk Account Refunds"
+page 87037 "Bulk Account Refunds"
 {
     CardPageID = "Bulk Refunds Card";
     DeleteAllowed = false;

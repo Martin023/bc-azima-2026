@@ -1,4 +1,4 @@
-codeunit 52186506 "Sky Coop ATM Bridge"
+codeunit 86506 "Sky Coop ATM Bridge"
 {
     procedure HandleRequest(Request: Text): Text
     var

@@ -1,4 +1,4 @@
-table 52187149 "Sky Email Buffer"
+table 87149 "Sky Email Buffer"
 {
     DataClassification = ToBeClassified;
     //DrillDownPageId = "Sky Email Buffer";

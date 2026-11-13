@@ -1,4 +1,4 @@
-page 52186810 "Debt Collectors Header List"
+page 86810 "Debt Collectors Header List"
 {
     ApplicationArea = All;
     PageType = List;

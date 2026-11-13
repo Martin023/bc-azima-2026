@@ -1,4 +1,4 @@
-table 52186093 "DCS Parameter Range"
+table 86093 "DCS Parameter Range"
 {
 
     fields

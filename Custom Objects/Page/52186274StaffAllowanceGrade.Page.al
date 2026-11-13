@@ -1,4 +1,4 @@
-page 52186274 "Staff Allowance Grade"
+page 86274 "Staff Allowance Grade"
 {
     PageType = List;
     SourceTable = "Staff Allowance Grades";

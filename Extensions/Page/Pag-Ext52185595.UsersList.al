@@ -3,7 +3,7 @@ namespace AzimaBC.AzimaBC;
 using System.Security.User;
 using System.Security.AccessControl;
 
-pageextension 52185595 "Users List" extends Users
+pageextension 85595 "Users List" extends Users
 {
     layout
     {

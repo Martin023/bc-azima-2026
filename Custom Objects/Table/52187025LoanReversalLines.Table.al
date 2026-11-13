@@ -1,4 +1,4 @@
-table 52187025 "Loan Reversal Lines"
+table 87025 "Loan Reversal Lines"
 {
     Caption = 'Loan Reversal Lines';
     DataClassification = ToBeClassified;

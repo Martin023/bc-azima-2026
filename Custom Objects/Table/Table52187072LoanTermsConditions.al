@@ -1,4 +1,4 @@
-table 52187072 "Loan Terms And Conditions"
+table 87072 "Loan Terms And Conditions"
 {
     Caption = 'Loan Terms And Conditions';
     fields

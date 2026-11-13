@@ -1,4 +1,4 @@
-report 52186605 "Perspective Analysis Report"
+report 86605 "Perspective Analysis Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/PerspectiveAnalysisReport.rdl';

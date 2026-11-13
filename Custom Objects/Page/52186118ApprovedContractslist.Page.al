@@ -1,4 +1,4 @@
-page 52186118 "Approved Contracts list"
+page 86118 "Approved Contracts list"
 {
     CardPageID = "Approved Contract Details Card";
     PageType = List;

@@ -1,7 +1,7 @@
 namespace Mwanga.Mwanga;
 using Microsoft.Finance.GeneralLedger.Journal;
 
-report 52186200 "Activate BOSA Accounts"
+report 86200 "Activate BOSA Accounts"
 {
     ApplicationArea = All;
     Caption = 'Activate BOSA Accounts';

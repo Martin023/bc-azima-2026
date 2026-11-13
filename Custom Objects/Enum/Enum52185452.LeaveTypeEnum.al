@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-enum 52185452 "Leave Type Enum"
+enum 85452 "Leave Type Enum"
 {
     Extensible = true;
 

@@ -1,4 +1,4 @@
-table 52185628 "prJournal Details"
+table 85628 "prJournal Details"
 {
 
     fields

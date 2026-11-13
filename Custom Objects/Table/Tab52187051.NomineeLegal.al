@@ -1,4 +1,4 @@
-table 52187051 "Nominee Legal"
+table 87051 "Nominee Legal"
 {
     Caption = 'Nominee Legal';
     DataClassification = ToBeClassified;

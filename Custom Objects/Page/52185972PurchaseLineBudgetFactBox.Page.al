@@ -1,4 +1,4 @@
-page 52185972 "Purchase Line Budget FactBox"
+page 85972 "Purchase Line Budget FactBox"
 {
     PageType = CardPart;
     SourceTable = "Purchase Line";

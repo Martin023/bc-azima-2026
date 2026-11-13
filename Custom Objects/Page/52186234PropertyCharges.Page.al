@@ -1,4 +1,4 @@
-page 52186234 "Property Charges"
+page 86234 "Property Charges"
 {
     PageType = List;
     SourceTable = "Property Charges";

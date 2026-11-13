@@ -1,4 +1,4 @@
-table 52185573 "HR Succession Training Needs"
+table 85573 "HR Succession Training Needs"
 {
 
     fields

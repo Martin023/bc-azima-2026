@@ -1,4 +1,4 @@
-table 52185503 "Sky Mortgage"
+table 85503 "Sky Mortgage"
 {
     DrillDownPageId = "Mortgage Requisition List";
     LookupPageId = "Mortgage Requisition List";

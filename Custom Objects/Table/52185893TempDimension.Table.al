@@ -1,4 +1,4 @@
-table 52185893 "Temp Dimension"
+table 85893 "Temp Dimension"
 {
     Caption = 'Temp Dimensions';
 

@@ -1,4 +1,4 @@
-page 52185884 "End Year Interest Header"
+page 85884 "End Year Interest Header"
 {
     PageType = Card;
     SourceTable = "End Year Transfer Header";

@@ -1,6 +1,6 @@
 namespace MNSProjectMwanga.MNSProjectMwanga;
 
-report 52186133 "Generate Daily Interest (NEW)"
+report 86133 "Generate Daily Interest (NEW)"
 {
     ApplicationArea = All;
     Caption = 'Generate Daily Interest (NEW)';

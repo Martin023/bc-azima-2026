@@ -1,4 +1,4 @@
-table 52185507 "HR Job Responsiblities"
+table 85507 "HR Job Responsiblities"
 {
     // DrillDownPageID = "HR Job Responsiblities Lines";
     // LookupPageID = "HR Job Responsiblities Lines";

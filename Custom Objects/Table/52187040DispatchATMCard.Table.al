@@ -1,4 +1,4 @@
-table 52187040 "Dispatch ATM Header"
+table 87040 "Dispatch ATM Header"
 {
     Caption = 'Dispatch ATM Header';
     DataClassification = ToBeClassified;

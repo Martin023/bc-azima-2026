@@ -1,4 +1,4 @@
-page 52186346 "ADM Registration List"
+page 86346 "ADM Registration List"
 {
     Caption = 'ADM Registration List';
     CardPageID = "Delegate AGM Registration";

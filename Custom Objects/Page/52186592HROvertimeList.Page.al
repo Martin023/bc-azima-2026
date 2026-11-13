@@ -1,4 +1,4 @@
-page 52186592 "HR Overtime List1"
+page 86592 "HR Overtime List1"
 {
     // CardPageID = "HR Overtime Card";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-table 52185563 "HR OSMeasure Line"
+table 85563 "HR OSMeasure Line"
 {
 
     fields

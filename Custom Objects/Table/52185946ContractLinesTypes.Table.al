@@ -1,4 +1,4 @@
-table 52185946 "Contract Lines Types"
+table 85946 "Contract Lines Types"
 {
 
     fields

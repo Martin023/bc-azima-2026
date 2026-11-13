@@ -1,4 +1,4 @@
-table 52185899 "Procurement Methods"
+table 85899 "Procurement Methods"
 {
 
     fields

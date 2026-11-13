@@ -1,4 +1,4 @@
-table 52187063 "Office Keys"
+table 87063 "Office Keys"
 {
     Caption = 'Office Keys';
     DataClassification = ToBeClassified;

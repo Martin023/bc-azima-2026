@@ -1,4 +1,4 @@
-table 52187073 "Share Capital Transfer Lines"
+table 87073 "Share Capital Transfer Lines"
 {
     DataClassification = ToBeClassified;
 

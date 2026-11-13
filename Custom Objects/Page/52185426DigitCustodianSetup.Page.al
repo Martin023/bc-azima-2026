@@ -1,4 +1,4 @@
-page 52185426 "Digit Custodian Setup"
+page 85426 "Digit Custodian Setup"
 {
     PageType = List;
     SourceTable = "Digit Custodian Setup";

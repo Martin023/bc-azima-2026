@@ -1,6 +1,6 @@
 namespace MNSProject.MNSProject;
 
-page 52186756 "Member Closure List All"
+page 86756 "Member Closure List All"
 {
     ApplicationArea = All;
     Caption = 'Member Closure List';

@@ -1,4 +1,4 @@
-page 52186366 "Micro Member  List"
+page 86366 "Micro Member  List"
 {
     CardPageID = "Member Single";
     DeleteAllowed = false;

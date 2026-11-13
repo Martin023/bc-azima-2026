@@ -1,4 +1,4 @@
-page 52186407 "Product Factory Appl. Card"
+page 86407 "Product Factory Appl. Card"
 {
     PageType = Card;
     SourceTable = "Product Factory Application";

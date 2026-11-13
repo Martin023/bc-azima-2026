@@ -1,4 +1,4 @@
-page 52186075 "Maintain Machne/Vehicles"
+page 86075 "Maintain Machne/Vehicles"
 {
     Caption = 'Vehicles Repair';
     PageType = List;

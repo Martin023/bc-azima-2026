@@ -1,4 +1,4 @@
-page 52186176 "Posted Vote Transfer List"
+page 86176 "Posted Vote Transfer List"
 {
     ApplicationArea = All;
     Caption = 'Posted Vote Transfer List';

@@ -1,4 +1,4 @@
-page 52187414 "FOSA Payment Voucher"
+page 87414 "FOSA Payment Voucher"
 {
 
     Caption = 'FOSA Payment Voucher';

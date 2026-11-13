@@ -1,4 +1,4 @@
-page 52186627 "HR Head of Departments Card"
+page 86627 "HR Head of Departments Card"
 {
     PageType = Card;
     SourceTable = "HR Heads of Departments";

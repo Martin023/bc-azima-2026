@@ -1,4 +1,4 @@
-table 52187001 "User Tasks"
+table 87001 "User Tasks"
 {
     fields{
         field(1; "No."; Integer)

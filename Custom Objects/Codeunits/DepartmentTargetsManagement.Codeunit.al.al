@@ -1,4 +1,4 @@
-codeunit 52185456 "Department Targets Management"
+codeunit 85456 "Department Targets Management"
 {
     procedure CopyPreviousYearTargets(NewTargetNo: Code[20]; PreviousYear: Integer)
     var

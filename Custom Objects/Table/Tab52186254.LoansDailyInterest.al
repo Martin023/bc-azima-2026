@@ -1,4 +1,4 @@
-table 52186254 "Loans Daily Interest"
+table 86254 "Loans Daily Interest"
 {
     Caption = 'Loans Daily Interest';
     DataClassification = ToBeClassified;

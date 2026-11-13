@@ -1,4 +1,4 @@
-table 52185904 "Document Cancellation Users"
+table 85904 "Document Cancellation Users"
 {
 
     fields

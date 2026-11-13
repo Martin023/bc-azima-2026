@@ -1,4 +1,4 @@
-table 52187151 "Loan Listing Report List"
+table 87151 "Loan Listing Report List"
 {
     Caption = 'Loan Listing Report List';
     DataClassification = ToBeClassified;

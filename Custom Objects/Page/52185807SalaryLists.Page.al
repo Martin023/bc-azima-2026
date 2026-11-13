@@ -1,4 +1,4 @@
-page 52185807 "Salary Lists"
+page 85807 "Salary Lists"
 {
     CardPageID = "Salary Header";
     DeleteAllowed = false;

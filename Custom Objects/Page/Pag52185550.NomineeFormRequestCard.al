@@ -1,4 +1,4 @@
-page 52185550 "Nominee Form Request Card"
+page 85550 "Nominee Form Request Card"
 {
     Caption = 'Nominee Form Request Card';
     PageType = Card;

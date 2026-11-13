@@ -1,4 +1,4 @@
-table 52185523 "HR Employee Course Comp."
+table 85523 "HR Employee Course Comp."
 {
 
     fields

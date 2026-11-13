@@ -2,7 +2,7 @@ namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 using System.Utilities;
 
-report 52186391 "Monthly Receipt "
+report 86391 "Monthly Receipt "
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Monthly Receipt Per Product.rdl';

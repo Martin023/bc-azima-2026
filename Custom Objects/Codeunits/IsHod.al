@@ -1,4 +1,4 @@
-codeunit 52185458 "HOD Management"
+codeunit 85458 "HOD Management"
 {
     procedure IsHOD(UserID: Code[50]): Boolean
     var

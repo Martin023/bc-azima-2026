@@ -1,4 +1,4 @@
-page 52186060 "PrSalary List Casual"
+page 86060 "PrSalary List Casual"
 {
     CardPageID = "PrSalary Card Casual";
     PageType = List;

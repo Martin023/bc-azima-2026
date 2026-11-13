@@ -1,5 +1,5 @@
 
-query 52185434 "Salary Lines"
+query 85434 "Salary Lines"
 {
     Caption = 'Detailed Salary Lines';
     QueryType = Normal;

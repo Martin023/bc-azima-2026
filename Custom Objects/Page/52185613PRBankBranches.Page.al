@@ -1,4 +1,4 @@
-page 52185613 "PR Bank Branches"
+page 85613 "PR Bank Branches"
 {
     PageType = List;
     SourceTable = "PR Bank Branches";

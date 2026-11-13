@@ -1,4 +1,4 @@
-page 52185806 "Banking User Setup"
+page 85806 "Banking User Setup"
 {
     SourceTable = "Banking User Template";
     ApplicationArea = All;

@@ -2,7 +2,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Sales.Customer;
 
-report 52185842 "Recover Overpaid Loans"
+report 85842 "Recover Overpaid Loans"
 {
     ApplicationArea = All;
     Caption = 'Recover Overpaid Loans';

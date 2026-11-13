@@ -1,4 +1,4 @@
-table 52185749 "Collateral Types Ratings"
+table 85749 "Collateral Types Ratings"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52185444 "Loan Clearance Lines"
+table 85444 "Loan Clearance Lines"
 {
     Caption = 'Refund And Account Transfer';
     DrillDownPageID = "Loan Clearance Lines";

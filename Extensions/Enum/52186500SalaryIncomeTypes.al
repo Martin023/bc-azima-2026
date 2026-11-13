@@ -1,4 +1,4 @@
-enum 52186500 "Salary Income Types"
+enum 86500 "Salary Income Types"
 {
     Extensible = true;
 

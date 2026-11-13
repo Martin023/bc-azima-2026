@@ -1,4 +1,4 @@
-table 52186500 "CRM API Setup"
+table 86500 "CRM API Setup"
 {
     DataClassification = SystemMetadata;
 

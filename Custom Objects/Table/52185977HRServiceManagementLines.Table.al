@@ -1,4 +1,4 @@
-table 52185977 "HR Service Management Lines"
+table 85977 "HR Service Management Lines"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186059 "PrSalary Card Casual"
+page 86059 "PrSalary Card Casual"
 {
     // strempcode,dtDOE,curbasicpay,blnpaye,blnnssf,blnnhif,selectedperio,dtopenperio,
     // membership,referenceno,dttermination,blngetspayereleif

@@ -1,4 +1,4 @@
-page 52186042 "Destination Rate List"
+page 86042 "Destination Rate List"
 {
     CardPageID = "Destination Rates Card";
     PageType = List;

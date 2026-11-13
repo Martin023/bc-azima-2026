@@ -1,4 +1,4 @@
-table 52185452 "E-Channels Cue Table"
+table 85452 "E-Channels Cue Table"
 {
     Caption = 'E-Channels Cue Table';
 

@@ -1,4 +1,4 @@
-report 52187358 "Member Status"
+report 87358 "Member Status"
 {
     ApplicationArea = All;
     Caption = 'Member Status';

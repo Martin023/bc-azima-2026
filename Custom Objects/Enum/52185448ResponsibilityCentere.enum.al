@@ -1,4 +1,4 @@
-enum 52185448 "Responsibility Center Enum"
+enum 85448 "Responsibility Center Enum"
 {
     Extensible = true;
 

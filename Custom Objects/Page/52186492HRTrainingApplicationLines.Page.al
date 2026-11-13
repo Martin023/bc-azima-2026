@@ -1,4 +1,4 @@
-page 52186492 "HR Training Application Lines"
+page 86492 "HR Training Application Lines"
 {
     AutoSplitKey = false;
     Caption = 'HR Training Participants';

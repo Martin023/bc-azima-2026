@@ -1,4 +1,4 @@
-page 52187359 "Approved Security Perf. Card"
+page 87359 "Approved Security Perf. Card"
 {
     ApplicationArea = All;
     Caption = 'Approved Security Perf. Card';

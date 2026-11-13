@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185482 "Member Form List"
+page 85482 "Member Form List"
 {
     ApplicationArea = All;
     Caption = 'Member Form List';

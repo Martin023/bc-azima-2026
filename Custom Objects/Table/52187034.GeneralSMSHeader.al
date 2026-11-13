@@ -1,4 +1,4 @@
-table 52187034 "General SMS Header"
+table 87034 "General SMS Header"
 {
     Caption = 'General SMS Header';
     DataClassification = ToBeClassified;

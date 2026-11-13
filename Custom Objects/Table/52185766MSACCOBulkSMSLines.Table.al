@@ -1,4 +1,4 @@
-table 52185766 "Bulk SMS Lines"
+table 85766 "Bulk SMS Lines"
 {
     DrillDownPageId = "Bulk SMS Lines Part";
 

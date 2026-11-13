@@ -1,4 +1,4 @@
-report 52187011 "Parking Space"
+report 87011 "Parking Space"
 {
     ApplicationArea = All;
     Caption = 'Parking Space - Internal';

@@ -1,4 +1,4 @@
-table 52185676 "Staff Loan Types"
+table 85676 "Staff Loan Types"
 {
     DrillDownPageID = "Loan Type List";
     LookupPageID = "Loan Type List";

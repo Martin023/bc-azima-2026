@@ -1,4 +1,4 @@
-table 52185465 "Gaming Paybills Setup"
+table 85465 "Gaming Paybills Setup"
 {
     Caption = 'Gaming Paybills Setup';
     DataClassification = ToBeClassified;

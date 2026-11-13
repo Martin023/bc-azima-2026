@@ -1,4 +1,4 @@
-table 52186830 "NextofKin Payment Allocation"
+table 86830 "NextofKin Payment Allocation"
 {
     Caption = 'Next of Kin Beneficiary Allocation';
     DataClassification = ToBeClassified;

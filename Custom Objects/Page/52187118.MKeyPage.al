@@ -1,4 +1,4 @@
-page 52187118 "MKey Page"
+page 87118 "MKey Page"
 {
     ApplicationArea = All;
     PageType = Card;

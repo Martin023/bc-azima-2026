@@ -1,4 +1,4 @@
-page 52185850 "Open Closure List"
+page 85850 "Open Closure List"
 {
     CardPageID = "Membership Closure";
     DeleteAllowed = false;

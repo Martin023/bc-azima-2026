@@ -1,4 +1,4 @@
-table 52185759 "M-PESA Transactions"
+table 85759 "M-PESA Transactions"
 {
     DrillDownPageID = "Mpesa Transactions List";
     LookupPageID = "Mpesa Transactions List";

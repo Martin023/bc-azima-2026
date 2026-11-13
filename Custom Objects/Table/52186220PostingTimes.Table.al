@@ -1,4 +1,4 @@
-table 52186220 "Posting Times"
+table 86220 "Posting Times"
 {
 
     fields

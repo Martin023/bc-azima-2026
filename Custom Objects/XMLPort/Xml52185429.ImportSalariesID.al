@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-xmlport 52185429 "Import Salaries ID"
+xmlport 85429 "Import Salaries ID"
 {
     Format = VariableText;
 

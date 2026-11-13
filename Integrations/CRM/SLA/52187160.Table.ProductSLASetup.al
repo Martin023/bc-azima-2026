@@ -1,4 +1,4 @@
-table 52187160 "Product SLA Setup"
+table 87160 "Product SLA Setup"
 {
     Caption = 'Product SLA Setup';
     DataClassification = ToBeClassified;

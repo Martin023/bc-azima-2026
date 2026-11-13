@@ -1,4 +1,4 @@
-xmlport 52185566 "Loans Daily Interest"
+xmlport 85566 "Loans Daily Interest"
 {
     Caption = 'Daily interest buffer';
     Format = VariableText;

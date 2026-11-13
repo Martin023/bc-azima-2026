@@ -1,4 +1,4 @@
-page 52186831 "Posted Tenant Receipt List"
+page 86831 "Posted Tenant Receipt List"
 {
     CardPageID = "Tenant Receipt";
     DeleteAllowed = false;

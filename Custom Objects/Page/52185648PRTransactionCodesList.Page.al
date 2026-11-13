@@ -1,4 +1,4 @@
-page 52185648 "PR Transaction Codes List"
+page 85648 "PR Transaction Codes List"
 {
     CardPageID = "PR Transaction Code Card";
     PageType = List;

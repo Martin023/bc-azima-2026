@@ -1,4 +1,4 @@
-page 52185558 "HR Leave Applications Factbox"
+page 85558 "HR Leave Applications Factbox"
 {
     PageType = CardPart;
     SourceTable = "HR Employees";

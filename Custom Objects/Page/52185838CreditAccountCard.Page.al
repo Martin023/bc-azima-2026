@@ -1,4 +1,4 @@
-page 52185838 "Credit Account Card"
+page 85838 "Credit Account Card"
 {
     Caption = 'Credit Account Card';
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-table 52186186 "Master Record Creation Header"
+table 86186 "Master Record Creation Header"
 {
 
     fields

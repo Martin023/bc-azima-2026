@@ -1,7 +1,7 @@
 namespace Mwanga.Mwanga;
 using System.Threading;
 
-page 52186693 "BBF/Nominee Register"
+page 86693 "BBF/Nominee Register"
 {
     ApplicationArea = All;
     Caption = 'BBF/Nominee Register';

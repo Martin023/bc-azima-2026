@@ -1,4 +1,4 @@
-table 52186036 "Sms SPV Buffer"
+table 86036 "Sms SPV Buffer"
 {
 
     fields

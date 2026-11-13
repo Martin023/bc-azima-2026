@@ -1,4 +1,4 @@
-page 52186002 "Posted Store Requisition"
+page 86002 "Posted Store Requisition"
 {
     DeleteAllowed = false;
     Editable = false;

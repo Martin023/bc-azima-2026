@@ -7,7 +7,7 @@ using System.Security.AccessControl;
 using Microsoft.Sales.Customer;
 using Microsoft.Foundation.NoSeries;
 
-table 52187077 "System Edits Tables"
+table 87077 "System Edits Tables"
 {
     ReplicateData = false;
     DrillDownPageId = "System Edits Tables";

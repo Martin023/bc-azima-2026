@@ -1,4 +1,4 @@
-page 52185546 "HR Employee Grievance List"
+page 85546 "HR Employee Grievance List"
 {
     CardPageID = "HR Employee Grievance Card";
     PageType = List;

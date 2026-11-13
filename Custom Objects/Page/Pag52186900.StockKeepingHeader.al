@@ -3,7 +3,7 @@ using Microsoft.Inventory.Item;
 using System.Automation;
 using System.Security.User;
 
-page 52186901 "Stock Keeping Header"
+page 86901 "Stock Keeping Header"
 {
     ApplicationArea = All;
     Caption = 'Stock Keeping Header';

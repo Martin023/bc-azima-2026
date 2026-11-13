@@ -1,4 +1,4 @@
-page 52187050 "Parking Space Card"
+page 87050 "Parking Space Card"
 {
     ApplicationArea = All;
     Caption = 'Parking Management Card';

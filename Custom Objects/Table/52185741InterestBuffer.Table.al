@@ -1,4 +1,4 @@
-table 52185741 "Interest Buffer"
+table 85741 "Interest Buffer"
 {
     DrillDownPageID = "Interest Buffer";
     LookupPageID = "Interest Buffer";

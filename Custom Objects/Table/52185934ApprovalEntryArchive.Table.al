@@ -1,4 +1,4 @@
-table 52185934 "Approval Entry Archive"
+table 85934 "Approval Entry Archive"
 {
     Caption = 'Approval Entry';
 

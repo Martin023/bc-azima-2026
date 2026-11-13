@@ -1,4 +1,4 @@
-page 52186275 "Staff Allowance Lines"
+page 86275 "Staff Allowance Lines"
 {
     PageType = List;
     SourceTable = "Staff Allowance Lines";

@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186115 "Institutional Capital TAT"
+report 86115 "Institutional Capital TAT"
 {
     ApplicationArea = All;
     Caption = 'Institutional Capital TAT';

@@ -1,7 +1,7 @@
 namespace AZIMA.AZIMA;
 using Microsoft.Finance.GeneralLedger.Ledger;
 
-report 52185509 "Update Loan income Entries"
+report 85509 "Update Loan income Entries"
 {
     ApplicationArea = All;
     Caption = 'Update Loan income Entries';

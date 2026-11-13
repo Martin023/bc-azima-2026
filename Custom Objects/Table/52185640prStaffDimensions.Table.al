@@ -1,4 +1,4 @@
-table 52185640 "prStaff Dimensions"
+table 85640 "prStaff Dimensions"
 {
 
     fields

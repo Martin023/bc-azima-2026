@@ -1,4 +1,4 @@
-table 52185760 "M-SACCO Withdrawal Limits"
+table 85760 "M-SACCO Withdrawal Limits"
 {
 
     fields

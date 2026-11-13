@@ -1,4 +1,4 @@
-page 52186166 "Agent Registration Fact Box"
+page 86166 "Agent Registration Fact Box"
 {
     DeleteAllowed = false;
     Editable = false;

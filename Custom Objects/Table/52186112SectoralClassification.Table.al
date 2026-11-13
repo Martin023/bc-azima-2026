@@ -1,4 +1,4 @@
-table 52186112 "Sectoral Classification"
+table 86112 "Sectoral Classification"
 {
     DrillDownPageID = "Sectoral Classification";
     LookupPageID = "Sectoral Classification";

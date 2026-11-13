@@ -1,4 +1,4 @@
-table 52185938 "FA WIP Suggest Lines"
+table 85938 "FA WIP Suggest Lines"
 {
 
     fields

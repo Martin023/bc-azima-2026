@@ -5,7 +5,7 @@ using Microsoft.Foundation.Company;
 using Microsoft.Sales.Receivables;
 using Microsoft.Bank.Ledger;
 
-report 52186198 "Tenant Movement Report"
+report 86198 "Tenant Movement Report"
 {
     ApplicationArea = All;
     Caption = 'Tenant Movement Report';

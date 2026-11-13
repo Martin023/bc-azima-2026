@@ -1,4 +1,4 @@
-page 52186680 "Sky Portal Setup List"
+page 86680 "Sky Portal Setup List"
 {
     CardPageID = "Sky Portal Setup Card";
     Editable = false;

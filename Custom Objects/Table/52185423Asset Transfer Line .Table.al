@@ -1,4 +1,4 @@
-table 52185423 "Asset Transfer Line"
+table 85423 "Asset Transfer Line"
 {
     DrillDownPageId = "Assets Transfer Line";
     fields

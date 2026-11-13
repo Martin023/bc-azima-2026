@@ -1,4 +1,4 @@
-table 52185813 "Data Translation"
+table 85813 "Data Translation"
 {
 
     fields

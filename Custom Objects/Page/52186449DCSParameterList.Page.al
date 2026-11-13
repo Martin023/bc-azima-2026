@@ -1,4 +1,4 @@
-page 52186449 "DCS Parameter List"
+page 86449 "DCS Parameter List"
 {
     PageType = List;
     SourceTable = "DCS Parameter";

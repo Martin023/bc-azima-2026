@@ -1,4 +1,4 @@
-page 52186122 "Payment Vouchers Contract"
+page 86122 "Payment Vouchers Contract"
 {
     CardPageID = "Payment Header Contract";
     Editable = false;

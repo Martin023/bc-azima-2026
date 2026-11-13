@@ -1,4 +1,4 @@
-page 52185625 "prInstitutional Membership"
+page 85625 "prInstitutional Membership"
 {
     PageType = List;
     SourceTable = "prInstitutional Membership";

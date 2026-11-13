@@ -2,7 +2,7 @@ namespace MNSProjectMwanga.MNSProjectMwanga;
 
 using System.Utilities;
 
-page 52185438 "Error Messages Log"
+page 85438 "Error Messages Log"
 {
     ApplicationArea = All;
     Caption = 'Error Messages Log';

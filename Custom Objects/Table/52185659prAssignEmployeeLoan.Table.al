@@ -1,4 +1,4 @@
-table 52185659 prAssignEmployeeLoan
+table 85659 prAssignEmployeeLoan
 {
 
     fields

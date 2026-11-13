@@ -1,4 +1,4 @@
-page 52186412 "Collateral Register Card"
+page 86412 "Collateral Register Card"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -526,7 +526,7 @@ page 52186412 "Collateral Register Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52185840), "No." = field("No.");
+                SubPageLink = "Table ID" = Const(85840), "No." = field("No.");
             }
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
             {

@@ -1,4 +1,4 @@
-page 52186055 "All Users Activities"
+page 86055 "All Users Activities"
 {
     Caption = 'Activities';
     PageType = CardPart;

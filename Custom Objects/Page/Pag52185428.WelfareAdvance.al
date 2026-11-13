@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using System.Automation;
 
-page 52185428 "Welfare Advance"
+page 85428 "Welfare Advance"
 {
     Caption = 'Welfare Advance';
     PageType = Card;

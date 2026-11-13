@@ -1,4 +1,4 @@
-table 52185486 "Sales Route Plans"
+table 85486 "Sales Route Plans"
 {
     Caption = 'Sales Route Plans';
     DataClassification = ToBeClassified;

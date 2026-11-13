@@ -1,4 +1,4 @@
-page 52187365 "Vehicle Servicing Card Page"
+page 87365 "Vehicle Servicing Card Page"
 {
     ApplicationArea = All;
     Caption = 'Vehicle Servicing Card Page';

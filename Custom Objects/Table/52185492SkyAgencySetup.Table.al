@@ -1,4 +1,4 @@
-table 52185492 "Sky Agency Setup"
+table 85492 "Sky Agency Setup"
 {
 
     fields

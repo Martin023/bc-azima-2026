@@ -1,4 +1,4 @@
-table 52185688 "Credit Nos. Series"
+table 85688 "Credit Nos. Series"
 
 {
     DrillDownPageId = "Member Nos. Series";

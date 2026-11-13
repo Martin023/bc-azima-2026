@@ -1,4 +1,4 @@
-page 52185660 "PR Header Salary Card - ALL"
+page 85660 "PR Header Salary Card - ALL"
 {
 
     Caption = 'Salary Card';

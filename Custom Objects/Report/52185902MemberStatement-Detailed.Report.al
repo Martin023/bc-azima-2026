@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 52185902 "Member Statement-Detailed"
+Report 85902 "Member Statement-Detailed"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Member Statement-Detailed.rdl';
@@ -100,7 +100,7 @@ Report 52185902 "Member Statement-Detailed"
                 column(SharesAccountName; SharesAccountName)
                 {
                 }
-                dataitem(SavingsLedgerSharesCapital; 52185732)
+                dataitem(SavingsLedgerSharesCapital; 85732)
                 {
                     DataItemLink = "Customer No." = field("No.");
                     DataItemTableView = sorting("Customer No.", "Posting Date", "Currency Code.") where(Reversed = const(false));
@@ -380,7 +380,7 @@ Report 52185902 "Member Statement-Detailed"
                 column(Sasra_Cat; Loans."Loans Category-SASRA")
                 {
                 }
-                dataitem(CreditLedgers; 52185733)
+                dataitem(CreditLedgers; 85733)
                 {
                     DataItemLink = "Posting Date" = field("Date Filter"), "Loan No" = field("Loan No.");
                     DataItemTableView = sorting("Posting Date", "Document No.", "Customer No.") order(ascending) where("Transaction Type" = filter(Loan | Repayment | "Interest Due" | "Interest Paid"), Reversed = const(false));

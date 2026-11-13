@@ -1,4 +1,4 @@
-table 52185513 "HR Employee Target Assignment"
+table 85513 "HR Employee Target Assignment"
 {
     Caption = 'HR Employee Target Assignment';
     DataClassification = CustomerContent;

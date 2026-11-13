@@ -1,4 +1,4 @@
-page 52185902 "Store Requisition Header"
+page 85902 "Store Requisition Header"
 {
     DeleteAllowed = false;
     PageType = Document;
@@ -405,7 +405,7 @@ page 52185902 "Store Requisition Header"
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                         reqtoApp: page "Requests to Approve";
                         APPEntry: Record "Approval Entry";
-                        members: Record 52185700;
+                        members: Record 85700;
                     begin
                         ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
                         if rec.Status = rec.Status::Released then exit;

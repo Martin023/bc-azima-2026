@@ -2,7 +2,7 @@ namespace MNSProjectMwanga.MNSProjectMwanga;
 
 using Microsoft.FixedAssets.Depreciation;
 
-page 52186871 "52186871FA Analysis"
+page 86871 "52186871FA Analysis"
 {
     ApplicationArea = All;
     Caption = 'Fixed Asset Analysis';

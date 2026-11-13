@@ -1,4 +1,4 @@
-table 52186507 "EDMS Scanned Apps. Log"
+table 86507 "EDMS Scanned Apps. Log"
 {
     DataClassification = ToBeClassified;
 

@@ -1,4 +1,4 @@
-page 52186608 "ATM Repin Application List"
+page 86608 "ATM Repin Application List"
 {
     CardPageID = "ATM Repin Card";
     DeleteAllowed = false;

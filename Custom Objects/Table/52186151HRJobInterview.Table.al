@@ -1,4 +1,4 @@
-table 52186151 "HR Job Interview"
+table 86151 "HR Job Interview"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186697 "Posted Vouchers List"
+page 86697 "Posted Vouchers List"
 {
     Editable = false;
     PageType = List;

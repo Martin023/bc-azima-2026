@@ -1,4 +1,4 @@
-page 52186263 "All Property List"
+page 86263 "All Property List"
 {
     CardPageID = "Property Details";
     Editable = false;

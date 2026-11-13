@@ -1,4 +1,4 @@
-table 52187155 "CRB Monthly Manual"
+table 87155 "CRB Monthly Manual"
 {
     Caption = 'CRB Monthly Manual';
     DataClassification = ToBeClassified;

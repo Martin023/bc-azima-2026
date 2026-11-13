@@ -1,4 +1,4 @@
-codeunit 52185432 "Holiday Adjustment Management"
+codeunit 85432 "Holiday Adjustment Management"
 {
     procedure ProcessHolidayDeclaration(HolidayDate: Date; CalendarCode: Code[20])
     var

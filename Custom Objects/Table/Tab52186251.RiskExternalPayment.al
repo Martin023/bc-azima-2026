@@ -1,4 +1,4 @@
-table 52186251 "Risk External Payment"
+table 86251 "Risk External Payment"
 {
     Caption = 'Risk External Payment';
     DataClassification = ToBeClassified;

@@ -1,6 +1,6 @@
 namespace Azima.Azima;
 
-page 52185440 "Dividend Header List"
+page 85440 "Dividend Header List"
 {
     ApplicationArea = All;
     Caption = 'Dividend Header List';

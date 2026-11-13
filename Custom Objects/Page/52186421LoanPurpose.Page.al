@@ -1,4 +1,4 @@
-page 52186421 "Loan Purpose"
+page 86421 "Loan Purpose"
 {
     PageType = List;
     SourceTable = "Loan Purpose";

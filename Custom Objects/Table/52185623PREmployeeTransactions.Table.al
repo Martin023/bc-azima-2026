@@ -1,4 +1,4 @@
-table 52185623 "PR Employee Transactions"
+table 85623 "PR Employee Transactions"
 {
     DataCaptionFields = "Employee Code";
 

@@ -3,7 +3,7 @@ namespace KenpipeCBS.KenpipeCBS;
 using System.Automation;
 using System.Security.User;
 
-report 52186234 "Clear Approved Entries"
+report 86234 "Clear Approved Entries"
 {
     ApplicationArea = All;
     Caption = 'Clear Approved Entries';

@@ -1,4 +1,4 @@
-table 52185881 "InterBank Transfers"
+table 85881 "InterBank Transfers"
 {
     DrillDownPageID = "InterBank Transfers List";
     LookupPageID = "InterBank Transfers List";

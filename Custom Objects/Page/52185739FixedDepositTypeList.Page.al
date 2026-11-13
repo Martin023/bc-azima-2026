@@ -1,4 +1,4 @@
-page 52185739 "Fixed Deposit Type List"
+page 85739 "Fixed Deposit Type List"
 {
     CardPageID = "Fixed Deposit Type";
     DeleteAllowed = false;

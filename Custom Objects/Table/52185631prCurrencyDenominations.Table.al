@@ -1,4 +1,4 @@
-table 52185631 "prCurrency Denominations"
+table 85631 "prCurrency Denominations"
 {
 
     fields

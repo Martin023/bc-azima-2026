@@ -1,4 +1,4 @@
-codeunit 52187339 CustomCuesCodeunit
+codeunit 87339 CustomCuesCodeunit
 {
     procedure CalcDailyCashierTrans(): Decimal;
     var

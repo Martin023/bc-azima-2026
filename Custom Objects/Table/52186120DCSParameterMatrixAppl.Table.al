@@ -1,4 +1,4 @@
-table 52186120 "DCS Parameter Matrix Appl."
+table 86120 "DCS Parameter Matrix Appl."
 {
 
     fields

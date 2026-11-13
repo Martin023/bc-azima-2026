@@ -1,4 +1,4 @@
-codeunit 52186420 "52186420 NavigateExte"
+codeunit 86420 "52186420 NavigateExte"
 {
     TableNo = "Document Entry";
     trigger OnRun()

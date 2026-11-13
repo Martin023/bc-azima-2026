@@ -1,4 +1,4 @@
-page 52186378 "Salary Agreement Card"
+page 86378 "Salary Agreement Card"
 {
     DeleteAllowed = false;
     PageType = Card;

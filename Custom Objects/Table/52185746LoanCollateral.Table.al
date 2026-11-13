@@ -1,4 +1,4 @@
-table 52185746 "Loan Collateral"
+table 85746 "Loan Collateral"
 {
     DrillDownPageID = "Loan Top Up";
     LookupPageID = "Loan Top Up";

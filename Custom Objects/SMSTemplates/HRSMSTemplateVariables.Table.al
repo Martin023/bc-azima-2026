@@ -1,4 +1,4 @@
-table 52185929 "HR SMS Template Variables"
+table 85929 "HR SMS Template Variables"
 {
     Caption = 'HR SMS Template Variables';
     DataClassification = CustomerContent;

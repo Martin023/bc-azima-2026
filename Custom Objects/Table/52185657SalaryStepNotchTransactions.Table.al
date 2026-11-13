@@ -1,4 +1,4 @@
-table 52185657 "Salary Step/Notch Transactions"
+table 85657 "Salary Step/Notch Transactions"
 {
     DrillDownPageID = "Salary Step/Notch Transactions";
     LookupPageID = "Salary Step/Notch Transactions";

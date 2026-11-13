@@ -1,4 +1,4 @@
-table 52185679 "HR Appraisal Learning & Growth"
+table 85679 "HR Appraisal Learning & Growth"
 {
     //               HRAppraisalGoalSettingH.GET("Appraisal No");
     //                 "Employee No":=HRAppraisalGoalSettingH."Employee No";

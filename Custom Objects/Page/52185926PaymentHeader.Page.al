@@ -1,4 +1,4 @@
-page 52185926 "Payment Header"
+page 85926 "Payment Header"
 {
 
     Caption = 'Normal Payment Voucher';

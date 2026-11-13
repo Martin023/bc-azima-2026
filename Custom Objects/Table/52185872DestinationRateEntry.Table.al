@@ -1,4 +1,4 @@
-table 52185872 "Destination Rate Entry"
+table 85872 "Destination Rate Entry"
 {
     DrillDownPageID = "Destination Rate List";
     LookupPageID = "Destination Rate List";

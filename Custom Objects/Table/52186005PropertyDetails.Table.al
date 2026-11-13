@@ -1,4 +1,4 @@
-table 52186005 "Property Details"
+table 86005 "Property Details"
 {
     DrillDownPageID = "All Property List";
     LookupPageID = "All Property List";

@@ -1,4 +1,4 @@
-page 52186287 "Approved ATM Linking List"
+page 86287 "Approved ATM Linking List"
 {
     CardPageID = "Approved ATM Linking Card";
     DeleteAllowed = false;

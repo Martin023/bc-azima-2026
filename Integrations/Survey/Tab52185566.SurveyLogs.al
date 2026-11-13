@@ -1,4 +1,4 @@
-table 52185566 "Survey Logs"
+table 85566 "Survey Logs"
 {
     Caption = 'Survey Logs';
     DataClassification = ToBeClassified;

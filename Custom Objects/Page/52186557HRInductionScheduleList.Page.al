@@ -1,4 +1,4 @@
-page 52186557 "HR Induction Schedule List1"
+page 86557 "HR Induction Schedule List1"
 {
     CardPageID = "HR Induction Schedule Card";
     Editable = false;

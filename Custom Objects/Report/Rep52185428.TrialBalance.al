@@ -2,7 +2,7 @@ namespace AZIMA.AZIMA;
 using Microsoft.Finance.GeneralLedger.Account;
 using System.Utilities;
 
-report 52185428 "Trial Balance Custom"
+report 85428 "Trial Balance Custom"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Trial Balance Custom.rdl';

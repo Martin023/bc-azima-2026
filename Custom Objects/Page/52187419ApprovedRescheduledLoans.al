@@ -1,4 +1,4 @@
-page 52187419 "Approved Rescheduling List"
+page 87419 "Approved Rescheduling List"
 {
     PageType = List;
     ApplicationArea = All;

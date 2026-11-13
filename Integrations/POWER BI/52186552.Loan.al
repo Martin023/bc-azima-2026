@@ -1,4 +1,4 @@
-page 52186552 Loan
+page 86552 Loan
 {
     APIGroup = 'powerBI';
     APIPublisher = 'sky';

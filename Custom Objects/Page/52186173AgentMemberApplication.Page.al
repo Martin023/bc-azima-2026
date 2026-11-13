@@ -1,4 +1,4 @@
-page 52186173 "Agent Member Application"
+page 86173 "Agent Member Application"
 {
     CardPageID = "Member Application Single";
     DeleteAllowed = false;

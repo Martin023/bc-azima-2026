@@ -1,4 +1,4 @@
-table 52185822 "Checkoff Advice Header"
+table 85822 "Checkoff Advice Header"
 {
 
     fields

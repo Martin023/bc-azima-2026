@@ -1,4 +1,4 @@
-table 52185611 "HR Interns"
+table 85611 "HR Interns"
 {
     DataCaptionFields = "No.", "Full Name", Sex, "Posting Status";
     // DrillDownPageID = "HR Interns List";

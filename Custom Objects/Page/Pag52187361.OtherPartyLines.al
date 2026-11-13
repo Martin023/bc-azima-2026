@@ -1,4 +1,4 @@
-page 52187361 "Other Party Lines"
+page 87361 "Other Party Lines"
 {
     ApplicationArea = All;
     Caption = 'Other Party';

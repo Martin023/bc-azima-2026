@@ -1,4 +1,4 @@
-page 52185713 "Open Member Application List"
+page 85713 "Open Member Application List"
 {
     CardPageID = "Member Application Single";
     DeleteAllowed = false;

@@ -1,6 +1,6 @@
 namespace BCAZIMA.BCAZIMA;
 
-page 52185439 "Mobile Loan Eligibility"
+page 85439 "Mobile Loan Eligibility"
 {
     PageType = StandardDialog;
     Caption = 'Mobile Loan Eligibility Calculator';

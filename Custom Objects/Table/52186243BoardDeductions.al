@@ -1,4 +1,4 @@
-table 52186243 "Board Payroll Deductions"
+table 86243 "Board Payroll Deductions"
 {
     //DrillDownPageId = 
     DataClassification = ToBeClassified;

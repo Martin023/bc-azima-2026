@@ -1,4 +1,4 @@
-page 52187068 "Motor Vehicle Movement List"
+page 87068 "Motor Vehicle Movement List"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Movement List';

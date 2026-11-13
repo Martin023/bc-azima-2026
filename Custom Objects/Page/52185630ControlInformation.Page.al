@@ -1,4 +1,4 @@
-page 52185630 "Control-Information"
+page 85630 "Control-Information"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

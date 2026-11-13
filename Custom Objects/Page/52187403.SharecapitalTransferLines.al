@@ -1,4 +1,4 @@
-page 52187403 "Share capital Transfer Lines"
+page 87403 "Share capital Transfer Lines"
 {
     PageType = ListPart;
     ApplicationArea = All;

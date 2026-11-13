@@ -1,4 +1,4 @@
-table 52185580 "HR Training App Header"
+table 85580 "HR Training App Header"
 {
     Caption = 'HR Training Application Header';
     DataCaptionFields = "Application No", "Course Title", "Course Description";

@@ -1,4 +1,4 @@
-page 52187091 "Reversed System Reversal List"
+page 87091 "Reversed System Reversal List"
 {
     ApplicationArea = All;
     Caption = 'System Reversal List';

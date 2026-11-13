@@ -1,4 +1,4 @@
-page 52185664 "HR Employees Factbox"
+page 85664 "HR Employees Factbox"
 {
     PageType = CardPart;
     SourceTable = "HR Employees";

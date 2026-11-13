@@ -1,4 +1,4 @@
-page 52186058 "prSalary Info Casual"
+page 86058 "prSalary Info Casual"
 {
     PageType = CardPart;
     SourceTable = "prSalary Card Casual";

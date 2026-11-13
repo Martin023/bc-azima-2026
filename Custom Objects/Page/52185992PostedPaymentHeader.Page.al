@@ -1,4 +1,4 @@
-page 52185992 "Posted Payment Header"
+page 85992 "Posted Payment Header"
 {
     Caption = 'Payment Vouchers';
     DeleteAllowed = false;

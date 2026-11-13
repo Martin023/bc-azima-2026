@@ -1,4 +1,4 @@
-xmlport 52185553 DailyInterest
+xmlport 85553 DailyInterest
 {
     Caption = 'Daily interest';
     Format=VariableText;

@@ -3,7 +3,7 @@ namespace MNS.MNS;
 using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Foundation.Company;
 
-report 52186184 "Reccurring FA Journals Report"
+report 86184 "Reccurring FA Journals Report"
 {
     ApplicationArea = All;
     Caption = 'Reccurring FA Report';

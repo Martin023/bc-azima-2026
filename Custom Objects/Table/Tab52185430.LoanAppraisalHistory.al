@@ -1,4 +1,4 @@
-table 52185430 "Loan Appraisal History"
+table 85430 "Loan Appraisal History"
 {
     Caption = 'Loan Appraisal History';
     DataClassification = ToBeClassified;

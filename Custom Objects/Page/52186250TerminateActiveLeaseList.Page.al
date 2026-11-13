@@ -1,4 +1,4 @@
-page 52186250 "Terminate Active Lease-List"
+page 86250 "Terminate Active Lease-List"
 {
     Caption = 'Terminated Lease List';
     //CardPageID = Lease;

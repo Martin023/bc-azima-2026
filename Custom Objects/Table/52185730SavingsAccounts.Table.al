@@ -1,4 +1,4 @@
-table 52185730 "Savings Accounts"
+table 85730 "Savings Accounts"
 {
     Caption = 'Savings Accounts';
     DataCaptionFields = "No.", Name;

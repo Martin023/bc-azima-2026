@@ -1,4 +1,4 @@
-table 52185518 "HR Employee Kin"
+table 85518 "HR Employee Kin"
 {
     Caption = 'Employee Relative';
 

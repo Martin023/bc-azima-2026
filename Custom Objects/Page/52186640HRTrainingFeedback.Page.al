@@ -1,4 +1,4 @@
-page 52186640 "HR Training Feedback"
+page 86640 "HR Training Feedback"
 {
     Caption='Training Evaluation';
 

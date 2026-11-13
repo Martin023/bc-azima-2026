@@ -1,4 +1,4 @@
-table 52185473 "Dividend Header"
+table 85473 "Dividend Header"
 {
     Caption = 'Dividend Header List';
     DataClassification = ToBeClassified;

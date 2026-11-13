@@ -1,4 +1,4 @@
-page 52186114 "Renewed Contracts Card"
+page 86114 "Renewed Contracts Card"
 {
     Caption = 'Renewed Contracts Card';
     PageType = Document;

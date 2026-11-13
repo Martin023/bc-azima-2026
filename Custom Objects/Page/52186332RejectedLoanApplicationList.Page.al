@@ -1,4 +1,4 @@
-page 52186332 "Rejected Loan Application List"
+page 86332 "Rejected Loan Application List"
 {
     CardPageID = "Loan Application Card";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-table 52185811 "Loan FIle Upload"
+table 85811 "Loan FIle Upload"
 {
     Caption = 'Loan FIle Upload';
     DataClassification = ToBeClassified;

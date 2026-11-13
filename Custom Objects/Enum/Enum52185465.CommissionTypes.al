@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-enum 52185465 "Commission Types"
+enum 85465 "Commission Types"
 {
     Extensible = true;
 

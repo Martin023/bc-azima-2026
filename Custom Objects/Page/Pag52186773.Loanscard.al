@@ -11,7 +11,7 @@ using Microsoft.Purchases.Vendor;
 using System.Automation;
 using MNSProjectMwanga.MNSProjectMwanga;
 
-page 52186773 "Loans card"
+page 86773 "Loans card"
 {
     Caption = 'Loans card';
     PageType = Card;

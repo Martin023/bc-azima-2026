@@ -1,4 +1,4 @@
-enum 52186503 "M-Smart Documents"
+enum 86503 "M-Smart Documents"
 {
     Extensible = true;
     

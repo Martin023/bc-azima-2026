@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52186484 "FIles List Part"
+page 86484 "FIles List Part"
 {
     ApplicationArea = All;
     Caption = 'FIles List Part';

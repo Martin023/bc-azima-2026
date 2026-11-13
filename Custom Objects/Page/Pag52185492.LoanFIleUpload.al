@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52185492 "Loan FIle Upload"
+page 85492 "Loan FIle Upload"
 {
     ApplicationArea = All;
     Caption = 'Loan FIle Upload';

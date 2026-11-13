@@ -1,4 +1,4 @@
-page 52185869 "Posted Account Interest List"
+page 85869 "Posted Account Interest List"
 {
     CardPageID = "Posted Account Interest Header";
     DeleteAllowed = false;

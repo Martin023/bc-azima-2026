@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186294 "Batch No List"
+page 86294 "Batch No List"
 {
     ApplicationArea = All;
     Caption = 'Batch No List';

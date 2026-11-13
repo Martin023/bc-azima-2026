@@ -1,4 +1,4 @@
-page 52186178 "Payment Sub Form Delegates"
+page 86178 "Payment Sub Form Delegates"
 {
     PageType = ListPart;
     SourceTable = "Payment Line Delegate";

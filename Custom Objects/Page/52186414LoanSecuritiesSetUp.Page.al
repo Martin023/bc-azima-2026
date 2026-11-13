@@ -1,4 +1,4 @@
-page 52186414 "Loan Securities Set-Up"
+page 86414 "Loan Securities Set-Up"
 {
     CardPageID = "Loan Securites Card";
     DeleteAllowed = false;

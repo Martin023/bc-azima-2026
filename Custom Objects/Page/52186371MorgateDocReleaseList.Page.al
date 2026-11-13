@@ -1,4 +1,4 @@
-page 52186371 "Morgate Doc Release List"
+page 86371 "Morgate Doc Release List"
 {
     CardPageID = "Mortage Doc Release Card";
     DelayedInsert = false;

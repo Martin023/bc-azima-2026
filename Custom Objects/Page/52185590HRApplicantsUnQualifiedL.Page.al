@@ -1,4 +1,4 @@
-page 52185590 "HR Applicants UnQualified L1"
+page 85590 "HR Applicants UnQualified L1"
 {
     CardPageID = "HR Applicants UnQualified Card";
     PageType = List;

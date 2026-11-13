@@ -1,4 +1,4 @@
-page 52186183 "Property Details"
+page 86183 "Property Details"
 {
     PageType = Card;
     SourceTable = "Property Details";
@@ -220,7 +220,7 @@ page 52186183 "Property Details"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Charges';
-                    RunObject = Page 52186234;
+                    RunObject = Page 86234;
                     RunPageLink = "Property Code" = FIELD("No.");
                     Visible = false;
                 }

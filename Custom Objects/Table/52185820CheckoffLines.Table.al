@@ -1,4 +1,4 @@
-table 52185820 "Checkoff Lines"
+table 85820 "Checkoff Lines"
 {
     DrillDownPageID = "Checkoff Lines";
     LookupPageID = "Checkoff Lines";

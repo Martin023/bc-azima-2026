@@ -1,4 +1,4 @@
-page 52185581 "Mobile Transaction types Lines"
+page 85581 "Mobile Transaction types Lines"
 {
     Caption = 'Mobile Transaction types Lines';
     PageType = ListPart;

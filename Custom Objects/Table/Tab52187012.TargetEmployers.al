@@ -1,4 +1,4 @@
-table 52187012 "Target Employers"
+table 87012 "Target Employers"
 {
     Caption = 'Target Employers';
     DataClassification = ToBeClassified;

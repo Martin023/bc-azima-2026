@@ -1,4 +1,4 @@
-page 52185901 "Petty Cash Details"
+page 85901 "Petty Cash Details"
 {
     PageType = Card;
     SourceTable = "Imprest Details-User";

@@ -1,4 +1,4 @@
-report 52187357 "Daily Membership Report"
+report 87357 "Daily Membership Report"
 {
     ApplicationArea = All;
     Caption = 'Daily Membership Report';

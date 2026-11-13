@@ -1,4 +1,4 @@
-page 52187161 "M-Banking Whitelist List"
+page 87161 "M-Banking Whitelist List"
 {
     ApplicationArea = All;
     Caption = 'M-Banking Whitelist List';

@@ -1,4 +1,4 @@
-table 52185653 "prPension Details"
+table 85653 "prPension Details"
 {
 
     fields

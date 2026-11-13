@@ -1,4 +1,4 @@
-page 52185962 "Cancelled Staff Advance Reques"
+page 85962 "Cancelled Staff Advance Reques"
 {
     CardPageID = "Staff Advance Request";
     DeleteAllowed = false;

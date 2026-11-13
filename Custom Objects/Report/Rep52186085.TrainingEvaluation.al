@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186085 "Training Evaluation"
+report 86085 "Training Evaluation"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Training Evaluation Report.rdl';

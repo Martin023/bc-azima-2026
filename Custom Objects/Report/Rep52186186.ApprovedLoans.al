@@ -1,7 +1,7 @@
 namespace mns.mns;
 using Microsoft.Foundation.Company;
 
-report 52186186 "Approved  Loans"
+report 86186 "Approved  Loans"
 {
     ApplicationArea = All;
     Caption = 'Loan Appraised By';

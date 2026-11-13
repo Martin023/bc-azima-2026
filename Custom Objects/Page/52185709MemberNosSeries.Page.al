@@ -1,4 +1,4 @@
-page 52185709 "Member Nos. Series"
+page 85709 "Member Nos. Series"
 {
     PageType = Card;
     SourceTable = "Credit Nos. Series";

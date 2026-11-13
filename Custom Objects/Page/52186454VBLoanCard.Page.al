@@ -1,4 +1,4 @@
-page 52186454 "VB Loan Card"
+page 86454 "VB Loan Card"
 {
     PageType = Card;
     SourceTable = Loans;

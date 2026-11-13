@@ -1,4 +1,4 @@
-codeunit 52186505 "BC Portal"
+codeunit 86505 "BC Portal"
 {
     procedure HandleRequest(Request: Text): Text
     var

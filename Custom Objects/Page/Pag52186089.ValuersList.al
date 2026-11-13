@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186089 "Security Valuers List"
+page 86089 "Security Valuers List"
 {
     Caption = 'Valuers List';
     PageType = List;

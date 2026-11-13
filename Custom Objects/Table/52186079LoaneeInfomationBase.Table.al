@@ -1,4 +1,4 @@
-table 52186079 "Loanee Infomation Base"
+table 86079 "Loanee Infomation Base"
 {
 
     fields

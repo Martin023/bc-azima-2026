@@ -1,4 +1,4 @@
-table 52185625 "PR Employee P9 Info"
+table 85625 "PR Employee P9 Info"
 {
     DrillDownPageID = "Employee P9 Info";
     LookupPageID = "Employee P9 Info";

@@ -1,4 +1,4 @@
-report 52187007 "Insurance Contracts"
+report 87007 "Insurance Contracts"
 {
     ApplicationArea = All;
     Caption = 'Insurance Contracts';

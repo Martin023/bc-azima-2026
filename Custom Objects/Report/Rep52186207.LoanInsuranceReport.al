@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Foundation.Company;
 
-report 52186207 "Loan Insurance Report"
+report 86207 "Loan Insurance Report"
 {
     ApplicationArea = All;
     Caption = 'Loan Insurance Report';

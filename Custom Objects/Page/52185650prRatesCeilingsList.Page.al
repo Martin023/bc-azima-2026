@@ -1,4 +1,4 @@
-page 52185650 "prRates & Ceilings List"
+page 85650 "prRates & Ceilings List"
 {
     CardPageID = "PR Rates & Ceilings";
     PageType = List;

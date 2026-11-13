@@ -1,4 +1,4 @@
-codeunit 52186518 "Loan Listing Job Queue Manager"
+codeunit 86518 "Loan Listing Job Queue Manager"
 {
     TableNo = Loans;
     trigger OnRun()
@@ -136,7 +136,7 @@ codeunit 52186518 "Loan Listing Job Queue Manager"
         DateRangeDialog: page "Loan List. Date Picker";
 }
 
-codeunit 52186519 "Loan Listing Job"
+codeunit 86519 "Loan Listing Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()
@@ -193,7 +193,7 @@ codeunit 52186519 "Loan Listing Job"
     end;
 }
 
-page 52187025 "Loan List. Date Picker"
+page 87025 "Loan List. Date Picker"
 {
     PageType = StandardDialog;
     Caption = 'Loan Listing - Enter Date Range';

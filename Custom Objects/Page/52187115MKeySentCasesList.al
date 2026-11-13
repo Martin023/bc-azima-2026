@@ -1,4 +1,4 @@
-page 52187115 "MKey Sent Cases"
+page 87115 "MKey Sent Cases"
 {
     ApplicationArea = All;
     PageType = List;

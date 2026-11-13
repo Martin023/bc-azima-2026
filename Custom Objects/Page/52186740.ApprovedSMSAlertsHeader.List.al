@@ -1,4 +1,4 @@
-page 52186740 "Approved SMS Alerts List"
+page 86740 "Approved SMS Alerts List"
 {
     ApplicationArea = All;
     PageType = List;

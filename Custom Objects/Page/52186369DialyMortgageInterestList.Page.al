@@ -1,4 +1,4 @@
-page 52186369 "Dialy Mortgage Interest List"
+page 86369 "Dialy Mortgage Interest List"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

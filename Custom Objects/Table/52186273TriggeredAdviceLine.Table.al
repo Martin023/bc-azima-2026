@@ -1,4 +1,4 @@
-table 52186273 "Triggered Advice Line"
+table 86273 "Triggered Advice Line"
 {
     DrillDownPageID = "Checkoff Advice";
     LookupPageID = "Checkoff Advice";

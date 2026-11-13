@@ -1,4 +1,4 @@
-report 52187400 "Loan Disbursement Report"
+report 87400 "Loan Disbursement Report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

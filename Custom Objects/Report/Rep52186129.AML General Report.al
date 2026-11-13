@@ -1,4 +1,4 @@
-report 52186130 "AML Report Transactions"
+report 86130 "AML Report Transactions"
 {
     ApplicationArea = All;
     Caption = 'AML Report Transactions';

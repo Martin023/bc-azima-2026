@@ -1,4 +1,4 @@
-table 52185501 "Dividend Slip Years Buffer"
+table 85501 "Dividend Slip Years Buffer"
 {
 
     fields

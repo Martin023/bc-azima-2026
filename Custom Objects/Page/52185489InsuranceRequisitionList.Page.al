@@ -1,4 +1,4 @@
-page 52185489 "Insurance Requisition List"
+page 85489 "Insurance Requisition List"
 {
     CardPageID = "Sky Insurance Card";
     DelayedInsert = false;

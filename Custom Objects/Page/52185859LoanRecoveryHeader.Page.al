@@ -1,4 +1,4 @@
-page 52185859 "Loan Recovery Header"
+page 85859 "Loan Recovery Header"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -342,7 +342,7 @@ page 52185859 "Loan Recovery Header"
                     RecoveryLines.Reset();
                     RecoveryLines.SetRange("Header No.", Rec."No.");
                     if RecoveryLines.Find('-') then begin
-                        Report.Run(52186793, true, false, RecoveryLines);
+                        Report.Run(86793, true, false, RecoveryLines);
                     end;
                 end;
             }

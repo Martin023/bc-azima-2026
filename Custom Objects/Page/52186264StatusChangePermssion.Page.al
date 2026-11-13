@@ -1,4 +1,4 @@
-page 52186264 "Status Change Permssion."
+page 86264 "Status Change Permssion."
 {
     PageType = List;
     SourceTable = "Status Change Permissions.";

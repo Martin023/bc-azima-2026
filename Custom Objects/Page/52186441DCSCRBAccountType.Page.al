@@ -1,4 +1,4 @@
-page 52186441 "DCS CRB Account Type"
+page 86441 "DCS CRB Account Type"
 {
     PageType = List;
     SourceTable = "DCS CRB Account Type";

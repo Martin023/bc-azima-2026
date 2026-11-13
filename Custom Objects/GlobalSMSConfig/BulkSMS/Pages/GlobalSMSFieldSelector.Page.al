@@ -1,4 +1,4 @@
-page 52186139 "Global SMS Field Selector"
+page 86139 "Global SMS Field Selector"
 {
     PageType = List;
     Caption = 'Select Field';

@@ -1,4 +1,4 @@
-page 52186685 "Complaint Categories"
+page 86685 "Complaint Categories"
 {
     PageType = List;
     SourceTable = "Complaint Categories";

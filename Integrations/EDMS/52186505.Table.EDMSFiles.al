@@ -1,4 +1,4 @@
-table 52186505 "EDMS Files"
+table 86505 "EDMS Files"
 {
     DataClassification = ToBeClassified;
     DataCaptionFields = "Application No.", "EDMS Document Name";

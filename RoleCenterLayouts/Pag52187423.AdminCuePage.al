@@ -1,4 +1,4 @@
-page 52187392 "Admin Cue Page"
+page 87392 "Admin Cue Page"
 {
     ApplicationArea = All;
     Caption = 'Activities';

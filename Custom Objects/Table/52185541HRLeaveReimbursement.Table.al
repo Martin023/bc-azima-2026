@@ -1,4 +1,4 @@
-table 52185541 "HR Leave Reimbursement"
+table 85541 "HR Leave Reimbursement"
 {
     DrillDownPageID = "All Users Activities";
     LookupPageID = "All Users Activities";

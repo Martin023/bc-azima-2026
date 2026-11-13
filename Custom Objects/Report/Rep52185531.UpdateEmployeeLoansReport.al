@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-report 52185531 "Update Employee Loans Report"
+report 85531 "Update Employee Loans Report"
 {
     ApplicationArea = All;
     Caption = 'Update Employee Loans Report';

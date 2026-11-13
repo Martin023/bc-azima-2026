@@ -1,4 +1,4 @@
-table 52185875 "Cash Payments Header"
+table 85875 "Cash Payments Header"
 {
     LookupPageID = "Contract Cycle Stage";
 

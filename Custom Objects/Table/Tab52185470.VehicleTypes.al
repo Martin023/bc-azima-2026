@@ -1,4 +1,4 @@
-table 52185470 "Vehicle Types"
+table 85470 "Vehicle Types"
 {
     Caption = 'Vehicle Types';
     DataClassification = ToBeClassified;

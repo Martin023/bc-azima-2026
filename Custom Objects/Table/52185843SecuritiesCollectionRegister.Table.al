@@ -1,4 +1,4 @@
-table 52185843 "Securities Collection Register"
+table 85843 "Securities Collection Register"
 {
     DrillDownPageId = "Collateral Collection - List";
     LookupPageId = "Collateral Collection - List";

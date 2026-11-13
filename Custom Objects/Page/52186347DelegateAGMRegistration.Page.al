@@ -1,4 +1,4 @@
-page 52186347 "Delegate AGM Registration"
+page 86347 "Delegate AGM Registration"
 {
     DeleteAllowed = false;
     InsertAllowed = true;

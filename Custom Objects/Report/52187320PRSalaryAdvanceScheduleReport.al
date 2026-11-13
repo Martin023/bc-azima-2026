@@ -1,4 +1,4 @@
-report 52187320 "PRSalaryAdvanceSchedule"
+report 87320 "PRSalaryAdvanceSchedule"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

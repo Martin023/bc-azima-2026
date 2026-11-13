@@ -1,4 +1,4 @@
-table 52185644 prPeriodLumpSummedItems
+table 85644 prPeriodLumpSummedItems
 {
 
     fields

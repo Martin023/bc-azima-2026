@@ -1,4 +1,4 @@
-page 52186319 "Approval Entries Archive"
+page 86319 "Approval Entries Archive"
 {
     Caption = 'Approval Entries';
     Editable = false;

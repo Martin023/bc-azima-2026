@@ -1,4 +1,4 @@
-page 52186432 "BBF Requisation Header List"
+page 86432 "BBF Requisation Header List"
 {
     CardPageID = "BBF Requisation Headers";
     Editable = false;

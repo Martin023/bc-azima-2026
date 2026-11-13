@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185808 "Dividends Capitalization"
+report 85808 "Dividends Capitalization"
 {
     ApplicationArea = All;
     Caption = 'Dividends Capitalization';

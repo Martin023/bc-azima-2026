@@ -1,4 +1,4 @@
-page 52185678 "SMS Subscription List"
+page 85678 "SMS Subscription List"
 {
     CardPageID = "SMS Account Subscription";
     Editable = false;

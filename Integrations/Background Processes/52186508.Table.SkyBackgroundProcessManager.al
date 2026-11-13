@@ -1,4 +1,4 @@
-table 52186508 "Sky Background Process Manager"
+table 86508 "Sky Background Process Manager"
 {
     Caption = 'Sky Background Process Manager';
     DataClassification = ToBeClassified;

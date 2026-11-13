@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186114 "Risk Claim TAT Report"
+report 86114 "Risk Claim TAT Report"
 {
     ApplicationArea = All;
 

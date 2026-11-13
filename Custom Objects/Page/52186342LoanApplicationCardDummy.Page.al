@@ -1,4 +1,4 @@
-page 52186342 "Loan Application Card Dummy"
+page 86342 "Loan Application Card Dummy"
 {
     DeleteAllowed = false;
     InsertAllowed = true;

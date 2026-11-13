@@ -1,4 +1,4 @@
-table 52185531 "HR Leave Types"
+table 85531 "HR Leave Types"
 {
     // LookupPageID = "HR Leave Types";
 

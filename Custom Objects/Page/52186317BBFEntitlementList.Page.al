@@ -1,4 +1,4 @@
-page 52186317 "BBF Entitlement List"
+page 86317 "BBF Entitlement List"
 {
     PageType = List;
     SourceTable = "BBF Entitlement";

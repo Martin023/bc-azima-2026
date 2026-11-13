@@ -1,4 +1,4 @@
-table 52185792 "Cheque Set Up"
+table 85792 "Cheque Set Up"
 {
     DrillDownPageID = "Cheque Set Up";
     LookupPageID = "Cheque Set Up";

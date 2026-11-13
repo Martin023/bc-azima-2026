@@ -1,4 +1,4 @@
-page 52186544 "HR Policy List"
+page 86544 "HR Policy List"
 {
     PageType = List;
     SourceTable = "HR Policies";

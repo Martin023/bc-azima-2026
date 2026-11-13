@@ -1,4 +1,4 @@
-page 52185781 "HR CEO Goals Card"
+page 85781 "HR CEO Goals Card"
 {
     Caption = 'CEO Goals Card';
     PageType = Card;

@@ -1,4 +1,4 @@
-page 52187326 "Procurement Role Center"
+page 87326 "Procurement Role Center"
 {
     Caption = 'Procurement Role Center';
     PageType = RoleCenter;

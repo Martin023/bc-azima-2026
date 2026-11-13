@@ -1,4 +1,4 @@
-table 52185642 "prMembership Groups"
+table 85642 "prMembership Groups"
 {
     DrillDownPageID = "prMembership Groups";
     LookupPageID = "prMembership Groups";

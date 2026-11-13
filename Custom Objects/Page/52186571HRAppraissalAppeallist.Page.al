@@ -1,4 +1,4 @@
-page 52186571 "HR Appraissal Appeal list"
+page 86571 "HR Appraissal Appeal list"
 {
     CardPageID = "HR Appraissal Appeal1";
     PageType = List;

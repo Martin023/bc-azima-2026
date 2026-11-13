@@ -1,4 +1,4 @@
-page 52187350 "ADR Card"
+page 87350 "ADR Card"
 {
     ApplicationArea = All;
     Caption = 'ADR Card';

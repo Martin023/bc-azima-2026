@@ -1,4 +1,4 @@
-table 52185747 "Loan Application Credit Score"
+table 85747 "Loan Application Credit Score"
 {
 
     fields

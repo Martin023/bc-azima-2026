@@ -1,4 +1,4 @@
-page 52186521 "HR 360 Appraisals List - TS1"
+page 86521 "HR 360 Appraisals List - TS1"
 {
     CardPageID = "HR 360 Appraisal Card";
     PageType = List;

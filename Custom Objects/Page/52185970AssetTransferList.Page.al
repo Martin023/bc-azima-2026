@@ -1,4 +1,4 @@
-page 52185970 "Asset Transfer List"
+page 85970 "Asset Transfer List"
 {
     CardPageID = "Asset Transfer";
     

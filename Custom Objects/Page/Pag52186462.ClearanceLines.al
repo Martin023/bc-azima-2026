@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using System.Security.User;
 
-page 52186462 "Clearance Lines"
+page 86462 "Clearance Lines"
 {
     Caption = 'Clearance Lines';
     PageType = ListPart;

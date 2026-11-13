@@ -1,4 +1,4 @@
-page 52185576 "Assets Transfer Line"
+page 85576 "Assets Transfer Line"
 {
     ApplicationArea = All;
     Caption = 'Assets Transfer Line';

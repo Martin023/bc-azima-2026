@@ -1,4 +1,4 @@
-enum 52186563 "CRB Metropol Identity Types"
+enum 86563 "CRB Metropol Identity Types"
 {   
     value(001; "National ID")
     {

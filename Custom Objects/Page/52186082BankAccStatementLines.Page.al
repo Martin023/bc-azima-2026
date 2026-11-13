@@ -1,4 +1,4 @@
-page 52186082 "Bank Acc. Statement Lines"
+page 86082 "Bank Acc. Statement Lines"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

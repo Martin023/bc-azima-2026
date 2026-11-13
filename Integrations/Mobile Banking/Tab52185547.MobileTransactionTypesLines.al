@@ -1,4 +1,4 @@
-table 52185547 "Mobile Transaction Types Lines"
+table 85547 "Mobile Transaction Types Lines"
 {
     Caption = 'Mobile Transaction Types Lines';
     DataClassification = ToBeClassified;

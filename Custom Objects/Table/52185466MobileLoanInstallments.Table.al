@@ -1,4 +1,4 @@
-table 52185466 "Mobile Loan Installments"
+table 85466 "Mobile Loan Installments"
 {
 
     fields

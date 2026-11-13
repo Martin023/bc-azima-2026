@@ -1,4 +1,4 @@
-table 52185660 "HR Lateness Ledger"
+table 85660 "HR Lateness Ledger"
 {
 
     fields

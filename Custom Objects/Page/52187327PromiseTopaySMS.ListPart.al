@@ -1,4 +1,4 @@
-page 52187327 "Promise Topay SMS"
+page 87327 "Promise Topay SMS"
 {
     Editable = false;
     PageType = ListPart;

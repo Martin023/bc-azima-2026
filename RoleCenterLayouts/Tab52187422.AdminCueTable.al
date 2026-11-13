@@ -1,4 +1,4 @@
-table 52187422 "Admin Cue Table"
+table 87422 "Admin Cue Table"
 {
     Caption = 'Admin Cue Table';
     DataClassification = ToBeClassified;

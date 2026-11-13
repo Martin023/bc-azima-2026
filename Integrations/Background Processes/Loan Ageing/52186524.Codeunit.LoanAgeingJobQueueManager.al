@@ -1,4 +1,4 @@
-codeunit 52186526 "Loan Ageing Job Queue Manager"
+codeunit 86526 "Loan Ageing Job Queue Manager"
 {
     TableNo = Loans;
     trigger OnRun()
@@ -130,7 +130,7 @@ codeunit 52186526 "Loan Ageing Job Queue Manager"
     // FallOffFilter: Page "Fall Off Filter";
 }
 
-codeunit 52186527 "Loan Ageing Job"
+codeunit 86527 "Loan Ageing Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()

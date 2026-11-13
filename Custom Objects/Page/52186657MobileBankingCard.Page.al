@@ -1,4 +1,4 @@
-page 52186657 "Mobile Banking Card"
+page 86657 "Mobile Banking Card"
 {
     DeleteAllowed = false;
     PageType = Card;

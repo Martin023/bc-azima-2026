@@ -1,4 +1,4 @@
-table 52185556 "HR Committees"
+table 85556 "HR Committees"
 {
     // DrillDownPageID = "HR Committees";
     // LookupPageID = "HR Committees";

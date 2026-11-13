@@ -1,4 +1,4 @@
-table 52185851 "ATM Card Types"
+table 85851 "ATM Card Types"
 {
     DrillDownPageID = "ATM Card Types";
     LookupPageID = "ATM Card Types";

@@ -1,4 +1,4 @@
-table 52185809 "Investment Lines"
+table 85809 "Investment Lines"
 {
 
     fields

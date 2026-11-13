@@ -1,4 +1,4 @@
-codeunit 52186524 "Member List Job Queue Manager"
+codeunit 86524 "Member List Job Queue Manager"
 {
     TableNo = Members;
     trigger OnRun()
@@ -143,7 +143,7 @@ codeunit 52186524 "Member List Job Queue Manager"
         DateRangeDialog: Page "Member List. Date Picker";
 }
 
-codeunit 52186525 "Member Listing Job"
+codeunit 86525 "Member Listing Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()
@@ -201,7 +201,7 @@ codeunit 52186525 "Member Listing Job"
 }
 
 
-page 52187026 "Member List. Date Picker"
+page 87026 "Member List. Date Picker"
 {
     PageType = StandardDialog;
     Caption = 'Member Listing - Enter Date Range';

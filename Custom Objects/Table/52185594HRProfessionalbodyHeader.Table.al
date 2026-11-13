@@ -1,4 +1,4 @@
-table 52185594 "HR Professional body Header"
+table 85594 "HR Professional body Header"
 {
      DrillDownPageID = "HR Professional Bodies List";
      LookupPageID = "HR Professional Bodies List";

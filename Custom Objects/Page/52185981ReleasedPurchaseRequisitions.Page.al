@@ -1,4 +1,4 @@
-page 52185981 "Released Purchase Requisitions"
+page 85981 "Released Purchase Requisitions"
 {
     Caption = 'Purchase Requisitions';
     CardPageID = "Released Internal Requisitions";

@@ -1,4 +1,4 @@
-Report 52187382 "Investment and Interest Income"
+Report 87382 "Investment and Interest Income"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Investment and Interest Income.rdl';

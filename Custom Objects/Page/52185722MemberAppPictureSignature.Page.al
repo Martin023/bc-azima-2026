@@ -1,4 +1,4 @@
-page 52185722 "Member App Picture & Signature"
+page 85722 "Member App Picture & Signature"
 {
     Caption = 'Member App Picture & Signature';
     DeleteAllowed = false;

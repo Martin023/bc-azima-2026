@@ -1,4 +1,4 @@
-page 52187400 "Deffered Vehicle Movt - List"
+page 87400 "Deffered Vehicle Movt - List"
 {
     ApplicationArea = All;
     Caption = 'Deffered Vehicle Movements';

@@ -1,4 +1,4 @@
-page 52185491 "Sky Insurance Card"
+page 85491 "Sky Insurance Card"
 {
     DelayedInsert = false;
     DeleteAllowed = false;

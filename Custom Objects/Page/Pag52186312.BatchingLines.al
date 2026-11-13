@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186312 "Batching Lines"
+page 86312 "Batching Lines"
 {
     Caption = 'Batching Lines';
     PageType = ListPart;

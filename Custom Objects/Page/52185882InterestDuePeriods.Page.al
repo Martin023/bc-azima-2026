@@ -1,4 +1,4 @@
-page 52185882 "Interest Due Periods"
+page 85882 "Interest Due Periods"
 {
     // DeleteAllowed = false;
     // InsertAllowed = false;

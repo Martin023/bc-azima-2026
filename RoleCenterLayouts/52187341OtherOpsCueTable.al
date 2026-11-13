@@ -1,4 +1,4 @@
-table 52187341 "Other Operations Cue Table"
+table 87341 "Other Operations Cue Table"
 {
 
     fields

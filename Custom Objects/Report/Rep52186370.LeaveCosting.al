@@ -1,4 +1,4 @@
-report 52186370 "Leave Costing"
+report 86370 "Leave Costing"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Leave Costing.rdl';

@@ -1,4 +1,4 @@
-table 52185764 "Welfare Advance"
+table 85764 "Welfare Advance"
 {
     Caption = 'Welfare Advance';
     DataClassification = ToBeClassified;

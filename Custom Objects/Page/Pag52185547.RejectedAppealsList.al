@@ -1,4 +1,4 @@
-page 52185547 "Rejected Appeals List"
+page 85547 "Rejected Appeals List"
 {
     ApplicationArea = All;
     Caption = 'Rejected Appeals List';

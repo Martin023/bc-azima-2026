@@ -1,4 +1,4 @@
-page 52185751 "RTGS Transfer Lines"
+page 85751 "RTGS Transfer Lines"
 {
     PageType = ListPart;
     SourceTable = "RTGS Transfer Lines";

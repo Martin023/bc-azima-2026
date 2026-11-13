@@ -1,4 +1,4 @@
-report 52186073 "Membership Closure Summary"
+report 86073 "Membership Closure Summary"
 {
     ApplicationArea = All;
     Caption = 'Membership Closure Summary Report';

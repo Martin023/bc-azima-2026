@@ -1,4 +1,4 @@
-codeunit 52185428 "IPRS Integration"
+codeunit 85428 "IPRS Integration"
 {
     procedure ValidateMemberApplication(var MemberApplication: Record "Member Application")
     var

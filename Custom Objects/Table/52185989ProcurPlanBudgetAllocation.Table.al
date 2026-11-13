@@ -1,4 +1,4 @@
-table 52185989 "Procur. Plan Budget Allocation"
+table 85989 "Procur. Plan Budget Allocation"
 {
     Caption = 'Procurment Plan Budget Allocation';
 

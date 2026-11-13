@@ -1,4 +1,4 @@
-page 52186564  "Company Vehicles list"
+page 86564  "Company Vehicles list"
 {
     PageType = List;
     SourceTable = "Company Vehicles";

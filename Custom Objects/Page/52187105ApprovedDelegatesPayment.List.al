@@ -1,4 +1,4 @@
-page 52187107 "Posted Delegates Payments"
+page 87107 "Posted Delegates Payments"
 {
     CardPageID = "Delegates Payment Card";
     DeleteAllowed = false;

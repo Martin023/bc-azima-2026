@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52186780 "CRB log Buffer"
+page 86780 "CRB log Buffer"
 {
     ApplicationArea = All;
     Caption = 'CRB log Buffer';

@@ -1,4 +1,4 @@
-table 52187233 "Nominee Form Request"
+table 87233 "Nominee Form Request"
 {
     Caption = 'Nominee Form Request';
     DataClassification = ToBeClassified;

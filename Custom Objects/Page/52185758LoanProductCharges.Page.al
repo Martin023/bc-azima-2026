@@ -1,4 +1,4 @@
-page 52185758 "Loan Product Charges"
+page 85758 "Loan Product Charges"
 {
     PageType = List;
     SourceTable = "Loan Product Charges";

@@ -1,4 +1,4 @@
-page 52186136 "Cancelled Store Req List"
+page 86136 "Cancelled Store Req List"
 {
     // CardPageID = "Store Requisition Header";
     PageType = List;

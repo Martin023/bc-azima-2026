@@ -1,4 +1,4 @@
-enum 52185425 "Marital Status"
+enum 85425 "Marital Status"
 {
     value(0; " ") {}
     value(1; Single) {}

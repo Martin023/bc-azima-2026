@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185783 "Loans Factbox"
+page 85783 "Loans Factbox"
 {
     ApplicationArea = All;
     Caption = 'Loans Factbox';

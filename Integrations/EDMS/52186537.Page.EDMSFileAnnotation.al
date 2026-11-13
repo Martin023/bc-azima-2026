@@ -1,4 +1,4 @@
-page 52186537 "EDMS File Annotation"
+page 86537 "EDMS File Annotation"
 {
     ApplicationArea = All;
     Caption = 'EDMS File Annotation';

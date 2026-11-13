@@ -1,4 +1,4 @@
-table 52185669 "HR Leave Reliver"
+table 85669 "HR Leave Reliver"
 {
 
     fields

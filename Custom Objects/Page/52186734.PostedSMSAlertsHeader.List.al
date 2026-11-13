@@ -1,4 +1,4 @@
-page 52186734 "Posted SMS Alerts List"
+page 86734 "Posted SMS Alerts List"
 {
     ApplicationArea = All;
     Caption = 'Posted SMS Alerts List';

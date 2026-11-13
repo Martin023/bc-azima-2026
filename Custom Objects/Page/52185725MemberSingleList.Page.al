@@ -1,4 +1,4 @@
-page 52185725 "Member Single List"
+page 85725 "Member Single List"
 {
     Caption = 'Member Single List';
     CardPageID = "Member Single";
@@ -430,7 +430,7 @@ page 52185725 "Member Single List"
                     CustMembr.Reset;
                     CustMembr.SetRange(CustMembr."No.", Rec."No.");
                     if CustMembr.Find('-') then
-                        REPORT.Run(52185928, true, false, CustMembr);
+                        REPORT.Run(85928, true, false, CustMembr);
                 end;
             }
             action("Member Statement[ Historical ]")
@@ -452,7 +452,7 @@ page 52185725 "Member Single List"
                     CustMembr.Reset;
                     CustMembr.SetRange(CustMembr."No.", Rec."No.");
                     if CustMembr.Find('-') then
-                        REPORT.Run(52185903, true, false, CustMembr);
+                        REPORT.Run(85903, true, false, CustMembr);
                 end;
             }
             action("Determine TAT")

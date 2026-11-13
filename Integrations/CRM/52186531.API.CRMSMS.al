@@ -1,4 +1,4 @@
-page 52186531 "CRM SMS API"
+page 86531 "CRM SMS API"
 {
     APIGroup = 'crm';
     APIPublisher = 'sky';

@@ -1,4 +1,4 @@
-table 52185582 "HR Training Cost"
+table 85582 "HR Training Cost"
 {
     DrillDownPageId="HR Training Cost";
     LookupPageId="HR Training Cost";

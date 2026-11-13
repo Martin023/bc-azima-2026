@@ -1,4 +1,4 @@
-page 52186836 "Approved Risk Claim List"
+page 86836 "Approved Risk Claim List"
 {
 
     CardPageID = "Risk Claim Notice";

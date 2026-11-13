@@ -1,4 +1,4 @@
-page 52185626 "prInsurance Policies"
+page 85626 "prInsurance Policies"
 {
     PageType = List;
     SourceTable = prInsurancePolicies;

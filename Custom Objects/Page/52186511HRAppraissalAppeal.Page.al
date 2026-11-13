@@ -1,4 +1,4 @@
-page 52186511 "HR Appraissal Appeal1"
+page 86511 "HR Appraissal Appeal1"
 {
     Caption='Hr Appraissal Appeal';
     PageType = Card;

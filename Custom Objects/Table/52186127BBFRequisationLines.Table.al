@@ -1,4 +1,4 @@
-table 52186127 "BBF Requisation Lines"
+table 86127 "BBF Requisation Lines"
 {
     LookupPageID = "Next of KIN";
 

@@ -1,4 +1,4 @@
-table 52187376 "Parking List Table"
+table 87376 "Parking List Table"
 {
     Caption = 'MSN Parking List Table';
     DataClassification = ToBeClassified;

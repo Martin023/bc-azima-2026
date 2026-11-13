@@ -1,4 +1,4 @@
-page 52186580 "CRM Member Applications API"
+page 86580 "CRM Member Applications API"
 {
     APIGroup = 'crm';
     APIPublisher = 'sky';

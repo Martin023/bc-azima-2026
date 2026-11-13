@@ -1,4 +1,4 @@
-table 52185892 "Asset Transfer"
+table 85892 "Asset Transfer"
 {
     DrillDownPageID = "Asset Transfer List";
     LookupPageID = "Asset Transfer List";

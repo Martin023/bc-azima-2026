@@ -1,4 +1,4 @@
-table 52186166 "HR Staff Loan Typess"
+table 86166 "HR Staff Loan Typess"
 {
     fields
     {

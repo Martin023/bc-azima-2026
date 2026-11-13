@@ -1,4 +1,4 @@
-table 52186510 "CRM Originations Setup"
+table 86510 "CRM Originations Setup"
 {
     Caption = 'CRM Originations Setup';
     DataClassification = ToBeClassified;
@@ -56,7 +56,7 @@ table 52186510 "CRM Originations Setup"
     end;
 }
 
-enum 52186517 "CRM Originations"
+enum 86517 "CRM Originations"
 {
     value(0; "Member Application") { }
     value(1; "Member Readmission") { }

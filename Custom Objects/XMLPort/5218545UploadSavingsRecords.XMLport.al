@@ -1,4 +1,4 @@
-xmlport 52185600 "Upload Savings Records"
+xmlport 85600 "Upload Savings Records"
 {
     Caption = 'SavingsAccts';
     Format=VariableText;

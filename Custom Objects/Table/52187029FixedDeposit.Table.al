@@ -1,4 +1,4 @@
-table 52187029 "Fixed Deposit Contract"
+table 87029 "Fixed Deposit Contract"
 {
     DrillDownPageId = "Fixed Deposit Contract List";
     LookupPageId = "Fixed Deposit Contract list";

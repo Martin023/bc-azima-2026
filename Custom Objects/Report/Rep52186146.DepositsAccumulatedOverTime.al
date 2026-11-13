@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186146 "Deposits Accumulated Over Time"
+report 86146 "Deposits Accumulated Over Time"
 {
     ApplicationArea = All;
     Caption = 'Deposits Accumulated Over Time';

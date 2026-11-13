@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185586 pageextension52185586 extends "Apply Vendor Entries"
+PageExtension 85586 pageextension52185586 extends "Apply Vendor Entries"
 {
     layout
     {
@@ -599,7 +599,7 @@ PageExtension 52185586 pageextension52185586 extends "Apply Vendor Entries"
 
     var
         "***CoreTEC****": Integer;
-        PVLine: Record 52185878;
+        PVLine: Record 85878;
 
 
     //Unsupported feature: Code Modification on "OnAfterGetCurrRecord".
@@ -1396,9 +1396,9 @@ PageExtension 52185586 pageextension52185586 extends "Apply Vendor Entries"
     //Unsupported feature: Property Modification (Name) on "OnBeforeEarlierPostingDateError(PROCEDURE 16)".
 
 
-    procedure "SetPVLine-Delete"(NewPVLine: Record 52185878; ApplnTypeSelect: Integer)
+    procedure "SetPVLine-Delete"(NewPVLine: Record 85878; ApplnTypeSelect: Integer)
     var
-        PaymentHeader: Record 52185888;
+        PaymentHeader: Record 85888;
     begin
 
         PVLine := NewPVLine;

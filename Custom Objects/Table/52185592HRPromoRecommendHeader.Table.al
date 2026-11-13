@@ -1,4 +1,4 @@
-table 52185592 "HR Promo. Recommend Header"
+table 85592 "HR Promo. Recommend Header"
 {
     // DrillDownPageID = "HR Promotion Recommend List";
     // LookupPageID = "HR Promotion Recommend List";

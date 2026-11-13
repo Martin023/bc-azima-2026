@@ -1,4 +1,4 @@
-table 52185735 "Schedule of Loan Payment"
+table 85735 "Schedule of Loan Payment"
 {
 
     fields

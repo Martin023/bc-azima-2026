@@ -1,4 +1,4 @@
-table 52185535 "HR Leave Periods"
+table 85535 "HR Leave Periods"
 {
 
     fields

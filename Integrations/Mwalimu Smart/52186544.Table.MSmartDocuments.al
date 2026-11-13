@@ -1,4 +1,4 @@
-table 52186544 "M-Smart Documents"
+table 86544 "M-Smart Documents"
 {
     Caption = 'M-Smart Documents';
     DataClassification = SystemMetadata;

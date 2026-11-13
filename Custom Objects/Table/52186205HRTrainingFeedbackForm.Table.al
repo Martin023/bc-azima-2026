@@ -1,4 +1,4 @@
-table 52186205 "HR Training Feedback Form"
+table 86205 "HR Training Feedback Form"
 {
     // DrillDownPageID = "Asset Transfer List Effected";
     // LookupPageID = "Asset Transfer List Effected";

@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Foundation.Company;
 
-codeunit 52185429 "Members Portal Link"
+codeunit 85429 "Members Portal Link"
 {
     trigger OnRun()
     begin

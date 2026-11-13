@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52186380 "Marketing Teams Lines"
+page 86380 "Marketing Teams Lines"
 {
     ApplicationArea = All;
     Caption = 'Marketing Teams Lines';

@@ -1,4 +1,4 @@
-table 52185500 "Sky Business Accounts"
+table 85500 "Sky Business Accounts"
 {
     DrillDownPageId = "Sky Business Accounts";
     LookupPageId = "Sky Business Accounts";

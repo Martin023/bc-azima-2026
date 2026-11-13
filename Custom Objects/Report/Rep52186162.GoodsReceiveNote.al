@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 using Microsoft.Bank.BankAccount;
 using Microsoft.Purchases.Vendor;
 
-report 52186170 "Goods Receive Note"
+report 86170 "Goods Receive Note"
 {
 
     DefaultLayout = RDLC;

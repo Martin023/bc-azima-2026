@@ -1,4 +1,4 @@
-table 52186180 "HR Employee Bank Accounts"
+table 86180 "HR Employee Bank Accounts"
 {
     // DrillDownPageID = "HR Bank Accounts List";
     // LookupPageID = "HR Bank Accounts List";

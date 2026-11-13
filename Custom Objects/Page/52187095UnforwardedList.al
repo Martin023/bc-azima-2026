@@ -1,4 +1,4 @@
-page 52187095 "Unforwarded Cases"
+page 87095 "Unforwarded Cases"
 {
     ApplicationArea = All;
     Caption = 'DMUCaseForwardingList';

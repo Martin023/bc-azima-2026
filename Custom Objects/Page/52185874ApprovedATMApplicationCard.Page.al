@@ -1,4 +1,4 @@
-page 52185874 "Approved ATM Application Card"
+page 85874 "Approved ATM Application Card"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

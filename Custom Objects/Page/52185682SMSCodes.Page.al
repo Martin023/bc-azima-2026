@@ -1,4 +1,4 @@
-page 52185682 "SMS Codes"
+page 85682 "SMS Codes"
 {
     PageType = List;
     SourceTable = "SMS Codes";

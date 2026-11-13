@@ -1,4 +1,4 @@
-table 52185930 "Quotation Request Vendors"
+table 85930 "Quotation Request Vendors"
 {
 
     fields

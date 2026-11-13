@@ -5,7 +5,7 @@ using Microsoft.HumanResources.Employee;
 using Microsoft.FixedAssets.Setup;
 using Microsoft.Foundation.Company;
 
-report 52185995 "Leased Assets & Obligations"
+report 85995 "Leased Assets & Obligations"
 {
     ApplicationArea = All;
     Caption = 'Leased Assets & Obligations';

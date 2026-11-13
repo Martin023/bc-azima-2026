@@ -1,4 +1,4 @@
-page 52186124 "Notification Cases"
+page 86124 "Notification Cases"
 {
     PageType = List;
     SourceTable = "Cases Noitification";

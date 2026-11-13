@@ -1,4 +1,4 @@
-page 52185647 "HR Training Need Request List"
+page 85647 "HR Training Need Request List"
 {
     PageType = List;
     SourceTable = "HR Training Need Request";

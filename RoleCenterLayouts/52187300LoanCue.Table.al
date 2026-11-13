@@ -1,4 +1,4 @@
-table 52187300 "Loan Cue"
+table 87300 "Loan Cue"
 {
     DrillDownPageId = "Loan Processing Activities";
 

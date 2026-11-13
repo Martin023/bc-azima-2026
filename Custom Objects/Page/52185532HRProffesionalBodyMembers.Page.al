@@ -1,4 +1,4 @@
-page 52185532 "HR Proffesional Body Members"
+page 85532 "HR Proffesional Body Members"
 {
     CardPageID = "HR Employees Factbox";
     DeleteAllowed = false;

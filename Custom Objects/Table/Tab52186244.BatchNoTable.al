@@ -1,4 +1,4 @@
-table 52186244 "Batch No Table"
+table 86244 "Batch No Table"
 {
     Caption = 'Batch No Table';
     DataClassification = ToBeClassified;

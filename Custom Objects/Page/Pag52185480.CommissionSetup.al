@@ -1,7 +1,7 @@
 namespace AzimaBC.AzimaBC;
 using AZIMA.AZIMA;
 
-page 52185480 "Commission Setup"
+page 85480 "Commission Setup"
 {
     ApplicationArea = All;
     Caption = 'Commission Setup';

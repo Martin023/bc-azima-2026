@@ -1,4 +1,4 @@
-page 52187360 "Nominee Legal Lines"
+page 87360 "Nominee Legal Lines"
 {
     ApplicationArea = All;
     Caption = 'Nominee Legal Lines ';

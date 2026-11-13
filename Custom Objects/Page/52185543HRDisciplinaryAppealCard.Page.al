@@ -1,4 +1,4 @@
-page 52185543 "HR Disciplinary Appeal Card"
+page 85543 "HR Disciplinary Appeal Card"
 {
     SourceTable = "HRDisciplinary Appeal";
     PromotedActionCategories ='New,Process,Reports,Approval';

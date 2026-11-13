@@ -1,4 +1,4 @@
-table 52185549 "HR E-Mail Parameters"
+table 85549 "HR E-Mail Parameters"
 {
 
     fields

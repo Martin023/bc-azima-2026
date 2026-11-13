@@ -1,4 +1,4 @@
-page 52185770 "Appraisal Salary Details"
+page 85770 "Appraisal Salary Details"
 {
     PageType = List;
     SourceTable = "Appraisal Salary Details";

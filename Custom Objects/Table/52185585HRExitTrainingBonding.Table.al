@@ -1,4 +1,4 @@
-table 52185585 "HR Exit Training Bonding"
+table 85585 "HR Exit Training Bonding"
 {
     Caption = 'HR Exit Interview Clearance Items';
 

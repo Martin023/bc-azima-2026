@@ -1,4 +1,4 @@
-page 52186155 "My Assigned Targets"
+page 86155 "My Assigned Targets"
 {
     Caption = 'My Assigned Targets';
     PageType = List;

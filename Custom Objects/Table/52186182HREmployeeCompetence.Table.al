@@ -1,4 +1,4 @@
-table 52186182 "HR Employee Competence"
+table 86182 "HR Employee Competence"
 {
 
     fields

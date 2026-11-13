@@ -1,4 +1,4 @@
-page 52185593 "HR Lookup Values List"
+page 85593 "HR Lookup Values List"
 {
     CardPageID = "HR Lookup Values Card";
     DeleteAllowed = false;

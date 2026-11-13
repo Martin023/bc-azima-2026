@@ -1,4 +1,4 @@
-table 52185738 "Ideal Repayment Schedule"
+table 85738 "Ideal Repayment Schedule"
 {
     // DrillDownPageID = idea
     // LookupPageID = "DCS Member Card";

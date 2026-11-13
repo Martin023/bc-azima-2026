@@ -1,4 +1,4 @@
-page 52186800 "Loan Defferals"
+page 86800 "Loan Defferals"
 {
     PageType = List;
     ApplicationArea = All;

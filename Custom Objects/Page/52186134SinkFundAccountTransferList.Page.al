@@ -1,4 +1,4 @@
-page 52186134 "SinkFund Account Transfer List"
+page 86134 "SinkFund Account Transfer List"
 {
     CardPageID = "SinkFund Account Transfer";
     DeleteAllowed = false;

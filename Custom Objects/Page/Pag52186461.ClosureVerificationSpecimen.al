@@ -1,6 +1,6 @@
 namespace ChaMkufuu.ChaMkufuu;
 
-page 52186461 "Closure Verification Specimen"
+page 86461 "Closure Verification Specimen"
 {
     ApplicationArea = All;
     Caption = 'Closure Verification Specimen';

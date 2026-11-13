@@ -1,4 +1,4 @@
-page 52187076 "Motor Vehicle Repair"
+page 87076 "Motor Vehicle Repair"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Repair';

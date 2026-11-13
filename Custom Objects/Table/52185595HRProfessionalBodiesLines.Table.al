@@ -1,4 +1,4 @@
-table 52185595 "HR Professional Bodies Lines"
+table 85595 "HR Professional Bodies Lines"
 {
 
     fields

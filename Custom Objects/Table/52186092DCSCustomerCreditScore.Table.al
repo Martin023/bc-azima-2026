@@ -1,4 +1,4 @@
-table 52186092 "DCS Customer Credit Score"
+table 86092 "DCS Customer Credit Score"
 {
 
     fields

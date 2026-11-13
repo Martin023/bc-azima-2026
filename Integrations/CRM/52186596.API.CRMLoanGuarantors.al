@@ -1,4 +1,4 @@
-page 52186596 "CRM Loan Guarantors API"
+page 86596 "CRM Loan Guarantors API"
 {
     APIGroup = 'crm';
     APIPublisher = 'sky';

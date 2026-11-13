@@ -1,4 +1,4 @@
-page 52187160 "Product SLA Setup List"
+page 87160 "Product SLA Setup List"
 {
     ApplicationArea = All;
     Caption = 'Product SLA Setup List';

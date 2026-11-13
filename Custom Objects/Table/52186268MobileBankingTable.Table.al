@@ -1,4 +1,4 @@
-table 52186268 "Mobile Banking Table"
+table 86268 "Mobile Banking Table"
 {
     DrillDownPageID = "Mobile Banking App List";
     LookupPageID = "Mobile Banking App List";

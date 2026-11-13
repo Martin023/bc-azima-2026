@@ -1,4 +1,4 @@
-page 52186021 "Global SMS Token Card"
+page 86021 "Global SMS Token Card"
 {
     PageType = Card;
     ApplicationArea = All;

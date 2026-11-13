@@ -1,4 +1,4 @@
-page 52185997 "Posted Imprest Vouchers List"
+page 85997 "Posted Imprest Vouchers List"
 {
     Caption = 'Posted Staff Travel Vouchers List';
     CardPageID = "Posted Imprest Request";

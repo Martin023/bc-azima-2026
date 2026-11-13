@@ -1,4 +1,4 @@
-page 52187321 "DMU SMS Templates"
+page 87321 "DMU SMS Templates"
 {
     //DeleteAllowed = false;
     PageType = Card;

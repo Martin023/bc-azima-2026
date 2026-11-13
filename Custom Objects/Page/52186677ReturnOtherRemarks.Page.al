@@ -1,4 +1,4 @@
-page 52186677 "Return Other Remarks"
+page 86677 "Return Other Remarks"
 {
     CardPageID = "Complains and Remarks Page";
     Editable = false;

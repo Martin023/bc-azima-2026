@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Sales.Customer;
 
-report 52186235 "Refund Excess I to P"
+report 86235 "Refund Excess I to P"
 {
     ApplicationArea = All;
     Caption = 'Refund Excess I to P';

@@ -1,4 +1,4 @@
-enum 52185446 "Digital Signature Name"
+enum 85446 "Digital Signature Name"
 {
     Extensible = true;
     value(0; " ")

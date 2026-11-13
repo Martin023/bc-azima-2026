@@ -1,6 +1,6 @@
 
 
-page 52186851 "Insurance Claim List"
+page 86851 "Insurance Claim List"
 {
     CardPageID = "Insurance Claim Notice";
     DeleteAllowed = false;

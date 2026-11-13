@@ -1,4 +1,4 @@
-page 52185662 prOtherSetups
+page 85662 prOtherSetups
 {
     PageType = List;
     SourceTable = PrOtherSetups;

@@ -1,4 +1,4 @@
-table 52185870 "Procurement Limit Code"
+table 85870 "Procurement Limit Code"
 {
     // DrillDownPageID = "HR BSC List Qaurter 3";
     // LookupPageID = "HR BSC List Qaurter 3";

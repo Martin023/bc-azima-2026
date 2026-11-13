@@ -1,4 +1,4 @@
-table 52185506 "Sky Portal Transactions"
+table 85506 "Sky Portal Transactions"
 {
 
     fields

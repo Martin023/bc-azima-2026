@@ -1,4 +1,4 @@
-page 52185510 "HR Jobs Card"
+page 85510 "HR Jobs Card"
 {
     PageType = Card;
     ApplicationArea = all;

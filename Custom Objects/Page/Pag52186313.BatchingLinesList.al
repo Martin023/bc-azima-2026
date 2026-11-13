@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186313 "Batching Lines List"
+page 86313 "Batching Lines List"
 {
     ApplicationArea = All;
     Caption = 'Batching Lines List';

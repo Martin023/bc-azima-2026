@@ -1,4 +1,4 @@
-page 52185818 "Bankers Cheque Register List"
+page 85818 "Bankers Cheque Register List"
 {
     DeleteAllowed = false;
     Editable = true;

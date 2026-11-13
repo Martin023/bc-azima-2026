@@ -1,4 +1,4 @@
-table 52185880 "Cash Payment Line"
+table 85880 "Cash Payment Line"
 {
 
 

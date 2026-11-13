@@ -1,4 +1,4 @@
-page 52185468 "Conference Room Booking Card"
+page 85468 "Conference Room Booking Card"
 {
     ApplicationArea = All;
     Caption = 'Conference Room Booking Card';

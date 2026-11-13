@@ -1,4 +1,4 @@
-page 52186611 "ATM Repin Card"
+page 86611 "ATM Repin Card"
 {
     DeleteAllowed = false;
     PageType = Card;

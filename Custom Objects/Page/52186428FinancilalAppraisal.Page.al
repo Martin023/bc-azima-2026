@@ -1,4 +1,4 @@
-page 52186428 "Financilal Appraisal"
+page 86428 "Financilal Appraisal"
 {
     PageType = List;
     SourceTable = "Financial Appraisal setup";

@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Codeunit 52185506 "Global Functions"
+Codeunit 85506 "Global Functions"
 {
     trigger OnRun()
     begin
@@ -1615,7 +1615,7 @@ Codeunit 52185506 "Global Functions"
         Comments.Reset();
         Comments.SetRange("Header No.", RecordID);
         if Comments.Find('-') then
-            Page.Run(52186311, Comments);
+            Page.Run(86311, Comments);
     end;
 
     procedure CancelApprovalManually(RecordID: RecordID) Result: Boolean
@@ -2185,7 +2185,7 @@ Codeunit 52185506 "Global Functions"
         CreditAccounts: Record "Credit Accounts";
         Loans: Record Loans;
     begin
-        if (TableID = 52185700) and (FieldID = 3) then begin
+        if (TableID = 85700) and (FieldID = 3) then begin
             SavingAccounts.Reset;
             SavingAccounts.SetRange(SavingAccounts."Member No.", FilterValue);
             if SavingAccounts.Find('-') then begin

@@ -1,4 +1,4 @@
-table 52185620 "prSalary Arrears"
+table 85620 "prSalary Arrears"
 {
 
     fields

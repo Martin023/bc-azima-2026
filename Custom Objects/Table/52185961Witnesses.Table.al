@@ -1,4 +1,4 @@
-table 52185961 Witnesses
+table 85961 Witnesses
 {
     DrillDownPageID = "Witness Line";
     LookupPageID = "Witness Line";

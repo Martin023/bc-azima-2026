@@ -1,4 +1,4 @@
-page 52187087 "Business Loan Clossure Card"
+page 87087 "Business Loan Clossure Card"
 {
     ApplicationArea = All;
     PromotedActionCategories = 'New,Process,Reports,Activities,WorkFlows,Category7_caption,Category8_caption,Category9_caption,Approvals';

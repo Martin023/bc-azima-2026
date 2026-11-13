@@ -1,4 +1,4 @@
-page 52185608 "HR Employee List-Pending App1"
+page 85608 "HR Employee List-Pending App1"
 {
     CardPageID = "HR Employee Card";
     Editable = false;

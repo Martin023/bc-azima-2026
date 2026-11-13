@@ -1,4 +1,4 @@
-table 52185427 "Loan Schedule Error Log"
+table 85427 "Loan Schedule Error Log"
 {
     fields
     {

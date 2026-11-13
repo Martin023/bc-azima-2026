@@ -1,4 +1,4 @@
-table 52186200 "prBoard Category"
+table 86200 "prBoard Category"
 {
 
     fields

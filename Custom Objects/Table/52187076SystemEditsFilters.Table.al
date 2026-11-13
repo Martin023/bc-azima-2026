@@ -5,7 +5,7 @@ using System.Environment;
 using System.Reflection;
 using System.Security.AccessControl;
 
-table 52187075 "System Edits Filters"
+table 87075 "System Edits Filters"
 {
     ReplicateData = false;
 

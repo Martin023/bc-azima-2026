@@ -1,4 +1,4 @@
-page 52186646 "Dependancies Applications List"
+page 86646 "Dependancies Applications List"
 {
     CardPageID = "Dependancies Applications Card";
     // DeleteAllowed = false;

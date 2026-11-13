@@ -1,4 +1,4 @@
-page 52185525 "Trigger Survey Setup"
+page 85525 "Trigger Survey Setup"
 {
     Caption = 'Trigger Survey Setup';
     PageType = List;

@@ -1,4 +1,4 @@
-page 52187089 "System Edits Tables"
+page 87089 "System Edits Tables"
 {
     ApplicationArea = All;
     Caption = 'System Edits Tables';

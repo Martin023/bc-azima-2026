@@ -1,4 +1,4 @@
-page 52185579 "Insurance Claims - Card"
+page 85579 "Insurance Claims - Card"
 {
     Caption = 'Fixed Asset Insurance Claims - Card';
     PageType = Card;

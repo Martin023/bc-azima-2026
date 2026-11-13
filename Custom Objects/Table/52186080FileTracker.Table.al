@@ -1,4 +1,4 @@
-table 52186080 "File Tracker"
+table 86080 "File Tracker"
 {
 
     fields

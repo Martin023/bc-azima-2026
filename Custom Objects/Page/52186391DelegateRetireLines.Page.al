@@ -1,4 +1,4 @@
-page 52186391 "Delegate Retire Lines"
+page 86391 "Delegate Retire Lines"
 {
     PageType = ListPart;
     SourceTable = "Delegate AGM Retire Update";

@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 using Microsoft.Sales.Customer;
 
-report 52186124 "Member Commission"
+report 86124 "Member Commission"
 {
     ApplicationArea = All;
     Caption = 'Member Commission ';

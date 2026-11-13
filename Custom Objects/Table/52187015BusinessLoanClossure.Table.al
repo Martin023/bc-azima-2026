@@ -1,4 +1,4 @@
-table 52187015 "Business Loan Clossure"
+table 87015 "Business Loan Clossure"
 {
     fields
     {

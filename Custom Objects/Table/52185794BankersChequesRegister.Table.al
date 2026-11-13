@@ -1,4 +1,4 @@
-table 52185794 "Bankers Cheques Register"
+table 85794 "Bankers Cheques Register"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52185471 "Sky Mobile Setup"
+table 85471 "Sky Mobile Setup"
 {
 
     fields

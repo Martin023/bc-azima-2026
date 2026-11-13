@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52186480 pageextension52186480 extends "FA Reclass. Journal Batches" 
+PageExtension 86480 pageextension52186480 extends "FA Reclass. Journal Batches" 
 {
     layout
     {

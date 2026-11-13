@@ -1,4 +1,4 @@
-page 52186418 "Loan Linking List"
+page 86418 "Loan Linking List"
 {
     PageType = ListPart;
     SourceTable = "Loan Linking Line";

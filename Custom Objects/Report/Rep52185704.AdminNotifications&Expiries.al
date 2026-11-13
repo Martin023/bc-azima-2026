@@ -1,4 +1,4 @@
-report 52185704 "Admin Notificaitions"
+report 85704 "Admin Notificaitions"
 {
     ApplicationArea = All;
     Caption = 'Admin Notifications & Expiries';

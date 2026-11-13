@@ -1,4 +1,4 @@
-page 52186524 "HR 360 Appraisals List - EV1"
+page 86524 "HR 360 Appraisals List - EV1"
 {
     CardPageID = "HR 360 Appraisal Card";
     DeleteAllowed = false;

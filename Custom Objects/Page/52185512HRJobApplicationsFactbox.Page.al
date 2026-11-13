@@ -1,4 +1,4 @@
-page 52185512 "HR Job Applications Factbox"
+page 85512 "HR Job Applications Factbox"
 {
     PageType = ListPart;
     SourceTable = "HR Job Applications";

@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-enum 52185459 "Loan Guarantor Types Enum"
+enum 85459 "Loan Guarantor Types Enum"
 {
     Extensible = true;
     

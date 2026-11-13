@@ -1,4 +1,4 @@
-page 52187363 "Key Request Card"
+page 87363 "Key Request Card"
 {
     ApplicationArea = All;
     Caption = 'Key Request Card';

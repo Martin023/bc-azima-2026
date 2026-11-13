@@ -1,4 +1,4 @@
-table 52186563 "Sky Interest Log Buffer"
+table 86563 "Sky Interest Log Buffer"
 {
     Caption = 'Sky Interest Log Buffer';
     DataClassification = ToBeClassified;

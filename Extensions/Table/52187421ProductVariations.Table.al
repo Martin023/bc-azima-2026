@@ -1,4 +1,4 @@
-table 52187421 "Product Variations"
+table 87421 "Product Variations"
 {
 
     fields

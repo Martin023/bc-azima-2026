@@ -1,4 +1,4 @@
-table 52185926 "Purchase Quote Header"
+table 85926 "Purchase Quote Header"
 {
     Caption = 'Purchase Header';
     LookupPageID = "RFQ List";

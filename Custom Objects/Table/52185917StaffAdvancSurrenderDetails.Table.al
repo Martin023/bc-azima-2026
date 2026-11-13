@@ -1,4 +1,4 @@
-table 52185917 "Staff Advanc Surrender Details"
+table 85917 "Staff Advanc Surrender Details"
 {
 
     fields

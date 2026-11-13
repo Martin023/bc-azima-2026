@@ -1,4 +1,4 @@
-page 52186828 "Posted Investment Receipt List"
+page 86828 "Posted Investment Receipt List"
 {
     CardPageID = "Investment Receipt";
     DeleteAllowed = false;

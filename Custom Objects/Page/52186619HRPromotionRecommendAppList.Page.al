@@ -1,4 +1,4 @@
-page 52186619 "HR Promotion RecommendAppList"
+page 86619 "HR Promotion RecommendAppList"
 {
     CardPageID = "HR Promotion Recommend AppHead";
     DeleteAllowed = false;

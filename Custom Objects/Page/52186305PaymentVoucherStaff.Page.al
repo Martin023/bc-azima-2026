@@ -1,4 +1,4 @@
-page 52186305 "Payment Voucher Staff"
+page 86305 "Payment Voucher Staff"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -248,7 +248,7 @@ page 52186305 "Payment Voucher Staff"
                     if BosaPaymentH.Find('-') then begin
                         BOSAPAY.Reset;
                         BOSAPAY.SetRange(BOSAPAY."Document No", BosaPaymentH."Transaction No.");
-                        XMLPORT.Run(52185621);
+                        XMLPORT.Run(85621);
                     end;
                 end;
             }

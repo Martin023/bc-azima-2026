@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 using Microsoft.Sales.Customer;
 
-report 52186065 "Over/Under Recovery Loans Rep"
+report 86065 "Over/Under Recovery Loans Rep"
 {
     ApplicationArea = All;
     Caption = 'Over/Under Recoveries Report';

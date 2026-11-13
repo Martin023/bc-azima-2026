@@ -1,4 +1,4 @@
-page 52186603 "MBanking Other Services"
+page 86603 "MBanking Other Services"
 {
     PageType = List;
     SourceTable = "M-SACCO Other Services";

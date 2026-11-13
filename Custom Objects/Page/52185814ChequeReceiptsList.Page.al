@@ -1,4 +1,4 @@
-page 52185814 "Cheque Receipts List"
+page 85814 "Cheque Receipts List"
 {
     CardPageID = "Cheque Receipts Header";
     Editable = false;

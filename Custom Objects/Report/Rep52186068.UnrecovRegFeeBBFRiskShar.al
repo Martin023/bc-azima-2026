@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186068 "Unrecov. Reg Fee/BBF/Risk/Shar"
+report 86068 "Unrecov. Reg Fee/BBF/Risk/Shar"
 {
     ApplicationArea = All;
     Caption = 'Unrecov. Reg Fee/BBF/Risk/Shar';

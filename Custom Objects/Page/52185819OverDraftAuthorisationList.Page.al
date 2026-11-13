@@ -1,4 +1,4 @@
-page 52185819 "Over Draft Authorisation List"
+page 85819 "Over Draft Authorisation List"
 {
     CardPageID = "Over Draft Authorisation";
     Editable = false;

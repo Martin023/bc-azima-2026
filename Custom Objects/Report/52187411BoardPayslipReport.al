@@ -1,4 +1,4 @@
-report 52187411 "Board Payslip Report"
+report 87411 "Board Payslip Report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

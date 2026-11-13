@@ -1,4 +1,4 @@
-page 52186629 "HR Intern Requisition Card"
+page 86629 "HR Intern Requisition Card"
 {
     PageType = Card;
     SourceTable = "HR Interns Requisition";

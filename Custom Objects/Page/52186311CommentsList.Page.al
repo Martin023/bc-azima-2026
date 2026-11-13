@@ -1,4 +1,4 @@
-page 52186311 "Comments List"
+page 86311 "Comments List"
 {
     // CardPageID = "Comments Card";
     DeleteAllowed = true;

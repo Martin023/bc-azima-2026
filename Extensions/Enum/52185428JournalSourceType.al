@@ -1,4 +1,4 @@
-enumextension 52185428 "Gen. Journal source Type Ext" extends "Gen. Journal Source Type"
+enumextension 85428 "Gen. Journal source Type Ext" extends "Gen. Journal Source Type"
 {
     value(7; Savings) { }//New
     value(8; Credit) { }//New

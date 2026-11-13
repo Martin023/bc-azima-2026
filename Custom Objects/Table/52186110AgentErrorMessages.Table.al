@@ -1,4 +1,4 @@
-table 52186110 "Agent Error Messages"
+table 86110 "Agent Error Messages"
 {
 
     fields

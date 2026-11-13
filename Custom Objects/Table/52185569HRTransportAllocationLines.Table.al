@@ -1,4 +1,4 @@
-table 52185569 "HR Transport Allocation Lines"
+table 85569 "HR Transport Allocation Lines"
 {
 
     fields

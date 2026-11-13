@@ -1,4 +1,4 @@
-table 52186524 "Sky Guarantor Sub Requests"
+table 86524 "Sky Guarantor Sub Requests"
 {
     Caption = 'Sky Channels Guarantor Substitution Requests';
     DataClassification = ToBeClassified;

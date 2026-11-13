@@ -1,4 +1,4 @@
-pageextension 52187301 CustomerCardExtension extends "Customer Card"
+pageextension 87301 CustomerCardExtension extends "Customer Card"
 {
     layout
     {
@@ -193,7 +193,7 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
                     Customer: Record Customer;
                 begin
                     Customer.SetRange("No.", Rec."No.");
-                    Report.Run(52186801, true, false, Customer);
+                    Report.Run(86801, true, false, Customer);
                 end;
             }
 
@@ -226,7 +226,7 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
                     Cust: Record Customer;
                 begin
                     Cust.SetRange("No.", Rec."No.");
-                    Page.Run(52186649, Cust);
+                    Page.Run(86649, Cust);
                 end;
             }
             action("Information Base")

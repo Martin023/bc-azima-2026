@@ -1,4 +1,4 @@
-page 52185793 "SMS Subscriptions"
+page 85793 "SMS Subscriptions"
 {
     PageType = List;
     SourceTable = "Notification Subscription";

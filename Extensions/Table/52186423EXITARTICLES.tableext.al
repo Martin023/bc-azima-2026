@@ -1,4 +1,4 @@
-TableExtension 52186446 exitarticles extends "Misc. Article Information"
+TableExtension 86446 exitarticles extends "Misc. Article Information"
 {
     fields
     {

@@ -1,4 +1,4 @@
-table 52186116 "Electrol Zones/Area Svr Center"
+table 86116 "Electrol Zones/Area Svr Center"
 {
     LookupPageID = "Electrol Zones/Area Svr Center";
 

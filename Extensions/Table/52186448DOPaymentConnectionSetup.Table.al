@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Table 52186448 "DO Payment Connection Setup"
+Table 86448 "DO Payment Connection Setup"
 {
     Caption = 'Microsoft Dynamics ERP Payment Services Setup';
     Permissions = TableData "DO Payment Connection Details" = rd;

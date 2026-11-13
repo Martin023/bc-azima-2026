@@ -1,4 +1,4 @@
-page 52186749 "NCBA Pension List"
+page 86749 "NCBA Pension List"
 {
     ApplicationArea = basic, suite;
     Caption = 'NCBA Pension List';

@@ -1,4 +1,4 @@
-page 52186681 "Sky Portal Setup Card"
+page 86681 "Sky Portal Setup Card"
 {
     DeleteAllowed = false;
     PageType = Card;

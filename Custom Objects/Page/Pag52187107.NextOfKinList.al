@@ -1,4 +1,4 @@
-page 52187108 "Next Of Kin List"
+page 87108 "Next Of Kin List"
 {
     ApplicationArea = All;
     Caption = 'Next Of Kin List';

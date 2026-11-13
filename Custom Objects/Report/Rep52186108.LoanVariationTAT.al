@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186108 " Loan Variation TAT"
+report 86108 " Loan Variation TAT"
 {
     ApplicationArea = All;
     Caption = ' Loan Variation TAT';

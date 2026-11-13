@@ -1,6 +1,6 @@
 namespace BCWMNS.BCWMNS;
 
-report 52186176 "Delete From PR Transactioncode"
+report 86176 "Delete From PR Transactioncode"
 {
 
     ApplicationArea = All;

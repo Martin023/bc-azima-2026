@@ -1,4 +1,4 @@
-table 52186113 "Agent Sent Sms"
+table 86113 "Agent Sent Sms"
 {
 
     fields

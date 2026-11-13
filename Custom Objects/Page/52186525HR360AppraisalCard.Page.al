@@ -1,4 +1,4 @@
-page 52186525 "HR 360 Appraisal Card"
+page 86525 "HR 360 Appraisal Card"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Functions,Appraisal,,,,Approvals';

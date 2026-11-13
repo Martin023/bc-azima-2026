@@ -1,4 +1,4 @@
-report 52185547 "Leases Approaching Expiry"
+report 85547 "Leases Approaching Expiry"
 {
     ApplicationArea = All;
     Caption = 'Leases Approaching Expiry';

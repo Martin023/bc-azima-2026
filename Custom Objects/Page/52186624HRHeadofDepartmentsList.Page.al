@@ -1,4 +1,4 @@
-page 52186624 "HR Head of Departments List"
+page 86624 "HR Head of Departments List"
 {
     CardPageID = "HR Head of Departments Card";
     DeleteAllowed = false;

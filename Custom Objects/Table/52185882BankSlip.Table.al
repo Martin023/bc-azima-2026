@@ -1,4 +1,4 @@
-table 52185882 "Bank Slip"
+table 85882 "Bank Slip"
 {
     DrillDownPageID = "Bank Pay In Slip List";
     LookupPageID = "Bank Pay In Slip List";

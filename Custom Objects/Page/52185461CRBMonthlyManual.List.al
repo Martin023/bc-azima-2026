@@ -1,4 +1,4 @@
-page 52185461 "CRB Monthly Manual List"
+page 85461 "CRB Monthly Manual List"
 {
     PageType = List;
     SourceTable = "CRB Monthly Manual";

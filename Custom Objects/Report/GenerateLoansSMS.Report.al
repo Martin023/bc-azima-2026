@@ -1,4 +1,4 @@
-report 52187321 "Generate Loans"
+report 87321 "Generate Loans"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

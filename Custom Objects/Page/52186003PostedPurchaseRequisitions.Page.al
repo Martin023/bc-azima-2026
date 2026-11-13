@@ -1,4 +1,4 @@
-page 52186003 "Posted Purchase Requisitions"
+page 86003 "Posted Purchase Requisitions"
 {
     CardPageID = "Released Internal Requisitions";
     DeleteAllowed = false;

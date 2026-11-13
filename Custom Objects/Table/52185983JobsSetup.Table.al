@@ -1,4 +1,4 @@
-table 52185983 "Jobs-Setup"
+table 85983 "Jobs-Setup"
 {
     Caption = 'Jobs Setup';
 

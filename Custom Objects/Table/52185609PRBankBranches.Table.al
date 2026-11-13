@@ -1,4 +1,4 @@
-table 52185609 "PR Bank Branches"
+table 85609 "PR Bank Branches"
 {
     DrillDownPageID = "PR Bank Branches";
     LookupPageID = "PR Bank Branches";

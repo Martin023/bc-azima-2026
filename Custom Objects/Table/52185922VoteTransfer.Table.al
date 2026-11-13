@@ -1,4 +1,4 @@
-table 52185922 "Vote Transfer"
+table 85922 "Vote Transfer"
 {
     DrillDownPageID = "Vote Transfer List.";
     LookupPageID = "Vote Transfer List.";

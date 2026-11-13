@@ -10,7 +10,7 @@ using Microsoft.Finance.GeneralLedger.Setup;
 using Microsoft.FixedAssets.Ledger;
 using System.Utilities;
 
-report 52186218 "Calculate Depreciation Custom"
+report 86218 "Calculate Depreciation Custom"
 {
     AdditionalSearchTerms = 'write down fixed asset';
     ApplicationArea = FixedAssets;

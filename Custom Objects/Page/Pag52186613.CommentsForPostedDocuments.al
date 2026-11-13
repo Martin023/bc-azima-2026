@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186613 "Comments For Posted Documents"
+page 86613 "Comments For Posted Documents"
 {
     ApplicationArea = All;
     Caption = 'Comments For Posted Documents';

@@ -1,7 +1,7 @@
 namespace AZIMA.AZIMA;
 using System.Text;
 
-page 52186585 "Loan Appraisal form viewer"
+page 86585 "Loan Appraisal form viewer"
 {
     ApplicationArea = All;
     Caption = 'Loan Appraisal form viewer';

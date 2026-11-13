@@ -1,4 +1,4 @@
-page 52187369 "Share Certificate Buffer List"
+page 87369 "Share Certificate Buffer List"
 {
     ApplicationArea = All;
     Caption = 'Share Certificate Buffer List';

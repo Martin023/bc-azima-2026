@@ -1,4 +1,4 @@
-page 52186762 "Motor Vehicle Request List"
+page 86762 "Motor Vehicle Request List"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Request List';

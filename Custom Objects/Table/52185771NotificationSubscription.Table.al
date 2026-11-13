@@ -1,4 +1,4 @@
-table 52185771 "Notification Subscription"
+table 85771 "Notification Subscription"
 {
 
     fields

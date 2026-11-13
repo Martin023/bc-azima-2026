@@ -1,4 +1,4 @@
-enumextension 52185426 "Attachment Document Type" extends "Attachment Document Type"
+enumextension 85426 "Attachment Document Type" extends "Attachment Document Type"
 { 
     value(8; Contract)
     {

@@ -1,4 +1,4 @@
-table 52185469 "Sky Email Update Buffer"
+table 85469 "Sky Email Update Buffer"
 {
 
     fields

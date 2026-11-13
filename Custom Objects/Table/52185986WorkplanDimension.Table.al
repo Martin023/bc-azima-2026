@@ -1,4 +1,4 @@
-table 52185986 "Workplan Dimension"
+table 85986 "Workplan Dimension"
 {
     Caption = 'Workplan Dimension';
 

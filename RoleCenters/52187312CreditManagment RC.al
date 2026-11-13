@@ -1,4 +1,4 @@
-page 52187312 "Credit Management Role Center"
+page 87312 "Credit Management Role Center"
 {
     Caption = 'Credit Management Role Center';
     PageType = RoleCenter;
@@ -378,35 +378,35 @@ page 52187312 "Credit Management Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Open Collateral Updates';
                             RunObject = Page "System Edits List";
-                            RunPageView = where("Table ID" = CONST(52185840), Status = CONST(Open));
+                            RunPageView = where("Table ID" = CONST(85840), Status = CONST(Open));
                         }
                         action("Collateral Update Pending Approval")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Collateral Updates Pending Approval';
                             RunObject = Page "System Edits List";
-                            RunPageView = where("Table ID" = CONST(52185840), Status = CONST(Pending));
+                            RunPageView = where("Table ID" = CONST(85840), Status = CONST(Pending));
                         }
                         action("Rejected Collateral Update")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Rejected Collateral Updates';
                             RunObject = Page "System Edits List";
-                            RunPageView = where("Table ID" = CONST(52185840), Status = CONST(Rejected));
+                            RunPageView = where("Table ID" = CONST(85840), Status = CONST(Rejected));
                         }
                         action("Approved Collateral Update")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Approved Collateral Updates';
                             RunObject = Page "System Edits List";
-                            RunPageView = WHere("Table ID" = CONST(52185840), Status = CONST(Approved));
+                            RunPageView = WHere("Table ID" = CONST(85840), Status = CONST(Approved));
                         }
                         action("Posted Collateral Update")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Posted Collateral Updates';
                             RunObject = Page "System Edits List";
-                            RunPageView = where("Table ID" = CONST(52185840), Status = CONST(Approved), Posted = CONST(TRUE));
+                            RunPageView = where("Table ID" = CONST(85840), Status = CONST(Approved), Posted = CONST(TRUE));
                         }
                     }
                     group("Collateral Collection")

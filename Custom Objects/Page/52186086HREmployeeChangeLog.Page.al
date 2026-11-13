@@ -1,4 +1,4 @@
-page 52186086 "HR Employee Change Log"
+page 86086 "HR Employee Change Log"
 {
     DeleteAllowed = false;
     Editable = false;

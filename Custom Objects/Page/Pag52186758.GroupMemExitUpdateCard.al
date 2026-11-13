@@ -2,7 +2,7 @@ namespace KenpipeBC.KenpipeBC;
 using System.Security.User;
 using System.Automation;
 
-page 52186758 "Group Mem Exit & Update Card"
+page 86758 "Group Mem Exit & Update Card"
 {
     Caption = 'Group Mem Exit & Update Card';
     PageType = Card;
@@ -497,7 +497,7 @@ page 52186758 "Group Mem Exit & Update Card"
 
                         ApprovalCommentLine: Record "Approval Comment Line";
                     begin
-                        ApprovalCommentLine.SetRange("Table ID", 52185690);
+                        ApprovalCommentLine.SetRange("Table ID", 85690);
                         ApprovalCommentLine.SetRange("Record ID to Approve", Rec.RecordId);
                         PAGE.Run(PAGE::"Approval Comments", ApprovalCommentLine);
                     end;

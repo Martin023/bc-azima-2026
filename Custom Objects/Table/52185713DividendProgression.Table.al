@@ -1,4 +1,4 @@
-table 52185713 "Dividend Progression"
+table 85713 "Dividend Progression"
 {
     LookupPageID = "Dividend Progression";
     DrillDownPageId = "Dividend Progression";

@@ -1,4 +1,4 @@
-table 52185667 "PrMonthly Variance"
+table 85667 "PrMonthly Variance"
 {
 
     fields

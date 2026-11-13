@@ -1,4 +1,4 @@
-page 52187234 "Open CRM Member Edits"
+page 87234 "Open CRM Member Edits"
 {
     CardPageID = "CRM Member Edit";
     PageType = List;

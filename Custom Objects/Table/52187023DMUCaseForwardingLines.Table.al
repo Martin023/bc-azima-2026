@@ -1,4 +1,4 @@
-table 52187023 "DMU Case Forwarding Lines"
+table 87023 "DMU Case Forwarding Lines"
 {
     Caption = 'DMU Case Forwarding Lines';
     DataClassification = ToBeClassified;

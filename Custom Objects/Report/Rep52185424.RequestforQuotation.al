@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-report 52185424 "Request for Quotation"
+report 85424 "Request for Quotation"
 {
     Caption = 'Request for Quotation (RFQ)';
     UsageCategory = ReportsAndAnalysis;

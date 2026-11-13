@@ -1,7 +1,7 @@
 namespace AzimaBC.AzimaBC;
 using Microsoft.Foundation.Company;
 
-report 52185507 "Deductions With Employer Contr"
+report 85507 "Deductions With Employer Contr"
 {
     ApplicationArea = All;
     Caption = 'PR Deductions With Employer Contributions';

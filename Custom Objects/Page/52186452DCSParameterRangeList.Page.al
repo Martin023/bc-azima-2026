@@ -1,4 +1,4 @@
-page 52186452 "DCS Parameter Range List"
+page 86452 "DCS Parameter Range List"
 {
     PageType = List;
     SourceTable = "DCS Parameter Range";

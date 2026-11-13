@@ -1,4 +1,4 @@
-page 52186325 "Delegate Tariffs"
+page 86325 "Delegate Tariffs"
 {
     PageType = List;
     SourceTable = "Delegates Tariff";

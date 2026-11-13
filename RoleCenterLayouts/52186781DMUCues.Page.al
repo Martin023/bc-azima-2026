@@ -1,4 +1,4 @@
-page 52186781 "DMU Cues"
+page 86781 "DMU Cues"
 {
     PageType = CardPart;
     SourceTable = "DMU Cue";

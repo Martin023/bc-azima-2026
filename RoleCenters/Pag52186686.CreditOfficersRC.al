@@ -6,7 +6,7 @@ using Microsoft.Finance.GeneralLedger.Ledger;
 using Microsoft.Bank.BankAccount;
 using System.Automation;
 
-page 52186686 "Credit Officers RC"
+page 86686 "Credit Officers RC"
 {
     Caption = 'Credit Officers RC';
     PageType = RoleCenter;

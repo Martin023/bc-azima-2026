@@ -1,4 +1,4 @@
-table 52185489 "Sky Agent Withdrawals Buffer"
+table 85489 "Sky Agent Withdrawals Buffer"
 {
     DrillDownPageId = "Agent Withdrawals Buffer";
     LookupPageId = "Agent Withdrawals Buffer";

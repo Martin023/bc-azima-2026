@@ -1,4 +1,4 @@
-page 52185881 "ATM Linking Card"
+page 85881 "ATM Linking Card"
 {
     DeleteAllowed = false;
     PageType = Card;

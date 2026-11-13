@@ -1,4 +1,4 @@
-page 52186636 "HR Leave Planner"
+page 86636 "HR Leave Planner"
 {
     PageType = ListPart;
     SourceTable = "HR Leave Planner Lines";

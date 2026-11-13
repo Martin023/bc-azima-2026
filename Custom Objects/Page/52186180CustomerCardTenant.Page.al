@@ -1,4 +1,4 @@
-page 52186180 "Customer Card-Tenant"
+page 86180 "Customer Card-Tenant"
 {
     Caption = 'Customer Card';
     DeleteAllowed = false;

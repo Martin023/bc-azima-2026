@@ -1,4 +1,4 @@
-report 52187398 "Adjusted Fixed Assets"
+report 87398 "Adjusted Fixed Assets"
 {
     ApplicationArea = All;
     Caption = 'Adjusted Fixed Assets';

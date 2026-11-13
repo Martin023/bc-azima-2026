@@ -1,4 +1,4 @@
-page 52186012 "Posted Receipt Header"
+page 86012 "Posted Receipt Header"
 {
     DeleteAllowed = false;
     Editable = false;

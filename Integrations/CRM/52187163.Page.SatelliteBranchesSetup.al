@@ -1,4 +1,4 @@
-page 52187163 "Satellite Branches Setup"
+page 87163 "Satellite Branches Setup"
 {
     ApplicationArea = All;
     Caption = 'Satellite Branches Setup';

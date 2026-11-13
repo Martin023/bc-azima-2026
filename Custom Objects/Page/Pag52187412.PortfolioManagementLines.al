@@ -1,6 +1,6 @@
 namespace AzimaBC.AzimaBC;
 
-page 52187412 "Portfolio Management Lines"
+page 87412 "Portfolio Management Lines"
 {
     ApplicationArea = All;
     Caption = 'Portfolio Management Lines';

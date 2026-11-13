@@ -1,4 +1,4 @@
-enum 52187007 "Loan Recovery Mode"
+enum 87007 "Loan Recovery Mode"
 {
     Extensible = true;
 

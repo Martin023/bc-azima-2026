@@ -1,4 +1,4 @@
-PageExtension 52186454 pageextension52186454 extends "Fixed Asset Setup"
+PageExtension 86454 pageextension52186454 extends "Fixed Asset Setup"
 {
     layout
     {

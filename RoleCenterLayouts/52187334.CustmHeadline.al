@@ -1,4 +1,4 @@
-page 52187334 CustomHeadline
+page 87334 CustomHeadline
 {
     Caption = 'Custom Headline';
     PageType = HeadlinePart;

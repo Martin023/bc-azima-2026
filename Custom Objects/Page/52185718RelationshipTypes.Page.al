@@ -1,4 +1,4 @@
-page 52185718 "Relationship Types"
+page 85718 "Relationship Types"
 {
 
     PageType = List;

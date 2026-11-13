@@ -1,4 +1,4 @@
-report 52187363 "Member Rejoining"
+report 87363 "Member Rejoining"
 {
     ApplicationArea = All;
     Caption = 'Member Rejoining';

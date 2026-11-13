@@ -1,4 +1,4 @@
-table 52185927 "Purchase Quote Line"
+table 85927 "Purchase Quote Line"
 {
     Caption = 'Purchase Quote Line';
     LookupPageID = "Credit Accounts List";

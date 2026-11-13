@@ -1,4 +1,4 @@
-table 52185593 "HR Promo. Recommend Lines"
+table 85593 "HR Promo. Recommend Lines"
 {
 
     fields

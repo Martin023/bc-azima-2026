@@ -1,4 +1,4 @@
-table 52187011 "Loans Interest Buffer"
+table 87011 "Loans Interest Buffer"
 {
     fields
     {

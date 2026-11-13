@@ -1,4 +1,4 @@
-page 52186805 "Loan Recovery Header II"
+page 86805 "Loan Recovery Header II"
 {
     DeleteAllowed = false;
     PageType = Card;

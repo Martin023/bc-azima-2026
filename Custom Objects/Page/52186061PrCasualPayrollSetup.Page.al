@@ -1,4 +1,4 @@
-page 52186061 "PrCasual Payroll Setup"
+page 86061 "PrCasual Payroll Setup"
 {
     PageType = Card;
     SourceTable = "PrCasual Payroll Setup";

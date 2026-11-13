@@ -1,4 +1,4 @@
-table 52185520 "HR Employee Qualifications"
+table 85520 "HR Employee Qualifications"
 {
     DataCaptionFields = "Employee No.";
     // DrillDownPageID = "HR Employee Qualification Line";

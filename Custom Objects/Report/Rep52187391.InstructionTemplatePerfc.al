@@ -1,4 +1,4 @@
-report 52187391 "Instruction Template - Perfc"
+report 87391 "Instruction Template - Perfc"
 {
     ApplicationArea = All;
     Caption = 'Instruction Template - Perfc';

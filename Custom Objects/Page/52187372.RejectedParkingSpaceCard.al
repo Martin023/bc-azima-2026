@@ -1,4 +1,4 @@
-page 52187372 "Rejected Parking Space - Card"
+page 87372 "Rejected Parking Space - Card"
 {
     ApplicationArea = All;
     Caption = 'Rejected Parking Space - Card';

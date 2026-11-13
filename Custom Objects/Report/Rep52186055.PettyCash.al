@@ -1,4 +1,4 @@
-report 52186055 "Petty Cash"
+report 86055 "Petty Cash"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Petty Cash.rdl';

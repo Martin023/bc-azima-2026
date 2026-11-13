@@ -1,4 +1,4 @@
-table 52185970 "HRDisciplinary Appeal"
+table 85970 "HRDisciplinary Appeal"
 {
 
     fields

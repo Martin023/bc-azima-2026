@@ -1,4 +1,4 @@
-table 52185981 "SMS Template Token Usage"
+table 85981 "SMS Template Token Usage"
 {
     Caption = 'SMS Template Token Usage';
     DataClassification = SystemMetadata;

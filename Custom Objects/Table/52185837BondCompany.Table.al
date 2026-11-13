@@ -1,4 +1,4 @@
-table 52185837 "Bond Company"
+table 85837 "Bond Company"
 {
     DrillDownPageID = "Bond Beneficiary Companies";
     LookupPageID = "Bond Beneficiary Companies";

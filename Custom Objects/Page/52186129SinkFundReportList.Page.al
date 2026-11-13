@@ -1,4 +1,4 @@
-page 52186129 "BBF SinkFund List"
+page 86129 "BBF SinkFund List"
 {
     CardPageID = "SinkFund Notice";
     DeleteAllowed = false;

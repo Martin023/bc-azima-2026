@@ -1,4 +1,4 @@
-table 52185534 "HR Leave Journal Batch"
+table 85534 "HR Leave Journal Batch"
 {
     DataCaptionFields = Name, Description;
     // DrillDownPageID = "HR Leave Batches";

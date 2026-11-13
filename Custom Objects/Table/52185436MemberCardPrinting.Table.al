@@ -1,5 +1,5 @@
 
-table 52185436 "Member Card Printing Log"
+table 85436 "Member Card Printing Log"
 {
     DataClassification = ToBeClassified;
     DrillDownPageId = "Member Card Printing Log";

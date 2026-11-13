@@ -1,4 +1,4 @@
-page 52187088 "Image Data Edits"
+page 87088 "Image Data Edits"
 {
     ApplicationArea = All;
     Caption = 'Image Data Edits';

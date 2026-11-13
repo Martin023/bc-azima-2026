@@ -1,4 +1,4 @@
-page 52187053 "Nominee Legal Card"
+page 87053 "Nominee Legal Card"
 {
     ApplicationArea = All;
     Caption = 'Nominee Legal Card';

@@ -1,4 +1,4 @@
-page 52186361 "Agent Tariff Header"
+page 86361 "Agent Tariff Header"
 {
     CardPageID = "Agent Tariff Card";
     DeleteAllowed = false;

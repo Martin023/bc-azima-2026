@@ -1,4 +1,4 @@
-page 52186748 "NCBA Pension Card"
+page 86748 "NCBA Pension Card"
 {
     Caption = 'NCBA Pension Card';
     PageType = Card;

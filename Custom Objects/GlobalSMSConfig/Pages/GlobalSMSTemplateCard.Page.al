@@ -1,4 +1,4 @@
-page 52185667 "Global SMS Template Card"
+page 85667 "Global SMS Template Card"
 {
     PageType = Card;
     ApplicationArea = All;

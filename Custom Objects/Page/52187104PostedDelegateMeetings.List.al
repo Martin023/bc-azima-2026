@@ -1,4 +1,4 @@
-page 52187104 "Posted Delegate Meetings"
+page 87104 "Posted Delegate Meetings"
 {
     CardPageID = "Delegate Meeting Card";
     DeleteAllowed = false;

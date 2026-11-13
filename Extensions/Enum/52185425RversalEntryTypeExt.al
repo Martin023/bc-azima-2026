@@ -1,4 +1,4 @@
-enumextension 52185425 "Reversal Entry Type Ext" extends "Reversal Entry Type"
+enumextension 85425 "Reversal Entry Type Ext" extends "Reversal Entry Type"
 {
     value(9; Savings) 
     { 

@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52186224 pageextension52186224 extends "Outlook Mail Engine" 
+PageExtension 86224 pageextension52186224 extends "Outlook Mail Engine" 
 {
 
     //Unsupported feature: Property Modification (SourceTable) on ""Outlook Mail Engine"(Page 1600)".

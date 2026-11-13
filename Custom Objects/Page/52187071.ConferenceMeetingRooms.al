@@ -1,4 +1,4 @@
-page 52187071 "Confe & Mtng Room Appl Card"
+page 87071 "Confe & Mtng Room Appl Card"
 {
     ApplicationArea = All;
     Caption = 'Conference & Meeting Rooms Application Card';

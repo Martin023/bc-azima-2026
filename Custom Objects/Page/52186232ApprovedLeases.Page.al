@@ -1,4 +1,4 @@
-page 52186232 "Approved Leases"
+page 86232 "Approved Leases"
 {
     PageType = Card;
     SourceTable = Lease;

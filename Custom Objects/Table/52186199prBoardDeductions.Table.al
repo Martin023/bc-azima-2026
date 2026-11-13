@@ -1,4 +1,4 @@
-table 52186199 "prBoard Deductions"
+table 86199 "prBoard Deductions"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52187035 "Refund,Account Transfer Lines"
+page 87035 "Refund,Account Transfer Lines"
 {
 
     Caption = 'Refund,Account Transfer Lines';

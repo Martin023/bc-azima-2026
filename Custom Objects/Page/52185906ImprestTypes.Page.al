@@ -1,4 +1,4 @@
-page 52185906 "Imprest Types"
+page 85906 "Imprest Types"
 {
     PageType = Card;
     SourceTable = "Receipts and Payment Types";

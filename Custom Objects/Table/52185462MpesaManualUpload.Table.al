@@ -1,5 +1,5 @@
 //FEEL FREE TO USE THIS OBJECT
-table 52185462 "Mpesa Manual Upload"
+table 85462 "Mpesa Manual Upload"
 {
 
     fields

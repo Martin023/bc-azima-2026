@@ -1,4 +1,4 @@
-page 52186324 "Degate Meeting Minutes Card"
+page 86324 "Degate Meeting Minutes Card"
 {
     PageType = Card;
     SourceTable = "Delegates Meeting Minutes";

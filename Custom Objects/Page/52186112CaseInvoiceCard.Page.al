@@ -1,4 +1,4 @@
-page 52186112 "Case Invoice Card"
+page 86112 "Case Invoice Card"
 {
     Caption = 'Case Invoice Card';
     PageType = Document;

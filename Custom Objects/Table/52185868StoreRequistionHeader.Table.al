@@ -1,4 +1,4 @@
-table 52185868 "Store Requistion Header"
+table 85868 "Store Requistion Header"
 {
     DrillDownPageID = "Store Requisitions List";
     LookupPageID = "Store Requisitions List";

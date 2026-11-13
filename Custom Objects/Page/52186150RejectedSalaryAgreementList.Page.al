@@ -1,4 +1,4 @@
-page 52186150 "Rejected Salary Agreement List"
+page 86150 "Rejected Salary Agreement List"
 {
     //CardPageID = "Salary Agreement Card";
     DeleteAllowed = false;

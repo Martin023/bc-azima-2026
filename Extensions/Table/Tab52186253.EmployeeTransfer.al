@@ -1,4 +1,4 @@
-table 52186253 "Employee Transfer"
+table 86253 "Employee Transfer"
 {
     Caption = 'Employee Transfer';
     DataClassification = ToBeClassified;

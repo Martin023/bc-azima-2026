@@ -1,4 +1,4 @@
-page 52185862 "ATM Linking Application List"
+page 85862 "ATM Linking Application List"
 {
     CardPageID = "ATM Linking Card";
     DeleteAllowed = false;

@@ -1,6 +1,6 @@
 namespace azima.azima;
 
-enum 52185458 "Auto Openning Account Status"
+enum 85458 "Auto Openning Account Status"
 {
     Extensible = true;
     

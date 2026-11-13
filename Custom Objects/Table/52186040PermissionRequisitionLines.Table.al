@@ -1,4 +1,4 @@
-table 52186040 "Permission Requisition Lines"
+table 86040 "Permission Requisition Lines"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52185501 "E-Channels Cue"
+page 85501 "E-Channels Cue"
 {
     Caption = 'Activities';
     PageType = CardPart;

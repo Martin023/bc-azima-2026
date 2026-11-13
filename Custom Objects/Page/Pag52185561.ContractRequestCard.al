@@ -1,4 +1,4 @@
-page 52185561 "Contract Request Card"
+page 85561 "Contract Request Card"
 {
     Caption = 'Contract Request';
     PageType = Card;

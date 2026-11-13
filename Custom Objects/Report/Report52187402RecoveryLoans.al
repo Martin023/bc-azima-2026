@@ -1,4 +1,4 @@
-Report 52187402 "Recovery Fresh Loans"
+Report 87402 "Recovery Fresh Loans"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

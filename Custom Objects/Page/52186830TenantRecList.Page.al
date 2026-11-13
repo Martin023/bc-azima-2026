@@ -1,4 +1,4 @@
-page 52186830 "Tenant Receipts List"
+page 86830 "Tenant Receipts List"
 {
     CardPageID = "Tenant Receipt";
     Editable = false;

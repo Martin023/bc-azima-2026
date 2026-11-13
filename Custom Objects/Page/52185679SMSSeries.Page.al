@@ -1,4 +1,4 @@
-page 52185679 "SMS Series"
+page 85679 "SMS Series"
 {
     PageType = List;
     SourceTable = "SMS Series";

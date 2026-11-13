@@ -1,4 +1,4 @@
-page 52186777 "HR Salary Grade Lines"
+page 86777 "HR Salary Grade Lines"
 {
     Caption = 'Salary Grade Lines';
     //Editable = false;

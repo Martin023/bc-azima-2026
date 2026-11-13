@@ -1,4 +1,4 @@
-table 52185550 "HR Setup"
+table 85550 "HR Setup"
 {
 
     fields

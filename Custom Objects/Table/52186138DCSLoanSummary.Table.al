@@ -1,4 +1,4 @@
-table 52186138 "DCS Loan Summary"
+table 86138 "DCS Loan Summary"
 {
     DrillDownPageID = "DCS Loan Summary List";
     LookupPageID = "DCS Loan Summary List";

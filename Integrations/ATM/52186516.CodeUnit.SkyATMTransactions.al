@@ -1,4 +1,4 @@
-codeunit 52186516 "Sky Coop ATM Transactions"
+codeunit 86516 "Sky Coop ATM Transactions"
 {
     procedure LogBalanceEnquiry(
         var SkyATMTransactions: Record "Sky ATM Transactions Buffer";

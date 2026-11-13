@@ -1,4 +1,4 @@
-table 52185624 "PR Period Transactions"
+table 85624 "PR Period Transactions"
 {
     DrillDownPageId = "prPeriodTransaction List";
     LookupPageId = "prPeriodTransaction List";

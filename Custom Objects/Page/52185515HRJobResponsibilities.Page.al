@@ -1,4 +1,4 @@
-page 52185515 "HR Job Responsibilities"
+page 85515 "HR Job Responsibilities"
 {
     Caption = 'HR Job Responsibilities';
     DeleteAllowed = true;

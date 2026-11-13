@@ -1,6 +1,6 @@
 namespace mns.mns;
 
-page 52186515 "Recruitment Costs"
+page 86515 "Recruitment Costs"
 {
     Caption = 'Recruitment Costs';
     PageType = List;

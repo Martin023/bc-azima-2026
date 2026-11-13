@@ -1,4 +1,4 @@
-page 52186299 "Payment Voucher Board"
+page 86299 "Payment Voucher Board"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -294,7 +294,7 @@ page 52186299 "Payment Voucher Board"
 
                     Rec.Reset;
                     Rec.SetFilter("Transaction No.", Rec."Transaction No.");
-                    REPORT.Run(52185723, true, true, Rec);
+                    REPORT.Run(85723, true, true, Rec);
                     Rec.Reset;
                 end;
             }
@@ -627,7 +627,7 @@ page 52186299 "Payment Voucher Board"
                     PromotedCategory = Category4;
                     RunObject = Page "Approval Comments";
 #pragma warning disable AL0171
-                    RunPageLink = "Table ID" = CONST(52185888),
+                    RunPageLink = "Table ID" = CONST(85888),
                     "Document No." = FIELD("No. Series");
 #pragma warning restore AL0171
                     Visible = OpenApprovalEntriesExistForCurrUser;

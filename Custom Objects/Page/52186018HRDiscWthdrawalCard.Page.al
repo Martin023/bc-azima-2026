@@ -1,4 +1,4 @@
-page 52186018 "HR Disc Wthdrawal Card"
+page 86018 "HR Disc Wthdrawal Card"
 {
     PageType = Card;
     SourceTable = "HRDisciplinary Case Withdrawal";

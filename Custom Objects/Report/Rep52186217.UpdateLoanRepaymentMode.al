@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186217 "Update Loan Repayment Mode"
+report 86217 "Update Loan Repayment Mode"
 {
     ApplicationArea = All;
     Caption = 'Update Loan Repayment Mode';

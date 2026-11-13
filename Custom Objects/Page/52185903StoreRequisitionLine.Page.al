@@ -1,4 +1,4 @@
-page 52185903 "Store Requisition Line"
+page 85903 "Store Requisition Line"
 {
     PageType = ListPart;
     SourceTable = "Store Requistion Lines";

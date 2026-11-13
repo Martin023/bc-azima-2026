@@ -1,4 +1,4 @@
-table 52186148 "HR Appraisal Journal Batch"
+table 86148 "HR Appraisal Journal Batch"
 {
     DataCaptionFields = Name, Description;
     // DrillDownPageID = "HR Appraisal Batches";

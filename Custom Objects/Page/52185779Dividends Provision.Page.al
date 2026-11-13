@@ -1,4 +1,4 @@
-page 52185779 "Dividends Provision"
+page 85779 "Dividends Provision"
 {
     DeleteAllowed = false;
     PageType = Card;

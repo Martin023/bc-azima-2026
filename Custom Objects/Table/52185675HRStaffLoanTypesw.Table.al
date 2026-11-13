@@ -1,4 +1,4 @@
-table 52185675 "HR Staff Loan Typesw"
+table 85675 "HR Staff Loan Typesw"
 {
     // DrillDownPageID = "HR Shift Management Card";
     // LookupPageID = "HR Shift Management Card";

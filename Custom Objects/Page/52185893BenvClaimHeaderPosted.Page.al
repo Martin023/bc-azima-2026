@@ -1,4 +1,4 @@
-page 52185893 "Benv.Claim Header-Posted"
+page 85893 "Benv.Claim Header-Posted"
 {
     Caption = 'Payment Vouchers';
     DeleteAllowed = false;

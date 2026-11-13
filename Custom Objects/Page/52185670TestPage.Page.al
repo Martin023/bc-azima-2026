@@ -1,4 +1,4 @@
-page 52185670 "Test Page"
+page 85670 "Test Page"
 {
     PageType = List;
     SourceTable = TestTable;

@@ -1,4 +1,4 @@
-table 52185757 "M-SACCO Applications"
+table 85757 "M-SACCO Applications"
 {
     // DrillDownPageID = "MBanking Applications List";
     // LookupPageID = "MBanking Applications List";

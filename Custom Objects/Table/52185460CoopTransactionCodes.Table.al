@@ -1,4 +1,4 @@
-table 52185460 "Coop Transaction Codes"
+table 85460 "Coop Transaction Codes"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52185782 "Banking User Template"
+table 85782 "Banking User Template"
 {
     DrillDownPageID = "Banking User Setup";
     LookupPageID = "Banking User Setup";

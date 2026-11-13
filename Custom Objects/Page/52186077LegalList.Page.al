@@ -1,4 +1,4 @@
-page 52186077 "Legal List"
+page 86077 "Legal List"
 {
     CardPageID = "Legal Card";
     DeleteAllowed = false;

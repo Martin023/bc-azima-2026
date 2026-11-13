@@ -1,4 +1,4 @@
-page 52187308 "Loan Application List_BL"
+page 87308 "Loan Application List_BL"
 {
     CardPageID = "Loan Application Card_BL";
     DeleteAllowed = false;

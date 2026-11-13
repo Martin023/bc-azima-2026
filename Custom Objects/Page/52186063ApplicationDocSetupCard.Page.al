@@ -1,4 +1,4 @@
-page 52186063 "Application Doc. Setup Card"
+page 86063 "Application Doc. Setup Card"
 {
     PageType = Card;
     SourceTable = "Application Document Setup";

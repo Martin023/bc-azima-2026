@@ -1,4 +1,4 @@
-page 52186723 "Treasury Cheque Inventory"
+page 86723 "Treasury Cheque Inventory"
 {
     DeleteAllowed = false;
     Editable = true;

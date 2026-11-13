@@ -1,4 +1,4 @@
-report 52187324 "Loans Arrears HISTORICAL"
+report 87324 "Loans Arrears HISTORICAL"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

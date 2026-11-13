@@ -1,4 +1,4 @@
-table 52185848 "End Year Interest Buffer"
+table 85848 "End Year Interest Buffer"
 {
     DrillDownPageId = "End Year Interest Buffer";
     LookupPageId = "End Year Interest Buffer";

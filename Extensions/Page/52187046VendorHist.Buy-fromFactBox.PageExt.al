@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52187046 pageextension52187046 extends "Vendor Hist. Buy-from FactBox" 
+PageExtension 87046 pageextension52187046 extends "Vendor Hist. Buy-from FactBox" 
 {
     layout
     {

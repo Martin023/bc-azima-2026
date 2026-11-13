@@ -1,4 +1,4 @@
-table 52186073 "Loan Repayment Schedule-Calc"
+table 86073 "Loan Repayment Schedule-Calc"
 {
     DrillDownPageID = "DCS Member Card";
     LookupPageID = "DCS Member Card";

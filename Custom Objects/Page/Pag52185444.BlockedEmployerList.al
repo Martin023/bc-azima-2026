@@ -1,6 +1,6 @@
 namespace BCAZIMA.BCAZIMA;
 
-page 52185444 "Blocked Employers List"
+page 85444 "Blocked Employers List"
 {
     ApplicationArea = All;
     Caption = 'Blocked Employer List';

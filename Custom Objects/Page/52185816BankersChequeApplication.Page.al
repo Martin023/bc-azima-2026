@@ -1,4 +1,4 @@
-page 52185816 "Bankers Cheque Application"
+page 85816 "Bankers Cheque Application"
 {
     DeleteAllowed = false;
     Editable = true;

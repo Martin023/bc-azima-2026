@@ -1,4 +1,4 @@
-report 52186520 "Mobile Loans Repayment Update"
+report 86520 "Mobile Loans Repayment Update"
 {
     ApplicationArea = All;
     Caption = 'Mobile Loans Repayment Update';

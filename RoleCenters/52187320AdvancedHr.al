@@ -1,4 +1,4 @@
-page 52187320 AdvancedHumanResources
+page 87320 AdvancedHumanResources
 {
     PageType = RoleCenter;
     Caption = 'Human Resources Role Center.';

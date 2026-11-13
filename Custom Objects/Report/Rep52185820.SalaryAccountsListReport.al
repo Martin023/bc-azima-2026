@@ -1,4 +1,4 @@
-report 52185820 "Salary Accounts List Report"
+report 85820 "Salary Accounts List Report"
 {
     ApplicationArea = All;
     Caption = 'Salary Accounts List Report';

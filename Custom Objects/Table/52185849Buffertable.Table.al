@@ -1,4 +1,4 @@
-table 52185849 "Buffer table"
+table 85849 "Buffer table"
 {
 
     fields

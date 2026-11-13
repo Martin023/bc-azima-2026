@@ -1,4 +1,4 @@
-table 52185562 "HR OSAccident Line"
+table 85562 "HR OSAccident Line"
 {
 
     fields

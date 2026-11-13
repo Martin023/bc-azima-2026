@@ -1,4 +1,4 @@
-page 52186348 "Banking Account Closure"
+page 86348 "Banking Account Closure"
 {
     DeleteAllowed = false;
     PageType = Card;

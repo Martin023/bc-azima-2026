@@ -1,4 +1,4 @@
-page 52185717 "Next of KIN Application"
+page 85717 "Next of KIN Application"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

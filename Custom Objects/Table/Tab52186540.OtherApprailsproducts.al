@@ -1,4 +1,4 @@
-table 52186540 "Other Apprails products"
+table 86540 "Other Apprails products"
 {
     Caption = 'Other Apprail products';
     DataClassification = ToBeClassified;

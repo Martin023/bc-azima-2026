@@ -3,11 +3,11 @@ namespace MNSProjectMwanga.MNSProjectMwanga;
 using Microsoft.Finance.Dimension;
 using Microsoft.Finance.GeneralLedger.Account;
 
-tableextension 52185429 "Dimension Code Buffer Ext" extends "Dimension Code Buffer"
+tableextension 85429 "Dimension Code Buffer Ext" extends "Dimension Code Buffer"
 {
     fields
     {
-        field(52185423; "Account Category"; Enum "G/L Account Category")
+        field(85423; "Account Category"; Enum "G/L Account Category")
         {
             Caption = 'Account Category';
             FieldClass = FlowField;
@@ -16,7 +16,7 @@ tableextension 52185429 "Dimension Code Buffer Ext" extends "Dimension Code Buff
 
 
         }
-        field(52185424; "Account Sub Category"; Text[80])
+        field(85424; "Account Sub Category"; Text[80])
         {
             Caption = 'Account Sub Category';
             FieldClass = FlowField;

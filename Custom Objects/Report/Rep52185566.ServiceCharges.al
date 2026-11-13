@@ -1,4 +1,4 @@
-report 52185566 "Service Charges"
+report 85566 "Service Charges"
 {
     ApplicationArea = All;
     Caption = 'Service Charges';

@@ -1,4 +1,4 @@
-page 52185759 "Loan Payment Schedule"
+page 85759 "Loan Payment Schedule"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

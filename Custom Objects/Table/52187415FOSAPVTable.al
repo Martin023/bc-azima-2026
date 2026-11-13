@@ -1,4 +1,4 @@
-table 52187415 "Fosa Payments Header"
+table 87415 "Fosa Payments Header"
 {
     DrillDownPageID = "FOSA Payment Voucher List";
     LookupPageID = "FOSA Payment Voucher List";

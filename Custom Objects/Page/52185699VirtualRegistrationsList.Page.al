@@ -1,4 +1,4 @@
-page 52185699 "Virtual Registrations List"
+page 85699 "Virtual Registrations List"
 {
     CardPageID = "Virtual Registrations Card";
     DeleteAllowed = false;

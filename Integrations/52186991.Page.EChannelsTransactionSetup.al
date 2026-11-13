@@ -1,4 +1,4 @@
-page 52186991 "E-Channels Transaction Setup"
+page 86991 "E-Channels Transaction Setup"
 {
     ApplicationArea = All;
     Caption = 'E-Channels Transaction Setup';

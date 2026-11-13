@@ -1,4 +1,4 @@
-reportextension 52185423 "Bank Acc. - DetailTrial BalEXT" extends "Bank Acc. - Detail Trial Bal."
+reportextension 85423 "Bank Acc. - DetailTrial BalEXT" extends "Bank Acc. - Detail Trial Bal."
 {
     dataset
     {

@@ -1,4 +1,4 @@
-enum 52185970 "SMS Filter Operator"
+enum 85970 "SMS Filter Operator"
 {
     Extensible = false;
 

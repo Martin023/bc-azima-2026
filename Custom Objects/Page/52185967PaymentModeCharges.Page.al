@@ -1,4 +1,4 @@
-page 52185967 "Payment Mode Charges"
+page 85967 "Payment Mode Charges"
 {
     PageType = List;
     SourceTable = "Payment Mode Charges";

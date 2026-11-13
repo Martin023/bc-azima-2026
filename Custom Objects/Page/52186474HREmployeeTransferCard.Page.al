@@ -1,4 +1,4 @@
-page 52186474 "HR Employee Transfer Card"
+page 86474 "HR Employee Transfer Card"
 {
     PageType = Card;
     PromotedActionCategories = 'Manage,Process,Report,Redeploy';

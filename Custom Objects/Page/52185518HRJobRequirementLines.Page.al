@@ -1,4 +1,4 @@
-page 52185518 "HR Job Requirement Lines"
+page 85518 "HR Job Requirement Lines"
 {
     PageType = ListPart;
     SourceTable = "HR Job Requirements";

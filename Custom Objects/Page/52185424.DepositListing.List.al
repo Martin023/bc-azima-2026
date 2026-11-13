@@ -1,4 +1,4 @@
-page 52187154 "Deposit Listing List"
+page 87154 "Deposit Listing List"
 {
     PageType = List;
     SourceTable = "Deposit Listing";

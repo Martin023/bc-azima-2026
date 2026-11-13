@@ -1,4 +1,4 @@
-page 52186556 "HR Job Applicants Qualified Ca"
+page 86556 "HR Job Applicants Qualified Ca"
 {
     Caption = 'HR Job Applicants Qualified Card';
     DeleteAllowed = false;

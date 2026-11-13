@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52185454 "Loan Topup ListPart"
+page 85454 "Loan Topup ListPart"
 {
     ApplicationArea = All;
     Caption = 'Loan Topup ListPart';

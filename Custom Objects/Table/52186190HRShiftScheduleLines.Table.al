@@ -1,4 +1,4 @@
-table 52186190 "HR Shift Schedule Lines"
+table 86190 "HR Shift Schedule Lines"
 {
     // DrillDownPageID = "HR Shift Schedule Lines";
     // LookupPageID = "HR Shift Schedule Lines";

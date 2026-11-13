@@ -1,4 +1,4 @@
-codeunit 52185457 "Membership Closure Mgmt"
+codeunit 85457 "Membership Closure Mgmt"
 {
 
     procedure PostMemberShipClosure(MembershipClosure: Record "Membership Closure")

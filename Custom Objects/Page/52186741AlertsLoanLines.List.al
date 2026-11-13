@@ -1,4 +1,4 @@
-page 52186741 "Alerts Loan Lines"
+page 86741 "Alerts Loan Lines"
 {
     ApplicationArea = All;
     PageType = ListPart;

@@ -1,4 +1,4 @@
-page 52187319 "Funds Management Role Center"
+page 87319 "Funds Management Role Center"
 {
     Caption = 'Funds Management Role Center';
     PageType = RoleCenter;

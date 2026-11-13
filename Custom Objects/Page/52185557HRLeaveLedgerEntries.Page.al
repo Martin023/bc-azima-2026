@@ -1,4 +1,4 @@
-page 52185557 "HR Leave Ledger Entries"
+page 85557 "HR Leave Ledger Entries"
 {
     Caption = 'Leave Ledger Entries';
     DataCaptionFields = "Leave Calendar Code";

@@ -1,4 +1,4 @@
-page 52186594 "HR Overtime Rates List1"
+page 86594 "HR Overtime Rates List1"
 {
     PageType = List;
     SourceTable = "HR Overtime Rates";

@@ -1,4 +1,4 @@
-table 52186580 "Mobile Loan Guarantors"
+table 86580 "Mobile Loan Guarantors"
 {
 
     fields

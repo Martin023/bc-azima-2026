@@ -1,4 +1,4 @@
-page 52186559 "HR Induction Schedule Card"
+page 86559 "HR Induction Schedule Card"
 {
     DeleteAllowed = false;
     PageType = Card;

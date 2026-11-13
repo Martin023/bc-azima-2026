@@ -1,4 +1,4 @@
-page 52185636 "HR Employee Target Assgns List"
+page 85636 "HR Employee Target Assgns List"
 {
     Caption = 'Employee Target Assignments';
     PageType = List;

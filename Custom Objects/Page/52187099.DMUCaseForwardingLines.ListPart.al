@@ -1,4 +1,4 @@
-page 52187099 "DMU Case Forwarding Lines"
+page 87099 "DMU Case Forwarding Lines"
 {
     ApplicationArea = All;
     Caption = 'DMU Case Forwarding Lines';

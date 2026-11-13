@@ -1,4 +1,4 @@
-report 52187396 "Vehicle Accidents - Multiple"
+report 87396 "Vehicle Accidents - Multiple"
 {
     ApplicationArea = All;
     Caption = 'Vehicle Accidents - Multiple';

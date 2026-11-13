@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52185455 "Loan Guarantors ListPart"
+page 85455 "Loan Guarantors ListPart"
 {
     ApplicationArea = All;
     Caption = 'Loan Guarantors ListPart"';

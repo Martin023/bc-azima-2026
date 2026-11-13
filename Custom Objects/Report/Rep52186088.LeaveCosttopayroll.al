@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-report 52186188 "LeaveCost to payroll"
+report 86188 "LeaveCost to payroll"
 {
     Caption = 'LeaveCost to payroll';
     ProcessingOnly = true;

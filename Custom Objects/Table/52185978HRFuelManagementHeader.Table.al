@@ -1,4 +1,4 @@
-table 52185978 "HR Fuel Management Header"
+table 85978 "HR Fuel Management Header"
 
 {
     LookupPageId = "Motor Vehicle Fueling List";

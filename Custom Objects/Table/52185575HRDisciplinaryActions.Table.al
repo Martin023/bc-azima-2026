@@ -1,4 +1,4 @@
-table 52185575 "HR Disciplinary Actions"
+table 85575 "HR Disciplinary Actions"
 {
      DrillDownPageID = "HR Disciplinary Actions1";
     LookupPageID = "HR Disciplinary Actions1";

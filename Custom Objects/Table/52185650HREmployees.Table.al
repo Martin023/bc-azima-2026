@@ -1,4 +1,4 @@
-table 52185650 "HR Employees"
+table 85650 "HR Employees"
 {
 
     DrillDownPageId = "HR Employee List - Active";

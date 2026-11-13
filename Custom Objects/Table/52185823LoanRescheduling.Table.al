@@ -1,4 +1,4 @@
-table 52185823 "Loan Rescheduling"
+table 85823 "Loan Rescheduling"
 {
     DrillDownPageID = "Loan Rescheduling List";
     LookupPageID = "Loan Rescheduling List";

@@ -1,4 +1,4 @@
-table 52185495 "Password History"
+table 85495 "Password History"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52185721 "FingerPrint Authentication"
+table 85721 "FingerPrint Authentication"
 {
 
     fields

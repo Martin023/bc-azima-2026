@@ -1,4 +1,4 @@
-page 52186721 "Treasury Cheque Register List"
+page 86721 "Treasury Cheque Register List"
 {
     DeleteAllowed = false;
     Editable = true;

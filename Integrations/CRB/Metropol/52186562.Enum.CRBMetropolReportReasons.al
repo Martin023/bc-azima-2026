@@ -1,4 +1,4 @@
-enum 52186562 "CRB Metropol Report Reasons"
+enum 86562 "CRB Metropol Report Reasons"
 {   
     value(1; "New credit application")
     {

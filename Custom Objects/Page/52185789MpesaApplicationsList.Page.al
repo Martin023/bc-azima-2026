@@ -1,4 +1,4 @@
-page 52185789 "Mpesa Applications List"
+page 85789 "Mpesa Applications List"
 {
     //CardPageID = "MBanking Applications";
     Editable = false;

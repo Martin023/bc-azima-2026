@@ -1,4 +1,4 @@
-page 52186300 "Payment Sub Form Board"
+page 86300 "Payment Sub Form Board"
 {
     PageType = ListPart;
     SourceTable = "Payment Line Board";

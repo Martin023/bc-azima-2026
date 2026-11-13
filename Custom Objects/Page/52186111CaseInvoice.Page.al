@@ -1,4 +1,4 @@
-page 52186111 "Case Invoice"
+page 86111 "Case Invoice"
 {
     Caption = 'Case Invoice';
     CardPageID = "Case Invoice Card";

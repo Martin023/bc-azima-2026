@@ -1,4 +1,4 @@
-table 52187010 "Moratorium Loan"
+table 87010 "Moratorium Loan"
 {
     DataClassification = ToBeClassified;
     DrillDownPageId = "Moratorium Loan List";

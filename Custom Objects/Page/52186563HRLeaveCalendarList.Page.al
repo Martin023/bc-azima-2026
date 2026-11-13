@@ -1,4 +1,4 @@
-page 52186563 "HR Leave Calendar List"
+page 86563 "HR Leave Calendar List"
 {
     CardPageID = "HR Leave Calendar Card";
     DeleteAllowed = false;

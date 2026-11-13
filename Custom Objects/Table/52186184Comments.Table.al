@@ -1,4 +1,4 @@
-table 52186184 Comments
+table 86184 Comments
 {
     DrillDownPageID = "Comments List";
     LookupPageID = "Comments List";

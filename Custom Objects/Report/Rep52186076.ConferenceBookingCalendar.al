@@ -3,7 +3,7 @@ using System.Environment;
 using System.Utilities;
 using Microsoft.Foundation.Company;
 
-report 52186076 "Conference Booking Calendar"
+report 86076 "Conference Booking Calendar"
 {
     ApplicationArea = All;
     Caption = 'Conference Booking Calendar';

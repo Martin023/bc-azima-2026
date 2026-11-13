@@ -1,4 +1,4 @@
-page 52185988 "Claim Types List"
+page 85988 "Claim Types List"
 {
     CardPageID = "Claim Types";
     PageType = List;

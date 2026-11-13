@@ -1,4 +1,4 @@
-table 52186197 "prBoard Earnings"
+table 86197 "prBoard Earnings"
 {
     DrillDownPageID = "prBoard Earning";
     LookupPageID = "prBoard Earning";

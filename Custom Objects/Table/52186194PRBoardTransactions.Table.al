@@ -1,4 +1,4 @@
-table 52186194 "PR Board Transactions"
+table 86194 "PR Board Transactions"
 {
 
     fields

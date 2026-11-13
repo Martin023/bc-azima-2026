@@ -1,4 +1,4 @@
-report 52186057 "Fixed Assets Report"
+report 86057 "Fixed Assets Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Fixed Assets Depreciation.rdl';

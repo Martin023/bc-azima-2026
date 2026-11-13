@@ -1,4 +1,4 @@
-page 52186246 "Lease line Invoice"
+page 86246 "Lease line Invoice"
 {
     PageType = List;
     SourceTable = "Lease Line Invoices";

@@ -1,4 +1,4 @@
-page 52186717 "Treasury Cheque Application"
+page 86717 "Treasury Cheque Application"
 {
     DeleteAllowed = false;
     Editable = true;

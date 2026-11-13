@@ -1,4 +1,4 @@
-page 52186660 "Deferred Loan Application List"
+page 86660 "Deferred Loan Application List"
 {
     CardPageID = "Loan Application Card";
     DeleteAllowed = false;

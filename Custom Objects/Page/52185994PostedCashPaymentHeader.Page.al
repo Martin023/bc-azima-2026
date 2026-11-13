@@ -1,4 +1,4 @@
-page 52185994 "Posted Cash Payment Header"
+page 85994 "Posted Cash Payment Header"
 {
     Caption = 'Petty Cash Payments';
     DeleteAllowed = false;

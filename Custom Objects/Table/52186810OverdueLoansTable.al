@@ -1,4 +1,4 @@
-table 52186810 "OverDue Loans"
+table 86810 "OverDue Loans"
 {
     DataClassification = ToBeClassified;
 

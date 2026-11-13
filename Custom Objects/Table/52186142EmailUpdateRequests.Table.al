@@ -1,4 +1,4 @@
-table 52186142 "Email Update Requests"
+table 86142 "Email Update Requests"
 {
 
     fields

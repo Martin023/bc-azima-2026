@@ -1,4 +1,4 @@
-table 52186222 "File Locations"
+table 86222 "File Locations"
 {
     Caption = 'File Locations';
     DataClassification = ToBeClassified;

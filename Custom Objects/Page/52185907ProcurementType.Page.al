@@ -1,4 +1,4 @@
-page 52185907 "Procurement Type"
+page 85907 "Procurement Type"
 {
     PageType = List;
     SourceTable = "Procurement Limit Code";

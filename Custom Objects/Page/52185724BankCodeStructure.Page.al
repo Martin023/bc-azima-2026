@@ -1,4 +1,4 @@
-page 52185724 "Bank Code Structure"
+page 85724 "Bank Code Structure"
 {
     PageType = List;
     SourceTable = "Bank Code Structure";

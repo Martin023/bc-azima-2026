@@ -1,4 +1,4 @@
-page 52187101 "Staff Welfare List"
+page 87101 "Staff Welfare List"
 {
     CardPageId ="Staff Welfare ";
     ApplicationArea = All;

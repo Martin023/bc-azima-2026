@@ -1,4 +1,4 @@
-table 52185701 "Next of KIN"
+table 85701 "Next of KIN"
 {
     DrillDownPageID = "Next of KIN";
     LookupPageID = "Next of KIN";

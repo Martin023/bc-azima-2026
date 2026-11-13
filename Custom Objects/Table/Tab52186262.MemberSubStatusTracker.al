@@ -1,4 +1,4 @@
-table 52186262 "Member Sub-Status Tracker"
+table 86262 "Member Sub-Status Tracker"
 {
     Caption = 'Member Sub-Status Tracker';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-page 52186569 "HR Activity Participants SF"
+page 86569 "HR Activity Participants SF"
 {
     Caption = 'Activity Participants';
     PageType = ListPart;

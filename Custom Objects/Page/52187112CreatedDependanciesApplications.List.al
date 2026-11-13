@@ -1,4 +1,4 @@
-page 52187112 "Created Dependancies Apps"
+page 87112 "Created Dependancies Apps"
 {
     CardPageID = "Dependancies Applications Card";
     DeleteAllowed = false;

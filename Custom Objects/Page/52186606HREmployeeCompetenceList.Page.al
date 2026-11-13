@@ -1,4 +1,4 @@
-page 52186606 "HR Employee Competence List"
+page 86606 "HR Employee Competence List"
 {
     PageType = List;
     SourceTable = "HR Employee Competence";    

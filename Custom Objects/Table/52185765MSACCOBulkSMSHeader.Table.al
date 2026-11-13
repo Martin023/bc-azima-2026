@@ -1,4 +1,4 @@
-table 52185765 "Bulk SMS Header"
+table 85765 "Bulk SMS Header"
 {
     DrillDownPageId = "Bulk SMS Header";
     fields

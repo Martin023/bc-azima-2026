@@ -1,4 +1,4 @@
-table 52186242 "Allowed Allowances"
+table 86242 "Allowed Allowances"
 {
 
     fields

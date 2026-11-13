@@ -1,4 +1,4 @@
-table 52185533 "HR Leave Journal Template"
+table 85533 "HR Leave Journal Template"
 {
 
     fields

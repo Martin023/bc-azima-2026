@@ -1,4 +1,4 @@
-table 52185706 "FD Interest Calculation Rules"
+table 85706 "FD Interest Calculation Rules"
 {
     LookupPageID = "FD Interest Calculation";
     DrillDownPageID = "FD Interest Calculation";

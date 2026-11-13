@@ -1,4 +1,4 @@
-table 52186560 "CRB DPI File Submissions"
+table 86560 "CRB DPI File Submissions"
 {
     Caption = 'CRB Daily Payment Information File Submissions';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52185780 Denominations
+table 85780 Denominations
 {
     DrillDownPageID = Denominations;
     LookupPageID = Denominations;

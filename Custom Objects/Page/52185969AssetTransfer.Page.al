@@ -1,4 +1,4 @@
-page 52185969 "Asset Transfer"
+page 85969 "Asset Transfer"
 {
     SourceTable = "Asset Transfer";
     ApplicationArea = Basic, Suite;
@@ -316,7 +316,7 @@ page 52185969 "Asset Transfer"
                     PromotedCategory = Category4;
                     RunObject = Page "Approval Comments";
 
-                    RunPageLink = "Table ID" = CONST(52185914),
+                    RunPageLink = "Table ID" = CONST(85914),
                                   "Document No." = FIELD("No.");
 
                     Visible = OpenApprovalEntriesExistForCurrUser;

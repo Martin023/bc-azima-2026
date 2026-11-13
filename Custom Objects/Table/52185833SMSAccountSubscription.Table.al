@@ -1,4 +1,4 @@
-table 52185833 "SMS Account Subscription"
+table 85833 "SMS Account Subscription"
 {
 
     fields

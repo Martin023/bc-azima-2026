@@ -1,4 +1,4 @@
-table 52185599 "HR Succession Comments"
+table 85599 "HR Succession Comments"
 {
 
     fields

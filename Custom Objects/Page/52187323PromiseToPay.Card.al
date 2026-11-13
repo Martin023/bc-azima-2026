@@ -1,4 +1,4 @@
-page 52187323 "Promise Topay Card"
+page 87323 "Promise Topay Card"
 {
     //DeleteAllowed = false;
     PageType = Card;

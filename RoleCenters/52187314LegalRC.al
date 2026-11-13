@@ -1,4 +1,4 @@
-page 52187314 "Legal Role Center"
+page 87314 "Legal Role Center"
 {
     Caption = 'Legal Management';
     PageType = RoleCenter;
@@ -316,7 +316,7 @@ page 52187314 "Legal Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted Security Updates';
                         RunObject = Page "Posted System Edits List";
-                        RunPageView = where("Table ID" = filter(52185840), Posted = CONST(TRUE));
+                        RunPageView = where("Table ID" = filter(85840), Posted = CONST(TRUE));
                     }
                 }
                 group("Security Register")

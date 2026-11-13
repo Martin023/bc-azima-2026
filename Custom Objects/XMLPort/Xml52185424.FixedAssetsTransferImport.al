@@ -1,4 +1,4 @@
-xmlport 52185424 "Fixed Assets Transfer Import"
+xmlport 85424 "Fixed Assets Transfer Import"
 {
     Caption = 'Fixed Assets Transfer Import';
     Format = VariableText;

@@ -1,6 +1,6 @@
 // namespace ALProject.ALProject;
 
-page 52186744 "Clearance Form"//52185654
+page 86744 "Clearance Form"//52185654
 {
     Caption = 'Clearance Form';
     PageType = Card;

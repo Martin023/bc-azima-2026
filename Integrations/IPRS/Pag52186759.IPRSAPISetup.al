@@ -1,4 +1,4 @@
-page 52186759 "IPRS API Setup"
+page 86759 "IPRS API Setup"
 {
     Caption = 'IPRS API Setup';
     PageType = List;

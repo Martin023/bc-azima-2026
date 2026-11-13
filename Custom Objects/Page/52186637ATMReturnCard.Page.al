@@ -1,4 +1,4 @@
-page 52186637 "ATM Return Card"
+page 86637 "ATM Return Card"
 {
     DeleteAllowed = false;
     Editable = true;

@@ -1,4 +1,4 @@
-table 52186185 "Master Record Creation Lines"
+table 86185 "Master Record Creation Lines"
 {
 
     fields

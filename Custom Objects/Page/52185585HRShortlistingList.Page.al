@@ -1,4 +1,4 @@
-page 52185585 "HR Shortlisting List1"
+page 85585 "HR Shortlisting List1"
 {
     CardPageID = "HR Shortlisting Card";
     DeleteAllowed = false;

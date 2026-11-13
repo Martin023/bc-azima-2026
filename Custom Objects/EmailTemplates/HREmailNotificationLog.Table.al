@@ -1,4 +1,4 @@
-table 52185857 "HR Email Notification Log"
+table 85857 "HR Email Notification Log"
 {
     Caption = 'HR Email Notification Log';
     DataClassification = CustomerContent;

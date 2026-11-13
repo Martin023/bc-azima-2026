@@ -1,4 +1,4 @@
-page 52186395 "MBanking Guarantors List"
+page 86395 "MBanking Guarantors List"
 {
     Editable = false;
     PageType = List;

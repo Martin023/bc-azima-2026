@@ -1,4 +1,4 @@
-table 52186046 "ATM Alerts"
+table 86046 "ATM Alerts"
 {
 
     fields

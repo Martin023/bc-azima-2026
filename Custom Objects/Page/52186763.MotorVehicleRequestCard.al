@@ -1,4 +1,4 @@
-page 52186763 "Motor Vehicle Request Card"
+page 86763 "Motor Vehicle Request Card"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Request Card';

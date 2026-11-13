@@ -1,4 +1,4 @@
-table 52185941 "Maintain Machne/Vehicles"
+table 85941 "Maintain Machne/Vehicles"
 {
     LookupPageId = "Motor Vehicle Repair";
     DrilldownPageId = "Motor Vehicle Repair";

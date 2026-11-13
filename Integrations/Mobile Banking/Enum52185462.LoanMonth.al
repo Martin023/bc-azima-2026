@@ -1,6 +1,6 @@
 namespace BCAZIMA.BCAZIMA;
 
-enum 52185462 "Loan Month"
+enum 85462 "Loan Month"
 {
     Extensible = true;
 

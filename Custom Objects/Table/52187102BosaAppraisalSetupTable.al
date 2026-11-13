@@ -1,4 +1,4 @@
-table 52187102 "Bosa Salary Appraisal Set-up"
+table 87102 "Bosa Salary Appraisal Set-up"
 {
     DataClassification = ToBeClassified;
 

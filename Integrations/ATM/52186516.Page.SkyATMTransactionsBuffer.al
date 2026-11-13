@@ -1,4 +1,4 @@
-page 52186516 "Sky ATM Transactions Buffer"
+page 86516 "Sky ATM Transactions Buffer"
 {
     ApplicationArea = All;
     Caption = 'Sky ATM Transactions List';

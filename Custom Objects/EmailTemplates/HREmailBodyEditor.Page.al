@@ -1,4 +1,4 @@
-page 52185940 "HR Email Body Editor"
+page 85940 "HR Email Body Editor"
 {
     Caption = 'Email Body Editor';
     PageType = Document;

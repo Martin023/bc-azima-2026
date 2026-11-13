@@ -1,4 +1,4 @@
-table 52187058 "Vehicle Movement"
+table 87058 "Vehicle Movement"
 {
     Caption = 'Vehicle Movement';
     DataClassification = ToBeClassified;

@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-xmlport 52185576 "Import Old Div"
+xmlport 85576 "Import Old Div"
 {
     Format = VariableText;
     Direction = Both;

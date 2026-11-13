@@ -4,7 +4,7 @@ using Microsoft.Finance.GeneralLedger.Account;
 using Microsoft.Finance.GeneralLedger.Ledger;
 using System.Utilities;
 
-report 52186163 "Custom Detail Trial Bal."
+report 86163 "Custom Detail Trial Bal."
 {
     DefaultLayout = RDLC;
     //RDLCLayout = './FinancialMgt/GeneralLedger/Reports/DetailTrialBalance.rdlc';

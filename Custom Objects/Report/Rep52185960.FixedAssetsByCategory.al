@@ -5,7 +5,7 @@ using Microsoft.Foundation.Company;
 using Microsoft.FixedAssets.Ledger;
 using Microsoft.FixedAssets.Depreciation;
 
-report 52185960 "Fixed Assets By Category"
+report 85960 "Fixed Assets By Category"
 {
     ApplicationArea = All;
     Caption = 'Fixed Assets By Category';

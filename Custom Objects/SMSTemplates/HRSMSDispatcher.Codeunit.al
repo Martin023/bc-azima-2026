@@ -1,4 +1,4 @@
-codeunit 52185460 "HR SMS Dispatcher"
+codeunit 85460 "HR SMS Dispatcher"
 {
     procedure Send(
         EventCode: Code[50];

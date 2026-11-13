@@ -1,4 +1,4 @@
-page 52187418 "Resheduled Loans Lists"
+page 87418 "Resheduled Loans Lists"
 {
     PageType = List;
     ApplicationArea = All;

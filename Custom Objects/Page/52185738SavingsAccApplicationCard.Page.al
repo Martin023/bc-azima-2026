@@ -1,4 +1,4 @@
-page 52185738 "Savings Acc. Application Card"
+page 85738 "Savings Acc. Application Card"
 {
     DeleteAllowed = false;
     PageType = Card;

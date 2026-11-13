@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-page 52185710 "HR Employees ListPart"
+page 85710 "HR Employees ListPart"
 {
     ApplicationArea = All;
     Caption = 'HR Employees ListPart';

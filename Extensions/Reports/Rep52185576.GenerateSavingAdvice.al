@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-report 52185576 "Generate Saving Advice"
+report 85576 "Generate Saving Advice"
 {
     ApplicationArea = All;
     Caption = 'Generate Saving Advice';

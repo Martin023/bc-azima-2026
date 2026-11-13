@@ -1,4 +1,4 @@
-table 52185696 "Mobile loan App. Buffer"
+table 85696 "Mobile loan App. Buffer"
 {
     Caption = 'Mobile loan App. Buffer';
     DataClassification = ToBeClassified;

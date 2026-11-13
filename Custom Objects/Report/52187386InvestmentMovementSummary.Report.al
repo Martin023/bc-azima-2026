@@ -1,4 +1,4 @@
-Report 52187386 "Investment Movement Summary"
+Report 87386 "Investment Movement Summary"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Investment Movement Summary.rdl';

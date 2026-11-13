@@ -1,4 +1,4 @@
-table 52186811 "Exit Clearance"
+table 86811 "Exit Clearance"
 {
     Caption = 'Exit Clearance';
     

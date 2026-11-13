@@ -1,4 +1,4 @@
-page 52186393 "Delegates AGM Update List"
+page 86393 "Delegates AGM Update List"
 {
     CardPageID = "Deleage AGM Update Header";
     DeleteAllowed = false;

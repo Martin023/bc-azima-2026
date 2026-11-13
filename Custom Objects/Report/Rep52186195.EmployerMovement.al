@@ -5,7 +5,7 @@ using Microsoft.Foundation.Company;
 using Microsoft.Sales.Receivables;
 using Microsoft.Bank.Ledger;
 
-report 52186195 "Employer Movement Report"
+report 86195 "Employer Movement Report"
 {
     ApplicationArea = All;
     Caption = 'Employer Movement';

@@ -1,4 +1,4 @@
-table 52185906 "Staff Allowance Setup"
+table 85906 "Staff Allowance Setup"
 {
 
     fields

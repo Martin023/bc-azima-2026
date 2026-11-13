@@ -1,4 +1,4 @@
-table 52186270 "Excempted Product Charges"
+table 86270 "Excempted Product Charges"
 {
     Caption = 'Excempted Product Charges';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52187005 "Treasury Cheques Register"
+table 87005 "Treasury Cheques Register"
 {
 
     fields

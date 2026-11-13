@@ -4,7 +4,7 @@ using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Finance.GeneralLedger.Ledger;
 using System.Automation;
 
-pageextension 52185482 PostedGeneralJournal extends "Posted General Journal"
+pageextension 85482 PostedGeneralJournal extends "Posted General Journal"
 {
     layout
     {

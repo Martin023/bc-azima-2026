@@ -1,4 +1,4 @@
-table 52185931 "Purchase Committments"
+table 85931 "Purchase Committments"
 {
 
     fields

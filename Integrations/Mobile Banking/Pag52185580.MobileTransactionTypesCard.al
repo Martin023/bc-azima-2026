@@ -1,4 +1,4 @@
-page 52185580 "Mobile Transaction Types Card"
+page 85580 "Mobile Transaction Types Card"
 {
     Caption = 'Mobile Transaction Types Card';
     PageType = Card;

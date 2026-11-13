@@ -1,4 +1,4 @@
-page 52187357 "Rejected Security Perf Card"
+page 87357 "Rejected Security Perf Card"
 {
     ApplicationArea = All;
     Caption = 'Rejected Security Perf Card';

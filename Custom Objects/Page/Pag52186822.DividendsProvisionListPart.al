@@ -1,4 +1,4 @@
-page 52186822 "Dividends Provision List Part"
+page 86822 "Dividends Provision List Part"
 {
     ApplicationArea = None;
     Caption = 'Dividends Provision List Part';

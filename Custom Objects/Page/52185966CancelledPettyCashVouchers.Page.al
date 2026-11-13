@@ -1,4 +1,4 @@
-page 52185966 "Cancelled Petty Cash Vouchers"
+page 85966 "Cancelled Petty Cash Vouchers"
 {
     CardPageID = "Cash Payment Header";
     Editable = false;

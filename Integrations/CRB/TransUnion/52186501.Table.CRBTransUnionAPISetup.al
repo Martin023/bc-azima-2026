@@ -1,4 +1,4 @@
-table 52186501 "CRB Trans Union API Setup"
+table 86501 "CRB Trans Union API Setup"
 {
     DataClassification = SystemMetadata;
 

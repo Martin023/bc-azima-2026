@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185585 pageextension52185585 extends "Apply Customer Entries"
+PageExtension 85585 pageextension52185585 extends "Apply Customer Entries"
 {
     layout
     {
@@ -600,8 +600,8 @@ PageExtension 52185585 pageextension52185585 extends "Apply Customer Entries"
         "Applies-to IDVisible": Boolean;
 
     var
-        ReceiptLine: Record 52185877;
-        ReceiptHeader: Record 52185889;
+        ReceiptLine: Record 85877;
+        ReceiptHeader: Record 85889;
         GenJnlLineApply: Boolean;
 
 

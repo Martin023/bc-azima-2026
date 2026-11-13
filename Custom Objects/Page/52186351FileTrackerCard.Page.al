@@ -1,4 +1,4 @@
-page 52186351 "File Tracker Card"
+page 86351 "File Tracker Card"
 {
     //DeleteAllowed = false;
     //InsertAllowed = false;
@@ -452,7 +452,7 @@ page 52186351 "File Tracker Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52186080), "No." = field("File Request Number");//52186080
+                SubPageLink = "Table ID" = Const(86080), "No." = field("File Request Number");//52186080
             }
             systempart(Control1900383207; Links)
             {

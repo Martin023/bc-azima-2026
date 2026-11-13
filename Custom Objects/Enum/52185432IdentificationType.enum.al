@@ -1,4 +1,4 @@
-enum 52185432 "Identification Type"
+enum 85432 "Identification Type"
 {
     value(0; " ") {}
     value(1; "ID Number") {}

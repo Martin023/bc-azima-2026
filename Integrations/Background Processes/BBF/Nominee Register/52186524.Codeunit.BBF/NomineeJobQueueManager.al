@@ -1,4 +1,4 @@
-codeunit 52186528 "BBF/Nominee Job Queue Manager"
+codeunit 86528 "BBF/Nominee Job Queue Manager"
 {
     TableNo = "Next of KIN";
     trigger OnRun()
@@ -133,7 +133,7 @@ codeunit 52186528 "BBF/Nominee Job Queue Manager"
         BBFNomineeFilter: Page "BBF/Nominee Filter";
 }
 
-codeunit 52186529 "BBF/Nominee Job"
+codeunit 86529 "BBF/Nominee Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()
@@ -183,7 +183,7 @@ codeunit 52186529 "BBF/Nominee Job"
     end;
 }
 
-page 52186746 "BBF/Nominee Filter"
+page 86746 "BBF/Nominee Filter"
 {
     PageType = StandardDialog;
     Caption = 'BBF/Nominee Filter';

@@ -1,4 +1,4 @@
-report 52186837 "Training Planner"
+report 86837 "Training Planner"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Training Planner.rdl';

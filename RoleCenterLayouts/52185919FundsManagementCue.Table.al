@@ -1,4 +1,4 @@
-table 52185919 "Funds Management Cue"
+table 85919 "Funds Management Cue"
 {
     Caption = 'Finance Cue';
 

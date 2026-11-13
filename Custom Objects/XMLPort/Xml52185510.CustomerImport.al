@@ -1,5 +1,5 @@
 
-xmlport 52185510 CustomerImport
+xmlport 85510 CustomerImport
 {
     Format = VariableText;
     Caption = 'CustomerImport';

@@ -1,4 +1,4 @@
-page 52185762 "Member Collaterals"
+page 85762 "Member Collaterals"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

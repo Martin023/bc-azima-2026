@@ -1,4 +1,4 @@
-page 52185834 "Cheque Clearance"
+page 85834 "Cheque Clearance"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

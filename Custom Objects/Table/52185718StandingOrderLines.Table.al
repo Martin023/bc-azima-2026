@@ -1,4 +1,4 @@
-table 52185718 "Standing Order Lines"
+table 85718 "Standing Order Lines"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186507 "EDMS File Viewer"
+page 86507 "EDMS File Viewer"
 {
     ApplicationArea = All;
     Caption = 'EDMS File Viewer';

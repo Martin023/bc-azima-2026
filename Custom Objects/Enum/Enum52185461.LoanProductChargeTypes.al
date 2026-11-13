@@ -1,6 +1,6 @@
 namespace AzimaCBS.AzimaCBS;
 
-enum 52185461 "Loan Product Charge Types"
+enum 85461 "Loan Product Charge Types"
 {
     Extensible = true;
 

@@ -1,4 +1,4 @@
-table 52185932 "Purchase Quote Params"
+table 85932 "Purchase Quote Params"
 {
 
     fields

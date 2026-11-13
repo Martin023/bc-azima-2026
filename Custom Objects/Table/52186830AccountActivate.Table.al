@@ -1,4 +1,4 @@
-table 52186833 "Account Activation"
+table 86833 "Account Activation"
 {
     DrillDownPageId = "Account Activation List";
     LookupPageId = "Account Activation List";

@@ -1,4 +1,4 @@
-page 52185964 "Cancelled Staff Claims List"
+page 85964 "Cancelled Staff Claims List"
 {
     CardPageID = "Staff Claims";
     DeleteAllowed = false;

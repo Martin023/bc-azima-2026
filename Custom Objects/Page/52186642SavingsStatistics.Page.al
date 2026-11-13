@@ -1,4 +1,4 @@
-page 52186642 "Savings Statistics"
+page 86642 "Savings Statistics"
 {
     DeleteAllowed = false;
     Editable = false;

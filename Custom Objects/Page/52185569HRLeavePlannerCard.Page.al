@@ -1,4 +1,4 @@
-page 52185569 "HR Leave Planner Card"
+page 85569 "HR Leave Planner Card"
 {
     PageType = Card;
     SourceTable = "HR Leave Planner Header";

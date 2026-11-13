@@ -1,4 +1,4 @@
-table 52185847 "End Year Transfer Header"
+table 85847 "End Year Transfer Header"
 {
     DrillDownPageID = "End Year Interest List";
     LookupPageID = "End Year Interest List";

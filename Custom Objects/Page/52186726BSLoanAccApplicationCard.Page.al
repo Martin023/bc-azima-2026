@@ -1,5 +1,5 @@
 
-page 52186726 "B/S Loan Acc. Application Card"
+page 86726 "B/S Loan Acc. Application Card"
 {
     DeleteAllowed = false;
     PageType = Card;

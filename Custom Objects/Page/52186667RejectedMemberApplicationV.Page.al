@@ -1,4 +1,4 @@
-page 52186667 "Rejected Member Application V"
+page 86667 "Rejected Member Application V"
 {
     CardPageID = "Member Application Single";
     DeleteAllowed = false;

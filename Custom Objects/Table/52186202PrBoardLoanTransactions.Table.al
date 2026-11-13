@@ -1,4 +1,4 @@
-table 52186202 "PrBoard Loan Transactions"
+table 86202 "PrBoard Loan Transactions"
 {
 
     fields

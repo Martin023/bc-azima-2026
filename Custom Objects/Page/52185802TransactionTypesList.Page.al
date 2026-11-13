@@ -1,4 +1,4 @@
-page 52185802 "Transaction Types List"
+page 85802 "Transaction Types List"
 {
     CardPageID = "Transactions Type";
     Editable = false;

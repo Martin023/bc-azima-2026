@@ -1,4 +1,4 @@
-table 52185684 "Tariff Codes"
+table 85684 "Tariff Codes"
 {
     DrillDownPageID = "Tariff Codes";
     LookupPageID = "Tariff Codes";

@@ -1,4 +1,4 @@
-table 52185939 "Contract Cycle"
+table 85939 "Contract Cycle"
 {
 
     fields

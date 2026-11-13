@@ -1,4 +1,4 @@
-table 52185826 "Member withdrawal Notice"
+table 85826 "Member withdrawal Notice"
 {
     DrillDownPageID = "Open withdrawal Notice";
     LookupPageID = "Open withdrawal Notice";

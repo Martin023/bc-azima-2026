@@ -1,4 +1,4 @@
-table 52186240 "Delegate Officials"
+table 86240 "Delegate Officials"
 {
     DataCaptionFields = "Electoral Zone", "Delegate Official Name";
     DrillDownPageID = "Active Delegate Officials";

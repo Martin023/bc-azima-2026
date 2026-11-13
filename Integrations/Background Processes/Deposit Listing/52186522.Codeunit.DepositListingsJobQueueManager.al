@@ -1,4 +1,4 @@
-page 52187022 "Deposit List. Date Picker"
+page 87022 "Deposit List. Date Picker"
 {
     PageType = StandardDialog;
     Caption = 'Deposit Listing - Enter Date Range';
@@ -51,7 +51,7 @@ page 52187022 "Deposit List. Date Picker"
 }
 
 
-codeunit 52186522 "Deposit List Job Queue Manager"
+codeunit 86522 "Deposit List Job Queue Manager"
 {
     TableNo = "Savings Accounts";
     trigger OnRun()
@@ -200,7 +200,7 @@ codeunit 52186522 "Deposit List Job Queue Manager"
         DateRangeDialog: Page "Deposit List. Date Picker";
 }
 
-codeunit 52186523 "Deposit Listing Job"
+codeunit 86523 "Deposit Listing Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()

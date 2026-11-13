@@ -1,4 +1,4 @@
-table 52186085 "File Movement Remarks"
+table 86085 "File Movement Remarks"
 {
     LookupPageID = "File MVT Remarks";
     DrillDownPageId = "File MVT Remarks";

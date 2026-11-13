@@ -1,4 +1,4 @@
-page 52185463 "Global Bulk SMS Card"
+page 85463 "Global Bulk SMS Card"
 {
     PageType = Card;
     SourceTable = "Global Bulk SMS Header";

@@ -1,4 +1,4 @@
-table 52187413 "Refund,Account Transfer Header"
+table 87413 "Refund,Account Transfer Header"
 {
     DrillDownPageID = "Refund $ Account Trans List";
     LookupPageID = "Refund $ Account Trans List";

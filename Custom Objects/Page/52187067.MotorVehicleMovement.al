@@ -1,4 +1,4 @@
-page 52187067 "Motor Vehicle Movement"
+page 87067 "Motor Vehicle Movement"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Movement';

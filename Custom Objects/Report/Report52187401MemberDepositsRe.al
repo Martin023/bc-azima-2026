@@ -1,4 +1,4 @@
-Report 52187401 "Member Deposits Report"
+Report 87401 "Member Deposits Report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

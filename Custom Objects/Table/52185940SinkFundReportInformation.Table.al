@@ -1,4 +1,4 @@
-table 52185940 "SinkFund Report Information"
+table 85940 "SinkFund Report Information"
 {
     LookupPageId = "BBF SinkFund List";
     DrilldownPageId = "BBF SinkFund List";

@@ -1,4 +1,4 @@
-page 52185604 "HR OSAccident Card"
+page 85604 "HR OSAccident Card"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -193,7 +193,7 @@ page 52185604 "HR OSAccident Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52185561), "No." = field("Accident No.");
+                SubPageLink = "Table ID" = Const(85561), "No." = field("Accident No.");
             }
         }
     }

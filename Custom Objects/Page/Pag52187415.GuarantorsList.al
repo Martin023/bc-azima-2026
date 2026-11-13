@@ -1,4 +1,4 @@
-page 52187415 "Guarantors List"
+page 87415 "Guarantors List"
 {
     ApplicationArea = All;
     Caption = 'GuarantorsList';

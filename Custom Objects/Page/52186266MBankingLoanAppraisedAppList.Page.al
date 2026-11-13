@@ -1,4 +1,4 @@
-page 52186266 "MBanking Loan Appraised List"
+page 86266 "MBanking Loan Appraised List"
 {
     // CardPageID = "MBanking Loan Application Card";
     DeleteAllowed = false;

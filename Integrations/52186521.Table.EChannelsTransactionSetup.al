@@ -1,4 +1,4 @@
-table 52186521 "E-Channels Transaction Setup"
+table 86521 "E-Channels Transaction Setup"
 {
     Caption = 'E-Channels Transaction Setup';
     DataClassification = ToBeClassified;

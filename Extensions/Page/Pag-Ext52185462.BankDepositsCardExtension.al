@@ -5,7 +5,7 @@ using Microsoft.Finance.GeneralLedger.Journal;
 using System.Automation;
 using System.Security.User;
 
-pageextension 52185462 "Bank Deposits Card Extension" extends "Bank Deposit"
+pageextension 85462 "Bank Deposits Card Extension" extends "Bank Deposit"
 {
     PromotedActionCategories = 'New,Process,Report,Posting,Bank Deposit,Approvals,Import,Clear Lines';
 

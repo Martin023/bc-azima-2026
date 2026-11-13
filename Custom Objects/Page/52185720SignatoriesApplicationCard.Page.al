@@ -1,4 +1,4 @@
-page 52185720 "Signatories Application Card"
+page 85720 "Signatories Application Card"
 {
     AutoSplitKey = true;
     Caption = 'Group Member Application Card';

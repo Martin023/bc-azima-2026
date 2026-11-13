@@ -1,4 +1,4 @@
-page 52185692 "Agent Applications List"
+page 85692 "Agent Applications List"
 {
     CardPageID = "Agent Application Card";
     PageType = List;

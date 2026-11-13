@@ -1,4 +1,4 @@
-page 52186323 "Delegate Meeting Minutes"
+page 86323 "Delegate Meeting Minutes"
 {
     CardPageID = "Degate Meeting Minutes Card";
     PageType = List;

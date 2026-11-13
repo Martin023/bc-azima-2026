@@ -1,4 +1,4 @@
-table 52185973 "Applied Bank Account Ledger2"
+table 85973 "Applied Bank Account Ledger2"
 {
 
     fields

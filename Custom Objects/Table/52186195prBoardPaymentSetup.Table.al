@@ -1,4 +1,4 @@
-table 52186195 "prBoard Payment Setup"
+table 86195 "prBoard Payment Setup"
 {
 
     fields

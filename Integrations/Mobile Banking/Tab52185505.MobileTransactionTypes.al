@@ -1,4 +1,4 @@
-table 52185505 "Mobile Transaction Types"
+table 85505 "Mobile Transaction Types"
 {
     Caption = 'Mobile/ATM Transaction Types';
     DataClassification = ToBeClassified;

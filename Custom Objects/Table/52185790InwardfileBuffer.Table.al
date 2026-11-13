@@ -1,4 +1,4 @@
-table 52185790 "Inward file Buffer"
+table 85790 "Inward file Buffer"
 {
 
     fields

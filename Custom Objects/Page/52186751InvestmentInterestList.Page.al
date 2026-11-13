@@ -1,4 +1,4 @@
-page 52187047 "Investment Interest List"
+page 87047 "Investment Interest List"
 {
     CardPageID = "Investment Interest Header";
     DeleteAllowed = false;

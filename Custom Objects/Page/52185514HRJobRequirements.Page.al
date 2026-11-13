@@ -1,4 +1,4 @@
-page 52185514 "HR Job Requirements"
+page 85514 "HR Job Requirements"
 {
     //DeleteAllowed = false;
     InsertAllowed = false;

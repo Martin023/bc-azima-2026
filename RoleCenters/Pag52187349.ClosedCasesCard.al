@@ -1,4 +1,4 @@
-page 52187349 "Closed Cases Card"
+page 87349 "Closed Cases Card"
 {
     ApplicationArea = All;
     Caption = 'Closed Cases Card';

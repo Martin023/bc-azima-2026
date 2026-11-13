@@ -1,4 +1,4 @@
-table 52185852 "BBF Entitlement"
+table 85852 "BBF Entitlement"
 {
     DrillDownPageID = "BBF Entitlement List";
     LookupPageID = "BBF Entitlement List";

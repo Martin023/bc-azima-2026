@@ -1,4 +1,4 @@
-table 52186065 "Delegate Region Mem Retirement"
+table 86065 "Delegate Region Mem Retirement"
 {
     DrillDownPageID = "Delegate Group Retire Lists";
     LookupPageID = "Delegate Group Retire Lists";

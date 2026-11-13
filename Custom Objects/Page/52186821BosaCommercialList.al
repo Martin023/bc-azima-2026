@@ -1,4 +1,4 @@
-page 52186821 "Bosa Commercial List"
+page 86821 "Bosa Commercial List"
 {
     CardPageID = "Bosa Commecial Loan";
     DeleteAllowed = false;

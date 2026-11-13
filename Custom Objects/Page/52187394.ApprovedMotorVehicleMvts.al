@@ -1,4 +1,4 @@
-page 52187394 "Approved Motor Vehicle Mvts"
+page 87394 "Approved Motor Vehicle Mvts"
 {
     ApplicationArea = All;
     Caption = 'Motor Vehicle Movement';

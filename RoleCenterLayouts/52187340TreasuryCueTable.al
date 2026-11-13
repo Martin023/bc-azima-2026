@@ -1,4 +1,4 @@
-table 52187340 "Treasury Cue Table"
+table 87340 "Treasury Cue Table"
 {
     Caption = 'Treasury Cue Table';
 

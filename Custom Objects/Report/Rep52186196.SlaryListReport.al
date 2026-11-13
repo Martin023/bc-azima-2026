@@ -2,7 +2,7 @@ namespace MNSProjectMwanga.MNSProjectMwanga;
 
 using System.Utilities;
 
-report 52186196 "Slary List Report"
+report 86196 "Slary List Report"
 {
     ApplicationArea = All;
     Caption = 'Salary List Report';

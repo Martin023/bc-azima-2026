@@ -1,4 +1,4 @@
-page 52185568 "Hr Leave Planner Lines"
+page 85568 "Hr Leave Planner Lines"
 {
     PageType = ListPart;
     SourceTable = "HR Leave Planner Lines";
@@ -34,7 +34,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 1);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(Feburuary; Rec.Feburuary)
@@ -49,7 +49,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 2);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(March; Rec.March)
@@ -64,7 +64,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 3);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(April; Rec.April)
@@ -79,7 +79,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 4);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(May; Rec.May)
@@ -94,7 +94,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 5);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(June; Rec.June)
@@ -109,7 +109,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 6);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(July; Rec.July)
@@ -123,7 +123,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 7);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(August; Rec.August)
@@ -137,7 +137,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 8);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(September; Rec.September)
@@ -151,7 +151,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 9);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(October; Rec.October)
@@ -165,7 +165,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 10);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(November; Rec.November)
@@ -179,7 +179,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 11);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
                 field(December; Rec.December)
@@ -193,7 +193,7 @@ page 52185568 "Hr Leave Planner Lines"
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Month, 12);
                         LeavePlannerDrillDown.SetRange(LeavePlannerDrillDown.Year, Rec.Year);
 
-                        PAGE.Run(52185672, LeavePlannerDrillDown);
+                        PAGE.Run(85672, LeavePlannerDrillDown);
                     end;
                 }
             }

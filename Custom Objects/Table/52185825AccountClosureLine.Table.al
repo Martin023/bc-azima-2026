@@ -1,4 +1,4 @@
-table 52185825 "Account Closure Line"
+table 85825 "Account Closure Line"
 {
 
     fields

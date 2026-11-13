@@ -1,4 +1,4 @@
-page 52185522 "HR Appraisal Discussion Log"
+page 85522 "HR Appraisal Discussion Log"
 {
     PageType = ListPart;
     SourceTable = "HR Appraisal Discussion Log";

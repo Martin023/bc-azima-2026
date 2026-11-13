@@ -1,4 +1,4 @@
-table 52185467 "User Access Request Lines"
+table 85467 "User Access Request Lines"
 {
     Caption = 'User Access Request Lines';
     DataClassification = ToBeClassified;

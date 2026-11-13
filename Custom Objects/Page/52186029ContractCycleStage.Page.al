@@ -1,4 +1,4 @@
-page 52186029 "Contract Cycle Stage"
+page 86029 "Contract Cycle Stage"
 {
     PageType = List;
     //PageType = ListPart;

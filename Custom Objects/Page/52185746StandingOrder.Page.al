@@ -1,4 +1,4 @@
-page 52185746 "Standing Order"
+page 85746 "Standing Order"
 {
     DeleteAllowed = false;
     PageType = Card;

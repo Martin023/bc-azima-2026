@@ -1,4 +1,4 @@
-table 52186078 "ADM Registration"
+table 86078 "ADM Registration"
 {
     DataCaptionFields = "Code", "Delegate Region Description", "Electoral Zone";
     DrillDownPageID = "ADM Registration List";

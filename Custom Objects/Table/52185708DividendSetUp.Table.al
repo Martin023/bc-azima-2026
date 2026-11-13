@@ -1,4 +1,4 @@
-table 52185708 "Dividend SetUp"
+table 85708 "Dividend SetUp"
 {
 
     fields

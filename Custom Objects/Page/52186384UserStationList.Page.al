@@ -1,4 +1,4 @@
-page 52186384 "User Station List"
+page 86384 "User Station List"
 {
     CardPageID = "User Station Card";
     Editable = false;

@@ -1,4 +1,4 @@
-page 52186478 "Posted General SMS List"
+page 86478 "Posted General SMS List"
 {
     ApplicationArea = All;
     PageType = List;

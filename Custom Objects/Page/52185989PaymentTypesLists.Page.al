@@ -1,4 +1,4 @@
-page 52185989 "Payment Types Lists"
+page 85989 "Payment Types Lists"
 {
     CardPageID = "Payment Types";
     PageType = List;

@@ -1,4 +1,4 @@
-page 52185596 "HR Non Working Days & Dates"
+page 85596 "HR Non Working Days & Dates"
 {
     Caption = 'HR Non Working Dates';
     PageType = ListPart;

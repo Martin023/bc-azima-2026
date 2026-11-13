@@ -1,4 +1,4 @@
-page 52186268 "Permission Requisition Lines"
+page 86268 "Permission Requisition Lines"
 {
     PageType = ListPart;
     SourceTable = "Permission Requisition Lines";

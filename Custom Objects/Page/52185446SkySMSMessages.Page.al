@@ -1,4 +1,4 @@
-page 52185446 "Sky SMS Messages"
+page 85446 "Sky SMS Messages"
 {
     DeleteAllowed = false;
     Editable = false;

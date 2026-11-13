@@ -1,4 +1,4 @@
-table 52186163 "Company Vehicles"
+table 86163 "Company Vehicles"
 {
     drilldownpageid = "Company Vehicles List";
     LookupPageID = "Company Vehicles list";

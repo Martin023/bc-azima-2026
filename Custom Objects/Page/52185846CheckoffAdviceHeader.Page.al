@@ -1,4 +1,4 @@
-page 52185846 "Checkoff Advice Header"
+page 85846 "Checkoff Advice Header"
 {
     PageType = Card;
     SourceTable = "Checkoff Advice Header";
@@ -189,7 +189,7 @@ page 52185846 "Checkoff Advice Header"
                 begin
                     Rec.Reset;
                     Rec.SetFilter("No.", Rec."No.");
-                    REPORT.Run(52185650, true, true, Rec);
+                    REPORT.Run(85650, true, true, Rec);
                     Rec.Reset;
                 end;
             }

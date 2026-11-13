@@ -1,4 +1,4 @@
-page 52186406 "Product Factory Appl. List"
+page 86406 "Product Factory Appl. List"
 {
     CardPageID = "Product Factory Appl. Card";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-page 52186206 "Landlord Commission Calc  Line"
+page 86206 "Landlord Commission Calc  Line"
 {
     Editable = true;
     PageType = ListPart;

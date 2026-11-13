@@ -1,4 +1,4 @@
-table 52186211 "Banking Account Closure"
+table 86211 "Banking Account Closure"
 {
     DrillDownPageId = "Banking Closure List";
     LookupPageId = "Banking Closure List";

@@ -1,4 +1,4 @@
-page 52187413 "FOSA Payment Voucher List"
+page 87413 "FOSA Payment Voucher List"
 {
     CardPageID = "FOSA Payment Voucher";
     Editable = false;

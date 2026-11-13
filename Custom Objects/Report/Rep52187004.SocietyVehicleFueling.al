@@ -1,4 +1,4 @@
-report 52187004 "Society Vehicle Fueling"
+report 87004 "Society Vehicle Fueling"
 {
     ApplicationArea = All;
     Caption = 'Society Vehicle Fueling';

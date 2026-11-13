@@ -1,4 +1,4 @@
-page 52186601 "HR Disciplinary Cases Factbox"
+page 86601 "HR Disciplinary Cases Factbox"
 {
     Caption = 'HR Disciplinary Cases Factbox';
     PageType = CardPart;

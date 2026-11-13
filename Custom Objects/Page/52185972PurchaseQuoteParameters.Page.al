@@ -1,4 +1,4 @@
-page 52186041 "Purchase Quote Parameters"
+page 86041 "Purchase Quote Parameters"
 {
     PageType = List;
     SourceTable = "Purchase Quote Params";

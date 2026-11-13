@@ -1,4 +1,4 @@
-page 52186368 "Micro Member Application"
+page 86368 "Micro Member Application"
 {
     DeleteAllowed = false;
     PageType = Card;

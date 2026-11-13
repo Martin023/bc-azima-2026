@@ -4,7 +4,7 @@ using Microsoft.Inventory.Item;
 using Microsoft.Sales.Document;
 using System.Automation;
 
-page 52186151 "Disposal Requisition"
+page 86151 "Disposal Requisition"
 {
     Caption = 'Disposal Requisition';
     PromotedActionCategories = ',,,,,Generate Items,,,Approvals';

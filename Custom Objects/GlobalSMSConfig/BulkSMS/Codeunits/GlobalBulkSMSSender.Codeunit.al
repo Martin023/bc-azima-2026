@@ -1,4 +1,4 @@
-codeunit 52185977 "Global Bulk SMS Sender"
+codeunit 85977 "Global Bulk SMS Sender"
 {
     procedure SendCampaign(CampaignNo: Code[20])
     var

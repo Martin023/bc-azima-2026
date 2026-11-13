@@ -1,4 +1,4 @@
-table 52185956 "Global SMS Token Registry"
+table 85956 "Global SMS Token Registry"
 {
     Caption = 'Global SMS Token Registry';
     DataClassification = SystemMetadata;

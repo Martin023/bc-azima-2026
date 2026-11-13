@@ -1,4 +1,4 @@
-table 52185682 "Checkoff  Receipt Transactions"
+table 85682 "Checkoff  Receipt Transactions"
 {
     DrillDownPageID = "Checkoff Receipt Trans List";
     LookupPageID = "Checkoff Receipt Trans List";

@@ -1,4 +1,4 @@
-page 52186426 "Collateral Collection - List"
+page 86426 "Collateral Collection - List"
 {
     CardPageID = "Collateral Collection Card";
     DeleteAllowed = false;

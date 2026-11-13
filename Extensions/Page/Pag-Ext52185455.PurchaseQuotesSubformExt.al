@@ -2,7 +2,7 @@ namespace AZIMA.AZIMA;
 
 using Microsoft.Purchases.Document;
 
-pageextension 52185455 "Purchase Quotes Subform Ext" extends "Purchase Quote Subform"
+pageextension 85455 "Purchase Quotes Subform Ext" extends "Purchase Quote Subform"
 {
     layout
     {

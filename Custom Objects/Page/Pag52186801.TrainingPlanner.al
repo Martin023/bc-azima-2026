@@ -1,4 +1,4 @@
-page 52186801 "Training Planner"
+page 86801 "Training Planner"
 {
     ApplicationArea = All;
     Caption = 'Training Planner';

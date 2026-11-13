@@ -1,4 +1,4 @@
-table 52186264 "Monthly Contrib Logs"
+table 86264 "Monthly Contrib Logs"
 {
     Caption = 'Monthly Contrib Logs';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52185864 "Social Listening Sites"
+table 85864 "Social Listening Sites"
 {
 
     fields

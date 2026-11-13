@@ -1,4 +1,4 @@
-page 52186359 "Email Update Requests"
+page 86359 "Email Update Requests"
 {
     PageType = List;
     SourceTable = "Email Update Requests";

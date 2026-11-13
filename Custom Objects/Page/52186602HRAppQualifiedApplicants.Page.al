@@ -1,4 +1,4 @@
-page 52186602 "HR  App Qualified Applicants1"
+page 86602 "HR  App Qualified Applicants1"
 {
     CardPageID = "HR Job Applicants Qualified Ca";
     Editable = false;

@@ -1,6 +1,6 @@
 
 
-page 52186841 "Member FactBox"
+page 86841 "Member FactBox"
 {
     ApplicationArea = All;
     Caption = 'Member FactBox';

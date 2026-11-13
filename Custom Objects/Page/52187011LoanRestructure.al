@@ -1,4 +1,4 @@
-page 52187011 "Loan Restucturing"
+page 87011 "Loan Restucturing"
 {
     // CardPageID = "Loan Rescheduling List";
     DeleteAllowed = false;

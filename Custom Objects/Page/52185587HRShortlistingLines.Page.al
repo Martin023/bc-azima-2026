@@ -1,4 +1,4 @@
-page 52185587 "HR Shortlisting Lines"
+page 85587 "HR Shortlisting Lines"
 {
     Caption = 'Shorlisted Candidates';
     //Editable = false;

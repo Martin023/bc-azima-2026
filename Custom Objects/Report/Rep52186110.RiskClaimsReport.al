@@ -1,4 +1,4 @@
-report 52186110 "Risk Claims Report"
+report 86110 "Risk Claims Report"
 {
     ApplicationArea = All;
     Caption = 'Risk Claims Report';

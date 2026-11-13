@@ -1,4 +1,4 @@
-page 52187098 "DMU CF Page"
+page 87098 "DMU CF Page"
 {
     ApplicationArea = All;
     Caption = 'DMU CF Page';
@@ -302,7 +302,7 @@ page 52187098 "DMU CF Page"
                         DMUCFHeader.SetRange("No.", Rec."No.");
                         DMUCFHeader.SetRange("Employer Code", Rec."Employer Code");
                         if DMUCFHeader.FindFirst() then begin
-                            Report.Run(52187326, true, false, DMUCFHeader);
+                            Report.Run(87326, true, false, DMUCFHeader);
                         end;
                     end;
                     Message('Lines inserted successfully');

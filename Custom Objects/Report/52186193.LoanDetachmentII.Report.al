@@ -1,7 +1,7 @@
 namespace Mwanga.Mwanga;
 using Microsoft.Foundation.Company;
 
-report 52186193 "Loan Detachment II"
+report 86193 "Loan Detachment II"
 {
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

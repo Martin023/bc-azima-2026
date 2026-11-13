@@ -1,4 +1,4 @@
-page 52185549 "Nominee Request Form List"
+page 85549 "Nominee Request Form List"
 {
     ApplicationArea = All;
     Caption = 'Nominee Request Form';

@@ -1,4 +1,4 @@
-table 52185877 "Receipt Line"
+table 85877 "Receipt Line"
 {
     DrillDownPageID = "Receipts Line";
     LookupPageID = "Receipts Line";

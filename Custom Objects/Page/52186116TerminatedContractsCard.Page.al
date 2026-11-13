@@ -1,4 +1,4 @@
-page 52186116 "Terminated Contracts Card"
+page 86116 "Terminated Contracts Card"
 {
     Caption = 'Renewed Contracts Card';
     Editable = false;

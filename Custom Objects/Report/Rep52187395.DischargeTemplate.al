@@ -1,4 +1,4 @@
-report 52187395 "Discharge Template"
+report 87395 "Discharge Template"
 {
     ApplicationArea = All;
     Caption = 'Discharge Template';

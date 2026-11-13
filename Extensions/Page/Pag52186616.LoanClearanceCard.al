@@ -3,7 +3,7 @@ using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Finance.Dimension;
 using System.Automation;
 
-page 52186616 "Loan Clearance Card"
+page 86616 "Loan Clearance Card"
 {
     Caption = 'Loan Clearance Card';
     PageType = Card;

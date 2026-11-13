@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52186463 "Dues Amount"
+page 86463 "Dues Amount"
 {
     Caption = 'Dues Amount';
     PageType = List;

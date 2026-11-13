@@ -1,4 +1,4 @@
-table 52185652 "Salary Grades"
+table 85652 "Salary Grades"
 {
     DrillDownPageID = "Salary Grades List";
     LookupPageID = "Salary Grades List";

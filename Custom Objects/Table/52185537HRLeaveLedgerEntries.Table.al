@@ -1,4 +1,4 @@
-table 52185537 "HR Leave Ledger Entries"
+table 85537 "HR Leave Ledger Entries"
 {
     Caption = 'Leave Ledger Entry';
     DrillDownPageID = "HR Leave Ledger Entries";

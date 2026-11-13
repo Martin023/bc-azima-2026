@@ -2,7 +2,7 @@ namespace AZIMA.AZIMA;
 using System.Utilities;
 using System.IO;
 
-page 52186618 "Guarantor Notice Letters List"
+page 86618 "Guarantor Notice Letters List"
 {
     ApplicationArea = All;
     Caption = 'Guarantor Notice Letters List';

@@ -1,4 +1,4 @@
-page 52186067 "Account Signatory Image Fatbox"
+page 86067 "Account Signatory Image Fatbox"
 {
     PageType = CardPart;
     SourceTable = "Account Signatories";

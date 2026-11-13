@@ -1,4 +1,4 @@
-table 52185866 "Budgetary Control Setup"
+table 85866 "Budgetary Control Setup"
 {
 
     fields

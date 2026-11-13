@@ -1,4 +1,4 @@
-page 52185891 "PR Employee Allowances List"
+page 85891 "PR Employee Allowances List"
 {
     CardPageID = "PR Employee Allowances Card";
     PageType = List;

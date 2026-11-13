@@ -1,4 +1,4 @@
-page 52185582 "HR Disciplinary Actions1"
+page 85582 "HR Disciplinary Actions1"
 {
     PageType = List;
     SourceTable = "HR Disciplinary Actions";

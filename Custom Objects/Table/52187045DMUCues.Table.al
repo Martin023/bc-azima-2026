@@ -1,4 +1,4 @@
-table 52187045 "DMU Cue"
+table 87045 "DMU Cue"
 {
 
     fields

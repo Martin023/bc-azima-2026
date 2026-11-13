@@ -1,4 +1,4 @@
-page 52187093 "User Termination Requests List"
+page 87093 "User Termination Requests List"
 {
     ApplicationArea = All;
     Caption = 'User Termination Request';

@@ -1,4 +1,4 @@
-page 52186813 "Debt Lines Logs"
+page 86813 "Debt Lines Logs"
 {
     ApplicationArea = All;
     PageType = ListPart;

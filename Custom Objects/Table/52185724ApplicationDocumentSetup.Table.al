@@ -1,4 +1,4 @@
-table 52185724 "Application Document Setup"
+table 85724 "Application Document Setup"
 {
     DrillDownPageID = "Application Doc. Setup Card";
     LookupPageID = "Application Doc. Setup Card";

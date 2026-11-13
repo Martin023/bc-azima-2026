@@ -1,4 +1,4 @@
-page 52185788 "MBanking Virtual Registrations"
+page 85788 "MBanking Virtual Registrations"
 {
     PageType = List;
     SourceTable = "M-SACCO Virtual Registrations";

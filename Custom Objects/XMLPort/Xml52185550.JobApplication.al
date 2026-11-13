@@ -1,4 +1,4 @@
-xmlport 52185550 "Job Application"
+xmlport 85550 "Job Application"
 {
     Caption = 'Job Application';
     Format = VariableText;

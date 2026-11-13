@@ -1,4 +1,4 @@
-page 52185782 "HR CEO Goals List"
+page 85782 "HR CEO Goals List"
 {
     Caption = 'CEO Goals';
     PageType = List;

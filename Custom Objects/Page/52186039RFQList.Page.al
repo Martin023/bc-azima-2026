@@ -1,4 +1,4 @@
-page 52186039 "RFQ List"
+page 86039 "RFQ List"
 {
     CardPageID = "RFQ Header";
     DeleteAllowed = false;

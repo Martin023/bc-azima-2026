@@ -1,4 +1,4 @@
-page 52187235 "CRM Member Edit"
+page 87235 "CRM Member Edit"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

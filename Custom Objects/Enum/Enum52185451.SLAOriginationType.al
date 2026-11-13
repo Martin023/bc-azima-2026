@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-enum 52185451 "SLA Origination Type"
+enum 85451 "SLA Origination Type"
 {
     Extensible = true;
 

@@ -1,4 +1,4 @@
-page 52186043 "Destination Rates Card"
+page 86043 "Destination Rates Card"
 {
     PageType = Card;
     SourceTable = "Destination Rate Entry";

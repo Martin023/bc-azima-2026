@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186491 "Vehicle Types"
+page 86491 "Vehicle Types"
 {
     ApplicationArea = All;
     Caption = 'Vehicle Types';

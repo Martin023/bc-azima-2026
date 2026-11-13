@@ -1,4 +1,4 @@
-codeunit 52185464 "Global SMS Dispatcher"
+codeunit 85464 "Global SMS Dispatcher"
 {
     InherentEntitlements = X;
     InherentPermissions = X;

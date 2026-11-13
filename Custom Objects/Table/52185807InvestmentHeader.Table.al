@@ -1,4 +1,4 @@
-table 52185807 "Investment Header"
+table 85807 "Investment Header"
 {
     DrillDownPageID = "Investment List";
     LookupPageID = "Investment List";

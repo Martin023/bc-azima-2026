@@ -1,4 +1,4 @@
-page 52185542 "Approved Appeals Card"
+page 85542 "Approved Appeals Card"
 {
     Caption = 'Approved Appeals Card';
     PageType = Card;

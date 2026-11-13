@@ -1,4 +1,4 @@
-page 52187084 "Posted System Edits List"
+page 87084 "Posted System Edits List"
 {
     ApplicationArea = All;
     Caption = 'Posted System Edits List';

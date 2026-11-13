@@ -1,4 +1,4 @@
-table 52185980 "Item Budget Dimension"
+table 85980 "Item Budget Dimension"
 {
 
     fields

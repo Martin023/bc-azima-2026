@@ -1,4 +1,4 @@
-page 52186497 "HR Disciplinary Cases List"
+page 86497 "HR Disciplinary Cases List"
 {
     CardPageID = "HR Disciplinary Cases";
     DeleteAllowed = false;

@@ -1,4 +1,4 @@
-page 52186056 "Vote Transfer"
+page 86056 "Vote Transfer"
 {
     DeleteAllowed = false;
     PageType = Card;

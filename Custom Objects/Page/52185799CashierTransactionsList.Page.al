@@ -1,4 +1,4 @@
-page 52185799 "Cashier Transactions List"
+page 85799 "Cashier Transactions List"
 {
     CardPageID = "Cashier Transactions";
     DeleteAllowed = false;

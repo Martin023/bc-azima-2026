@@ -1,4 +1,4 @@
-page 52186468 "HR Disciplinary Case Card Clsd"
+page 86468 "HR Disciplinary Case Card Clsd"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

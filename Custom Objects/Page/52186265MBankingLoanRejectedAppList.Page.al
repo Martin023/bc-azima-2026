@@ -1,4 +1,4 @@
-page 52186265 "MBanking Loan Rejected List"
+page 86265 "MBanking Loan Rejected List"
 {
     // CardPageID = "MBanking Loan Application Card";
     DeleteAllowed = false;

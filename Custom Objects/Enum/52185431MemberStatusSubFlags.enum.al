@@ -1,4 +1,4 @@
-enum 52185431 "Member Status Sub Flags"
+enum 85431 "Member Status Sub Flags"
 {
     value(0; " ") { }
     value(1; "Pending/Differed") { }

@@ -2,7 +2,7 @@ namespace BCWMNS.BCWMNS;
 
 using System.Security.AccessControl;
 
-page 52186615 "User Permission Roles"
+page 86615 "User Permission Roles"
 {
     Caption = 'Users Permissions Roles';
     PageType = List;

@@ -1,4 +1,4 @@
-table 52185819 "Checkoff Header"
+table 85819 "Checkoff Header"
 {
     DrillDownPageID = "Checkoff Header List";
     LookupPageID = "Checkoff Header List";

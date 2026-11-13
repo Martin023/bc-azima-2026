@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186224 "Generate Actual progression"
+report 86224 "Generate Actual progression"
 {
     ApplicationArea = All;
     Caption = 'Generate Actual progression';

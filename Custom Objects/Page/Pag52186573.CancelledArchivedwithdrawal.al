@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using System.Security.User;
 
-page 52186573 "Cancelled/Archived withdrawal"
+page 86573 "Cancelled/Archived withdrawal"
 {
     CardPageID = "Member withdrawal Notice";
     Editable = false;

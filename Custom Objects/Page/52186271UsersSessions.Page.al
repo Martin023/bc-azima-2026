@@ -1,4 +1,4 @@
-page 52186271 "Users Sessions"
+page 86271 "Users Sessions"
 {
     InsertAllowed = false;
     ModifyAllowed = false;

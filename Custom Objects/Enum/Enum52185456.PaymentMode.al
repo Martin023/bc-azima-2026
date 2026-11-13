@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-enum 52185456 "Payment Mode"
+enum 85456 "Payment Mode"
 {
     Extensible = true;
     

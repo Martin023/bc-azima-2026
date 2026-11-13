@@ -1,4 +1,4 @@
-page 52186733 "SMS Alerts Lines"
+page 86733 "SMS Alerts Lines"
 {
     ApplicationArea = All;
     Caption = 'SMS Alerts Lines';

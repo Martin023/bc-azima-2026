@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-page 52186770 "Per-Diem Lines"
+page 86770 "Per-Diem Lines"
 {
     Caption = 'Per-Diem Lines';
     PageType = ListPart;

@@ -1,4 +1,4 @@
-page 52186651 "Performance Attributes"
+page 86651 "Performance Attributes"
 {
     PageType = List;
     SourceTable = "Performance Attributes1";

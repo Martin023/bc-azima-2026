@@ -1,4 +1,4 @@
-page 52185965 "HR SMS Template Variables"
+page 85965 "HR SMS Template Variables"
 {
     Caption = 'Available Tokens';
     PageType = ListPart;

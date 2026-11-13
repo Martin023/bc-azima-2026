@@ -7,7 +7,7 @@ using Microsoft.FixedAssets.Setup;
 using Microsoft.FixedAssets.Depreciation;
 using Microsoft.Foundation.Company;
 
-report 52185986 "Fixed Asset Movement Schedule"
+report 85986 "Fixed Asset Movement Schedule"
 {
     ApplicationArea = All;
     Caption = 'Fixed Asset Movement Schedule';

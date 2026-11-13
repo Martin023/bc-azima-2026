@@ -1,4 +1,4 @@
-table 52187390 "Guarantor Failure Reasons"
+table 87390 "Guarantor Failure Reasons"
 {
     DataClassification = ToBeClassified;
 

@@ -1,4 +1,4 @@
-table 52186156 "Journal Line Dimension"
+table 86156 "Journal Line Dimension"
 {
     Caption = 'Journal Line Dimension';
 

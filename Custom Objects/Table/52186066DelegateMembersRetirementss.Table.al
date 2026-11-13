@@ -1,4 +1,4 @@
-table 52186066 "Delegate Members Retirementss"
+table 86066 "Delegate Members Retirementss"
 {
     DrillDownPageID = "Delegate Retire Memberss";
     LookupPageID = "Delegate Retire Memberss";

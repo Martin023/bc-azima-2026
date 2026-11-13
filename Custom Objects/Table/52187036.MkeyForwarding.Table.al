@@ -1,4 +1,4 @@
-table 52187036 "MKey Forwarding"
+table 87036 "MKey Forwarding"
 {
     DataClassification = ToBeClassified;
 

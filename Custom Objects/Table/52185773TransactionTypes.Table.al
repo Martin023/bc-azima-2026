@@ -1,4 +1,4 @@
-table 52185773 "Transaction Types"
+table 85773 "Transaction Types"
 {
     LookupPageID = "Transaction Types SetUp";
 

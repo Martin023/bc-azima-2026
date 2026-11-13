@@ -1,4 +1,4 @@
-table 52185992 "Temp Budget Alloc G/L"
+table 85992 "Temp Budget Alloc G/L"
 {
 
     fields

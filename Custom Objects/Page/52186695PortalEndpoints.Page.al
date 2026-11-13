@@ -1,4 +1,4 @@
-page 52186695 "Portal Endpoints"
+page 86695 "Portal Endpoints"
 {
     PageType = List;
     SourceTable = "Portal Endpoints";

@@ -1,4 +1,4 @@
-page 52187046 "Investment Interest Header"
+page 87046 "Investment Interest Header"
 {
     DeleteAllowed = false;
     PageType = Card;

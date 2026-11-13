@@ -1,9 +1,9 @@
 
-page 52186137 "Defined SLA Card"
+page 86137 "Defined SLA Card"
 {
     Caption = 'Defined SLA Card';
     PageType = Card;
-    SourceTable = 52186018;
+    SourceTable = 86018;
     
     layout
     {

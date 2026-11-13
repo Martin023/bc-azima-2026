@@ -1,4 +1,4 @@
-report 52186849 "FA Period Depreciation Report"
+report 86849 "FA Period Depreciation Report"
 {
     ApplicationArea = All;
     Caption = 'FA Period Depreciation Report';

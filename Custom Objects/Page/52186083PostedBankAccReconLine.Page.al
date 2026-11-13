@@ -1,4 +1,4 @@
-page 52186083 "Posted Bank Acc. Recon Line"
+page 86083 "Posted Bank Acc. Recon Line"
 {
     Editable = false;
     PageType = List;

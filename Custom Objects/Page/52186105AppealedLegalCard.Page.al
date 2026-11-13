@@ -1,4 +1,4 @@
-page 52186105 "Appealed Legal Card"
+page 86105 "Appealed Legal Card"
 {
     PageType = Card;
     SourceTable = "Appeals Table";

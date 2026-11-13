@@ -1,4 +1,4 @@
-page 52187393 "Key Details"
+page 87393 "Key Details"
 {
     ApplicationArea = All;
     Caption = 'Key Details';

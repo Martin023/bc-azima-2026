@@ -1,4 +1,4 @@
-page 52187077 "User Creation Request List"
+page 87077 "User Creation Request List"
 {
     ApplicationArea = All;
     Caption = 'User Access Requests';

@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52186902 "StockKeeping List"
+page 86902 "StockKeeping List"
 {
     CardPageId= "Stock Keeping Header";
     ApplicationArea = All;

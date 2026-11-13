@@ -1,6 +1,6 @@
 namespace BCAZIMA.BCAZIMA;
 
-page 52185436 "ATM Card Delink Reason"
+page 85436 "ATM Card Delink Reason"
 {
     PageType = StandardDialog;
     ApplicationArea = All;

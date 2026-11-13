@@ -1,4 +1,4 @@
-table 52185902 "HR Email Template Variables"
+table 85902 "HR Email Template Variables"
 {
     Caption = 'HR Email Template Variables';
     DataClassification = CustomerContent;

@@ -1,4 +1,4 @@
-table 52186564 "Channel Application Documents"
+table 86564 "Channel Application Documents"
 {
     Caption = 'Channel Application Documents';
     DataClassification = CustomerContent;

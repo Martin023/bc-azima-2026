@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52186153 "Disposal Lines"
+page 86153 "Disposal Lines"
 {
     Caption = 'Disposal Lines';
     PageType = ListPart;

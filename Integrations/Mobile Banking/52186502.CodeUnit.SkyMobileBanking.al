@@ -1,4 +1,4 @@
-codeunit 52186502 "Sky Mobile Banking Integration"
+codeunit 86502 "Sky Mobile Banking Integration"
 {
     procedure HandleRequest(Request: Text): Text
     var
@@ -8696,7 +8696,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         TempBlob.CreateOutStream(OutStr);
                         Base64Convert.FromBase64(file_contents.AsValue.AsText, OutStr);
                         Clear(TheLoanApplicationDocuments.Document);
-                        StoreRecRef.Open(52186564);
+                        StoreRecRef.Open(86564);
                         StoreImageRef := StoreRecRef.Field(TheLoanApplicationDocuments.FieldNo(Document));
                         TempBlob.ToFieldRef(StoreImageRef);
                         StoreImageRef.TestField();

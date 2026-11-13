@@ -4,7 +4,7 @@ using Microsoft.Bank.BankAccount;
 using Microsoft.Bank.Ledger;
 using System.Utilities;
 
-report 52186094 "Custom Bank Detail Trial Bal."
+report 86094 "Custom Bank Detail Trial Bal."
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/BankAccDetailTrialBal.rdl';

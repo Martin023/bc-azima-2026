@@ -1,4 +1,4 @@
-page 52186554 "Loans Top Up"
+page 86554 "Loans Top Up"
 {
     APIGroup = 'powerBI';
     APIPublisher = 'sky';

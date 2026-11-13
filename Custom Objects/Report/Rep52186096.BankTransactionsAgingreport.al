@@ -1,4 +1,4 @@
-report 52186096 "Bank Transactions Aging report"
+report 86096 "Bank Transactions Aging report"
 {
     ApplicationArea = All;
     Caption = 'Bank Transactions Aging report';

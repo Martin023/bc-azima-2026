@@ -1,4 +1,4 @@
-table 52185429 "Procurement Cue Table"
+table 85429 "Procurement Cue Table"
 {
     Caption = 'Procurement Cue Table';
     //FieldClass = FlowField;

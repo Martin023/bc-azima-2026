@@ -1,4 +1,4 @@
-page 52185552 "HR Leave Types1"
+page 85552 "HR Leave Types1"
 {
     CardPageID = "HR Leave Types Card";
     DeleteAllowed = false;

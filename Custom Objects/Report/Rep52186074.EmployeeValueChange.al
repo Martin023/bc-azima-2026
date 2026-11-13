@@ -3,7 +3,7 @@ namespace ALProject.ALProject;
 using System.IO;
 using Microsoft.Foundation.Company;
 
-report 52186074 "Employee Value Change"
+report 86074 "Employee Value Change"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Employee Value Change Report.rdl';

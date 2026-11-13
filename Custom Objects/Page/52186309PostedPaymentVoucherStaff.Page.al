@@ -1,4 +1,4 @@
-page 52186309 "Posted Payment Voucher Staff"
+page 86309 "Posted Payment Voucher Staff"
 {
     DeleteAllowed = false;
     Editable = false;

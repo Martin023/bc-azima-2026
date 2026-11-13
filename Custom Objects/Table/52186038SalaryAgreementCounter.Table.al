@@ -1,4 +1,4 @@
-table 52186038 "Salary Agreement Counter"
+table 86038 "Salary Agreement Counter"
 {
 
     fields

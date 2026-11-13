@@ -1,4 +1,4 @@
-codeunit 52186421 "Credit and Savings Navigation"
+codeunit 86421 "Credit and Savings Navigation"
 {
     TableNo = "G/L Register";
     trigger OnRun()

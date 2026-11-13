@@ -1,4 +1,4 @@
-table 52185856 "Bank Transfer Modes"
+table 85856 "Bank Transfer Modes"
 {
     LookupPageID = "Bank Transfer Modes";
 

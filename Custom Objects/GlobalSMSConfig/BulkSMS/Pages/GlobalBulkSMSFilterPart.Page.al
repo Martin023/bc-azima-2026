@@ -1,4 +1,4 @@
-page 52186073 "Global Bulk SMS Filter Part"
+page 86073 "Global Bulk SMS Filter Part"
 {
     PageType = ListPart;
     SourceTable = "Global Bulk SMS Filter";

@@ -1,4 +1,4 @@
-table 52185665 "HR SMS CC Recipient Buffer"
+table 85665 "HR SMS CC Recipient Buffer"
 {
     Caption = 'HR SMS CC Recipient Buffer';
     TableType = Temporary;

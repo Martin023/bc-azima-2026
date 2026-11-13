@@ -1,4 +1,4 @@
-page 52187410 "Lien Transactions"
+page 87410 "Lien Transactions"
 {
     DeleteAllowed = true;
     PageType = Card;

@@ -1,4 +1,4 @@
-page 52186241 "Terminated Leases"
+page 86241 "Terminated Leases"
 {
     Editable = false;
     PageType = Card;

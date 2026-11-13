@@ -1,4 +1,4 @@
-page 52185505 "HRHOD Department Targets"
+page 85505 "HRHOD Department Targets"
 {
     Caption = 'HOD Department Targets';
     PageType = List;

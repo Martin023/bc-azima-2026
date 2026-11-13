@@ -1,4 +1,4 @@
-table 52186158 "HR Activity Participants"
+table 86158 "HR Activity Participants"
 {
     Caption = 'HR Activity Participants';
 

@@ -1,4 +1,4 @@
-page 52185527 "Closed HR Exit Interview list1"
+page 85527 "Closed HR Exit Interview list1"
 {
     CardPageID = "HR Employee Exit Interviews1";
     DeleteAllowed = false;

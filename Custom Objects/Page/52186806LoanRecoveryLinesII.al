@@ -1,4 +1,4 @@
-page 52186806 "Loan Recovery Lines II"
+page 86806 "Loan Recovery Lines II"
 {
     ApplicationArea = All;
     Caption = 'Loan Recovery Lines II';

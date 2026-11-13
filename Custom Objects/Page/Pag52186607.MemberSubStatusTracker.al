@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186607 "Member Sub-Status Tracker"
+page 86607 "Member Sub-Status Tracker"
 {
     ApplicationArea = All;
     Caption = 'Member Sub-Status Tracker';

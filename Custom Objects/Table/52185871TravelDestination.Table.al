@@ -1,4 +1,4 @@
-table 52185871 "Travel Destination"
+table 85871 "Travel Destination"
 {
     DrillDownPageID = "Destination Code List";
     LookupPageID = "Destination Code List";

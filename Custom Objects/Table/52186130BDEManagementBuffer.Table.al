@@ -1,4 +1,4 @@
-table 52186130 "BDE Management Buffer"
+table 86130 "BDE Management Buffer"
 {
     DrillDownPageID = "BDE Management Buffer";
     LookupPageID = "BDE Management Buffer";

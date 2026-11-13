@@ -1,4 +1,4 @@
-report 52187399 "Disposal FA audit trail"
+report 87399 "Disposal FA audit trail"
 {
     ApplicationArea = All;
     Caption = 'Depreciation FA audit trail';

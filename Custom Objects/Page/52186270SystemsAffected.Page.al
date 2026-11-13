@@ -1,4 +1,4 @@
-page 52186270 "Systems Affected"
+page 86270 "Systems Affected"
 {
     PageType = List;
     SourceTable = "Systems Affected";

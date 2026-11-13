@@ -1,4 +1,4 @@
-table 52185985 "Global Bulk SMS Token Map"
+table 85985 "Global Bulk SMS Token Map"
 {
     Caption = 'Global Bulk SMS Token Map';
     DataClassification = CustomerContent;

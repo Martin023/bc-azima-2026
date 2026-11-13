@@ -3,7 +3,7 @@ using System.Email;
 using System.Security.User;
 using System.Utilities;
 
-report 52185907 "Security Job Queue "
+report 85907 "Security Job Queue "
 {
     ApplicationArea = All;
     Caption = 'Security Job Queue ';

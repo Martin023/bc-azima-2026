@@ -1,7 +1,7 @@
 namespace Mwanga.Mwanga;
 using Microsoft.Foundation.Company;
 
-report 52186191 "Loan Attachment II"
+report 86191 "Loan Attachment II"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Loan Attachment II.rdl';

@@ -1,4 +1,4 @@
-table 52185964 "Surety Management"
+table 85964 "Surety Management"
 {
     DrillDownPageId = "Surety Management List";
     LookupPageId = "Surety Management Card";

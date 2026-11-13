@@ -1,4 +1,4 @@
-page 52185898 "HR Email Notification Log"
+page 85898 "HR Email Notification Log"
 {
     Caption = 'Email Notification Log';
     PageType = List;

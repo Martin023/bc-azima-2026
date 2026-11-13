@@ -1,4 +1,4 @@
-table 52187061 "Motor Vehicle Request"
+table 87061 "Motor Vehicle Request"
 {
     Caption = 'Motor Vehicle Request';
     DataClassification = ToBeClassified;

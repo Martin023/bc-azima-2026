@@ -1,4 +1,4 @@
-page 52187251 "Channel Application Document"
+page 87251 "Channel Application Document"
 {
     ApplicationArea = All;
     Caption = 'Channel Application Document Card';

@@ -1,4 +1,4 @@
-table 52186798 "Debt Collectors Staging"
+table 86798 "Debt Collectors Staging"
 {
     Caption = 'Loan Reversal Lines';
     DataClassification = ToBeClassified;

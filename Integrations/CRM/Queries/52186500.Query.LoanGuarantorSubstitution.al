@@ -1,4 +1,4 @@
-query 52186500 "Loan Guarantor Substitution"
+query 86500 "Loan Guarantor Substitution"
 {
     QueryType = API;
     APIPublisher = 'sky';

@@ -1,4 +1,4 @@
-table 52186561 "CRB Metropol API Setup"
+table 86561 "CRB Metropol API Setup"
 {
     DataClassification = SystemMetadata;
 

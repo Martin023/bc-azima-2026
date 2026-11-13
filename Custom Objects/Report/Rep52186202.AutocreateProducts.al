@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186202 AutocreateProducts
+report 86202 AutocreateProducts
 {
     ApplicationArea = All;
     Caption = 'AutocreateProducts';

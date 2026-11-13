@@ -1,4 +1,4 @@
-page 52187309 "HR  Manager Activities"
+page 87309 "HR  Manager Activities"
 {
     PageType = CardPart;
     SourceTable = "HR Officer Cue";

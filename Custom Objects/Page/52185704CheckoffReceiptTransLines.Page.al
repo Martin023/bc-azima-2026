@@ -1,4 +1,4 @@
-page 52185704 "Checkoff Receipt Trans Lines"
+page 85704 "Checkoff Receipt Trans Lines"
 {
     PageType = List;
     SourceTable = "Checkoff  Receipt Trans Lines";

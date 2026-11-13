@@ -1,4 +1,4 @@
-table 52187007 "Share Capital Transfer Buffer"
+table 87007 "Share Capital Transfer Buffer"
 {
     DrillDownPageId = "Share Capital Transfer List";
     LookupPageId = "Share Capital Transfer List";

@@ -1,4 +1,4 @@
-page 52185944 "Imprest Details List"
+page 85944 "Imprest Details List"
 {
     Caption = ' Travel  Imprest Details List';
     Editable = false;

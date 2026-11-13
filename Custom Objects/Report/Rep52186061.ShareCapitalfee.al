@@ -1,4 +1,4 @@
-report 52186061 "Share Capital fee"
+report 86061 "Share Capital fee"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Share Capital Transfer fee Report.rdl';

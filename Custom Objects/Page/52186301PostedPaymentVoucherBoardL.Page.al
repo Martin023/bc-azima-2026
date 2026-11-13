@@ -1,4 +1,4 @@
-page 52186301 "Posted Payment Voucher Board L"
+page 86301 "Posted Payment Voucher Board L"
 {
     CardPageID = "Posted Payment Voucher Board";
     DeleteAllowed = false;

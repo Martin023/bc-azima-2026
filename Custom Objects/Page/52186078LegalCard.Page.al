@@ -1,4 +1,4 @@
-page 52186078 "Legal Card"
+page 86078 "Legal Card"
 {
     DeleteAllowed = false;
     PageType = Card;

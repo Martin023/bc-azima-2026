@@ -1,4 +1,4 @@
-table 52186523 "Salary Lines P"
+table 86523 "Salary Lines P"
 {
     DrillDownPageId = "Salary Lines P";
     LookupPageId = "Salary Lines P";

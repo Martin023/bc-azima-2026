@@ -1,4 +1,4 @@
-table 52185702 "Image Data"
+table 85702 "Image Data"
 {
 
     fields

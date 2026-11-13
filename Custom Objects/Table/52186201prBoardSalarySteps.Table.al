@@ -1,4 +1,4 @@
-table 52186201 "prBoard Salary Steps"
+table 86201 "prBoard Salary Steps"
 {
 
     fields

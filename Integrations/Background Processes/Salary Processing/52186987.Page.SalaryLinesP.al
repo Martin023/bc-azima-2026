@@ -1,4 +1,4 @@
-page 52186987 "Salary Lines P"
+page 86987 "Salary Lines P"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

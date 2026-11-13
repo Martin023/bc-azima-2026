@@ -1,4 +1,4 @@
-table 52185619 "prEmployee Cost Centers"
+table 85619 "prEmployee Cost Centers"
 {
 
     fields

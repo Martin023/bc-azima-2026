@@ -1,4 +1,4 @@
-page 52186120 "Surety Management Card"
+page 86120 "Surety Management Card"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -232,7 +232,7 @@ page 52186120 "Surety Management Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52185964), "No." = field("Surety No");
+                SubPageLink = "Table ID" = Const(85964), "No." = field("Surety No");
             }
             systempart(Control1900383207; Links)
             {

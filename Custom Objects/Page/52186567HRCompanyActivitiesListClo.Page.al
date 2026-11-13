@@ -1,4 +1,4 @@
-page 52186472 "HR Company Activities List Cl1"
+page 86472 "HR Company Activities List Cl1"
 {
     CardPageID = "HR Company Activities Card";
     DeleteAllowed = false;

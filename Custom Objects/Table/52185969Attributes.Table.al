@@ -1,4 +1,4 @@
-table 52185969 Attributes
+table 85969 Attributes
 {
 
     fields

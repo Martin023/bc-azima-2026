@@ -1,4 +1,4 @@
-page 52187346 "Approved Vehicle"
+page 87346 "Approved Vehicle"
 {
     ApplicationArea = All;
     Caption = 'Approved Vehicle';

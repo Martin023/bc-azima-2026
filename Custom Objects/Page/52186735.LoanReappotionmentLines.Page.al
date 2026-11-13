@@ -1,4 +1,4 @@
-page 52186735 "Loan Reappotionment Lines"
+page 86735 "Loan Reappotionment Lines"
 {
     ApplicationArea = All;
     Caption = 'Loan Reappotionment Lines';

@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186158 "Legal Share Capital Register"
+report 86158 "Legal Share Capital Register"
 {
     ApplicationArea = All;
     Caption = 'Legal Share Capital Register';

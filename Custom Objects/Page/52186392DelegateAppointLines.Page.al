@@ -1,4 +1,4 @@
-page 52186392 "Delegate Appoint  Lines"
+page 86392 "Delegate Appoint  Lines"
 {
     PageType = ListPart;
     SourceTable = "Delegate AGM Appoint Update";

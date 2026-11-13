@@ -1,4 +1,4 @@
-table 52185894 "Payment Line Board"
+table 85894 "Payment Line Board"
 {
     //DrillDownPageId = Payment line
     fields

@@ -1,4 +1,4 @@
-page 52185702 "Checkoff Receipt Transactions"
+page 85702 "Checkoff Receipt Transactions"
 {
     DeleteAllowed = false;
     PageType = Card;

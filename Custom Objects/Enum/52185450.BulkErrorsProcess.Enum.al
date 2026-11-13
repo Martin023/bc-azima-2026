@@ -1,6 +1,6 @@
 namespace Mwanga.Mwanga;
 
-enum 52185453 "Bulk Errors Process"
+enum 85453 "Bulk Errors Process"
 {
     Extensible = true;
     

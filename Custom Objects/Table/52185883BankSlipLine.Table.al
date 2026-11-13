@@ -1,4 +1,4 @@
-table 52185883 "Bank Slip Line"
+table 85883 "Bank Slip Line"
 {
 
     fields

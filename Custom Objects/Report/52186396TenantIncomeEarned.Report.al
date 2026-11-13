@@ -1,4 +1,4 @@
-Report 52186396 "Tenant Income Earned"
+Report 86396 "Tenant Income Earned"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Tenant Income Earned.rdl';

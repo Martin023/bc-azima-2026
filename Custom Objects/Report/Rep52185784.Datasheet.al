@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52185784 Datasheet
+report 85784 Datasheet
 {
     ApplicationArea = All;
     Caption = 'Datasheet';

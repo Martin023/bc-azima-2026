@@ -1,4 +1,4 @@
-table 52185921 "HR SMS Notification Log"
+table 85921 "HR SMS Notification Log"
 {
     Caption = 'HR SMS Notification Log';
     DataClassification = CustomerContent;

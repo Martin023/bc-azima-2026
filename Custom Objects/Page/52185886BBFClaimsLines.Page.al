@@ -1,4 +1,4 @@
-page 52185886 "BBF Claims Lines"
+page 85886 "BBF Claims Lines"
 {
     PageType = ListPart;
     SourceTable = "BBF Claim Lines";

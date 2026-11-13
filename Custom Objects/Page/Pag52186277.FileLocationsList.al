@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186277 "File Locations List"
+page 86277 "File Locations List"
 {
     Caption = 'File Locations List';
     PageType = List;

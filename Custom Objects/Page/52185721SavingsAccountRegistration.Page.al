@@ -1,4 +1,4 @@
-page 52185721 "Savings Account Registration"
+page 85721 "Savings Account Registration"
 {
     PageType = List;
     SourceTable = "Savings Account Registration";

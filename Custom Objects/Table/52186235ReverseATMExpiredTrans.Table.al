@@ -1,4 +1,4 @@
-table 52186235 "Reverse ATM Expired Trans"
+table 86235 "Reverse ATM Expired Trans"
 {
 
     fields

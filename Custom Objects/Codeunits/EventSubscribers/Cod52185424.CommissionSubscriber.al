@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using System.Security.User;
 
-codeunit 52185424 EventSubscribers
+codeunit 85424 EventSubscribers
 {
 
     // [EventSubscriber(ObjectType::Table, 52185700, 'OnAfterInsertEvent', '', false, false)]

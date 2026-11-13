@@ -1,4 +1,4 @@
-report 52186342 "Individual Usage Report"
+report 86342 "Individual Usage Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Individual Usage Report.rdl';

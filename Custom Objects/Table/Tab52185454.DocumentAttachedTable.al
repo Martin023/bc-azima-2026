@@ -10,7 +10,7 @@ using System.Security.AccessControl;
 using System.Utilities;
 
 //table 1173 "Document Attachment"
-table 52185454 "Document Attachment Table"
+table 85454 "Document Attachment Table"
 {
     Caption = 'Document Attachment Table';
 

@@ -1,4 +1,4 @@
-TableExtension 52186247 tableextension52186247 extends "Sales Invoice Header"
+TableExtension 86247 tableextension52186247 extends "Sales Invoice Header"
 {
     fields
     {

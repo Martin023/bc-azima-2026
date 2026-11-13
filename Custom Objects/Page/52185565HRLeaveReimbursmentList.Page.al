@@ -1,4 +1,4 @@
-page 52185565 "HR Leave Reimbursment List1"
+page 85565 "HR Leave Reimbursment List1"
 {
     CardPageID = "HR Leave Reimbursment Card";
     DeleteAllowed = false;

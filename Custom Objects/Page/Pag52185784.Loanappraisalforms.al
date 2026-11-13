@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185784 "Loan appraisal forms"
+page 85784 "Loan appraisal forms"
 {
     ApplicationArea = All;
     Caption = 'Loan appraisal forms';

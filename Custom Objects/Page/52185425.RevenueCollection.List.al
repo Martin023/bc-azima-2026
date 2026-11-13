@@ -1,6 +1,6 @@
 namespace Mwanga.Mwanga;
 
-page 52185425 "Revenue Collection List"
+page 85425 "Revenue Collection List"
 {
     ApplicationArea = All;
     Caption = 'Revenue Collection';

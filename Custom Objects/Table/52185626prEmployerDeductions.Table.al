@@ -1,4 +1,4 @@
-table 52185626 "prEmployer Deductions"
+table 85626 "prEmployer Deductions"
 {
     DrillDownPageID = "prEmployer Deductions";
     LookupPageID = "prEmployer Deductions";

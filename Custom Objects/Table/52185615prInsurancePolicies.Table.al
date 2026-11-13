@@ -1,4 +1,4 @@
-table 52185615 prInsurancePolicies
+table 85615 prInsurancePolicies
 {
 
     fields

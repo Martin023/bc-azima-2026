@@ -1,4 +1,4 @@
-page 52185504 "Payment Lists"
+page 85504 "Payment Lists"
 {
     Caption = 'Normal Payment List';
     CardPageID = "Payment Header";

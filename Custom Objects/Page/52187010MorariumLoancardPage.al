@@ -1,4 +1,4 @@
-page 52187010 "Moratorium Loan Card"
+page 87010 "Moratorium Loan Card"
 {
     PageType = Card;
     UsageCategory = Administration;

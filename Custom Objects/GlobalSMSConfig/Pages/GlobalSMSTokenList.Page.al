@@ -1,4 +1,4 @@
-page 52186019 "Global SMS Token List"
+page 86019 "Global SMS Token List"
 {
     PageType = List;
     ApplicationArea = All;

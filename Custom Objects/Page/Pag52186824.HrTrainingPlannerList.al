@@ -1,4 +1,4 @@
-page 52186824 "Hr Training Planner List"
+page 86824 "Hr Training Planner List"
 {
     CardPageId="Training Planner";
     ApplicationArea = All;

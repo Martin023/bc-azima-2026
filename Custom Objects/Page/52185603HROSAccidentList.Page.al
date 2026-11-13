@@ -1,4 +1,4 @@
-page 52185603 "HR OSAccident List"
+page 85603 "HR OSAccident List"
 {
     CardPageID = "HR OSAccident Card";
     PageType = List;

@@ -1,4 +1,4 @@
-page 52186475 "HR Employee Transfer List1"
+page 86475 "HR Employee Transfer List1"
 {
     CardPageID = "HR Employee Transfer Card";
     Editable = false;

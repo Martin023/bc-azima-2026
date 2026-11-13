@@ -1,4 +1,4 @@
-table 52185693 "Relationship Types"
+table 85693 "Relationship Types"
 {
     LookupPageID = "Relationship Types";
 

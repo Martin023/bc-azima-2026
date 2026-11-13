@@ -1,4 +1,4 @@
-page 52186505 "EDMS API Setup"
+page 86505 "EDMS API Setup"
 {
     PageType = List;
     ApplicationArea = Advanced;

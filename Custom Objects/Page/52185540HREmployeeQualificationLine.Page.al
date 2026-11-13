@@ -1,4 +1,4 @@
-page 52185540 "HR Employee Qualification Line"
+page 85540 "HR Employee Qualification Line"
 {
     Caption = 'Employee Qualification Lines';
     PageType = ListPart;

@@ -1,4 +1,4 @@
-table 52185602 "HR Appraisal Header"
+table 85602 "HR Appraisal Header"
 {
     DrillDownPageId = "HR 360 Appraisals List - TS1";
     LookupPageId = "HR 360 Appraisals List - TS1";

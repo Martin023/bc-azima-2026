@@ -1,4 +1,4 @@
-page 52186302 "Payment Voucher Board List"
+page 86302 "Payment Voucher Board List"
 {
     CardPageID = "Payment Voucher Board";
     Editable = false;

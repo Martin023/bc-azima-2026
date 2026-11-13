@@ -1,4 +1,4 @@
-table 52185884 "Payment Mode Charges"
+table 85884 "Payment Mode Charges"
 {
 
     fields

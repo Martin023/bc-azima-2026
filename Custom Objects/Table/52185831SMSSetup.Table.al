@@ -1,4 +1,4 @@
-table 52185831 "SMS Setup"
+table 85831 "SMS Setup"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186218 "Active Properties"
+page 86218 "Active Properties"
 {
     Editable = false;
     PageType = Card;

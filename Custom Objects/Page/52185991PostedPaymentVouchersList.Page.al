@@ -1,4 +1,4 @@
-page 52185991 "Posted Payment Vouchers List"
+page 85991 "Posted Payment Vouchers List"
 {
     CardPageID = "Posted Payment Header";
     DeleteAllowed = false;

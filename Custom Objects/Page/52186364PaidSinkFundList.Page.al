@@ -1,4 +1,4 @@
-page 52186364 "Paid SinkFund List"
+page 86364 "Paid SinkFund List"
 {
     CardPageID = "SinkFund Notice";
     DeleteAllowed = false;

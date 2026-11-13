@@ -1,4 +1,4 @@
-page 52186883 "Account Activation List"
+page 86883 "Account Activation List"
 {
     CardPageID = "Account Activation";
     Caption = 'FOSA Account Activation';

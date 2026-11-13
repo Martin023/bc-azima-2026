@@ -1,4 +1,4 @@
-table 52185664 prLatenessLedger
+table 85664 prLatenessLedger
 {
     DrillDownPageID = prLatenessLedger;
     LookupPageID = prLatenessLedger;

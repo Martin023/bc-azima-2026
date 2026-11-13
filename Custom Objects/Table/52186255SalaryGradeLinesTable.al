@@ -1,4 +1,4 @@
-table 52186255 "Salary Grade Lines"
+table 86255 "Salary Grade Lines"
 {
     DataClassification = ToBeClassified;
 

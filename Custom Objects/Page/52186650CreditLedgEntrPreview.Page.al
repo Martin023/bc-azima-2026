@@ -1,4 +1,4 @@
-page 52186650 "Credit Ledg. Entr. Preview"
+page 86650 "Credit Ledg. Entr. Preview"
 {
     Caption = 'Credit  Ledg. Entr. Preview';
     DataCaptionFields = "No. Series";

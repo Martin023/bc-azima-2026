@@ -1,4 +1,4 @@
-page 52186096 "FA WIP Job Task Lines"
+page 86096 "FA WIP Job Task Lines"
 {
     Caption = 'FA WIP Job Task Lines';
     DataCaptionFields = "Job No.";

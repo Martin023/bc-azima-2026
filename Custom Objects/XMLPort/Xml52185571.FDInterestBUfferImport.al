@@ -1,5 +1,5 @@
 
-xmlport 52185571 FDInterestBUfferImport
+xmlport 85571 FDInterestBUfferImport
 {
     Format=VariableText;
     Caption = 'FDInterestBUfferImport';

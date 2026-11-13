@@ -1,4 +1,4 @@
-table 52186213 "Journal Two"
+table 86213 "Journal Two"
 {
 
     fields

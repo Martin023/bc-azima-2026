@@ -1,4 +1,4 @@
-table 52185909 "Imprest Header"
+table 85909 "Imprest Header"
 {
     DrillDownPageID = "Imprest Vouchers List";
     LookupPageID = "Imprest Vouchers List";

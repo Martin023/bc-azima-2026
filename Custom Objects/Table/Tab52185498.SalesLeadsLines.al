@@ -1,4 +1,4 @@
-table 52185498 "Sales Leads Lines"
+table 85498 "Sales Leads Lines"
 {
     Caption = 'Sales Leads Lines';
     DataClassification = ToBeClassified;

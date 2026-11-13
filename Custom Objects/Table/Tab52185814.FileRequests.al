@@ -1,4 +1,4 @@
-table 52185814 "File Requests"
+table 85814 "File Requests"
 {
     Caption = 'File Requests';
     DataClassification = ToBeClassified;

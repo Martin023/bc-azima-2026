@@ -1,4 +1,4 @@
-page 52186437 "BDE Management Buffer"
+page 86437 "BDE Management Buffer"
 {
     DeleteAllowed = false;
     PageType = List;

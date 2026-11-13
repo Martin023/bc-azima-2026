@@ -1,4 +1,4 @@
-table 52185482 "Loan Product Availability"
+table 85482 "Loan Product Availability"
 {
     DataClassification = ToBeClassified;
 

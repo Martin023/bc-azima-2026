@@ -1,4 +1,4 @@
-page 52185961 "HR SMS Template List"
+page 85961 "HR SMS Template List"
 {
     Caption = 'HR SMS Templates';
     PageType = List;

@@ -1,4 +1,4 @@
-page 52186145 "HR Individual Appraisal Card"
+page 86145 "HR Individual Appraisal Card"
 {
     DeleteAllowed = false;
     PageType = Card;

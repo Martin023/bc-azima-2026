@@ -1,4 +1,4 @@
-table 52185797 "Account Transfer Header"
+table 85797 "Account Transfer Header"
 {
     DrillDownPageID = "Account Transfer List";
     LookupPageID = "Account Transfer List";

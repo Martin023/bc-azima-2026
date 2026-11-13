@@ -1,4 +1,4 @@
-report 52187005 "Society Vehicle Repair"
+report 87005 "Society Vehicle Repair"
 {
     ApplicationArea = All;
     Caption = 'Society Vehicle Repair';

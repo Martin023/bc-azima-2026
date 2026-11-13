@@ -1,4 +1,4 @@
-page 52187337 "Payroll Activity"
+page 87337 "Payroll Activity"
 {
     PageType = CardPart;
     SourceTable = "Payroll Activities Cue";

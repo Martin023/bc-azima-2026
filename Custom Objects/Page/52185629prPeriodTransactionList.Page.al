@@ -1,4 +1,4 @@
-page 52185629 "prPeriodTransaction List"
+page 85629 "prPeriodTransaction List"
 {
     DeleteAllowed = false;
     Editable = false;

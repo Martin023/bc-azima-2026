@@ -1,4 +1,4 @@
-page 52186423 "Payment Methods Application"
+page 86423 "Payment Methods Application"
 {
     PageType = List;
     SourceTable = "Payment Methods Application";

@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185584 "Purchase Quote Vendors"
+page 85584 "Purchase Quote Vendors"
 {
     Caption = 'Purchase Quote Vendors';
     PageType = ListPart;

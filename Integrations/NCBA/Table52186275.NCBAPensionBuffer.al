@@ -1,4 +1,4 @@
-table 52186275 "NCBA Pension Buffer"
+table 86275 "NCBA Pension Buffer"
 {
     Caption = 'NCBA Pension Buffer';
     DataClassification = ToBeClassified;

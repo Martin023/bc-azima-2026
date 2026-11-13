@@ -1,4 +1,4 @@
-table 52186246 "Batching Process Table"
+table 86246 "Batching Process Table"
 {
     Caption = 'Batching Process Table';
     DataClassification = ToBeClassified;

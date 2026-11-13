@@ -1,4 +1,4 @@
-xmlport 52185564 "Attachement lines"
+xmlport 85564 "Attachement lines"
 {
     Caption = 'DMUAttachment';
     Format=VariableText;

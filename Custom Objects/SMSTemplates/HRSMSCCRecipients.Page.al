@@ -1,4 +1,4 @@
-page 52185666 "HR SMS CC Recipients"
+page 85666 "HR SMS CC Recipients"
 {
     Caption = 'CC Recipients';
     PageType = ListPart;

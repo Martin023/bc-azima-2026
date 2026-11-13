@@ -1,4 +1,4 @@
-page 52187034 "Refund,Account Transfer "
+page 87034 "Refund,Account Transfer "
 {
     ApplicationArea = All;
     Caption = 'Refund And Account Transfer';

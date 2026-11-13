@@ -1,4 +1,4 @@
-table 52185965 "Cases Noitification"
+table 85965 "Cases Noitification"
 {
 
     fields

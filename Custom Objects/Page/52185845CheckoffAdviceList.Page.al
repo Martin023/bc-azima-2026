@@ -1,4 +1,4 @@
-page 52185845 "Checkoff Advice List"
+page 85845 "Checkoff Advice List"
 {
     CardPageID = "Checkoff Advice Header";
     Editable = false;

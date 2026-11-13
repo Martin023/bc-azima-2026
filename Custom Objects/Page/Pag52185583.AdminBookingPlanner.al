@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52185583 "Admin Booking Planner"
+page 85583 "Admin Booking Planner"
 {
     Caption = 'Admin Booking Planner';
     PageType = List;

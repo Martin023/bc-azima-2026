@@ -1,4 +1,4 @@
-table 52186263 "ATM Repin Table"
+table 86263 "ATM Repin Table"
 {
     DrillDownPageID = "ATM Repin Application List";
     LookupPageID = "ATM Repin Application List";

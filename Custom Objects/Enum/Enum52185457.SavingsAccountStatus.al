@@ -1,6 +1,6 @@
 namespace azima.azima;
 
-enum 52185457 "Savings Account Status"
+enum 85457 "Savings Account Status"
 {
     Extensible = true;
     

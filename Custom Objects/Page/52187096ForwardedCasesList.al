@@ -1,4 +1,4 @@
-page 52187096 "Forwarded Cases"
+page 87096 "Forwarded Cases"
 {
     ApplicationArea = All;
     PageType = List;

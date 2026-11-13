@@ -1,4 +1,4 @@
-page 52187292 "Loan Application Card_HR"
+page 87292 "Loan Application Card_HR"
 {
     //DeleteAllowed = false;
     PageType = Card;
@@ -1316,27 +1316,27 @@ page 52187292 "Loan Application Card_HR"
                                     //    Rec.Modify;
                                 End;
 
-                                CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
+                                CreateAppraisalBackup(LoanApp."Loan No.", 85745);
                             end else
                                 if ProdFac."Mortgage Loan" = true then begin
                                     IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
                                     REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
                                     Rec."Loan Appraised By" := UserId;
                                     //   Rec.Modify;
-                                    CreateAppraisalBackup(LoanApp."Loan No.", 52185957);
+                                    CreateAppraisalBackup(LoanApp."Loan No.", 85957);
                                 end;
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
                             REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
                             Rec."Loan Appraised By" := UserId;
                             // Rec.Modify;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52185640);
+                            CreateAppraisalBackup(LoanApp."Loan No.", 85640);
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
                             REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
                             Rec."Loan Appraised By" := UserId;
                             //  Rec.Modify;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52185747);
+                            CreateAppraisalBackup(LoanApp."Loan No.", 85747);
                         end;
                         AmountTaken := 0;
                         RevolvingBal := 0;
@@ -1361,7 +1361,7 @@ page 52187292 "Loan Application Card_HR"
                         REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
                         Rec."Loan Appraised By" := UserId;
                         //  Rec.Modify;
-                        CreateAppraisalBackup(LoanApp."Loan No.", 52186719);
+                        CreateAppraisalBackup(LoanApp."Loan No.", 86719);
                     end;
                 end;
 

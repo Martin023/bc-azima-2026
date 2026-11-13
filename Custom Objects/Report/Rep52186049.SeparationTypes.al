@@ -1,4 +1,4 @@
-report 52186049 SeparationTypes
+report 86049 SeparationTypes
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Separation Types.rdl';

@@ -1,4 +1,4 @@
-page 52185755 "Credit Ledger Entries"
+page 85755 "Credit Ledger Entries"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

@@ -5,7 +5,7 @@ using Microsoft.Foundation.Company;
 using Microsoft.FixedAssets.Depreciation;
 using Microsoft.FixedAssets.Ledger;
 
-report 52185996 "FA Depreciation History"
+report 85996 "FA Depreciation History"
 
 {
     ApplicationArea = All;

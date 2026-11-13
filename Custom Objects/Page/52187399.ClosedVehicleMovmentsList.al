@@ -1,4 +1,4 @@
-page 52187399 "Closed Vehicle Movments - List"
+page 87399 "Closed Vehicle Movments - List"
 {
     ApplicationArea = All;
     Caption = 'Approved Vehicle Movements';

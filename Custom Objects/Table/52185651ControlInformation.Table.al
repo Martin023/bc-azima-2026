@@ -1,4 +1,4 @@
-table 52185651 "Control-Information"
+table 85651 "Control-Information"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52185457 "Insurance Claims"
+table 85457 "Insurance Claims"
 {
     Caption = 'Insurance Claims';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52186143 "Asset Finance Loan"
+table 86143 "Asset Finance Loan"
 {
     DrillDownPageID = "Posted End Year Interest";
     LookupPageID = "Posted End Year Interest";

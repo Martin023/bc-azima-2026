@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52187370 "Files List"
+page 87370 "Files List"
 {
     ApplicationArea = All;
     Caption = 'Files List ';

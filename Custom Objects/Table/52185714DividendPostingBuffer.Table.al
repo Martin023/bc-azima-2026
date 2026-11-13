@@ -1,4 +1,4 @@
-table 52185714 "Dividend Posting Buffer"
+table 85714 "Dividend Posting Buffer"
 {
 
     fields

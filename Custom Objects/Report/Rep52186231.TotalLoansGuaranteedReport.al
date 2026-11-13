@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Foundation.Company;
 
-report 52186231 "Total Loans Guaranteed Report"
+report 86231 "Total Loans Guaranteed Report"
 {
     ApplicationArea = All;
     Caption = 'Total Loans Guaranteed Report';

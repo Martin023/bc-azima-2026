@@ -1,4 +1,4 @@
-page 52185708 "Account  Picture & Signature"
+page 85708 "Account  Picture & Signature"
 {
     Caption = 'Account  Picture & Signature';
     DeleteAllowed = false;

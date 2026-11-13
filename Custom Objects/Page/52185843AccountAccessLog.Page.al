@@ -1,4 +1,4 @@
-page 52185843 "Account Access Log"
+page 85843 "Account Access Log"
 {
     DeleteAllowed = false;
     Editable = false;

@@ -1,4 +1,4 @@
-table 52185663 PrOtherSetups
+table 85663 PrOtherSetups
 {
     DrillDownPageID = prOtherSetups;
     LookupPageID = prOtherSetups;

@@ -1,4 +1,4 @@
-enum 52185700 "Perfection Stages"
+enum 85700 "Perfection Stages"
 {
     Extensible = true;
     value(0; " ")

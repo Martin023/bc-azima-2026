@@ -1,4 +1,4 @@
-page 52185740 "Fixed Deposit Type"
+page 85740 "Fixed Deposit Type"
 {
     DeleteAllowed = true;
     Editable = true;

@@ -1,4 +1,4 @@
-page 52186656 "Standing Order Control Card"
+page 86656 "Standing Order Control Card"
 {
     DeleteAllowed = false;
     PageType = Card;

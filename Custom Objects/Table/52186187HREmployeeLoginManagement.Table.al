@@ -1,4 +1,4 @@
-table 52186187 "HR Employee Login Management"
+table 86187 "HR Employee Login Management"
 {
     // DrillDownPageID = "HR Emp. Login Management List";
     // LookupPageID = "HR Emp. Login Management List";

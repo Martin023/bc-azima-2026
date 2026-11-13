@@ -3,7 +3,7 @@ namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.FixedAssets.Setup;
 using Microsoft.FixedAssets.Depreciation;
 
-tableextension 52185431 "FA Class table Extension" extends "FA Class"
+tableextension 85431 "FA Class table Extension" extends "FA Class"
 {
     fields
     {

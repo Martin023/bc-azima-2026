@@ -1,4 +1,4 @@
-page 52187237 "M-Smart Member Edit"
+page 87237 "M-Smart Member Edit"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

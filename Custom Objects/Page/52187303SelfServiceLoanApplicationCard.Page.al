@@ -1,4 +1,4 @@
-page 52187303 "Self Loan Application Card"
+page 87303 "Self Loan Application Card"
 {
     DeleteAllowed = false;
     PageType = Card;

@@ -1,4 +1,4 @@
-table 52185972 "Bank Acc. Statement Line"
+table 85972 "Bank Acc. Statement Line"
 {
 
     fields

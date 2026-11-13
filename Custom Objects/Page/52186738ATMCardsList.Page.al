@@ -1,4 +1,4 @@
-page 52186753 "ATM Card List"
+page 86753 "ATM Card List"
 {
     Editable = false;
     PageType = List;

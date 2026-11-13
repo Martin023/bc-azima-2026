@@ -1,4 +1,4 @@
-page 52187411 "Bosa Salary Appraisal Set-up"
+page 87411 "Bosa Salary Appraisal Set-up"
 {
     PageType = List;
     ApplicationArea = All;

@@ -1,4 +1,4 @@
-page 52186202 "Lease-InActivate"
+page 86202 "Lease-InActivate"
 {
     PageType = Card;
     SourceTable = Lease;

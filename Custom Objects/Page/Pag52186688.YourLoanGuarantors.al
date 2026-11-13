@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-page 52186688 "Your Loan Guarantors"
+page 86688 "Your Loan Guarantors"
 {
     ApplicationArea = All;
     Caption = 'Your Loan Guarantors';

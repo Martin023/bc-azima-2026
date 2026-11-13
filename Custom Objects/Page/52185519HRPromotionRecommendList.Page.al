@@ -1,4 +1,4 @@
-page 52185519 "HR Promotion Recommend List"
+page 85519 "HR Promotion Recommend List"
 {
     CardPageID = "HR Promotion Recommend Header";
     DeleteAllowed = false;

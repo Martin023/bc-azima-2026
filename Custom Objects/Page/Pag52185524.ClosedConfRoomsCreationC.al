@@ -1,4 +1,4 @@
-page 52185524 "Closed Conf Rooms - Creation C"
+page 85524 "Closed Conf Rooms - Creation C"
 {
     Caption = 'Closed Conf Rooms - Creation C';
     PageType = Card;

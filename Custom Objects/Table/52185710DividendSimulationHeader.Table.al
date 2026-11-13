@@ -1,4 +1,4 @@
-table 52185710 "Dividend Simulation Header"
+table 85710 "Dividend Simulation Header"
 {
 
     fields

@@ -1,5 +1,5 @@
 // #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
+PageExtension 86447 pageextension52186447 extends "Fixed Asset Card"
 {
     PromotedActionCategories = ',,,,EDMS';
 
@@ -269,7 +269,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
     }
     procedure FnRestrictAccess()
     var
-        StatusPermission: Record 52185687;
+        StatusPermission: Record 85687;
         ErrorOnRestrictViewTxt: label 'You do Not have Permission on View,Read,Modify on this Page. Contact system administrator for assistance. %1-%2';
     begin
         StatusPermission.Reset;

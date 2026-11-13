@@ -1,4 +1,4 @@
-codeunit 52187200 DataTransfer
+codeunit 87200 DataTransfer
 {
     var
         DataToPass: Code[50];

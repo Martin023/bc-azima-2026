@@ -1,4 +1,4 @@
-page 52186772 "Mobile Deposits Keywords Setup"
+page 86772 "Mobile Deposits Keywords Setup"
 {
     ApplicationArea = All;
     Caption = 'Mobile Deposits Keywords Setup';

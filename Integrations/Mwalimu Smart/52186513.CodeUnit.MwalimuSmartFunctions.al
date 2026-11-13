@@ -1,4 +1,4 @@
-codeunit 52186513 "Mwalimu Smart Functions"
+codeunit 86513 "Mwalimu Smart Functions"
 {
     procedure TestUptime()
     var

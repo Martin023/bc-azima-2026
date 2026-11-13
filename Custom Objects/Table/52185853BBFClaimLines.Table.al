@@ -1,4 +1,4 @@
-table 52185853 "BBF Claim Lines"
+table 85853 "BBF Claim Lines"
 {
     LookupPageID = "Next of KIN";
 

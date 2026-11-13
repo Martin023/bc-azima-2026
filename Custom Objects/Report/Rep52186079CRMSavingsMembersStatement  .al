@@ -1,4 +1,4 @@
-report 52186079 "CRM Savings's Statement"
+report 86079 "CRM Savings's Statement"
 {
     Caption = 'CRM Savings''s Statement';
     UsageCategory = ReportsAndAnalysis;

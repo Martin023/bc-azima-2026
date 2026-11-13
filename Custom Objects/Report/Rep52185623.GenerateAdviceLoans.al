@@ -1,7 +1,7 @@
 namespace AzimaBC.AzimaBC;
 using Microsoft.Sales.Customer;
 
-report 52185623 "Generate Advice Loans"
+report 85623 "Generate Advice Loans"
 {
     ApplicationArea = All;
     Caption = 'Generate Advice Loans';

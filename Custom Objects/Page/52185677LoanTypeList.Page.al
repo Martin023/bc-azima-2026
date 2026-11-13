@@ -1,4 +1,4 @@
-page 52185677 "Loan Type List"
+page 85677 "Loan Type List"
 {
     CardPageID = "Staff Loan Types";
     PageType = List;

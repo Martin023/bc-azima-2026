@@ -1,4 +1,4 @@
- enum 52185434 "Workflow Status Main Flags"
+ enum 85434 "Workflow Status Main Flags"
     {
         Value(0; Open) { }
         Value(1; Pending) { Caption = 'Pending Approval'; }

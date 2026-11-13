@@ -1,4 +1,4 @@
-page 52187040 "Bulk Refunds Card"
+page 87040 "Bulk Refunds Card"
 {
     ApplicationArea = All;
     Caption = 'Bulk Refunds Card';

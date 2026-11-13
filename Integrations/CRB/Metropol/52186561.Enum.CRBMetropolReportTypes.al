@@ -1,4 +1,4 @@
-enum 52186561 "CRB Metropol Report Types"
+enum 86561 "CRB Metropol Report Types"
 {
     value(1; "Identity Verification")
     {

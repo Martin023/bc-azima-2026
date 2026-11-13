@@ -1,4 +1,4 @@
-page 52186200 "Lease Review-Effect"
+page 86200 "Lease Review-Effect"
 {
     DeleteAllowed = false;
     InsertAllowed = false;

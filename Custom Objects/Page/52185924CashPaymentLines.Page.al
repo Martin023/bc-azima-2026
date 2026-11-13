@@ -1,4 +1,4 @@
-page 52185924 "Cash Payment Lines"
+page 85924 "Cash Payment Lines"
 {
     Editable = true;
     PageType = ListPart;

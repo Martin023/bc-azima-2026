@@ -1,4 +1,4 @@
-table 52186045 "ATM Charges"
+table 86045 "ATM Charges"
 {
 
     fields

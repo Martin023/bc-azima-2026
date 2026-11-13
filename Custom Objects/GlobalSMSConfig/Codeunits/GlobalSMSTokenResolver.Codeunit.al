@@ -1,4 +1,4 @@
-codeunit 52185468 "Global SMS Token Resolver"
+codeunit 85468 "Global SMS Token Resolver"
 {
     InherentEntitlements = X;
     InherentPermissions = X;

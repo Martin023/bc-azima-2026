@@ -1,4 +1,4 @@
-table 52185678 "PrCasual Payroll Setup"
+table 85678 "PrCasual Payroll Setup"
 {
 
     fields

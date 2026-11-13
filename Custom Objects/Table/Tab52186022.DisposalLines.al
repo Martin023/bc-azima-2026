@@ -1,4 +1,4 @@
-table 52186022 "Disposal Lines"
+table 86022 "Disposal Lines"
 {
     Caption = 'Disposal Lines';
     DataClassification = ToBeClassified;

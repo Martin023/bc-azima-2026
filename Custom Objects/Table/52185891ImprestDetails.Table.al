@@ -1,4 +1,4 @@
-table 52185891 "Imprest Details"
+table 85891 "Imprest Details"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52187398 "Rejected Vehicle Movments Card"
+page 87398 "Rejected Vehicle Movments Card"
 
 {
     ApplicationArea = All;

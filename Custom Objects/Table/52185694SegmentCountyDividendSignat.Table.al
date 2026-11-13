@@ -1,7 +1,7 @@
-table 52185694 "Segment/County/Dividend/Signat"
+table 85694 "Segment/County/Dividend/Signat"
 {
-    LookupPageID = 52185723;
-    DrillDownPageId = 52185723;
+    LookupPageID = 85723;
+    DrillDownPageId = 85723;
 
     fields
     {

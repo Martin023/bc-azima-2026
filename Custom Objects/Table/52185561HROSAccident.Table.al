@@ -1,4 +1,4 @@
-table 52185561 "HR OSAccident"
+table 85561 "HR OSAccident"
 {
     LookupPageId ="HR OSAccident List";
     DrillDownPageId = "HR OSAccident Card";

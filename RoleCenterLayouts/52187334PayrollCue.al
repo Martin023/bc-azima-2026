@@ -1,4 +1,4 @@
-table 52187334 PayrollCue
+table 87334 PayrollCue
 {
     Caption = 'PayrollCue';
     DataClassification = ToBeClassified;

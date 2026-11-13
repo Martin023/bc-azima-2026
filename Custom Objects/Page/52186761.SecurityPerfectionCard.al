@@ -1,4 +1,4 @@
-page 52186761 "Security Perfection Card"
+page 86761 "Security Perfection Card"
 {
     ApplicationArea = All;
     Caption = 'Security Perfection Card';
@@ -383,7 +383,7 @@ page 52186761 "Security Perfection Card"
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = Const(52187050), "No." = field("No.");
+                SubPageLink = "Table ID" = Const(87050), "No." = field("No.");
             }
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
             {

@@ -1,4 +1,4 @@
-table 52186157 "HR Company Activities"
+table 86157 "HR Company Activities"
 {
     LookupPageId="HR Company Activities List1";
     DrillDownPageId="HR Company Activities List1";

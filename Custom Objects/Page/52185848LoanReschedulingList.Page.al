@@ -1,4 +1,4 @@
-page 52185848 "Loan Rescheduling List"
+page 85848 "Loan Rescheduling List"
 {
     CardPageID = "Loan Rescheduling";
     // Editable = false;

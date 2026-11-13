@@ -1,4 +1,4 @@
-page 52186633 "prBoard Payment"
+page 86633 "prBoard Payment"
 {
     PageType = List;
     SourceTable = "PR Board Transactions";

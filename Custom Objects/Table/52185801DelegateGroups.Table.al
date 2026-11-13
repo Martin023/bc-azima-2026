@@ -1,4 +1,4 @@
-table 52185801 "Delegate Groups"
+table 85801 "Delegate Groups"
 {
     // DrillDownPageID = "Delegate Group List";
     // LookupPageID = "Delegate Group List";

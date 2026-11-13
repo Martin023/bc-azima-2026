@@ -1,5 +1,5 @@
 
-page 52186159 "Procurement Methods List"
+page 86159 "Procurement Methods List"
 {
     CardPageID = "Procurement Methods Card";
     Editable = false;

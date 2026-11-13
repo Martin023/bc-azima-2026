@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186097 "Member Cards Awaiting Printing"
+report 86097 "Member Cards Awaiting Printing"
 {
     ApplicationArea = All;
     Caption = 'Member Cards Awaiting Printing';

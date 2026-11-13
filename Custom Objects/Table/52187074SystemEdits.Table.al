@@ -10,7 +10,7 @@ using Microsoft.Foundation.NoSeries;
 using System.Security.User;
 using Microsoft.Foundation.AuditCodes;
 
-table 52187074 "System Edits"
+table 87074 "System Edits"
 {
     ReplicateData = false;
     LookupPageId = "System Edits List";
@@ -155,7 +155,7 @@ table 52187074 "System Edits"
                     if Status = Rec.Status::Approved then begin
                         Message(SystemEditsCodeunit.SetFilterFields(Rec."Table ID", Rec."No.", Action::PostChanges, RecRef, RecRef));
 
-                        if Rec."Table ID" = 52185700 then
+                        if Rec."Table ID" = 85700 then
                             SystemEditsCard.SMSMemberOnChange(Rec);
 
                         Rec.Posted := true;

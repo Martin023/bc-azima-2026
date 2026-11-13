@@ -1,5 +1,5 @@
 
-page 52186834 "Risk Claim List"
+page 86834 "Risk Claim List"
 {
     CardPageID = "Risk Claim Notice";
     Caption = 'Deceased Member Notice';

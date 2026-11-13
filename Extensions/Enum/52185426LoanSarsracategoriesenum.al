@@ -1,4 +1,4 @@
-enum 52187422 "Loan Sasra categories"
+enum 87422 "Loan Sasra categories"
 {
     Extensible = true;
 

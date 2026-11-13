@@ -1,6 +1,6 @@
 namespace KenpipeCBS.KenpipeCBS;
 
-report 52186228 "FD Interest Update"
+report 86228 "FD Interest Update"
 {
     ApplicationArea = All;
     Caption = 'FD Interest Update';

@@ -1,4 +1,4 @@
-enum 52185468 "HR Email Event"
+enum 85468 "HR Email Event"
 {
     Extensible = true;
 

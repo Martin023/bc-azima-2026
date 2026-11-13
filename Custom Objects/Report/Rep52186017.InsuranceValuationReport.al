@@ -5,7 +5,7 @@ using Microsoft.FixedAssets.Ledger;
 using Microsoft.Foundation.Company;
 using Microsoft.FixedAssets.Depreciation;
 
-report 52186017 "Insurance Valuation Report"
+report 86017 "Insurance Valuation Report"
 {
     ApplicationArea = All;
     Caption = 'Insurance Valuation Report';

@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185656 "Vendor SubCategories List"
+page 85656 "Vendor SubCategories List"
 {
     ApplicationArea = All;
     Caption = 'Vendor SubCategories';

@@ -1,4 +1,4 @@
-page 52186292 "Delegate Groups Card"
+page 86292 "Delegate Groups Card"
 {
     DeleteAllowed = false;
     Editable = false;

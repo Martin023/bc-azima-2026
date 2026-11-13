@@ -1,4 +1,4 @@
-page 52185910 "Cash Office Setup"
+page 85910 "Cash Office Setup"
 {
     PageType = Card;
     SourceTable = "Cash Office Setup";

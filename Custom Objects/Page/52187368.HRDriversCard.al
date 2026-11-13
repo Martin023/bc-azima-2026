@@ -1,4 +1,4 @@
-page 52187368 "HR Drivers Card"
+page 87368 "HR Drivers Card"
 {
     ApplicationArea = All;
     Caption = 'Drivers Card';

@@ -1,4 +1,4 @@
-page 52186356 "AGM Delegates Payment Card"
+page 86356 "AGM Delegates Payment Card"
 {
     DeleteAllowed = false;
     PageType = Card;

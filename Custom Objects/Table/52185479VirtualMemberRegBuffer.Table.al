@@ -1,4 +1,4 @@
-table 52185479 "Virtual Member Reg Buffer"
+table 85479 "Virtual Member Reg Buffer"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52185599 "HR Commitee Members"
+page 85599 "HR Commitee Members"
 {
     PageType = List;
     SourceTable = "HR Commitee Members";

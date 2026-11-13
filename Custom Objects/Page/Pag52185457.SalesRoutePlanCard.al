@@ -2,7 +2,7 @@ namespace AzimaBC.AzimaBC;
 using System.Security.AccessControl;
 using AZIMA.AZIMA;
 
-page 52185457 "Sales Route Plan Card"
+page 85457 "Sales Route Plan Card"
 {
     ApplicationArea = All;
     Caption = 'Sales Route Plan Card';

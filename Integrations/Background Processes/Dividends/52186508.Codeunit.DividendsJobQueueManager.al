@@ -1,4 +1,4 @@
-codeunit 52186508 "Dividends Job Queue Manager"
+codeunit 86508 "Dividends Job Queue Manager"
 {
     TableNo = "Savings Accounts";
     trigger OnRun()
@@ -112,7 +112,7 @@ codeunit 52186508 "Dividends Job Queue Manager"
     end;
 }
 
-codeunit 52186509 "Dividend Job"
+codeunit 86509 "Dividend Job"
 {
     TableNo = "Job Queue Entry";
     trigger OnRun()

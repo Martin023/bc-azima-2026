@@ -1,4 +1,4 @@
-page 52185500 "Main Role Center"
+page 85500 "Main Role Center"
 {
     Caption = 'Credit Management Role Center';
     PageType = RoleCenter;

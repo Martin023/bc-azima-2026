@@ -1,4 +1,4 @@
-table 52186250 "Final Dues"
+table 86250 "Final Dues"
 {
     Caption = 'Final Dues';
     DataClassification = ToBeClassified;

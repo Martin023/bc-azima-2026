@@ -1,4 +1,4 @@
-table 52186260 "Credit Ledger Temp"
+table 86260 "Credit Ledger Temp"
 {
 
     Caption = 'Credit Ledger Entry Temp';

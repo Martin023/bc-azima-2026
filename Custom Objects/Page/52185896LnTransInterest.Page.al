@@ -1,4 +1,4 @@
-page 52185896 "LnTrans Interest"
+page 85896 "LnTrans Interest"
 {
     DeleteAllowed = false;
     Editable = false;

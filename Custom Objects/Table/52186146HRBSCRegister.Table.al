@@ -1,4 +1,4 @@
-table 52186146 "HR BSC Register"
+table 86146 "HR BSC Register"
 {
     Caption = 'Leave Register';
 

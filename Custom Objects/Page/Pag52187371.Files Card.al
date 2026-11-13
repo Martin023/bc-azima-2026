@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using AZIMA.AZIMA;
 
-page 52187371 "Files Card"
+page 87371 "Files Card"
 {
     ApplicationArea = All;
     Caption = 'File Card';

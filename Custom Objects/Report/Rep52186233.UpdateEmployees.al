@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-report 52186233 "Update Employee Members"
+report 86233 "Update Employee Members"
 {
     ApplicationArea = All;
     Caption = 'Sync Employees & Board with Members';

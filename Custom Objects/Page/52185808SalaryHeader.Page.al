@@ -1,4 +1,4 @@
-page 52185808 "Salary Header"
+page 85808 "Salary Header"
 {
     DeleteAllowed = false;
     Editable = true;

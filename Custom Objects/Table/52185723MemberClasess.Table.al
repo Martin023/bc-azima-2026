@@ -1,4 +1,4 @@
-table 52185723 "Member Classes"
+table 85723 "Member Classes"
 {
     LookupPageID = "Member Clasess";
 

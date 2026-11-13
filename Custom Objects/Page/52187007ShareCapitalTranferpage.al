@@ -1,4 +1,4 @@
-page 52187007 "Share Capital Transfer Card"
+page 87007 "Share Capital Transfer Card"
 {
     PageType = Card;
     ApplicationArea = All;

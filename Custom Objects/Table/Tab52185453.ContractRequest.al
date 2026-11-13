@@ -1,4 +1,4 @@
-table 52185453 "Contract Request"
+table 85453 "Contract Request"
 {
     Caption = 'Contract Request';
     DataClassification = ToBeClassified;

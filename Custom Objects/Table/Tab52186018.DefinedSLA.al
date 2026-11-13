@@ -1,4 +1,4 @@
-table 52186018 "Defined SLA"
+table 86018 "Defined SLA"
 {
     Caption = 'Defined SLA';
     DataClassification = ToBeClassified;

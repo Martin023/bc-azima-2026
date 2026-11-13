@@ -1,4 +1,4 @@
-report 52186336 "Total Expenditure"
+report 86336 "Total Expenditure"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Total Ependiture Report.rdl';

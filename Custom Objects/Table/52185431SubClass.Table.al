@@ -1,4 +1,4 @@
-table 52185431 "Sub Classes"
+table 85431 "Sub Classes"
 {
 LookupPageId = "Sub Classes";
 DrillDownPageId = "Sub Classes";

@@ -1,4 +1,4 @@
-page 52185684 "Bond List"
+page 85684 "Bond List"
 {
     CardPageID = "Bond Card";
     Editable = false;

@@ -1,4 +1,4 @@
-page 52186257 "Terminated Active Lease-List"
+page 86257 "Terminated Active Lease-List"
 {
     //             RecordInvoice."Document Type":=RecordInvoice."Document Type"::Invoice;
     //             RecordInvoice."Document Date":=TODAY;

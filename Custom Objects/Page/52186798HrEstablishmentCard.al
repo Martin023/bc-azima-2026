@@ -1,4 +1,4 @@
-page 52186798 "HR Establishment Card"
+page 86798 "HR Establishment Card"
 {
     //CardPageID = "HR Jobs Card";
     // DelayedInsert = false;

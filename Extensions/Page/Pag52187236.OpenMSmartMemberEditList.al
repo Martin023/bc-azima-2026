@@ -1,4 +1,4 @@
-page 52187236 "Open M-Smart Member Edits"
+page 87236 "Open M-Smart Member Edits"
 {
     CardPageID = "M-Smart Member Edit";
     PageType = List;

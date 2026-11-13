@@ -1,4 +1,4 @@
-page 52186562 "CRB Metropol PDF Viewer"
+page 86562 "CRB Metropol PDF Viewer"
 {
     ApplicationArea = All;
     Caption = 'CRB Metropol PDF Viewer';

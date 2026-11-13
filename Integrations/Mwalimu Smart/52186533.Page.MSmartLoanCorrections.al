@@ -1,4 +1,4 @@
-page 52186533 "M-Smart Loan Corrections"
+page 86533 "M-Smart Loan Corrections"
 {
     DeleteAllowed = true;
     ApplicationArea = Basic, Suite;

@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-report 52185540 "Insurance Deposit Report"
+report 85540 "Insurance Deposit Report"
 {
     ApplicationArea = All;
     Caption = 'Insurance Deposit Report';

@@ -1,4 +1,4 @@
-page 52185837 "Credit Accounts List"
+page 85837 "Credit Accounts List"
 {
     CardPageID = "Credit Account Card";
     DeleteAllowed = false;

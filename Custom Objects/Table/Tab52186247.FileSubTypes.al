@@ -1,4 +1,4 @@
-table 52186247 "File Sub Types"
+table 86247 "File Sub Types"
 {
     Caption = 'File Sub Types';
     DataClassification = ToBeClassified;

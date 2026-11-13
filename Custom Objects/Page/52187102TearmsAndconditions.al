@@ -1,4 +1,4 @@
-page 52187102 "loan Tearms And Conditions"
+page 87102 "loan Tearms And Conditions"
 {
     ApplicationArea = All;
     Caption = 'Loan Terms And Conditions';

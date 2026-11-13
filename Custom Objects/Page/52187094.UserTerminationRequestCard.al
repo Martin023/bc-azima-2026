@@ -1,4 +1,4 @@
-page 52187094 "User Termination Card"
+page 87094 "User Termination Card"
 {
     DeleteAllowed = false;
     ApplicationArea = All;

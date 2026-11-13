@@ -2,7 +2,7 @@ namespace KenpipeCBS.KenpipeCBS;
 
 using Microsoft.FixedAssets.Depreciation;
 
-tableextension 52185432 "FA Depreciation Book EXT" extends "FA Depreciation Book"
+tableextension 85432 "FA Depreciation Book EXT" extends "FA Depreciation Book"
 {
     fields
     {

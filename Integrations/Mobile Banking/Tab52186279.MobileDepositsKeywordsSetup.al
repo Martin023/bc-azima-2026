@@ -1,4 +1,4 @@
-table 52186279 "Mobile Deposits Keywords Setup"
+table 86279 "Mobile Deposits Keywords Setup"
 {
     Caption = 'Mobile Deposits Keywords Setup';
     DataClassification = ToBeClassified;

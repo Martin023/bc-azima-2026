@@ -1,4 +1,4 @@
-table 52186137 "PR Trans Codes Groups"
+table 86137 "PR Trans Codes Groups"
 {
     Caption = 'PR Transaction Code Groups';
 

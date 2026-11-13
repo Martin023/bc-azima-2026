@@ -1,4 +1,4 @@
-codeunit 52187324 ActualLoanSchedule
+codeunit 87324 ActualLoanSchedule
 {
     procedure GenerateLoanSchedule(Loans: Record Loans)
     var

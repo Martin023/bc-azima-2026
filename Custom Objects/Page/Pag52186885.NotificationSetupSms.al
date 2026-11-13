@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-page 52186885 NotificationSetupSms
+page 86885 NotificationSetupSms
 {
     ApplicationArea = All;
     Caption = 'NotificationSetupSms';

@@ -1,4 +1,4 @@
-table 52186206 "Performance Attributes1"
+table 86206 "Performance Attributes1"
 {
 
     fields

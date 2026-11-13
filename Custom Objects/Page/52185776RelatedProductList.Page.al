@@ -1,4 +1,4 @@
-page 52185776 "Related Product List"
+page 85776 "Related Product List"
 {
     PageType = List;
     SourceTable = "Related Product";

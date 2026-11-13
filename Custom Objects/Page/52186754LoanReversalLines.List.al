@@ -1,4 +1,4 @@
-page 52186754 "Loan Reversal Lines"
+page 86754 "Loan Reversal Lines"
 {
     ApplicationArea = All;
     PageType = ListPart;

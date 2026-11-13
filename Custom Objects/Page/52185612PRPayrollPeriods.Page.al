@@ -1,4 +1,4 @@
-page 52185612 "PR Payroll Periods"
+page 85612 "PR Payroll Periods"
 {
     DeleteAllowed = true;
     Editable = true;

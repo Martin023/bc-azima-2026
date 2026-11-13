@@ -1,4 +1,4 @@
-table 52185914 "Staff Advance Header"
+table 85914 "Staff Advance Header"
 {
     DrillDownPageID = "Staff Advance Request List";
     LookupPageID = "Staff Advance Request List";

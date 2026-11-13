@@ -1,4 +1,4 @@
-page 52186579 "EDMS Scanned Apps. API"
+page 86579 "EDMS Scanned Apps. API"
 {
     APIGroup = 'crm';
     APIPublisher = 'sky';

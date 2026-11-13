@@ -1,4 +1,4 @@
-table 52186126 "BBF Requisation Header"
+table 86126 "BBF Requisation Header"
 {
 
     fields

@@ -1,4 +1,4 @@
-report 52187359 "Member Appl Channels"
+report 87359 "Member Appl Channels"
 {
     ApplicationArea = All;
     Caption = 'Member Appl Channels';

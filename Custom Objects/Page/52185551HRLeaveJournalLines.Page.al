@@ -1,4 +1,4 @@
-page 52185551 "HR Leave Journal Lines"
+page 85551 "HR Leave Journal Lines"
 {
     DelayedInsert = false;
     PageType = Worksheet;

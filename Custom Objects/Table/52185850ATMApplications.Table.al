@@ -1,4 +1,4 @@
-table 52185850 "ATM Applications"
+table 85850 "ATM Applications"
 {
     DrillDownPageID = "Approved ATM Application List";
     LookupPageID = "Approved ATM Application List";

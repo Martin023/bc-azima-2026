@@ -1,4 +1,4 @@
-page 52185766 "Loan Disbursement Lines"
+page 85766 "Loan Disbursement Lines"
 {
     AutoSplitKey = true;
     DelayedInsert = true;

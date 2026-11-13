@@ -1,4 +1,4 @@
-page 52186011 "Posted Receipt List"
+page 86011 "Posted Receipt List"
 {
     CardPageID = "Posted Receipt Header";
     DeleteAllowed = false;

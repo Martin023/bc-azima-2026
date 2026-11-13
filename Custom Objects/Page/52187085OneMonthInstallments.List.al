@@ -1,4 +1,4 @@
-page 52187085 "One Month Installments"
+page 87085 "One Month Installments"
 {
     ApplicationArea = All;
     PageType = List;

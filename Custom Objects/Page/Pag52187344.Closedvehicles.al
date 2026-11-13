@@ -1,4 +1,4 @@
-page 52187344 "Closed vehicles"
+page 87344 "Closed vehicles"
 {
     ApplicationArea = All;
     Caption = 'Closed vehicles';

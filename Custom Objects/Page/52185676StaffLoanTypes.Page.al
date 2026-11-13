@@ -1,4 +1,4 @@
-page 52185676 "Staff Loan Types"
+page 85676 "Staff Loan Types"
 {
     PageType = Card;
     SourceTable = "Staff Loan Types";

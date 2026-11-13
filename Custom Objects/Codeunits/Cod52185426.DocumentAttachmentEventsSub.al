@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.Foundation.Attachment;
 
-codeunit 52185426 "Document Attachment Events Sub"
+codeunit 85426 "Document Attachment Events Sub"
 {
     TableNo = "Document Attachment";
 

@@ -1,4 +1,4 @@
-table 52185854 "Suspended Interest Accounts"
+table 85854 "Suspended Interest Accounts"
 {
 
     fields

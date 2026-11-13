@@ -1,4 +1,4 @@
-page 52185432 "Sky Mbanking Changes List"
+page 85432 "Sky Mbanking Changes List"
 {
     CardPageID = "Sky Mbanking Changes Card";
     Editable = false;

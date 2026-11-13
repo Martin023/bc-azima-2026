@@ -1,4 +1,4 @@
-page 52185668 "prNSSF List"
+page 85668 "prNSSF List"
 {
     PageType = List;
     SourceTable = "prNSSF Tiers";

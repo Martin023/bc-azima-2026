@@ -1,4 +1,4 @@
-table 52185690 "Product Factory"
+table 85690 "Product Factory"
 {
     DrillDownPageID = "Product Factory List";
     LookupPageID = "Product Factory List";

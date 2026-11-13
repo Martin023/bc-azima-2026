@@ -1,4 +1,4 @@
-page 52185795 "Transactions Type"
+page 85795 "Transactions Type"
 {
     SourceTable = "Transaction Types";
 

@@ -1,4 +1,4 @@
-table 52185974 "Posted Bank Acc. Recon Line"
+table 85974 "Posted Bank Acc. Recon Line"
 {
 
     fields

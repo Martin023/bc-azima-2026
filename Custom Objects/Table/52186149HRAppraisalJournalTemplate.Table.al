@@ -1,4 +1,4 @@
-table 52186149 "HR Appraisal Journal Template"
+table 86149 "HR Appraisal Journal Template"
 {
     // DrillDownPageID = "HR Appraisal Jnl. Template";
     // LookupPageID = "HR Appraisal Jnl. Template";

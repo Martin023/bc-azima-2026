@@ -1,4 +1,4 @@
-page 52187302 "Self Loan Application List"
+page 87302 "Self Loan Application List"
 {
     CardPageID = "Self Loan Application Card";
     DeleteAllowed = false;

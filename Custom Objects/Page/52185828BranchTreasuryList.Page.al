@@ -1,4 +1,4 @@
-page 52185828 "Branch Treasury List"
+page 85828 "Branch Treasury List"
 {
     CardPageID = "Branch Treasury";
     Editable = false;

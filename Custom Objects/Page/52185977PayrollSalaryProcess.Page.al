@@ -1,4 +1,4 @@
-page 52185977 "Payroll Salary Process"
+page 85977 "Payroll Salary Process"
 {
     CardPageID = "Salary Header";
     DeleteAllowed = false;

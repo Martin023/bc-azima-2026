@@ -1,4 +1,4 @@
-page 52186514 "HR Promotion Recommend Header"
+page 86514 "HR Promotion Recommend Header"
 {
     DeleteAllowed = false;
     PageType = Card;

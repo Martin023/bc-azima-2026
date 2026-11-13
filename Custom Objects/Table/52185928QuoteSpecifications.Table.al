@@ -1,4 +1,4 @@
-table 52185928 "Quote Specifications"
+table 85928 "Quote Specifications"
 {
     LookupPageID = "Quote Specifications List";
 

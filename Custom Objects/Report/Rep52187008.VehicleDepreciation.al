@@ -1,4 +1,4 @@
-report 52187008 "Vehicle Depreciation"
+report 87008 "Vehicle Depreciation"
 {
     ApplicationArea = All;
     Caption = 'Vehicle Depreciation';

@@ -1,4 +1,4 @@
-table 52185637 "PR Salary Card"
+table 85637 "PR Salary Card"
 {
 
     fields

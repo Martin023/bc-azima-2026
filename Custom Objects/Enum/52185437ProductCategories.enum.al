@@ -1,4 +1,4 @@
-enum 52185437 "Product Categories"
+enum 85437 "Product Categories"
 {
     Value(0; " ") { }
     Value(1; "Entrance Fee") { }

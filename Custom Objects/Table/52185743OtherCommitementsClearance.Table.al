@@ -1,4 +1,4 @@
-table 52185743 "Other Commitements Clearance"
+table 85743 "Other Commitements Clearance"
 {
     DrillDownPageID = "Other Commitments Clearance";
     LookupPageID = "Other Commitments Clearance";

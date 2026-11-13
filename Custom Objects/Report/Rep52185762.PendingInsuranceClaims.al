@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using System.Environment;
 using Microsoft.Foundation.Company;
 
-report 52185762 "Pending Insurance Claims"
+report 85762 "Pending Insurance Claims"
 {
     ApplicationArea = All;
     Caption = 'Pending Insurance Claims';

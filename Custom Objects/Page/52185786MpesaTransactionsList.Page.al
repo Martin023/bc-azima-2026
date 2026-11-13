@@ -1,4 +1,4 @@
-page 52185786 "Mpesa Transactions List"
+page 85786 "Mpesa Transactions List"
 {
     DeleteAllowed = false;
     Editable = false;

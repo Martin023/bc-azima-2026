@@ -1,4 +1,4 @@
-page 52187376 "MNS Parking Space List"
+page 87376 "MNS Parking Space List"
 {
     ApplicationArea = All;
     Caption = 'Parking Spaces List';

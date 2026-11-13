@@ -1,4 +1,4 @@
-table 52185695 "Savings Account Registration"
+table 85695 "Savings Account Registration"
 {
     LookupPageID = "Savings Account Registration";
     DrillDownPageID = "Savings Account Registration";

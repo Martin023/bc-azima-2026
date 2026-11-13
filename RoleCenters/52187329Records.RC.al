@@ -1,4 +1,4 @@
-page 52187329 "Records"
+page 87329 "Records"
 {
     Caption = 'Records Role Center';
     PageType = RoleCenter;

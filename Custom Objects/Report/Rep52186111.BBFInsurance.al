@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-report 52186111 "BBF Insurance"
+report 86111 "BBF Insurance"
 {
     ApplicationArea = All;
     Caption = 'BBF Insurance';

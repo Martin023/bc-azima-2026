@@ -1,4 +1,4 @@
-page 52185634 "Salary Grades List"
+page 85634 "Salary Grades List"
 {
     CardPageId = "Salary Grades";
     DeleteAllowed = false;

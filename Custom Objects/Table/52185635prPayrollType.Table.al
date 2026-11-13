@@ -1,4 +1,4 @@
-table 52185635 "prPayroll Type"
+table 85635 "prPayroll Type"
 {
     DrillDownPageID = "prPayroll Type";
     LookupPageID = "prPayroll Type";

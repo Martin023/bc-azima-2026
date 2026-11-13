@@ -1,4 +1,4 @@
-table 52185716 "RTGS Transfer Lines"
+table 85716 "RTGS Transfer Lines"
 {
 
     fields

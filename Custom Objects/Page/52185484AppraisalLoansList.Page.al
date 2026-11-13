@@ -1,4 +1,4 @@
-page 52185484 "Appraisal Loans List"
+page 85484 "Appraisal Loans List"
 {
     CardPageID = "Loans card";
     DeleteAllowed = false;

@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Codeunit 52186458 "Loans Process"
+Codeunit 86458 "Loans Process"
 {
 
     trigger OnRun()
@@ -1523,7 +1523,7 @@ Codeunit 52186458 "Loans Process"
         CheckOffAdviceLine.SetRange("Advice Date", AdviceDate);
         CheckOffAdviceLine.setrange("Associated Document No", AssociatedDocNo);
         if CheckOffAdviceLine.Find('-') then begin
-            Report.Run(52186856, true, false, CheckOffAdviceLine);
+            Report.Run(86856, true, false, CheckOffAdviceLine);
         end
         else
             Message('There is no checkoff line record associated with the document number provided : %1.', AssociatedDocNo);
@@ -1537,7 +1537,7 @@ Codeunit 52186458 "Loans Process"
         CheckOffAdviceLine.Reset();
         CheckOffAdviceLine.SetRange("Associated Document No", AssociatedDocNo);
         if CheckOffAdviceLine.Find('-') then begin
-            Report.Run(52186856, true, false, CheckOffAdviceLine);
+            Report.Run(86856, true, false, CheckOffAdviceLine);
         end;
     end;
 

@@ -1,4 +1,4 @@
-table 52187008 "52187008 Employer Product Attr"
+table 87008 "52187008 Employer Product Attr"
 {
     Caption = 'Employer Product Attributes';
     DataClassification = ToBeClassified;

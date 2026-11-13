@@ -1,4 +1,4 @@
-page 52186649 "Specimen File Viewer"
+page 86649 "Specimen File Viewer"
 {
     ApplicationArea = All;
     Caption = 'Specimen File Viewer';

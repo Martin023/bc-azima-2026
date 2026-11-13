@@ -1,4 +1,4 @@
-table 52185756 "M-SACCO Paybill Keywords"
+table 85756 "M-SACCO Paybill Keywords"
 {
 
     fields

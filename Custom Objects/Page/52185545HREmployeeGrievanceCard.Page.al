@@ -1,4 +1,4 @@
-page 52185545 "HR Employee Grievance Card"
+page 85545 "HR Employee Grievance Card"
 {
     PageType = Card;
     SourceTable = "HR Employee Grievance";

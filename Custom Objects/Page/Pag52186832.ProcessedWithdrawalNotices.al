@@ -1,4 +1,4 @@
-page 52186832 "Processed WithDrawal Notices"
+page 86832 "Processed WithDrawal Notices"
 {
     CardPageID = "Member withdrawal Notice";
     Editable = false;

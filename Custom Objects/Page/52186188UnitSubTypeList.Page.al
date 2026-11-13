@@ -1,4 +1,4 @@
-page 52186188 "Unit Sub Type List"
+page 86188 "Unit Sub Type List"
 {
     Editable = false;
     PageType = List;

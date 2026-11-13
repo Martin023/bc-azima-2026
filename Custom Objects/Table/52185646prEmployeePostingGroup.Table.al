@@ -1,4 +1,4 @@
-table 52185646 "prEmployee Posting Group"
+table 85646 "prEmployee Posting Group"
 {
     DataCaptionFields = "Code", Description;
     DrillDownPageID = "prEmployee Posting Group";

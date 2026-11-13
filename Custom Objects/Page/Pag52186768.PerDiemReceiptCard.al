@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using System.Automation;
 
-page 52186768 "Per-Diem Receipt Card"
+page 86768 "Per-Diem Receipt Card"
 {
     Caption = 'Per-Diem/Claims Payment Card';
     DeleteAllowed = false;

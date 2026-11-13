@@ -1,4 +1,4 @@
-page 52186555 "HR Hiring Criteria"
+page 86555 "HR Hiring Criteria"
 {
     PageType = List;
     SourceTable = "HR Hiring Criteria";

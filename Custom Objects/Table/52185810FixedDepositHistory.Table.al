@@ -1,4 +1,4 @@
-table 52185810 "Fixed Deposit History"
+table 85810 "Fixed Deposit History"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186396 "Checkoff Advice Lines"
+page 86396 "Checkoff Advice Lines"
 {
     Caption = 'Checkoff Advice Lines';
     SourceTable = "Checkoff Advice Line";

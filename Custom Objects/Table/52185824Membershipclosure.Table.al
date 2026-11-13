@@ -1,4 +1,4 @@
-table 52185824 "Membership Closure"
+table 85824 "Membership Closure"
 {
     // DrillDownPageID = "Open Closure List";
     // LookupPageID = "Open Closure List";

@@ -1,4 +1,4 @@
-page 52186691 "Sky Mobile Setup Card"
+page 86691 "Sky Mobile Setup Card"
 {
     DeleteAllowed = false;
     PageType = Card;

@@ -1,4 +1,4 @@
-enum 52185428 "Member Status"
+enum 85428 "Member Status"
 {
     value(0; " ") { }
     value(1; Open) { }

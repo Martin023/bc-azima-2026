@@ -1,4 +1,4 @@
-table 52186226 "Delegates Returns Lines"
+table 86226 "Delegates Returns Lines"
 {
     DrillDownPageID = "Return Lines List";
     LookupPageID = "Return Lines List";

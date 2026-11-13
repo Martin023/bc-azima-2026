@@ -1,4 +1,4 @@
-table 52185483 "Contract Templates"
+table 85483 "Contract Templates"
 {
     Caption = 'Contract Templates';
     DataClassification = ToBeClassified;

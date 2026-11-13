@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Foundation.Company;
 
-report 52186241 "End Year Interest Report"
+report 86241 "End Year Interest Report"
 {
     ApplicationArea = All;
     Caption = 'End Year Interest Report';

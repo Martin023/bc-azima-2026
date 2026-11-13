@@ -1,4 +1,4 @@
-page 52186109 "Contract Purchase Invoices"
+page 86109 "Contract Purchase Invoices"
 {
     Caption = 'Contract Purchase Invoices';
     // CardPageID = "Contract Purchase Invoice";

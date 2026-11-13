@@ -1,4 +1,4 @@
-page 52185530 "HR Employee List - New1"
+page 85530 "HR Employee List - New1"
 {
     Caption='New Hr Employees List ';
     CardPageID = "HR Employee Card";

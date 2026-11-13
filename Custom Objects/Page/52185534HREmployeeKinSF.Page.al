@@ -1,4 +1,4 @@
-page 52185534 "HR Employee Kin SF"
+page 85534 "HR Employee Kin SF"
 {
     Caption = 'HR Employee Kin & Beneficiaries';
     PageType = List;

@@ -1,4 +1,4 @@
-page 52186496 "HR Disciplinary Cases"
+page 86496 "HR Disciplinary Cases"
 {
     DeleteAllowed = false;
     PageType = Card;

@@ -1,4 +1,4 @@
-page 52185832 "Savings Statistics FactBox"
+page 85832 "Savings Statistics FactBox"
 {
     Caption = 'Savings Statistics';
     PageType = CardPart;

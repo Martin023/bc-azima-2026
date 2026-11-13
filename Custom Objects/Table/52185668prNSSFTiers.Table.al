@@ -1,4 +1,4 @@
-table 52185668 "prNSSF Tiers"
+table 85668 "prNSSF Tiers"
 {
     DrillDownPageId = "prNSSF List";
     fields

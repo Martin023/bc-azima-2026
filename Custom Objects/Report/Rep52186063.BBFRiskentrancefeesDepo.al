@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186063 "BBF/Risk/entrance fees/Depo"
+report 86063 "BBF/Risk/entrance fees/Depo"
 {
     ApplicationArea = All;
     Caption = 'BBF/Risk/entrance fees/Depo';

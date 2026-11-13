@@ -1,6 +1,6 @@
 namespace MNS.MNS;
 
-page 52186612 "Monthly Contrib Logs"
+page 86612 "Monthly Contrib Logs"
 {
     ApplicationArea = All;
     Caption = 'Monthly Contrib Logs';

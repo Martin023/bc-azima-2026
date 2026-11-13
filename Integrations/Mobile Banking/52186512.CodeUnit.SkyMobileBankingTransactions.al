@@ -1,4 +1,4 @@
-codeunit 52186512 "Sky M-Banking Transactions"
+codeunit 86512 "Sky M-Banking Transactions"
 {
     procedure LogAccountBalanceEnquiry(
         APIRequestID: Text;

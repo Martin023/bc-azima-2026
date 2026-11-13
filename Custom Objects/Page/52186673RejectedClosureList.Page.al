@@ -1,4 +1,4 @@
-page 52186673 "Rejected Closure List"
+page 86673 "Rejected Closure List"
 {
     CardPageID = "Membership Closure";
     DeleteAllowed = false;

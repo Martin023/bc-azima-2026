@@ -1,4 +1,4 @@
-page 52187404 "Posted Share Capital List"
+page 87404 "Posted Share Capital List"
 {
     PageType = List;
     CardPageId = "Share Capital Transfer Card";

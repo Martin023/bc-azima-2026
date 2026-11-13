@@ -1,4 +1,4 @@
-page 52186504 "HR Employee Exit Interviews1"
+page 86504 "HR Employee Exit Interviews1"
 {
     Caption = 'Hr Exit';
     DeleteAllowed = false;

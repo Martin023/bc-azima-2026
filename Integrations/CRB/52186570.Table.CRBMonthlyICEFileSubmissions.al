@@ -1,4 +1,4 @@
-table 52186570 "CRB Monthly ICE File Subm."
+table 86570 "CRB Monthly ICE File Subm."
 {
     Caption = 'CRB Monthly Individual Consumer, Employer and Account File Submissions';
     DataClassification = ToBeClassified;

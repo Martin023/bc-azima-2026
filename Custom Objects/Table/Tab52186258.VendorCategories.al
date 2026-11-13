@@ -1,4 +1,4 @@
-table 52186258 "Vendor Categories"
+table 86258 "Vendor Categories"
 {
     Caption = 'Vendor Categories';
     DataClassification = ToBeClassified;

@@ -1,4 +1,4 @@
-table 52186107 "Agent Biometric Data"
+table 86107 "Agent Biometric Data"
 {
 
     fields

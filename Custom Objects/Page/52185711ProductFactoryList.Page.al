@@ -1,4 +1,4 @@
-page 52185711 "Product Factory List"
+page 85711 "Product Factory List"
 {
     CardPageID = "Product Factory";
     Caption = 'Product Setups List';

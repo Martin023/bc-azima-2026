@@ -1,4 +1,4 @@
-page 52186479 "Imprest Application List S/S."
+page 86479 "Imprest Application List S/S."
 {
     ApplicationArea = All;
     Caption = 'Imprest Application Self Service.';

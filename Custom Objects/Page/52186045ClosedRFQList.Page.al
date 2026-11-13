@@ -1,4 +1,4 @@
-page 52186045 "Closed RFQ List"
+page 86045 "Closed RFQ List"
 {
     CardPageID = "Closed RFQ Header";
     PageType = List;

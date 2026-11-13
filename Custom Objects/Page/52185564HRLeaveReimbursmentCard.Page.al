@@ -1,4 +1,4 @@
-page 52185564 "HR Leave Reimbursment Card"
+page 85564 "HR Leave Reimbursment Card"
 {
     DeleteAllowed = false;
     PageType = Card;

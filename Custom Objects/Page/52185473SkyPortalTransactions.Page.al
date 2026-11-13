@@ -1,4 +1,4 @@
-page 52185473 "Sky Portal Transactions"
+page 85473 "Sky Portal Transactions"
 {
     Editable = false;
     PageType = List;

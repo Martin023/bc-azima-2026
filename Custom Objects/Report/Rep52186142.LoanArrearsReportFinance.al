@@ -2,7 +2,7 @@ namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 using Microsoft.Sales.Customer;
 
-report 52186142 "Loan Arrears Report - Finance"
+report 86142 "Loan Arrears Report - Finance"
 {
     ApplicationArea = All;
     Caption = 'Loan Arrears Report - Finance';

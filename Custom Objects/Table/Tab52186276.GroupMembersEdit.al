@@ -1,4 +1,4 @@
-table 52186276 "Group Members Edit"
+table 86276 "Group Members Edit"
 {
     Caption = 'Group Members Edit';
     DataClassification = ToBeClassified;

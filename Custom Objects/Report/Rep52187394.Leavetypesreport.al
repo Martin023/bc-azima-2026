@@ -1,4 +1,4 @@
-report 52187394 "Leave types report"
+report 87394 "Leave types report"
 {
     ApplicationArea = All;
     Caption = 'Leave types report';

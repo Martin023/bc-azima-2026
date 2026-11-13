@@ -1,4 +1,4 @@
-page 52186465 "Risk External Payment"
+page 86465 "Risk External Payment"
 {
     ApplicationArea = All;
     Caption = 'Risk External Payment';

@@ -1,4 +1,4 @@
-page 52186838 "Posted Risk Claim List"
+page 86838 "Posted Risk Claim List"
 {
     CardPageID = "Risk Claim Notice";
     DeleteAllowed = false;

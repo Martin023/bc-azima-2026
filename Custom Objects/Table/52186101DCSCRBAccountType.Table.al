@@ -1,4 +1,4 @@
-table 52186101 "DCS CRB Account Type"
+table 86101 "DCS CRB Account Type"
 {
 
     fields

@@ -1,4 +1,4 @@
-codeunit 52185438 "HR Expiry & Retirement Notif"
+codeunit 85438 "HR Expiry & Retirement Notif"
 {
     TableNo = "Job Queue Entry";
 

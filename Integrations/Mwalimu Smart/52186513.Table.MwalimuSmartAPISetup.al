@@ -1,4 +1,4 @@
-table 52186513 "M-Smart API Setup"
+table 86513 "M-Smart API Setup"
 {
     DataClassification = SystemMetadata;
 

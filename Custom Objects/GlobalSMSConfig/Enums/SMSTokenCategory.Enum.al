@@ -1,4 +1,4 @@
-enum 52185470 "SMS Token Category"
+enum 85470 "SMS Token Category"
 {
     Extensible = true;
 

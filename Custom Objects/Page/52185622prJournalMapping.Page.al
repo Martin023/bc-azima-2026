@@ -1,4 +1,4 @@
-page 52185622 "prJournal Mapping"
+page 85622 "prJournal Mapping"
 {
     PageType = Card;
     SourceTable = "prJournal Trans Mapping";

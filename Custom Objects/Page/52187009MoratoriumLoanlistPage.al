@@ -1,4 +1,4 @@
-page 52187009 "Moratorium Loan List"
+page 87009 "Moratorium Loan List"
 {
     PageType = List;
     ApplicationArea = All;

@@ -1,4 +1,4 @@
-page 52185686 "Bond Setup"
+page 85686 "Bond Setup"
 {
     PageType = List;
     SourceTable = "Bond Setup";

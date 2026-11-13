@@ -1,4 +1,4 @@
-page 52185675 "prSalary Advance List"
+page 85675 "prSalary Advance List"
 {
     CardPageID = "prSalary Advance";
     Editable = false;

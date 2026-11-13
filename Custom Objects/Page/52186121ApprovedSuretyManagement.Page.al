@@ -1,4 +1,4 @@
-page 52186121 "Approved Surety Management"
+page 86121 "Approved Surety Management"
 {
     CardPageID = "ApprovedSurety Management Card";
     PageType = List;

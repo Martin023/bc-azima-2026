@@ -1,4 +1,4 @@
-page 52186696 "Log Entries Endpoints"
+page 86696 "Log Entries Endpoints"
 {
     PageType = List;
     SourceTable = "Log Endpoint  Entiries";

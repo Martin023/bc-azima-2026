@@ -1,4 +1,4 @@
-table 52186010 "Lease Charge Review"
+table 86010 "Lease Charge Review"
 {
     LookupPageId = "Lease Charge Review View";
     DrillDownPageId = "Lease Charge Review View";

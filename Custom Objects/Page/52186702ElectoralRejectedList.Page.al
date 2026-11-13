@@ -1,4 +1,4 @@
-page 52186702 "Electoral Rejected List"
+page 86702 "Electoral Rejected List"
 {
     CardPageID = "Electoral Zones Card";
     DeleteAllowed = false;

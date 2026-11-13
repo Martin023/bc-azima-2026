@@ -1,4 +1,4 @@
-page 52186040 "Quotation Request Vendors"
+page 86040 "Quotation Request Vendors"
 {
     PageType = List;
     SourceTable = "Quotation Request Vendors";

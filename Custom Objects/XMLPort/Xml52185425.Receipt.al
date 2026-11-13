@@ -1,6 +1,6 @@
 namespace ALProject.ALProject;
 
-xmlport 52185425 "Receipt "
+xmlport 85425 "Receipt "
 {
     Format = VariableText;
     Direction = both;

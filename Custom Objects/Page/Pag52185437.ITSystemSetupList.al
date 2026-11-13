@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185437 "IT System Setup List"
+page 85437 "IT System Setup List"
 {
     ApplicationArea = All;
     Caption = 'IT System Setup';

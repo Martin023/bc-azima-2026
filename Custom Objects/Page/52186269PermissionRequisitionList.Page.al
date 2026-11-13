@@ -1,4 +1,4 @@
-page 52186269 "Permission Requisition List"
+page 86269 "Permission Requisition List"
 {
     CardPageID = "Permission Requisition Card";
     Caption = 'Permission Requisition List';

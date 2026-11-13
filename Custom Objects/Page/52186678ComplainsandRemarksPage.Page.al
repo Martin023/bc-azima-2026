@@ -1,4 +1,4 @@
-page 52186678 "Complains and Remarks Page"
+page 86678 "Complains and Remarks Page"
 {
     PageType = Card;
     SourceTable = "Complain and Remarks";

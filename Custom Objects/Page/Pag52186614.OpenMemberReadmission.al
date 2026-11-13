@@ -7,7 +7,7 @@ using System.Utilities;
 using System.Email;
 using Microsoft.Sales.Customer;
 
-page 52186614 "Open Member Readmission"
+page 86614 "Open Member Readmission"
 {
     DeleteAllowed = false;
     // InsertAllowed = false;
@@ -167,7 +167,7 @@ page 52186614 "Open Member Readmission"
                             Contracts.SetRange("Record ID", Rec."No.");
                             Contracts.SetRange("Document Type", Contracts."Document Type"::"Tax Exemption");
                             if Contracts.FindFirst() then
-                                Page.Run(52186716, Contracts);
+                                Page.Run(86716, Contracts);
                         end else begin
                             if not Confirm('Toggling this action off, will automatically remove the dates filled under tax exemption if any\Do you wish to continue?') then begin
                                 Rec.Disabled := true;
@@ -300,7 +300,7 @@ page 52186614 "Open Member Readmission"
                             Contracts.SetRange("Record ID", Rec."No.");
                             Contracts.SetRange("Document Type", Contracts."Document Type"::Passport);
                             if Contracts.FindFirst() then
-                                Page.Run(52186716, Contracts);
+                                Page.Run(86716, Contracts);
                         end;
                     end;
                 }
@@ -357,7 +357,7 @@ page 52186614 "Open Member Readmission"
                             Contracts.SetRange("Record ID", Rec."No.");
                             Contracts.SetRange("Document Type", Contracts."Document Type"::Passport);
                             if Contracts.FindFirst() then
-                                Page.Run(52186716, Contracts);
+                                Page.Run(86716, Contracts);
                         end;
                     end;
                 }
@@ -640,7 +640,7 @@ page 52186614 "Open Member Readmission"
                             Contracts.SetRange("Record ID", Rec."No.");
                             Contracts.SetRange("Document Type", Contracts."Document Type"::Contract);
                             if Contracts.FindFirst() then
-                                Page.Run(52186716, Contracts);
+                                Page.Run(86716, Contracts);
                         end else begin
                             if xRec."Terms of Employment" = Rec."Terms of Employment"::Contract then
                                 if not Confirm('Changing from contract, will automatically remove the dates filled under contracts if any\Do you wish to continue?') then begin
@@ -843,7 +843,7 @@ page 52186614 "Open Member Readmission"
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(52185700),
+                SubPageLink = "Table ID" = const(85700),
                 "No." = field("No.");
 
             }

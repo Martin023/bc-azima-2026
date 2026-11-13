@@ -1,4 +1,4 @@
-page 52186654 "Member Clasess"
+page 86654 "Member Clasess"
 {
     PageType = List;
     SourceTable = "Member Classes";

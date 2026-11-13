@@ -1,4 +1,4 @@
-table 52185769 "HR CEO Goal Line"
+table 85769 "HR CEO Goal Line"
 {
     Caption = 'HR CEO Goal Line';
     DataClassification = CustomerContent;

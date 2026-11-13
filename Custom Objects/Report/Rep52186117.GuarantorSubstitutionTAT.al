@@ -1,7 +1,7 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
 
-report 52186117 "Guarantor Substitution TAT"
+report 86117 "Guarantor Substitution TAT"
 {
     ApplicationArea = All;
     Caption = 'Guarantor Substitution TAT';

@@ -1,4 +1,4 @@
-table 52187060 "Parking Space"
+table 87060 "Parking Space"
 {
     Caption = 'Parking Management';
     DataClassification = ToBeClassified;

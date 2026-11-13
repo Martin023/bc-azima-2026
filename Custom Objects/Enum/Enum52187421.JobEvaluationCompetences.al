@@ -1,4 +1,4 @@
-enum 52187421 "Competences"
+enum 87421 "Competences"
 {
     Extensible = true;
      Value(0; " ") {}

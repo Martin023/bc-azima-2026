@@ -1,4 +1,4 @@
-page 52186210 "Computer Asset Register"
+page 86210 "Computer Asset Register"
 {
     DeleteAllowed = false;
     PageType = Card;

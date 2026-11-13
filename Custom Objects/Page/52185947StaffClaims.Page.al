@@ -1,4 +1,4 @@
-page 52185947 "Staff Claims"
+page 85947 "Staff Claims"
 {
     DeleteAllowed = false;
     PageType = Document;

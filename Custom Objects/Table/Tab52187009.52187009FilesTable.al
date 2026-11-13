@@ -1,4 +1,4 @@
-table 52187009 "Member Form List"
+table 87009 "Member Form List"
 {
     DataClassification = ToBeClassified;
     DrillDownPageId = "Member Form List";

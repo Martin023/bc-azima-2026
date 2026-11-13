@@ -1,4 +1,4 @@
-page 52185921 "Imprest Surrender Details"
+page 85921 "Imprest Surrender Details"
 {
     Caption = ' Travel Imprest  Surrender Details';
     PageType = ListPart;

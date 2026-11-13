@@ -1,4 +1,4 @@
-table 52186041 "Systems Affected"
+table 86041 "Systems Affected"
 {
     DrillDownPageID = "Systems Affected";
     LookupPageID = "Systems Affected";

@@ -1,4 +1,4 @@
-page 52186600 "HR Exit Interview list1"
+page 86600 "HR Exit Interview list1"
 {
     Caption='Hr Exit';
     CardPageID = "HR Employee Exit Interviews1";

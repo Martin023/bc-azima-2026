@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.Finance.GeneralLedger.Journal;
 
-xmlport 52185559 "Reccuring Fixed Assets Journal"
+xmlport 85559 "Reccuring Fixed Assets Journal"
 {
     Caption = 'Reccuring Fixed Assets Journal';
     FORMAT = Variabletext;

@@ -1,4 +1,4 @@
-page 52186443 "DCS Member Transaction List"
+page 86443 "DCS Member Transaction List"
 {
     PageType = List;
     SourceTable = "DCS Member Transaction";

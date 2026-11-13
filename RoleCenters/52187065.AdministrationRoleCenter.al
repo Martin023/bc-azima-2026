@@ -1,4 +1,4 @@
-page 52187065 "Administration Role Center"
+page 87065 "Administration Role Center"
 {
     ApplicationArea = All;
     Caption = 'Administration Role Center';
@@ -204,7 +204,7 @@ page 52187065 "Administration Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Vehicle Requests Edit';
                             RunObject = Page "System Edits List";
-                            RunPageLink = "Table ID" = CONST(52187061);
+                            RunPageLink = "Table ID" = CONST(87061);
                         }
 
                     }

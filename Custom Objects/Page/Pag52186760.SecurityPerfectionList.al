@@ -1,4 +1,4 @@
-page 52186760 "Security Perfection List"
+page 86760 "Security Perfection List"
 {
     ApplicationArea = All;
     Caption = 'Security Perfection List';

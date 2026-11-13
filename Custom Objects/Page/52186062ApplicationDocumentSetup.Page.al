@@ -1,4 +1,4 @@
-page 52186062 "Application Document Setup"
+page 86062 "Application Document Setup"
 {
     CardPageID = "Application Doc. Setup Card";
     Editable = false;

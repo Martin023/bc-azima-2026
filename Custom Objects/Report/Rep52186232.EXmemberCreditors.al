@@ -3,7 +3,7 @@ namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Finance.GeneralLedger.Ledger;
 using Microsoft.Finance.GeneralLedger.Account;
 
-report 52186232 "EX member Creditors"
+report 86232 "EX member Creditors"
 {
     ApplicationArea = All;
     Caption = 'EX member Creditors Report';

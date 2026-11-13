@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.Sales.Customer;
 
-page 52186566 "Employer Code List"
+page 86566 "Employer Code List"
 {
     ApplicationArea = All;
     Caption = 'Employer Code List';

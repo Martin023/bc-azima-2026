@@ -1,4 +1,4 @@
-Page 52185448 "HR Department Targets Card"
+Page 85448 "HR Department Targets Card"
 {
     Caption = 'Department Targets';
     PageType = Card;

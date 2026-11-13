@@ -1,4 +1,4 @@
-page 52186553 "HR Interview Candidates List"
+page 86553 "HR Interview Candidates List"
 {
     CardPageID = "HR Job Applications Card";
     PageType = List;

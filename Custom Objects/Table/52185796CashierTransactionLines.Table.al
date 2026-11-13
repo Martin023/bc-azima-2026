@@ -1,4 +1,4 @@
-table 52185796 "Cashier Transaction Lines"
+table 85796 "Cashier Transaction Lines"
 {
     DrillDownPageID = "Cashier Transaction Lines";
     LookupPageID = "Cashier Transaction Lines";

@@ -2,7 +2,7 @@ namespace MNS.MNS;
 
 using Microsoft.Bank.Deposit;
 
-tableextension 52185430 "Bank Deposit Header Extension" extends "Bank Deposit Header"
+tableextension 85430 "Bank Deposit Header Extension" extends "Bank Deposit Header"
 {
     fields
     {

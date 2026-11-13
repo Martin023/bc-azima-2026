@@ -1,4 +1,4 @@
-table 52185627 "prJournal Headers"
+table 85627 "prJournal Headers"
 {
 
     fields

@@ -1,4 +1,4 @@
-table 52186281 "Saving Interest Import Buffer"
+table 86281 "Saving Interest Import Buffer"
 {
     Caption = 'Saving Interest Import Buffer';
     DataClassification = ToBeClassified;

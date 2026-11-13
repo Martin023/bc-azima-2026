@@ -1,6 +1,6 @@
 namespace KenpipeBC.KenpipeBC;
 
-report 52186225 "Update Member Closure Date"
+report 86225 "Update Member Closure Date"
 {
     ApplicationArea = All;
     Caption = 'Update Member Closure Date';

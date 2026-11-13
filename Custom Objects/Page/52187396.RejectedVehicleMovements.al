@@ -1,4 +1,4 @@
-page 52187396 "Rejected Vehicle Movt - List"
+page 87396 "Rejected Vehicle Movt - List"
 {
     ApplicationArea = All;
     Caption = 'Rejected Vehicle Movements';

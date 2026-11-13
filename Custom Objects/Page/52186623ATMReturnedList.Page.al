@@ -1,4 +1,4 @@
-page 52186623 "ATM Returned List"
+page 86623 "ATM Returned List"
 {
     CardPageID = "ATM Return Card";
     DeleteAllowed = TRUE;

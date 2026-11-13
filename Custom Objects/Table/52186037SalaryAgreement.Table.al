@@ -1,4 +1,4 @@
-table 52186037 "Salary Agreement"
+table 86037 "Salary Agreement"
 {
 
     fields

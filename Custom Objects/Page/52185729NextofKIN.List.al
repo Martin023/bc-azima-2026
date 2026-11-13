@@ -1,4 +1,4 @@
-page 52185729 "Next of KIN"
+page 85729 "Next of KIN"
 {
     Caption = 'Next of Kin List';
     AutoSplitKey = true;

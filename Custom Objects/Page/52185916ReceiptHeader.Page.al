@@ -1,4 +1,4 @@
-page 52185916 "Receipt Header"
+page 85916 "Receipt Header"
 {
     DeleteAllowed = false;
     PageType = Document;

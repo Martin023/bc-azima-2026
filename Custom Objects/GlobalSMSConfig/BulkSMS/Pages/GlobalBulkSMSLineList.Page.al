@@ -1,4 +1,4 @@
-page 52186074 "Global Bulk SMS Line List"
+page 86074 "Global Bulk SMS Line List"
 {
     PageType = List;
     SourceTable = "Global Bulk SMS Line";

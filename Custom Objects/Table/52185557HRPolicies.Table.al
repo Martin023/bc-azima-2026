@@ -1,4 +1,4 @@
-table 52185557 "HR Policies"
+table 85557 "HR Policies"
 {
     // DrillDownPageID = "HR Policy List";
     // LookupPageID = "HR Policy List";

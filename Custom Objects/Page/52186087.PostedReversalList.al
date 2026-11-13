@@ -1,4 +1,4 @@
-page 52186087 "Posted Reversal List"
+page 86087 "Posted Reversal List"
 {
     ApplicationArea = All;
     Caption = 'Posted Reversal List';

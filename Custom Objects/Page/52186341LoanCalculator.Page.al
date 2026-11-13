@@ -1,4 +1,4 @@
-page 52186341 "Loan Calculator"
+page 86341 "Loan Calculator"
 {
     PageType = Card;
     SourceTable = "Loan Calculator";
@@ -855,7 +855,7 @@ page 52186341 "Loan Calculator"
                                     LoansR."Loan Appraised By" := UserId;
                                     LoansR.Modify;
                                 end;
-                                CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
+                                CreateAppraisalBackup(LoanApp."Loan No.", 85745);
                             end else
                                 if ProdFac."Mortgage Loan" = true then begin
                                     IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
@@ -867,7 +867,7 @@ page 52186341 "Loan Calculator"
                                         LoansR."Loan Appraised By" := UserId;
                                         LoansR.Modify;
                                     end;
-                                    CreateAppraisalBackup(LoanApp."Loan No.", 52185957);
+                                    CreateAppraisalBackup(LoanApp."Loan No.", 85957);
                                 end;
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
@@ -879,7 +879,7 @@ page 52186341 "Loan Calculator"
                                 LoansR."Loan Appraised By" := UserId;
                                 LoansR.Modify;
                             end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52185640);
+                            CreateAppraisalBackup(LoanApp."Loan No.", 85640);
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
                             REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
@@ -890,7 +890,7 @@ page 52186341 "Loan Calculator"
                                 LoansR."Loan Appraised By" := UserId;
                                 LoansR.Modify;
                             end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52185747);
+                            CreateAppraisalBackup(LoanApp."Loan No.", 85747);
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
                             REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
@@ -901,7 +901,7 @@ page 52186341 "Loan Calculator"
                                 LoansR."Loan Appraised By" := UserId;
                                 LoansR.Modify;
                             end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52186719);
+                            CreateAppraisalBackup(LoanApp."Loan No.", 86719);
                         end;
                         if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
                             REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
@@ -912,7 +912,7 @@ page 52186341 "Loan Calculator"
                                 LoansR."Loan Appraised By" := UserId;
                                 LoansR.Modify;
                             end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52186204);
+                            CreateAppraisalBackup(LoanApp."Loan No.", 86204);
                         end;
                     end;
 

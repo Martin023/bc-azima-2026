@@ -1,4 +1,4 @@
-table 52185873 "Cash Office User Template"
+table 85873 "Cash Office User Template"
 {
     DataCaptionFields = UserID;
 

@@ -1,4 +1,4 @@
-table 52185767 "M-SACCO Guarantors"
+table 85767 "M-SACCO Guarantors"
 {
 
     fields

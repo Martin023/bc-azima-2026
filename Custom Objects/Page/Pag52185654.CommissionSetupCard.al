@@ -1,6 +1,6 @@
 namespace AZIMA.AZIMA;
 
-page 52185654 "Commission Setup Card"
+page 85654 "Commission Setup Card"
 {
     ApplicationArea = All;
     Caption = 'Commission Setup Card';

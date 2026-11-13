@@ -1,4 +1,4 @@
-page 52185643 "HR Employee Target Assgn Card"
+page 85643 "HR Employee Target Assgn Card"
 {
     Caption = 'Employee Target Assignment Card';
     PageType = Card;

@@ -2,7 +2,7 @@ namespace KENPIPE.KENPIPE;
 using Microsoft.Foundation.NoSeries;
 using System.Security.User;
 
-page 52186747 "Open Member Readmission List"
+page 86747 "Open Member Readmission List"
 {
    CardPageID = "Open Member Readmission";
     DeleteAllowed = false;

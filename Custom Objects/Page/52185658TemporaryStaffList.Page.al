@@ -1,4 +1,4 @@
-page 52185658 "Temporary Staff List"
+page 85658 "Temporary Staff List"
 {
     Caption = 'Terminal Staff List';
     PageType = List;

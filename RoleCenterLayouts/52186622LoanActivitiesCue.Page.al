@@ -1,4 +1,4 @@
-page 52186622 "Loan Processing Activities"
+page 86622 "Loan Processing Activities"
 {
     PageType = CardPart;
     SourceTable = "Loan Cue";

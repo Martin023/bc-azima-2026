@@ -1,4 +1,4 @@
-page 52186811 "Debt Collecrtors header"
+page 86811 "Debt Collecrtors header"
 {
     DeleteAllowed = false;
     PageType = Card;

@@ -1,4 +1,4 @@
-table 52185858 "Daily Loans Interest Buffer"
+table 85858 "Daily Loans Interest Buffer"
 {
     DrillDownPageID = "Daily Loans Interest Buffer";
     LookupPageID = "Daily Loans Interest Buffer";

@@ -1,4 +1,4 @@
-table 52187301 "Self Loan Application"
+table 87301 "Self Loan Application"
 {
 
     fields

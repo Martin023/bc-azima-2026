@@ -1,4 +1,4 @@
-table 52186174 "HR Overtime Header"
+table 86174 "HR Overtime Header"
 {
     DrillDownPageID ="HR Overtime List1";
     LookupPageID = "HR Overtime List1";

@@ -1,4 +1,4 @@
-report 52187416 "Share Capital Recovery"
+report 87416 "Share Capital Recovery"
 {
     ApplicationArea = All;
     Caption = 'Share Capital Recovery';

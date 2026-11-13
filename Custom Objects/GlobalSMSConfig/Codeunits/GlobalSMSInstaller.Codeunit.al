@@ -1,4 +1,4 @@
-codeunit 52185465 "Global SMS Installer"
+codeunit 85465 "Global SMS Installer"
 {
     Subtype = Install;
 

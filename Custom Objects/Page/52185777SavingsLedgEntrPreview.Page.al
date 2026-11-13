@@ -1,4 +1,4 @@
-page 52185777 "Savings  Ledg. Entr. Preview"
+page 85777 "Savings  Ledg. Entr. Preview"
 {
     Caption = 'Savings  Ledg. Entr. Preview';
     DataCaptionFields = "Customer No.";

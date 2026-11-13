@@ -1,4 +1,4 @@
-page 52186100 "Legal Card Approved"
+page 86100 "Legal Card Approved"
 {
 
     PageType = Card;

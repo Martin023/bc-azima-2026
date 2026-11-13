@@ -1,4 +1,4 @@
-page 52187081 "System Edits Card"
+page 87081 "System Edits Card"
 {
     ApplicationArea = All;
     Caption = 'System Edits Card';
@@ -180,7 +180,7 @@ page 52187081 "System Edits Card"
                     myInt: Integer;
                 begin
                     DataTransfer.SetData(Rec."No.");
-                    Page.Run(52187317, Rec);
+                    Page.Run(87317, Rec);
                 end;
             }
 
@@ -203,7 +203,7 @@ page 52187081 "System Edits Card"
                     if Rec.Posted then Error('This record has already been posted');
                     Message(SystemEditsCodeunit.SetFilterFields(Rec."Table ID", Rec."No.", Action::PostChanges, RecRef, RecRef));
 
-                    if Rec."Table ID" = 52185700 then
+                    if Rec."Table ID" = 85700 then
                         SMSMemberOnChange(Rec);
 
                     Rec.Posted := true;

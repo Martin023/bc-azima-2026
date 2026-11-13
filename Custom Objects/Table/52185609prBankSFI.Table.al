@@ -1,4 +1,4 @@
-table 52185617 "prBank SFI"
+table 85617 "prBank SFI"
 {
 
     fields

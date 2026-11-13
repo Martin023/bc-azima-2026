@@ -1,4 +1,4 @@
-page 52186032 "Contract Lines Types Card"
+page 86032 "Contract Lines Types Card"
 {
     PageType = Card;
     SourceTable = "Contract Lines Types";

@@ -1,4 +1,4 @@
-table 52185455 "Perfection Lines"
+table 85455 "Perfection Lines"
 {
     Caption = 'Perfection Lines';
     DataClassification = ToBeClassified;

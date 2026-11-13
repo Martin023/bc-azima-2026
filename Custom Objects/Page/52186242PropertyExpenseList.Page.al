@@ -1,4 +1,4 @@
-page 52186242 "Property Expense List"
+page 86242 "Property Expense List"
 {
     PageType = List;
     SourceTable = "Property Expense List";

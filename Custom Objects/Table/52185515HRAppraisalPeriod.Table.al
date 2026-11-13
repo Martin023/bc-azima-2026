@@ -1,4 +1,4 @@
-table 52185515 "HR Appraisal Period"
+table 85515 "HR Appraisal Period"
 {
 
     fields

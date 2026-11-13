@@ -1,7 +1,7 @@
 namespace KenpipeCBS.KenpipeCBS;
 using Microsoft.Finance.GeneralLedger.Journal;
 
-report 52186243 "Dividend SMS"
+report 86243 "Dividend SMS"
 {
     ApplicationArea = All;
     Caption = 'Dividend SMS';

@@ -1,4 +1,4 @@
-page 52185772 "Loan Collaterals1"
+page 85772 "Loan Collaterals1"
 {
     PageType = List;
     SourceTable = "Loan Collateral";

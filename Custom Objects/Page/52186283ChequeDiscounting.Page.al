@@ -1,4 +1,4 @@
-page 52186283 "Cheque Discounting"
+page 86283 "Cheque Discounting"
 {
     DeleteAllowed = false;
     Editable = true;

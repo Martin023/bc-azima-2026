@@ -1,4 +1,4 @@
-page 52185646 "HR Training Need Request Card"
+page 85646 "HR Training Need Request Card"
 {
     PageType = Card;
     SourceTable = "HR Training Need Request";

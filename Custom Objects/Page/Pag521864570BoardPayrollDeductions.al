@@ -1,4 +1,4 @@
-page 52186470 "Board Payroll Deductions"
+page 86470 "Board Payroll Deductions"
 {
     ApplicationArea = All;
     Caption = 'Board Payroll Deductions';

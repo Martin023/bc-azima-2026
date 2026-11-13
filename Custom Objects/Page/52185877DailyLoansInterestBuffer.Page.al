@@ -1,4 +1,4 @@
-page 52185877 "Daily Loans Interest Buffer"
+page 85877 "Daily Loans Interest Buffer"
 {
     DeleteAllowed = false;
     Editable = false;

@@ -1,4 +1,4 @@
-table 52185477 "Sky PIN Change Log"
+table 85477 "Sky PIN Change Log"
 {
 
     fields

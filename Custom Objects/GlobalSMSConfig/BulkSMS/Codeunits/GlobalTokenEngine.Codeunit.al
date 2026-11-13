@@ -1,4 +1,4 @@
-codeunit 52185976 "Global Token Engine"
+codeunit 85976 "Global Token Engine"
 {
     procedure ResolveAllTokens(MessageTemplate: Text; MemberNo: Code[20]; CampaignNo: Code[20]): Text
     var

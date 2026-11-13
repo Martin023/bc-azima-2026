@@ -1,4 +1,4 @@
-page 52186349 "Banking Closure List"
+page 86349 "Banking Closure List"
 {
     CardPageID = "Banking Account Closure";
     DeleteAllowed = false;

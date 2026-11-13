@@ -1,4 +1,4 @@
-report 52185524 "Recruitment Cost Report"
+report 85524 "Recruitment Cost Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/RecruitmentCostReport.rdl';

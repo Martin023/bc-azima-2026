@@ -1,4 +1,4 @@
-table 52185647 "Global Bulk SMS Filter"
+table 85647 "Global Bulk SMS Filter"
 {
     Caption = 'Global Bulk SMS Filter';
     DataClassification = CustomerContent;

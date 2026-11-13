@@ -1,7 +1,7 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
 
-report 52186100 "File Movement Report"
+report 86100 "File Movement Report"
 {
     ApplicationArea = All;
     Caption = 'File Movement Report';

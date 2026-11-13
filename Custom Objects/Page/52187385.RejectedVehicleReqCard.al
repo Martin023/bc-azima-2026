@@ -1,4 +1,4 @@
-page 52187385 "Rejected Vehicle Req - Card"
+page 87385 "Rejected Vehicle Req - Card"
 {
     ApplicationArea = All;
     Caption = 'Rejected Vehicle Req - Card';

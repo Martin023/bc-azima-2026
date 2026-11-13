@@ -1,4 +1,4 @@
-page 52186164 "Budget Committments"
+page 86164 "Budget Committments"
 {
     ApplicationArea = All;
     Caption = 'Budget Committments';

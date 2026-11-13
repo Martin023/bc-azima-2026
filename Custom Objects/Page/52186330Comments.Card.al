@@ -1,4 +1,4 @@
-page 52186330 "Comments Card"
+page 86330 "Comments Card"
 {
     DeleteAllowed = false;
     PageType = Card;

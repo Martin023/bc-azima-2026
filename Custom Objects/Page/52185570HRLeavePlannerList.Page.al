@@ -1,4 +1,4 @@
-page 52185570 "HR Leave Planner List"
+page 85570 "HR Leave Planner List"
 {
     CardPageID = "HR Leave Planner Card";
     Editable = false;

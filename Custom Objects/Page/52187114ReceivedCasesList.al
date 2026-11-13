@@ -1,4 +1,4 @@
-page 52187114 "Received Cases"
+page 87114 "Received Cases"
 {
     ApplicationArea = All;
     PageType = List;

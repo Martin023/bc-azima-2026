@@ -1,4 +1,4 @@
-table 52185960 "Legal Line"
+table 85960 "Legal Line"
 {
 
     fields

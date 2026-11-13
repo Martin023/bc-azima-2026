@@ -1,4 +1,4 @@
-table 52185517 "HR Succession Job Rotation"
+table 85517 "HR Succession Job Rotation"
 {
 
     fields

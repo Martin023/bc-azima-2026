@@ -1,4 +1,4 @@
-page 52185803 "Banking No Setup"
+page 85803 "Banking No Setup"
 {
     SourceTable = "Banking No Setup";
     ApplicationArea = All;

@@ -1,4 +1,4 @@
-table 52185554 "HR Non Working Days & Dates"
+table 85554 "HR Non Working Days & Dates"
 {
 
     fields

@@ -1,4 +1,4 @@
-page 52186282 "Investment Type"
+page 86282 "Investment Type"
 {
     PageType = List;
     SourceTable = "Investment Type";

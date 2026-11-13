@@ -1,4 +1,4 @@
-table 52185911 "Value Posting"
+table 85911 "Value Posting"
 {
 
     fields

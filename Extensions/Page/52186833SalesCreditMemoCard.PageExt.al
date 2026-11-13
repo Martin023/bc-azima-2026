@@ -1,4 +1,4 @@
-PageExtension 52186833 pageextension52186833 extends "Sales Credit Memo"
+PageExtension 86833 pageextension52186833 extends "Sales Credit Memo"
 {
 
     //Unsupported feature: Property Modification (PromotedActionCategoriesML) on ""Sales Credit Memos"(Page 9302)".
